@@ -6883,7 +6883,7 @@ var CT2={cav:[['Bộ Binh','inf']],arc:[['Kỵ Binh','cav'],['Bộ Binh','inf']]
  str:[['Kỵ Binh','cav'],['Cung','arc']],mac:[['Mưu Sĩ','str'],['Bộ Binh','inf'],['Kỵ Binh','cav']],sup:[['Kỵ Binh','cav'],['Cung','arc']]};
 function pvMyBoard(ex){ex=ex||{};var P=fmP(),F=FORM[P.fid],di=deployInfo(P.fid).n,pl=fmPlaced(P).sort(),dep=pl.slice(0,di),x='<div class="fgrid ofg pv-my">';
  for(var r=0;r<3;r++)for(var l=0;l<3;l++){var k=r+'-'+l,g=P.c[k],z=g&&!(S.gens[g].troops>0),rs=g&&dep.indexOf(k)<0,bn=g&&!rs&&ex[g];
-  x+='<div class="fc'+(F.cells.indexOf(k)>=0?' lit':'')+(g?' has':'')+(z?' noq':'')+(rs?' rsv':'')+(bn?' ban':'')+'">'+(g?pt(g,TAGS[GENS[g].br],S.gens[g].lv)+(bn?'<i>'+ex[g]+'</i>':z?'<i>Hết quân</i>':rs?'<i>Dự bị</i>':''):'')+'</div>'}
+  x+='<div data-k="'+k+'" class="fc'+(F.cells.indexOf(k)>=0?' lit':'')+(g?' has':'')+(z?' noq':'')+(rs?' rsv':'')+(bn?' ban':'')+'">'+(g?pt(g,TAGS[GENS[g].br],S.gens[g].lv)+(bn?'<i>'+ex[g]+'</i>':z?'<i>Hết quân</i>':rs?'<i>Dự bị</i>':''):'')+'</div>'}
  return x+'</div>'}
 function pvCounter(mi,si,kind){var en=buildEnemy(mi,si,kind),cnt={},pu=playerUnits(true);
  en.units.forEach(function(u){cnt[u.br]=(cnt[u.br]||0)+1});
@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V192';
+var BUILD='V193';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -10993,4 +10993,34 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '#main .gdstrip:has(+.hubrail.u185f){margin-bottom:8px!important}'+
  '#main .u185cw .innerw::before{display:none!important}#main .u185cw .innerw .ptbtn{top:8px!important}';
  document.head.appendChild(st)}catch(e){}})();
+/* ===== V193 (user 2026-11-03 15:41 "allow user to drag hero icon to change position"): on the stage sheet (Quân ta board, .pv-my) a hero can be dragged
+   to another cell: onto an empty cell = move, onto a hero = swap. Uses fmDrop (fx150.js) so the formation, save and win % update exactly like Bày trận.
+   Pointer events only; the drag starts after 6 px so taps still work; everything wrapped (a failure only cancels the drag). */
+(function(){try{
+ var st=document.createElement('style');st.id='pvdragcss';st.textContent=
+  '.pv-my .fc.has{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}'+
+  '.pv-my .fc.pvlift{opacity:.35}'+
+  '.pv-my .fc.pvover{outline:2px solid #f1cf6a;outline-offset:-2px;box-shadow:0 0 14px rgba(241,207,106,.55) inset}'+
+  '.pvghost{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%) scale(1.08);opacity:.92;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}'+
+  '.pv-my img,.pv-my .fc *{-webkit-user-drag:none}';
+ document.head.appendChild(st);
+ var D=null,eat=0;
+ function cellAt(x,y){var el=document.elementFromPoint(x,y);return el&&el.closest?el.closest('.pv-my .fc[data-k]'):null}
+ function clear(){document.querySelectorAll('.pv-my .pvover,.pv-my .pvlift').forEach(function(e){e.classList.remove('pvover','pvlift')})}
+ function begin(){var r=D.el.getBoundingClientRect(),g=D.el.cloneNode(true);g.className='pvghost fc has';g.style.width=r.width+'px';g.style.height=r.height+'px';
+  document.body.appendChild(g);D.g=g;D.on=1;D.el.classList.add('pvlift');try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}
+ function move(){D.g.style.left=D.x+'px';D.g.style.top=D.y+'px';var c=cellAt(D.x,D.y);
+  document.querySelectorAll('.pv-my .pvover').forEach(function(e){if(e!==c)e.classList.remove('pvover')});if(c&&c!==D.el)c.classList.add('pvover');D.t=c}
+ function end(drop){var d=D;D=null;if(!d||!d.on)return;eat=Date.now();try{d.g.remove()}catch(e){}clear();
+  try{if(drop&&d.t&&d.t!==d.el){var k=d.t.getAttribute('data-k');if(k&&k!==d.k)fmDrop({cell:d.k},k)}}catch(e){if(window.console)console.warn(e)}}
+ document.addEventListener('pointerdown',function(e){if(e.button>0||D)return;var c=e.target.closest&&e.target.closest('.pv-my .fc.has[data-k]');if(!c)return;
+  D={el:c,k:c.getAttribute('data-k'),x:e.clientX,y:e.clientY,x0:e.clientX,y0:e.clientY,id:e.pointerId,on:0}},true);
+ document.addEventListener('pointermove',function(e){if(!D||e.pointerId!==D.id)return;D.x=e.clientX;D.y=e.clientY;
+  try{if(!D.on){if(Math.abs(D.x-D.x0)+Math.abs(D.y-D.y0)<6)return;begin()}move()}catch(x){end(0)}},true);
+ document.addEventListener('pointerup',function(e){if(D&&e.pointerId===D.id)end(1)},true);
+ document.addEventListener('pointercancel',function(e){if(D&&e.pointerId===D.id)end(0)},true);
+ document.addEventListener('touchmove',function(e){if(D&&D.on)e.preventDefault()},{passive:false,capture:true});
+ document.addEventListener('dragstart',function(e){if(e.target.closest&&e.target.closest('.pv-my'))e.preventDefault()},true);
+ document.addEventListener('click',function(e){if(eat&&Date.now()-eat<400){eat=0;e.stopPropagation();e.preventDefault()}},true);
+}catch(e){}})();
 </script>
