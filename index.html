@@ -502,7 +502,7 @@ nav i{top:2px;right:calc(50% - 24px);min-width:15px;height:15px;line-height:14px
 <symbol id="i-gear2" viewBox="0 0 24 24"><path d="M5 19L17 5l2 2L7 21z" fill="url(#gStl)" stroke="#3a4250" stroke-width=".6"/><path d="M3 17l4 4" stroke="url(#gGld)" stroke-width="2.6" stroke-linecap="round"/><path d="M15 3l6 6" stroke="url(#gRed)" stroke-width="1.6"/></symbol>
 <symbol id="i-prestige" viewBox="0 0 24 24"><path d="M12 2l2.6 6.2 6.6.5-5 4.4 1.6 6.5L12 16.2l-5.8 3.4 1.6-6.5-5-4.4 6.6-.5z" fill="url(#gGld)" stroke="#7a4a06" stroke-width=".7"/><path d="M12 6l1.3 3.2" stroke="#fff8d0" stroke-width="1"/></symbol>
 </defs></svg>
-<div id="splash" aria-label="Bá Nghiệp"><b class="splogo">Bá Nghiệp</b><div class="spbar"><i></i></div></div>
+<div id="splash" aria-label="Bá Nghiệp"><div class="spbg"></div><div class="spem" aria-hidden="true"><i style="left:11%;animation-delay:-0.00s;animation-duration:5s"></i><i style="left:48%;animation-delay:-0.71s;animation-duration:7s"></i><i style="left:85%;animation-delay:-1.42s;animation-duration:9s"></i><i style="left:22%;animation-delay:-2.13s;animation-duration:6s"></i><i style="left:59%;animation-delay:-2.84s;animation-duration:8s"></i><i style="left:96%;animation-delay:-3.55s;animation-duration:5s"></i><i style="left:33%;animation-delay:-4.26s;animation-duration:7s"></i><i style="left:70%;animation-delay:-4.97s;animation-duration:9s"></i><i style="left:7%;animation-delay:-5.68s;animation-duration:6s"></i><i style="left:44%;animation-delay:-0.39s;animation-duration:8s"></i><i style="left:81%;animation-delay:-1.10s;animation-duration:5s"></i><i style="left:18%;animation-delay:-1.81s;animation-duration:7s"></i><i style="left:55%;animation-delay:-2.52s;animation-duration:9s"></i><i style="left:92%;animation-delay:-3.23s;animation-duration:6s"></i><i style="left:29%;animation-delay:-3.94s;animation-duration:8s"></i><i style="left:66%;animation-delay:-4.65s;animation-duration:5s"></i></div><b class="splogo">Bá Nghiệp</b><div class="sptag">Thống nhất thiên hạ</div><div class="spbar"><i></i></div></div>
 <script>/* V169 boot guard (runs before the game script): records any error during start-up and never lets the splash hang.
  After 8 s the splash is removed; if the game threw while starting, a box shows the error and offers reload / safe start. */
 window.__bootErr=[];window.addEventListener('error',function(e){try{__bootErr.push((e.message||'')+' @'+(e.lineno||'')+':'+(e.colno||''))}catch(x){}});
@@ -515,7 +515,45 @@ setTimeout(function(){var sp=document.getElementById('splash');if(sp)try{sp.remo
 #splash .splogo{margin-top:12vh;font:400 clamp(34px,10.5vw,64px)/1 "Licorice","Philosopher",serif;white-space:nowrap;text-align:center;padding:0 16px;background:linear-gradient(180deg,#fff3c4 0%,#f2c75a 45%,#b8801f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #2a1606) drop-shadow(0 0 10px rgba(0,0,0,.75))}
 #splash .spbar{position:absolute;left:50%;bottom:calc(36px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(62vw,300px);height:16px;border:6px solid transparent;border-image:url(art/ui/k_hpbar.webp) 30 fill / 6px stretch}
 #splash .spbar i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#b8801f,#ffe39a);animation:spload 2.4s ease-out forwards}
-@keyframes spload{to{width:100%}}</style>
+@keyframes spload{to{width:100%}}
+/* V189 splash refresh (user 2026-11-03 15:04): slow push-in on the art, vignette, big Licorice title with a light sweep, tagline, rising embers */
+#splash{background:#120c08;overflow:hidden}
+#splash .spbg{position:absolute;inset:0;background:url(art/maps/splash.webp) center bottom/cover no-repeat;animation:spzoom 9s ease-out forwards}
+#splash .spbg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(10,6,3,.7) 0%,rgba(10,6,3,0) 34%,rgba(10,6,3,0) 70%,rgba(10,6,3,.75) 100%)}
+#splash .splogo{position:relative;margin-top:10vh;font-size:clamp(58px,17vw,104px);padding:0 .25em .1em;background:linear-gradient(100deg,#b8801f 0%,#f2c75a 30%,#fff7d6 45%,#f2c75a 60%,#b8801f 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:spin .9s ease-out both,spshine 3.2s ease-in-out .9s infinite;filter:drop-shadow(0 3px 0 #2a1606) drop-shadow(0 0 18px rgba(255,190,90,.35)) drop-shadow(0 0 8px rgba(0,0,0,.8))}
+#splash .sptag{position:relative;margin-top:.4em;font:600 clamp(13px,3.6vw,17px)/1 "Philosopher",serif;letter-spacing:.32em;text-transform:uppercase;color:#f3dfae;text-shadow:0 1px 0 #000,0 0 10px rgba(0,0,0,.9);animation:spin 1s ease-out .35s both}
+#splash .spem{position:absolute;inset:0;pointer-events:none}
+#splash .spem i,.wcem i{position:absolute;bottom:-12px;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#fff0b0 0%,#ffb347 45%,rgba(255,120,30,0) 70%);box-shadow:0 0 8px 2px rgba(255,150,50,.45);animation:emrise 7s linear infinite;opacity:0}
+@keyframes spzoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes spin{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes spshine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+@keyframes emrise{0%{transform:translate(0,0) scale(.6);opacity:0}10%{opacity:1}60%{transform:translate(18px,-55vh) scale(1)}100%{transform:translate(-10px,-105vh) scale(.4);opacity:0}}
+/* the welcome / first sheet stays hidden while the splash is up (it showed through the fade) */
+body:has(#splash:not(.out)) #modal{visibility:hidden}
+/* V189 full-screen intro (game3.js welcome) */
+#modal:has(.wcbox){align-items:stretch!important;padding:0!important;background:#0b0705!important}
+#modal .sheet:has(.wcbox){max-width:none!important;width:100%!important;height:100%!important;max-height:100%!important;margin:0!important;border:0!important;border-image:none!important;border-radius:0!important;padding:0!important;background:#120c08!important;box-shadow:none!important;overflow:hidden!important;animation:none!important}
+#modal .sheet:has(.wcbox)>.snav{display:none!important}
+.wcbox{position:relative;height:100%;min-height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:url(art/maps/splash.webp) center bottom/cover no-repeat}
+.wcbox::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,6,3,.82) 0%,rgba(10,6,3,.35) 30%,rgba(10,6,3,.55) 55%,rgba(10,6,3,.92) 100%)}
+.wcem{position:absolute;inset:0;pointer-events:none}
+.wcin{position:relative;width:100%;max-width:440px;padding:calc(env(safe-area-inset-top,0px) + 18px) max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 18px) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.wclogo{margin:0!important;font:400 clamp(56px,16vw,96px)/1.05 "Licorice","Philosopher",serif!important;letter-spacing:0!important;padding:0 .2em .08em;background:linear-gradient(100deg,#b8801f 0%,#f2c75a 30%,#fff7d6 45%,#f2c75a 60%,#b8801f 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 #2a1606) drop-shadow(0 0 16px rgba(255,190,90,.35));animation:spin .8s ease-out both,spshine 3.2s ease-in-out .8s infinite}
+.wctag{font:600 13px/1 "Philosopher",serif;letter-spacing:.3em;text-transform:uppercase;color:#f3dfae;text-shadow:0 1px 0 #000;animation:spin .8s ease-out .15s both}
+.wcstory{margin:6px 0 2px!important;font-size:15px;line-height:1.5;color:#f4ead2;text-shadow:0 1px 2px #000;animation:spin .8s ease-out .25s both}
+.wcpick{font:700 14px "Philosopher",serif;color:#e7c46a;letter-spacing:.06em;margin-top:4px;animation:spin .8s ease-out .3s both}
+.wcfac{display:flex;flex-direction:column;gap:10px;width:100%}
+.wcf{position:relative;display:grid;grid-template-columns:52px 1fr;grid-template-rows:auto auto;align-items:center;column-gap:12px;text-align:left;width:100%;min-height:68px;padding:10px 16px 10px 12px;border-radius:12px;cursor:pointer;
+ border:1px solid rgba(255,215,122,.55);background:rgba(28,20,14,.92);background:linear-gradient(90deg,color-mix(in srgb,var(--fc) 70%,#000) 0%,rgba(20,14,10,.92) 70%);box-shadow:0 6px 18px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,240,200,.18);overflow:hidden;animation:wcup .6s cubic-bezier(.2,.8,.2,1) both;transition:transform .15s,box-shadow .15s}
+.wcf::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,240,200,.22) 45%,transparent 60%);background-size:250% 100%;animation:spshine 4s ease-in-out infinite;pointer-events:none}
+.wcf:active{transform:scale(.98)}
+.wcs{grid-row:1/3;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:var(--fc);border:2px solid #e7c46a;color:#fff6dc;font:900 28px/1 "Noto Serif SC",serif;box-shadow:0 0 14px color-mix(in srgb,var(--fc) 60%,transparent)}
+.wcn{font:700 22px/1.1 "Philosopher",serif;color:#fff3d0}
+.wcd{font-size:13px;color:#e8d6ae}
+.wcfoot{margin:6px 0 0!important;font-size:12.5px;color:#cdbb92;letter-spacing:.04em}
+@keyframes wcup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#splash *,.wcbox,.wcbox *{animation:none!important}#splash .spem,.wcem{display:none}}
+</style>
 <div id="app">
   <div class="top" id="top"></div>
   <div class="strip" id="strip"></div>
@@ -2971,8 +3009,13 @@ document.addEventListener('click',function(e){
  if(!el||el.disabled)return;
  A_(el.getAttribute('data-a'),el.getAttribute('data-v'),el.getAttribute('data-w'),el);dirty=true});
 function _w(){}
-function welcome(){
- openSheet(function(){return'<h3>'+(typeof gameName==='function'?gameName():'Bá Nghiệp')+'</h3><p style="margin:6px 0 12px">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân. Chọn thế lực của bạn:</p><div class="stack"><button class="btn wide" data-a="nation" data-v="shu">Thục · sắc xanh lục</button><button class="btn alt wide" data-a="nation" data-v="wei">Ngụy · sắc xanh lam</button><button class="btn alt wide" data-a="nation" data-v="wu">Ngô · sắc đỏ</button></div><p class="sm mute" style="margin-top:10px">12 màn chinh chiến, 100 danh tướng. Vào Thêm để chỉnh tốc độ thời gian khi thử.</p>'})}
+function welcome(){   /* V189: full-screen intro (user 2026-11-03 15:04 "make the welcome box fit the entire screen with effect"); styles in head.html (.wcbox) */
+ openSheet(function(){var em='';for(var i=0;i<18;i++)em+='<i style="left:'+((i*37)%100)+'%;animation-delay:'+(-(i*0.83)%7).toFixed(2)+'s;animation-duration:'+(6+(i*7)%5)+'s"></i>';
+  var F=[['shu','蜀','Thục','Nhân nghĩa · Lưu Bị','#2f7d4f'],['wei','魏','Ngụy','Bá đạo · Tào Tháo','#2d5a9a'],['wu','吳','Ngô','Giang Đông · Tôn Quyền','#a3332a']];
+  return'<div class="wcbox"><div class="wcem" aria-hidden="true">'+em+'</div><div class="wcin"><h3 class="wclogo">'+(typeof gameName==='function'?gameName():'Bá Nghiệp')+'</h3><div class="wctag">Thống nhất thiên hạ</div>'+
+  '<p class="wcstory">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân.</p><div class="wcpick">Chọn thế lực của bạn</div><div class="wcfac">'+
+  F.map(function(f,i){return'<button class="wcf" data-a="nation" data-v="'+f[0]+'" style="--fc:'+f[4]+';animation-delay:'+(.35+i*.12)+'s"><b class="wcs">'+f[1]+'</b><span class="wcn">'+f[2]+'</span><span class="wcd">'+f[3]+'</span></button>'}).join('')+
+  '</div><p class="wcfoot">40 màn chinh chiến · 100 danh tướng</p></div></div>'})}
 /* boot */
 try{load()}catch(e){try{console.error('boot load',e)}catch(x){}}try{ensure()}catch(e){try{console.error('boot ensure',e)}catch(x){}}try{renderTop();renderStrip();renderMain()}catch(e){try{console.error('boot render',e)}catch(x){}}   /* V146: a render error here used to abort the whole script (game stuck) */
 if(!S.name)welcome();
@@ -10796,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V188';
+var BUILD='V189';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
