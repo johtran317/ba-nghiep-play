@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V190';
+var BUILD='V191';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -10976,5 +10976,18 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '.hubrail [data-a="hub"][data-v="ev"]{order:3}'+
  '.hubrail [data-a="hub"][data-v="shop"]{order:4;justify-self:end}'+
  '.hubrail [data-a="hub"][data-v="war"],.hubrail [data-a="hub"][data-v="shop"]{min-width:84px}';
+ document.head.appendChild(st)}catch(e){}})();
+/* V191 (user 2026-11-03 15:28 "add own section for these buttons"): the hub row gets its own panel between the Quân Đoàn / Sự kiện
+   strip and the city, instead of floating over the top of the city art. u185HubPos (ui185.js 4.15) no longer pulls it over the scene;
+   the dark fade it needed at the top of the city and the lowered Cảng Biển button go back to normal. */
+(function(){try{if(typeof u185HubPos==='function')u185HubPos=function(m,hr){try{hr.style.removeProperty('margin-top');hr.style.removeProperty('margin-bottom')}catch(e){}};
+ var st=document.createElement('style');st.id='h191css';st.textContent=
+ '#main .qb4.qb5.hubrail.u185f{position:relative;margin:0 0 8px!important;padding:10px 6px 8px!important;border-radius:14px!important;'+
+  'background:radial-gradient(ellipse at 50% 0%,rgba(240,195,90,.16),rgba(240,195,90,0) 70%),linear-gradient(180deg,#2c1f15 0%,#1b130d 100%)!important;'+
+  'border:1px solid rgba(201,162,79,.65)!important;box-shadow:inset 0 1px 0 rgba(255,236,190,.15),inset 0 0 0 3px rgba(20,12,6,.6),0 4px 12px rgba(0,0,0,.45)!important}'+
+ '#main .qb4.qb5.hubrail.u185f::before,#main .qb4.qb5.hubrail.u185f::after{content:"";position:absolute;top:50%;width:6px;height:6px;margin-top:-3px;transform:rotate(45deg);background:#c9a24f;box-shadow:0 0 6px rgba(240,195,90,.6)}'+
+ '#main .qb4.qb5.hubrail.u185f::before{left:-3px}#main .qb4.qb5.hubrail.u185f::after{right:-3px}'+
+ '#main .gdstrip:has(+.hubrail.u185f){margin-bottom:8px!important}'+
+ '#main .u185cw .innerw::before{display:none!important}#main .u185cw .innerw .ptbtn{top:8px!important}';
  document.head.appendChild(st)}catch(e){}})();
 </script>
