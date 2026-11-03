@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V191';
+var BUILD='V192';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -10977,6 +10977,9 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '.hubrail [data-a="hub"][data-v="shop"]{order:4;justify-self:end}'+
  '.hubrail [data-a="hub"][data-v="war"],.hubrail [data-a="hub"][data-v="shop"]{min-width:84px}';
  document.head.appendChild(st)}catch(e){}})();
+/* V192 (user 15:38 "balance the tabs"): the 4 hub buttons get 4 equal columns, each centred (order kept: Chiến trường · Nhiệm vụ · Hoạt động · Cửa hàng). */
+(function(){try{var st=document.createElement('style');st.id='h192css';st.textContent='#main .qb4.qb5.hubrail.u185f{grid-template-columns:repeat(4,minmax(0,1fr))!important;column-gap:0!important}'+
+ '#main .qb4.qb5.hubrail.u185f .qbtn{justify-self:stretch!important;min-width:0!important;width:100%!important;display:flex!important;flex-direction:column;align-items:center;text-align:center}';document.head.appendChild(st)}catch(e){}})();
 /* V191 (user 2026-11-03 15:28 "add own section for these buttons"): the hub row gets its own panel between the Quân Đoàn / Sự kiện
    strip and the city, instead of floating over the top of the city art. u185HubPos (ui185.js 4.15) no longer pulls it over the scene;
    the dark fade it needed at the top of the city and the lowered Cảng Biển button go back to normal. */
