@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V189';
+var BUILD='V190';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -10963,4 +10963,18 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
   WK.last=0}catch(e){try{if(WK.g&&WK.g.parentNode)WK.g.parentNode.removeChild(WK.g)}catch(x){}WK.g=null;WK.off=1;return}
   WK.idle=setTimeout(function(){WK.idle=0;if(!WK.raf&&!WK.off)WK.raf=requestAnimationFrame(wkLoop)},700)}
 (function(){try{WK.raf=requestAnimationFrame(wkLoop)}catch(e){}})();
+/* ===== V190 home layout (user 2026-11-03 15:18: "remove Quân sư gợi ý and move Nhiệm vụ, Hoạt động icon to the middle") =====
+   - The Quân sư gợi ý goal banner (#main .goal, advisor.js goalHtml) is hidden on the home screen; the advisor tips still exist
+     elsewhere (defeat screen, stage sheets).
+   - Hub row over the city: Nhiệm vụ + Hoạt động sit together in the centre, Chiến trường on the left edge, Cửa hàng on the right edge.
+     CSS only (grid order + columns), so every older hub wrapper and badge keeps working. */
+(function(){try{var st=document.createElement('style');st.id='h190css';st.textContent=
+ '#main .goal{display:none!important}'+
+ '.qb4.qb5.hubrail{grid-template-columns:1fr 80px 80px 1fr!important;column-gap:4px!important}'+
+ '.hubrail [data-a="hub"][data-v="war"]{order:1;justify-self:start}'+
+ '.hubrail [data-a="daily"]{order:2}'+
+ '.hubrail [data-a="hub"][data-v="ev"]{order:3}'+
+ '.hubrail [data-a="hub"][data-v="shop"]{order:4;justify-self:end}'+
+ '.hubrail [data-a="hub"][data-v="war"],.hubrail [data-a="hub"][data-v="shop"]{min-width:84px}';
+ document.head.appendChild(st)}catch(e){}})();
 </script>
