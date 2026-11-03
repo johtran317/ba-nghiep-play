@@ -1,5 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Chiến Ký Tam Quốc</title>
+<title>Bá Nghiệp</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Philosopher:wght@400;700&family=Noto+Serif+SC:wght@700;900&family=Licorice&display=swap">
@@ -502,7 +501,7 @@ nav i{top:2px;right:calc(50% - 24px);min-width:15px;height:15px;line-height:14px
 <symbol id="i-gear2" viewBox="0 0 24 24"><path d="M5 19L17 5l2 2L7 21z" fill="url(#gStl)" stroke="#3a4250" stroke-width=".6"/><path d="M3 17l4 4" stroke="url(#gGld)" stroke-width="2.6" stroke-linecap="round"/><path d="M15 3l6 6" stroke="url(#gRed)" stroke-width="1.6"/></symbol>
 <symbol id="i-prestige" viewBox="0 0 24 24"><path d="M12 2l2.6 6.2 6.6.5-5 4.4 1.6 6.5L12 16.2l-5.8 3.4 1.6-6.5-5-4.4 6.6-.5z" fill="url(#gGld)" stroke="#7a4a06" stroke-width=".7"/><path d="M12 6l1.3 3.2" stroke="#fff8d0" stroke-width="1"/></symbol>
 </defs></svg>
-<div id="splash" aria-label="Chiến Ký Tam Quốc"><b class="splogo">Chiến Ký Tam Quốc</b><div class="spbar"><i></i></div></div>
+<div id="splash" aria-label="Bá Nghiệp"><b class="splogo">Bá Nghiệp</b><div class="spbar"><i></i></div></div>
 <script>/* V169 boot guard (runs before the game script): records any error during start-up and never lets the splash hang.
  After 8 s the splash is removed; if the game threw while starting, a box shows the error and offers reload / safe start. */
 window.__bootErr=[];window.addEventListener('error',function(e){try{__bootErr.push((e.message||'')+' @'+(e.lineno||'')+':'+(e.colno||''))}catch(x){}});
@@ -2972,7 +2971,7 @@ document.addEventListener('click',function(e){
  A_(el.getAttribute('data-a'),el.getAttribute('data-v'),el.getAttribute('data-w'),el);dirty=true});
 function _w(){}
 function welcome(){
- openSheet(function(){return'<h3>Chiến Ký Tam Quốc</h3><p style="margin:6px 0 12px">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân. Chọn thế lực của bạn:</p><div class="stack"><button class="btn wide" data-a="nation" data-v="shu">Thục · sắc xanh lục</button><button class="btn alt wide" data-a="nation" data-v="wei">Ngụy · sắc xanh lam</button><button class="btn alt wide" data-a="nation" data-v="wu">Ngô · sắc đỏ</button></div><p class="sm mute" style="margin-top:10px">12 màn chinh chiến, 100 danh tướng. Vào Thêm để chỉnh tốc độ thời gian khi thử.</p>'})}
+ openSheet(function(){return'<h3>'+(typeof gameName==='function'?gameName():'Bá Nghiệp')+'</h3><p style="margin:6px 0 12px">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân. Chọn thế lực của bạn:</p><div class="stack"><button class="btn wide" data-a="nation" data-v="shu">Thục · sắc xanh lục</button><button class="btn alt wide" data-a="nation" data-v="wei">Ngụy · sắc xanh lam</button><button class="btn alt wide" data-a="nation" data-v="wu">Ngô · sắc đỏ</button></div><p class="sm mute" style="margin-top:10px">12 màn chinh chiến, 100 danh tướng. Vào Thêm để chỉnh tốc độ thời gian khi thử.</p>'})}
 /* boot */
 try{load()}catch(e){try{console.error('boot load',e)}catch(x){}}try{ensure()}catch(e){try{console.error('boot ensure',e)}catch(x){}}try{renderTop();renderStrip();renderMain()}catch(e){try{console.error('boot render',e)}catch(x){}}   /* V146: a render error here used to abort the whole script (game stuck) */
 if(!S.name)welcome();
@@ -8373,7 +8372,7 @@ var _ATL=A_;A_=function(a,v,w,el){
 /* advisor: offer it when silver piles up (≥ 3 rolls) */
 var _ptTL=powerTips;powerTips=function(){var o=_ptTL(),c=tlCost().s;if(S.res.silver>=c*3){var g=advTeam().filter(function(x){return tlSlots(x)})[0];if(g)o.push({k:'tl',t:'Bạc dư: tẩy luyện binh cho '+GENS[g].n,a:'gen',v:g})}return o};
 (function(){var st=document.createElement('style');st.textContent='.tl40{margin:10px 0;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(232,196,110,.28)}.tl40 .tlh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.tls{display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px solid rgba(232,196,110,.12);font:500 13px var(--fb)}.tls>span:nth-child(2){flex:1}.tls.off{opacity:.55}.tln{width:20px;height:20px;border-radius:50%;background:rgba(232,196,110,.18);display:inline-flex;align-items:center;justify-content:center;font:700 11px var(--fb)}.tlnew{margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(232,196,110,.08)}';document.head.appendChild(st)})();
-var SPRT5={"inf_t5a_front":{"w":228,"h":227,"ax":115.0,"ay":224.5,"bh":216,"y":0,"at":"t5"},"inf_t5a_back":{"w":227,"h":222,"ax":110.5,"ay":220.0,"bh":213,"y":227,"at":"t5"},"inf_t5b_front":{"w":218,"h":224,"ax":110.5,"ay":221.5,"bh":218,"y":449,"at":"t5"},"inf_t5b_back":{"w":218,"h":224,"ax":110.5,"ay":221.0,"bh":218,"y":673,"at":"t5"},"inf_t5c_front":{"w":216,"h":224,"ax":112.5,"ay":221.0,"bh":218,"y":897,"at":"t5"},"inf_t5c_back":{"w":222,"h":222,"ax":116.0,"ay":219.5,"bh":210,"y":1121,"at":"t5"},"inf_t5d_front":{"w":200,"h":222,"ax":78.5,"ay":219.5,"bh":218,"y":1343,"at":"t5"},"inf_t5d_back":{"w":220,"h":225,"ax":112.5,"ay":222.5,"bh":218,"y":1565,"at":"t5"},"inf_t5e_front":{"w":210,"h":224,"ax":105.5,"ay":221.5,"bh":217,"y":1790,"at":"t5"},"inf_t5e_back":{"w":216,"h":224,"ax":85.0,"ay":221.0,"bh":218,"y":2014,"at":"t5"},"cav_t5a_front":{"w":225,"h":224,"ax":90.5,"ay":221.0,"bh":218,"y":0,"at":"t5"},"cav_t5a_back":{"w":226,"h":223,"ax":90.0,"ay":220.5,"bh":213,"y":224,"at":"t5"},"cav_t5b_front":{"w":224,"h":224,"ax":129.0,"ay":221.0,"bh":218,"y":447,"at":"t5"},"cav_t5b_back":{"w":210,"h":223,"ax":117.5,"ay":220.5,"bh":216,"y":671,"at":"t5"},"cav_t5c_front":{"w":236,"h":222,"ax":119.0,"ay":220.0,"bh":215,"y":894,"at":"t5"},"cav_t5c_back":{"w":238,"h":220,"ax":114.5,"ay":217.0,"bh":214,"y":1116,"at":"t5"},"cav_t5d_front":{"w":214,"h":224,"ax":103.5,"ay":222.0,"bh":218,"y":1336,"at":"t5"},"cav_t5d_back":{"w":214,"h":222,"ax":84.0,"ay":219.5,"bh":218,"y":1560,"at":"t5"},"cav_t5e_front":{"w":220,"h":220,"ax":111.5,"ay":218.0,"bh":214,"y":1782,"at":"t5"},"cav_t5e_back":{"w":213,"h":210,"ax":104.5,"ay":207.0,"bh":200,"y":2002,"at":"t5"},"arc_t5a_front":{"w":226,"h":228,"ax":107.5,"ay":225.0,"bh":220,"y":0,"at":"t5"},"arc_t5a_back":{"w":226,"h":225,"ax":109.0,"ay":222.5,"bh":220,"y":228,"at":"t5"},"arc_t5b_front":{"w":236,"h":224,"ax":119.0,"ay":221.5,"bh":218,"y":453,"at":"t5"},"arc_t5b_back":{"w":218,"h":226,"ax":121.5,"ay":223.0,"bh":218,"y":677,"at":"t5"},"arc_t5c_front":{"w":217,"h":221,"ax":101.5,"ay":218.5,"bh":215,"y":903,"at":"t5"},"arc_t5c_back":{"w":218,"h":220,"ax":103.0,"ay":218.0,"bh":215,"y":1124,"at":"t5"},"arc_t5d_front":{"w":201,"h":224,"ax":87.0,"ay":221.5,"bh":218,"y":1344,"at":"t5"},"arc_t5d_back":{"w":196,"h":222,"ax":105.5,"ay":220.0,"bh":218,"y":1568,"at":"t5"},"arc_t5e_front":{"w":210,"h":222,"ax":105.5,"ay":219.0,"bh":217,"y":1790,"at":"t5"},"arc_t5e_back":{"w":209,"h":221,"ax":105.0,"ay":218.5,"bh":216,"y":2012,"at":"t5"},"mac_t5a_front":{"w":246,"h":230,"ax":130.0,"ay":227.5,"bh":221,"y":0,"at":"t5"},"mac_t5a_back":{"w":226,"h":230,"ax":110.0,"ay":227.5,"bh":225,"y":230,"at":"t5"},"mac_t5b_front":{"w":223,"h":226,"ax":116.5,"ay":223.5,"bh":218,"y":460,"at":"t5"},"mac_t5b_back":{"w":264,"h":226,"ax":157.0,"ay":223.0,"bh":215,"y":686,"at":"t5"},"mac_t5c_front":{"w":220,"h":224,"ax":114.5,"ay":221.0,"bh":218,"y":912,"at":"t5"},"mac_t5c_back":{"w":238,"h":223,"ax":115.5,"ay":220.5,"bh":218,"y":1136,"at":"t5"},"mac_t5d_front":{"w":238,"h":196,"ax":142.0,"ay":194.0,"bh":192,"y":1359,"at":"t5"},"mac_t5d_back":{"w":217,"h":223,"ax":118.5,"ay":220.5,"bh":216,"y":1555,"at":"t5"},"mac_t5e_front":{"w":210,"h":216,"ax":111.0,"ay":214.0,"bh":212,"y":1778,"at":"t5"},"mac_t5e_back":{"w":210,"h":210,"ax":138.0,"ay":208.0,"bh":206,"y":1994,"at":"t5"},"str_t5a_front":{"w":229,"h":230,"ax":135.0,"ay":227.5,"bh":226,"y":0,"at":"t5"},"str_t5a_back":{"w":226,"h":230,"ax":99.0,"ay":227.5,"bh":226,"y":230,"at":"t5"},"str_t5b_front":{"w":222,"h":222,"ax":120.5,"ay":220.0,"bh":217,"y":460,"at":"t5"},"str_t5b_back":{"w":219,"h":224,"ax":110.0,"ay":221.5,"bh":218,"y":682,"at":"t5"},"str_t5c_front":{"w":216,"h":224,"ax":108.5,"ay":221.0,"bh":218,"y":906,"at":"t5"},"str_t5c_back":{"w":216,"h":216,"ax":108.0,"ay":213.5,"bh":211,"y":1130,"at":"t5"},"str_t5d_front":{"w":190,"h":212,"ax":95.5,"ay":209.5,"bh":208,"y":1346,"at":"t5"},"str_t5d_back":{"w":210,"h":225,"ax":86.5,"ay":222.5,"bh":218,"y":1558,"at":"t5"},"str_t5e_front":{"w":211,"h":224,"ax":99.0,"ay":222.0,"bh":213,"y":1783,"at":"t5"},"str_t5e_back":{"w":184,"h":216,"ax":86.5,"ay":214.0,"bh":209,"y":2007,"at":"t5"},"sup_t5a_front":{"w":234,"h":230,"ax":134.5,"ay":227.5,"bh":224,"y":0,"at":"t5"},"sup_t5a_back":{"w":227,"h":230,"ax":127.0,"ay":227.5,"bh":226,"y":230,"at":"t5"},"sup_t5b_front":{"w":217,"h":223,"ax":111.0,"ay":220.5,"bh":218,"y":460,"at":"t5"},"sup_t5b_back":{"w":222,"h":220,"ax":112.0,"ay":217.0,"bh":214,"y":683,"at":"t5"},"sup_t5c_front":{"w":216,"h":224,"ax":118.0,"ay":221.0,"bh":219,"y":903,"at":"t5"},"sup_t5c_back":{"w":217,"h":222,"ax":123.0,"ay":220.0,"bh":213,"y":1127,"at":"t5"},"sup_t5d_front":{"w":206,"h":212,"ax":94.0,"ay":209.5,"bh":204,"y":1349,"at":"t5"},"sup_t5d_back":{"w":194,"h":222,"ax":103.0,"ay":220.0,"bh":218,"y":1561,"at":"t5"},"sup_t5e_front":{"w":200,"h":219,"ax":107.5,"ay":216.5,"bh":210,"y":1783,"at":"t5"},"sup_t5e_back":{"w":208,"h":225,"ax":111.0,"ay":222.5,"bh":214,"y":2002,"at":"t5"}};
+var SPRT5={"inf_t5a_front":{"w":228,"h":227,"ax":115.0,"ay":224.5,"bh":216,"y":0,"at":"t5"},"inf_t5a_back":{"w":227,"h":222,"ax":110.5,"ay":220.0,"bh":213,"y":227,"at":"t5"},"inf_t5b_front":{"w":216,"h":218,"ax":108.5,"ay":215.5,"bh":208,"y":449,"at":"t5"},"inf_t5b_back":{"w":218,"h":218,"ax":110.5,"ay":215.0,"bh":212,"y":667,"at":"t5"},"inf_t5c_front":{"w":210,"h":213,"ax":106.0,"ay":210.5,"bh":207,"y":885,"at":"t5"},"inf_t5c_back":{"w":206,"h":210,"ax":104.5,"ay":208.0,"bh":206,"y":1098,"at":"t5"},"inf_t5d_front":{"w":210,"h":213,"ax":91.5,"ay":210.5,"bh":208,"y":1308,"at":"t5"},"inf_t5d_back":{"w":220,"h":223,"ax":112.5,"ay":220.5,"bh":218,"y":1521,"at":"t5"},"inf_t5e_front":{"w":225,"h":215,"ax":129.0,"ay":212.5,"bh":210,"y":1744,"at":"t5"},"inf_t5e_back":{"w":219,"h":215,"ax":105.0,"ay":212.5,"bh":197,"y":1959,"at":"t5"},"cav_t5a_front":{"w":225,"h":224,"ax":90.5,"ay":221.0,"bh":218,"y":0,"at":"t5"},"cav_t5a_back":{"w":226,"h":223,"ax":90.0,"ay":220.5,"bh":213,"y":224,"at":"t5"},"cav_t5b_front":{"w":224,"h":218,"ax":129.0,"ay":215.0,"bh":213,"y":447,"at":"t5"},"cav_t5b_back":{"w":210,"h":218,"ax":117.5,"ay":215.0,"bh":212,"y":665,"at":"t5"},"cav_t5c_front":{"w":236,"h":214,"ax":119.0,"ay":212.0,"bh":208,"y":883,"at":"t5"},"cav_t5c_back":{"w":238,"h":218,"ax":114.5,"ay":216.0,"bh":207,"y":1097,"at":"t5"},"cav_t5d_front":{"w":211,"h":215,"ax":109.0,"ay":212.5,"bh":205,"y":1315,"at":"t5"},"cav_t5d_back":{"w":215,"h":222,"ax":84.5,"ay":219.5,"bh":218,"y":1530,"at":"t5"},"cav_t5e_front":{"w":216,"h":200,"ax":105.5,"ay":198.0,"bh":195,"y":1752,"at":"t5"},"cav_t5e_back":{"w":234,"h":215,"ax":109.0,"ay":212.5,"bh":210,"y":1952,"at":"t5"},"arc_t5a_front":{"w":226,"h":228,"ax":107.5,"ay":225.0,"bh":220,"y":0,"at":"t5"},"arc_t5a_back":{"w":226,"h":225,"ax":109.0,"ay":222.5,"bh":220,"y":228,"at":"t5"},"arc_t5b_front":{"w":236,"h":218,"ax":119.0,"ay":215.0,"bh":213,"y":453,"at":"t5"},"arc_t5b_back":{"w":218,"h":220,"ax":121.5,"ay":218.0,"bh":213,"y":671,"at":"t5"},"arc_t5c_front":{"w":204,"h":208,"ax":95.0,"ay":205.5,"bh":202,"y":891,"at":"t5"},"arc_t5c_back":{"w":206,"h":208,"ax":96.0,"ay":206.0,"bh":200,"y":1099,"at":"t5"},"arc_t5d_front":{"w":201,"h":222,"ax":87.0,"ay":220.0,"bh":218,"y":1307,"at":"t5"},"arc_t5d_back":{"w":196,"h":222,"ax":105.5,"ay":220.0,"bh":218,"y":1529,"at":"t5"},"arc_t5e_front":{"w":209,"h":215,"ax":96.0,"ay":212.5,"bh":210,"y":1751,"at":"t5"},"arc_t5e_back":{"w":194,"h":200,"ax":94.0,"ay":197.5,"bh":195,"y":1966,"at":"t5"},"mac_t5a_front":{"w":246,"h":230,"ax":130.0,"ay":227.5,"bh":221,"y":0,"at":"t5"},"mac_t5a_back":{"w":226,"h":230,"ax":110.0,"ay":227.5,"bh":225,"y":230,"at":"t5"},"mac_t5b_front":{"w":223,"h":219,"ax":116.5,"ay":216.5,"bh":213,"y":460,"at":"t5"},"mac_t5b_back":{"w":264,"h":221,"ax":157.0,"ay":218.5,"bh":213,"y":679,"at":"t5"},"mac_t5c_front":{"w":238,"h":216,"ax":114.5,"ay":214.0,"bh":212,"y":900,"at":"t5"},"mac_t5c_back":{"w":238,"h":216,"ax":115.5,"ay":214.0,"bh":212,"y":1116,"at":"t5"},"mac_t5d_front":{"w":224,"h":220,"ax":108.0,"ay":217.0,"bh":212,"y":1332,"at":"t5"},"mac_t5d_back":{"w":227,"h":224,"ax":105.5,"ay":221.5,"bh":212,"y":1552,"at":"t5"},"mac_t5e_front":{"w":224,"h":210,"ax":105.5,"ay":207.0,"bh":202,"y":1776,"at":"t5"},"mac_t5e_back":{"w":212,"h":202,"ax":103.0,"ay":199.5,"bh":187,"y":1986,"at":"t5"},"str_t5a_front":{"w":229,"h":230,"ax":135.0,"ay":227.5,"bh":226,"y":0,"at":"t5"},"str_t5a_back":{"w":226,"h":230,"ax":99.0,"ay":227.5,"bh":226,"y":230,"at":"t5"},"str_t5b_front":{"w":222,"h":218,"ax":120.5,"ay":215.0,"bh":213,"y":460,"at":"t5"},"str_t5b_back":{"w":219,"h":218,"ax":110.0,"ay":215.0,"bh":213,"y":678,"at":"t5"},"str_t5c_front":{"w":204,"h":214,"ax":102.0,"ay":211.5,"bh":207,"y":896,"at":"t5"},"str_t5c_back":{"w":204,"h":212,"ax":94.0,"ay":209.0,"bh":207,"y":1110,"at":"t5"},"str_t5d_front":{"w":190,"h":212,"ax":95.5,"ay":209.5,"bh":208,"y":1322,"at":"t5"},"str_t5d_back":{"w":204,"h":207,"ax":104.5,"ay":204.5,"bh":198,"y":1534,"at":"t5"},"str_t5e_front":{"w":228,"h":219,"ax":104.0,"ay":216.5,"bh":214,"y":1741,"at":"t5"},"str_t5e_back":{"w":208,"h":203,"ax":104.0,"ay":200.5,"bh":198,"y":1960,"at":"t5"},"sup_t5a_front":{"w":234,"h":230,"ax":134.5,"ay":227.5,"bh":224,"y":0,"at":"t5"},"sup_t5a_back":{"w":227,"h":230,"ax":127.0,"ay":227.5,"bh":226,"y":230,"at":"t5"},"sup_t5b_front":{"w":217,"h":218,"ax":111.0,"ay":215.0,"bh":213,"y":460,"at":"t5"},"sup_t5b_back":{"w":222,"h":218,"ax":112.0,"ay":215.0,"bh":212,"y":678,"at":"t5"},"sup_t5c_front":{"w":204,"h":210,"ax":110.0,"ay":207.0,"bh":204,"y":896,"at":"t5"},"sup_t5c_back":{"w":204,"h":209,"ax":117.0,"ay":206.5,"bh":204,"y":1106,"at":"t5"},"sup_t5d_front":{"w":211,"h":216,"ax":117.5,"ay":213.0,"bh":206,"y":1315,"at":"t5"},"sup_t5d_back":{"w":210,"h":215,"ax":133.0,"ay":212.5,"bh":206,"y":1531,"at":"t5"},"sup_t5e_front":{"w":222,"h":218,"ax":127.5,"ay":216.0,"bh":210,"y":1746,"at":"t5"},"sup_t5e_back":{"w":224,"h":226,"ax":116.5,"ay":223.5,"bh":212,"y":1964,"at":"t5"}};
 /* ===== Bậc 5 (V135): five armies, one per Bậc 4 form; art = art/troops/<branch>/sprites/t5.webp (loaded lazily) =====
    Unlock: Bậc 4 ★5, Quân Cơ Xứ 200, rebirth 4, 10 Thiên Mệnh Phù, 2M silver + 200k merit, 48 h. The army is the hero's Bậc 4 form (no switching at Bậc 5).
    Skills (Tier 5 Design Bible): every 3rd action the unit fires its army skill on top of its Bậc 4 effect; Chiến Ý doctrine swaps it for a morale skill. */
@@ -9035,11 +9034,11 @@ function twIc(k,sz){var i=TWICN.indexOf(k);if(i<0)i=6;sz=sz||18;return'<span cla
  var _tsTW=twSweep;twSweep=function(){var sw=_tsTW();if(sw&&ev().tw.best>150)sw.sh=1;return sw};
  var _grTW=giveRw;giveRw=function(rw){_grTW(rw);try{
   if(rw.rt)S.tlTok=(S.tlTok||0)+rw.rt;if(rw.ng)S.ngoc=(S.ngoc||0)+rw.ng;if(rw.tb)S.thanBinh=(S.thanBinh||0)+rw.tb;
-  if(rw.fr){S.twFr=S.twFr||[];if(S.twFr.indexOf(rw.fr)<0)S.twFr.push(rw.fr)}
+  if(typeof rw.fr==='number'){S.twFr=S.twFr||[];if(S.twFr.indexOf(rw.fr)<0)S.twFr.push(rw.fr)}
   if(rw.sh){S.phuSh=(S.phuSh||0)+rw.sh;if(S.phuSh>=10){var n=Math.floor(S.phuSh/10);S.phuSh-=n*10;var T=tp();T.tmp=(T.tmp||0)+n;toast('+'+n+' Thiên Mệnh Phù (ghép mảnh)')}}}catch(e){}};
  var _rtTW=rewardTxt;rewardTxt=function(rw){var o=_rtTW(rw),x=[];
   if(rw.tphu)x.push(twIc('phu')+'Thiên Mệnh Phù '+rw.tphu);if(rw.rt)x.push(twIc('refine')+'Lệnh Bảo Đảm '+rw.rt);if(rw.ng)x.push(twIc('ngoc')+'Thức Tỉnh Ngọc '+rw.ng);
-  if(rw.tb)x.push(twIc('than_binh')+'Thần Binh Hạch');if(rw.sh)x.push(twIc('phu_shard')+'Mảnh Phù '+rw.sh);if(rw.fr)x.push(twIc('chest')+'Khung '+TWRL[rw.fr-1].n);
+  if(rw.tb)x.push(twIc('than_binh')+'Thần Binh Hạch');if(rw.sh)x.push(twIc('phu_shard')+'Mảnh Phù '+rw.sh);if(typeof rw.fr==='number'&&TWRL[rw.fr-1])x.push(twIc('chest')+'Khung '+TWRL[rw.fr-1].n);
   return x.length?o+(o?' · ':'')+x.join(' · '):o};
  /* realm rule + realm background on tower battles (STMODE/STF are set by strat.js around towerFight) */
  var _rsTW=runSpecial;runSpecial=function(D,meta,opt,after){try{if(typeof STMODE!=='undefined'&&STMODE==='tower'&&STF){var r=twRealm(STF);
@@ -10175,6 +10174,616 @@ function dkdOn(mi,si,kind,r){if(kind!=='stage'||mi<DKD_MI)return false;if(r&&r.b
 }catch(e){}return r}})();
 (function(){if(typeof pvCounter!=='function')return;var _pvD181=pvCounter;pvCounter=function(mi,si,kind){var x=_pvD181(mi,si,kind);try{var en=buildEnemy(mi,si,kind);
  if(en&&en.dkd)x=x.replace(/<\/div>$/,'')+'<div class="eskbox"><div class="ctrh"><b>Đoạt Khí Doanh</b></div><div class="sm">Cả 5 quân địch rút sĩ khí: mỗi đòn thường −'+DKDH+' sĩ khí mục tiêu, mỗi chiêu −'+DKDS+' sĩ khí toàn quân ta. Mang đủ trống, dùng khóa sĩ khí và trúng độc.</div></div></div>'}catch(e){}return x}})();
-</script>
+/* ===== V185 release (coding, 2026-11-03): rename + art release (ember, Tier 5 B–E, skins, tower masters, UI Batch 4) ===== */
 
-</body></html>
+/* A. Game name (user 2026-11-03 13:06): "Bá Nghiệp" (VI) / "Hegemony" (EN). Title set in code (Licorice), never painted into art.
+   Internal ids, save keys, Drive folders and file names keep the old Chiến Ký Tam Quốc names so saves still load. */
+function gameLang(){try{return (window.S&&S.lang==='en')?'en':'vi'}catch(e){return'vi'}}
+function gameName(){return gameLang()==='en'?'Hegemony':'Bá Nghiệp'}
+function gameNameApply(){try{var n=gameName();document.title=n;var sp=document.getElementById('splash');if(sp){sp.setAttribute('aria-label',n);var b=sp.querySelector('.splogo');if(b)b.textContent=n}}catch(e){}}
+gameNameApply();
+
+/* B. Morale ember sprite (Art To-Do item 12): art/ui/morale_ember.webp 1024×512, 4×2 cells of 256 on black, drawn additively,
+   flame base at y 205 of each cell. Cells: 0 spark, 1 small ember, 2 flame, 3/4 ready (alternating flicker poses),
+   5/6 overcharged (alternating), 7 locked (seal ring). Growth is painted into the cells; code adds flicker, sway and pulse.
+   Falls back to the V184 code flame (emberDraw) until / unless the image loads. */
+var EMBI=null;(function(){try{var im=new Image();im.onload=function(){EMBI=im};im.src='art/ui/morale_ember.webp'}catch(e){}})();
+(function(){if(typeof emberDraw!=='function')return;var _emb185=emberDraw;emberDraw=function(c,x,y,s,mo,cost,lk,id){
+ if(!EMBI||!EMBI.naturalWidth)return _emb185(c,x,y,s,mo,cost,lk,id);
+ try{mo=Math.max(0,mo||0);var r=mo/cost,ov=mo-cost,t=BT.t||0,ph=((id||'').length*37+(id||'').charCodeAt(1||0))%100,alt=Math.floor((t+ph*13)/170)%2;
+  var cell=lk?7:r<.34?0:r<.67?1:r<1?2:ov>15?5+alt:3+alt;
+  var fl=lk?1:1+Math.sin(t/95+ph)*.05+Math.sin(t/41+ph*2)*.03,pu=(!lk&&r>=1)?1+.07*Math.sin(t/120+ph):1,k=.24*Math.min(1.2,s)*fl*pu;
+  k*=[1.9,1.5,1.2,1,1,1.05,1.05,1.1][cell];var cw=256*k,bx=x,by=y-(BT.rh||90)*.08;
+  c.save();c.globalCompositeOperation='lighter';c.globalAlpha=lk?.9:Math.min(1,.65+.35*Math.min(1,r));
+  c.drawImage(EMBI,(cell%4)*256,Math.floor(cell/4)*256,256,256,bx-cw/2,by-205*k,cw,cw);c.restore()}catch(e){try{_emb185(c,x,y,s,mo,cost,lk,id)}catch(_){}}}})();
+/* C. Tier 5 final unit names (Tier 5 Design Bible "[Art] Tier 5 unit names FINAL", 2026-11-02 22:55): replace F5P + F5S. EN names kept for the EN build. */
+var F5N={a:{inf:'Phượng Dực Vệ',cav:'Phượng Hoàng Kỵ',arc:'Phượng Linh Tiễn',mac:'Phượng Hỏa Pháo',str:'Phượng Vũ Sư',sup:'Phượng Minh Cổ'},
+ b:{inf:'Huyền Thuẫn Vệ',cav:'Huyền Quy Kỵ',arc:'Huyền Giáp Nỏ',mac:'Huyền Vũ Xa',str:'Huyền Phù Sư',sup:'Huyền Quy Cổ'},
+ c:{inf:'Long Lân Vệ',cav:'Long Mã Kỵ',arc:'Long Nha Tiễn',mac:'Long Nỏ Xa',str:'Long Vân Sư',sup:'Long Ngâm Cổ'},
+ d:{inf:'Hổ Nha Vệ',cav:'Bạch Hổ Kỵ',arc:'Hổ Giác Tiễn',mac:'Hổ Đầu Xa',str:'Hổ Diện Sư',sup:'Hổ Uy Cổ'},
+ e:{inf:'Lân Giáp Vệ',cav:'Kỳ Lân Kỵ',arc:'Lân Ngọc Tiễn',mac:'Lân Thạch Xa',str:'Lân Phù Sư',sup:'Lân Thụy Cổ'}};
+var F5NE={a:{inf:'Phoenix Wing Guard',cav:'Phoenix Riders',arc:'Phoenix Feather Archers',mac:'Phoenix Fire Trebuchet',str:'Phoenix Plume Sages',sup:'Phoenix Song Drummers'},
+ b:{inf:'Blackshell Guard',cav:'Tortoise Riders',arc:'Ironshell Crossbows',mac:'Tortoise War Wagon',str:'Shell Talisman Sages',sup:'Shell Drummers'},
+ c:{inf:'Dragonscale Guard',cav:'Dragon-Horse Riders',arc:'Dragon Fang Archers',mac:'Dragon Repeater Cart',str:'Dragon Cloud Sages',sup:'Dragon Roar Drummers'},
+ d:{inf:'Tiger Fang Blades',cav:'White Tiger Riders',arc:'Tiger Horn Archers',mac:'Tiger-Head Ram',str:'Tiger Mask Sages',sup:'Tiger Might Drummers'},
+ e:{inf:'Qilin Scale Wardens',cav:'Qilin Riders',arc:'Jade Qilin Archers',mac:'Qilin Stone Cart',str:'Qilin Talisman Sages',sup:'Auspicious Drummers'}};
+(function(){try{var _f5n185=f5n;f5n=function(br,f){try{var t=(gameLang()==='en'?F5NE:F5N)[f];if(t&&t[br])return t[br]}catch(e){}return _f5n185(br,f)}}catch(e){}})();
+/* D. Skins: art/skins/portraits.webp + fx.webp (src/skin_pack.py, SKORD order, lubu_b fx rotated 45°). Face boxes measured on the packed cells. */
+(function(){try{var F={zhugeliang_a:[.4,.1,.22,.17],zhugeliang_b:[.42,.2,.2,.15],lubu_a:[.4,.13,.24,.2],lubu_b:[.38,.08,.26,.2],guanyu_a:[.38,.12,.26,.2],
+ zhaoyun_a:[.4,.08,.26,.2],caocao_a:[.33,.13,.26,.21],zhangfei_a:[.38,.11,.28,.23],diaochan_a:[.41,.13,.24,.18]};for(var k in F)SKFACE[k]=F[k]}catch(e){}})();
+/* Skin statues: ONE atlas art/skins/statues.webp (3 × 540×960 on black, drawn additively by sgSkin). sigImg('statue_<skin>') cuts its cell. */
+var STA185={guanyu_a:0,zhugeliang_a:1,zhugeliang_b:2},STAI185=null,STAC185={};
+(function(){try{var im=new Image();im.onload=function(){STAI185=im};im.onerror=function(){};im.src='art/skins/statues.webp'}catch(e){}})();
+(function(){if(typeof sigImg!=='function')return;var _sig185=sigImg;sigImg=function(g,n){try{if(n==='k_statue'&&g==='zhugeliang')return null;if(n&&n.indexOf('statue_')===0){var k=n.slice(7),i=STA185[k];
+ if(i!==undefined){if(STAC185[k])return STAC185[k];if(!STAI185||!STAI185.naturalWidth)return null;var cv=document.createElement('canvas');cv.width=540;cv.height=960;
+ cv.getContext('2d').drawImage(STAI185,i*540,0,540,960,0,0,540,960);cv.naturalWidth=540;cv.naturalHeight=960;cv.complete=true;STAC185[k]=cv;return cv}}}catch(e){}return _sig185(g,n)}})();
+/* Fix (found in V185 testing): campaign star chests store hero fragments as rw.fr={gid:n}; tower300 treated rw.fr as a realm-frame number
+   (rewardTxt threw on Chinh chiến, giveRw pushed the object into S.twFr). tower300 now checks typeof number; clean old saves here. */
+(function(){try{if(window.S&&S.twFr&&S.twFr.filter)S.twFr=S.twFr.filter(function(x){return typeof x==='number'})}catch(e){}})();
+/* ===== V185 tower realm master skills with painted art (Thông Thiên Tháp Bible "[Art] Realm master art APPROVED" + motion page EebWoqacLbD54gZX3PfbCT) =====
+   Atlases (src/twm_cut.py): art/tower/master_statues.webp (3x2 of 480x720), master_fx_s.webp (4x6 of 256 solid), master_fx_g.webp (4x6 of 256, additive).
+   The 18 motions are ported from the art agent's preview (360x400 field: master M top, player slots PF front / PB back). Per cast the preview space is
+   mapped onto the battle field with one uniform scale (column spacing at the target front row / 100), anchored on the target front-row centre;
+   M and the preview slots used by the skill's hits are moved onto the real master and real targets (in hit order), so pieces land where damage lands.
+   Damage (impact) per target at its hit time, status text only for statuses the engine applied (ev.est), stun star ring on real stunned units.
+   Takes over playAct only for /^twm\d$/ casters with a known skill name, when all 3 atlases are loaded; otherwise the V174 path (code stele + generic FX) plays. */
+var TMFI={s:null,g:null,st:null};
+(function(){try{[['s','art/tower/master_fx_s.webp'],['g','art/tower/master_fx_g.webp'],['st','art/tower/master_statues.webp']].forEach(function(p){var im=new Image();im.onload=function(){TMFI[p[0]]=im};im.onerror=function(){};im.src=p[1]})}catch(e){}})();
+function tmfReady(){return !!(TMFI.s&&TMFI.g&&TMFI.st&&TMFI.s.naturalWidth&&TMFI.g.naturalWidth&&TMFI.st.naturalWidth)}
+var TMF=(function(){
+let M=[180,92],PF=[[80,250],[180,250],[280,250]],PB=[[80,334],[180,334],[280,334]],PL=[...PF,...PB],VR=[-10,-10,380,420],STUN=[];
+const IMG={};
+function rect(k){ if(k[0]==='s'&&k[1]==='t'){const r=+k.slice(2)-1;return [TMFI.st,(r%3)*480,Math.floor(r/3)*720,480,720];}
+  const r=+k[1]-1,ty=k[2],n=+k[3]-1;return [ty==='s'?TMFI.s:TMFI.g,n*256,r*256,256,256]; }
+const REALM = [
+  {n:'Thạch Giáp Tướng', f:50,  el:'Đá',   col:'#e0b46a', s:['Stone wall slab','Earth spikes','Falling rock','Stone shield'], g:['Amber crack','Shield dome','Dust ring','Mountain seal']},
+  {n:'Hỏa Phượng Sứ',   f:100, el:'Hỏa',  col:'#ff7a2a', s:['Feather dart','Phoenix wing','Ember chunk','Scorched patch'], g:['Diving phoenix','Fire-rain streak','Ring of fire','Rebirth pillar']},
+  {n:'Băng Hồn Vương',  f:150, el:'Băng',  col:'#9fe6ff', s:['Ice lance','Ice wall','Hex ice seal','Ice shards'], g:['Blizzard swirl','Frost nova','Cold mist','Aurora seal']},
+  {n:'Lôi Thần Tướng',  f:200, el:'Lôi',   col:'#a8b8ff', s:['Thunder spear','War drum','Split rock','Blank talisman'], g:['Lightning bolt','Energy ball','Shock ring','Sky-crack flash']},
+  {n:'Minh Phủ Diêm Quân', f:250, el:'Minh', col:'#b77aff', s:['Soul-chain hook','Underworld lantern','Judgement tablet','Tombstone'], g:['Soul wisp','Drain ribbon','Underworld gate','Ghost horde']},
+  {n:'Thiên Đình Thủ Vệ', f:300, el:'Thiên', col:'#ffe08a', s:['Heavenly sword','Golden wheel','Jade tablet','Cloud pillar'], g:['Light column','Five-element ring','Halo burst','Cloud swirl']},
+];
+const lerp=(a,b,t)=>a+(b-a)*t, cl=(t)=>Math.max(0,Math.min(1,t)), seg=(t,a,b)=>cl((t-a)/(b-a));
+const easeOut=t=>1-Math.pow(1-t,3), easeIn=t=>t*t, bell=t=>Math.sin(Math.PI*cl(t));
+const PI=Math.PI;
+
+function spr(c,k,x,y,s,rot=0,a=1,add=false,sx=1,sy=1){
+  const R=rect(k),im=R[0]; if(!im||!(a>0)||!(s>0)||!isFinite(x+y)) return;
+  c.save(); c.globalAlpha=Math.min(1,a); if(add) c.globalCompositeOperation='lighter';
+  c.translate(x,y); c.rotate(rot); c.scale(sx,sy); c.drawImage(im,R[1],R[2],R[3],R[4],-s/2,-s/2,s,s); c.restore();
+}
+const glow=(c,k,x,y,s,a=1,rot=0,sx=1,sy=1)=>spr(c,k,x,y,s,rot,a,true,sx,sy);
+// a piece lying flat on the ground (or a disc in perspective): squash first, then spin inside the squash
+function flat(c,k,x,y,s,a,rot,sy,add=true){ const R=rect(k),im=R[0]; if(!im||!(a>0)||!(s>0)) return; c.save(); c.globalAlpha=Math.min(1,a); if(add) c.globalCompositeOperation='lighter'; c.translate(x,y); c.scale(1,sy); c.rotate(rot); c.drawImage(im,R[1],R[2],R[3],R[4],-s/2,-s/2,s,s); c.restore(); }
+// a glow stretched between two points (bolts, beams, ribbons): sprite's long axis is vertical
+function beam(c,k,x0,y0,x1,y1,w,a){ const d=Math.hypot(x1-x0,y1-y0); if(d<1) return; const r=Math.atan2(y1-y0,x1-x0)-PI/2;
+  glow(c,k,(x0+x1)/2,(y0+y1)/2,d,a,r,w/d,1); }
+function quake(t,t0,amp,len=.14){ const k=(t-t0)/len; return (k>0&&k<1)? Math.sin(k*40)*amp*(1-k):0; }
+function shadow(c,x,y,r,a){ c.save(); c.globalAlpha=a; c.fillStyle='#000'; c.beginPath(); c.ellipse(x,y,r,r*.3,0,0,7); c.fill(); c.restore(); }
+function veil(c,col,a){ if(a<=0) return; c.save(); c.globalAlpha=a; c.fillStyle=col; c.fillRect(VR[0],VR[1],VR[2],VR[3]); c.restore(); }
+function flash(c,t,t0,a=.5,len=.06){ const k=seg(t,t0,t0+len); if(k>0&&k<1) veil(c,'#fff',a*(1-k)); }
+function motes(c,col,x0,y0,x1,y1,t,t0,t1,n=5,seed=0){ const k=seg(t,t0,t1); if(k<=0||k>=1) return;
+  c.save(); c.globalCompositeOperation='lighter'; c.fillStyle=col;
+  for(let i=0;i<n;i++){ const p=cl(k*1.4-i*.08); if(p<=0||p>=1) continue; const e=easeIn(p);
+    const x=lerp(x0,x1,e)+Math.sin(p*9+i+seed)*14*(1-p), y=lerp(y0,y1,e)+Math.cos(p*7+i)*6;
+    c.globalAlpha=(1-p)*.9+.1; c.beginPath(); c.arc(x,y,2.6-p,0,7); c.fill(); }
+  c.restore(); }
+function stunRing0(c,x,y,t0,t){ if(t<=t0||t>.97) return; const a=Math.min(1,(t-t0)*6);
+  c.save(); c.globalAlpha=a; c.fillStyle='#ffe58a';
+  for(let i=0;i<4;i++){ const ang=t*14+i*PI/2; const px=x+Math.cos(ang)*18, py=y-34+Math.sin(ang)*5;
+    c.beginPath(); for(let j=0;j<10;j++){ const r=j%2?2:5, aa=j*PI/5; c.lineTo(px+Math.cos(aa)*r,py+Math.sin(aa)*r);} c.fill(); }
+  c.restore(); }
+function debris(c,k,x,y,t0,t,n=6,sz=14){ const p=seg(t,t0,t0+.3); if(p<=0||p>=1) return;
+  for(let i=0;i<n;i++){ const a=-PI/2+(i-(n-1)/2)*.55, v=50+i*9; spr(c,k,x+Math.cos(a)*v*p,y+Math.sin(a)*v*p+130*p*p,sz+(i%3)*4,i+p*8,1-p); } }
+function embers(c,col,x,y,t0,t,n=8){ const p=seg(t,t0,t0+.35); if(p<=0||p>=1) return;
+  c.save(); c.globalCompositeOperation='lighter'; c.fillStyle=col;
+  for(let i=0;i<n;i++){ const a=i/n*PI*2+.3, v=30+(i*13)%30; c.globalAlpha=1-p; c.beginPath(); c.arc(x+Math.cos(a)*v*p,y+Math.sin(a)*v*p-30*p,2.2,0,7); c.fill(); }
+  c.restore(); }
+// falling piece with a ground shadow that grows as it nears: returns progress
+function drop(c,k,x,y,t0,t1,t,s,rot=0,h=260){ const p=seg(t,t0,t1); if(p<=0||p>=1) return p;
+  const e=easeIn(p); shadow(c,x,y+26,s*.38*(.3+.7*e),.15+.4*e); spr(c,k,x,y-h*(1-e),s,rot*(1-e)); return p; }
+
+function stunRing(){}
+
+const SK = [
+ // ===== 1 · Thạch Giáp Tướng =====
+ {r:0,slot:'Kỹ năng 1',n:'Thạch Bích Trận',area:'Own side',eff:'A stone wall rises in front of the master, a shield dome covers him and the seal draws every attack to him (taunt).',pc:['r1s1','r1s4','r1g1','r1g2','r1g4','r1g3'],
+  st:[['Khiên · Khiêu khích','own',.55]],
+  cam(t){ return quake(t,.28,4)+quake(t,.36,4)+quake(t,.44,4); },
+  draw(c,t){ const off=1-seg(t,.9,.99);
+    const cr=seg(t,.08,.26); if(cr>0) glow(c,'r1g1',M[0],M[1]+84,330,(cr<1?cr:1)*off*.9,0,1,.5);
+    [[M[0]-110,.24],[M[0],.32],[M[0]+110,.40]].forEach(([x,t0])=>{ const u=seg(t,t0,t0+.1); if(u<=0) return; const y=lerp(M[1]+122,M[1]+78,easeOut(u));
+      c.save(); c.beginPath(); c.rect(x-60,-2000,120,M[1]+98+2000); c.clip(); spr(c,'r1s1',x,y,118,0,off,false,1,.85); c.restore();
+      const d=seg(t,t0+.04,t0+.3); if(d>0&&d<1) glow(c,'r1g3',x,M[1]+94,lerp(50,130,d),(1-d)*.8,0,1,.4); debris(c,'r1s3',x,M[1]+94,t0+.05,t,4,10); });
+    const g=seg(t,.38,.52); if(g>0) flat(c,'r1g4',M[0],M[1]+44,lerp(40,150,easeOut(g)),off*(.9-.3*Math.sin(t*20)*.2),t*1.2,.42);
+    const d=seg(t,.46,.6); if(d>0) glow(c,'r1g2',M[0],M[1]-4,lerp(60,128,easeOut(d)),off*.75*(1+.05*Math.sin(t*25)));
+    const s=seg(t,.5,.64); if(s>0) spr(c,'r1s4',M[0]+lerp(-70,0,easeOut(s)),M[1]+30,46,(1-s)*-6,off);
+    if(t>.6&&t<.9) PL.forEach((p,i)=>{ const k=((t-.6)*3+i*.13)%1; c.save(); c.globalAlpha=(1-k)*.5*off; c.strokeStyle='#e0b46a'; c.lineWidth=2; c.setLineDash([4,6]);
+      c.beginPath(); c.moveTo(p[0],p[1]-28); c.lineTo(lerp(p[0],M[0],k),lerp(p[1]-28,M[1]+40,k)); c.stroke(); c.restore(); }); } },
+ {r:0,slot:'Kỹ năng 2',n:'Sơn Băng Địa Liệt',area:'Column',eff:'The ground splits down a column and earth spikes burst under each unit; 35% stun.',pc:['r1g1','r1s2','r1g3','r1s3'],hits:[[1,.42],[4,.56]],
+  st:[['Choáng',[1],.5]],
+  cam(t){ return quake(t,.1,2,.3)+quake(t,.42,8)+quake(t,.56,7); },
+  draw(c,t){ const g=seg(t,.1,.4), off=1-seg(t,.82,.97); if(g>0){ const y1=lerp(140,400,easeOut(g)); c.save(); c.beginPath(); c.rect(0,130,360,y1-130); c.clip();
+      glow(c,'r1g1',PF[1][0],265,300,off,PI/2,1,.55); c.restore(); }
+    [[PF[1],.42],[PB[1],.56]].forEach(([p,t0])=>{ const u=seg(t,t0,t0+.08); if(u<=0) return; const o=1-seg(t,t0+.25,t0+.38); const sc=u<1? easeOut(u)*1.12 : 1.12-.12*seg(t,t0+.08,t0+.14);
+      spr(c,'r1s2',p[0],p[1]+4-36*sc,92*sc,0,o); const d=seg(t,t0,t0+.25); if(d<1) glow(c,'r1g3',p[0],p[1]+22,lerp(50,150,d),(1-d)*.9,0,1,.45); debris(c,'r1s3',p[0],p[1]+10,t0,t,6,12); });
+    stunRing(c,...PF[1],.5,t); } },
+ {r:0,slot:'Tuyệt kỹ',n:'Vạn Thạch Băng Thiên',area:'All',eff:'The mountain seal opens in the sky and boulders crash onto the whole army; 25% stun, defence −20%.',pc:['r1g4','r1s3','r1g3','r1s1'],hits:[[0,.4],[2,.46],[1,.52],[3,.58],[5,.64],[4,.7]],
+  st:[['Choáng',[0,5],.72],['−20% thủ',[1,2,3,4],.76]],
+  cam(t){ let q=0; [.4,.46,.52,.58,.64,.7].forEach(t0=>q+=quake(t,t0,6)); return q; },
+  draw(c,t){ const off=1-seg(t,.86,.98); veil(c,'#140c04',.4*seg(t,.06,.2)*off);
+    const g=seg(t,.04,.3); if(g>0) flat(c,'r1g4',180,48,lerp(40,260,easeOut(g)),off*(g<1?1:.75),t*2.4,.5);
+    [[0,.4],[2,.46],[1,.52],[3,.58],[5,.64],[4,.7]].forEach(([u,t1],i)=>{ const p=PL[u]; const t0=t1-.2; drop(c,'r1s3',p[0]+4,p[1]-6,t0,t1,t,62+(i%2)*10,2.5+i);
+      const d=seg(t,t1,t1+.25); if(d>0&&d<1){ glow(c,'r1g3',p[0],p[1]+22,lerp(50,140,d),(1-d),0,1,.45); spr(c,'r1s3',p[0]+4,p[1]+8,58,0,1-d); }
+      debris(c,'r1s3',p[0],p[1]+6,t1,t,6,11); });
+    stunRing(c,...PL[0],.72,t); stunRing(c,...PL[5],.72,t); } },
+
+ // ===== 2 · Hỏa Phượng Sứ =====
+ {r:1,slot:'Kỹ năng 1',n:'Phượng Hỏa Liêu Nguyên',area:'All',eff:'A fire phoenix dives across the battlefield and sets the whole army alight; 70% burn.',pc:['r2g1','r2g2','r2g3','r2s4'],hits:[[0,.3],[3,.36],[1,.42],[4,.48],[2,.54],[5,.6]],
+  st:[['Bỏng',[0,1,2,3,4,5],.62]],
+  tint(i,t){ const at=[.3,.42,.54,.36,.48,.6][i]; return t>at&&t<.92? `rgba(255,110,30,${.22*(1-seg(t,.8,.92))})`:null; },
+  draw(c,t){ const P=(k)=>[lerp(-40,420,k),150+Math.sin(k*PI)*130+k*60];
+    const k=seg(t,.12,.66);
+    PL.forEach((p,i)=>{ const at=[.3,.42,.54,.36,.48,.6][i]; const u=seg(t,at,at+.1), o=1-seg(t,.82,.95); if(u<=0) return;
+      spr(c,'r2s4',p[0],p[1]+26,70,0,o*.9,false,1,.5); glow(c,'r2g3',p[0],p[1]+6,lerp(30,74,easeOut(u))*(1+.05*Math.sin(t*30+i)),o*.9,0,1,.8);
+      glow(c,'r2g4',p[0]+Math.sin(t*20+i)*3,p[1]-6,40+6*Math.sin(t*26+i),o*.6); embers(c,'#ffb060',p[0],p[1],at,t); });
+    if(k>0&&k<1){ for(let j=6;j>=1;j--){ const q=P(Math.max(0,k-j*.03)), q2=P(Math.max(0,k-j*.03-.01)); const r=Math.atan2(q[1]-q2[1],q[0]-q2[0])-PI/2; glow(c,'r2g2',q[0],q[1],70,.5*(1-j/7),r+PI); }
+      const p=P(k), p2=P(k-.01); const r=Math.atan2(p[1]-p2[1],p[0]-p2[0])-PI/2; glow(c,'r2g1',p[0],p[1],130,1,r+PI); } } },
+ {r:1,slot:'Kỹ năng 2',n:'Niết Bàn Hỏa Vũ',area:'5 hits',eff:'Phoenix wings open behind the master and five burning feathers rain onto the army; +40% on a unit under half troops.',pc:['r2s2','r2s1','r2g2','r2s3','r2g3'],hits:[[0,.44],[2,.52],[1,.6],[5,.68],[4,.76]],
+  st:[['Bỏng',[0,2,1],.6],['+40%',[4],.78]],
+  cam(t){ return quake(t,.76,6); },
+  draw(c,t){ const w=seg(t,.04,.26), off=1-seg(t,.86,.97);
+    if(w>0){ const s=easeOut(w); spr(c,'r2s2',M[0]+44,M[1]-6,lerp(30,110,s),lerp(.6,-.1,s)+Math.sin(t*18)*.04,off,false); spr(c,'r2s2',M[0]-44,M[1]-6,lerp(30,110,s),-(lerp(.6,-.1,s)+Math.sin(t*18)*.04),off,false,-1,1);
+      glow(c,'r2g4',M[0],M[1]+10,90,off*.4); }
+    [[0,.44],[2,.52],[1,.6],[5,.68],[4,.76]].forEach(([u,t1],i)=>{ const t0=t1-.14, p=PL[u]; const k=seg(t,t0,t1); const big=u===4;
+      if(k>0&&k<1){ const e=easeIn(k); const x=lerp(M[0]+(i-2)*14,p[0],e), y=lerp(M[1]-10,p[1]-10,e); const r=Math.atan2(p[1]-M[1],p[0]-M[0])-PI/2;
+        beam(c,'r2g2',lerp(M[0],p[0],Math.max(0,e-.25)),lerp(M[1],p[1],Math.max(0,e-.25)),x,y,26,.8); spr(c,'r2s1',x,y,big?56:44,r); }
+      const d=seg(t,t1,t1+.22); if(d>0&&d<1){ glow(c,'r2g3',p[0],p[1]+4,lerp(30,big?120:84,d),1-d,0,1,.7); spr(c,'r2s3',p[0]+8,p[1]+12,26*(1-d*.5),d*4,1-d); }
+      embers(c,'#ffb060',p[0],p[1],t1,t,big?12:7); }); } },
+ {r:1,slot:'Tuyệt kỹ',n:'Phượng Hoàng Niết Bàn',area:'All',eff:'A rebirth pillar erupts, the phoenix rises and fire rains on everyone; drains 25% of the damage back to the master.',pc:['r2g4','r2g1','r2g2','r2g3','r2s3'],hits:[[0,.5],[1,.54],[2,.58],[3,.62],[4,.66],[5,.7]],
+  st:[['Bỏng',[0,1,2,3,4,5],.68],['+ Hồi quân','own',.86]],
+  cam(t){ return quake(t,.06,3,.3)+quake(t,.6,5,.2); },
+  tint(i,t){ return t>.5+i*.04&&t<.9? 'rgba(255,100,30,.18)':null; },
+  draw(c,t){ const off=1-seg(t,.9,.99); veil(c,'#2a0800',.3*seg(t,.05,.2)*off);
+    const p=seg(t,.05,.24); if(p>0) glow(c,'r2g4',M[0],M[1]-10-40*easeOut(p),150,off*(1-seg(t,.5,.7)*.7),0,1,lerp(.3,1.3,easeOut(p)));
+    const r=seg(t,.18,.46); if(r>0&&r<1) glow(c,'r2g1',M[0],lerp(M[1],-10,easeOut(r)),lerp(90,240,r),1-seg(t,.38,.46),PI);
+    PL.forEach((u,i)=>{ for(let j=0;j<3;j++){ const t1=.5+i*.04+j*.05, k=seg(t,t1-.12,t1); if(k>0&&k<1){ const x=u[0]+(j-1)*16, y=lerp(-30,u[1],easeIn(k)); glow(c,'r2g2',x,y-30,80,.9); } }
+      const d=seg(t,.5+i*.04,.72+i*.04); if(d>0&&d<1) glow(c,'r2g3',u[0],u[1]+4,lerp(40,96,d),(1-d)*.9,0,1,.7);
+      embers(c,'#ffb060',u[0],u[1],.52+i*.04,t,8); motes(c,'#ffb35a',u[0],u[1]-10,M[0],M[1]+20,t,.7,.92,6,i); });
+    const h=seg(t,.84,.95); if(h>0&&h<1) glow(c,'r2g3',M[0],M[1]+30,lerp(60,140,h),1-h,0,1,.6); } },
+
+ // ===== 3 · Băng Hồn Vương =====
+ {r:2,slot:'Kỹ năng 1',n:'Băng Phong Vạn Lý',area:'All',eff:'Two blizzard swirls sweep the field and freeze the army; 30% stun, −30 morale.',pc:['r3g1','r3g3','r3s4'],hits:[[1,.6],[3,.6]],
+  st:[['Choáng',[1,3],.62],['−30 sĩ khí',[0,2,4,5],.7]],
+  tint(i,t){ const a=seg(t,.25+(i%3)*.1,.45+(i%3)*.1)*(1-seg(t,.88,.97)); return a>0?`rgba(200,236,255,${.32*a})`:null; },
+  draw(c,t){ const off=1-seg(t,.88,.98);
+    c.save(); c.fillStyle='#fff'; for(let i=0;i<70;i++){ const ph=(t*1.6+i*.137)%1, x=((i*53)%380)-10+ph*120-60, y=((i*97)%420)-10+ph*60; c.globalAlpha=.75*off*seg(t,.05,.2); c.beginPath(); c.arc(x,y,1+(i%3)*.6,0,7); c.fill(); } c.restore();
+    veil(c,'#cfeaff',.18*seg(t,.15,.45)*off);
+    glow(c,'r3g3',180,300,420,.55*seg(t,.2,.5)*off,0,1,.55);
+    [[250,.08],[330,.18]].forEach(([y,t0])=>{ const k=seg(t,t0,t0+.55); if(k>0&&k<1) glow(c,'r3g1',lerp(-70,430,k),y,140,bell(k)*.8,k*6); });
+    [1,3].forEach(u=>{ const p=PL[u]; const d=seg(t,.58,.8); if(d>0&&d<1){ for(let j=0;j<5;j++){ const a=j*1.3; spr(c,'r3s4',p[0]+Math.cos(a)*34*d,p[1]+Math.sin(a)*18*d,30,a+d*3,1-d); } } stunRing(c,p[0],p[1],.62,t); }); } },
+ {r:2,slot:'Kỹ năng 2',n:'Băng Lăng Xuyên Tâm',area:'Column',eff:'An ice lance forms above the master and pierces straight down a column; slow 2 turns, defence −25%.',pc:['r3s1','r3g3','r3g2','r3s4'],hits:[[1,.38],[4,.46]],
+  st:[['Chậm · −25% thủ',[1,4],.52]],
+  cam(t){ return quake(t,.38,6)+quake(t,.46,5); },
+  tint(i,t){ return (i===1&&t>.38||i===4&&t>.46)&&t<.92? 'rgba(190,232,255,.38)':null; },
+  draw(c,t){ const f=seg(t,.04,.26), off=1-seg(t,.86,.97); const R=-.42;
+    if(f>0&&t<.3){ glow(c,'r3g3',M[0],M[1]+28,lerp(40,140,f),f*.7); spr(c,'r3s1',M[0],M[1]+34,lerp(20,104,easeOut(f)),R+PI*0+Math.sin(t*30)*.03,1); }
+    const k=seg(t,.28,.52),LX=PF[1][0]; if(k>0&&k<1){ const y=lerp(M[1]+34,470,easeIn(k)),x=lerp(M[0],LX,easeIn(k));
+      for(let j=1;j<=5;j++) glow(c,'r3g3',x+Math.sin(j)*4,y-j*26,60-j*6,.4*(1-j/6));
+      spr(c,'r3s1',x,y,104,R); }
+    if(k>0) for(let j=0;j<5;j++){ const yy=M[1]+48+j*55; if(yy<lerp(M[1]+34,470,easeIn(k))) glow(c,'r3g3',lerp(M[0],LX,(yy-M[1])/(470-M[1])),yy,70,.35*off*(1-seg(t,.6,.86))); }
+    [[PF[1],.38],[PB[1],.46]].forEach(([p,t0])=>{ const d=seg(t,t0,t0+.25); if(d>0&&d<1){ glow(c,'r3g2',p[0],p[1],lerp(30,130,easeOut(d)),1-d);
+      for(let j=0;j<6;j++){ const a=j*1.05+.4; spr(c,'r3s4',p[0]+Math.cos(a)*40*d,p[1]+Math.sin(a)*20*d+50*d*d,24,a+d*4,1-d);} } }); } },
+ {r:2,slot:'Tuyệt kỹ',n:'Vĩnh Đông Phong Ấn',area:'All',eff:'The aurora seal spreads under the army, an ice wall rises and a frozen seal locks every unit; slow, 50% no morale gain.',pc:['r3g4','r3s2','r3s3','r3g2','r3g3'],hits:[[0,.5],[1,.54],[2,.58],[3,.62],[4,.66],[5,.7]],
+  st:[['Khóa sĩ khí',[0,1,2,3,4,5],.74]],
+  tint(i,t){ return t>.5+i*.04&&t<.94? 'rgba(200,236,255,.3)':null; },
+  draw(c,t){ const off=1-seg(t,.9,.99); veil(c,'#06202c',.3*seg(t,.04,.2)*off);
+    const g=seg(t,.04,.3); if(g>0) flat(c,'r3g4',180,296,lerp(80,380,easeOut(g)),off*(.85+.15*Math.sin(t*12)),t*.8,.48);
+    glow(c,'r3g3',180,300,400,.4*seg(t,.2,.5)*off,0,1,.5);
+    [[70,.3],[180,.34],[290,.38]].forEach(([x,t0])=>{ const u=seg(t,t0,t0+.1); if(u<=0) return; const y=lerp(232,198,easeOut(u)); c.save(); c.beginPath(); c.rect(x-62,0,124,220); c.clip(); spr(c,'r3s2',x,y,124,0,off,false,1,.7); c.restore(); });
+    PL.forEach((p,i)=>{ const t1=.5+i*.04; const k=seg(t,t1-.12,t1); if(k>0&&k<1) spr(c,'r3s3',p[0],lerp(p[1]-160,p[1]-6,easeIn(k)),50,k*PI,1);
+      if(t>=t1){ spr(c,'r3s3',p[0],p[1]-6,50*(1+.04*Math.sin(t*20+i)),0,off*.55); const d=seg(t,t1,t1+.2); if(d<1) glow(c,'r3g2',p[0],p[1],lerp(30,100,d),1-d); } }); } },
+
+ // ===== 4 · Lôi Thần Tướng =====
+ {r:3,slot:'Kỹ năng 1',n:'Lôi Bạo Cửu Thiên',area:'6 hits',eff:'The thunder drum beats six times and a bolt strikes a random unit on every beat; 35% stun.',pc:['r4s2','r4g3','r4g1','r4g2','r4s3'],hits:[[2,.22],[0,.33],[4,.44],[1,.55],[5,.66],[3,.77]],
+  st:[['Choáng',[0,4],.8]],
+  cam(t){ let q=0; [.22,.33,.44,.55,.66,.77].forEach(t0=>q+=quake(t,t0,5,.1)); return q; },
+  draw(c,t){ const off=1-seg(t,.9,.99); veil(c,'#0a0c22',.32*seg(t,.04,.16)*off);
+    const a=seg(t,.04,.16); if(a>0){ let pulse=0; [.2,.31,.42,.53,.64,.75].forEach(t0=>pulse=Math.max(pulse,bell(seg(t,t0,t0+.06)))); spr(c,'r4s2',M[0]+82,M[1]+12,62*(1+.12*pulse),-.1,a*off);
+      [.2,.31,.42,.53,.64,.75].forEach(t0=>{ const d=seg(t,t0,t0+.14); if(d>0&&d<1) glow(c,'r4g3',M[0]+82,M[1]+12,lerp(40,130,d),1-d); }); }
+    [[2,.22],[0,.33],[4,.44],[1,.55],[5,.66],[3,.77]].forEach(([u,t0])=>{ const p=PL[u]; const k=seg(t,t0-.02,t0+.08);
+      if(k>0&&k<1){ const fl=(Math.floor(t*90)%2)?1:.6; beam(c,'r4g1',p[0]+8,-20,p[0],p[1],70,(1-k)*fl); }
+      flash(c,t,t0,.22,.04); const d=seg(t,t0,t0+.2); if(d>0&&d<1){ glow(c,'r4g2',p[0],p[1],lerp(40,100,d),1-d); }
+      debris(c,'r4s3',p[0],p[1]+10,t0,t,5,12); });
+    stunRing(c,...PL[0],.8,t); stunRing(c,...PL[4],.8,t); } },
+ {r:3,slot:'Kỹ năng 2',n:'Thiên Lôi Phá Giáp',area:'Cross',eff:'A thunder spear is hurled into the front centre and lightning splits along a cross; defence −30%, 20% stun.',pc:['r4s1','r4g2','r4g1','r4g3','r4s3'],hits:[[1,.34],[0,.42],[2,.42],[4,.46]],
+  st:[['Choáng',[1],.6],['−30% thủ',[0,2,4],.56]],
+  cam(t){ return quake(t,.34,9)+quake(t,.44,4); },
+  draw(c,t){ const off=1-seg(t,.86,.97), R=-.32; const p=PF[1];
+    const ch=seg(t,.04,.2); if(ch>0&&t<.22){ spr(c,'r4s1',M[0]+36,M[1]-10,lerp(30,96,easeOut(ch)),R,1); glow(c,'r4g2',M[0]+36,M[1]+30,46+8*Math.sin(t*60),ch); }
+    const k=seg(t,.22,.34); if(k>0&&k<1){ const e=easeIn(k), x=lerp(M[0]+36,p[0],e), y=lerp(M[1]-10,p[1]-30,e); const ang=Math.atan2(p[1]-M[1],p[0]-M[0]-36)-PI/2;
+      beam(c,'r4g1',M[0]+36,M[1],x,y,30,.6); spr(c,'r4s1',x,y,96,ang+R*0); }
+    if(t>.34&&t<.6) spr(c,'r4s1',p[0],p[1]-34,96,0,1-seg(t,.5,.6));
+    const d=seg(t,.34,.6); if(d>0&&d<1) glow(c,'r4g2',p[0],p[1],lerp(60,170,easeOut(d)),1-d);
+    const b=seg(t,.36,.6); if(b>0&&b<1){ const fl=((Math.floor(t*80)%2)?1:.55)*(1-b);
+      beam(c,'r4g1',p[0],p[1],PF[0][0],PF[0][1],60,fl); beam(c,'r4g1',p[0],p[1],PF[2][0],PF[2][1],60,fl); beam(c,'r4g1',p[0],p[1],PB[1][0],PB[1][1],60,fl); }
+    [PF[0],PF[2],PB[1]].forEach(q=>{ const s=seg(t,.42,.62); if(s>0&&s<1) glow(c,'r4g3',q[0],q[1],lerp(30,100,s),1-s); debris(c,'r4s3',q[0],q[1]+8,.42,t,4,10); });
+    stunRing(c,...PF[1],.6,t); } },
+ {r:3,slot:'Tuyệt kỹ',n:'Cửu Tiêu Lôi Kiếp',area:'All',eff:'A talisman flies up and ignites, the sky cracks open and the thunder tribulation hits everyone in three waves; 30% stun, −30 morale.',pc:['r4s4','r4g2','r4g4','r4g1','r4g3'],hits:[[0,.44],[1,.44],[2,.44],[3,.56],[4,.56],[5,.56]],
+  st:[['Choáng',[1,3,5],.74],['−30 sĩ khí',[0,2,4],.8]],
+  cam(t){ return quake(t,.44,6)+quake(t,.56,6)+quake(t,.68,11,.2); },
+  draw(c,t){ const off=1-seg(t,.9,.99); veil(c,'#05061a',.45*seg(t,.06,.26)*off);
+    const f=seg(t,.04,.22); if(f>0&&t<.3) spr(c,'r4s4',M[0],lerp(M[1],34,easeOut(f)),lerp(30,52,f),t*14,1-seg(t,.24,.3));
+    const ig=seg(t,.22,.34); if(ig>0&&ig<1) glow(c,'r4g2',M[0],34,lerp(40,120,ig),1-ig);
+    const sc=seg(t,.24,.4); if(sc>0) [[60,.2],[180,-.1],[300,.15]].forEach(([x,r],i)=>glow(c,'r4g4',x,34,170,off*(sc<1?sc:.6+.4*Math.sin(t*40+i)*.5),r));
+    [[[0,1,2],.44],[[3,4,5],.56]].forEach(([us,t0])=>us.forEach(u=>{ const p=PL[u]; const k=seg(t,t0-.02,t0+.1); if(k>0&&k<1) beam(c,'r4g1',p[0]+6,30,p[0],p[1],64,(1-k)*((Math.floor(t*90)%2)?1:.6));
+      const d=seg(t,t0,t0+.2); if(d>0&&d<1) glow(c,'r4g3',p[0],p[1],lerp(30,96,d),1-d); }));
+    flash(c,t,.44,.4); flash(c,t,.56,.4);
+    const k=seg(t,.66,.76); if(k>0&&k<1){ beam(c,'r4g1',180,20,180,292,130,(1-k)); } flash(c,t,.68,.7,.08);
+    const big=seg(t,.68,.9); if(big>0&&big<1) glow(c,'r4g3',180,292,lerp(80,420,easeOut(big)),1-big,0,1,.6);
+    [1,3,5].forEach(u=>stunRing(c,...PL[u],.74,t)); } },
+
+ // ===== 5 · Minh Phủ Diêm Quân =====
+ {r:4,slot:'Kỹ năng 1',n:'Câu Hồn Đoạt Phách',area:'All',eff:'Soul chains hook every unit and drag their souls back to the master; drains 35% of the damage as troops.',pc:['r5s1','r5g1','r5g2'],hits:[[0,.3],[1,.3],[2,.3],[3,.32],[4,.32],[5,.32]],
+  st:[['+ Hồi quân','own',.8]],
+  tint(i,t){ const a=seg(t,.32,.45)*(1-seg(t,.82,.95)); return a>0?`rgba(170,110,255,${.25*a})`:null; },
+  draw(c,t){ const off=1-seg(t,.86,.96); veil(c,'#0c0618',.3*seg(t,.04,.18)*off);
+    PL.forEach((p,i)=>{ const out=easeOut(seg(t,.1+i*.015,.3+i*.015)), back=seg(t,.8,.92); const r=out*(1-back); if(r<=0) return;
+      const x0=M[0],y0=M[1]+30, tx=p[0],ty=p[1]-12, x=lerp(x0,tx,r), y=lerp(y0,ty,r); const ang=Math.atan2(ty-y0,tx-x0);
+      c.save(); c.strokeStyle='#5d566a'; c.lineWidth=3; c.setLineDash([5,3]); c.lineDashOffset=-t*80; c.beginPath(); c.moveTo(x0,y0); c.lineTo(x,y); c.stroke();
+      c.strokeStyle='rgba(200,170,255,.5)'; c.lineWidth=1; c.setLineDash([]); c.beginPath(); c.moveTo(x0,y0); c.lineTo(x,y); c.stroke(); c.restore();
+      spr(c,'r5s1',x,y,34,ang-PI/2,1);
+      const dr=seg(t,.36,.82); if(dr>0&&dr<1){ beam(c,'r5g2',tx,ty,x0,y0,26,.55*bell(dr));
+        for(let j=0;j<3;j++){ const q=cl(((dr*2.2)-j*.33)%1); if(dr*2.2<j*.33) continue; glow(c,'r5g1',lerp(tx,x0,easeIn(q)),lerp(ty,y0,easeIn(q)),30,(1-q*.6)); } } });
+    const h=seg(t,.5,.9); if(h>0&&h<1) glow(c,'r5g1',M[0],M[1]+16,70+10*Math.sin(t*30),.5*bell(h)); } },
+ {r:4,slot:'Kỹ năng 2',n:'Diêm La Phán Quyết',area:'1 unit',eff:'The underworld gate opens under one unit and the judgement tablet slams down; +60% on a unit under half troops, no morale gain, −50 morale.',pc:['r5g3','r5s2','r5s3','r5g1'],hits:[[4,.46]],
+  st:[['−50 sĩ khí',[4],.56]],
+  cam(t){ return quake(t,.46,11,.2); },
+  tint(i,t){ return i===4&&t>.46&&t<.92? 'rgba(150,90,255,.3)':null; },
+  draw(c,t){ const p=PB[1], off=1-seg(t,.86,.97); veil(c,'#0a0414',.35*seg(t,.04,.2)*off);
+    const g=seg(t,.06,.3); if(g>0) flat(c,'r5g3',p[0],p[1]+18,lerp(30,170,easeOut(g)),off,-t*2,.45);
+    const l=seg(t,.1,.3); if(l>0) spr(c,'r5s2',p[0]+62,lerp(p[1]-180,p[1]-56,easeOut(l)),44,Math.sin(t*12)*.18,off);
+    if(l>0) glow(c,'r5g1',p[0]+62,lerp(p[1]-180,p[1]-56,easeOut(l))+6,40,off*.6);
+    const k=seg(t,.3,.46); if(k>0&&k<1){ shadow(c,p[0],p[1]+26,30*(.3+.7*k),.2+.4*k); spr(c,'r5s3',p[0],lerp(-60,p[1]-20,easeIn(k)),78,0); }
+    if(t>=.46) spr(c,'r5s3',p[0],p[1]-20+Math.sin(seg(t,.46,.52)*PI)*-6,78,0,1-seg(t,.7,.84));
+    flash(c,t,.46,.5); const d=seg(t,.46,.72); if(d>0&&d<1){ for(let j=0;j<6;j++){ const a=j*1.05; glow(c,'r5g1',p[0]+Math.cos(a)*60*d,p[1]+Math.sin(a)*30*d-20*d,34,1-d); } } } },
+ {r:4,slot:'Tuyệt kỹ',n:'Bách Quỷ Dạ Hành',area:'8 hits',eff:'Ghost smoke rolls over the field, tombstones rise and eight spirits tear through the army; 20% chaos, drains 30%.',pc:['r5g4','r5s4','r5g1','r5g2'],hits:[[0,.3],[3,.37],[1,.44],[5,.51],[2,.58],[4,.65],[1,.72],[3,.79]],
+  st:[['Hỗn loạn',[2],.7],['+ Hồi quân','own',.9]],
+  tint(i,t){ return t>.3&&t<.92? 'rgba(130,160,150,.14)':null; },
+  draw(c,t){ const off=1-seg(t,.9,.99); veil(c,'#06080a',.4*seg(t,.04,.2)*off);
+    [0,1,2].forEach(j=>{ const k=seg(t,.02+j*.06,.4+j*.06); if(k>0) glow(c,'r5g4',60+j*120,lerp(-80,200+j*30,easeOut(k)),220,.75*off*(k<1?k:1)); });
+    [[34,206,.1],[326,206,.14],[34,380,.18],[326,380,.22]].forEach(([x,y,t0])=>{ const u=seg(t,t0,t0+.12); if(u<=0) return; c.save(); c.beginPath(); c.rect(x-40,0,80,y+22); c.clip(); spr(c,'r5s4',x,lerp(y+70,y-10,easeOut(u)),62,0,off); c.restore(); });
+    [[0,.3],[3,.37],[1,.44],[5,.51],[2,.58],[4,.65],[1,.72],[3,.79]].forEach(([u,t1],i)=>{ const p=PL[u]; const k=seg(t,t1-.12,t1); const sx=i%2? 400:-40, sy=120+(i*47)%120;
+      if(k>0&&k<1){ const e=easeIn(k); const x=lerp(sx,p[0],e)+Math.sin(k*12+i)*16*(1-k), y=lerp(sy,p[1]-10,e); glow(c,'r5g1',x,y,46,1,Math.atan2(p[1]-sy,p[0]-sx)+PI/2);
+        glow(c,'r5g2',lerp(sx,x,.6),lerp(sy,y,.6),70,.4*(1-k),Math.atan2(p[1]-sy,p[0]-sx)+PI/2,.5,1); }
+      const d=seg(t,t1,t1+.16); if(d>0&&d<1) glow(c,'r5g1',p[0],p[1],lerp(30,80,d),1-d); });
+    PL.forEach((p,i)=>motes(c,'#9ff0c8',p[0],p[1]-10,M[0],M[1]+20,t,.8,.96,4,i)); } },
+
+ // ===== 6 · Thiên Đình Thủ Vệ =====
+ {r:5,slot:'Kỹ năng 1',n:'Thiên Mệnh Đảo Hành',area:'All',eff:'The five-element ring turns over the army and flips every unit\'s element; −40 morale.',pc:['r6g2','r6g1','r6g3'],hits:[[0,.6],[1,.6],[2,.6],[3,.64],[4,.64],[5,.64]],
+  st:[['Đảo ngũ hành',[1,3,5],.7],['−40 sĩ khí',[0,2,4],.74]],
+  tint(i,t){ const cols=['rgba(120,220,120,.3)','rgba(255,90,70,.3)','rgba(255,220,90,.3)','rgba(235,235,255,.3)','rgba(90,150,255,.3)','rgba(255,90,70,.3)']; return t>.6&&t<.93? cols[(i+2)%6]:null; },
+  draw(c,t){ const off=1-seg(t,.88,.98); veil(c,'#1a1404',.25*seg(t,.04,.2)*off);
+    const g=seg(t,.04,.24); const rot=easeOut(seg(t,.3,.56))*PI+t*.4;
+    if(g>0) flat(c,'r6g2',180,170,lerp(40,240,easeOut(g)),off,rot,.55);
+    const f=seg(t,.3,.56); if(f>0&&f<1) glow(c,'r6g3',180,170,lerp(100,260,f),.5*bell(f),0,1,.55);
+    PL.forEach((p,i)=>{ const k=seg(t,.56+(i>2?.04:0),.7+(i>2?.04:0)); if(k>0&&k<1) beam(c,'r6g1',180+(i%3-1)*40,190,p[0],p[1],44,bell(k)); }); } },
+ {r:5,slot:'Kỹ năng 2',n:'Thiên Phạt',area:'Row',eff:'Three heavenly swords appear in the sky and plunge onto the front row; 30% stun, defence −30%.',pc:['r6s1','r6g3','r6g1'],hits:[[0,.4],[1,.43],[2,.46]],
+  st:[['Choáng',[1],.58],['−30% thủ',[0,2],.6]],
+  cam(t){ return quake(t,.4,6)+quake(t,.43,6)+quake(t,.46,7); },
+  draw(c,t){ const off=1-seg(t,.86,.97);
+    PF.forEach((p,i)=>{ const a=seg(t,.06+i*.04,.22+i*.04); const t1=.4+i*.03; const hang=t<t1-.08;
+      if(a>0&&hang){ const y=24+Math.sin(t*9+i)*3; glow(c,'r6g3',p[0],y,70,a*.7); spr(c,'r6s1',p[0],y,74,0,a); }
+      const k=seg(t,t1-.08,t1); if(k>0&&k<1){ const y=lerp(24,p[1]-30,easeIn(k)); beam(c,'r6g1',p[0],24,p[0],y,30,.7); spr(c,'r6s1',p[0],y,74,0,1); }
+      if(t>=t1){ spr(c,'r6s1',p[0],p[1]-30,74,0,1-seg(t,.7,.86)); const d=seg(t,t1,t1+.24); if(d<1){ glow(c,'r6g1',p[0],p[1]-80,170,(1-d),0,.5,1); glow(c,'r6g3',p[0],p[1],lerp(40,120,d),1-d,0,1,.6); } } });
+    flash(c,t,.4,.3); stunRing(c,...PF[1],.58,t); } },
+ {r:5,slot:'Tuyệt kỹ',n:'Thiên Đạo Luân Hồi',area:'All',eff:'The golden wheel of fate turns in the clouds and light columns strike every unit; element flip, attack −20%, the master\'s side +30 morale.',pc:['r6g4','r6s2','r6s4','r6g1','r6g3'],hits:[[0,.46],[1,.49],[2,.52],[3,.55],[4,.58],[5,.61]],
+  st:[['−20% công',[0,1,2,3,4,5],.66],['+30 sĩ khí','own',.86]],
+  cam(t){ return quake(t,.46,4,.2)+quake(t,.56,4,.2); },
+  tint(i,t){ return t>.46+i*.03&&t<.93? 'rgba(255,225,130,.22)':null; },
+  draw(c,t){ const off=1-seg(t,.9,.99); veil(c,'#1a1406',.3*seg(t,.04,.2)*off);
+    const g=seg(t,.04,.3); if(g>0) flat(c,'r6g4',180,176,lerp(80,330,easeOut(g)),off*.8,-t*3,.6);
+    const w=seg(t,.1,.3); if(w>0) flat(c,'r6s2',180,176,lerp(40,150,easeOut(w)),off*.95,t*8,.62,false);
+    [[30,.1],[330,.14]].forEach(([x,t0])=>{ const u=seg(t,t0,t0+.14); if(u<=0) return; c.save(); c.beginPath(); c.rect(x-40,0,80,400); c.clip(); spr(c,'r6s4',x,lerp(460,300,easeOut(u)),120,0,off,false,.75,1); c.restore(); });
+    PL.forEach((p,i)=>{ const t1=.46+i*.03; const d=seg(t,t1,t1+.26); if(d>0&&d<1){ glow(c,'r6g1',p[0],p[1]-90,190,1-d,0,.48,1); glow(c,'r6g3',p[0],p[1],lerp(40,110,d),1-d,0,1,.6); }
+      motes(c,'#ffe08a',p[0],p[1]-10,M[0],M[1]+20,t,.72,.92,5,i); });
+    const h=seg(t,.86,.97); if(h>0&&h<1) glow(c,'r6g3',M[0],M[1]+30,lerp(60,150,h),1-h,0,1,.6); } },
+];
+
+const BYN={};SK.forEach(s=>BYN[s.n]=s);
+/* geometry: preview space -> screen. side = the target side (below the master). */
+function slotXY(side,r,l){const z=pvKc(pvRow({side:side,r:r}));return[pvX(l,z),pvY(z)]}
+function geo(a,ev,sk){const foe=a.u.side==='A'?'D':'A';const f0=slotXY(foe,0,1),f0b=slotXY(foe,0,0),K=Math.max(.5,(f0[0]-f0b[0])/100);
+  const OX=f0[0]-180*K,OY=f0[1]-250*K,inv=p=>[(p[0]-OX)/K,(p[1]-OY)/K];
+  const pl=[0,1,2,3,4,5].map(i=>inv(slotXY(foe,i<3?0:1,i%3)));
+  const R=[],T=[],seen={};(ev.tg||[]).forEach(t=>{if(t.res==='heal'||t.id===ev.a)return;const d=BT.uds[t.id];if(!d)return;R.push({id:t.id,d:d,tg:t});if(!seen[t.id]){seen[t.id]=1;T.push(d)}});
+  const H=(sk.hits||[]).slice(),asg={},hitT=[];
+  R.forEach((r,i)=>{let t;if(i<H.length){const u=H[i][0];t=H[i][1];if(asg[u]===undefined){asg[u]=r.id;pl[u]=inv([r.d.x,r.d.y])}}
+    else{const n=R.length-H.length,j=i-H.length;t=H.length?Math.min(.86,H[H.length-1][1]+.06*(j+1)):.4+.35*(n>1?j/(n-1):0)}hitT.push(Math.max(.15,Math.min(.9,t)))});
+  /* targets of 'all'/row skills not covered by preview hit slots keep their real slot position */
+  T.forEach(d=>{const u=(d.u.r<2?d.u.r*3:3)+d.u.l;if(asg[u]===undefined&&u<6&&!Object.values(asg).includes(d.u.id)){pl[u]=inv([d.x,d.y]);asg[u]=d.u.id}});
+  return{K:K,OX:OX,OY:OY,inv:inv,pl:pl,M:inv([a.x,a.y]),R:R,T:T,hitT:hitT}}
+async function play(ev){const a=BT.uds[ev.a],sk=BYN[a.u.tact.n],G=geo(a,ev,sk),D=3000*(BT.pace||1),t0=BT.t,r=+String(a.u.look).replace('twm',''),W=BT.W||390,Hs=BT.H||740;
+  const est=ev.est||[],stun={},firstT={};est.forEach(s=>{if(s.k==='stun')stun[s.id]=1});G.R.forEach((x,i)=>{if(firstT[x.id]===undefined||G.hitT[i]<firstT[x.id])firstT[x.id]=G.hitT[i]});
+  const set=()=>{M=G.M;PL=G.pl;PF=PL.slice(0,3);PB=PL.slice(3,6);VR=[-G.OX/G.K-10,-G.OY/G.K-10,W/G.K+20,Hs/G.K+20]};
+  BT.fx.push({t0:t0,dur:D,fn:function(c,p){const t=p;set();try{const q=sk.cam?sk.cam(t):0;if(Math.abs(q)>1.5)BT.shake=Math.max(BT.shake||0,Math.abs(q)*G.K*.8)}catch(e){}
+    c.save();c.translate(G.OX,G.OY);c.scale(G.K,G.K);
+    try{/* statue: the caster on the master's side, rising, pulse in the realm colour */const R0=REALM[sk.r],up=easeOut(seg(t,0,.16)),fo=1-seg(t,.9,1),cp=seg(t,.02,.2);
+      if(cp>0&&cp<1){c.save();c.globalCompositeOperation='lighter';const gr=c.createRadialGradient(M[0],M[1],4,M[0],M[1],lerp(30,90,cp));gr.addColorStop(0,R0.col);gr.addColorStop(1,'rgba(0,0,0,0)');c.globalAlpha=(1-cp)*.8;c.fillStyle=gr;c.fillRect(M[0]-100,M[1]-100,200,200);c.restore()}
+      const R=rect('st'+(sk.r+1));if(up>0&&fo>0){const h=120*up;c.save();c.globalAlpha=fo;c.beginPath();c.rect(M[0]-60,M[1]+60-h-2,120,h+4);c.clip();c.drawImage(R[0],R[1],R[2],R[3],R[4],M[0]-40,M[1]-60+(1-up)*30,80,120);c.restore()}}catch(e){}
+    try{sk.draw(c,t)}catch(e){}
+    try{G.T.forEach(d=>{const h=firstT[d.u.id];if(h===undefined)return;const kb=t>h?8*G.K*Math.sin(Math.min(1,(t-h)/.25)*Math.PI):0;ekOff(d,0,kb);
+      if(sk.tint){const i=G.pl.findIndex(pp=>{const q=G.inv([d.x,d.y]);return Math.abs(pp[0]-q[0])<1&&Math.abs(pp[1]-q[1])<1});const tc=i>=0?sk.tint(i,t):null;if(tc&&typeof ekVeil==='function'){c.restore();ekVeil(c,d,tc,G.K);c.save();c.translate(G.OX,G.OY);c.scale(G.K,G.K)}}
+      if(stun[d.u.id]){const q=G.inv([d.x+(d.ox||0),d.y+(d.oy||0)]);stunRing0(c,q[0],q[1],h+.05,t)}})}catch(e){}
+    c.restore();if(p>.985)G.T.forEach(d=>ekOff(d,0,0))}});
+  cutin(a,ev.name);
+  const order=G.R.map((x,i)=>({i:i,t:G.hitT[i]})).sort((x,y)=>x.t-y.t),shown={};let now=0;
+  for(const h of order){if(h.t>now){await wait(3000*(h.t-now));now=h.t}if(BT.abort)return;const x=G.R[h.i];impact(a,[x.tg],true);
+    if(!shown[x.id]){shown[x.id]=1;est.forEach(s=>{if(s.id!==x.id)return;const L=(typeof EKSTT!=='undefined')&&EKSTT[s.k];
+      if(s.k==='moD'){setTimeout(()=>{const d=BT.uds[x.id];if(d&&!BT.skip)floatTxt(d,'−'+s.v+' sĩ khí','#c58cff')},300);return}
+      if(L)setTimeout(()=>{const d=BT.uds[x.id];if(d&&!BT.skip)floatTxt(d,L[0],L[1])},120)})}
+    if(x.tg.refl){const d=BT.uds[x.id];if(d)floatTxt(d,'Phản kỹ −'+x.tg.d,'#ff8a5a')}}
+  (sk.st||[]).forEach(s=>{if(s[1]==='own')floatTxt(a,s[0],'#f0cf7a')});
+  applySnap(ev.s);if(now<.88)await wait(3000*(.88-now))}
+return{play:play,has:n=>!!BYN[n],SK:SK};
+})();
+(function(){if(typeof playAct!=='function')return;var _paTM=playAct;playAct=async function(ev){var a=ev&&BT.uds&&BT.uds[ev.a];
+ if(ev&&ev.kind==='tactic'&&a&&a.u&&/^twm\d$/.test(a.u.look||'')&&a.u.tact&&TMF.has(a.u.tact.n)&&tmfReady()&&!BT.skip&&!ev.miss){try{if(ev.burn)floatTxt(a,'-'+fmt(ev.burn),'#ff9a4d');if(ev.chaos)floatTxt(a,'Hỗn loạn','#c58cff');return await TMF.play(ev)}catch(e){try{applySnap(ev.s)}catch(x){}return}}
+ return _paTM.apply(this,arguments)}})();
+/* ===== V185 UI Batch 4 (UI Bible 'Batch 4: UI review fixes' 4.1–4.21) =====
+   One layer of wrappers + CSS + DOM post-processing, loaded last. Nothing here changes balance or the engine.
+   Saved originals: _u185*. Actions: u185go (daily 'Đi tới'), u185dall (daily Nhận tất cả), u185ball (Đồ Giám Nhận tất cả).
+   Globals: U185 (art state), U185VIPA (vip_track atlas rects), u185Post(), u185Fit(), u185Empty(), u185Labels(), u185VipLadder(). */
+var U185={art:{},dir:'art/ui/'};
+var U185VIPA={locked:[0,0,140,140],reached:[142,0,140,140],current:[284,0,140,140],crown:[426,0,149,120],cord_lit:[577,0,40,256],cord_dark:[619,0,40,256],cloud:[661,0,160,101]};
+/* every painted asset has a code fallback: preload, and on error flag the root so CSS falls back */
+(function(){try{['vip_track','empty','qi_event','k_badge','k_plq_dark'].forEach(function(n){var im=new Image();im.onload=function(){U185.art[n]=1};im.onerror=function(){U185.art[n]=-1;try{document.documentElement.classList.add('u185no-'+n)}catch(e){}};im.src=U185.dir+n+'.webp'})}catch(e){}})();
+function u185N(n){n=Math.floor(+n||0);return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+
+/* ---------- 4.21 empty states (art/ui/empty.webp, 3 cells of 400 on #2a1d14) ---------- */
+function u185Empty(cell,cap,sub){return'<div class="u185emp"><div class="u185ei" style="background-position:'+(cell*50)+'% 0" role="img" aria-label="'+cap+'"></div><b>'+cap+'</b>'+(sub?'<span>'+sub+'</span>':'')+'</div>'}
+
+/* guard (found while testing 4.7): campaign star chests carry hero fragments as rw.fr = {gid:n}, but tower300's rewardTxt reads rw.fr as a
+   realm-frame index (TWRL[rw.fr-1].n) and threw → Chinh chiến could not render on maps whose 3rd chest has an unowned hero. Text only. */
+(function(){if(typeof rewardTxt!=='function')return;var _u185rt=rewardTxt;
+ rewardTxt=function(rw){if(rw&&rw.fr&&typeof rw.fr==='object'){var c={},k;for(k in rw)if(k!=='fr')c[k]=rw[k];var o=_u185rt(c),x=[];
+   for(k in rw.fr)if(GENS[k])x.push('<b class="rk'+GENS[k].rar+'">Mảnh '+GENS[k].n+' ×'+rw.fr[k]+'</b>');return x.length?o+(o?' · ':'')+x.join(' · '):o}
+  return _u185rt.apply(this,arguments)}})();
+
+/* ---------- 4.20 VIP ladder (art/ui/vip_track.webp atlas) ---------- */
+function u185Spr(k,w){var r=U185VIPA[k],s=w/r[2];return'background-image:url('+U185.dir+'vip_track.webp);background-size:'+(823*s).toFixed(1)+'px '+(256*s).toFixed(1)+'px;background-position:-'+(r[0]*s).toFixed(1)+'px -'+(r[1]*s).toFixed(1)+'px;width:'+w+'px;height:'+(r[3]*s).toFixed(1)+'px'}
+function u185VipLadder(){var v=vipLv(),h='<div class="u185vl" aria-label="Bậc VIP"><div class="u185vt"><b>Đặc quyền</b><span>VIP '+v+' / 10</span></div>';
+ h+='<div class="u185vcap"><span class="u185vcr" style="'+u185Spr('crown',92)+'"></span></div>';
+ for(var k=10;k>=1;k--){var st=k<v?'reached':k===v?'current':'locked',up=k+1<=v&&k<10,dn=k<=v;
+  h+='<div class="u185vs '+st+'"><span class="u185vc t'+(k===10?' cap':'')+(up?' lit':'')+'"></span><span class="u185vc b'+(dn?' lit':'')+'"></span>'+
+   '<span class="u185vp" style="'+u185Spr(st,52)+'"><i>'+k+'</i></span><span class="u185vx"><b>VIP '+k+(k===v?' <em>hiện tại</em>':'')+'</b><span>'+(VIPP[k]||'')+'</span>'+(k>v&&typeof VIPT!=='undefined'?'<small>Cần '+u185N(VIPT[k])+' vàng nạp</small>':'')+'</span></div>'}
+ h+='<div class="u185vcl"><span style="'+u185Spr('cloud',96)+'"></span></div></div>';return h}
+(function(){if(typeof vipHtml!=='function')return;var _u185vip=vipHtml;
+ vipHtml=function(){var h=_u185vip.apply(this,arguments);try{var L=u185VipLadder(),r=/<div class="card sm" style="margin-top:8px"><b>Đặc quyền<\/b>(?:<div class="[^"]*">[^<]*<\/div>)*<\/div>/;h=r.test(h)?h.replace(r,L):h+L}catch(e){}return h}})();
+
+/* ---------- 4.3 Binh Đạo › Tinh luyện: 'owned / needed' with a space and thousands dots ---------- */
+(function(){if(typeof treeSheet!=='function')return;var _u185tree=treeSheet;
+ treeSheet=function(){var h=_u185tree.apply(this,arguments);try{h=h.replace(/<b class="(ok|bad)">(\d+)\/(\d+)<\/b>/g,function(m,c,a,b){return'<b class="'+c+' u185q">'+u185N(a)+' / '+u185N(b)+'</b>'})}catch(e){}return h}})();
+
+/* ---------- 4.9 / 4.10 / 4.21 Nhiệm vụ ngày: Đi tới, Nhận tất cả, nothing-left state ---------- */
+var U185GO={tax:1,build:1,harv:1,levy:1,win:1,elite:1,arena:1,tower:1,boss:1,port:1,praid:1};
+function u185DailyReady(){var d=dget(),n=0;DAILY.forEach(function(t){if((d.p[t.k]||0)>=t.t&&!d.c[t.k])n++});var all=DAILY.every(function(t){return d.c[t.k]||(d.p[t.k]||0)>=t.t});if(all&&!d.c.all)n++;return n}
+(function(){if(typeof dailySheet!=='function')return;var _u185daily=dailySheet;
+ dailySheet=function(){var h=_u185daily.apply(this,arguments);try{var d=dget(),n=u185DailyReady();
+  DAILY.forEach(function(t){if(!U185GO[t.k]||d.c[t.k]||(d.p[t.k]||0)>=t.t)return;
+   h=h.replace('<button class="btn sm" data-a="dclaim" data-v="'+t.k+'" disabled>Nhận</button>','<button class="btn alt sm u185go" data-a="u185go" data-v="'+t.k+'">Đi tới ›</button>')});
+  if(n)h=h.replace('</h3>','</h3><button class="btn wide u185all" data-a="u185dall">Nhận tất cả ('+n+')</button>');
+  else if(d.c.all)h=h.replace('<div class="stack">',u185Empty(2,'Doanh trại yên ắng','Đã nhận hết thưởng hôm nay. Nhiệm vụ mới lúc 05:00.')+'<div class="stack">')}catch(e){}return h}})();
+(function(){if(typeof bkSheet!=='function')return;var _u185bk=bkSheet;
+ bkSheet=function(){var h=_u185bk.apply(this,arguments);try{var n=bkReady();if(n)h=h.replace('<div class="sm mute">Sưu tầm','<button class="btn wide u185all" data-a="u185ball">Nhận tất cả ('+n+')</button><div class="sm mute">Sưu tầm')}catch(e){}return h}})();
+function u185Pulse(sel){setTimeout(function(){try{var e=document.querySelector('#main '+sel);if(!e)return;try{e.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){e.scrollIntoView()}
+ e.classList.add('u185pulse');setTimeout(function(){try{e.classList.remove('u185pulse')}catch(x){}},2600)}catch(x){}},80)}
+function u185Elite(){var w=eliteWin(),best=null;for(var mi=MAPS.length-1;mi>=0&&!best;mi--){if(!S.camp.mapDone[mi]&&!(mi===0||S.camp.mapDone[mi-1]))continue;
+  for(var k=0;k<3;k++){var key=mi+'-'+k;if(S.camp.elite[key]!==w&&(S.camp.mapDone[mi]||S.camp.stage[mi+'-0'])){best=mi+'|'+k+'|elite';break}}}return best}
+function u185Go(k){
+ function city(sel,id){try{closeSheet()}catch(e){}tab='city';renderMain();var b=document.querySelector('#main '+sel);if(b)u185Pulse(sel);else A_('bsheet',id)}
+ if(k==='tax'){try{closeSheet()}catch(e){}tab='city';renderMain();u185Pulse(document.querySelector('#main .taxbar [data-a="tax"],#main .card [data-a="tax"]')?'.card [data-a="tax"],.taxbar [data-a="tax"]':'[data-a="tax"]');return}
+ if(k==='harv')return city('[data-a="harvest"]','field');
+ if(k==='levy')return city('[data-a="levy"]','barracks');
+ if(k==='build')return A_('bsheet','mc');
+ if(k==='win'){var n=typeof advNext==='function'?advNext():null;if(n)return A_('stage',n[0]+'|'+n[1]+'|stage');try{closeSheet()}catch(e){}return A_('tab','camp')}
+ if(k==='elite'){var e=null;try{e=u185Elite()}catch(x){}if(e)return A_('stage',e);try{closeSheet()}catch(x){}return A_('tab','camp')}
+ if(k==='praid')k='port';
+ if(k==='boss'){return A_('boss')}
+ return A_(k)}
+(function(){var _u185A=A_;A_=function(a,v,w,el){
+ if(a==='u185go'){try{u185Go(v)}catch(e){if(window.console)console.warn(e)}return}
+ if(a==='u185dall'){var d=dget(),n=0;DAILY.forEach(function(t){if((d.p[t.k]||0)>=t.t&&!d.c[t.k]){_u185A('dclaim',t.k);n++}});
+  if(!d.c.all&&DAILY.every(function(t){return d.c[t.k]})){_u185A('dclaim','all');n++}save();refresh();return}
+ if(a==='u185ball'){var B=bkS(),m=0;bkGoals().forEach(function(g){if(!B.got[g.k]&&g.cur>=g.need){_u185A('bkclaim',g.k);m++}});save();refresh();return}
+ /* 4.8 a new tab opens at the top (Chinh chiến keeps its own scroll to the first uncleared stage) */
+ if(a==='tab'&&v!==tab&&v!=='camp'){var r=_u185A(a,v,w,el);try{var m=document.getElementById('main');if(m)m.scrollTop=0;setTimeout(function(){try{if(tab===v&&m)m.scrollTop=0}catch(x){}},0)}catch(x){}return r}
+ return _u185A(a,v,w,el)}})();
+
+/* ---------- 4.11 Thương Điếm: one slim line with the tab's own currency ---------- */
+(function(){if(typeof shopSheet!=='function')return;var _u185shop=shopSheet;
+ shopSheet=function(){var h=_u185shop.apply(this,arguments);try{var e=ev(),T=SHOP[shopTab],used={};
+  if(T&&T.items)T.items.forEach(function(it){var p=it.p||{};['s','v','tw','bp'].forEach(function(k){if(p[k])used[k]=1})});if(shopTab==='vip')used.v=1;
+  var L=[];if(used.s)L.push(ic('silver')+'<b>'+u185N(S.res.silver)+'</b>');if(used.v)L.push(ic('gold')+'<b>'+u185N(S.res.gold)+'</b>');
+  if(used.tw)L.push('<span class="tdk tw">試</span>Thí Luyện Lệnh <b>'+u185N(e.tok.tw)+'</b>');if(used.bp)L.push('<span class="tdk bp">討</span>Thảo Phạt Lệnh <b>'+u185N(e.tok.bp)+'</b>');
+  h=h.replace(/<div class="tdw">(?:<span>.*?<\/span>)*<\/div>/,L.length?'<div class="u185cur"><span>Đang có</span>'+L.map(function(x){return'<span class="u185cv">'+x+'</span>'}).join('')+'</div>':'')}catch(x){}return h}})();
+
+/* ---------- 4.17 login calendars: reward object on an r_tile frame, count drawn in code ---------- */
+function u185Rw(rw){if(!rw)return['chest','',''];var n=0;
+ if(rw.phu)return['tally','×'+rw.phu,'Binh Phù'];if(rw.gear)return['chest','×'+rw.gear,'Trang bị'];if(rw.v)return['gold',fmt(rw.v),'Vàng'];
+ if(rw.b){for(var k in rw.b)n+=rw.b[k];return['book','×'+n,'Binh Thư']}if(rw.ord)return['order','×'+rw.ord,'Quân lệnh'];if(rw.s)return['silver',fmt(rw.s),'Bạc'];return['chest','','']}
+function u185Tile(rw,rar){var m=u185Rw(rw),more=0;if(rw){for(var k in rw)if(rw[k])more++}
+ return'<span class="u185tl r'+rar+'"><span class="u185to">'+objH(m[0])+'</span>'+(more>1?'<i>+'+(more-1)+'</i>':'')+'</span>'+(m[1]?'<em class="u185tc">'+m[1]+'</em>':'')}
+(function(){if(typeof evSheet!=='function')return;var _u185ev=evSheet;
+ evSheet=function(){var h=_u185ev.apply(this,arguments);try{if(typeof objH!=='function')return h;
+  h=h.replace(/(<button class="evday[^"]*" data-a="(nuclaim|liclaim)" data-v="(\d+)"[^>]*>)<b>([^<]*)<\/b><span>[\s\S]*?<\/span><\/button>/g,function(m,open,a,i,lbl){i=+i;var rw=null,rar='r';
+   try{if(a==='nuclaim'){rw=NU7[i];rar=i===6?'ssr':i>=3?'sr':'r'}else{rw=liRw(i);rar=(i+1)%28===0?'ssr':(i+1)%7===0?'sr':'r'}}catch(x){}
+   var t=u185Rw(rw);return open.replace('class="evday','class="evday u185d').replace('>',' aria-label="'+lbl+': '+t[2]+' '+t[1]+'">')+'<b>'+lbl+'</b>'+u185Tile(rw,rar)+'</button>'})}catch(x){}return h}})();
+
+/* ---------- 4.21 empty Kho đồ / Tửu Quán ---------- */
+(function(){if(typeof invSheet==='function'){var _u185inv=invSheet;invSheet=function(){var h=_u185inv.apply(this,arguments);try{h=h.replace('<div class="card sm mute" style="grid-column:1/-1">Chưa có trang bị nào.</div>','<div style="grid-column:1/-1">'+u185Empty(0,'Kho còn trống','Đánh ải, Tinh binh và Thông Thiên Tháp để nhận trang bị.')+'</div>')}catch(e){}return h}}
+ if(typeof tavernSheet==='function'){var _u185tav=tavernSheet;tavernSheet=function(){var h=_u185tav.apply(this,arguments);try{h=h.replace('<div class="card sm">Đã chiêu mộ toàn bộ tướng phe này.</div>',u185Empty(1,'Tửu Quán vắng khách','Đã chiêu mộ toàn bộ tướng phe này.'))}catch(e){}return h}}})();
+
+/* ---------- 4.16 Dân Cư: ONE badge with the lowest house level + ×N ---------- */
+(function(){if(typeof cityScene!=='function')return;var _u185cs=cityScene;
+ cityScene=function(){var h=_u185cs.apply(this,arguments);try{if(!/cityin/.test(h)||!S.b.house||!S.b.house.length)return h;
+  var re=/<g transform="translate\([^)]*\)" class=" " pointer-events="none"><circle cx="0" cy="0" r="10" fill="#1b0d08"[^>]*\/><text[^>]*>-?\d+<\/text><\/g>/g,n=0;h=h.replace(re,function(){n++;return''});if(!n)return h;
+  var t=inLot('house'),lo=Math.min.apply(null,S.b.house),N=S.b.house.length,x=t.x,y=t.y-t.h/2+14;
+  var b='<g class="u185hb" transform="translate('+x+' '+y+')" pointer-events="none"><circle r="15" fill="#8a1a14" stroke="#e8c46e" stroke-width="2"/><image href="'+U185.dir+'k_badge.webp" x="-16" y="-16" width="32" height="32"/>'+
+   '<text y="5" text-anchor="middle" font-size="14" font-weight="800" fill="#fff" stroke="#3a0a06" stroke-width="2.4" paint-order="stroke" font-family="Barlow Condensed,sans-serif">'+lo+'</text>'+
+   '<g transform="translate(19 9)"><rect x="-11" y="-8" width="22" height="16" rx="8" fill="#1b0d08" stroke="#e8c46e" stroke-width="1.2"/><text y="4.2" text-anchor="middle" font-size="11.5" font-weight="800" fill="#f2d684" font-family="Barlow Condensed,sans-serif">×'+N+'</text></g></g>';
+  var k=h.lastIndexOf('</svg>');if(k>0)h=h.slice(0,k)+b+h.slice(k)}catch(e){}return h}})();
+
+/* ---------- 4.18 battle HP bars (team bars at the top; per-squad bars were removed in V164, the grid is off since V183): 1 px dark outline, 2 px taller ---------- */
+(function(){if(typeof drawTug!=='function')return;var _u185tug=drawTug;
+ drawTug=function(c){try{
+  var A=0,D=0,Am=0,Dm=0;BT.list.forEach(function(d){var v=Math.max(0,d.trD);if(d.u.side==='A'){A+=v;Am+=d.u.max}else{D+=v;Dm+=d.u.max}});
+  var W=BT.W,y=20,cx=W/2,w=W*.34,hh=5;
+  c.save();var tb=c.createLinearGradient(0,0,0,y+22);tb.addColorStop(0,'rgba(10,5,3,.78)');tb.addColorStop(1,'rgba(10,5,3,0)');c.fillStyle=tb;c.fillRect(0,0,W,y+22);
+  function barf(x0,dir,v,m,c1,c2){var bx=dir>0?x0:x0-w;c.fillStyle='rgba(0,0,0,.75)';c.fillRect(bx,y-hh,w,hh*2);var f=w*(m?v/m:0),g=c.createLinearGradient(0,y-hh,0,y+hh);g.addColorStop(0,c1);g.addColorStop(1,c2);c.fillStyle=g;c.fillRect(dir>0?x0:x0-f,y-hh,f,hh*2);
+   c.strokeStyle='rgba(8,4,2,.95)';c.lineWidth=1;c.strokeRect(bx-.5,y-hh-.5,w+1,hh*2+1);c.strokeStyle='rgba(255,215,122,.45)';c.strokeRect(bx-1.5,y-hh-1.5,w+3,hh*2+3)}
+  barf(cx-20,-1,A,Am,'#8ff0a4','#2f9a4f');barf(cx+20,1,D,Dm,'#ff9a8a','#b3262d');
+  c.font='700 11px "Barlow Condensed",sans-serif';c.lineWidth=2.5;c.strokeStyle='rgba(0,0,0,.85)';c.textAlign='right';c.strokeText(fmt(A),cx-24-w,y+4);c.fillStyle='#d9ffe2';c.fillText(fmt(A),cx-24-w,y+4);c.textAlign='left';c.strokeText(fmt(D),cx+24+w,y+4);c.fillStyle='#ffd9d2';c.fillText(fmt(D),cx+24+w,y+4);
+  var g=c.createRadialGradient(cx-4,y-4,1,cx,y,17);g.addColorStop(0,'#5a2a2e');g.addColorStop(1,'#1a0d10');c.fillStyle=g;c.beginPath();c.arc(cx,y,16,0,6.3);c.fill();c.strokeStyle='#e0b04f';c.lineWidth=2;c.stroke();
+  c.strokeStyle='#ffe39a';c.lineWidth=2.4;c.lineCap='round';c.beginPath();c.moveTo(cx-7,y-7);c.lineTo(cx+7,y+7);c.moveTo(cx+7,y-7);c.lineTo(cx-7,y+7);c.stroke();c.fillStyle='#ffe39a';c.beginPath();c.arc(cx-7,y+7,1.8,0,6.3);c.arc(cx+7,y+7,1.8,0,6.3);c.fill();
+  c.restore()}catch(e){try{c.restore()}catch(x){}try{return _u185tug.apply(this,arguments)}catch(x){}}}})();
+
+/* ---------- 4.15 season wash about half as strong ---------- */
+(function(){try{if(typeof SEATINT==='undefined')return;SEATINT=SEATINT.map(function(p){return p.map(function(c){return c.replace(/,\s*([\d.]+)\)$/,function(m,a){return','+(+a*.5).toFixed(3)+')'})})})}catch(e){}})();
+
+/* ---------- 4.13 Thông Thiên Tháp: keep the floor card's Khiêu chiến, no pinned copy ---------- */
+(function(){try{if(typeof SHPRI!=='undefined'){var i=SHPRI.indexOf('twfight');if(i>=0)SHPRI.splice(i,1)}}catch(e){}})();
+
+/* ---------- 4.7 campaign map: nudge colliding stage labels apart ---------- */
+function u185Labels(){var g0=document.querySelector('#main g.node');var sv=g0?g0.ownerSVGElement:null;if(!sv)return;
+ var vb=sv.viewBox&&sv.viewBox.baseVal,VW=vb&&vb.width?vb.width:474,X0=vb?vb.x:0,L=[],O=[],R=[];
+ function add(t,g){var b;try{b=t.getBBox()}catch(e){return}if(!b||!b.width)return;
+  if(t._u185x==null){t._u185x=+t.getAttribute('x');t._u185y=+t.getAttribute('y')}var dx=t._u185x-(+t.getAttribute('x')),dy=t._u185y-(+t.getAttribute('y'));
+  L.push({t:t,g:g,l:b.x+dx,r:b.x+b.width+dx,tp:b.y+dy,bt:b.y+b.height+dy,cx:t._u185x,y:t._u185y,ox:0,oy:0})}
+ [].forEach.call(sv.querySelectorAll('g.node'),function(g){var ts=g.querySelectorAll('text'),t=ts[ts.length-1];[].forEach.call(g.querySelectorAll('circle'),function(c){var r=+c.getAttribute('r');if(r>=14)O.push({g:g,x:+c.getAttribute('cx'),y:+c.getAttribute('cy'),r:r})});
+  if(t&&ts.length>=2&&!/^\d+$/.test(t.textContent.trim()))add(t,g)});
+ /* objective tags (Tử Thủ, Trảm Tướng…) move too; star rows stay put */
+ [].forEach.call(sv.children,function(t){if(t.tagName!=='text')return;if(/★/.test(t.textContent)){try{var b=t.getBBox();if(b.width)R.push({l:b.x,r:b.x+b.width,tp:b.y,bt:b.y+b.height})}catch(e){}return}
+  if(t.getAttribute('font-size')==='10')t.setAttribute('font-size','11');add(t,null)});
+ if(!L.length)return;var P=3;
+ function lo(a){return a.l+a.ox}function ro(a){return a.r+a.ox}function to(a){return a.tp+a.oy}function bo(a){return a.bt+a.oy}
+ function clamp(a){a.ox=Math.max(X0+2-a.l,Math.min(X0+VW-2-a.r,a.ox))}
+ function sep(A,B,ox,oy,fixB){var first=(lo(A)+ro(A))<(lo(B)+ro(B));var s=fixB?ox+.5:ox/2+.5,pa=A.ox,pb=B.ox;A.ox+=first?-s:s;clamp(A);if(!fixB){B.ox+=first?s:-s;clamp(B)}
+  var got=Math.abs(A.ox-pa)+(fixB?0:Math.abs(B.ox-pb));if(got<ox-.5){if(fixB||to(A)>to(B))A.oy+=Math.min(oy,14);else B.oy+=Math.min(oy,14)}}
+ for(var it=0;it<30;it++){var mv=0;
+  for(var i=0;i<L.length;i++){for(var j=i+1;j<L.length;j++){var a=L[i],b=L[j],ox=Math.min(ro(a),ro(b))-Math.max(lo(a),lo(b))+P,oy=Math.min(bo(a),bo(b))-Math.max(to(a),to(b))+P;if(ox>0&&oy>0){mv=1;sep(a,b,ox,oy)}}
+   R.forEach(function(r){var a=L[i],ox=Math.min(ro(a),r.r)-Math.max(lo(a),r.l)+P,oy=Math.min(bo(a),r.bt)-Math.max(to(a),r.tp)+P;if(ox>0&&oy>0){mv=1;sep(a,{l:r.l,r:r.r,tp:r.tp,bt:r.bt,ox:0,oy:0},ox,oy,1)}})}
+  L.forEach(function(a){O.forEach(function(o){if(o.g&&o.g===a.g)return;var nx=Math.max(lo(a),Math.min(o.x,ro(a))),ny=Math.max(to(a),Math.min(o.y,bo(a))),dx=o.x-nx,dy=o.y-ny;if(dx*dx+dy*dy>=o.r*o.r)return;mv=1;
+   var cxl=(lo(a)+ro(a))/2,push=cxl<o.x?-(ro(a)-(o.x-o.r))-1:((o.x+o.r)-lo(a))+1;var p0=a.ox;a.ox+=Math.max(-12,Math.min(12,push));clamp(a);if(Math.abs(a.ox-p0)<.5)a.oy+=4})});
+  if(!mv)break}
+ L.forEach(function(a){a.t.setAttribute('x',(a.cx+a.ox).toFixed(1));a.t.setAttribute('y',(a.y+a.oy).toFixed(1))})}
+
+/* ---------- 4.6 names never cut: shrink to 11 px, then allow 2 lines ---------- */
+var U185NM='.hc>b,.fm2-hn,.fm2-nm,.gdb .sp>b,.tvr .sp>b,.hub-tx>b,.bkc>b,.trp-n,.tgn';
+function u185Fit(root){root=root||document;var L=root.querySelectorAll(U185NM);for(var i=0;i<L.length;i++){var e=L[i];if(!e.offsetWidth)continue;
+  if(e._u185t===e.textContent&&e._u185w===e.clientWidth)continue;e._u185t=e.textContent;e._u185w=e.clientWidth;
+  e.style.removeProperty('font-size');e.style.removeProperty('white-space');e.classList.remove('u185w2');
+  e.style.setProperty('text-overflow','clip','important');if(e.scrollWidth<=e.clientWidth+1)continue;
+  var fs=parseFloat(getComputedStyle(e).fontSize)||12;while(fs>11&&e.scrollWidth>e.clientWidth+1){fs-=.5;e.style.setProperty('font-size',fs+'px','important')}
+  if(e.scrollWidth>e.clientWidth+1){e.style.setProperty('white-space','normal','important');e.classList.add('u185w2')}}}
+
+/* ---------- post-processing after every render ---------- */
+function u185Post(){var m=document.getElementById('main');
+ try{if(tab==='city'&&m)u185Home(m)}catch(e){if(window.console)console.warn(e)}
+ try{if(tab==='camp')u185Labels()}catch(e){}
+ try{u185Hero()}catch(e){}
+ try{u185Fit(document)}catch(e){}}
+function u185HubPos(m,hr,cw,gd){var top=(gd&&gd.parentNode===m?gd.getBoundingClientRect().bottom:hr.getBoundingClientRect().top)+6;
+ var cs=getComputedStyle(hr),mt=parseFloat(cs.marginTop)||0,mb=parseFloat(cs.marginBottom)||0;
+ hr.style.setProperty('margin-top',(mt+(top+4-hr.getBoundingClientRect().top)).toFixed(1)+'px','important');
+ hr.style.setProperty('margin-bottom',(mb+(top-cw.getBoundingClientRect().top)).toFixed(1)+'px','important')}
+/* 4.15 home: the hub row floats over the top edge of the city scene; 4.19 Hoạt động medallion */
+function u185Home(m){var hr=m.querySelector('.hubrail'),cw=m.querySelector('.cwrap'),gd=m.querySelector('.gdstrip');
+ if(hr&&cw&&hr.parentNode===m&&cw.parentNode===m){if(gd&&gd.parentNode===m&&(gd.compareDocumentPosition(hr)&Node.DOCUMENT_POSITION_PRECEDING))m.insertBefore(gd,hr);
+  if(hr.nextElementSibling!==cw)m.insertBefore(hr,cw);hr.classList.add('u185f');cw.classList.add('u185cw');try{u185HubPos(m,hr,cw,gd)}catch(x){}}
+ var ev=m.querySelector('.hubrail [data-a="hub"][data-v="ev"] .qi');
+ if(ev&&!ev.querySelector('.u185qe')&&U185.art.qi_event!==-1){var sv=ev.querySelector('.hub-svg');var im=document.createElement('img');im.className='u185qe';im.alt='';im.src=U185.dir+'qi_event.webp';
+  im.onerror=function(){U185.art.qi_event=-1;try{im.remove();if(sv)sv.style.display=''}catch(x){}};if(sv)sv.style.display='none';ev.appendChild(im)}}
+/* 4.12 hero sheet: Thống / Dũng / Trí under the name (first screen) */
+function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet');if(!sh)return;var hd=sh.querySelector('.hsh'),st=sh.querySelector('.hsst');if(!hd||!st||hd.querySelector('.u185st'))return;
+ var o=[].map.call(st.children,function(d){var a=d.querySelector('span'),b=d.querySelector('b');return a&&b?'<span><em>'+a.textContent+'</em><b>'+b.textContent+'</b></span>':''}).join('');if(!o)return;
+ var sp=hd.querySelector('.sp');if(!sp)return;var x=document.createElement('div');x.className='u185st';x.innerHTML=o;sp.appendChild(x)}
+(function(){var _u185rm=renderMain;renderMain=function(){var r=_u185rm.apply(this,arguments);try{u185Post()}catch(e){}return r};
+ var _u185os=openSheet;openSheet=function(){var r=_u185os.apply(this,arguments);try{u185Post()}catch(e){}return r};
+ var _u185rf=refresh;refresh=function(){var r=_u185rf.apply(this,arguments);try{u185Post()}catch(e){}return r};
+ try{window.addEventListener('resize',function(){try{u185Fit(document)}catch(e){}})}catch(e){}})();
+
+/* ---------- CSS ---------- */
+(function(){try{var U=U185.dir,st=document.createElement('style');st.id='u185css';st.textContent=
+ /* 4.1 Quân sư goal banner: dark plaque, cream text, gold sub-line (≥ 4.5:1) */
+ '#main .goal{border:16px solid transparent!important;border-width:12px 22px!important;border-image:url('+U+'k_plq_dark.webp) 70 fill / 12px 22px stretch!important;background:#2e2016!important;background-clip:padding-box!important;border-radius:0!important;box-shadow:0 4px 10px rgba(0,0,0,.45)!important;color:#f6ead0!important;padding:0 22px 0 36px!important;font:500 13.5px/1.28 var(--fb)!important;margin:0 0 6px!important}'+
+ 'html.u185no-k_plq_dark #main .goal{border:1px solid #c9a24f!important;border-image:none!important;background:#1d2a44!important;border-radius:10px!important;padding:8px 30px 8px 46px!important;color:#fff!important}'+
+ '#main .goal::after{display:none!important}#main .goal::before{left:4px!important;filter:brightness(1.6) sepia(1) saturate(2)!important}'+
+ '#main .goal small{color:#f0c35a!important;font:800 13px "Barlow Condensed",var(--fn)!important;letter-spacing:.05em!important;text-transform:none!important;display:block}#main .goal .goalgo{color:#f0c35a;opacity:1!important;right:-8px!important}'+
+ '#main .goal .mute,#main .goalb .mute{color:#e3cfa6!important}'+
+ /* 4.2 filter rows: two rows that scroll sideways */
+ '.fm2-flt,.genflt{display:flex!important;flex-direction:column!important;gap:0!important;flex-wrap:nowrap!important}'+
+ '.fm2-flt .chips,.genflt .chips{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden;scrollbar-width:none;min-height:40px;align-items:center;gap:6px!important;padding:0 2px;max-width:100%}.fm2-flt .chips::-webkit-scrollbar{display:none}'+
+ '.fm2-flt .chip,.genflt .chip{flex:none!important}'+
+ /* 4.5 tap targets: art keeps its size, the hit area grows to 40 px */
+ '.chip,.fm2 .pill[data-a="fpre"],.fm2 .btn.sm,.cup,.pills .pill,.tdtab button,.fm2-fold{position:relative}'+
+ '.chip::after,.fm2 .pill[data-a="fpre"]::after,.fm2 .btn.sm::after,.pills .pill::after,.fm2-fold::after{content:"";position:absolute;left:0;right:0;top:50%;height:40px;min-height:100%;transform:translateY(-50%)}'+
+ '.res.cur26 .cup::after{content:"";position:absolute;left:50%;top:50%;width:40px;height:40px;transform:translate(-50%,-50%)}'+
+ '.btn.sm{min-height:40px}.tdtab button{min-height:40px}.fm2 .btn.sm{min-height:40px!important;height:auto!important}.fm2 .pill[data-a="fpre"]{min-height:40px!important}.fm2-fold{min-height:40px}'+
+ '.gtools .chips{min-height:42px!important;padding-top:0!important;padding-bottom:0!important;align-items:center!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none}.gtools .chips .chip{flex:none}'+
+ /* 4.4 small text → body ≥ 12 px, labels ≥ 11 px */
+ '.fm2 .tag,.fm2 .lv,.fm2-hn,.fm2-hp,.fm2-enemy,.fm2-nm{font-size:11px!important}.hc .brt,.brt{font-size:11px!important}'+
+ '.sktag{font-size:11px!important}.hsh .lv,.sheet .lv{font-size:11px!important}.gtag{font-size:11px!important}.tdpkr b,.tdpkr span{font-size:11px!important}.tdk{font-size:11px!important}'+
+ '.u185w2{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.08!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:normal;overflow-wrap:anywhere}'+
+ /* 4.3 */
+ '.u185q{white-space:nowrap;font-family:"Barlow Condensed",var(--fb);font-size:14px}.u185q.bad{color:#ff6b5e!important}'+
+ /* 4.9/4.10 */
+ '.u185all{margin:6px 0 10px!important;min-height:44px}.u185go{white-space:nowrap}'+
+ '@keyframes u185p{0%,100%{filter:none;transform:none}50%{filter:drop-shadow(0 0 10px #ffe39a) brightness(1.35);transform:scale(1.08)}}.u185pulse{animation:u185p .8s ease-in-out 3;transform-box:fill-box;transform-origin:center}'+
+ '@media (prefers-reduced-motion:reduce){.u185pulse{animation:none;outline:3px solid #ffe39a}}'+
+ /* 4.11 slim currency line */
+ '.u185cur{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:4px 12px;margin:6px 2px 10px;font:500 13px var(--fb);color:var(--text-dim,#cdbf9f)}.u185cur>span:first-child{margin-right:auto;font-size:12px}.u185cv{display:inline-flex;align-items:center;gap:4px}.u185cv b{font:700 15px "Barlow Condensed",var(--fb);color:#f6ead0}.u185cv .ic{width:16px;height:16px}'+
+ /* 4.12 sheets with a Trở về bar use the whole screen (HUD hidden behind) */
+ '#modal:has(#sheet.sheet .snav){align-items:stretch!important;padding:0!important}'+
+ '#sheet.sheet:has(.snav){height:100%!important;max-height:none!important;min-height:0!important;margin:0 auto!important;border-radius:0!important;padding-top:max(4px,env(safe-area-inset-top))!important}'+
+ '.u185st{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.u185st span{display:inline-flex;align-items:baseline;gap:4px;padding:3px 9px;border-radius:12px;background:rgba(0,0,0,.4);border:1px solid rgba(232,196,110,.35);font:500 12px var(--fb);color:#d8c8a4}.u185st b{font:700 16px "Barlow Condensed",var(--fb);color:#ffe39a}.u185st em{font-style:normal}'+
+ '#sheet .hero{max-height:58vh}'+
+ /* 4.14 shop prices: white Barlow Condensed with a dark outline */
+ '.sheet .tdi .tdb,.sheet .tdi .tdb b{color:#fff!important;font-family:"Barlow Condensed",sans-serif!important;font-weight:700!important;font-size:21px!important;letter-spacing:.02em;text-shadow:-1px -1px 0 #2a0604,1px -1px 0 #2a0604,-1px 1px 0 #2a0604,1px 1px 0 #2a0604,0 2px 3px rgba(0,0,0,.7)!important}'+
+ /* 4.15 city: hub row floats on the scene's top edge, scene ≥ 55% of the screen */
+ '#main .gdstrip:has(+.hubrail.u185f){margin-bottom:6px!important}.qb4.qb5.hubrail.u185f{position:relative;z-index:5;margin-top:0!important;margin-bottom:-70px!important;padding:4px 4px 0!important;background:none!important;border:0!important;box-shadow:none!important}'+
+ '.qb4.qb5.hubrail.u185f .qbtn{background:none!important;border:0!important;border-image:none!important;box-shadow:none!important;text-shadow:0 1px 2px #000,0 0 4px #000,0 0 8px rgba(0,0,0,.8)!important;color:#fff3d6!important}'+
+ '.qb4.qb5.hubrail.u185f .qbtn{padding:2px 1px 0!important;min-height:0!important;height:auto!important;font-size:14px!important}.qb4.qb5.hubrail.u185f .qbtn .qi{width:46px!important;height:46px!important;margin:0 auto 1px!important;filter:drop-shadow(0 3px 5px rgba(0,0,0,.75))}'+
+ '.u185cw .innerw::before{content:"";position:absolute;left:0;right:0;top:0;height:96px;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(14,8,4,.62),rgba(14,8,4,0))}'+
+ '.u185cw .innerw .ptbtn{top:100px!important}'+
+ '.innerw .wxc{opacity:.55}.innerw svg.cityin{filter:brightness(1.07) saturate(1.06)}'+
+ /* 4.17 calendar tiles */
+ '.evday.u185d{padding:3px 1px 4px!important;gap:1px!important;min-height:66px;justify-content:flex-start}.evday.u185d>b{font:700 11px var(--fb)!important;line-height:1.1}'+
+ '.u185tl{position:relative;display:block;width:100%;max-width:36px;aspect-ratio:1;background:#3a2a1c center/100% 100% no-repeat;border-radius:6px}'+
+ '.u185tl.rr{background-image:url('+U+'r_tile_r.webp)}.u185tl.rsr{background-image:url('+U+'r_tile_sr.webp)}.u185tl.rssr{background-image:url('+U+'r_tile_ssr.webp)}'+
+ '.u185to{position:absolute;inset:16%;display:block}.u185to .objx{display:block;width:100%;height:100%}'+
+ '.u185tc{display:block;font:700 12px/1 "Barlow Condensed",sans-serif;font-style:normal;color:#fff;white-space:nowrap;text-shadow:-1px -1px 0 #120804,1px -1px 0 #120804,-1px 1px 0 #120804,1px 1px 0 #120804;margin-top:1px}'+
+ '.u185tl i{position:absolute;left:-2px;top:-3px;font:700 11px/1 "Barlow Condensed",sans-serif;font-style:normal;color:#ffe39a;text-shadow:0 0 2px #000,0 0 2px #000}'+
+ '.evday.u185d:not(.sm7){min-height:74px}.evday.u185d:not(.sm7) .u185tl{max-width:48px}'+
+ /* 4.20 VIP ladder */
+ '.u185vl{margin-top:10px;padding:12px 12px 6px;border-radius:12px;background:linear-gradient(180deg,rgba(40,24,12,.85),rgba(18,10,6,.9));border:1px solid rgba(232,196,110,.3)}'+
+ '.u185vt{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px}.u185vt b{font:700 20px var(--fn,Philosopher),serif;color:#ffe39a}.u185vt span{font:700 15px "Barlow Condensed",var(--fb);color:#d8c8a4}'+
+ '.u185vcap{display:flex;padding-left:4px;height:78px;align-items:flex-end;margin-top:4px}.u185vcr{display:block;background-repeat:no-repeat}'+
+ '.u185vs{position:relative;display:flex;align-items:center;gap:12px;min-height:66px;padding-left:24px}'+
+ '.u185vc{position:absolute;left:44px;width:12px;background-image:url('+U+'vip_track.webp);background-size:246.9px 76.8px;background-position:-185.7px 0;background-repeat:repeat-y;background-color:#3a2418}'+
+ '.u185vc.lit{background-position:-173.1px 0;background-color:#b8282a}.u185vc.t{top:0;height:50%}.u185vc.b{bottom:0;height:50%}.u185vc.t.cap{top:-8px;height:calc(50% + 8px)}'+
+ '.u185vp{position:relative;z-index:1;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background-repeat:no-repeat}'+
+ '.u185vp i{font:800 22px/1 "Barlow Condensed",sans-serif;font-style:normal;color:#fff2c8;text-shadow:0 1px 0 #2a1004,0 0 3px #000}.u185vs.locked .u185vp i{color:#b0a08a}'+
+ '.u185vs.reached .u185vp{box-shadow:0 0 10px 2px rgba(255,205,90,.45)}.u185vs.current .u185vp{box-shadow:0 0 0 2px rgba(255,236,170,.8),0 0 18px 6px rgba(255,170,60,.7);animation:u185g 1.8s ease-in-out infinite}'+
+ '@keyframes u185g{50%{box-shadow:0 0 0 2px rgba(255,236,170,.95),0 0 26px 10px rgba(255,190,80,.85)}}@media (prefers-reduced-motion:reduce){.u185vs.current .u185vp{animation:none}}'+
+ 'html.u185no-vip_track .u185vp{background:radial-gradient(circle,#c9a24f 55%,#6a4a1a 57%,#e8c46e 66%,#3a2410 70%)!important}html.u185no-vip_track .u185vs.locked .u185vp{background:radial-gradient(circle,#2a1d14 58%,#5a4a38 66%,#1a120c 70%)!important}html.u185no-vip_track .u185vs.current .u185vp{background:radial-gradient(circle,#c9a24f 50%,#b8282a 54%,#b8282a 64%,#e8c46e 68%)!important}'+
+ 'html.u185no-vip_track .u185vcr,html.u185no-vip_track .u185vcl span{display:none}html.u185no-vip_track .u185vc{background-image:none}'+
+ '.u185vx{display:flex;flex-direction:column;min-width:0;padding:6px 0}.u185vx b{font:700 16px var(--fb);color:#f6ead0}.u185vx b em{font:700 12px var(--fb);font-style:normal;color:#2a1606;background:#f0c35a;border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:2px}'+
+ '.u185vx span{font:500 13px/1.3 var(--fb);color:#e3cfa6}.u185vx small{font:500 12px var(--fb);color:#a8987e}.u185vs.locked .u185vx b{color:#bfae92}.u185vs.locked .u185vx span{color:#a8987e}'+
+ '.u185vcl{display:flex;padding-left:2px;margin-top:-6px}.u185vcl span{display:block;background-repeat:no-repeat}'+
+ /* 4.21 empty states */
+ '.u185emp{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:6px 8px 14px;margin:6px 0 10px;border-radius:12px;background:#2a1d14;border:1px solid rgba(232,196,110,.22)}'+
+ '.u185ei{width:min(240px,70vw);aspect-ratio:1;background:#2a1d14 url('+U+'empty.webp) no-repeat;background-size:300% 100%}html.u185no-empty .u185ei{display:none}'+
+ '.u185emp>b{font:700 18px var(--fn,Philosopher),serif;color:#ffe39a}.u185emp>span{font:400 13px/1.4 var(--fb);color:#d8c8a4;max-width:300px}'+
+ '';document.head.appendChild(st)}catch(e){}})();
+</script>
