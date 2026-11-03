@@ -9940,7 +9940,7 @@ function ekC2(t){return t<0?0:t>1?1:t}function ekEO2(t){return 1-Math.pow(1-t,3)
 var DEVBIG=999999;
 function devApply(){
  if(typeof S==='undefined'||!S||!S.res)return;
- if(S.devInit==null){S.devInit=1;S.dev=1}
+ if(S.devInit==null){S.devInit=1;S.dev=0}/* V187 (user 2026-11-03 15:00): test mode OFF by default; only the owner's account shows the switch (cloud186.js) */
  if(!S.dev)return;
  Object.keys(GENS).forEach(function(id){S.camp.flag[id]=1;if(!S.gens[id]){var G=GENS[id];
   S.gens[id]={lv:Math.max(1,S.gens.liubei?S.gens.liubei.lv:1),exp:0,troops:0,path:null,tier:1,reb:0,tb:(typeof HTB!=="undefined"&&G.rar?HTB[G.rar]:Math.floor(G.cost/10000*40)),bonus:{tong:0,dung:0,tri:0},eq:{}};S.gens[id].troops=gmax(id)}});
@@ -10796,7 +10796,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V186';
+var BUILD='V187';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -10812,6 +10812,12 @@ function token(){var c=cl();if(c.at&&c.exp>Date.now())return Promise.resolve();
  return signup()}
 function pushName(){var c=cl();if(!S||!S.pname||!c.uid||c.named===S.pname)return Promise.resolve();
  return req('/rest/v1/profiles?id=eq.'+c.uid,{m:'PATCH',auth:1,b:{display_name:S.pname},h:{Prefer:'return=minimal'}}).then(function(){c.named=S.pname;cs()})}
+/* V187: owner = this guest account is listed in public.owner_users (server check am_owner). Only the owner's game shows the
+   test tools: test-mode switch (devtog), late-game account (devend/devendback) and the admin panel (adm*, cheat). */
+var OWNACT={devtog:1,devend:1,devendback:1,adm:1,cheat:1};
+function isOwner(){return !!cl().owner}
+function applyOwner(){try{document.body.classList.toggle('bn-owner',isOwner())}catch(e){}}
+function checkOwner(){var c=cl();return req('/rest/v1/rpc/am_owner',{auth:1,b:{}}).then(function(r){var o=r===true;if(o!==!!c.owner){c.owner=o;cs();applyOwner();if(!o&&S&&S.dev){S.dev=0;save()}try{refresh()}catch(e){}}},function(){})}
 function progress(){var p={name:S.pname||'',nation:S.nation||'',build:BUILD};try{p.gold=S.res.gold;p.silver=S.res.silver;p.merit=S.res.merit}catch(e){}
  try{var n=0;for(var k in S.camp.stage)if(S.camp.stage[k])n++;p.stages=n}catch(e){}try{p.gens=Object.keys(S.gens).length}catch(e){}return p}
 function adopt(d){try{if(!d||d.v!==2||!d.res)return false;S=d;try{ensure()}catch(e){}save();try{refresh()}catch(e){}return true}catch(e){return false}}
@@ -10819,7 +10825,7 @@ function push(force,manual){var c=cl();if(busy||c.banned||!S||!S.name)return Pro
  if(typeof navigator!=='undefined'&&navigator.onLine===false){if(manual)toast('Chưa có mạng — tiến trình vẫn lưu trên máy');return Promise.resolve()}
  if(typeof fighting!=='undefined'&&fighting&&!manual)return Promise.resolve();
  busy=true;lastTry=Date.now();
- return token().then(pushName).then(function(){S.real=Date.now();return req('/rest/v1/rpc/push_save',{auth:1,b:{p_data:S,p_base_version:c.ver||0,p_build:BUILD,p_progress:progress(),p_force:!!force}})})
+ return token().then(pushName).then(checkOwner).then(function(){S.real=Date.now();return req('/rest/v1/rpc/push_save',{auth:1,b:{p_data:S,p_base_version:c.ver||0,p_build:BUILD,p_progress:progress(),p_force:!!force}})})
  .then(function(r){r=r||{};
   if(r.status==='ok'){c.ver=r.version;c.last=Date.now();c.err='';cs();if(manual)toast('Đã đồng bộ lên máy chủ');return}
   if(r.status==='admin_edit'&&r.server){if(typeof fighting!=='undefined'&&fighting)return;
@@ -10837,76 +10843,23 @@ function askName(){if(asked||!S||!S.name||S.pname)return;if(typeof fighting!=='u
 function pid(){var u=cl().uid;return u?u.replace(/-/g,'').slice(0,8).toUpperCase():'—'}
 function ago(t){if(!t)return'chưa';var s=Math.round((Date.now()-t)/1000);return s<60?'vừa xong':s<3600?Math.round(s/60)+' phút trước':s<86400?Math.round(s/3600)+' giờ trước':Math.round(s/86400)+' ngày trước'}
 function card(){var c=cl();var st=c.banned?'Đã khóa':c.last?'Đồng bộ '+ago(c.last):c.err?'Chưa kết nối':'Đang chờ mạng';
- return'<div class="card"><b>Tài khoản</b><div class="sm" style="margin:4px 0">Tên: <b>'+((S.pname||'—').replace(/</g,'&lt;'))+'</b> · Mã người chơi: <b>'+pid()+'</b></div>'+
+ return'<div class="card"><b>Tài khoản</b>'+(isOwner()?' <span class="sm" style="color:var(--gold)">· Chủ game</span>':'')+'<div class="sm" style="margin:4px 0">Tên: <b>'+((S.pname||'—').replace(/</g,'&lt;'))+'</b> · Mã người chơi: <b>'+pid()+'</b></div>'+
  '<div class="sm mute" style="margin-bottom:8px">'+st+' · Bản '+BUILD+'. Tiến trình luôn lưu trên máy; máy chủ giữ bản sao.</div>'+
  '<div class="row" style="gap:8px"><button class="btn alt sm" data-a="clsync">Đồng bộ ngay</button><button class="btn alt sm" data-a="clren">Đổi tên</button></div></div>'}
 try{var _vmCL=viewMore;viewMore=function(){var h=_vmCL.apply(this,arguments);try{var k='<div class="card"><b>Đặt lại dữ liệu</b>';h=h.indexOf(k)>=0?h.replace(k,card()+k):h+card()}catch(e){}return h}}catch(e){}
 try{var _ACL=A_;A_=function(a,v,w,el){
+ if(!isOwner()&&(OWNACT[a]||String(a).indexOf('adm_')===0))return;
  if(a==='clname'){var i=document.getElementById('clnm'),n=i?String(i.value||'').replace(/\s+/g,' ').trim():'';
   if(n.length<2||n.length>16){toast('Tên cần 2–16 ký tự');return}S.pname=n;save();closeSheet();toast('Xin chào, '+n+'!');push(false,false);try{refresh()}catch(e){}return}
  if(a==='clren'){openSheet(nameSheet);return}
  if(a==='clsync'){push(false,true).then(function(){try{refresh()}catch(e){}});return}
  return _ACL(a,v,w,el)}}catch(e){}
+/* hide the test tools for everyone except the owner (CSS :has, plus the action guard above) */
+try{var st=document.createElement('style');st.textContent='body:not(.bn-owner) .card:has([data-a=devtog]),body:not(.bn-owner) .card:has([data-a=devend]),body:not(.bn-owner) .card:has([data-a=devendback]),body:not(.bn-owner) .admlk{display:none!important}';document.head.appendChild(st);applyOwner()}catch(e){}
+/* one-time V187 switch: saves made before V187 had test mode on by default; turn it off unless this is the owner's account */
+try{if(S&&!S.dev187){S.dev187=1;if(!isOwner()&&S.dev){S.dev=0}save()}}catch(e){}
 try{setInterval(function(){try{askName();if(S&&S.name&&Date.now()-lastTry>120000)push(false,false)}catch(e){}},1000)}catch(e){}
 try{document.addEventListener('visibilitychange',function(){try{if(document.hidden&&Date.now()-lastTry>15000)push(false,false)}catch(e){}})}catch(e){}
 try{setTimeout(function(){try{push(false,false)}catch(e){}},4000)}catch(e){}
 })();
-/* ===== V187 Nội Thành walkers (user 2026-11-03 14:56: "add some walking people to make it more alive") =====
-   Small code-drawn townsfolk walk the stone streets of the inner-city scene (svg.cityin, art/maps/inner.webp, 474×849).
-   No art files. Street graph WKN/WKE (avenue x 238, cross streets y 276 / 435 / 615, the avenue starts at the foot of Chính Sảnh; 2 palace guards stand at the top of the avenue below its plaque); each walker walks node to node,
-   picks a new street at every crossing, keeps to its own lane offset and pauses now and then. One requestAnimationFrame
-   loop; it only works while the city scene is on screen and the tab is visible, and never during a battle. The group is
-   inserted right after the background image, so buildings, plaques and badges stay on top. Reduced motion → people stand still.
-   Everything is wrapped: a draw error removes the walkers, never the city. */
-var WKN=[[238,150],[238,276],[238,435],[238,615],[238,780],[62,276],[414,276],[62,435],[414,435],[62,615],[414,615],[150,276],[326,276],[150,435],[326,435],[150,615],[326,615]];
-var WKE=[[0,1],[1,2],[2,3],[3,4],[5,11],[11,1],[1,12],[12,6],[7,13],[13,2],[2,14],[14,8],[9,15],[15,3],[3,16],[16,10]];
-var WKT=[ /* body colours: robe, sash/trim, hat kind (0 straw cone, 1 topknot, 2 soldier helmet, 3 headscarf), carries (0 none, 1 spear, 2 basket, 3 pole with buckets) */
- ['#7a5a3a','#c9a46a',0,2],['#5d4630','#a37b4b',0,3],['#8c2f25','#d6b25e',2,1],['#3d4f7a','#c9b27a',1,0],['#6b6f45','#b9a56a',0,0],
- ['#9a7b52','#e2cf9f',3,2],['#4a3b5c','#c4a5d8',1,0],['#8c2f25','#d6b25e',2,1],['#6a4a2a','#d9b77a',0,0],['#2f5a52','#bcd8c8',3,0],
- ['#7a5a3a','#c9a46a',0,3],['#5b5f63','#d0c6a8',1,0],['#7d3b6a','#e6c3d6',3,0],['#3d4f7a','#c9b27a',1,2]];
-var WKG=[[221,176],[255,176]];   /* two palace guards standing at the Chính Sảnh steps */
-var WK={list:[],raf:0,last:0,svg:null,g:null,on:0,adj:null};
-function wkAdj(){if(WK.adj)return WK.adj;var a=WKN.map(function(){return[]});WKE.forEach(function(e){a[e[0]].push(e[1]);a[e[1]].push(e[0])});return WK.adj=a}
-function wkRnd(){WK.seed=(WK.seed||12345)*16807%2147483647;return(WK.seed-1)/2147483646}
-function wkInit(){var adj=wkAdj();WK.list=[];WKT.forEach(function(t,i){var e=i<3?WKE[0]:WKE[Math.floor(wkRnd()*WKE.length)],k=i<3?i*.3:wkRnd();
-  WK.list.push({t:t,a:e[0],b:e[1],k:k,sp:7+wkRnd()*6,lane:(wkRnd()-.5)*14,ph:wkRnd()*6.28,wait:0,el:null,legs:null,body:null})})}
-function wkFig(w){var t=w.t,NS='http://www.w3.org/2000/svg',g=document.createElementNS(NS,'g'),h='';
-  h+='<ellipse cx="0" cy="0.6" rx="3.6" ry="1.4" fill="rgba(0,0,0,.35)"/>';
-  h+='<g class="wkl"><line x1="-1.1" y1="-3" x2="-1.4" y2="0" stroke="#2b2118" stroke-width="1.3" stroke-linecap="round"/><line x1="1.1" y1="-3" x2="1.4" y2="0" stroke="#2b2118" stroke-width="1.3" stroke-linecap="round"/></g>';
-  h+='<g class="wkb">';
-  if(t[3]===1)h+='<line x1="3.2" y1="-14" x2="2.6" y2="-1" stroke="#6b4a2b" stroke-width=".8"/><path d="M2.6 -16.5 L3.8 -13.6 L2.4 -13.8 Z" fill="#cfd3d6"/>';
-  if(t[3]===3)h+='<line x1="-5.5" y1="-8.6" x2="5.5" y2="-8.6" stroke="#6b4a2b" stroke-width=".8"/><rect x="-6.6" y="-8.2" width="2.4" height="2.6" rx=".5" fill="#5a4630"/><rect x="4.2" y="-8.2" width="2.4" height="2.6" rx=".5" fill="#5a4630"/>';
-  h+='<path d="M-2.6 -2.6 Q-3 -6.5 -2.2 -8.6 L2.2 -8.6 Q3 -6.5 2.6 -2.6 Z" fill="'+t[0]+'" stroke="rgba(0,0,0,.45)" stroke-width=".35"/>';
-  h+='<rect x="-2.4" y="-6.2" width="4.8" height=".9" fill="'+t[1]+'"/>';
-  if(t[3]===2)h+='<ellipse cx="-3.2" cy="-5.4" rx="1.7" ry="1.3" fill="#a9824f" stroke="#5a4630" stroke-width=".3"/>';
-  h+='<circle cx="0" cy="-10" r="1.75" fill="#e2b98c" stroke="rgba(0,0,0,.35)" stroke-width=".3"/>';
-  if(t[2]===0)h+='<path d="M-3.4 -10.4 L0 -13.2 L3.4 -10.4 Z" fill="#d8b56f" stroke="#7a5a2e" stroke-width=".3"/>';
-  else if(t[2]===1)h+='<circle cx="0" cy="-12" r=".9" fill="#1d1712"/><path d="M-1.8 -10.6 Q0 -12.2 1.8 -10.6" fill="#1d1712"/>';
-  else if(t[2]===2)h+='<path d="M-2.1 -10.2 Q0 -13.4 2.1 -10.2 Z" fill="#6d7378" stroke="#2c2f31" stroke-width=".3"/><line x1="0" y1="-13" x2="0" y2="-14.3" stroke="#b03a2e" stroke-width=".7"/>';
-  else h+='<path d="M-2 -10 Q0 -13 2 -10 L2.2 -9 L-2.2 -9 Z" fill="'+t[1]+'"/>';
-  h+='</g>';
-  g.innerHTML=h;g.setAttribute('class','wk');w.el=g;w.legs=g.firstChild.nextSibling;w.body=w.legs.nextSibling;return g}
-function wkAttach(){var svg=document.querySelector('svg.cityin');if(!svg)return null;if(WK.svg===svg&&WK.g&&WK.g.parentNode===svg)return svg;
-  var NS='http://www.w3.org/2000/svg',g=document.createElementNS(NS,'g');g.setAttribute('class','walkers');g.setAttribute('pointer-events','none');
-  var bg=svg.querySelector('image');if(bg&&bg.nextSibling)svg.insertBefore(g,bg.nextSibling);else svg.appendChild(g);
-  if(!WK.list.length)wkInit();WK.list.forEach(function(w){g.appendChild(wkFig(w))});
-  WKG.forEach(function(q,i){var w={t:['#8c2f25','#d6b25e',2,1]};var f=wkFig(w);f.setAttribute('transform','translate('+q[0]+' '+q[1]+') scale('+(i?-1.4:1.4)+' 1.4)');g.appendChild(f)});WK.svg=svg;WK.g=g;return svg}
-function wkPos(w){var A=WKN[w.a],B=WKN[w.b],dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;
-  return{x:A[0]+dx*w.k+nx*w.lane,y:A[1]+dy*w.k+ny*w.lane*.6,dx:dx/L,dy:dy/L,L:L}}
-function wkStep(dt,still){var adj=wkAdj();WK.list.forEach(function(w){var p=wkPos(w);
-  if(!still){if(w.wait>0)w.wait-=dt;else{w.k+=w.sp*dt/p.L;if(w.k>=1){var n=adj[w.b].filter(function(x){return x!==w.a});if(!n.length)n=[w.a];
-     var nx=n[Math.floor(wkRnd()*n.length)];w.a=w.b;w.b=nx;w.k=0;if(wkRnd()<.18)w.wait=1.2+wkRnd()*2.5}}p=wkPos(w)}
-  var moving=!still&&w.wait<=0,sw=moving?Math.sin(performance.now()/1000*7+w.ph):0,fl=p.dx<-.2?-1:1,s=1.3+.1*(w.t[2]===2?1:0);
-  w.el.setAttribute('transform','translate('+p.x.toFixed(1)+' '+p.y.toFixed(1)+') scale('+(fl*s).toFixed(2)+' '+s.toFixed(2)+')');
-  if(w.legs){w.legs.firstChild.setAttribute('x2',(-1.4+sw*1.2).toFixed(2));w.legs.lastChild.setAttribute('x2',(1.4-sw*1.2).toFixed(2))}
-  if(w.body)w.body.setAttribute('transform','translate(0 '+(moving?-Math.abs(sw)*.35:0).toFixed(2)+')')});
-  /* draw order: lower on the map in front */
-  if(WK.g&&Math.random()<.05){WK.list.slice().sort(function(a,b){return wkPos(a).y-wkPos(b).y}).forEach(function(w){WK.g.appendChild(w.el)})}}
-function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!bt&&!document.hidden?wkAttach():null;
-  if(svg){var dt=Math.min(.1,Math.max(0,(now-(WK.last||now))/1000));WK.last=now;
-   var still=false;try{still=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-   wkStep(dt,still);WK.raf=requestAnimationFrame(wkLoop);return}
-  WK.last=0}catch(e){try{if(WK.g&&WK.g.parentNode)WK.g.parentNode.removeChild(WK.g)}catch(x){}WK.g=null;WK.off=1;return}
-  WK.idle=setTimeout(function(){WK.idle=0;if(!WK.raf&&!WK.off)WK.raf=requestAnimationFrame(wkLoop)},700)}
-(function(){try{WK.raf=requestAnimationFrame(wkLoop)}catch(e){}})();
 </script>
