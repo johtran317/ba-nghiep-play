@@ -10787,4 +10787,68 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
  '.u185ei{width:min(240px,70vw);aspect-ratio:1;background:#2a1d14 url('+U+'empty.webp) no-repeat;background-size:300% 100%}html.u185no-empty .u185ei{display:none}'+
  '.u185emp>b{font:700 18px var(--fn,Philosopher),serif;color:#ffe39a}.u185emp>span{font:400 13px/1.4 var(--fb);color:#d8c8a4;max-width:300px}'+
  '';document.head.appendChild(st)}catch(e){}})();
+/* ===== V186 cloud: guest account + player name + cloud save (server agent, user 2026-11-03 14:40) =====
+   - No email or password. The first time the game is online it makes a Supabase guest (anonymous) account
+     and keeps its session in localStorage 'bn-cloud-v1'. Tester server: bibles "Tester server (Supabase)".
+   - The phone save (ckt-save-v2) stays primary: the game plays fully offline; the cloud copy is pushed
+     about every 2 minutes, when the app goes to the background, and from "Đồng bộ ngay".
+   - Server answers: ok | conflict (another device saved newer: the phone keeps its own copy and pushes with force)
+     | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
+   - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
+   - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
+var BUILD='V186';
+(function(){
+var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
+var C=null,busy=false,lastTry=0,asked=false;
+function cl(){if(C)return C;try{C=JSON.parse(localStorage.getItem(CK)||'null')}catch(e){C=null}if(!C||typeof C!=='object')C={};return C}
+function cs(){try{localStorage.setItem(CK,JSON.stringify(cl()))}catch(e){}}
+function req(path,o){o=o||{};var hd={apikey:PK,'Content-Type':'application/json'};if(o.auth)hd.Authorization='Bearer '+cl().at;if(o.h)for(var k in o.h)hd[k]=o.h[k];
+ return fetch(SB+path,{method:o.m||'POST',headers:hd,body:o.b!==undefined?JSON.stringify(o.b):undefined}).then(function(r){return r.text().then(function(t){var j=null;try{j=t?JSON.parse(t):null}catch(e){}
+  if(!r.ok){var er=new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));er.status=r.status;throw er}return j})})}
+function setSess(j){var c=cl();if(!j||!j.access_token)throw new Error('no session');c.at=j.access_token;c.rt=j.refresh_token;c.exp=Date.now()+((j.expires_in||3600)-120)*1000;if(j.user&&j.user.id){if(c.uid&&c.uid!==j.user.id)c.ver=0;c.uid=j.user.id}cs()}
+function signup(){return req('/auth/v1/signup',{b:{data:{},gotrue_meta_security:{}}}).then(function(j){setSess(j);cl().named=0;cs()})}
+function token(){var c=cl();if(c.at&&c.exp>Date.now())return Promise.resolve();
+ if(c.rt)return req('/auth/v1/token?grant_type=refresh_token',{b:{refresh_token:c.rt}}).then(setSess,function(e){if(e.status===400||e.status===401){c.at=c.rt=null;cs();return signup()}throw e});
+ return signup()}
+function pushName(){var c=cl();if(!S||!S.pname||!c.uid||c.named===S.pname)return Promise.resolve();
+ return req('/rest/v1/profiles?id=eq.'+c.uid,{m:'PATCH',auth:1,b:{display_name:S.pname},h:{Prefer:'return=minimal'}}).then(function(){c.named=S.pname;cs()})}
+function progress(){var p={name:S.pname||'',nation:S.nation||'',build:BUILD};try{p.gold=S.res.gold;p.silver=S.res.silver;p.merit=S.res.merit}catch(e){}
+ try{var n=0;for(var k in S.camp.stage)if(S.camp.stage[k])n++;p.stages=n}catch(e){}try{p.gens=Object.keys(S.gens).length}catch(e){}return p}
+function adopt(d){try{if(!d||d.v!==2||!d.res)return false;S=d;try{ensure()}catch(e){}save();try{refresh()}catch(e){}return true}catch(e){return false}}
+function push(force,manual){var c=cl();if(busy||c.banned||!S||!S.name)return Promise.resolve();
+ if(typeof navigator!=='undefined'&&navigator.onLine===false){if(manual)toast('Chưa có mạng — tiến trình vẫn lưu trên máy');return Promise.resolve()}
+ if(typeof fighting!=='undefined'&&fighting&&!manual)return Promise.resolve();
+ busy=true;lastTry=Date.now();
+ return token().then(pushName).then(function(){S.real=Date.now();return req('/rest/v1/rpc/push_save',{auth:1,b:{p_data:S,p_base_version:c.ver||0,p_build:BUILD,p_progress:progress(),p_force:!!force}})})
+ .then(function(r){r=r||{};
+  if(r.status==='ok'){c.ver=r.version;c.last=Date.now();c.err='';cs();if(manual)toast('Đã đồng bộ lên máy chủ');return}
+  if(r.status==='admin_edit'&&r.server){if(typeof fighting!=='undefined'&&fighting)return;
+   if(adopt(r.server.data)){c.ver=r.server.version;cs();toast('Đã nhận cập nhật từ quản trị viên');return req('/rest/v1/rpc/ack_admin_save',{auth:1,b:{p_version:r.server.version}})}return}
+  if(r.status==='conflict'){busy=false;return push(true,manual)}
+  if(r.status==='banned'){c.banned=1;cs();toast('Tài khoản này đã bị khóa trên máy chủ thử nghiệm')}})
+ .catch(function(e){c.err=String((e&&e.message)||e).slice(0,120);cs();if(manual)toast('Không kết nối được máy chủ — tiến trình vẫn lưu trên máy')})
+ .then(function(){busy=false})}
+window.cloudPush=function(){return push(false,true)};
+/* name sheet: asked once, after the nation is chosen */
+function nameSheet(){var cur=(S&&S.pname)||'';return'<h3>Tên của bạn</h3><p class="sm mute" style="margin:4px 0 10px">Tên hiển thị khi chơi thử, để quản trị viên tìm và gửi quà cho bạn. Không cần email hay mật khẩu.</p>'+
+ '<input id="clnm" class="ainp" type="text" maxlength="16" placeholder="Ví dụ: Tử Long" autocomplete="off" value="'+cur.replace(/"/g,'&quot;')+'">'+
+ '<div class="row" style="margin-top:10px"><button class="btn sp" data-a="clname">Lưu tên</button></div><p class="sm mute" style="margin-top:8px">2–16 ký tự. Có thể đổi sau trong Thêm › Tài khoản.</p>'}
+function askName(){if(asked||!S||!S.name||S.pname)return;if(typeof fighting!=='undefined'&&fighting)return;var m=document.getElementById('modal');if(m&&!m.hidden)return;asked=true;openSheet(nameSheet)}
+function pid(){var u=cl().uid;return u?u.replace(/-/g,'').slice(0,8).toUpperCase():'—'}
+function ago(t){if(!t)return'chưa';var s=Math.round((Date.now()-t)/1000);return s<60?'vừa xong':s<3600?Math.round(s/60)+' phút trước':s<86400?Math.round(s/3600)+' giờ trước':Math.round(s/86400)+' ngày trước'}
+function card(){var c=cl();var st=c.banned?'Đã khóa':c.last?'Đồng bộ '+ago(c.last):c.err?'Chưa kết nối':'Đang chờ mạng';
+ return'<div class="card"><b>Tài khoản</b><div class="sm" style="margin:4px 0">Tên: <b>'+((S.pname||'—').replace(/</g,'&lt;'))+'</b> · Mã người chơi: <b>'+pid()+'</b></div>'+
+ '<div class="sm mute" style="margin-bottom:8px">'+st+' · Bản '+BUILD+'. Tiến trình luôn lưu trên máy; máy chủ giữ bản sao.</div>'+
+ '<div class="row" style="gap:8px"><button class="btn alt sm" data-a="clsync">Đồng bộ ngay</button><button class="btn alt sm" data-a="clren">Đổi tên</button></div></div>'}
+try{var _vmCL=viewMore;viewMore=function(){var h=_vmCL.apply(this,arguments);try{var k='<div class="card"><b>Đặt lại dữ liệu</b>';h=h.indexOf(k)>=0?h.replace(k,card()+k):h+card()}catch(e){}return h}}catch(e){}
+try{var _ACL=A_;A_=function(a,v,w,el){
+ if(a==='clname'){var i=document.getElementById('clnm'),n=i?String(i.value||'').replace(/\s+/g,' ').trim():'';
+  if(n.length<2||n.length>16){toast('Tên cần 2–16 ký tự');return}S.pname=n;save();closeSheet();toast('Xin chào, '+n+'!');push(false,false);try{refresh()}catch(e){}return}
+ if(a==='clren'){openSheet(nameSheet);return}
+ if(a==='clsync'){push(false,true).then(function(){try{refresh()}catch(e){}});return}
+ return _ACL(a,v,w,el)}}catch(e){}
+try{setInterval(function(){try{askName();if(S&&S.name&&Date.now()-lastTry>120000)push(false,false)}catch(e){}},1000)}catch(e){}
+try{document.addEventListener('visibilitychange',function(){try{if(document.hidden&&Date.now()-lastTry>15000)push(false,false)}catch(e){}})}catch(e){}
+try{setTimeout(function(){try{push(false,false)}catch(e){}},4000)}catch(e){}
+})();
 </script>
