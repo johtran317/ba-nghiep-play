@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V246';
+var BUILD='V247';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14151,4 +14151,47 @@ var RT245=1;
   '#rs9p .hs246p>.row{display:flex;align-items:center;gap:8px;margin-bottom:8px}#rs9p .hs246p .bdl{margin-top:8px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.25);font-size:14px;line-height:1.5}';
  document.head.appendChild(st);
 }catch(e){try{console.error('hs246',e)}catch(x){}}})();
+/* V247 (coding, user 2026-11-04 13:29 "if a hero has a better item in the inventory that they can equip - create a red button to guide
+   player that they can go in that slot to equip"). Display only, no new actions, no save keys.
+   - Hero sheet: a gear slot (button.slot[data-a=slot]) whose general could wear a better UNWORN item from Kho gets a red ▲ badge
+     (class eq247) on top of the slot's own + badge; the slot keeps its normal tap (opens the picker).
+   - Slot picker: the "Mặc" button of every unworn item that beats what the slot holds turns red with "Mặc ▲"; the best one says "Tốt nhất".
+   - Tướng list: a general's card (button[data-a=gen]) with any such slot gets a small red dot, so the player knows whom to open.
+   "Better" = eq247Score (gpow × (1 + 0.1 per gear star)) above the worn item's score; an empty slot counts any unworn item of that slot.
+   Items worn by another general are ignored (taking them would only move the problem). Everything wrapped; runs after #modal / #main
+   change (debounced), never during a battle. */
+function eq247Score(it){try{return gpow(it)*(1+.1*(it.st||0))}catch(e){return 0}}
+function eq247Free(){var w={};try{for(var id in S.gens){var e=S.gens[id].eq||{};for(var k in e)if(e[k]!=null)w[e[k]]=1}}catch(e){}return w}
+/* best unworn item for general gid, slot si, if it beats the worn one; else null */
+function eq247Best(gid,si,worn){try{var g=S.gens[gid];if(!g)return null;worn=worn||eq247Free();var cur=itemById((g.eq||{})[si]),cs=cur?eq247Score(cur):-1,b=null,bs=cs;
+  S.inv.forEach(function(it){if(it.s!==si||worn[it.id])return;var sc=eq247Score(it);if(sc>bs){bs=sc;b=it}});return b}catch(e){return null}}
+function eq247Any(gid,worn){for(var s=0;s<6;s++)if(eq247Best(gid,s,worn))return true;return false}
+function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S||!S.gens||!S.inv)return;var worn=eq247Free();
+  /* hero sheet slots */
+  document.querySelectorAll('#sheet button.slot[data-a="slot"]').forEach(function(b){var on=!!eq247Best(b.dataset.v,+b.dataset.w,worn),m=b.querySelector('.eq247');
+   if(on&&!m){m=document.createElement('i');m.className='eq247';m.setAttribute('aria-label','Có trang bị tốt hơn');m.textContent='▲';b.appendChild(m);b.classList.add('eq247on')}
+   else if(!on&&m){m.remove();b.classList.remove('eq247on')}});
+  /* slot picker: equip buttons */
+  var eqb=document.querySelectorAll('#sheet [data-a="equip"]');if(eqb.length){var gid=eqb[0].dataset.w,it0=itemById(+eqb[0].dataset.v);
+   if(gid&&it0&&S.gens[gid]){var si=it0.s,cur=itemById((S.gens[gid].eq||{})[si]),cs=cur?eq247Score(cur):-1,best=eq247Best(gid,si,worn);
+    eqb.forEach(function(b){if(b.dataset.e247)return;var it=itemById(+b.dataset.v);if(!it||worn[it.id]||eq247Score(it)<=cs)return;b.dataset.e247='1';
+     b.classList.remove('alt');b.classList.add('red','eq247b');b.textContent=best&&best.id===it.id?'Tốt nhất · Mặc':'Mặc ▲'})}}
+  /* Tướng list: red dot on the general's card */
+  document.querySelectorAll('#main button[data-a="gen"][data-v], #sheet button.hc[data-a="gen"][data-v]').forEach(function(b){var id=b.dataset.v;if(!S.gens[id])return;
+   var on=eq247Any(id,worn),d=b.querySelector('.eq247d');if(on&&!d){d=document.createElement('i');d.className='eq247d';d.setAttribute('aria-label','Có trang bị tốt hơn');b.appendChild(d)}else if(!on&&d)d.remove()})
+ }catch(e){}}
+(function(){try{
+  var st=document.createElement('style');st.id='eq247css';st.textContent=
+   'button.slot.eq247on{position:relative;box-shadow:0 0 0 2px #d8443a inset,0 0 10px rgba(216,68,58,.45)}'+
+   'button.slot .eq247{position:absolute;top:4px;right:4px;z-index:3;width:24px;height:24px;border-radius:50%;background:#c8342b;color:#fff;font:700 12px/24px system-ui,sans-serif;font-style:normal;text-align:center;box-shadow:0 0 0 2px #2a0b08,0 2px 6px rgba(0,0,0,.5);animation:eq247p 1.6s ease-in-out infinite;pointer-events:none}'+
+   '.eq247b{font-weight:700}'+
+   'button[data-a="gen"]{position:relative}button[data-a="gen"] .eq247d{position:absolute;top:6px;left:6px;z-index:4;width:12px;height:12px;border-radius:50%;background:#e0463b;box-shadow:0 0 0 2px #2a0b08;pointer-events:none}'+
+   '@keyframes eq247p{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}'+
+   '@media (prefers-reduced-motion:reduce){button.slot .eq247{animation:none}}';
+  document.head.appendChild(st);
+  var t=0;function sched(){if(t)return;t=setTimeout(function(){t=0;eq247Run()},120)}
+  var mo=new MutationObserver(sched);
+  function attach(){['modal','main'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.dataset.eq247){e.dataset.eq247='1';mo.observe(e,{childList:true,subtree:true})}})}
+  attach();setInterval(function(){attach();sched()},1500);
+ }catch(e){}})();
 </script>
