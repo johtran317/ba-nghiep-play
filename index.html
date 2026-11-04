@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V240';
+var BUILD='V241';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11137,6 +11137,10 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  var CW=84,GW=CW*3+16;
  var st=document.createElement('style');st.id='pvdragcss';st.textContent=
   'html body #sheet .pv .fgrid.ofg.pv-my,html body #sheet .pv .fgrid.ofg:not(.pv-my){max-width:'+GW+'px!important;width:'+GW+'px;margin-left:auto!important;margin-right:auto!important}'+
+  /* V241 (user 12:20 "the empty spot in enemy formation is off"): enemy empty cells were shrunk to 45% (uibible.js) and floated in the
+     middle of their 84 px track; now full-size quiet tiles, so the enemy board reads as the same 3×3 grid as ours. */
+  'html body #sheet .pv .fgrid.ofg:not(.pv-my) .fc:not(.has){transform:none!important;opacity:1!important;background:rgba(0,0,0,.2)!important;border:1px solid rgba(214,120,96,.16)!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)!important;border-radius:12px!important}'+
+  'html body #sheet .pv .fgrid.ofg:not(.pv-my) .fc:not(.has)>*{display:none}'+
   '.pv-my .fc.has{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}'+
   '.pv220h{touch-action:pan-x;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}'+
   '.pv-my img,.pv-my .fc *,.pv220h img{-webkit-user-drag:none}'+
@@ -13824,7 +13828,19 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
 var RS9={};
 (function(){try{
  var ICO={'Bạc':'silver','Lương':'grain','Quân công':'merit','Vàng':'gold','Lần đầu':'gold'};
- function tile(ic,val,lab,tag,act){return'<'+(act?'button data-a="rs9" data-v="'+act+'"':'div')+' class="rs9t">'+(tag?'<em>'+tag+'</em>':'')+'<span class="rs9i">'+ic+'</span><b>'+val+'</b><small>'+lab+'</small></'+(act?'button':'div')+'>'}
+ function tile(ic,val,lab,tag,act){return'<'+(act?'button data-a="rs9" data-v="'+act+'"':'div')+' class="rs9t">'+(tag?'<em>'+tag+'</em>':'')+'<span class="rs9i">'+ic+'</span><b>'+val+'</b><small'+(lab.length>8?' class="w2"':'')+'>'+lab+'</small></'+(act?'button':'div')+'>'}
+ /* V241: the first-clear reward can hold several parts joined by " · " (gold, Binh Thư <branch> n, Binh Phù, Quân lệnh, chest, tokens);
+    each becomes its own tile tagged "lần đầu" (before, they were squeezed into the gold tile: "+2 · Binh Thư CUNG 1"). */
+ function firstTiles(b){var o='';b.innerHTML.split(' · ').forEach(function(part){var d=document.createElement('div');d.innerHTML=part;var u=d.querySelector('use'),hr=u?u.getAttribute('href')||'':'',tx=d.textContent.replace(/\s+/g,' ').trim(),m;
+   if(/gold/.test(hr))o+=tile(objH('gold'),'+'+tx,'Vàng','lần đầu');
+   else if(/silver/.test(hr))o+=tile(objH('silver'),'+'+tx,'Bạc','lần đầu');
+   else if(/merit/.test(hr))o+=tile(objH('merit'),'+'+tx,'Quân công','lần đầu');
+   else if(m=tx.match(/^Binh Thư (.+?) (\d+)$/))o+=tile(objH('book'),'+'+m[2],'Binh Thư '+m[1].charAt(0)+m[1].slice(1).toLowerCase(),'lần đầu');
+   else if(m=tx.match(/^Binh Phù (\d+)$/))o+=tile(objH('phu'),'+'+m[1],'Binh Phù','lần đầu');
+   else if(m=tx.match(/^Quân lệnh (\d+)$/))o+=tile(objH('order'),'+'+m[1],'Quân lệnh','lần đầu');
+   else if(/^Rương/.test(tx))o+=tile(objH('chest'),'+1','Rương','lần đầu');
+   else if(m=tx.match(/^(.+?) (\d+)$/))o+=tile(objH('chest2'),'+'+m[2],m[1],'lần đầu');
+   else if(tx)o+=tile('','',tx,'lần đầu')});return o}
  function more(k,lab,cls){return'<button class="rs9m'+(cls?' '+cls:'')+'" data-a="rs9" data-v="'+k+'">'+lab+'<i>›</i></button>'}
  var _rs=resultSheet;resultSheet=function(R){var h=_rs.apply(this,arguments);
   try{var box=document.createElement('div');box.innerHTML=h;var rs=box.querySelector('.rs2');if(!rs)return h;RS9={};
@@ -13844,6 +13860,7 @@ var RS9={};
    if(lose){other.forEach(function(n){x+='<div class="rs9note">'+n.innerHTML+'</div>'});other=[];}
    /* rewards */
    var tl='';if(rw)[].forEach.call(rw.querySelectorAll('.rs-t'),function(t){var lb=(t.querySelector('span')||{}).textContent||'',b=t.querySelector('b'),em=t.querySelector('em');if(!b)return;
+     if(lb.trim()==='Lần đầu'){tl+=firstTiles(b);return}
      var key=ICO[lb.trim()],u=b.querySelector('use'),val=b.textContent.trim();if(u&&/gold/.test(u.getAttribute('href')||''))key='gold';
      tl+=tile(key?objH(key):'',/^[+−-]/.test(val)||lb.trim()==='Lần đầu'?(lb.trim()==='Lần đầu'?'+'+val:val):'+'+val,lb.trim()==='Lần đầu'?'Vàng':lb.trim(),em?em.textContent.replace('lần đầu','').trim():(lb.trim()==='Lần đầu'?'lần đầu':''))});
    items.forEach(function(n,i){var gi=n.querySelector('.gi'),nm=n.querySelector('.sp b');RS9['it'+i]='<h4>Chiến lợi phẩm</h4><div class="rs9item">'+n.innerHTML+'</div>';tl+=tile(gi?gi.outerHTML:'','',nm?nm.textContent.split(' ').slice(-2).join(' '):'Trang bị','mới','it'+i)});
@@ -13872,7 +13889,13 @@ var RS9={};
  function open(k){var c=RS9[k];if(!c)return;close();P=document.createElement('div');P.id='rs9p';P.innerHTML='<div class="rs9bg" data-a="rs9x"></div><div class="rs9in" role="dialog" aria-modal="true"><button class="rs9c" data-a="rs9x" aria-label="Đóng">✕</button>'+c+'</div>';document.body.appendChild(P);requestAnimationFrame(function(){if(P)P.classList.add('in')})}
  var _A=A_;A_=function(a,v,w,el){if(a==='rs9'){open(v);return}if(a==='rs9x'){close();return}
   if(P&&el&&el.closest&&el.closest('#rs9p'))close();return _A.apply(this,arguments)};
- var _cs=closeSheet;closeSheet=function(){close();return _cs.apply(this,arguments)};
+ var _cs=closeSheet;closeSheet=function(){close();try{document.getElementById('modal').classList.remove('rs9fl')}catch(e){}return _cs.apply(this,arguments)};
+ /* V241 (user 12:20 "make it a floating window and shrink to fit"): while the sheet shows the result (.rs9), #modal gets .rs9fl — the
+    sheet becomes a centred card sized to its content (max 88vh, scrolls inside) over a dim + light blur of the screen behind (one static
+    layer, V225 rule). Watched with a MutationObserver because refresh() can redraw the sheet without openSheet. */
+ function flt(){try{var m=document.getElementById('modal'),sh=document.getElementById('sheet');if(m&&sh)m.classList.toggle('rs9fl',!m.hidden&&!!sh.querySelector(':scope>.rs9'))}catch(e){}}
+ var _os=openSheet;openSheet=function(){var r=_os.apply(this,arguments);flt();return r};
+ try{new MutationObserver(flt).observe(document.getElementById('sheet'),{childList:true});new MutationObserver(flt).observe(document.getElementById('modal'),{attributes:true,attributeFilter:['hidden']})}catch(e){}
  document.addEventListener('keydown',function(e){if(P&&e.key==='Escape')close()});
  var st=document.createElement('style');st.id='rs9css';st.textContent=
   '.rs9{display:flex;flex-direction:column;gap:14px;padding-bottom:6px}'+
@@ -13883,6 +13906,7 @@ var RS9={};
   '.rs9rw{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}'+
   '.rs9t{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px 8px;border-radius:14px;background:linear-gradient(180deg,rgba(60,44,28,.55),rgba(24,17,12,.6));border:1px solid rgba(226,178,90,.28);color:inherit;font:inherit}'+
   'button.rs9t{cursor:pointer}.rs9t .rs9i{width:36px;height:36px;display:block}.rs9t .rs9i .objx{width:100%;height:100%}.rs9t .rs9i .gi{width:36px!important;height:36px!important;transform:none}'+
+  '.rs9t small.w2{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-align:center;line-height:1.2}'+
   '.rs9t b{font:700 17px/1.1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}.rs9t small{font-size:11.5px;color:var(--ds-mu,#b9a98a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}'+
   '.rs9t em{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font:700 10px var(--ds-fb,sans-serif);font-style:normal;padding:1px 7px;border-radius:8px;background:#2f7d4f;color:#e9fff0;white-space:nowrap}'+
   '.rs9gs{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(226,178,90,.25);color:inherit;font:inherit;cursor:pointer;text-align:left}'+
@@ -13902,7 +13926,16 @@ var RS9={};
   '#rs9p h4{margin:2px 0 10px;font:700 18px var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;padding-right:44px}#rs9p h4+*{margin-bottom:12px}#rs9p .rs2 h4{margin-top:14px}'+
   '#rs9p .rs9cr div{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(226,178,90,.15);color:#a99f8c;font-size:14px}#rs9p .rs9cr div:first-child{border-top:0}#rs9p .rs9cr b{font-size:18px;color:#6b604f}#rs9p .rs9cr .on{color:#f3e6c8}#rs9p .rs9cr .on b{color:#f2c45c}'+
   '#rs9p .rs9n{font-size:12.5px;color:var(--ds-mu,#b9a98a);margin:6px 0 0}#rs9p .rs9why{font-size:14px;line-height:1.55}#rs9p .rs9item{display:flex;gap:12px;align-items:center}#rs9p .rs9item>div:first-child{flex:none}#rs9p .rs9pb{margin-top:10px}#rs9p .rs9pb .btn{width:100%}'+
-  '@media (prefers-reduced-motion:reduce){#rs9p .rs9in,#rs9p .rs9bg{transition:none}}';
+  'html body #modal.rs9fl{display:flex!important;align-items:center!important;justify-content:center!important;padding:max(14px,env(safe-area-inset-top,0px)) 12px max(14px,env(safe-area-inset-bottom,0px));background:rgba(8,5,3,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}'+
+  'html body #modal.rs9fl>#sheet.sheet{position:relative;align-self:center!important;flex:none!important;inset:auto!important;width:min(94vw,440px)!important;max-width:440px!important;height:auto!important;min-height:0!important;max-height:88vh!important;margin:0!important;overflow:auto;overscroll-behavior:contain;'+
+   'padding:8px 14px 14px!important;border-radius:20px!important;border:1px solid rgba(226,178,90,.6)!important;border-image:none!important;background:linear-gradient(180deg,rgba(44,32,22,.98),rgba(22,16,11,.98))!important;'+
+   'box-shadow:0 22px 60px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,230,170,.14)!important;animation:rs9pop .24s cubic-bezier(.2,.9,.3,1.2) both}'+
+  'html body #modal.rs9fl>#sheet.sheet::before,html body #modal.rs9fl>#sheet.sheet::after{display:none!important}'+
+  'html body #modal.rs9fl>#sheet .snav{position:static!important;margin:0 0 2px!important;background:none!important;padding:0!important}'+
+  'html body #modal.rs9fl>#sheet .resbar,html body #modal.rs9fl>#sheet .sbar{position:static!important;margin:14px 0 0!important;padding:0!important;background:none!important;box-shadow:none!important}'+
+  'html body #modal.rs9fl>#sheet .rs9{gap:12px;padding-bottom:0}html body #modal.rs9fl>#sheet .rs9hd{padding-top:0;margin-top:-6px}html body #modal.rs9fl .rs9rw{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px 6px}html body #modal.rs9fl .rs9t{padding:10px 2px 8px}'+
+  '@keyframes rs9pop{from{transform:translateY(16px) scale(.96);opacity:0}to{transform:none;opacity:1}}'+
+  '@media (prefers-reduced-motion:reduce){#rs9p .rs9in,#rs9p .rs9bg{transition:none}html body #modal.rs9fl>#sheet.sheet{animation:none}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('rs234',e)}catch(x){}}})();
 /* ================= V238 (art agent, user 2026-11-04 11:22 "the battle background looks great, but it can interrupt the player's eye,
