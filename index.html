@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V247';
+var BUILD='V248';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14167,10 +14167,17 @@ function eq247Best(gid,si,worn){try{var g=S.gens[gid];if(!g)return null;worn=wor
   S.inv.forEach(function(it){if(it.s!==si||worn[it.id])return;var sc=eq247Score(it);if(sc>bs){bs=sc;b=it}});return b}catch(e){return null}}
 function eq247Any(gid,worn){for(var s=0;s<6;s++)if(eq247Best(gid,s,worn))return true;return false}
 function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S||!S.gens||!S.inv)return;var worn=eq247Free();
-  /* hero sheet slots */
-  document.querySelectorAll('#sheet button.slot[data-a="slot"]').forEach(function(b){var on=!!eq247Best(b.dataset.v,+b.dataset.w,worn),m=b.querySelector('.eq247');
-   if(on&&!m){m=document.createElement('i');m.className='eq247';m.setAttribute('aria-label','Có trang bị tốt hơn');m.textContent='▲';b.appendChild(m);b.classList.add('eq247on')}
-   else if(!on&&m){m.remove();b.classList.remove('eq247on')}});
+  /* hero sheet slots — V248 (art agent, user 13:38 "rethink the design for better equipment (red button)"): ONE marker per slot inside the
+     icon box: a red lacquer seal with a gold double chevron REPLACES the slot's own + (no more two badges stacked), plus a bottom tag
+     "Mặc" (empty slot) / "Tốt hơn" (upgrade) whose dot is the better item's quality colour, and a soft gold frame that breathes (opacity only). */
+  document.querySelectorAll('#sheet button.slot[data-a="slot"]').forEach(function(b){var gi=b.querySelector('.gi')||b,bi=eq247Best(b.dataset.v,+b.dataset.w,worn),m=gi.querySelector('.eq247'),old=b.querySelector(':scope>.eq247');if(old)old.remove();
+   if(bi){var key=bi.id+':'+(b.querySelector('.gi.e')?1:0);if(m&&m.dataset.k===key)return;if(m){m.remove();var t0=gi.querySelector('.eq247t');if(t0)t0.remove()}
+    var emp=!!b.querySelector('.gi.e')||!itemById((S.gens[b.dataset.v].eq||{})[+b.dataset.w]),qc=(GQ[bi.q]||GQ[0]).c;
+    m=document.createElement('i');m.className='eq247';m.dataset.k=key;m.setAttribute('aria-label','Có trang bị tốt hơn');
+    m.innerHTML='<svg viewBox="0 0 24 24" width="100%" height="100%" aria-hidden="true"><defs><linearGradient id="eq248g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2493c"/><stop offset="1" stop-color="#8f1c16"/></linearGradient></defs><rect x="1.5" y="3.2" width="21" height="21" rx="6" fill="#000" opacity=".45"/><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="url(#eq248g)" stroke="#f1cf6a" stroke-width="1.4"/><path d="M7 12.6l5-4.6 5 4.6M7 17l5-4.6 5 4.6" fill="none" stroke="#fbe7a6" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var t=document.createElement('i');t.className='eq247t';t.innerHTML='<b style="background:'+qc+'"></b>'+(emp?'Mặc':'Tốt hơn');
+    if(getComputedStyle(gi).position==='static')gi.style.position='relative';gi.appendChild(m);gi.appendChild(t);b.classList.add('eq247on')}
+   else if(m){m.remove();var t1=gi.querySelector('.eq247t');if(t1)t1.remove();b.classList.remove('eq247on')}});
   /* slot picker: equip buttons */
   var eqb=document.querySelectorAll('#sheet [data-a="equip"]');if(eqb.length){var gid=eqb[0].dataset.w,it0=itemById(+eqb[0].dataset.v);
    if(gid&&it0&&S.gens[gid]){var si=it0.s,cur=itemById((S.gens[gid].eq||{})[si]),cs=cur?eq247Score(cur):-1,best=eq247Best(gid,si,worn);
@@ -14182,12 +14189,19 @@ function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S|
  }catch(e){}}
 (function(){try{
   var st=document.createElement('style');st.id='eq247css';st.textContent=
-   'button.slot.eq247on{position:relative;box-shadow:0 0 0 2px #d8443a inset,0 0 10px rgba(216,68,58,.45)}'+
-   'button.slot .eq247{position:absolute;top:4px;right:4px;z-index:3;width:24px;height:24px;border-radius:50%;background:#c8342b;color:#fff;font:700 12px/24px system-ui,sans-serif;font-style:normal;text-align:center;box-shadow:0 0 0 2px #2a0b08,0 2px 6px rgba(0,0,0,.5);animation:eq247p 1.6s ease-in-out infinite;pointer-events:none}'+
+   'button.slot.eq247on .dsplus{display:none!important}'+
+   'button.slot.eq247on .gi{overflow:visible}'+
+   'button.slot.eq247on .gi::after{content:"";position:absolute;inset:-2px;border-radius:inherit;border:1.5px solid #f1cf6a;box-shadow:0 0 12px rgba(241,207,106,.45),inset 0 0 10px rgba(241,207,106,.18);pointer-events:none;animation:eq248f 2.4s ease-in-out infinite}'+
+   'button.slot .eq247{position:absolute;top:5px;right:5px;z-index:3;width:24px;height:24px;display:block;font-style:normal;pointer-events:none;animation:eq248b 2.4s ease-in-out infinite}'+
+   'button.slot .eq247 svg{display:block;overflow:visible}'+
+   'button.slot .eq247t{position:absolute;left:50%;bottom:5px;z-index:3;transform:translateX(-50%);display:flex;align-items:center;gap:4px;white-space:nowrap;padding:2px 8px 2px 6px;border-radius:9px;background:linear-gradient(#a8261e,#7a1712);border:1px solid rgba(241,207,106,.75);color:#fbe7a6;font:700 10.5px/14px var(--ds-fb,system-ui,sans-serif);font-style:normal;letter-spacing:.02em;box-shadow:0 2px 6px rgba(0,0,0,.5);pointer-events:none}'+
+   'button.slot .eq247t b{width:7px;height:7px;border-radius:50%;box-shadow:0 0 0 1.5px #fbe7a6,0 0 0 2.5px rgba(0,0,0,.45)}'+
+   '@keyframes eq248f{0%,100%{opacity:.35}50%{opacity:1}}'+
+   '@keyframes eq248b{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}'+
+   '@media (prefers-reduced-motion:reduce){button.slot.eq247on .gi::after,button.slot .eq247{animation:none}}'+
    '.eq247b{font-weight:700}'+
    'button[data-a="gen"]{position:relative}button[data-a="gen"] .eq247d{position:absolute;top:6px;left:6px;z-index:4;width:12px;height:12px;border-radius:50%;background:#e0463b;box-shadow:0 0 0 2px #2a0b08;pointer-events:none}'+
-   '@keyframes eq247p{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}'+
-   '@media (prefers-reduced-motion:reduce){button.slot .eq247{animation:none}}';
+   '';
   document.head.appendChild(st);
   var t=0;function sched(){if(t)return;t=setTimeout(function(){t=0;eq247Run()},120)}
   var mo=new MutationObserver(sched);
