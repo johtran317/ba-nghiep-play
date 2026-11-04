@@ -10261,8 +10261,8 @@ var F5NE={a:{inf:'Phoenix Wing Guard',cav:'Phoenix Riders',arc:'Phoenix Feather 
 (function(){try{var F={zhugeliang_a:[.4,.1,.22,.17],zhugeliang_b:[.42,.2,.2,.15],lubu_a:[.4,.13,.24,.2],lubu_b:[.38,.08,.26,.2],guanyu_a:[.38,.12,.26,.2],
  zhaoyun_a:[.4,.08,.26,.2],caocao_a:[.33,.13,.26,.21],zhangfei_a:[.38,.11,.28,.23],diaochan_a:[.41,.13,.24,.18]};for(var k in F)SKFACE[k]=F[k]}catch(e){}})();
 /* Skin statues: ONE atlas art/skins/statues.webp (3 × 540×960 on black, drawn additively by sgSkin). sigImg('statue_<skin>') cuts its cell. */
-var STA185={guanyu_a:0,zhugeliang_a:1,zhugeliang_b:2},STAI185=null,STAC185={};
-(function(){try{var im=new Image();im.onload=function(){STAI185=im};im.onerror=function(){};im.src='art/skins/statues.webp'}catch(e){}})();
+var STA185={guanyu_a:0,zhugeliang_a:1,zhugeliang_b:2,lubu_a:3,lubu_b:4,caocao_a:5,diaochan_a:6}/* V208: + Lữ Bố a/b, Tào Tháo, Điêu Thuyền statues (art agent) */,STAI185=null,STAC185={};
+(function(){try{var im=new Image();im.onload=function(){STAI185=im};im.onerror=function(){};im.src='art/skins/statues.webp?v=2'}catch(e){}})();
 (function(){if(typeof sigImg!=='function')return;var _sig185=sigImg;sigImg=function(g,n){try{if(n==='k_statue'&&g==='zhugeliang')return null;if(n&&n.indexOf('statue_')===0){var k=n.slice(7),i=STA185[k];
  if(i!==undefined){if(STAC185[k])return STAC185[k];if(!STAI185||!STAI185.naturalWidth)return null;var cv=document.createElement('canvas');cv.width=540;cv.height=960;
  cv.getContext('2d').drawImage(STAI185,i*540,0,540,960,0,0,540,960);cv.naturalWidth=540;cv.naturalHeight=960;cv.complete=true;STAC185[k]=cv;return cv}}}catch(e){}return _sig185(g,n)}})();
@@ -10844,7 +10844,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V207';
+var BUILD='V208';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12132,6 +12132,7 @@ function s2cell(A,i,tint,mask){var key=A+i+(tint||'')+(mask||''),c0=S2T[key];if(
  if(mask){x.globalCompositeOperation='destination-in';var gh=mask==='ghost',g1=x.createLinearGradient(0,0,w,0);g1.addColorStop(0,'rgba(0,0,0,0)');g1.addColorStop(gh?.3:.2,'rgba(0,0,0,1)');g1.addColorStop(gh?.7:.8,'rgba(0,0,0,1)');g1.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g1;x.fillRect(0,0,w,h);
   var g2=x.createLinearGradient(0,0,0,h);g2.addColorStop(0,'rgba(0,0,0,0)');g2.addColorStop(gh?.12:.1,'rgba(0,0,0,1)');g2.addColorStop(gh?.6:.85,'rgba(0,0,0,1)');g2.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g2;x.fillRect(0,0,w,h)}
  S2T[key]=cv;return cv}
+function stat(c,sk,x,yb,h,a){/* the skin's glowing statue (art/skins/statues.webp via sigImg), bottom at yb */if(!(a>0))return false;var g=(SKL[sk]||{}).g,im=g&&sigImg(g,'statue_'+sk);if(!im)return false;var w=h*im.naturalWidth/im.naturalHeight;c.save();c.globalCompositeOperation='lighter';c.globalAlpha=Math.min(1,a);c.drawImage(im,x-w/2,yb-h,w,h);c.restore();return true}
 function pc(c,A,i,x,y,w,a,rot,sy,tint,mask,op){if(!(a>0))return;var cv=s2cell(A,i,tint,mask);if(!cv)return false;var h=w*cv.height/cv.width;c.save();c.globalCompositeOperation=op||'lighter';c.globalAlpha=Math.min(1,a);c.translate(x,y);if(sy&&sy!==1)c.scale(1,sy);if(rot)c.rotate(rot);c.drawImage(cv,-w/2,-h/2,w,h);c.restore();return true}
 /* crescent slash (code) */
 function crescent(c,x,y,r,rot,rgb,a,w){if(!(a>0))return;c.save();c.globalCompositeOperation='lighter';c.translate(x,y);c.rotate(rot);c.globalAlpha=Math.min(1,a);
@@ -12213,7 +12214,7 @@ function u2(a){return a.u.tact||{}}
 
 /* ---------- 3. Lữ Bố · Thiên Hạ Đệ Nhất Kích (V205 rebuild): fire aura, Lữ Bố himself leaps onto the target, a crimson crescent smashes down,
    a fire cross bursts out along the cross to the 4 neighbours, shockwaves + armour sparks on everyone hit ---------- */
-S2FX.lubu_a={T:3300,play:function(a,ev,T){
+S2FX.lubu_a={ownStatue:1,T:3300,play:function(a,ev,T){
  var hs=hitsOf(ev),U=uniq(hs),L=lander(a,ev),ctr=U[0];if(!ctr)return null;
  U.forEach(function(t){var d=BT.uds[t.id];if(!d)return;t._n=U.filter(function(x){var e=BT.uds[x.id];return e&&Math.abs(e.u.r-d.u.r)+Math.abs(e.u.l-d.u.l)===1}).length});
  U.forEach(function(t){if((t._n||0)>(ctr._n||0))ctr=t});
@@ -12226,7 +12227,7 @@ S2FX.lubu_a={T:3300,play:function(a,ev,T){
   var ax=A0.x+a.ox,ay=A0.y+a.oy;
   /* war aura: two fire pillars and a flame at his feet, the trail follows the leap */
   var aq=env(p,0,.48,.2);pc(c,'M',5,A0.x-ca*.32,A0.y-ca*.45,ca*.75,aq*.9);pc(c,'M',5,A0.x+ca*.32,A0.y-ca*.45,ca*.75,aq*.9);pc(c,'M',7,ax,ay-ca*.1,ca*.9,env(p,0,.62,.15)*.85);
-  var fq=env(p,.12,.56,.15);if(fq>0){var fh=Math.min(BT.H*.3,BT.rh*1.9);pc(c,'P',2,ax,ay-fh*.42,fh*480/720,fq*.9,dx<0?-.12:.12,1,null,'ghost')}
+  var fq=env(p,.12,.56,.15);if(fq>0){var fh=Math.min(BT.H*.3,BT.rh*1.9);(stat(c,'lubu_a',ax,ay+fh*.08,fh*1.1,fq)||pc(c,'P',2,ax,ay-fh*.42,fh*480/720,fq*.9,0,1,null,'ghost'))}
   if(lq>0&&lq<1)for(var k=1;k<7;k++){var q2=Math.max(0,lq-k*.04),e3=out(q2);pc(c,'E',1,A0.x+dx*e3,A0.y+dy*e3-Math.sin(Math.PI*q2)*BT.rh*1.7,ca*(.7-k*.07),.75*(1-k/7),0)}
   /* the crimson crescent comes down on the target */
   var sq=seg(p,.38,.5),sa=1-seg(p,.5,.62);if(sq>0&&p<.62){var yy=C0.y-BT.rh*1.6*(1-out(sq));pc(c,'V',2,C0.x,yy-cwc*.2,cwc*2.4,sa,-1.2,1,'255,70,40');pc(c,'V',0,C0.x,yy,cwc*1.8,sa*.9,.2,1,'255,110,50')}
@@ -12243,7 +12244,7 @@ S2FX.lubu_a={T:3300,play:function(a,ev,T){
 
 /* ---------- 4. Lữ Bố · Ma Thần Đoạt Hồn (V205 rebuild): the demon form of Lữ Bố (his skin painting, violet ghost) towers behind him,
    a violet swirl and spectral slashes sweep the whole army, souls (painted ghosts) are torn out and fly back into him ---------- */
-S2FX.lubu_b={T:3600,play:function(a,ev,T){
+S2FX.lubu_b={ownStatue:1,T:3600,play:function(a,ev,T){
  var side=a.u.side,foe=side==='A'?'D':'A',F2=sgField(foe),hs=hitsOf(ev),U=uniq(hs),L=lander(a,ev),A0=P(a),up=side==='A'?-1:1,
   heal=(ev.tg||[]).filter(function(t){return t.res==='heal'&&t.id===a.u.id});
  var tgs=U.map(function(t){var o=P(BT.uds[t.id]);o.t=t;o.at=.34+.2*C((o.x-(F2.cx-F2.w/2))/F2.w);return o}).filter(function(o){return o.d});
@@ -12252,7 +12253,7 @@ S2FX.lubu_b={T:3600,play:function(a,ev,T){
   /* the demon god: Lữ Bố's own demon painting as a towering violet ghost behind him */
   var dq=out(seg(p,0,.28))*(1-seg(p,.8,.95)),gh=Math.min(BT.H*.4,BT.rh*2.5),gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.4*(up<0?1:-1);
   pc(c,'M',18,A0.x,A0.y,ca*1.8*dq,.45*dq,t/700,.42);
-  pc(c,'P',3,A0.x,gy,gh*480/720*(.92+.08*Math.sin(t/300)),dq,0,1,null,'ghost');
+  stat(c,'lubu_b',A0.x,gy+gh*.5,gh*1.15*(.96+.04*Math.sin(t/300)),dq)||pc(c,'P',3,A0.x,gy,gh*480/720,dq,0,1,null,'ghost');
   pc(c,'M',16,A0.x,A0.y-ca*.3,ca*.8,dq*.6);
   /* violet swirl + spectral slashes sweep left → right through the whole army */
   var sq=seg(p,.3,.58);if(sq>0&&sq<1){var hx=F2.cx-F2.w*.6+F2.w*1.2*sq,ra=Math.sin(Math.PI*sq);pc(c,'V',1,hx,F2.cy,(F2.y1-F2.y0)*1.7,ra,-.3,1,'200,90,255');pc(c,'V',6,hx-F2.w*.15,F2.cy,F2.w*.9,ra*.7,0,.5,'170,60,255')}
@@ -12341,9 +12342,6 @@ S2FX.caocao_a={T:3600,play:function(a,ev,T){
  var sy=Math.max(BT.H*.08,F2.y0-BT.rh*.7),sw=Math.min(BT.W*.86,F2.w*1.2);
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
   dimAll(c,p,'18,6,30',.45);
-  /* V206: Cao Cao's statue (his skin painting as a gold-lit ghost, same size as the other skin statues) rises over his troop */
-  var stq=out(seg(p,0,.18))*(1-seg(p,.4,.55));if(stq>0){var sH=Math.min(BT.rh*1.7,BT.H*.21),sy2=A0.y+(side==='A'?-sH*.5:sH*.5)+(1-stq)*sH*.15*(side==='A'?1:-1);
-   glow(c,A0.x,sy2,sH*.5,'255,210,120',.25*stq);pc(c,'P',6,A0.x,sy2,sH*480/720,stq*.9,0,1,null,'ghost')}
   /* golden imperial edict unrolls across the sky (blank silk) */
   var uq=out(seg(p,.02,.24))*fo;if(uq>0&&!S2P(c,'caocao_a',0,BT.W/2,sy,sw*uq,uq,0,.35)){var w=sw*uq,h=BT.rh*.55,x0=BT.W/2-w/2;
    c.save();c.globalCompositeOperation='source-over';var sg=c.createLinearGradient(0,sy-h/2,0,sy+h/2);sg.addColorStop(0,'rgba(232,190,90,'+(.95*uq)+')');sg.addColorStop(.5,'rgba(255,234,160,'+(.95*uq)+')');sg.addColorStop(1,'rgba(200,150,60,'+(.95*uq)+')');c.fillStyle=sg;c.fillRect(x0,sy-h/2,w,h);
@@ -12401,7 +12399,7 @@ S2FX.zhangfei_a={T:3500,pre:[['zhangfei','k_tiger'],['zhangfei','roar'],['zhangf
 
 /* ---------- 9. Điêu Thuyền · Bế Nguyệt Hoa Vũ (V205 rebuild): her moonlit vision (the skin painting) appears over our army, a silk-wave ribbon
    sweeps through falling petals, a light column falls on each ally with gold healing rings, star rings + blossoms to finish ---------- */
-S2FX.diaochan_a={T:3600,play:function(a,ev,T){
+S2FX.diaochan_a={ownStatue:1,T:3600,play:function(a,ev,T){
  var side=a.u.side,F=sgField(side),FF=sgField(side==='A'?'D':'A'),A0=P(a),L=lander(a,ev),heals=(ev.tg||[]).filter(function(t){return t.res==='heal'}),cl=(ev.tg||[]).filter(function(t){return t.res==='cln'}),al=team(side),up=side==='A'?-1:1;
  var vh=Math.min(BT.H*.36,BT.rh*2.3),vx=F.cx,vy=(up<0?(F.y0+FF.y1)/2:(F.y1+FF.y0)/2);
  var hl=al.map(function(o,j){o.at=.48+j*.045;o.h=heals.filter(function(t){return t.id===o.u.id});return o});
@@ -12410,7 +12408,7 @@ S2FX.diaochan_a={T:3600,play:function(a,ev,T){
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
   dimAll(c,p,'26,8,26',.5);
   /* the moonlit vision of Điêu Thuyền rises over the gap between the armies */
-  var vq=out(seg(p,0,.3))*(1-seg(p,.62,.85));pc(c,'P',8,vx,vy-(1-vq)*BT.rh*.3,vh*480/720,vq*.85,0,1,null,'ghost');glow(c,vx,vy-vh*.25,vh*.5,'255,200,235',.18*vq);
+  var vq=out(seg(p,0,.3))*(1-seg(p,.62,.85));(stat(c,'diaochan_a',vx,vy+vh*.45-(1-vq)*BT.rh*.3,vh*1.05,vq)||pc(c,'P',8,vx,vy-(1-vq)*BT.rh*.3,vh*480/720,vq*.85,0,1,null,'ghost'));glow(c,vx,vy-vh*.25,vh*.5,'255,200,235',.18*vq);
   /* petals rain over our army */
   var pq=env(p,.1,.98,.12);if(pq>0)pet.forEach(function(q){var x=F.cx-F.w*.62+q.x*F.w*1.24+Math.sin(t/420+q.r)*14,yy=F.y0-BT.rh*.9+((q.o+t/2800*q.s)%1)*((F.y1-F.y0)+BT.rh*1.5);c.save();c.translate(x,yy);c.rotate(q.r+t/520);c.globalAlpha=.9*pq;c.fillStyle='rgb('+PC[q.c]+')';c.beginPath();c.moveTo(0,-5*q.s);c.quadraticCurveTo(4.5*q.s,-1*q.s,0,5*q.s);c.quadraticCurveTo(-4.5*q.s,-1*q.s,0,-5*q.s);c.fill();c.restore()});
   /* a silk-wave ribbon sweeps through our army */
@@ -12433,13 +12431,13 @@ playAct=async function(ev){var a=BT.uds[ev.a],sk=!BT.skip&&a&&s2Match(a,ev);if(!
  var F=S2FX[sk],T=F.T,K=SKL[sk]||{};
  try{if(ev.burn)floatTxt(a,'-'+fmt(ev.burn),'#ff9a4d');if(ev.chaos)floatTxt(a,'Hỗn loạn','#c58cff');
   BT.s2c=1;await cutin(a,ev.name);
-  try{sgSkin(a,sk,T*.42*(BT.pace||1))}catch(e){}
+  if(!F.ownStatue)try{sgSkin(a,sk,T*.42*(BT.pace||1))}catch(e){}   /* scenes that move/scale the statue themselves skip the standard one */
   a.sw=1;setTimeout(function(){a.sw=0},250);var w=F.play(a,ev,T);if(!w){applySnap(ev.s);await wait(200);return}
   await w;var rf=selfHits(ev);if(rf.length)impact(a,rf,false)}catch(e){try{console.error(e)}catch(x){}}
  finally{a.sw=0;BT.s2c=0;a.ox=0;a.oy=0}
  applySnap(ev.s);await wait(220)};
 /* skins without a painted statue: stop sgSkin asking the server for files that do not exist (404) */
-try{['lubu','caocao','diaochan'].forEach(function(g){if(SIGI[g+'_k_statue']===undefined)SIGI[g+'_k_statue']=null});['lubu_a','lubu_b','caocao_a','diaochan_a'].forEach(function(k){var g=k.split('_')[0];if(SIGI[g+'_statue_'+k]===undefined)SIGI[g+'_statue_'+k]=null})}catch(e){}
+try{['lubu','caocao','diaochan'].forEach(function(g){if(SIGI[g+'_k_statue']===undefined)SIGI[g+'_k_statue']=null});0}catch(e){}
 /* the hero's own commander pop-up (spr.js, base-hero art) is skipped for these casts: the skin statue / scene replaces it */
 try{var _hpS2=hfxPlay;hfxPlay=function(g,k){if(BT.s2c&&k==='cmd')return;return _hpS2.apply(this,arguments)}}catch(e){}
 /* preload the painted pieces each skinned unit will need */
