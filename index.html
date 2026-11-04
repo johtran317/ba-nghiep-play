@@ -10852,7 +10852,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V210';
+var BUILD='V211';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12084,6 +12084,8 @@ if(SKIN2ON)skin2Apply();
    into ONE atlas art/skins/skfx.webp (9 rows × 8 cells) and S2P() draws them in place of the code shapes.
    Safety: everything wrapped; a draw error drops only that frame (BT loop rule), a timeline error falls back to the
    normal cast; skip / 4× speed honoured (BT.pace, wait()). */
+/* V211 (user 23:20): every skin statue is drawn at the same height as the standard sgSkin statue */
+function S2SH(){return Math.min(BT.rh*1.7,BT.H*.21)}
 var S2FX={},S2AT=null,S2ATV=0;   /* set S2ATV to the atlas version once art/skins/skfx.webp is in the build (no 404 until then) */
 (function(){if(!S2ATV)return;try{var im=new Image();im.onload=function(){S2AT=im};im.onerror=function(){};im.src='art/skins/skfx.webp?v='+S2ATV}catch(e){}})();
 (function(){
@@ -12235,7 +12237,7 @@ S2FX.lubu_a={ownStatue:1,T:3300,play:function(a,ev,T){
   var ax=A0.x+a.ox,ay=A0.y+a.oy;
   /* war aura: two fire pillars and a flame at his feet, the trail follows the leap */
   var aq=env(p,0,.48,.2);pc(c,'M',5,A0.x-ca*.32,A0.y-ca*.45,ca*.75,aq*.9);pc(c,'M',5,A0.x+ca*.32,A0.y-ca*.45,ca*.75,aq*.9);pc(c,'M',7,ax,ay-ca*.1,ca*.9,env(p,0,.62,.15)*.85);
-  var fq=env(p,.12,.56,.15);if(fq>0){var fh=Math.min(BT.H*.3,BT.rh*1.9);(stat(c,'lubu_a',ax,ay+fh*.08,fh*1.1,fq)||pc(c,'P',2,ax,ay-fh*.42,fh*480/720,fq*.9,0,1,null,'ghost'))}
+  var fq=env(p,.12,.56,.15);if(fq>0){var fh=Math.min(BT.H*.3,BT.rh*1.9);(stat(c,'lubu_a',ax,ay+fh*.08,S2SH(),fq)||pc(c,'P',2,ax,ay-fh*.42,fh*480/720,fq*.9,0,1,null,'ghost'))}
   if(lq>0&&lq<1)for(var k=1;k<7;k++){var q2=Math.max(0,lq-k*.04),e3=out(q2);pc(c,'E',1,A0.x+dx*e3,A0.y+dy*e3-Math.sin(Math.PI*q2)*BT.rh*1.7,ca*(.7-k*.07),.75*(1-k/7),0)}
   /* the crimson crescent comes down on the target */
   var sq=seg(p,.38,.5),sa=1-seg(p,.5,.62);if(sq>0&&p<.62){var yy=C0.y-BT.rh*1.6*(1-out(sq));pc(c,'V',2,C0.x,yy-cwc*.2,cwc*2.4,sa,-1.2,1,'255,70,40');pc(c,'V',0,C0.x,yy,cwc*1.8,sa*.9,.2,1,'255,110,50')}
@@ -12259,7 +12261,7 @@ S2FX.lubu_b={ownStatue:1,T:3600,play:function(a,ev,T){
  fx(T,function(c,p,t){var fo=1-seg(p,.88,1),ca=cw(A0);
   dimAll(c,p,'22,0,36',.6);
   /* the demon god: Lữ Bố's own demon painting as a towering violet ghost behind him */
-  var dq=out(seg(p,0,.28))*(1-seg(p,.8,.95)),gh=Math.min(BT.H*.4,BT.rh*2.5),gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.4*(up<0?1:-1);
+  var dq=out(seg(p,0,.28))*(1-seg(p,.8,.95)),gh=S2SH()/1.15,gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.4*(up<0?1:-1);
   pc(c,'M',18,A0.x,A0.y,ca*1.8*dq,.45*dq,t/700,.42);
   stat(c,'lubu_b',A0.x,gy+gh*.5,gh*1.15*(.96+.04*Math.sin(t/300)),dq)||pc(c,'P',3,A0.x,gy,gh*480/720,dq,0,1,null,'ghost');
   pc(c,'M',16,A0.x,A0.y-ca*.3,ca*.8,dq*.6);
@@ -12351,7 +12353,7 @@ S2FX.caocao_a={ownStatue:1,T:3600,play:function(a,ev,T){
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
   dimAll(c,p,'18,6,30',.45);
   /* V209: the Emperor-maker towers behind his troop — his gold statue rises out of a radiant wheel and gold flame, and flares each time a seal lands */
-  var up=side==='A'?-1:1,ca=cw(A0),dq=out(seg(p,0,.26))*(1-seg(p,.84,.97)),gh=Math.min(BT.H*.4,BT.rh*2.5),gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.5*(up<0?1:-1),
+  var up=side==='A'?-1:1,ca=cw(A0),dq=out(seg(p,0,.26))*(1-seg(p,.84,.97)),gh=S2SH()/1.1,gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.5*(up<0?1:-1),
    fl=tg.reduce(function(m,o){var z=seg(p,o.at,o.at+.12);return Math.max(m,z>0&&z<1?1-z:0)},0);
   if(dq>0){var sx=Math.max(gh*.33,Math.min(BT.W-gh*.33,A0.x)),cy=gy-gh*.05;
    c.save();c.globalCompositeOperation='source-over';var rg=c.createRadialGradient(sx,cy,0,sx,cy,gh*.6);rg.addColorStop(0,'rgba(18,8,2,'+(.62*dq)+')');rg.addColorStop(.7,'rgba(18,8,2,'+(.35*dq)+')');rg.addColorStop(1,'rgba(18,8,2,0)');c.fillStyle=rg;c.fillRect(sx-gh*.6,cy-gh*.6,gh*1.2,gh*1.2);c.restore();
@@ -12424,7 +12426,7 @@ S2FX.diaochan_a={ownStatue:1,T:3600,play:function(a,ev,T){
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
   dimAll(c,p,'26,8,26',.5);
   /* the moonlit vision of Điêu Thuyền rises over the gap between the armies */
-  var vq=out(seg(p,0,.3))*(1-seg(p,.62,.85));(stat(c,'diaochan_a',vx,vy+vh*.45-(1-vq)*BT.rh*.3,vh*1.05,vq)||pc(c,'P',8,vx,vy-(1-vq)*BT.rh*.3,vh*480/720,vq*.85,0,1,null,'ghost'));glow(c,vx,vy-vh*.25,vh*.5,'255,200,235',.18*vq);
+  var vq=out(seg(p,0,.3))*(1-seg(p,.62,.85));(stat(c,'diaochan_a',vx,vy+S2SH()*.43-(1-vq)*BT.rh*.3,S2SH(),vq)||pc(c,'P',8,vx,vy-(1-vq)*BT.rh*.3,vh*480/720,vq*.85,0,1,null,'ghost'));glow(c,vx,vy-vh*.25,vh*.5,'255,200,235',.18*vq);
   /* petals rain over our army */
   var pq=env(p,.1,.98,.12);if(pq>0)pet.forEach(function(q){var x=F.cx-F.w*.62+q.x*F.w*1.24+Math.sin(t/420+q.r)*14,yy=F.y0-BT.rh*.9+((q.o+t/2800*q.s)%1)*((F.y1-F.y0)+BT.rh*1.5);c.save();c.translate(x,yy);c.rotate(q.r+t/520);c.globalAlpha=.9*pq;c.fillStyle='rgb('+PC[q.c]+')';c.beginPath();c.moveTo(0,-5*q.s);c.quadraticCurveTo(4.5*q.s,-1*q.s,0,5*q.s);c.quadraticCurveTo(-4.5*q.s,-1*q.s,0,-5*q.s);c.fill();c.restore()});
   /* a silk-wave ribbon sweeps through our army */
