@@ -10262,10 +10262,18 @@ var F5NE={a:{inf:'Phoenix Wing Guard',cav:'Phoenix Riders',arc:'Phoenix Feather 
  zhaoyun_a:[.4,.08,.26,.2],caocao_a:[.33,.13,.26,.21],zhangfei_a:[.38,.11,.28,.23],diaochan_a:[.41,.13,.24,.18]};for(var k in F)SKFACE[k]=F[k]}catch(e){}})();
 /* Skin statues: ONE atlas art/skins/statues.webp (3 × 540×960 on black, drawn additively by sgSkin). sigImg('statue_<skin>') cuts its cell. */
 var STA185={guanyu_a:0,zhugeliang_a:1,zhugeliang_b:2,lubu_a:3,lubu_b:4,caocao_a:5,diaochan_a:6}/* V208: + Lữ Bố a/b, Tào Tháo, Điêu Thuyền statues (art agent) */,STAI185=null,STAC185={};
-(function(){try{var im=new Image();im.onload=function(){STAI185=im};im.onerror=function(){};im.src='art/skins/statues.webp?v=2'}catch(e){}})();
+(function(){try{var im=new Image();im.onload=function(){STAI185=im};im.onerror=function(){};im.src='art/skins/statues.webp?v=3'}catch(e){}})();
 (function(){if(typeof sigImg!=='function')return;var _sig185=sigImg;sigImg=function(g,n){try{if(n==='k_statue'&&g==='zhugeliang')return null;if(n&&n.indexOf('statue_')===0){var k=n.slice(7),i=STA185[k];
  if(i!==undefined){if(STAC185[k])return STAC185[k];if(!STAI185||!STAI185.naturalWidth)return null;var cv=document.createElement('canvas');cv.width=540;cv.height=960;
- cv.getContext('2d').drawImage(STAI185,i*540,0,540,960,0,0,540,960);cv.naturalWidth=540;cv.naturalHeight=960;cv.complete=true;STAC185[k]=cv;return cv}}}catch(e){}return _sig185(g,n)}})();
+ cv.getContext('2d').drawImage(STAI185,i*540,0,540,960,0,0,540,960);cv.naturalWidth=540;cv.naturalHeight=960;cv.complete=true;STAC185[k]=half209(cv,k)||cv;return STAC185[k]}}
+ if(n==='k_statue'&&HALF209[g+'_k']){var kk=g+'_k';if(STAC185[kk])return STAC185[kk];var m=_sig185(g,n);if(!m)return null;var h=half209(m,kk);if(h){STAC185[kk]=h;return h}return m}}catch(e){}return _sig185(g,n)}})();
+/* V209 (user 22:47 "if Lữ Bố and Cao Cao are half body then all statues must be half body"): full-body statues are cut at the waist and
+   sit at the bottom of the same frame, so every statue is a bust of the same size. Value = share of the image height kept from the top. */
+var HALF209={guanyu_a:.6,zhugeliang_a:.6,zhugeliang_b:.6,zhaoyun_k:.58,zhangfei_k:.56};
+function half209(im,k){try{var f=HALF209[k];if(!f)return null;var W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,ch=Math.round(H*f),cv=document.createElement('canvas');cv.width=W;cv.height=H;var x=cv.getContext('2d');
+ x.drawImage(im,0,0,W,ch,0,H-ch,W,ch);x.globalCompositeOperation='destination-out';var g=x.createLinearGradient(0,H-ch*.26,0,H);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,1)');x.fillStyle=g;x.fillRect(0,H-ch*.26,W,ch*.26);
+ cv.naturalWidth=W;cv.naturalHeight=H;cv.complete=true;return cv}catch(e){return null}}
+
 /* Fix (found in V185 testing): campaign star chests store hero fragments as rw.fr={gid:n}; tower300 treated rw.fr as a realm-frame number
    (rewardTxt threw on Chinh chiến, giveRw pushed the object into S.twFr). tower300 now checks typeof number; clean old saves here. */
 (function(){try{if(window.S&&S.twFr&&S.twFr.filter)S.twFr=S.twFr.filter(function(x){return typeof x==='number'})}catch(e){}})();
@@ -10844,7 +10852,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V208';
+var BUILD='V209';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12336,12 +12344,20 @@ S2FX.zhaoyun_a={T:3400,pre:[['zhaoyun','comet'],['zhaoyun','spear'],['zhaoyun','
  return timeline(T,st)}};
 
 /* ---------- 7. Tào Tháo · Hiệp Thiên Tử Lệnh Chư Hầu: the edict unrolls, seals slam the cross, poison mist, a chain locks the strongest ---------- */
-S2FX.caocao_a={T:3600,play:function(a,ev,T){
+S2FX.caocao_a={ownStatue:1,T:3600,play:function(a,ev,T){
  var side=a.u.side,foe=side==='A'?'D':'A',F2=sgField(foe),F=sgField(side),hs=hitsOf(ev),U=uniq(hs),L=lander(a,ev),A0=P(a),lk=estFor(ev,'lock')[0],LK=lk&&BT.uds[lk]?P(BT.uds[lk]):null;
  var tg=U.map(function(t,i){var o=P(BT.uds[t.id]);o.t=t;o.at=.32+i*.045;return o}).filter(function(o){return o.d});
  var sy=Math.max(BT.H*.08,F2.y0-BT.rh*.7),sw=Math.min(BT.W*.86,F2.w*1.2);
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
   dimAll(c,p,'18,6,30',.45);
+  /* V209: the Emperor-maker towers behind his troop — his gold statue rises out of a radiant wheel and gold flame, and flares each time a seal lands */
+  var up=side==='A'?-1:1,ca=cw(A0),dq=out(seg(p,0,.26))*(1-seg(p,.84,.97)),gh=Math.min(BT.H*.4,BT.rh*2.5),gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.5*(up<0?1:-1),
+   fl=tg.reduce(function(m,o){var z=seg(p,o.at,o.at+.12);return Math.max(m,z>0&&z<1?1-z:0)},0);
+  if(dq>0){var sx=Math.max(gh*.33,Math.min(BT.W-gh*.33,A0.x)),cy=gy-gh*.05;
+   c.save();c.globalCompositeOperation='source-over';var rg=c.createRadialGradient(sx,cy,0,sx,cy,gh*.6);rg.addColorStop(0,'rgba(18,8,2,'+(.62*dq)+')');rg.addColorStop(.7,'rgba(18,8,2,'+(.35*dq)+')');rg.addColorStop(1,'rgba(18,8,2,0)');c.fillStyle=rg;c.fillRect(sx-gh*.6,cy-gh*.6,gh*1.2,gh*1.2);c.restore();
+   pc(c,'M',22,sx,gy-gh*.2,gh*.8*(1+.04*Math.sin(t/260)),.28*dq+.25*fl,t/1600,1,'255,200,100');
+   stat(c,'caocao_a',sx,gy+gh*.5,gh*1.1*(.97+.03*Math.sin(t/320)),dq*(.8+.2*fl));
+   c.save();c.globalCompositeOperation='lighter';for(var m=0;m<12;m++){var ph=((t/1400)+m/12)%1;glow(c,sx+Math.sin(m*2.4+t/700)*gh*.3,gy+gh*.45-ph*gh,ca*.04,'255,215,120',.7*dq*(1-ph))}c.restore()}
   /* golden imperial edict unrolls across the sky (blank silk) */
   var uq=out(seg(p,.02,.24))*fo;if(uq>0&&!S2P(c,'caocao_a',0,BT.W/2,sy,sw*uq,uq,0,.35)){var w=sw*uq,h=BT.rh*.55,x0=BT.W/2-w/2;
    c.save();c.globalCompositeOperation='source-over';var sg=c.createLinearGradient(0,sy-h/2,0,sy+h/2);sg.addColorStop(0,'rgba(232,190,90,'+(.95*uq)+')');sg.addColorStop(.5,'rgba(255,234,160,'+(.95*uq)+')');sg.addColorStop(1,'rgba(200,150,60,'+(.95*uq)+')');c.fillStyle=sg;c.fillRect(x0,sy-h/2,w,h);
@@ -12463,6 +12479,8 @@ var F204SR={shu:'weiyan',wei:'xuhuang',wu:'ganning'};
  if(typeof GBRS!=='undefined')GBRS.lord=['inf','cav'];
  /* code-drawn look until the art agent paints his portrait */
  if(typeof LOOKS!=='undefined'&&!LOOKS.lord){var lk=genericLook('inf','tl');lk.robe='#5d6f86';lk.hc='#3a4656';lk.beard='moust';LOOKS.lord=lk}
+/* V209 (art agent): painted Chủ Công portrait (design C) */
+try{if(typeof GART!=='undefined')GART.lord={src:heroArtPath('lord','portrait'),sm:heroArtPath('lord','portrait_small'),pos:'50% 14%',face:[.40,.11,.28,.17]}}catch(e){}
  if(typeof SPL!=='undefined'&&!SPL.lord){var b=SPL.chuthuong||{};SPL.lord=Object.assign({},b,{aura:'#a9c4e6',aura2:'#ffffff',bg:'#141c28',robe:'#4a5c74',robe2:'#2a3546',trim:'#d9b45a',plume:'#a9c4e6',band:'#4a5c74',rar:'R',scar:0,old:0})}
  if(typeof FACN!=='undefined'&&!FACN.tl)FACN.tl='Tự Lập';
  /* styles: intro button, reward line, locked world tab */
