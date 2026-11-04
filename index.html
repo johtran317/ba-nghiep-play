@@ -2560,7 +2560,7 @@ var _pwC={t:0,v:0};
 function myPower(){var now=Date.now();if(now-_pwC.t>3000){try{_pwC.v=powerOf(playerUnits(false))}catch(e){_pwC.v=0}_pwC.t=now}return _pwC.v}
 function renderTop(){
  var cap=10+S.b.mc,s=season(),left=((1-S.ord%1)/(s===0?1.5:1))*3600000,F=FAC[S.nation]||FAC.shu;
- var hg=S.gens&&S.gens.lord?'lord':'liubei',ava='<div class="ava"><div class="pw">'+(GART[hg]?artImg(hg,true,' style="object-position:50% 30%;transform:scale(1.6) translateY(4%)"'):portraitSvg(LOOKS[hg],S.nation,'hud'))+'</div><span class="lvb">Lv '+S.b.mc+'</span></div>';
+ var hg=S.gens&&S.gens.lord&&(GART.lord||LOOKS.lord)?'lord':'liubei',ava='<div class="ava"><div class="pw">'+(GART[hg]?artImg(hg,true,' style="object-position:50% 30%;transform:scale(1.6) translateY(4%)"'):portraitSvg(LOOKS[hg],S.nation,'hud'))+'</div><span class="lvb">Lv '+S.b.mc+'</span></div>';
  var who='<div class="who"><b>Chúa Công · '+F.n+'</b><span class="pwr">'+ic('power')+fmt(myPower())+'</span><span class="ssn">Mùa '+SEASONS[s].n+(S.speed>1?' · TEST x'+S.speed:'')+'</span></div>';
  var ord='<div class="ordc"><div class="cap">'+ic('order')+Math.floor(S.ord)+'/'+cap+'</div><small>'+(S.ord<cap?'+1 sau <b>'+fmtT(left)+'</b>':'Quân lệnh đầy')+'</small></div>';
  function ch(n,v){return'<div class="chip">'+ic(n)+'<b>'+v+'</b></div>'}
