@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V242';
+var BUILD='V243';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13987,4 +13987,72 @@ var CUT242=1;
    clearTimeout(T);T=setTimeout(function(){if(C)C.className=''},D+40)}catch(e){try{el.style.removeProperty('visibility')}catch(x){}}
   return p};
 }catch(e){try{console.error('cut242',e)}catch(x){}}})();
+/* ================= V243 (art agent, user 2026-11-04 12:40, stage-sheet screenshot: "if a player clicks on a hero portrait — think about how to
+   improve the flow — perhaps open a floating window to allow them to change the troops").
+   Tap a hero on the stage sheet's Quân ta board → the floating Đổi binh chủng panel (#rt226, V227) opens over the stage sheet, which stays
+   visible behind it and refreshes live (win %, tags). When opened from the board the panel also gets:
+   (1) a hero card on top: portrait, name, Lv, Quân now/max with a bar (red when low), cell ("Hàng trước · ô 2"), and "Gỡ khỏi trận"
+       (pv243rm → fmDrop({cell},null), closes the panel);
+   (2) a counter line for THIS stage: "Quân địch BỘ ×2 → khắc bằng Cơ Giới, Mưu Sĩ" (CT2, prepui.js), and every troop card / change chip whose
+       branch counters the enemy gets a green "Khắc địch" mark — so the player can switch to the right troop without leaving the battle prep.
+   A drag still moves heroes (pvdrag eats the click after a drag); the × still removes. Actions pv243rm (new, checked unused). */
+/* V243 (user 12:43 "optimize changing troops AND heroes; flow smoothly and get to the battle quick"): the panel also has a "Đổi tướng" strip of
+   heroes not on the board (tap = that hero takes this cell via fmDrop({gid},k); the panel switches to the new hero, the cell lands with the
+   V240 bounce) and a sticky footer Xong · Tấn công (pv243go closes the panel and presses the stage sheet's own Tấn công button, so the
+   lệnh / 0-lệnh flow is unchanged). Actions pv243sw, pv243go (checked unused). */
+var PV243={ctx:null,k:null,on:0};
+(function(){try{
+ var _ss=stageSheet;stageSheet=function(mi,si,kind){PV243.ctx={mi:mi,si:si,kind:kind};return _ss.apply(this,arguments)};
+ function cnt(){try{var c=PV243.ctx;if(!c)return null;var en=buildEnemy(c.mi,c.si,c.kind),o={};en.units.forEach(function(u){o[u.br]=(o[u.br]||0)+1});return o}catch(e){return null}}
+ function goodBr(o){var g={};Object.keys(o||{}).forEach(function(k){(CT2[k]||[]).forEach(function(c){g[c[1]]=c[0]})});return g}
+ function deco(){try{var box=document.getElementById('rt226');if(!box||!PV243.on)return;var p=box.querySelector('.rt226in');if(!p||p.querySelector('.pv243h'))return;
+   var gid=ROTGID,g=S.gens[gid],G=GENS[gid];if(!g||!G)return;var k=PV243.k,mx=gmax(gid)||1,q=Math.max(0,g.troops||0),pc=Math.min(1,q/mx);
+   var row=k?['Hàng trước','Hàng giữa','Hàng sau'][+k[0]]+' · ô '+(+k[2]+1):'';
+   var h='<div class="pv243h"><div class="pv243p">'+pt(gid,TAGS[G.br],g.lv)+'</div><div class="pv243i"><b>'+esc(gid==='lord'&&S.pname?S.pname:G.n)+'</b>'+
+    '<span class="sm">Lv '+g.lv+(row?' · '+row:'')+'</span><span class="pv243q"><i style="width:'+Math.round(pc*100)+'%" class="'+(pc<.35?'lo':pc<.7?'md':'')+'"></i></span>'+
+    '<span class="sm">Quân '+fmt(q)+' / '+fmt(mx)+'</span></div>'+(k?'<button class="btn alt sm pv243rm" data-a="pv243rm" data-v="'+k+'">Gỡ khỏi trận</button>':'')+'</div>';
+   if(k){var P=fmP(),used={};Object.keys(P.c).forEach(function(c){if(P.c[c])used[P.c[c]]=1});
+    var L=Object.keys(S.gens).filter(function(x){return GENS[x]&&!used[x]}).sort(function(a,b){return(S.gens[b].lv-S.gens[a].lv)||((GENS[b].cost||0)-(GENS[a].cost||0))});
+    h+='<div class="pv243s"><div class="pv243sh"><b>Đổi tướng</b><span>'+(L.length?'chạm để thay vào ô này':'mọi tướng đều đã ra trận')+'</span></div>'+
+     (L.length?'<div class="pv243sl">'+L.slice(0,14).map(function(x){var z=!(S.gens[x].troops>0);return'<button class="pv243sb'+(z?' noq':'')+'" data-a="pv243sw" data-v="'+x+'">'+pt(x,TAGS[GENS[x].br],S.gens[x].lv)+'<span>'+esc(x==='lord'&&S.pname?S.pname:GENS[x].n)+'</span></button>'}).join('')+'</div>':'')+'</div>'}
+   var o=cnt(),gb=goodBr(o);
+   if(o){var en=Object.keys(o).sort(function(a,b){return o[b]-o[a]}).map(function(b){return'<span class="pv243e">'+TAGS[b]+' ×'+o[b]+'</span>'}).join(' '),
+     ks=Object.keys(gb);h+='<div class="pv243c"><span>Quân địch</span>'+en+(ks.length?'<em>→ khắc bằng</em>'+ks.map(function(b){return'<span class="pv243g">'+gb[b]+'</span>'}).join(''):'')+'</div>'}
+   var hd=p.querySelector('.rt226h'),hb=hd&&hd.querySelector('b');if(hb)hb.textContent='Tướng & binh chủng';if(hd)hd.insertAdjacentHTML('afterend',h);else p.insertAdjacentHTML('afterbegin',h);
+   var bs=hBrs(gid);[].forEach.call(p.querySelectorAll('.rtslot'),function(s,i){var b=bs[i];if(b&&gb[b]){var t=s.querySelector('.rth .sp');if(t)t.insertAdjacentHTML('afterbegin','<span class="pv243k">✓ Khắc địch</span>')}});
+   [].forEach.call(p.querySelectorAll('.sw211 .chip[data-w]'),function(c){if(gb[c.getAttribute('data-w')])c.classList.add('pv243kc')});
+   if(document.querySelector('#sheet [data-a="fight"]'))p.insertAdjacentHTML('beforeend','<div class="pv243f"><button class="btn alt" data-a="rt226x">Xong</button><button class="btn" data-a="pv243go">'+esc((document.querySelector('#sheet [data-a="fight"]').textContent||'Tấn công').trim())+'</button></div>')}catch(e){try{console.warn('pv243',e)}catch(x){}}}
+ /* the panel re-renders with innerHTML: watch it */
+ var mo=new MutationObserver(function(){var box=document.getElementById('rt226');if(!box){PV243.on=0;return}deco()});
+ mo.observe(document.body,{childList:true,subtree:false});
+ var mo2=null;function watchIn(){var box=document.getElementById('rt226');if(!box)return;if(mo2)mo2.disconnect();mo2=new MutationObserver(deco);mo2.observe(box,{childList:true,subtree:true})}
+ document.addEventListener('click',function(e){try{var t=e.target;if(!t.closest||t.closest('.pv220x'))return;var c=t.closest('#sheet .pv-my .fc.has[data-k]');if(!c)return;
+   var k=c.getAttribute('data-k'),gid=fmP().c[k];if(!gid||!S.gens[gid])return;e.preventDefault();
+   PV243.k=k;PV243.on=1;rt226Open(gid);watchIn();deco()}catch(x){}});
+ var _A=A_;A_=function(a,v,w,el){if(a==='pv243rm'){try{fmDrop({cell:v},null)}catch(e){}PV243.on=0;try{rt226Close()}catch(e){}return}
+  if(a==='pv243sw'){try{var k=PV243.k;if(k&&S.gens[v]){var before=JSON.stringify(fmP().c);fmDrop({gid:v},k);if(JSON.stringify(fmP().c)!==before){rt226Open(v);watchIn();deco();
+     setTimeout(function(){var c=document.querySelector('#sheet .pv-my .fc[data-k="'+k+'"]');if(c){c.classList.add('pvland');setTimeout(function(){c.classList.remove('pvland')},560)}},0)}}}catch(e){}return}
+  if(a==='pv243go'){PV243.on=0;try{rt226Close()}catch(e){}var f=document.querySelector('#sheet [data-a="fight"]');if(f)f.click();return}
+  if(a==='rt226x')PV243.on=0;return _A.apply(this,arguments)};
+ var st=document.createElement('style');st.id='pv243css';st.textContent=
+  '#sheet .pv-my .fc.has{cursor:pointer}'+
+  '#rt226 .pv243h{display:flex;align-items:center;gap:12px;margin:6px 0 8px;padding:10px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.28)}'+
+  '#rt226 .pv243p{flex:none;width:58px}#rt226 .pv243p .pw{width:58px!important;border-radius:10px;overflow:hidden}'+
+  '#rt226 .pv243i{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}#rt226 .pv243i b{font:700 16px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'+
+  '#rt226 .pv243i .sm{font-size:12px;color:var(--ds-mu,#b9a98a)}'+
+  '#rt226 .pv243q{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}#rt226 .pv243q i{display:block;height:100%;background:#6cc283}#rt226 .pv243q i.md{background:#e2b25a}#rt226 .pv243q i.lo{background:#d0574a}'+
+  '#rt226 .pv243rm{flex:none;min-height:36px;padding:0 12px;font-size:13px}'+
+  '#rt226 .pv243c{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 6px;font-size:12.5px;color:var(--ds-mu,#b9a98a)}#rt226 .pv243c em{font-style:normal}'+
+  '#rt226 .pv243e{padding:2px 7px;border-radius:7px;background:rgba(160,40,30,.35);border:1px solid rgba(224,110,90,.45);color:#ffd2c6;font:700 11.5px var(--ds-fb,sans-serif)}'+
+  '#rt226 .pv243g{padding:2px 8px;border-radius:7px;background:rgba(60,140,80,.25);border:1px solid rgba(108,194,131,.55);color:#bff0cb;font:600 12px var(--ds-fb,sans-serif)}'+
+  '#rt226 .pv243k{display:inline-block;align-self:flex-start;margin-bottom:2px;padding:1px 7px;border-radius:7px;background:#2f7d4f;color:#e9fff0;font:700 11px var(--ds-fb,sans-serif)}'+
+  '#rt226 .pv243s{margin:0 0 10px}#rt226 .pv243sh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 6px}#rt226 .pv243sh b{font:700 13px var(--ds-fb,sans-serif);color:#f3e6c8}#rt226 .pv243sh span{font-size:11.5px;color:var(--ds-mu,#b9a98a)}'+
+  '#rt226 .pv243sl{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 4px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}'+
+  '#rt226 .pv243sb{flex:none;width:58px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0;background:none;border:0;color:#e8dcc0;font-size:11px;cursor:pointer}'+
+  '#rt226 .pv243sb .pw{width:58px!important;border-radius:9px;overflow:hidden;transition:transform .12s}#rt226 .pv243sb:active .pw{transform:scale(.94)}#rt226 .pv243sb span{max-width:58px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#rt226 .pv243sb.noq .pw{filter:grayscale(1) brightness(.6)}'+
+  '#rt226 .pv243f{position:sticky;bottom:-14px;display:flex;gap:8px;margin:12px -12px -14px;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,rgba(24,17,12,.6),rgba(24,17,12,.98) 40%);z-index:3}'+
+  '#rt226 .pv243f .btn{min-height:44px}#rt226 .pv243f .btn.alt{flex:0 0 32%}#rt226 .pv243f .btn:not(.alt){flex:1}'+
+  '#rt226 .sw211 .chip.pv243kc{border-color:rgba(108,194,131,.8)!important;color:#bff0cb!important;box-shadow:0 0 0 1px rgba(108,194,131,.35)}#rt226 .sw211 .chip.pv243kc::before{content:"✓ "}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('pv243',e)}catch(x){}}})();
 </script>
