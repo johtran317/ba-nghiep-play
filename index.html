@@ -10245,9 +10245,9 @@ var EMBI=null;(function(){try{var im=new Image();im.onload=function(){EMBI=im};i
  if(!EMBI||!EMBI.naturalWidth)return _emb185(c,x,y,s,mo,cost,lk,id);
  try{mo=Math.max(0,mo||0);var r=mo/cost,ov=mo-cost,t=BT.t||0,ph=((id||'').length*37+(id||'').charCodeAt(1||0))%100,alt=Math.floor((t+ph*13)/170)%2;
   var cell=lk?7:r<.34?0:r<.67?1:r<1?2:ov>15?5+alt:3+alt;
-  var fl=lk?1:1+Math.sin(t/95+ph)*.05+Math.sin(t/41+ph*2)*.03,pu=(!lk&&r>=1)?1+.07*Math.sin(t/120+ph):1,k=.24*Math.min(1.2,s)*fl*pu;
-  k*=[1.9,1.5,1.2,1,1,1.05,1.05,1.1][cell];var cw=256*k,bx=x,by=y-(BT.rh||90)*.08;
-  c.save();c.globalCompositeOperation='lighter';c.globalAlpha=lk?.9:Math.min(1,.65+.35*Math.min(1,r));
+  var fl=lk?1:1+Math.sin(t/95+ph)*.05+Math.sin(t/41+ph*2)*.03,pu=(!lk&&r>=1)?1+.03*Math.sin(t/120+ph):1,k=.11*Math.min(1.2,s)*fl*pu;/* V217 (user 2026-11-04 07:07 "the morale flame looks ridiculously big and pulls the eye from the battle"): about half the size, calm until ready */
+  k*=[1.25,1.15,1.05,1,1,1.05,1.05,1][cell];var cw=256*k,bx=x,by=y-(BT.rh||90)*.08;
+  c.save();c.globalCompositeOperation='lighter';c.globalAlpha=lk?.75:r>=1?.95:.4+.3*r;
   c.drawImage(EMBI,(cell%4)*256,Math.floor(cell/4)*256,256,256,bx-cw/2,by-205*k,cw,cw);c.restore()}catch(e){try{_emb185(c,x,y,s,mo,cost,lk,id)}catch(_){}}}})();
 /* C. Tier 5 final unit names (Tier 5 Design Bible "[Art] Tier 5 unit names FINAL", 2026-11-02 22:55): replace F5P + F5S. EN names kept for the EN build. */
 var F5N={a:{inf:'Phượng Dực Vệ',cav:'Phượng Hoàng Kỵ',arc:'Phượng Linh Tiễn',mac:'Phượng Hỏa Pháo',str:'Phượng Vũ Sư',sup:'Phượng Minh Cổ'},
@@ -10860,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V216';
+var BUILD='V217';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
