@@ -10856,7 +10856,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V212';
+var BUILD='V213';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12618,16 +12618,90 @@ try{F204EK=[]}catch(e){}
    So nobody faces 5 enemies with only 3 generals, the game hands out free R generals when a step opens:
    a new save gets a 2nd general at once, clearing 1-2 fills the roster to 3, clearing 1-4 fills it to 5 (CURVE208H order, only heroes not owned yet). */
 var CURVE208H=['chuthuong','hejin','lieuhoa','sunqian','jianyong','zhangbao'];
-(function(){try{if(MAPS[0])MAPS[0].cnt=MAPS[0].cnt.map(function(x,i){return i<1?1:i<2?2:i<4?3:5});
- for(var i=1;i<MAPS.length;i++)MAPS[i].cnt=MAPS[i].cnt.map(function(){return 5})}catch(e){}})();
+/* V213 (user 23:25 "player and enemy start having 3 heroes in formation in Màn 3 and 5 heroes in Màn 5"): Màn 1 1→2, Màn 2: 2, Màn 3–4: 3, Màn 5+: 5 (stage and elite) */
+function armyN211(mi){return mi>=4?5:mi>=2?3:2}
+(function(){try{for(var i=0;i<MAPS.length;i++)MAPS[i].cnt=MAPS[i].cnt.map(function(x,si){return i===0&&si===0?1:armyN211(i)})}catch(e){}})();
+(function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{if(kind==='elite'&&r.units&&r.units.length>armyN211(mi)){var keep=r.units.filter(function(u){return u.isBoss||u.main});var rest=r.units.filter(function(u){return!(u.isBoss||u.main)});r.units=keep.concat(rest).slice(0,armyN211(mi))}}catch(e){}return r}}catch(e){}})();
 (function(){try{var _di=deployInfo;deployInfo=function(fid){var r;try{r=_di(fid)}catch(e){r={n:2,why:''}}try{var c=S.camp||{},st=c.stage||{},md=c.mapDone||{};
- var n=(st['0-3']||md[0])?5:st['0-1']?3:2,why=n===2?'3 tướng: phá ải 1-2':n===3?'5 tướng: phá ải 1-4':'';
+ var n=md[3]?5:md[1]?3:2,why=n===2?'3 tướng: phá xong Màn 2':n===3?'5 tướng: phá xong Màn 4':'';
  var F=typeof FORM!=='undefined'&&FORM[fid];if(F&&F.cells&&F.cells.length<n)n=F.cells.length;return{n:n,why:why}}catch(e){return r}}}catch(e){}})();
 function curve208Fill(){try{if(!S||!S.camp||!S.gens||(typeof fighting!=='undefined'&&fighting))return;var st=S.camp.stage||{},md=S.camp.mapDone||{};
- var need=(st['0-3']||md[0])?5:st['0-1']?3:2,have=Object.keys(S.gens).length,got=[];
+ var need=md[3]?5:md[1]?3:2,have=Object.keys(S.gens).length,got=[];
  for(var i=0;i<CURVE208H.length&&have<need;i++){var id=CURVE208H[i];if(GENS[id]&&!S.gens[id]){joinHero(id,true);have++;got.push(GENS[id].n)}}
  if(got.length){try{var P=fmP(),n=Math.min(deployInfo(P.fid).n,Object.keys(S.gens).length);if(fmPlaced(P).length<n)fmAuto()}catch(e){}
   try{toast(got.join(', ')+' gia nhập · đủ quân '+need+' tướng')}catch(e){}try{save();refresh()}catch(e){}}}catch(e){}}
 (function(){try{setInterval(curve208Fill,1500)}catch(e){}})();
 (function(){try{var _t=tick;tick=function(dt){var r=_t.apply(this,arguments);curve208Fill();return r}}catch(e){}})();
+/* ===== V213 "think, don't grind" set (user 2026-11-03 23:25, picks 1 / 2 / 4 / 7 from the Ngọa Long comparison) =====
+   (1) A lost or retreated campaign battle gives its Quân lệnh back (only wins cost a lệnh).
+   (2) Đổi binh chủng: pick the branch yourself (no more random roll). 10 free changes per day, then 10 / 20 / 30 / 40 / 50 gold
+       (cap 50) for each further change that day. Switching which of the 2 slots fights ("Xuất chiến") stays free.
+   (4) Tiền đồn: each Tinh binh stage of a Màn ever won weakens that Màn's boss stage by 8% attack and troops (3 → −24%).
+   (7) Hồn Tướng exchange: shards of heroes you already own turn into Hồn Tướng (1 each, they were wasted before); unwanted
+       heroes can be released for Hồn Tướng (R 10 · SR 30 · SSR 60); Hồn Tướng buys shards of any hero you don't own
+       (R 1 · SR 2 · SSR 4 each), up to 5 shards a day.
+   Everything is wrapped: an error here never stops the game. Actions: sw211, hon211, hon211b, hon211r, hon211x (checked unused). */
+var SW211F=10,HON211={R:10,SR:30,SSR:60},HONP211={R:1,SR:2,SSR:4},HOND211=5,TD211=.08;
+function sw211(){if(!S.sw211||S.sw211.day!==S.day)S.sw211={day:S.day,n:0};return S.sw211}
+function sw211Cost(){var n=sw211().n;return n<SW211F?0:Math.min(50,10*(n-SW211F+1))}
+function hon211(){if(S.hon==null)S.hon=0;if(!S.honD||S.honD.day!==S.day)S.honD={day:S.day,n:0};
+ try{var F=hfr();Object.keys(F).forEach(function(k){if(S.gens[k]&&F[k]>0){S.hon+=F[k];F[k]=0}})}catch(e){}return S.hon}
+function td211(mi){var n=0;try{for(var e=0;e<3;e++)if(S.camp.eliteDone&&S.camp.eliteDone[mi+'-'+e])n++}catch(x){}return n}
+
+/* (1) refund the Quân lệnh when the campaign battle is not won (resultSheet is re-drawn, so only once per result) */
+(function(){try{var _rs=resultSheet;resultSheet=function(R){var h=_rs.apply(this,arguments);try{if(R&&!R.win&&R.key&&!R.ref211){R.ref211=1;S.ord+=1;try{save()}catch(e){}}
+ if(R&&R.ref211)h+='<div class="sm ok" style="margin-top:6px">Thua không mất Quân lệnh · đã hoàn 1 lệnh. Đổi đội hình rồi thử lại.</div>'}catch(e){}return h}}catch(e){}})();
+
+/* (2) troop change: pick the branch, daily free count, rising price */
+(function(){try{
+ var _rot=rotSheet;rotSheet=function(){var h=_rot.apply(this,arguments);try{var gid=ROTGID,g=S.gens[gid];if(!g)return h;var bs=hBrs(gid),c=sw211Cost(),left=Math.max(0,SW211F-sw211().n);
+  h=h.replace(/Đổi ngẫu nhiên một ô sang binh chủng khác: \d+ vàng \/ lần\./,'Chọn binh chủng cho từng ô. Hôm nay còn <b>'+left+'</b> lần đổi miễn phí; sau đó 10 vàng, tăng 10 mỗi lần, tối đa 50.');
+  h=h.replace(/<button class="btn alt sm" data-a="rotroll" data-v="(\d)"[^>]*>[^<]*<\/button>/g,function(m,i){i=+i;
+   return'<div class="sw211"><span class="sm mute">Đổi ô '+(i+1)+' sang:</span>'+BR6.filter(function(b){return bs.indexOf(b)<0}).map(function(b){return'<button class="chip" data-a="sw211" data-v="'+i+'" data-w="'+b+'">'+TAGS[b]+'</button>'}).join('')+
+    '<span class="sm '+(c?'gold':'ok')+'">'+(c?c+' vàng':'Miễn phí')+'</span></div>'})}catch(e){}return h};
+ var st=document.createElement('style');st.id='sw211css';st.textContent='.sw211{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;width:100%}.sw211 .chip{min-width:44px}';document.head.appendChild(st);
+}catch(e){}})();
+
+/* (7) Hồn Tướng sheet */
+var HON211X=null;
+function hon211Sheet(){var hon=hon211(),D=S.honD,h='<h3>Đổi Hồn Tướng</h3>';
+ h+='<div class="card row"><div class="sp"><b>Hồn Tướng: <span class="gold">'+fmt(hon)+'</span></b><div class="sm mute">Mảnh của tướng đã có tự đổi thành Hồn Tướng. Giải tán tướng không dùng để nhận thêm. Hôm nay đổi '+D.n+'/'+HOND211+' mảnh.</div></div></div>';
+ h+='<div class="sec">Đổi mảnh tướng</div><div class="stack dslist">';
+ var L=Object.keys(GENS).filter(function(id){var G=GENS[id];return!S.gens[id]&&id!=='lord'&&HONP211[G.rar]&&G.src}).sort(function(a,b){var r={SSR:0,SR:1,R:2};return(r[GENS[a].rar]-r[GENS[b].rar])||((hfr()[b]||0)/fragNeed(b)-(hfr()[a]||0)/fragNeed(a))});
+ L.slice(0,40).forEach(function(id){var G=GENS[id],p=HONP211[G.rar],have=hfr()[id]||0,ok=hon>=p&&D.n<HOND211;
+  h+='<div class="card row"><div class="sp"><b class="rk'+G.rar+'">'+G.n+'</b> <span class="sm mute">'+G.rar+' · '+(FAC[G.fac]?FAC[G.fac].n:'')+'</span><div class="sm mute">Mảnh '+have+'/'+fragNeed(id)+'</div></div><button class="btn sm" data-a="hon211b" data-v="'+id+'"'+(ok?'':' disabled')+'>'+p+' Hồn · 1 mảnh</button></div>'});
+ h+='</div>';
+ var inF={};try{Object.keys(S.fm.pre||{}).forEach(function(k){var c=(S.fm.pre[k]||{}).c||{};Object.keys(c).forEach(function(x){if(c[x])inF[c[x]]=1})})}catch(e){}
+ var R=Object.keys(S.gens).filter(function(id){return id!=='lord'&&GENS[id]&&!inF[id]&&HON211[GENS[id].rar]&&S.train.indexOf(id)<0&&!(typeof brBusy==='function'&&brBusy(id))});
+ h+='<div class="sec">Giải tán tướng</div><div class="sm mute" style="margin-bottom:6px">Chỉ tướng không ở trong đội hình nào. Trang bị trả về kho. Không hoàn tác được.</div><div class="stack dslist">';
+ if(!R.length)h+='<div class="card sm mute">Không có tướng rảnh để giải tán.</div>';
+ R.forEach(function(id){var G=GENS[id],g=S.gens[id],v=HON211[G.rar],sure=HON211X===id;
+  h+='<div class="card row"><div class="sp"><b class="rk'+G.rar+'">'+G.n+'</b> <span class="sm mute">'+G.rar+' · Lv '+g.lv+' · Bậc '+(g.tier||1)+'</span></div>'+(sure?'<button class="btn red sm" data-a="hon211x" data-v="'+id+'">Chắc chắn · +'+v+'</button>':'<button class="btn alt sm" data-a="hon211r" data-v="'+id+'">Giải tán · +'+v+' Hồn</button>')+'</div>'});
+ return h+'</div>'}
+(function(){try{
+ var _gr=giveRw;giveRw=function(rw){var pre={};try{if(rw&&rw.fr)Object.keys(rw.fr).forEach(function(k){if(S.gens[k])pre[k]=rw.fr[k]})}catch(e){}var r=_gr.apply(this,arguments);
+  try{var n=0;Object.keys(pre).forEach(function(k){n+=pre[k]});if(n){hon211();S.hon+=n}}catch(e){}return r};
+ var _tv=tavernSheet;tavernSheet=function(){var h=_tv.apply(this,arguments);try{var b='<button class="btn alt wide" data-a="hon211" style="margin:8px 0">Đổi Hồn Tướng · '+fmt(hon211())+' Hồn</button>';var k=h.indexOf('</h3>');h=k>0?h.slice(0,k+5)+b+h.slice(k+5):b+h}catch(e){}return h};
+ var _A=A_;A_=function(a,v,w,el){try{
+  if(a==='sw211'){var gid=ROTGID,g=S.gens[gid];if(!g)return;var i=+v,bs=hBrs(gid);if(bs.indexOf(w)>=0||BR6.indexOf(w)<0)return;var old=bs[i],was=GENS[gid].br===old;
+   if(was&&brBusy(gid)){toast('Đang luyện binh, chưa thể đổi binh chủng');return}var c=sw211Cost();if(S.res.gold<c){toast('Cần '+c+' vàng');return}
+   S.res.gold-=c;sw211().n++;var mx0=gmax(gid),ratio=g.troops==null?1:Math.min(1,g.troops/Math.max(1,mx0));bs[i]=w;delete g.rotC;
+   if(was){g.br=w;GENS[gid].br=w;g.troops=Math.round(ratio*gmax(gid))}syncBr();toast('Ô '+(i+1)+' → '+BR[w].n+(c?' · −'+c+' vàng':' · miễn phí'));save();refresh();openSheet(rotSheet);return}
+  if(a==='rotroll')return;
+  if(a==='hon211'){HON211X=null;openSheet(hon211Sheet);return}
+  if(a==='hon211b'){var G=GENS[v],p=G&&HONP211[G.rar];hon211();if(!p||S.gens[v]||S.hon<p||S.honD.n>=HOND211)return;S.hon-=p;S.honD.n++;var F=hfr();F[v]=(F[v]||0)+1;
+   toast('+1 mảnh '+G.n+((F[v]>=fragNeed(v))?' · đủ để ghép ở Tửu Quán!':''));save();refresh();openSheet(hon211Sheet);return}
+  if(a==='hon211r'){HON211X=v;openSheet(hon211Sheet);return}
+  if(a==='hon211x'){if(HON211X!==v||!S.gens[v]||v==='lord')return;var G2=GENS[v],val=HON211[G2.rar]||0;delete S.gens[v];try{if(S.camp.flag)S.camp.flag[v]=1}catch(e){}hon211();S.hon+=val;HON211X=null;
+   try{syncBr()}catch(e){}toast('Đã giải tán '+G2.n+' · +'+val+' Hồn Tướng');save();refresh();openSheet(hon211Sheet);return}
+ }catch(e){}return _A(a,v,w,el)};
+}catch(e){}})();
+
+/* (4) Tiền đồn: won Tinh binh of a Màn weaken its boss stage */
+(function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{if(kind==='stage'&&MAPS[mi]&&si===MAPS[mi].st.length-1){var n=td211(mi);if(n){var k=1-TD211*n;
+ (r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)});r.td211=n}}}catch(e){}return r}}catch(e){}})();
+(function(){try{var _ss=stageSheet;stageSheet=function(mi,si,kind){var h=_ss.apply(this,arguments);try{var M=MAPS[mi];if(!M)return h;var x='';
+ if(kind==='stage'&&si===M.st.length-1){var n=td211(mi);x='<div class="card sm td211"><span style="font-weight:700;color:#f6e6c4">Tiền đồn</span> · đã hạ <b>'+n+'/3</b> Tinh binh của Màn này: trùm yếu đi <b class="dsnum">'+Math.round(TD211*n*100)+'%</b> công và binh lực (mỗi Tinh binh −'+Math.round(TD211*100)+'%).</div>'}
+ else if(kind==='elite')x='<div class="card sm td211"><span style="font-weight:700;color:#f6e6c4">Tiền đồn</span> · thắng Tinh binh này một lần để trùm Màn '+(mi+1)+' yếu đi '+Math.round(TD211*100)+'%.</div>';
+ if(x){var k=h.indexOf('</h3>');h=k>0?h.slice(0,k+5)+x+h.slice(k+5):x+h}}catch(e){}return h}}catch(e){}})();
 </script>
