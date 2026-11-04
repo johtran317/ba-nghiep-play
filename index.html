@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V234';
+var BUILD='V235';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11114,6 +11114,14 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '#main .gdstrip:has(+.hubrail.u185f){margin-bottom:8px!important}'+
  '#main .u185cw .innerw::before{display:none!important}#main .u185cw .innerw .ptbtn{top:8px!important}';
  document.head.appendChild(st)}catch(e){}})();
+/* V235 (art agent, user 2026-11-04 10:52 "we don't need weather at both places; the height of the panel looks off"):
+   (1) the hub panel was pushed 18 px down by the old overlay rule .qb4{top:3%} and slid under the city art (bottom edge hidden,
+   gap above bigger than below) — reset top, equal 10 px gaps above/below, a little more bottom padding under the labels;
+   (2) the weather chip is drawn on both the Nội thành and Ngoại thành maps — keep the Nội thành one only (weather effects stay on both). */
+(function(){try{var st=document.createElement('style');st.id='h235css';st.textContent=
+ '#main .qb4.qb5.hubrail.u185f{top:0!important;margin:0 0 10px!important;padding:10px 6px 10px!important}'+
+ '#main .gdstrip:has(+.hubrail.u185f){margin-bottom:10px!important}'+
+ '#main .u185cw .outerw .wxchip{display:none!important}';document.head.appendChild(st)}catch(e){}})();
 /* ===== V193 (user 2026-11-03 15:41 "allow user to drag hero icon to change position"): on the stage sheet (Quân ta board, .pv-my) a hero can be dragged
    to another cell: onto an empty cell = move, onto a hero = swap. Uses fmDrop (fx150.js) so the formation, save and win % update exactly like Bày trận.
    Pointer events only; the drag starts after 6 px so taps still work; everything wrapped (a failure only cancels the drag). */
@@ -11972,14 +11980,19 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    var first=[].slice.call(nd.childNodes).filter(function(c){return c.nodeType===1&&!(c.tagName==='circle')})[0];
    nd.insertBefore(g,first||null);
   }catch(e){}});
-  /* our army marching to the current stage */
-  try{OURS=null;if(cur){var from=lastCl!=null&&pos[lastCl]?pos[lastCl]:[cur.P[0],cur.P[1]+70];var mine=(typeof FAC!=='undefined'&&FAC[S.nation])?FAC[S.nation].c:'#3a8a5c';
-    var og=E('g',{class:'mtour','pointer-events':'none'}),sq=E('g',{});og.appendChild(sq);
-    sq.appendChild(E('ellipse',{cx:0,cy:5,rx:17,ry:5,fill:'rgba(0,0,0,.4)'}));
-    sq.appendChild(banner(-15,4,mine,false,28));
-    var shB=MAPT.ours()||MAPT.sheet('inf','back'),list=[];if(shB){[[-8,-2],[8,-2],[0,4]].forEach(function(o,i){var r=sprite(shB,o[0],o[1],shB.painted?30:21,{ph:i,mode:'march'});sq.appendChild(r.g);list.push(r)})}
-    var tag=svg.querySelector('g.node[data-v="'+cur.mi+'|'+cur.s+'|stage"]');svg.insertBefore(og,tag||null);
-    OURS={g:og,from:from,to:cur.P,list:list}}}catch(e){OURS=null}
+  /* V235 (user 2026-11-04 10:55 "remove a troop moving from stage to stage; improve the visual of the straight line connecting stages"):
+     our marching army is gone (OURS stays null). The flat 8 px yellow bar between stages becomes a gently curved road: a soft dark
+     shadow under a dotted gold trail (march steps); the road to the current stage has flowing dashes toward it. CSS only animation. */
+  OURS=null;
+  try{var segs=[].slice.call(svg.querySelectorAll('path')).filter(function(p){return/^M[\d. -]+L[\d. -]+$/.test((p.getAttribute('d')||'').trim())&&/^#ffcf70|^#ffd98a/i.test(p.getAttribute('stroke')||'')}),seen={},k=0;
+   segs.forEach(function(p){var d=p.getAttribute('d').trim(),m=d.match(/^M\s*([\d.-]+)[ ,]+([\d.-]+)\s*L\s*([\d.-]+)[ ,]+([\d.-]+)$/);if(!m)return;
+    var wide=/^#ffcf70/i.test(p.getAttribute('stroke'));if(!seen[d]){seen[d]=k++}var i=seen[d];
+    var x1=+m[1],y1=+m[2],x2=+m[3],y2=+m[4],dx=x2-x1,dy=y2-y1,L=Math.sqrt(dx*dx+dy*dy)||1,bend=(i%2?1:-1)*Math.min(26,L*.12);
+    var cx=(x1+x2)/2-dy/L*bend,cy=(y1+y2)/2+dx/L*bend,c='M'+x1+' '+y1+'Q'+cx.toFixed(1)+' '+cy.toFixed(1)+' '+x2+' '+y2;
+    var next=cur&&Math.abs(x2-cur.P[0])<1&&Math.abs(y2-cur.P[1])<1;
+    p.setAttribute('d',c);p.setAttribute('fill','none');p.setAttribute('stroke-linecap','round');
+    if(wide){p.setAttribute('stroke','rgba(20,12,6,.55)');p.setAttribute('stroke-width','7');p.removeAttribute('stroke-dasharray');p.setAttribute('class','mt9sh')}
+    else{p.setAttribute('stroke',next?'#fff1c4':'#ffd27a');p.setAttribute('stroke-width',next?'3.8':'4.4');p.setAttribute('stroke-dasharray',next?'7 7':'0.1 9');p.setAttribute('class',next?'mt9nx':'mt9dt')}})}catch(e){}
   start()}
 
  function start(){if(timer||RM)return;timer=setInterval(step,120)}
@@ -12005,7 +12018,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    attach();document.addEventListener('DOMContentLoaded',function(){attach();sched()});setTimeout(function(){attach();sched()},0);setInterval(attach,3000);
    document.addEventListener('visibilitychange',function(){if(!document.hidden&&SPR.length)start()})}catch(e){}
 
- var CSS='#main .mapbox .mtsq.lk image{filter:grayscale(.75) brightness(.55)}'+
+ var CSS='#main .mapbox path.mt9nx{animation:mt9flow 1.1s linear infinite;filter:drop-shadow(0 0 3px rgba(255,220,140,.8))}@keyframes mt9flow{to{stroke-dashoffset:-14}}@media (prefers-reduced-motion:reduce){#main .mapbox path.mt9nx{animation:none}}#main .mapbox .mtsq.lk image{filter:grayscale(.75) brightness(.55)}'+
   '#main .mapbox .mtsq.dn image{filter:brightness(.8) saturate(.7)}'+
   '#main .mapbox .mtbn .mtfl{transform-box:fill-box;transform-origin:0 50%;animation:mtwv 1.6s ease-in-out infinite alternate}'+
   '#main .mapbox .mtbn.down .mtfl{animation:none;opacity:.8}'+
