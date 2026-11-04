@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V229';
+var BUILD='V230';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13461,13 +13461,20 @@ function ar2Fight(t){var a=ar2();if(!ar2Open())return;if(ar2Left()<=0){toast('H�
    pointer-events none, never touching the battle loop. After a battle: "Lần đầu gặp" card for statuses seen for the first time
    (from the battle log snapshots), and "Sổ tay chiến trận" in Settings lists them all.
    Painted art later (Art To-Do A1/A2): set GDART to the atlas and gdBust() uses it; nothing else changes.
-   Save key S.gd. Actions gdok, gdskip, gdtog, gdbook (checked unused). Everything wrapped. */
+   Save key S.gdn (was S.gd until V230). Actions gdok, gdskip, gdtog, gdbook (checked unused). Everything wrapped. */
 var GDART=null;
 var GDST=[[2,'Choáng','mất lượt kế tiếp.'],[3,'Thiêu đốt','mất quân mỗi lượt.'],[4,'Hỗn loạn','có thể đánh nhầm quân mình.'],[5,'Khiêu khích','kéo mọi đòn đánh về phía mình.'],
  [6,'Giáp khí','chắn bớt sát thương.'],[7,'Làm chậm','ra đòn muộn hơn.'],[8,'Suy yếu','gây ít sát thương hơn.'],[9,'Phá giáp','nhận thêm sát thương.'],
  [11,'Hồi phục','hồi quân mỗi lượt.'],[12,'Câm lặng','không dùng được chiến pháp.'],[13,'Trúng độc','mất một phần quân tối đa mỗi lượt.'],[14,'Khóa sĩ khí','không tăng được sĩ khí.']];
-function gd(){if(!S.gd)S.gd={done:{},ch:{},st:{},off:0};return S.gd}
-function gdOn(){try{return!!(S&&S.f204&&S.pname&&!gd().off)}catch(e){return false}}
+/* V230 fix: V226 first stored the guide in S.gd and named its helper gd(), which clashed with the guild (guild.js gd()/S.gd) and showed
+   "Quân Đoàn · undefined". The guide now lives in S.gdn / gdN(). gdFix() moves any guide keys out of S.gd and restores guild defaults. */
+function gdFix(){try{if(!S||S.gdfx)return;var o=S.gd;if(o&&typeof o==='object'){var n=S.gdn||(S.gdn={}),K=['done','ch','st','off','bn'];
+  K.forEach(function(k){if(k in o){if(!(k in n))n[k]=o[k];delete o[k]}});
+  if(!o.name)o.name='Hổ Phù Quân';['exp','con','ck','don'].forEach(function(k){if(!isFinite(o[k]))o[k]=0});if(!isFinite(o.day))o.day=-1}
+  S.gdfx=1}catch(e){}}
+(function(){try{var g0=gd;gd=function(){gdFix();return g0.apply(this,arguments)}}catch(e){}})();
+function gdN(){gdFix();var n=S.gdn||(S.gdn={});if(!n.done)n.done={};if(!n.ch)n.ch={};if(!n.st)n.st={};if(!('off' in n))n.off=0;return n}
+function gdOn(){try{return!!(S&&S.f204&&S.pname&&!gdN().off)}catch(e){return false}}
 function gdQ(s){try{var L=document.querySelectorAll(s);for(var i=0;i<L.length;i++){var r=L[i].getBoundingClientRect();if(r.width>4&&r.height>4&&r.bottom>0&&r.top<innerHeight)return L[i]}}catch(e){}return null}
 function gdNoModal(){var m=document.getElementById('modal');return!m||m.hidden}
 function gdSheet(s){return!gdNoModal()&&!!gdQ('#sheet '+s)}
@@ -13547,7 +13554,7 @@ function gdShow(s,mode){gdUI();var key=s.id+(mode||'');if(GDCUR!==key){GDCUR=key
 function gdHide(){GDCUR=null;if(GDEL)GDEL.hidden=true;if(GDPT)GDPT.hidden=true}
 function gdBlocked(){var sp=document.getElementById('splash');if(sp&&!sp.classList.contains('out')&&sp.offsetParent!==null)return true;
  if(document.querySelector('#hrev,#vcin'))return true;try{if(fighting)return true}catch(e){}return false}
-function gdPick(){var G=gd();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch[C.id])continue;var started=C.steps.some(function(s){return G.done[s.id]});
+function gdPick(){var G=gdN();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch[C.id])continue;var started=C.steps.some(function(s){return G.done[s.id]});
   if(!started&&C.end()){G.ch[C.id]=1;continue}if(!C.start())continue;
   for(var i=0;i<C.steps.length;i++){var s=C.steps[i];s.ch=C.id;if(G.done[s.id])continue;
    if(s.until&&s.until()&&(started||i>0)){G.done[s.id]=1;started=true;continue}
@@ -13556,33 +13563,33 @@ function gdPick(){var G=gd();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch[
  return null}
 function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s)gdShow(s);else gdHide()}catch(e){gdHide()}}
 /* in-battle tips: timed, drawn over the battle, never touching the battle loop */
-function gdBattleTips(){var G=gd();if(G.ch.G1)return;if(!G.done['g1.3b']&&G.done['g1.3'])G.done['g1.3b']=1;if(G.done['g1.4'])return;G.done['g1.4']=1;
+function gdBattleTips(){var G=gdN();if(G.ch.G1)return;if(!G.done['g1.3b']&&G.done['g1.3'])G.done['g1.3b']=1;if(G.done['g1.4'])return;G.done['g1.4']=1;
  var T=[[700,{id:'g1.4',f:1,t:'Quân ta bên trái, địch bên phải. Hai bên lần lượt tấn công theo thứ tự.'}],[7000,{id:'g1.5',f:2,t:'Ngọn lửa trên đầu là sĩ khí. Cháy đầy thì tướng tung chiến pháp! Sĩ khí vượt mức cần thì chiêu càng mạnh.'}],[14000,{id:'g1.6',f:2,t:'Bấm nút tốc độ nếu muốn xem nhanh hơn.',p:'[data-a="bspd"]'}]];
  GDBT=1;GDTM.forEach(clearTimeout);GDTM=[];T.forEach(function(x,i){GDTM.push(setTimeout(function(){try{if(!fighting){if(i===T.length-1)GDBT=null;return}gdShow(x[1],'bt');G.done[x[1].id]=1;setTimeout(function(){try{if(GDCUR===x[1].id+'bt')gdHide();if(i===T.length-1)GDBT=null}catch(e){}},5600)}catch(e){}},x[0]))})}
 var GDTM=[];function gdBattleEnd(){GDTM.forEach(clearTimeout);GDTM=[];GDBT=null;gdHide()}
 /* first-time statuses from the last real battle */
 var GDLAST=null;
-function gdStatusStep(){try{if(!GDLAST)return null;var res=GDLAST;GDLAST=null;var G=gd(),seen={};
+function gdStatusStep(){try{if(!GDLAST)return null;var res=GDLAST;GDLAST=null;var G=gdN(),seen={};
  res.log.forEach(function(e){if(!e.s)return;for(var id in e.s){var a=e.s[id];GDST.forEach(function(q){if(a[q[0]])seen[q[0]]=1})}});
  var nw=GDST.filter(function(q){return seen[q[0]]&&!G.st[q[0]]});if(!nw.length)return null;nw.forEach(function(q){G.st[q[0]]=1});
  return{id:'st'+Date.now(),f:1,tap:1,ch:'ST',t:'Lần đầu gặp: '+nw.map(function(q){return q[1]+' – '+q[2]}).join(' ')+' Xem lại trong Cài đặt › Sổ tay chiến trận.'}}catch(e){return null}}
 var GDSTQ=null;
-function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="dsinf"><div class="dsl">Hiệu ứng trong trận</div><div class="sm mute">Chạm vào một đạo quân trong trận để xem hiệu ứng nó đang chịu.</div></div><div class="stack dslist">'+
+function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class="dsinf"><div class="dsl">Hiệu ứng trong trận</div><div class="sm mute">Chạm vào một đạo quân trong trận để xem hiệu ứng nó đang chịu.</div></div><div class="stack dslist">'+
  GDST.map(function(q){return'<div class="card row"><div class="sp"><b>'+q[1]+'</b><div class="sm mute">'+q[2].charAt(0).toUpperCase()+q[2].slice(1)+'</div></div>'+(G.st[q[0]]?'<span class="ok">Đã gặp</span>':'<span class="sm mute">Chưa gặp</span>')+'</div>'}).join('')+'</div>'}
 (function(){try{
  var _b=battle;battle=function(){var r=_b.apply(this,arguments);try{if(fighting&&gdOn())GDLAST=r}catch(e){}return r};
  if(typeof btPlay==='function'){var _bp=btPlay;btPlay=function(){try{if(gdOn())gdBattleTips()}catch(e){}var pr=_bp.apply(this,arguments);try{if(pr&&pr.then)pr.then(gdBattleEnd,gdBattleEnd)}catch(e){}return pr}}
  var _A=A_;A_=function(a,v,w,el){try{
-  if(a==='gdok'){var G=gd();G.done[v]=1;if(GDSTQ&&v===GDSTQ.id)GDSTQ=null;gdHide();save();gdTick();return}
-  if(a==='gdskip'){var G2=gd();if(v==='ST'){GDSTQ=null}else{G2.ch[v]=1;GDC.forEach(function(C){if(C.id===v)C.steps.forEach(function(s){G2.done[s.id]=1})})}gdHide();save();return}
-  if(a==='gdtog'){var G3=gd();G3.off=G3.off?0:1;save();toast(G3.off?'Đã tắt hướng dẫn':'Đã bật hướng dẫn');refresh();return}
+  if(a==='gdok'){var G=gdN();G.done[v]=1;if(GDSTQ&&v===GDSTQ.id)GDSTQ=null;gdHide();save();gdTick();return}
+  if(a==='gdskip'){var G2=gdN();if(v==='ST'){GDSTQ=null}else{G2.ch[v]=1;GDC.forEach(function(C){if(C.id===v)C.steps.forEach(function(s){G2.done[s.id]=1})})}gdHide();save();return}
+  if(a==='gdtog'){var G3=gdN();G3.off=G3.off?0:1;save();toast(G3.off?'Đã tắt hướng dẫn':'Đã bật hướng dẫn');refresh();return}
   if(a==='gdbook'){openSheet(gdBook);return}
  }catch(e){}return _A(a,v,w,el)};
  /* status card shows once the result sheet is closed */
  var _gt=gdTick;gdTick=function(){try{if(gdOn()&&!GDBT&&!gdBlocked()){if(!GDSTQ){var q=gdStatusStep();if(q)GDSTQ=q}if(GDSTQ&&gdNoModal()){gdShow(GDSTQ);return}}}catch(e){}return _gt()};
  /* Settings: switch + glossary */
  if(typeof viewMore==='function'){var _vm=viewMore;viewMore=function(){var h=_vm.apply(this,arguments);try{var k='<div class="card"><b>Đặt lại dữ liệu</b>';
-  var row='<div class="card row"><div class="sp"><b>Hướng dẫn tân thủ</b><div class="sm mute">Quân sư Thanh Y chỉ dẫn từng bước khi một tính năng mới mở.</div></div><button class="btn sm alt" data-a="gdbook">Sổ tay</button><button class="btn sm" data-a="gdtog">'+(gd().off?'Bật':'Tắt')+'</button></div>';
+  var row='<div class="card row"><div class="sp"><b>Hướng dẫn tân thủ</b><div class="sm mute">Quân sư Thanh Y chỉ dẫn từng bước khi một tính năng mới mở.</div></div><button class="btn sm alt" data-a="gdbook">Sổ tay</button><button class="btn sm" data-a="gdtog">'+(gdN().off?'Bật':'Tắt')+'</button></div>';
   if(h.indexOf(k)>=0)h=h.replace(k,row+k)}catch(e){}return h}}
  setInterval(gdTick,400);
 }catch(e){}})();
@@ -13667,10 +13674,10 @@ function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="
  function ensure(){gdUI();if(sp)return;sp=document.createElement('div');sp.id='g9sp';sp.hidden=true;sp.innerHTML='<i class="r1"></i><i class="r2"></i>';document.body.appendChild(sp);
   bn=document.createElement('div');bn.id='g9bn';bn.hidden=true;document.body.appendChild(bn);
   GDPT.innerHTML='<i class="g9rp"></i><i class="g9rp b"></i><span class="g9fan"></span>'}
- function banner(s){try{var G=gd();if(!G.bn)G.bn={};var N=NAMES[s.ch];if(!N||G.bn[s.ch])return;var C=GDC.filter(function(c){return c.id===s.ch})[0];if(!C||C.steps[0].id!==s.id)return;
+ function banner(s){try{var G=gdN();if(!G.bn)G.bn={};var N=NAMES[s.ch];if(!N||G.bn[s.ch])return;var C=GDC.filter(function(c){return c.id===s.ch})[0];if(!C||C.steps[0].id!==s.id)return;
    G.bn[s.ch]=1;bn.innerHTML='<div class="g9sc"><small>CHƯƠNG '+N[0]+'</small><b>'+N[1]+'</b></div>';bn.hidden=false;bn.classList.remove('go');void bn.offsetWidth;bn.classList.add('go');
    clearTimeout(bnT);var t0=Date.now(),ch=s.ch;clearInterval(bnI);bnI=setInterval(function(){try{
-    if(document.querySelector('#hrev,#vcin')){bn.hidden=true;clearInterval(bnI);delete gd().bn[ch];return}  /* a hero reveal took the screen: replay the scroll later */
+    if(document.querySelector('#hrev,#vcin')){bn.hidden=true;clearInterval(bnI);delete gdN().bn[ch];return}  /* a hero reveal took the screen: replay the scroll later */
     if(Date.now()-t0>2600){bn.hidden=true;clearInterval(bnI)}}catch(e){clearInterval(bnI)}},150)}catch(e){}}
  gdShow=function(s,mode){ensure();var bt=mode==='bt',key=s.id+(mode||''),f=face(s);
   if(cur!==key){cur=key;GDCUR=key;
