@@ -10265,8 +10265,8 @@ var STA185={guanyu_a:0,zhugeliang_a:1,zhugeliang_b:2,lubu_a:3,lubu_b:4,caocao_a:
 (function(){try{var im=new Image();im.onload=function(){STAI185=im};im.onerror=function(){};im.src='art/skins/statues.webp?v=3'}catch(e){}})();
 (function(){if(typeof sigImg!=='function')return;var _sig185=sigImg;sigImg=function(g,n){try{if(n==='k_statue'&&g==='zhugeliang')return null;if(n&&n.indexOf('statue_')===0){var k=n.slice(7),i=STA185[k];
  if(i!==undefined){if(STAC185[k])return STAC185[k];if(!STAI185||!STAI185.naturalWidth)return null;var cv=document.createElement('canvas');cv.width=540;cv.height=960;
- cv.getContext('2d').drawImage(STAI185,i*540,0,540,960,0,0,540,960);cv.naturalWidth=540;cv.naturalHeight=960;cv.complete=true;STAC185[k]=half209(cv,k)||cv;return STAC185[k]}}
- if(n==='k_statue'&&HALF209[g+'_k']){var kk=g+'_k';if(STAC185[kk])return STAC185[kk];var m=_sig185(g,n);if(!m)return null;var h=half209(m,kk);if(h){STAC185[kk]=h;return h}return m}}catch(e){}return _sig185(g,n)}})();
+ cv.getContext('2d').drawImage(STAI185,i*540,0,540,960,0,0,540,960);cv.naturalWidth=540;cv.naturalHeight=960;cv.complete=true;STAC185[k]=alpha211(half209(cv,k)||cv);return STAC185[k]}}
+ if(n==='k_statue'&&HALF209[g+'_k']){var kk=g+'_k';if(STAC185[kk])return STAC185[kk];var m=_sig185(g,n);if(!m)return null;var h=alpha211(half209(m,kk)||m);if(h){STAC185[kk]=h;return h}return m}}catch(e){}return _sig185(g,n)}})();
 /* V209 (user 22:47 "if Lữ Bố and Cao Cao are half body then all statues must be half body"): full-body statues are cut at the waist and
    sit at the bottom of the same frame, so every statue is a bust of the same size. Value = share of the image height kept from the top. */
 var HALF209={guanyu_a:.6,zhugeliang_a:.6,zhugeliang_b:.6,zhaoyun_k:.58,zhangfei_k:.56};
@@ -10277,6 +10277,10 @@ function half209(im,k){try{var f=HALF209[k];if(!f)return null;var W=im.naturalWi
 /* Fix (found in V185 testing): campaign star chests store hero fragments as rw.fr={gid:n}; tower300 treated rw.fr as a realm-frame number
    (rewardTxt threw on Chinh chiến, giveRw pushed the object into S.twFr). tower300 now checks typeof number; clean old saves here. */
 (function(){try{if(window.S&&S.twFr&&S.twFr.filter)S.twFr=S.twFr.filter(function(x){return typeof x==='number'})}catch(e){}})();
+
+/* V211 (user 23:27 "make the statue 60% transparent, like Ngọa Long"): every skin statue is baked at 40% opacity (60% transparent). */
+var STATA211=.4;
+function alpha211(im){try{var W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,cv=document.createElement('canvas');cv.width=W;cv.height=H;var x=cv.getContext('2d');x.globalAlpha=STATA211;x.drawImage(im,0,0,W,H);cv.naturalWidth=W;cv.naturalHeight=H;cv.complete=true;return cv}catch(e){return null}}
 /* ===== V185 tower realm master skills with painted art (Thông Thiên Tháp Bible "[Art] Realm master art APPROVED" + motion page EebWoqacLbD54gZX3PfbCT) =====
    Atlases (src/twm_cut.py): art/tower/master_statues.webp (3x2 of 480x720), master_fx_s.webp (4x6 of 256 solid), master_fx_g.webp (4x6 of 256, additive).
    The 18 motions are ported from the art agent's preview (360x400 field: master M top, player slots PF front / PB back). Per cast the preview space is
@@ -10852,7 +10856,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V211';
+var BUILD='V212';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
