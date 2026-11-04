@@ -3052,8 +3052,8 @@ function viewGuild(){
  h+='<div class="wpan"><b>Đặc quyền Quân Đoàn</b><div class="sm" style="margin-top:6px">• Thu thuế +'+P.l+'% bạc <span class="mute">(mỗi cấp +1%)</span></div><div class="sm">• Cống hiến của bạn: <b class="gold">'+g.con+'</b></div></div>';
  h+=secH('Nhiệm vụ ngày')+'<div class="stack" style="margin-bottom:12px"><div class="elc"><div class="sp"><b>Điểm danh</b><div class="sm mute">Nhận 50 công trạng, +5 cống hiến</div></div><button class="btn sm" data-a="gck"'+(canCk?'':' disabled')+'>'+(canCk?'Điểm danh':'Đã nhận')+'</button></div>'+
   '<div class="elc"><div class="sp"><b>Quyên góp bạc</b><div class="sm mute">'+costH({s:1000})+' → +10 kinh nghiệm, +5 cống hiến · '+g.don+'/5 hôm nay</div></div><button class="btn sm" data-a="gdon"'+(canDon&&S.res.silver>=1000?'':' disabled')+'>Quyên góp</button></div></div>';
- h+=secH('Cửa hàng cống hiến')+'<div class="stack" style="margin-bottom:12px"><div class="elc"><div class="sp"><b>10 vàng</b><div class="sm mute">Giá 20 cống hiến</div></div><button class="btn sm" data-a="gbuy" data-v="gold"'+(g.con>=20?'':' disabled')+'>Đổi</button></div>'+
-  '<div class="elc"><div class="sp"><b>Trang bị ngẫu nhiên</b><div class="sm mute">Giá 50 cống hiến</div></div><button class="btn sm" data-a="gbuy" data-v="gear"'+(g.con>=50?'':' disabled')+'>Đổi</button></div></div>';
+ h+=secH('Cửa hàng cống hiến')+'<div class="stack" style="margin-bottom:12px"><div class="elc"><div class="sp"><b>10 vàng</b><div class="sm mute">Giá 20 cống hiến</div></div><button class="btn sm" data-a="gbuy" data-v="gold"'+(g.con>=20?'':' disabled')+'>'+(g.con>=20?'Đổi':'Thiếu cống hiến')+'</button></div>'+
+  '<div class="elc"><div class="sp"><b>Trang bị ngẫu nhiên</b><div class="sm mute">Giá 50 cống hiến</div></div><button class="btn sm" data-a="gbuy" data-v="gear"'+(g.con>=50?'':' disabled')+'>'+(g.con>=50?'Đổi':'Thiếu cống hiến')+'</button></div></div>';
  h+=secH('Thành viên')+'<div class="wpan" style="padding:6px 12px">';
  var rows=GMEM.map(function(m){return{n:m[0],r:m[1],p:Math.round(pw*m[2])}});rows.push({n:'Chúa Công',r:'Thành viên',p:pw,me:1});rows.sort(function(a,b){return b.p-a.p});
  rows.forEach(function(m,i){h+='<div class="row gm'+(m.me?' me':'')+'"><span class="gi">'+(i+1)+'</span><div class="sp"><b>'+m.n+(m.me?' (bạn)':'')+'</b><div class="sm mute">'+m.r+'</div></div><span class="pwr2">'+ic('power')+fmt(m.p)+'</span></div>'});
@@ -4589,7 +4589,7 @@ plotSheet=function(k,i){
   h+='<div class="pugr"><div><span>Sản lượng/giờ</span><b>'+plFmt(k,plRate(k,p.lv))+' <i>→</i> <em>'+plFmt(k,plRate(k,to))+'</em></b></div><div><span>Kho chứa</span><b>'+plFmt(k,plCap(k,p.lv))+' <i>→</i> <em>'+plFmt(k,plCap(k,to))+'</em></b></div></div>'+
    '<ul class="pureq">'+puReq(!capL,'Chính Sảnh cấp '+to+(capL?' (đang '+mc+')':''))+puReq(qm,'Hàng đợi xây '+S.q.length+'/'+qmax())+puReq(pay,'Đủ bạc')+'</ul>'+
    '<div class="puact"><div class="sp"><div class="sm mute">Chi phí · thời gian</div><div>'+costH(c)+' <span class="sm mute">· '+fmtT(plTime(to))+'</span></div></div>'+
-   '<button class="btn" data-a="plup" data-v="'+k+'|'+i+'"'+((capL||!qm||!pay)?' disabled':'')+'>'+(p.lv?'Nâng cấp':'Xây dựng')+'</button></div>'}
+   (capL?'<button class="btn" data-a="bsheet" data-v="mc">Nâng Chính Sảnh</button>':'<button class="btn" data-a="plup" data-v="'+k+'|'+i+'"'+((!qm||!pay)?' disabled':'')+'>'+(!qm?'Hàng đợi đầy':!pay?'Thiếu bạc':(p.lv?'Nâng cấp':'Xây dựng'))+'</button>')+'</div>'}/* V214: blocked plot upgrade says why / leads to Chính Sảnh */
  h+='</section>';
  var st=plStored(k);
  return h+'<div class="row" style="margin-top:12px;gap:8px"><button class="btn sp" data-a="plcol" data-v="'+k+'"'+(st<1?' disabled':'')+'>Thu '+T.n+(st>=1?' · '+plFmt(k,st):'')+'</button><button class="btn alt" data-a="close" style="flex:none;min-width:84px">Đóng</button></div>'};
@@ -4746,7 +4746,11 @@ bSheet=function(id){
   else{
    h+='<ul class="pureq">'+puReq(!capL,id==='mc'?'Giới hạn cấp '+lim+(capL?' · cần phá màn tiếp':''):'Chính Sảnh cấp '+to+(capL?' (đang '+L.mc+')':''))+puReq(!full,'Hàng đợi '+S.q.length+'/'+qmax())+puReq(pay,'Đủ bạc')+'</ul>'+
     '<div class="puact"><div class="sp"><div class="sm mute">Chi phí · thời gian</div><div>'+costH(c)+' <span class="sm mute">· '+fmtT(btime(id,to))+'</span></div></div>'+
-    '<button class="btn" data-a="build" data-v="'+id+'"'+(ok?'':' disabled')+'>'+(cur?'Nâng cấp':'Xây dựng')+'</button></div>'}
+    (ok?'<button class="btn" data-a="build" data-v="'+id+'">'+(cur?'Nâng cấp':'Xây dựng')+'</button>':
+     /* V214 button flow: a blocked upgrade says why and, when possible, leads to what unblocks it */
+     capL&&id!=='mc'?'<button class="btn" data-a="bsheet" data-v="mc">Nâng Chính Sảnh</button>':
+     capL?'<button class="btn" data-a="gocamp">Phá ải trùm tiếp</button>':
+     '<button class="btn" data-a="build" data-v="'+id+'" disabled>'+(full?'Hàng đợi đầy':!pay?'Thiếu bạc':(cur?'Nâng cấp':'Xây dựng'))+'</button>')+'</div>'}
   h+='</section>'}
  var open={field:'harvest',tech:'sh-tech',market:'sh-mkt',barracks:'sh-bar',train:'sh-trn'}[id],ob='';
  if(open&&lv>0)ob='<button class="btn sp" data-a="'+open+'">'+(id==='field'?'Thu hoạch':'Mở '+B.n)+'</button>';
@@ -5474,7 +5478,7 @@ function tvState(id){var G=GENS[id],s=srcOf(id),F=hfr()[id]||0;
  if(s.k==='c'&&S.camp.chest[s.a])return{st:'ready',act:'claimh'};
  return{st:'lock'}}
 function tvRow(id){var G=GENS[id],x=tvState(id),btn='';
- if(x.st==='ready'){if(x.act==='hire')btn='<button class="btn sm" data-a="hire" data-v="'+id+'"'+(S.res.silver<G.cost?' disabled':'')+'>Chiêu mộ</button>';
+ if(x.st==='ready'){if(x.act==='hire')btn='<button class="btn sm" data-a="hire" data-v="'+id+'"'+(S.res.silver<G.cost?' disabled':'')+'>'+(S.res.silver<G.cost?'Thiếu bạc':'Chiêu mộ')+'</button>';/* V214: a disabled button says why */
   else if(x.act==='assemble')btn='<button class="btn sm" data-a="assemble" data-v="'+id+'">Ghép tướng</button>';else btn='<button class="btn sm" data-a="claimh" data-v="'+id+'">Nhận</button>'}
  var open=x.st!=='lock'||(srcOf(id).k==='t');
  return'<div class="tvr r'+G.rar+(x.st==='lock'?' lk':'')+'"><div class="tvc">'+heroArt(id,'card')+'</div><div class="sp"><div><span class="rkt rk'+G.rar+'">'+G.rar+'</span> <b>'+G.n+'</b> <span class="sm mute">'+FAC[G.fac].n+' · '+G.brs.map(function(b){return BR[b].n}).join(' / ')+'</span></div>'+
@@ -5687,12 +5691,12 @@ function pickSeg(w){if(w.pity>=9){w.pity=0;return 1}var tot=WSEG.reduce(function
  if(i<=1)w.pity=0;else w.pity++;return Math.min(i,WSEG.length-1)}
 function addPieces(k,kind,n){var key=kind==='sk'?k:SKL[k].g+'|'+kind;skRec(key).p+=n}
 function giveSeg(s,w,out){
- if(s.k==='sk'||s.k==='wp'||s.k==='hr'){addPieces(w.t,s.k,s.n);out[s.k]=(out[s.k]||0)+s.n}
+ if(s.k==='sk'||s.k==='wp'||s.k==='hr'){var kk3=(s.k!=='sk'&&!SKIT[SKL[w.t].g])?'sk':s.k;/* V214: a skin with no named weapon/horse (Trương Phi) gets skin shards instead */addPieces(w.t,kk3,s.n);out[kk3]=(out[kk3]||0)+s.n}
  else if(s.k==='v'){S.res.gold+=s.n;out.v=(out.v||0)+s.n}
  else if(s.k==='res'){S.res.silver+=30000;var T=tp(),b=BRS6[Math.floor(Math.random()*6)];T.books[b]+=5;out.s=(out.s||0)+30000;out.bk=(out.bk||0)+5}
  else if(s.k==='phu'){tp().phu+=1;out.phu=(out.phu||0)+1}}
 function outTxt(o,k){var K=SKL[k],I=SKIT[K.g],x=[];
- if(o.sk)x.push('<b style="color:'+K.c1+'">Mảnh '+K.n+' ×'+o.sk+'</b>');if(o.wp)x.push('Mảnh '+I.wp.n+' ×'+o.wp);if(o.hr)x.push('Mảnh '+I.hr.n+' ×'+o.hr);
+ if(o.sk)x.push('<b style="color:'+K.c1+'">Mảnh '+K.n+' ×'+o.sk+'</b>');if(o.wp&&I)x.push('Mảnh '+I.wp.n+' ×'+o.wp);if(o.hr&&I)x.push('Mảnh '+I.hr.n+' ×'+o.hr);
  if(o.v)x.push(ic('gold')+o.v);if(o.s)x.push(ic('silver')+fmt(o.s));if(o.bk)x.push('Binh Thư ×'+o.bk);if(o.phu)x.push('Binh Phù ×'+o.phu);return x.join(' · ')}
 function segIcon(s){var K=SKL[whS().t];
  if(s.k==='sk')return'<path d="M0 -14L12 -4L8 12H-8L-12 -4Z" fill="'+K.c1+'" stroke="#fff" stroke-width="1.6"/><circle r="4" fill="#fff"/>';
@@ -5748,7 +5752,7 @@ A_=function(a,v,w2,el){
   var el2=document.querySelector('.whrot');if(el2){el2.style.transition='none';el2.style.transform='rotate('+from+'deg)';void el2.getBoundingClientRect();el2.style.transition='transform 2.6s cubic-bezier(.12,.7,.08,1)';el2.style.transform='rotate('+to+'deg)'}
   document.querySelectorAll('.whbtns .btn').forEach(function(b){b.disabled=true});
   setTimeout(function(){W.showLast=1;refresh();openSheet(wheelSheet)},2750);return}
- if(a==='whms'){var W2=whS(),i2=+v,m=WMS[i2];if(!m||W2.ws<m[0]||W2.got[i2])return;W2.got[i2]=1;var r=m[1];['sk','wp','hr'].forEach(function(k){if(r[k])addPieces(W2.t,k,r[k])});if(r.v)S.res.gold+=r.v;
+ if(a==='whms'){var W2=whS(),i2=+v,m=WMS[i2];if(!m||W2.ws<m[0]||W2.got[i2])return;W2.got[i2]=1;var r=m[1];['sk','wp','hr'].forEach(function(k){if(r[k])addPieces(W2.t,(k!=='sk'&&!SKIT[SKL[W2.t].g])?'sk':k,r[k])});if(r.v)S.res.gold+=r.v;
   toast('Nhận mốc '+m[0]+' lượt');save();refresh();openSheet(wheelSheet);return}
  if(a==='skup'){var key=v,isIt=key.indexOf('|')>0,gid=isIt?key.split('|')[0]:SKL[key].g,R=skRec(key),costs=isIt?SICOST:SKCOST;if(R.st>=5||R.p<costs[R.st])return;R.p-=costs[R.st];R.st++;
   if(!isIt&&R.st===1&&!skWorn(gid))skW()[gid]=key;
@@ -8077,7 +8081,7 @@ var _qsEF=queueSheet;queueSheet=function(){var h=_qsEF(),P=bplan(),i=h.lastIndex
 function feastXp(gid){var g=S.gens[gid];return Math.round(expNeed(g.lv)*.5)}
 function feastCost(gid){var x=feastXp(gid);return{g:Math.round(x*4),m:Math.round(x*.1)}}
 (function(){if(typeof genSheet!=='function')return;var _gsEF=genSheet;genSheet=function(gid){var h=_gsEF(gid),g=S.gens[gid];if(!g)return h;
- var c=feastCost(gid),cap=g.lv>=S.b.mc,row=hsAct('Khao quân','+'+fmt(feastXp(gid))+' kinh nghiệm (nửa cấp)'+(cap?' · đã chạm trần':''),costH(c),'<button class="btn sm" data-a="feast" data-v="'+gid+'"'+((cap||!canPay(c))?' disabled':'')+'>Khao</button>');
+ var c=feastCost(gid),cap=g.lv>=S.b.mc,row=hsAct('Khao quân','+'+fmt(feastXp(gid))+' kinh nghiệm (nửa cấp)'+(cap?' · đã chạm trần':''),costH(c),'<button class="btn sm" data-a="feast" data-v="'+gid+'"'+((cap||!canPay(c))?' disabled':'')+'>'+(cap?'Đã chạm trần':!canPay(c)?lack214(c):'Khao')+'</button>');
  var k=h.indexOf('<div class="hsal">');if(k<0)return h;k+='<div class="hsal">'.length;return h.slice(0,k)+row+h.slice(k)}})();
 /* ---- auto-formation: rank heroes by real strength (stats, tactic, rarity), not only troop count; no hero left at null troops ---- */
 var _fmPowEF=fmPow;fmPow=function(gid){var v=_fmPowEF(gid),G=GENS[gid];if(!G||!S.gens[gid])return v;var st=gstat(gid),r=rarOf(gid);
@@ -8406,7 +8410,7 @@ function tlCard(gid){var g=S.gens[gid],n=tlSlots(gid);
  if(g.tlc){h+='<div class="tlnew"><div class="sm"><b>Kết quả mới</b> · sức mạnh '+Math.round(tlScore(g.tlc))+' (đang '+Math.round(tlScore(g.tl))+')</div>';
   g.tlc.forEach(function(x,i){if(i<n&&x)h+='<div class="sm" style="color:'+TLG[x.g].c+'">'+(i+1)+'. '+TLG[x.g].n+' · '+tlTxt(x)+((g.tlk||[])[i]?' (khóa)':'')+'</div>'});
   h+='<div class="row" style="gap:8px;margin-top:6px"><button class="btn sm sp" data-a="tlok" data-v="'+gid+'">Giữ kết quả mới</button><button class="btn alt sm sp" data-a="tlno" data-v="'+gid+'">Giữ cũ</button></div></div>'}
- else h+='<div class="row" style="margin-top:8px;gap:8px"><div class="sp sm">'+costH(c)+(lk?' + '+ic('gold')+lk:'')+'</div><button class="btn sm" data-a="tlroll" data-v="'+gid+'"'+(canPay(c)&&S.res.gold>=lk?'':' disabled')+'>Tẩy luyện</button></div>';
+ else h+='<div class="row" style="margin-top:8px;gap:8px"><div class="sp sm">'+costH(c)+(lk?' + '+ic('gold')+lk:'')+'</div><button class="btn sm" data-a="tlroll" data-v="'+gid+'"'+(canPay(c)&&S.res.gold>=lk?'':' disabled')+'>'+(canPay(c)&&S.res.gold>=lk?'Tẩy luyện':!canPay(c)?lack214(c):'Thiếu vàng')+'</button></div>';
  return h+'</div>'}
 (function(){var _gsTL=genSheet;genSheet=function(gid){var h=_gsTL(gid);if(!S.gens[gid])return h;var x=tlCard(gid),k=h.indexOf('<div class="hsal">');if(k<0)return h+x;k+='<div class="hsal">'.length;return h.slice(0,k)+x+h.slice(k)}})();
 /* actions */
@@ -10856,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V213';
+var BUILD='V214';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11708,7 +11712,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    h+='<div class="whbtns dswbt"><button class="btn dsbt sec" data-a="whspin" data-v="1"'+(gold>=SPIN1?'':' disabled')+'><span>Quay ×1</span><small>'+ic('gold')+SPIN1+'</small></button>'+
      '<button class="btn dsbt pri" data-a="whspin" data-v="10"'+(gold>=SPIN10?'':' disabled')+'><span>Quay ×10</span><small>'+ic('gold')+SPIN10+' · rẻ hơn 10%</small></button></div>';
    /* legend */
-   var LG=[['sk','Mảnh '+K.n],['wp','Mảnh '+I.wp.n],['hr','Mảnh '+I.hr.n],['v','Vàng'],['s','30K bạc + 5 Binh Thư'],['phu','Binh Phù']];
+   var LG=[['sk','Mảnh '+K.n]].concat(I?[['wp','Mảnh '+I.wp.n],['hr','Mảnh '+I.hr.n]]:[]).concat([['v','Vàng'],['s','30K bạc + 5 Binh Thư'],['phu','Binh Phù']]);/* V214: heroes without a named weapon/horse (Trương Phi) no longer crash the wheel */
    h+='<div class="dshl">Phần thưởng trên vòng</div><div class="dswl">'+LG.map(function(x){return'<div class="dswli">'+(x[0]==='sk'?'<span class="dswg2">'+'<svg viewBox="0 0 24 24" width="28" height="28">'+gem(K.c1,24)+'</svg></span>':tileIco(x[0],K))+'<span>'+x[1]+'</span></div>'}).join('')+'</div>';
    h+='<div class="dswnote">Đại Cát (ô vàng) cho 10 mảnh ngoại trang. Cần 60 mảnh để mở ngoại trang ★1.</div>';
    /* weekly milestones */
@@ -11718,7 +11722,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
        return'<button class="dswm1'+(got?' got':reach?' ok':'')+'" data-a="whms" data-v="'+i+'"'+(reach&&!got?'':' disabled')+'><b>'+m[0]+'</b><span>'+sum+'</span>'+(got?'<em>'+'Đã nhận'+'</em>':reach?'<em class="go">Nhận</em>':'')+'</button>'}).join('')+'</div></div>';
    /* progress */
    var rows=[[k,art(k),K.n,SKCOST,'<button class="btn dsbt sec" data-a="skinw" data-v="'+g+'">Xem</button>'],
-     [g+'|wp',tileIco('wp',K),I.wp.n,SICOST,''],[g+'|hr',tileIco('hr',K),I.hr.n,SICOST,'']];
+     ].concat(I?[[g+'|wp',tileIco('wp',K),I.wp.n,SICOST,''],[g+'|hr',tileIco('hr',K),I.hr.n,SICOST,'']]:[]);
    h+='<div class="dshl">Tiến độ</div><div class="dswpr">'+rows.map(function(r){return'<div class="dswr"><span class="dswri">'+r[1]+'</span><div class="dswrb"><div class="dswrn"><b>'+r[2]+'</b>'+skStars(skStar(r[0]))+'</div>'+bar(r[0],r[3])+'</div>'+(upBtn(r[0],r[3])||r[4])+'</div>'}).join('')+'</div>';
    /* result panel */
    if(w.showLast&&w.last){var L=w.lastList||[],KT=SKL[w.lastT||k]||K;
@@ -12704,4 +12708,36 @@ function hon211Sheet(){var hon=hon211(),D=S.honD,h='<h3>Đổi Hồn Tướng</h
  if(kind==='stage'&&si===M.st.length-1){var n=td211(mi);x='<div class="card sm td211"><span style="font-weight:700;color:#f6e6c4">Tiền đồn</span> · đã hạ <b>'+n+'/3</b> Tinh binh của Màn này: trùm yếu đi <b class="dsnum">'+Math.round(TD211*n*100)+'%</b> công và binh lực (mỗi Tinh binh −'+Math.round(TD211*100)+'%).</div>'}
  else if(kind==='elite')x='<div class="card sm td211"><span style="font-weight:700;color:#f6e6c4">Tiền đồn</span> · thắng Tinh binh này một lần để trùm Màn '+(mi+1)+' yếu đi '+Math.round(TD211*100)+'%.</div>';
  if(x){var k=h.indexOf('</h3>');h=k>0?h.slice(0,k+5)+x+h.slice(k+5):x+h}}catch(e){}return h}}catch(e){}})();
+/* ================= V214 (art agent, user 2026-11-03 23:28 "go into every screen, review the logic of buttons, make sure the flow is sound, update the UI if it falls behind") =================
+   Found by tapping every button on every screen (fresh save + end-game save, 6,000 taps, src: art agent scratch crawl/):
+   (1) Nâng cấp / Xây dựng / Mua give no toast on purpose (navui.js TOASTS rule: the screen already shows the result) — kept;
+   (2) blocked upgrades were a grey button with no reason — they now say why (Hàng đợi đầy / Thiếu bạc) or lead to what unblocks them
+       (Nâng Chính Sảnh; Chính Sảnh at its cap → Phá ải trùm tiếp opens Chinh chiến) — bldui.js / plotui.js;
+   (3) plot sheets had their main button at the very bottom edge — it is pinned in the sticky bar like building sheets;
+   (4) small tap targets (HUD gold +, sort chips, Chiến Lệnh claim rows) raised to the 32–40 px minimum;
+   (6) the Binh Đạo sheet kept its title in an old band under the header — moved into the header;
+   (5) Vòng Quay crashed when Trương Phi was picked (no named weapon/horse) — fixed in ds197.js / event.js. */
+/* the first resource a cost still lacks, as a button label */
+function lack214(c){try{c=c||{};var R=S.res;return R.silver<(c.s||0)?'Thiếu bạc':R.grain<(c.g||0)?'Thiếu lương':R.merit<(c.m||0)?'Thiếu quân công':R.gold<(c.v||0)?'Thiếu vàng':'Không đủ'}catch(e){return'Không đủ'}}
+(function(){try{
+ if(typeof SHPRI!=='undefined'){['plup','bsheet','gocamp'].forEach(function(a){if(SHPRI.indexOf(a)<0)SHPRI.splice(SHPRI.indexOf('build')+1,0,a)})}
+ var _A213=A_;
+ A_=function(a,v,w,el){if(a==='gocamp'){try{closeSheet();tab='camp';renderMain();window.scrollTo(0,0)}catch(e){}return}return _A213.apply(this,arguments)};
+ /* (6) sheets whose title is a .tub band (Binh Đạo …) get it in the one-row header like every other sheet */
+ function tubTitle(){try{var sh=document.getElementById('sheet');if(!sh)return;var nav=sh.querySelector(':scope>.snav');if(!nav||nav.querySelector('h3.dsT'))return;
+   var t=sh.querySelector(':scope>.tub');if(!t)return;var bb=t.querySelector('b');if(!bb)return;var h=document.createElement('h3');h.className='dsT';h.textContent=bb.textContent.trim();
+   var back=nav.querySelector('.snb');if(back&&back.nextSibling)nav.insertBefore(h,back.nextSibling);else nav.appendChild(h);if(t.children.length<=1)t.style.display='none';else bb.style.display='none'}catch(e){}}
+ try{var mo=new MutationObserver(function(){tubTitle()});mo.observe(document.getElementById('sheet'),{childList:true})}catch(e){}
+ var css=document.createElement('style');css.id='ds214css';css.textContent=
+  /* tap targets: the HUD gold + keeps its look but gets a 36 px hit area */
+  '#top .cup{position:relative}#top .cup::after{content:"";position:absolute;left:50%;top:50%;width:36px;height:36px;transform:translate(-50%,-50%)}'+
+  'html body .chip.gsort{min-height:32px!important;display:inline-flex!important;align-items:center!important}'+
+  'html body #sheet .spc{min-height:38px!important}'+
+  /* plot sheets: the action row reads as one line with the price, like building sheets */
+  'html body #sheet .puact{align-items:center!important}'+
+  /* card titles written as a bold first line follow the section-title style (Lôi Đài Mốc hạng was a 24 px serif) */
+  'html body #sheet .card.sm>b:first-child{display:block!important;font:600 17px/1.3 var(--ds-fd)!important;margin-bottom:6px!important}'+
+  'html body #sheet .card.sm>b:first-child+.row,html body #sheet .card.sm>.row{padding:6px 0!important;border-top:1px solid rgba(226,178,90,.12)}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('ds213',e)}catch(x){}}})();
 </script>
