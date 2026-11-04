@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V195';
+var BUILD='V196';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11382,7 +11382,16 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
      if(four){sp.innerHTML=svg(TP[t]||TP['Tự động'],20)}else if(WXN[t]!=null&&typeof wxIcon==='function'){sp.innerHTML=wxIcon(WXN[t],30)}else{sp.innerHTML=svg(TP['Tự động'],30);sp.style.color='#f2cf7c'}});
    var tg=sh.querySelector('.btn[data-a="wxtog"]');if(tg&&!tg.classList.contains('dssw')){var on=/Bật/.test(tg.textContent);tg.classList.add('dssw',on?'on':'off');tg.setAttribute('role','switch');tg.setAttribute('aria-checked',on?'true':'false');tg.setAttribute('aria-label','Hiệu ứng động')}}catch(e){}}
 
- var pend=0;function run(){pend=0;var sh=document.getElementById('sheet');if(sh){hero(sh);world(sh);events(sh);weather(sh)}boss()}
+
+ /* V196 leftovers from the coding review of V194 */
+ var CSS2='html body #sheet>.snav>.dsT{flex:1 1 auto!important;min-width:0!important;margin:0!important;padding:0!important;font:700 20px/1.2 var(--ds-fd)!important;color:var(--ds-ts)!important;text-align:left!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;background:none!important;text-shadow:none!important}'+'html body #sheet .stg .ornd,html body #sheet .stg .co{display:none!important}'+'html body #sheet .pv-hd .pv-sub{font-size:13px!important;color:var(--ds-mu)!important}'+'html body #main .dstq{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;margin-left:4px;box-sizing:border-box;border-radius:10px;background:#b8322a;color:#fff;font:700 13px/20px var(--ds-fn)}'+'html body #main>.row:first-child>.btn{white-space:nowrap!important}'+'html body #sheet .fm2-c.has .fm2-nm{line-height:1.3!important;padding-bottom:1px!important;bottom:9px!important}'+'html body #main .bosspage .stack.dslist{gap:0!important;background:var(--ds-s1)!important;border:1px solid var(--ds-line)!important;border-radius:16px!important;overflow:hidden;padding:0!important}'+'html body #main .bosspage .stack.dslist>.card{border:0!important;border-image:none!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;border-top:1px solid rgba(226,178,90,.12)!important;margin:0!important}'+'html body #main .bosspage .stack.dslist>.card::before,html body #main .bosspage .stack.dslist>.card::after{display:none!important}'+'html body #main .bosspage .stack.dslist>.card:first-child{border-top:0!important}'+'html body #main .dsboss>.card,html body #main .dsboss>.card *{font:400 13px/1.45 var(--ds-fb)!important;color:#e6d8bf!important}'+'html body #main .dsboss>.card b{font-weight:700!important;color:#f6e6c4!important}';
+ function addCss2(){try{var s=document.getElementById('ds196css');if(!s){s=document.createElement('style');s.id='ds196css';s.textContent=CSS2}document.head.appendChild(s)}catch(e){}}
+ try{addCss2();setTimeout(addCss2,0);document.addEventListener('DOMContentLoaded',addCss2);window.addEventListener('load',addCss2)}catch(e){}
+ function v196(){try{var sh=document.getElementById('sheet');if(sh){var nav=sh.querySelector(':scope>.snav'),st=sh.querySelector('.stg .pv-hd>h3.stt');
+   if(nav&&st&&!nav.querySelector('.dsT')){var b=nav.querySelector('.snb');st.classList.add('dsT');if(b&&b.nextSibling)nav.insertBefore(st,b.nextSibling);else nav.appendChild(st)}}
+   var m=document.getElementById('main');if(m){var tv=m.querySelector('#main>.row:first-child>.btn[data-a="tavern"]');if(tv&&!tv.querySelector('.dstq')){var mt=/^(.*?)\s*\((\d+)\)\s*$/.exec(tv.textContent.trim());if(mt){tv.textContent=mt[1];var q=document.createElement('span');q.className='dstq';q.textContent=mt[2];tv.appendChild(q)}}}
+  }catch(e){}}
+ var pend=0;function run(){pend=0;v196();var sh=document.getElementById('sheet');if(sh){hero(sh);world(sh);events(sh);weather(sh)}boss()}
  function sched(){if(!pend){pend=1;(window.requestAnimationFrame||setTimeout)(run)}}
  try{var mo=new MutationObserver(sched);function attach(){['modal','main'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.dataset.ds5mo){e.dataset.ds5mo='1';mo.observe(e,{childList:true,subtree:true})}})}
    attach();document.addEventListener('DOMContentLoaded',function(){attach();sched()});setTimeout(function(){attach();sched()},0);setInterval(attach,3000)}catch(e){}
