@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V243';
+var BUILD='V244';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13688,7 +13688,7 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
   var h='<div class="rt226h"><b>Đổi binh chủng · '+esc(gid==='lord'&&S.pname?S.pname:G.n)+'</b><button class="rt226c" data-a="rt226x" aria-label="Đóng">✕</button></div>'+
    '<div class="rt226t">Chạm vào hình binh chủng để chọn ô xuất chiến. Hôm nay còn <b>'+left+'</b> lần đổi miễn phí'+(left?'':' · lần này '+c+' vàng')+'.</div>';
   bs.forEach(function(b,i){var on=b===G.br;
-   var foot='<div class="sw211"><span class="sm mute">Đổi ô '+(i+1)+' sang:</span>'+BR6.filter(function(x){return bs.indexOf(x)<0}).map(function(x){return'<button class="chip" data-a="sw211" data-v="'+i+'" data-w="'+x+'">'+TAGS[x]+'</button>'}).join('')+
+   var foot='<div class="sw211 rt244f"><button class="btn alt sm rt244b" data-a="rt244r" data-v="'+i+'">Đổi</button><span class="sm mute">ngẫu nhiên sang binh chủng khác</span>'+
     '<span class="sm '+(c?'gold':'ok')+'">'+(c?c+' vàng':'Miễn phí')+'</span></div>';
    var card=rotCard(gid,b,{foot:foot});
    if(on)card=card.replace(' · <span class="rton">Đang xuất chiến</span>','').replace('<div class="rtc on">','<div class="rtc on"><span class="rt226on"><i></i>Đang xuất chiến</span>');
@@ -13707,6 +13707,13 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
   if(a==='rotopen'){open(v);return}
   if(a==='rt226x'){close();return}
   if(a==='rt226b'){toast('Đang luyện binh, chưa thể đổi binh chủng');return}
+  /* V244 (user 12:59 "we do not let player change troop type freely — add a button Đổi that randomly picks a new troop type, not one already
+     in the slots"): the 4 branch chips are replaced by one Đổi button per slot; the branch is drawn at random from BR6 minus both slots,
+     then applied through free213's sw211 (same price: SW211F free changes a day, then 10 × n gold, cap 50; same busy/gold checks). */
+  if(a==='rt244r'){var gid=ROTGID,bs=hBrs(gid),op=BR6.filter(function(x){return bs.indexOf(x)<0});if(!op.length)return;var pick=op[Math.floor(Math.random()*op.length)],i=+v,before=bs[i];
+   _A.call(this,'sw211',v,pick,el);render();
+   try{if(hBrs(gid)[i]!==before&&box){var sl=box.querySelectorAll('.rtslot')[i],cd=sl&&sl.querySelector('.rtc');if(cd){cd.classList.add('rt244fx');setTimeout(function(){cd.classList.remove('rt244fx')},700)}}}catch(e){}
+   return}
   var inF=box&&el&&el.closest&&el.closest('#rt226');var r=_A.apply(this,arguments);if(inF)render();return r};
  document.addEventListener('keydown',function(e){if(box&&e.key==='Escape')close()});
  var st=document.createElement('style');st.id='rt226css';st.textContent=
@@ -13732,6 +13739,10 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
   '#rt226 .rt226on i{width:7px;height:7px;border-radius:50%;background:#2f9a55;box-shadow:0 0 0 2px rgba(255,255,255,.55);animation:rt226d 1.2s ease-in-out infinite}'+
   '@keyframes rt226on{50%{box-shadow:0 0 0 2px rgba(23,16,10,.9),0 0 22px rgba(242,196,96,.85)}}@keyframes rt226d{50%{opacity:.35}}'+
   '@keyframes rt226g{50%{box-shadow:0 0 0 2px rgba(108,194,131,.95),0 0 20px rgba(108,194,131,.55)}}'+
+  '#rt226 .rt244f{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}#rt226 .rt244f .sm.mute{flex:1;min-width:0}'+
+  '#rt226 .rt244b{min-height:40px!important;padding:0 18px!important;font-weight:700;border-color:rgba(226,178,90,.6)!important;color:#f6dfa6!important}'+
+  '@keyframes rt244fx{0%{transform:scale(.96);box-shadow:0 0 0 2px rgba(246,217,142,.9),0 0 24px rgba(246,217,142,.6)}100%{transform:none;box-shadow:none}}#rt226 .rtc.rt244fx{animation:rt244fx .6s ease-out}'+
+  '@media (prefers-reduced-motion:reduce){#rt226 .rtc.rt244fx{animation:none}}'+
   '@media (prefers-reduced-motion:reduce){#rt226 .rt226in,#rt226 .rt226bg{transition:none}#rt226 .rt226p img,#rt226 .rt226on,#rt226 .rt226on i{animation:none}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('rt226',e)}catch(x){}}})();
