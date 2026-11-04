@@ -10950,7 +10950,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V223';
+var BUILD='V224';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13267,4 +13267,178 @@ function ar2Fight(t){var a=ar2();if(!ar2Open())return;if(ar2Left()<=0){toast('H�
   'html body #sheet .ar2ch{flex-wrap:wrap;overflow:visible}html body #sheet .ar2tb{display:inline-flex;align-items:center;gap:4px}.ar2e{vertical-align:middle;flex:none}';
  document.head.appendChild(st);
 }catch(e){}})();
+/* ===== V224 (art agent, user 2026-11-04 08:11 "rework the Lôi Đài UI to match the existing UI, add images for rewards, review the button flow") =====
+   Re-skins coding's V223 Lôi Đài (arena2.js) in the Redesign Bible kit. Logic, numbers and save data are untouched; only the sheets change.
+   - Rank card: painted tier medallion (tower token art recoloured per tier), rank, tier, progress to the next tier, tries left (+ buy at 0),
+     21:00 payout as reward chips with item art, Cửa hàng button. The sticky "Cửa hàng" bar is gone (it covered the list).
+   - Khiêu chiến: attack team picker (Đội 1/2/3) in the section header; one card per rival with the rival's lead general portrait,
+     tier medallion + rank, formation, troop tags, power vs yours (±%), a difficulty chip, a compact Đánh button. Tapping the card opens
+     a preview (enemy formation with portraits, power bars, your attacking team, win rewards, sticky Khiêu chiến).
+   - Mốc hạng: one horizontal track (claimed ✓, next highlighted) instead of 9 rows. Đội phòng thủ shows the defence team's faces.
+     Báo chiến rows get a coloured mark. Top 3 as a small podium.
+   - Shop: item tiles on rarity frames with painted icons (Binh Phù = tiger tally, Thiên Mệnh Phù shards, Hồn Tướng soul orb,
+     5 beast stones = recoloured crystal, silver), price with the Uy Danh medal; unaffordable prices in red instead of a grey ghost button.
+   No new art file (512 of 512): icons come from art/icons/obj.webp, art/tower/icons.webp and art/ui/qi_arena.webp.
+   New actions ar2v (rival preview), ar2at (attack team) — checked unused. */
+(function(){try{
+ if(typeof ar2Sheet!=='function')return;
+ var TFX=['hue-rotate(-28deg) saturate(2.6) brightness(1.1)','sepia(.6) saturate(3) brightness(1.4)','hue-rotate(95deg) saturate(1.9) brightness(1.15)','sepia(.5) saturate(2.4) brightness(1.25)','grayscale(1) brightness(1.5) contrast(1.1)','none'];
+ var BFX={a:'hue-rotate(170deg) saturate(2.2)',b:'hue-rotate(30deg) saturate(1.4)',c:'hue-rotate(-75deg) saturate(1.6)',d:'grayscale(1) brightness(1.45)',e:'hue-rotate(-150deg) saturate(2.2) brightness(1.15)'};
+ function tw(i,sz,fx){return'<span class="ld4i" style="width:'+sz+'px;height:'+sz+'px;background-position:'+(i*100/6)+'% 0'+(fx?';filter:'+fx+' drop-shadow(0 2px 2px rgba(0,0,0,.6))':'')+'"></span>'}
+ function med(ti,sz){if(ti>=6)return'<span class="ld4m ld4none" style="width:'+sz+'px;height:'+sz+'px">'+tw(0,sz,'grayscale(1) brightness(.6)')+'</span>';
+  return'<span class="ld4m t'+ti+'" style="width:'+sz+'px;height:'+sz+'px">'+tw(0,sz,TFX[ti])+'</span>'}
+ function ud(sz){return'<img class="ld4ud" src="art/ui/qi_arena.webp" alt="" style="width:'+sz+'px;height:'+sz+'px">'}
+ function ob(k,sz){return'<span class="ld4o" style="width:'+sz+'px;height:'+sz+'px">'+objH(k)+'</span>'}
+ function chip(ic,n,cls){return'<span class="ld4c'+(cls?' '+cls:'')+'">'+ic+'<b>'+n+'</b></span>'}
+ function rwChips(rw,sz){sz=sz||18;var o='';if(rw.ud)o+=chip(ud(sz),fmt(rw.ud),'u');if(rw.s)o+=chip(ob('silver',sz),fmt(rw.s));if(rw.v)o+=chip(ob('gold',sz),fmt(rw.v));if(rw.m)o+=chip(ob('merit',sz),fmt(rw.m));return o}
+ function gname(g){return g==='lord'&&S.pname?S.pname:(GENS[g]?GENS[g].n:'')}
+ function face(g,cls){try{return'<span class="ld4f'+(cls?' '+cls:'')+'">'+pt(g,'',0)+'</span>'}catch(e){return''}}
+ function teamGids(i){try{var P=S.fm.pre[i],o=[];Object.keys(P.c).forEach(function(k){var g=P.c[k];if(S.gens[g]&&o.indexOf(g)<0)o.push(g)});return o}catch(e){return[]}}
+ function teamPw(i){var act=S.fm.act,p=0;try{S.fm.act=i;p=arnPower(playerUnits(true))}catch(e){}S.fm.act=act;return p}
+ function lead(T){var u=T.units.filter(function(x){return x.main})[0]||T.units[0];return u}
+ function diff(rat){return rat<.9?['dễ','ok']:rat<1.1?['ngang sức','eq']:['khó','bad']}
+ function seg(act,cur){return'<div class="ld4seg">'+[0,1,2].map(function(i){return'<button class="'+(cur===i?'on':'')+'" data-a="'+act+'" data-v="'+i+'">Đội '+(i+1)+'</button>'}).join('')+'</div>'}
+ function pct(rat){if(!isFinite(rat)||rat>50)return'—';var d=Math.round((rat-1)*100);return(d>0?'+':'')+d+'%'}
+
+ /* ---- rival card ---- */
+ function rival(t,st,mp,left,cd){var id=ar2At(t);if(id==null)return'';var T=ar2Team(id),rat=T.pw/Math.max(1,mp),ti=ar2TierI(t),L=lead(T),fac=ar2Fac(id),F=FAC[fac]||{n:'',c:'#ccc'},df=diff(rat);
+  var cn={},tags='';T.units.forEach(function(u){cn[u.br]=(cn[u.br]||0)+1});Object.keys(cn).sort(function(x,y){return cn[y]-cn[x]}).forEach(function(b){tags+='<i>'+TAGS[b]+(cn[b]>1?' ×'+cn[b]:'')+'</i>'});
+  return'<div class="ld4r'+(st?' st':'')+'" data-a="ar2v" data-v="'+t+'">'+(st?'<div class="ld4rib">Thách đấu · Uy Danh ×2</div>':'')+
+   '<div class="ld4rk">'+med(ti,30)+'<b>'+t+'</b></div>'+face(L.look,'lg')+
+   '<div class="ld4rb"><div class="ld4rn"><b>'+esc(ar2Name(id))+'</b><span style="color:'+F.c+'">'+F.n+'</span></div>'+
+   '<div class="ld4tg">'+tags+'</div>'+
+   '<div class="ld4pw"><span>Sức <b>'+fmt(T.pw)+'</b> '+pct(rat)+'</span><em class="'+df[1]+'">'+df[0]+'</em></div></div>'+
+   '<button class="btn sm ld4go" data-a="ar2f" data-v="'+t+'"'+(left<=0||cd?' disabled':'')+'>Đánh</button></div>'}
+
+ /* ---- main sheet ---- */
+ ar2Sheet=function(){ar2Settle();ar2Place();var a=ar2(),r=a.me,un=r>AR2N,ti=un?6:ar2TierI(r),mp=ar2MyPw(),left=ar2Left(),rw=ar2Reward(r),tg=ar2Targets(),cd=a.cd>S.clock;
+  var h='<h3>Lôi Đài</h3>';
+  /* rank card */
+  var nx='',pr=0;if(!un&&ti>0){var hi=ti<5?AR2TIER[ti].r:AR2N,lo=AR2TIER[ti-1].r;pr=Math.max(0,Math.min(1,(hi-r)/Math.max(1,hi-lo)));nx='Còn '+(r-lo)+' hạng tới '+AR2TIER[ti-1].n}
+  else if(!un)nx='Đứng đầu thiên hạ';
+  h+='<div class="ld4hd"><div class="ld4hm">'+med(ti,76)+'</div><div class="ld4hi"><div class="ld4ht"><span>'+(un?'Chưa xếp hạng':'Bậc '+AR2TIER[ti].n)+'</span><button class="btn alt sm" data-a="ar2s">'+ud(18)+'Cửa hàng</button></div>'+
+   '<div class="ld4hr">'+(un?'—':'Hạng <b>'+r+'</b>')+'<span>/ '+fmt(AR2N)+'</span></div>'+
+   (un?'<div class="ld4hn">Thắng một trận để vào bảng 1.000 hạng.</div>':'<div class="ld4bar"><i style="width:'+(pr*100).toFixed(1)+'%"></i></div><div class="ld4hn">'+nx+(a.badge!=null?' · Huy hiệu mùa: '+AR2TIER[a.badge].n:'')+'</div>')+'</div>'+
+   '<div class="ld4st"><div><span>Uy Danh</span><b>'+ud(18)+fmt(a.ud)+'</b></div><div><span>Lượt hôm nay</span><b>'+Math.max(0,left)+'/'+(AR2FREE+a.buy)+(left<=0?' <button class="ld4plus" data-a="ar2b" aria-label="Mua lượt">+</button>':'')+'</b></div><div><span>Bổng 21:00</span><b>'+ar2Next().replace(' giờ ','g ').replace(' phút','p')+'</b></div></div>'+
+   (un?'':'<div class="ld4pay"><span>Bổng hôm nay</span>'+rwChips(rw)+'</div>')+'</div>';
+  /* challenge list */
+  h+='<div class="ld4sec"><b>Khiêu chiến</b>'+seg('ar2at',S.fm.act)+'</div>';
+  var emp=!teamGids(S.fm.act).length;if(emp){cd=true;h+='<div class="ld4warn">Đội '+(S.fm.act+1)+' chưa có tướng <button class="btn sm" data-a="form">Bày trận</button></div>'}
+  else if(cd)h+='<div class="ld4warn">Nghỉ quân sau trận thua · còn '+Math.ceil((a.cd-S.clock)/60000)+' phút</div>';
+  else if(left<=0)h+='<div class="ld4warn">Hết lượt miễn phí · <button class="btn sm" data-a="ar2b">Mua 1 lượt · '+ob('gold',16)+(10*(a.buy+1))+'</button></div>';
+  h+='<div class="ld4list">'+(tg.st?rival(tg.st,true,mp,left,cd):'')+tg.list.map(function(t){return rival(t,false,mp,left,cd)}).join('')+'</div>';
+  h+='<div class="ld4hint">Chạm vào đối thủ để xem đội hình. Thắng: '+ud(14)+' 10 Uy Danh · '+ob('merit',14)+' 300 · đổi hạng.</div>';
+  /* milestones */
+  var nextM=null;AR2MS.forEach(function(m){if(!a.ms[m[0]]&&nextM==null)nextM=m[0]});
+  h+='<div class="ld4sec"><b>Mốc hạng</b><span>nhận một lần khi lần đầu đạt</span></div><div class="ld4ms">'+AR2MS.map(function(m){var got=a.ms[m[0]],nx=m[0]===nextM;
+   return'<div class="ld4mi'+(got?' got':'')+(nx?' nx':'')+'"><div class="ld4mt">Top '+m[0]+'</div>'+med(ar2TierI(m[0]),34)+'<div class="ld4mr">'+chip(ud(14),m[2],'u')+(m[1].v?chip(ob('gold',14),m[1].v):'')+'</div>'+(got?'<div class="ld4ok">✓</div>':'')+'</div>'}).join('')+'</div>';
+  /* defence */
+  var dd=a.def==null?S.fm.act:a.def,dg=teamGids(dd);
+  h+='<div class="ld4sec"><b>Đội phòng thủ</b>'+seg('ar2d',dd)+'</div><div class="ld4def"><div class="ld4fs">'+(dg.length?dg.map(function(g){return face(g)}).join(''):'<span class="sm mute">Đội trống</span>')+'</div>'+
+   '<div class="ld4dp"><span>Sức thủ</span><b>'+fmt(arnPower(ar2DefUnits()))+'</b></div></div><div class="ld4hint">Trước 21:00 các chư hầu xếp dưới sẽ đánh vào hạng của bạn bằng đội này.</div>';
+  /* battle log */
+  if(a.log.length){h+='<div class="ld4sec"><b>Báo chiến</b></div><div class="ld4log">'+a.log.slice(0,6).map(function(e){var tx='',btn='',k='n';
+   if(e.k==='lost'){k='bad';var cr=ar2RankOf(e.id);tx='<b>'+esc(ar2Name(e.id))+'</b> chiếm hạng '+e.from+' · bạn xuống '+e.to;if(cr&&cr<a.me)btn='<button class="btn sm" data-a="ar2r" data-v="'+e.id+'">Phục thù</button>'}
+   else if(e.k==='held'){k='ok';tx='Giữ vững hạng '+e.r+' trước <b>'+esc(ar2Name(e.id))+'</b> · +2 Uy Danh'}
+   else if(e.k==='pay'){k='g';tx='Bổng 21:00 · hạng '+e.r+'<div class="ld4lc">'+rwChips(e.rw,14)+'</div>'}
+   else if(e.k==='season'){k='g';tx='Kết mùa · bậc '+AR2TIER[e.ti].n+'<div class="ld4lc">'+rwChips(e.rw,14)+'</div>'}
+   else if(e.k==='place'){tx='Xếp hạng khởi điểm theo lực chiến: hạng '+e.r}
+   else if(e.k==='win'){k='ok';tx='Thắng <b>'+esc(ar2Name(e.id))+'</b> · lên hạng '+e.r}
+   else if(e.k==='loss'){k='bad';tx='Thua <b>'+esc(ar2Name(e.id))+'</b> · giữ hạng '+e.r}
+   return'<div class="ld4lg '+k+'"><i></i><div>'+tx+'</div>'+btn+'</div>'}).join('')+'</div>'}
+  /* top 3 */
+  h+='<div class="ld4sec"><b>Top 3 thiên hạ</b></div><div class="ld4pod">'+[2,1,3].map(function(k){var me=a.me===k,id=ar2At(k);
+   return'<div class="ld4p p'+k+(me?' me':'')+'">'+(me?face(teamGids(S.fm.act)[0]||'lord'):id!=null?face(lead(ar2Team(id)).look):'')+med(ar2TierI(k),26)+'<b>'+(me?'Bạn':esc(ar2Name(id)))+'</b><span>Hạng '+k+'</span></div>'}).join('')+'</div>';
+  return h};
+
+ /* ---- rival preview ---- */
+ function ar2Pre(t){var a=ar2(),id=ar2At(t);if(id==null)return ar2Sheet();var T=ar2Team(id),mp=ar2MyPw(),rat=T.pw/Math.max(1,mp),ti=ar2TierI(t),fac=ar2Fac(id),F=FAC[fac]||{n:'',c:'#ccc'},df=diff(rat),left=ar2Left(),cd=a.cd>S.clock,tg=ar2Targets(),st=tg.st===t;
+  var cells={};T.units.forEach(function(u){cells[u.r+'-'+u.l]=u});
+  var g='';[2,1,0].forEach(function(rr){for(var l=0;l<3;l++){var u=cells[rr+'-'+l];g+='<div class="ld4gc'+(u?' on':'')+(u&&u.main?' mn':'')+'">'+(u?face(u.look)+'<span class="tg">'+TAGS[u.br]+'</span>':'')+'</div>'}});
+  var my=teamGids(S.fm.act),tot=T.pw+mp;if(!my.length)cd=true;
+  var h='<h3>Đối thủ · hạng '+t+'</h3>';
+  h+='<div class="ld4pv"><div class="ld4pvh">'+med(ti,40)+'<div><b>'+esc(ar2Name(id))+'</b><span style="color:'+F.c+'">'+F.n+'</span> · <span>'+FORM[T.fid].n+' · Lv '+T.lv+'</span></div></div>'+
+   '<div class="ld4g">'+g+'</div><div class="ld4gl">Hàng trước ở dưới · tướng viền vàng là chủ tướng</div>'+
+   '<div class="ld4vs"><b class="f">'+fmt(T.pw)+'</b><div class="ld4vb"><i style="width:'+(T.pw/tot*100).toFixed(1)+'%"></i></div><b class="u">'+fmt(mp)+'</b></div>'+
+   '<div class="ld4vl"><span>Địch</span><em class="'+df[1]+'">'+df[0]+' · '+pct(rat)+'</em><span>Quân ta</span></div></div>';
+  h+='<div class="ld4sec"><b>Đội xuất chiến</b>'+seg('ar2at',S.fm.act)+'</div><div class="ld4def"><div class="ld4fs">'+(my.length?my.map(function(x){return face(x)}).join(''):'<span class="sm mute">Đội trống</span>')+'</div><button class="btn alt sm" data-a="form">Bày trận</button></div>';
+  h+='<div class="ld4sec"><b>Thắng nhận</b></div><div class="ld4pay big">'+rwChips({ud:st?20:10,m:300},20)+'<span class="ld4pn">'+(st?'Thách đấu ×2 · ':'')+'đổi lên hạng '+t+'</span></div>';
+  h+='<div class="ld4hint">Thua: +3 Uy Danh, giữ hạng, nghỉ quân 10 phút.</div>';
+  h+='<div class="sbar"><button class="btn wide" data-a="ar2f" data-v="'+t+'"'+(left<=0||cd?' disabled':'')+'>'+(!my.length?'Đội '+(S.fm.act+1)+' chưa có tướng':cd?'Đang nghỉ quân':left<=0?'Hết lượt hôm nay':'Khiêu chiến · còn '+left+' lượt')+'</button></div>';
+  return h}
+
+ /* ---- shop ---- */
+ var SHI={phu:function(){return ob('tally',58)},sh:function(){return tw(2,58)},hon:function(){return tw(3,58,'hue-rotate(150deg) saturate(1.6)')},sil:function(){return ob('silver',58)}},SHR={phu:'sr',sh:'ssr',hon:'sr',bst:'ssr',sil:'r'};
+ ar2ShopSheet=function(){var a=ar2(),h='<h3>Cửa hàng Uy Danh</h3>';
+  h+='<div class="ld4bal">'+ud(40)+'<div><span>Uy Danh đang có</span><b>'+fmt(a.ud)+'</b></div><em>Bổng 21:00 · trận thắng · mốc hạng · kết mùa<br>Lượt mua làm mới mỗi ngày</em></div><div class="ld4shop">';
+  AR2SHOP.forEach(function(it){var u=ar2ShopUsed(it.id),out=u>=it.lim,poor=a.ud<it.p;
+   if(it.pick){h+='<div class="ld4it wide"><div class="ld4itn"><b>'+it.n+'</b><span>'+it.d+' · còn '+(it.lim-u)+'/'+it.lim+'</span></div><div class="ld4bs">'+BSTK.map(function(f){
+     return'<button class="ld4b" data-a="ar2sb" data-v="bst:'+f+'"'+(out?' disabled':'')+'><span class="ld4tile ssr">'+tw(4,44,BFX[f])+'</span><span>'+BST[f].replace(' Thạch','')+'</span></button>'}).join('')+'</div>'+
+     '<div class="ld4pr'+(poor&&!out?' poor':'')+'">'+(out?'Hết lượt hôm nay':ud(16)+it.p+' · chạm một loại đá để đổi')+'</div></div>';return}
+   h+='<button class="ld4it" data-a="ar2sb" data-v="'+it.id+'"'+(out?' disabled':'')+'><span class="ld4tile '+(SHR[it.id]||'r')+'">'+(SHI[it.id]?SHI[it.id]():'')+'</span><b>'+it.n+'</b><span class="ld4d">'+(it.d||'&nbsp;')+'</span>'+
+    '<span class="ld4lim">còn '+(it.lim-u)+'/'+it.lim+'</span><span class="ld4pr'+(poor&&!out?' poor':'')+'">'+(out?'Hết lượt':ud(16)+it.p)+'</span></button>'});
+  return h+'</div>'};
+
+ /* reward text everywhere in Lôi Đài (result lines, milestones) shows item art */
+ ar2Rt=function(rw){return'<span class="ld4lc" style="display:inline-flex;margin:0">'+rwChips(rw,14)+'</span>'};
+ var _A=A_;A_=function(a,v,w,el){try{
+  if(a==='ar2v'){var t=+v;openSheet(function ar2PreS(){return ar2Pre(t)});return}
+  if(a==='ar2at'){S.fm.act=+v;try{save()}catch(e){}openSheet(sheetFn,true);return}
+ }catch(e){}return _A(a,v,w,el)};
+
+ var st=document.createElement('style');st.textContent=
+ '.ld4i{display:inline-block;flex:none;vertical-align:middle;background:url(art/tower/icons.webp) 0 0/700% 100% no-repeat}'+
+ '.ld4o{display:inline-flex;flex:none;vertical-align:middle}.ld4o .objx{width:100%;height:100%}.ld4ud{flex:none;vertical-align:middle;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}'+
+ '.ld4m{position:relative;display:inline-grid;place-items:center;flex:none}.ld4m.t0::after,.ld4m.t1::after{content:"";position:absolute;inset:-12%;border-radius:50%;box-shadow:0 0 14px 2px rgba(255,200,90,.45);pointer-events:none}.ld4m.t0::after{box-shadow:0 0 16px 3px rgba(255,80,60,.5)}'+
+ '.ld4c{display:inline-flex;align-items:center;gap:4px;padding:3px 9px 3px 4px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(226,178,90,.22);font:600 13px "Barlow Condensed",sans-serif;color:#f6e6c4;white-space:nowrap}.ld4c b{font-weight:700}.ld4c.u{color:#ffd77a}'+
+ '#sheet .ld4hd{display:grid;grid-template-columns:84px 1fr;gap:4px 12px;padding:14px;border-radius:16px;border:1px solid rgba(226,178,90,.35);background:radial-gradient(120% 90% at 0 0,rgba(226,178,90,.14),rgba(0,0,0,0) 60%),rgba(20,14,10,.6);margin-bottom:6px}'+
+ '#sheet .ld4hm{display:grid;place-items:center}.ld4hi{min-width:0}.ld4ht{display:flex;align-items:center;justify-content:space-between;gap:8px}.ld4ht>span{font:700 17px Philosopher,Georgia,serif;color:#fff2cf}'+
+ '#sheet .ld4ht .btn{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:0 10px}'+
+ '.ld4hr{font:600 14px "Be Vietnam Pro",sans-serif;color:#cdbd9c;margin-top:2px}.ld4hr b{font:700 30px/1 "Barlow Condensed",sans-serif;color:#fff;margin:0 2px}.ld4hr span{margin-left:4px;font-size:12px;opacity:.7}'+
+ '.ld4bar{height:6px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:7px;overflow:hidden}.ld4bar i{display:block;height:100%;background:linear-gradient(90deg,#b8801f,#ffe39a)}'+
+ '.ld4hn{font-size:12px;color:#b9a98a;margin-top:5px}'+
+ '.ld4st{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;padding-top:10px;border-top:1px solid rgba(226,178,90,.15)}.ld4st div{display:flex;flex-direction:column;gap:3px}.ld4st span{font-size:11.5px;color:#b9a98a}.ld4st b{display:flex;align-items:center;gap:4px;font:700 18px "Barlow Condensed",sans-serif;color:#fff}'+
+ '.ld4plus{width:26px;height:26px;border-radius:50%;border:1px solid #6cc283;background:#2c5a3a;color:#fff;font:700 16px/1 sans-serif;padding:0}'+
+ '.ld4pay{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}.ld4pay>span:first-child{font-size:12px;color:#b9a98a;margin-right:2px}.ld4pay.big{padding:10px 12px;border-radius:12px;border:1px solid rgba(226,178,90,.22);background:rgba(20,14,10,.5)}.ld4pay.big .ld4c{font-size:15px}.ld4pn{font-size:12px;color:#b9a98a}'+
+ '.ld4sec{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 8px}.ld4sec>b{font:700 17px Philosopher,Georgia,serif;color:#fff2cf}.ld4sec>span{font-size:12px;color:#b9a98a}'+
+ '.ld4seg{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(226,178,90,.22);border-radius:10px;padding:2px}.ld4seg button{min-width:52px;height:32px;border:0;border-radius:8px;background:none;color:#b9a98a;font:600 12.5px "Be Vietnam Pro",sans-serif}.ld4seg button.on{background:linear-gradient(180deg,#f3d58f,#c99a48);color:#2a1a08}'+
+ '.ld4warn{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;border:1px solid rgba(240,160,80,.45);background:rgba(240,160,80,.1);color:#f3c27a;font-size:12.5px;margin-bottom:8px}.ld4warn .btn{display:inline-flex;align-items:center;gap:3px}'+
+ '.ld4list{display:flex;flex-direction:column;gap:8px}'+
+ '.ld4r{position:relative;display:grid;grid-template-columns:36px 46px 1fr auto;align-items:center;gap:8px;padding:10px;border-radius:14px;border:1px solid rgba(226,178,90,.22);background:rgba(20,14,10,.55);cursor:pointer}.ld4r:active{transform:scale(.99)}'+
+ '.ld4r.st{border-color:rgba(255,205,100,.7);background:linear-gradient(100deg,rgba(226,178,90,.16),rgba(20,14,10,.55) 60%);padding-top:22px}'+
+ '.ld4rib{position:absolute;left:10px;top:-1px;padding:2px 9px;border-radius:0 0 8px 8px;background:linear-gradient(180deg,#f3d58f,#c99a48);color:#2a1a08;font:700 11px "Be Vietnam Pro",sans-serif}'+
+ '.ld4rk{display:flex;flex-direction:column;align-items:center;gap:1px}.ld4rk b{font:700 15px "Barlow Condensed",sans-serif;color:#fff}'+
+ '.ld4f{display:inline-block;flex:none;width:40px;height:40px;border-radius:10px;overflow:hidden;border:1px solid rgba(226,178,90,.4)}.ld4f.lg{width:46px;height:56px}.ld4f .pw{width:100%!important;height:100%!important;margin:0!important;border:0!important}.ld4f .pw svg,.ld4f .pw img{width:100%!important;height:100%!important}'+
+ '.ld4rb{min-width:0}.ld4rn{display:flex;align-items:baseline;gap:6px;min-width:0}.ld4rn b{font:700 15px Philosopher,Georgia,serif;color:#fff2cf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ld4rn span{font-size:12px;flex:none}'+
+ '.ld4tg{display:flex;gap:3px;overflow:hidden;margin-top:3px}.ld4tg i{flex:none;white-space:nowrap;font:700 10px/1 "Be Vietnam Pro",sans-serif;font-style:normal;padding:3px 4px;border-radius:4px;background:rgba(255,255,255,.08);color:#d9c9a8}'+
+ '.ld4pw{display:flex;align-items:center;gap:6px;white-space:nowrap;margin-top:4px;font-size:12px;color:#b9a98a}.ld4pw b{font:700 14px "Barlow Condensed",sans-serif;color:#fff}'+
+ '.ld4pw em,.ld4vl em{white-space:nowrap;font-style:normal;font-size:11px;font-weight:600;padding:1px 7px;border-radius:8px}em.ok{background:rgba(108,194,131,.18);color:#a8e6b7}em.eq{background:rgba(226,178,90,.18);color:#ffd77a}em.bad{background:rgba(230,110,100,.2);color:#ffb3a8}'+
+ '#sheet .ld4r .ld4go{min-width:64px;min-height:40px}'+
+ '.ld4hint{font-size:12px;color:#b9a98a;margin-top:8px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}'+
+ '.ld4ms{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scroll-snap-type:x mandatory;scrollbar-width:none}.ld4ms::-webkit-scrollbar{display:none}'+
+ '.ld4mi{position:relative;flex:none;width:96px;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 6px;border-radius:12px;border:1px solid rgba(226,178,90,.2);background:rgba(20,14,10,.5)}'+
+ '.ld4mi.nx{border-color:rgba(255,205,100,.8);box-shadow:0 0 0 2px rgba(255,205,100,.15)}.ld4mi.got{opacity:.55}.ld4mt{font:700 13px "Barlow Condensed",sans-serif;color:#fff2cf}.ld4mr{display:flex;flex-direction:column;gap:3px;align-items:center}.ld4mr .ld4c{font-size:12px}'+
+ '.ld4ok{position:absolute;right:6px;top:6px;width:18px;height:18px;border-radius:50%;background:#3a8a52;color:#fff;font-size:11px;display:grid;place-items:center}'+
+ '.ld4def{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(226,178,90,.22);background:rgba(20,14,10,.5)}.ld4fs{display:flex;gap:5px;flex-wrap:wrap}.ld4dp{text-align:right;flex:none}.ld4dp span{display:block;font-size:11.5px;color:#b9a98a}.ld4dp b{font:700 18px "Barlow Condensed",sans-serif;color:#fff}'+
+ '.ld4log{display:flex;flex-direction:column;border-radius:12px;border:1px solid rgba(226,178,90,.22);background:rgba(20,14,10,.5)}.ld4lg{display:flex;align-items:center;gap:9px;padding:9px 12px;font-size:12.5px;color:#e8dcc0;border-top:1px solid rgba(226,178,90,.1)}.ld4lg:first-child{border-top:0}.ld4lg>div{flex:1;min-width:0}'+
+ '.ld4lg>i{flex:none;width:8px;height:8px;border-radius:50%;background:#8a7a60}.ld4lg.ok>i{background:#6cc283}.ld4lg.bad>i{background:#e07d68}.ld4lg.g>i{background:#f0c24a}.ld4lc{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}.ld4lc .ld4c{font-size:12px}'+
+ '.ld4pod{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:8px}.ld4p{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:12px;border:1px solid rgba(226,178,90,.22);background:rgba(20,14,10,.5);text-align:center;min-width:0}'+
+ '.ld4p.p1{padding-top:16px;border-color:rgba(255,205,100,.6);background:linear-gradient(180deg,rgba(226,178,90,.16),rgba(20,14,10,.5))}.ld4p.me{border-color:#6cc283}.ld4p b{font:700 13px Philosopher,Georgia,serif;color:#fff2cf;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ld4p span{font-size:11px;color:#b9a98a}.ld4p .ld4f{width:48px;height:56px}.ld4p .ld4m{margin-top:-18px}'+
+ /* preview */
+ '.ld4pv{padding:12px;border-radius:16px;border:1px solid rgba(226,178,90,.3);background:linear-gradient(180deg,rgba(120,40,30,.18),rgba(20,14,10,.55) 55%,rgba(40,110,60,.12))}.ld4pvh{display:flex;align-items:center;gap:10px;font-size:12.5px;color:#b9a98a}.ld4pvh b{display:block;font:700 17px Philosopher,Georgia,serif;color:#fff2cf}'+
+ '.ld4g{display:grid;grid-template-columns:repeat(3,64px);gap:6px;justify-content:center;margin-top:10px}.ld4gc{position:relative;height:72px;border-radius:10px;border:1px dashed rgba(226,178,90,.18);background:rgba(255,255,255,.03)}.ld4gc.on{border:1px solid rgba(230,110,100,.6)}.ld4gc.mn{border:2px solid #f0c24a}'+
+ '.ld4gc .ld4f{width:100%;height:100%;border:0;border-radius:9px}.ld4gc .tg{position:absolute;left:3px;top:3px;font:700 9px/1.3 "Be Vietnam Pro",sans-serif;padding:0 4px;border-radius:4px;background:#8a2a22;color:#fff}.ld4gl{text-align:center;font-size:11px;color:#b9a98a;margin-top:6px}'+
+ '.ld4vs{display:flex;align-items:center;gap:8px;margin-top:10px}.ld4vs b{font:700 16px "Barlow Condensed",sans-serif}.ld4vs b.f{color:#ff9e8e}.ld4vs b.u{color:#8fd6a0}.ld4vb{flex:1;height:8px;border-radius:4px;background:#4a9a62;overflow:hidden}.ld4vb i{display:block;height:100%;background:#c8574a}'+
+ '.ld4vl{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#b9a98a;margin-top:4px}'+
+ /* shop */
+ '.ld4bal{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(226,178,90,.35);background:rgba(20,14,10,.6)}.ld4bal span{display:block;font-size:12px;color:#b9a98a}.ld4bal b{font:700 26px/1.1 "Barlow Condensed",sans-serif;color:#ffd77a}.ld4bal em{margin-left:auto;font-style:normal;font-size:11px;color:#b9a98a;text-align:right;line-height:1.4}'+
+ '.ld4shop{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}'+
+ '.ld4it{display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 8px 10px;border-radius:14px;border:1px solid rgba(226,178,90,.25);background:rgba(20,14,10,.55);color:#f3e6c8;font:500 12px "Be Vietnam Pro",sans-serif;text-align:center}.ld4it:disabled{opacity:.5}'+
+ '.ld4it.wide{grid-column:1/-1}.ld4it>b{font:700 14px Philosopher,Georgia,serif;color:#fff2cf;margin-top:4px}.ld4d{font-size:11px;color:#b9a98a;min-height:2.6em;line-height:1.3}.ld4lim{font-size:11px;color:#b9a98a}'+
+ '.ld4tile{display:grid;place-items:center;width:78px;height:78px;box-sizing:border-box;border:12px solid transparent;border-image:url(art/ui/r_tile_r.webp) 84 fill / 12px stretch}.ld4tile.sr{border-image-source:url(art/ui/r_tile_sr.webp)}.ld4tile.ssr{border-image-source:url(art/ui/r_tile_ssr.webp)}'+
+ '.ld4pr{display:inline-flex;align-items:center;justify-content:center;gap:4px;margin-top:4px;min-height:34px;min-width:100px;padding:0 12px;border-radius:10px;background:linear-gradient(180deg,#f3d58f,#c99a48);color:#2a1a08;font:700 15px "Barlow Condensed",sans-serif}.ld4pr.poor{background:rgba(230,110,100,.15);color:#ff9e8e;border:1px solid rgba(230,110,100,.45)}'+
+ '.ld4it.wide .ld4pr{background:none;color:#ffd77a;min-height:0;font-size:13px}.ld4it.wide .ld4pr.poor{border:0;color:#ff9e8e}.ld4itn{display:flex;flex-direction:column;align-items:center;gap:2px}.ld4itn b{font:700 14px Philosopher,Georgia,serif;color:#fff2cf}.ld4itn span{font-size:11px;color:#b9a98a}'+
+ '.ld4bs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;margin-top:8px}.ld4b{display:flex;flex-direction:column;align-items:center;gap:3px;padding:0;border:0;background:none;color:#e8dcc0;font:600 11px "Be Vietnam Pro",sans-serif}.ld4b:disabled{opacity:.45}.ld4b .ld4tile{width:58px;height:58px;border-width:9px;border-image-width:9px}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('ld224',e)}catch(x){}}})();
 </script>
