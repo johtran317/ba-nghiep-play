@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V225';
+var BUILD='V226';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13451,4 +13451,139 @@ function ar2Fight(t){var a=ar2();if(!ar2Open())return;if(ar2Left()<=0){toast('H�
  '.ld4bs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;margin-top:8px}.ld4b{display:flex;flex-direction:column;align-items:center;gap:3px;padding:0;border:0;background:none;color:#e8dcc0;font:600 11px "Be Vietnam Pro",sans-serif}.ld4b:disabled{opacity:.45}.ld4b .ld4tile{width:58px;height:58px;border-width:9px;border-image-width:9px}';
  document.head.appendChild(st);
 }catch(e){try{console.error('ld224',e)}catch(x){}}})();
+/* ===== V226 Tân thủ guide: Quân sư Thanh Y (coding, user 2026-11-04 08:28 "let do 1": build the guide now with stand-in art).
+   Plan doc §3–4: https://claude.ai/artifact/5tYwc5fmQCjHACuk6oK3mJ . New-start saves only (S.f204) with a name; Settings switch turns it off.
+   Engine: chapters {id, start(), end(), steps[]}; a step shows when its chapter has started, the steps before it are done and its
+   when() is true; it ends by until() (the player did the thing) or the "Đã hiểu" button. "Bỏ qua" skips the chapter. A chapter whose
+   end() is already true before any of its steps showed is skipped silently (existing saves never see stale chapters).
+   UI: a small card (code-drawn Thanh Y bust, 3 faces) + a gold pointer ring on the target; never blocks the screen; hidden while the
+   splash, a hero reveal or a battle is up. In battle: 3 timed tips (layout, morale ember, speed button) drawn over the battle,
+   pointer-events none, never touching the battle loop. After a battle: "Lần đầu gặp" card for statuses seen for the first time
+   (from the battle log snapshots), and "Sổ tay chiến trận" in Settings lists them all.
+   Painted art later (Art To-Do A1/A2): set GDART to the atlas and gdBust() uses it; nothing else changes.
+   Save key S.gd. Actions gdok, gdskip, gdtog, gdbook (checked unused). Everything wrapped. */
+var GDART=null;
+var GDST=[[2,'Choáng','mất lượt kế tiếp.'],[3,'Thiêu đốt','mất quân mỗi lượt.'],[4,'Hỗn loạn','có thể đánh nhầm quân mình.'],[5,'Khiêu khích','kéo mọi đòn đánh về phía mình.'],
+ [6,'Giáp khí','chắn bớt sát thương.'],[7,'Làm chậm','ra đòn muộn hơn.'],[8,'Suy yếu','gây ít sát thương hơn.'],[9,'Phá giáp','nhận thêm sát thương.'],
+ [11,'Hồi phục','hồi quân mỗi lượt.'],[12,'Câm lặng','không dùng được chiến pháp.'],[13,'Trúng độc','mất một phần quân tối đa mỗi lượt.'],[14,'Khóa sĩ khí','không tăng được sĩ khí.']];
+function gd(){if(!S.gd)S.gd={done:{},ch:{},st:{},off:0};return S.gd}
+function gdOn(){try{return!!(S&&S.f204&&S.pname&&!gd().off)}catch(e){return false}}
+function gdQ(s){try{var L=document.querySelectorAll(s);for(var i=0;i<L.length;i++){var r=L[i].getBoundingClientRect();if(r.width>4&&r.height>4&&r.bottom>0&&r.top<innerHeight)return L[i]}}catch(e){}return null}
+function gdNoModal(){var m=document.getElementById('modal');return!m||m.hidden}
+function gdSheet(s){return!gdNoModal()&&!!gdQ('#sheet '+s)}
+function gdSt(k){return!!(S.camp&&S.camp.stage&&S.camp.stage[k])}
+function gdMd(i){return!!(S.camp&&S.camp.mapDone&&S.camp.mapDone[i])}
+function gdTab(t){try{return tab===t}catch(e){return false}}
+function gdH3(t){var h=document.querySelector('#sheet h3');return!gdNoModal()&&!!h&&h.textContent.indexOf(t)>=0}
+var GDC=[
+ {id:'G1',start:function(){return true},end:function(){return gdSt('0-0')},steps:[
+  {id:'g1.1',f:0,t:'Chúa công {ten}, tại hạ là Thanh Y. Loạn thế đã đến, hãy cùng ta dẹp giặc trước đã.',when:gdNoModal,tap:1},
+  {id:'g1.2',f:2,t:'Vào Chinh chiến để xem bản đồ.',p:'#nav [data-v="camp"]',when:function(){return gdNoModal()&&!gdTab('camp')},until:function(){return gdTab('camp')}},
+  {id:'g1.3',f:2,t:'Chạm vào ải đầu tiên để xem quân địch.',p:function(){try{var n=advNext();if(n)return'#main [data-a="stage"][data-v="'+n[0]+'|'+n[1]+'|stage"]'}catch(e){}return'#main [data-a="stage"]'},when:function(){return gdTab('camp')&&gdNoModal()},until:function(){return gdSheet('[data-a="fight"]')}},
+  {id:'g1.3b',f:2,t:'Bên trên là quân địch, số % là cơ hội thắng. Trên 70% là yên tâm. Nhấn Tấn công!',p:'#sheet [data-a="fight"]',when:function(){return gdSheet('[data-a="fight"]')},until:function(){return fighting||gdSt('0-0')}},
+  {id:'g1.7',f:0,t:function(){return gdH3('Thất bại')?'Thua một trận không sao. Xem Tình báo để biết bị khắc chế ở đâu, Hồi binh rồi đánh lại.':'Thắng lợi! Ba sao khi thắng gọn và ít tổn thất.'},when:function(){return!fighting&&(gdH3('Chiến thắng')||gdH3('Thất bại')||gdH3('Thắng'))},tap:1}]},
+ {id:'G2',start:function(){return gdSt('0-0')},end:function(){return gdSt('0-1')},steps:[
+  {id:'g2.1',f:2,t:'Đây là đội của ta. Hàng trước chịu đòn, hàng sau an toàn cho cung và mưu sĩ. Kéo tướng để đổi chỗ.',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1},
+  {id:'g2.2',f:0,t:'Số nhỏ trên mỗi ô là thứ tự ra đòn. Vị trí quyết định thắng thua!',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1}]},
+ {id:'G3',start:function(){return gdSt('0-1')},end:function(){return gdSt('0-3')},steps:[
+  {id:'g3.0',f:2,t:'Về Thành để lo việc nội chính.',p:'#nav [data-v="city"]',when:function(){return gdNoModal()&&!gdTab('city')},until:function(){return gdTab('city')}},
+  {id:'g3.1',f:2,t:'Thu thuế để có bạc. Bạc dùng để xây dựng và luyện tướng.',p:'[data-a="tax"]',when:function(){return gdTab('city')&&gdNoModal()},tap:1,until:function(){return(S.taxUsed||0)>0}},
+  {id:'g3.2',f:1,t:'Chính Sảnh quyết định cấp tối đa của mọi công trình. Nâng nó trước!',p:'[data-a="bsheet"][data-v="mc"]',when:function(){return gdTab('city')&&gdNoModal()},tap:1,until:function(){return gdSheet('[data-a="bsheet"]')||gdH3('Chính Sảnh')}}]},
+ {id:'G3b',start:function(){return gdSt('0-0')},end:function(){return gdMd(2)},steps:[
+  {id:'g3.3',f:2,t:'Quân tổn thất cần bổ sung bằng lương. Bấm Hồi binh trước khi đánh tiếp.',p:'#sheet [data-a="refillTeam"]',when:function(){return gdSheet('[data-a="refillTeam"]')},tap:1,until:function(){return!gdSheet('[data-a="refillTeam"]')}}]},
+ {id:'G4',start:function(){return gdSt('0-2')},end:function(){return gdMd(1)},steps:[
+  {id:'g4.0',f:2,t:'Vào Tướng để xem, luyện và trang bị cho các tướng.',p:'#nav [data-v="gen"]',when:function(){return gdNoModal()&&!gdTab('gen')},until:function(){return gdTab('gen')}},
+  {id:'g4.1',f:2,t:'Chạm vào một tướng để nâng cấp và khoác trang bị từ Kho. Ô trống có dấu + là còn chỗ.',when:function(){return gdTab('gen')},tap:1},
+  {id:'g4.2',f:1,t:'Bộ khắc Kỵ. Kỵ khắc Cung, Mưu và Phụ. Cơ Giới phá Bộ, Mưu phá Cơ Giới. Đổi binh chủng để khắc chế địch (10 lần miễn phí mỗi ngày).',when:function(){return gdTab('gen')||gdNoModal()},tap:1}]},
+ {id:'G5',start:function(){return gdMd(0)},end:function(){return gdMd(2)},steps:[
+  {id:'g5.1',f:2,t:'Mỗi trận tốn một Quân lệnh. Hết lệnh thì bấm dấu + để mua thêm.',p:'.ord215plus',when:gdNoModal,tap:1},
+  {id:'g5.2',f:0,t:'Hoàn thành đủ Nhiệm vụ ngày sẽ mở rương lớn.',p:'[data-a="daily"]',when:function(){return gdNoModal()&&gdTab('city')},tap:1}]},
+ {id:'G6',start:function(){return gdMd(1)},end:function(){return gdMd(3)},steps:[
+  {id:'g6.1',f:2,t:'Giờ ta ra trận ba tướng. Tửu Quán đã mở, chiêu mộ thêm danh tướng!',p:'[data-a="tavern"]',when:function(){return gdNoModal()&&(gdTab('gen')||gdTab('city'))},tap:1},
+  {id:'g6.2',f:1,t:'Hạ Tinh binh sẽ làm yếu trùm của Màn này. Đánh hết rồi hãy gặp trùm.',when:function(){var s=document.getElementById('sheet');return gdSheet('.pv')&&s&&s.textContent.indexOf('Tinh binh')>=0},tap:1}]},
+ {id:'G7',start:function(){return gdMd(2)},end:function(){return S.nation&&S.nation!=='tl'&&!gdH3('Chọn phe')},steps:[
+  {id:'g7.1',f:1,t:'Thiên hạ chia ba. Chúa công muốn theo ai? Mỗi phe tặng một danh tướng.',when:function(){return gdH3('Chọn phe')},tap:1}]},
+ {id:'G8',start:function(){return gdMd(3)},end:function(){return gdMd(5)},steps:[
+  {id:'g8.1',f:2,t:'Năm tướng ra trận! Quân Trống tiếp sĩ khí cả đội, Quân y giữ sức. Xem các thẻ dưới bàn cờ.',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1},
+  {id:'g8.2',f:0,t:'Lôi Đài đã mở. Hạng lúc 21 giờ quyết định bổng ngày, giữ vững ngôi nhé!',p:'[data-a="hub"][data-v="war"]',when:function(){return gdNoModal()&&!!S.ar2pop&&gdTab('city')},tap:1}]},
+ {id:'G9',start:function(){return gdMd(5)},end:function(){return gdMd(7)},steps:[
+  {id:'g9.1',f:0,t:'Thông Thiên Tháp không tốn Quân lệnh. Mỗi tầng là một đề bài khắc chế.',p:'[data-a="hub"][data-v="war"]',when:function(){return gdNoModal()&&!!S.tw217pop&&gdTab('city')},tap:1},
+  {id:'g9.2',f:2,t:'Mỗi ngày nhớ bấm Quét tháp để nhận thưởng theo tầng cao nhất.',p:'#sheet [data-a="twsweep"]',when:function(){try{return ev().tw.best>=1&&gdSheet('[data-a="twsweep"]')}catch(e){return false}},tap:1}]},
+ {id:'G10',start:function(){return gdMd(9)},end:function(){return gdMd(11)},steps:[
+  {id:'g10.1',f:1,t:'Từ Màn 11 địch có quân Trống! Hạ kẻ đánh trống trước, Kỵ và Cung khắc chúng.',p:'#sheet .pv-en,#sheet .pv-foe',when:function(){return gdSheet('.pv')},tap:1}]}];
+/* ---- bust (stand-in, code-drawn) ---- */
+function gdBust(f){if(GDART)return'<span class="gdart" style="background-image:url('+GDART+');background-position:'+(f*50)+'% 0"></span>';
+ var mouth=f===1?'<path d="M29 37h6" stroke="#5a2e22" stroke-width="1.4" stroke-linecap="round"/>':'<path d="M28.5 36.5q3.5 2.6 7 0" stroke="#5a2e22" stroke-width="1.4" fill="none" stroke-linecap="round"/>';
+ var fan=f===2?'<g transform="rotate(-38 46 46)"><rect x="44" y="20" width="4" height="30" rx="2" fill="#e8d7b0"/><path d="M46 19l4-6-8 0z" fill="#d9b45a"/></g>':f===1?'<rect x="20" y="49" width="26" height="4" rx="2" fill="#e8d7b0" transform="rotate(-12 33 51)"/>':'';
+ return'<svg viewBox="0 0 64 64" class="gdsvg" aria-label="Quân sư Thanh Y"><defs><radialGradient id="gdbg" cx="50%" cy="40%"><stop offset="0" stop-color="#2a5c58"/><stop offset="1" stop-color="#132726"/></radialGradient></defs>'+
+  '<circle cx="32" cy="32" r="31" fill="url(#gdbg)" stroke="#d9b45a" stroke-width="1.6"/>'+
+  '<path d="M10 64c2-14 10-20 22-20s20 6 22 20z" fill="#1d3f57"/><path d="M20 64c2-10 6-16 12-16s10 6 12 16z" fill="#3e8f86"/><path d="M27 46l5 8 5-8" fill="none" stroke="#d9b45a" stroke-width="1.4"/>'+
+  '<ellipse cx="32" cy="31" rx="10" ry="12" fill="#f0d2b4"/><path d="M21 30c0-10 5-15 11-15s11 5 11 15c-2-5-5-8-11-8s-9 3-11 8z" fill="#1b1414"/><path d="M22 30c-2 6-1 14 1 18l3-12z M42 30c2 6 1 14-1 18l-3-12z" fill="#1b1414"/>'+
+  '<circle cx="32" cy="12" r="5" fill="#1b1414"/><rect x="25" y="10.5" width="14" height="1.6" rx=".8" fill="#c9ced8"/>'+
+  '<path d="M27.5 30.5q1.5-1 3 0M33.5 30.5q1.5-1 3 0" stroke="#2b1a14" stroke-width="1.3" fill="none" stroke-linecap="round"/>'+(f===1?'<path d="M27 27.5l3 .8M37 27.5l-3 .8" stroke="#2b1a14" stroke-width="1.1"/>':'')+mouth+fan+'</svg>'}
+/* ---- UI ---- */
+var GDEL=null,GDPT=null,GDCUR=null,GDBT=null;
+function gdUI(){if(GDEL)return;GDEL=document.createElement('div');GDEL.id='gdcard';GDEL.hidden=true;document.body.appendChild(GDEL);
+ GDPT=document.createElement('div');GDPT.id='gdptr';GDPT.hidden=true;GDPT.innerHTML='<i></i><b></b>';document.body.appendChild(GDPT);
+ var st=document.createElement('style');st.textContent=
+  '#gdcard{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:99990;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:rgba(18,13,9,.94);border:1px solid rgba(226,178,90,.55);box-shadow:0 8px 28px rgba(0,0,0,.55);color:#f6e6c4;font:400 14px/1.45 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);animation:gdin .25s ease-out;max-width:520px;margin:0 auto}'+
+  '#gdcard.bt{pointer-events:none;top:calc(56px + env(safe-area-inset-top,0px));bottom:auto}#gdcard .gdb{flex:none;width:56px;height:56px}#gdcard .gdsvg,#gdcard .gdart{width:56px;height:56px;display:block}#gdcard .gdart{background-size:300% 100%;border-radius:50%}'+
+  '#gdcard .gdx{flex:1;min-width:0}#gdcard .gdn{font:700 12px var(--ds-fb,sans-serif);letter-spacing:.06em;color:#e2b25a;text-transform:uppercase;margin-bottom:2px}#gdcard .gdr{display:flex;gap:8px;justify-content:flex-end;margin-top:8px;align-items:center}'+
+  '#gdcard .gdsk{background:none;border:0;color:rgba(246,230,196,.6);font:500 13px var(--ds-fb,sans-serif);padding:8px 6px;min-height:36px}#gdcard .btn{min-height:36px;padding:0 16px}'+
+  '#gdptr{position:fixed;z-index:99989;pointer-events:none;width:0;height:0}#gdptr i{position:absolute;left:-26px;top:-26px;width:52px;height:52px;border-radius:50%;border:2px solid #f2c45c;box-shadow:0 0 14px rgba(242,196,92,.8),inset 0 0 10px rgba(242,196,92,.5);animation:gdpulse 1.2s ease-in-out infinite}'+
+  '#gdptr b{position:absolute;left:14px;top:14px;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:22px solid #f2c45c;transform:rotate(-35deg);transform-origin:50% 0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6));animation:gdpoke 1.2s ease-in-out infinite}'+
+  '@keyframes gdpulse{0%,100%{transform:scale(.9);opacity:.9}50%{transform:scale(1.12);opacity:.55}}@keyframes gdpoke{0%,100%{translate:0 0}50%{translate:5px 6px}}@keyframes gdin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}'+
+  '@media (prefers-reduced-motion:reduce){#gdptr i,#gdptr b,#gdcard{animation:none}}';
+ document.head.appendChild(st)}
+function gdText(t){if(typeof t==='function')t=t();return esc(t).replace(/\{ten\}/g,esc(S.pname||'Chủ Công'))}
+function gdShow(s,mode){gdUI();var key=s.id+(mode||'');if(GDCUR!==key){GDCUR=key;
+  GDEL.className=mode==='bt'?'bt':'';GDEL.innerHTML='<div class="gdb">'+gdBust(s.f||0)+'</div><div class="gdx"><div class="gdn">Quân sư Thanh Y</div><div>'+gdText(s.t)+'</div>'+
+   (mode==='bt'?'':'<div class="gdr"><button class="gdsk" data-a="gdskip" data-v="'+s.ch+'">Bỏ qua</button>'+(s.tap?'<button class="btn sm" data-a="gdok" data-v="'+s.id+'">Đã hiểu</button>':'')+'</div>')+'</div>'}
+ GDEL.hidden=false;var sel=typeof s.p==='function'?s.p():s.p,tg=sel?gdQ(sel):null,r=null;
+ if(tg&&tg.tagName&&tg.tagName.toLowerCase()==='g'){var cs=tg.querySelectorAll('circle');for(var i=0;i<cs.length;i++){var cr=cs[i].getBoundingClientRect();if(cr.width>4){r=cr;break}}} /* map stage node: point at its marker, not the whole squad group */
+ if(!r&&tg)r=tg.getBoundingClientRect();
+ if(mode!=='bt'){var low=r?r.top+r.height/2<innerHeight*.55:gdNoModal(); /* no target: bottom on the home screens, top over a sheet (keeps its action bar free) */GDEL.style.top=low?'auto':'calc(10px + env(safe-area-inset-top,0px))';GDEL.style.bottom=low?'calc(78px + env(safe-area-inset-bottom,0px))':'auto'}
+ if(r){GDPT.hidden=false;GDPT.style.left=(r.left+r.width/2)+'px';GDPT.style.top=(r.top+r.height/2)+'px'}else GDPT.hidden=true}
+function gdHide(){GDCUR=null;if(GDEL)GDEL.hidden=true;if(GDPT)GDPT.hidden=true}
+function gdBlocked(){var sp=document.getElementById('splash');if(sp&&!sp.classList.contains('out')&&sp.offsetParent!==null)return true;
+ if(document.querySelector('#hrev,#vcin'))return true;try{if(fighting)return true}catch(e){}return false}
+function gdPick(){var G=gd();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch[C.id])continue;var started=C.steps.some(function(s){return G.done[s.id]});
+  if(!started&&C.end()){G.ch[C.id]=1;continue}if(!C.start())continue;
+  for(var i=0;i<C.steps.length;i++){var s=C.steps[i];s.ch=C.id;if(G.done[s.id])continue;
+   if(s.until&&s.until()&&(started||i>0)){G.done[s.id]=1;started=true;continue}
+   if(s.when())return s;break}
+  if(C.steps.every(function(s){return G.done[s.id]}))G.ch[C.id]=1}
+ return null}
+function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s)gdShow(s);else gdHide()}catch(e){gdHide()}}
+/* in-battle tips: timed, drawn over the battle, never touching the battle loop */
+function gdBattleTips(){var G=gd();if(G.ch.G1)return;if(!G.done['g1.3b']&&G.done['g1.3'])G.done['g1.3b']=1;if(G.done['g1.4'])return;G.done['g1.4']=1;
+ var T=[[700,{id:'g1.4',f:1,t:'Quân ta bên trái, địch bên phải. Hai bên lần lượt tấn công theo thứ tự.'}],[7000,{id:'g1.5',f:2,t:'Ngọn lửa trên đầu là sĩ khí. Cháy đầy thì tướng tung chiến pháp! Sĩ khí vượt mức cần thì chiêu càng mạnh.'}],[14000,{id:'g1.6',f:2,t:'Bấm nút tốc độ nếu muốn xem nhanh hơn.',p:'[data-a="bspd"]'}]];
+ GDBT=1;GDTM.forEach(clearTimeout);GDTM=[];T.forEach(function(x,i){GDTM.push(setTimeout(function(){try{if(!fighting){if(i===T.length-1)GDBT=null;return}gdShow(x[1],'bt');G.done[x[1].id]=1;setTimeout(function(){try{if(GDCUR===x[1].id+'bt')gdHide();if(i===T.length-1)GDBT=null}catch(e){}},5600)}catch(e){}},x[0]))})}
+var GDTM=[];function gdBattleEnd(){GDTM.forEach(clearTimeout);GDTM=[];GDBT=null;gdHide()}
+/* first-time statuses from the last real battle */
+var GDLAST=null;
+function gdStatusStep(){try{if(!GDLAST)return null;var res=GDLAST;GDLAST=null;var G=gd(),seen={};
+ res.log.forEach(function(e){if(!e.s)return;for(var id in e.s){var a=e.s[id];GDST.forEach(function(q){if(a[q[0]])seen[q[0]]=1})}});
+ var nw=GDST.filter(function(q){return seen[q[0]]&&!G.st[q[0]]});if(!nw.length)return null;nw.forEach(function(q){G.st[q[0]]=1});
+ return{id:'st'+Date.now(),f:1,tap:1,ch:'ST',t:'Lần đầu gặp: '+nw.map(function(q){return q[1]+' – '+q[2]}).join(' ')+' Xem lại trong Cài đặt › Sổ tay chiến trận.'}}catch(e){return null}}
+var GDSTQ=null;
+function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="dsinf"><div class="dsl">Hiệu ứng trong trận</div><div class="sm mute">Chạm vào một đạo quân trong trận để xem hiệu ứng nó đang chịu.</div></div><div class="stack dslist">'+
+ GDST.map(function(q){return'<div class="card row"><div class="sp"><b>'+q[1]+'</b><div class="sm mute">'+q[2].charAt(0).toUpperCase()+q[2].slice(1)+'</div></div>'+(G.st[q[0]]?'<span class="ok">Đã gặp</span>':'<span class="sm mute">Chưa gặp</span>')+'</div>'}).join('')+'</div>'}
+(function(){try{
+ var _b=battle;battle=function(){var r=_b.apply(this,arguments);try{if(fighting&&gdOn())GDLAST=r}catch(e){}return r};
+ if(typeof btPlay==='function'){var _bp=btPlay;btPlay=function(){try{if(gdOn())gdBattleTips()}catch(e){}var pr=_bp.apply(this,arguments);try{if(pr&&pr.then)pr.then(gdBattleEnd,gdBattleEnd)}catch(e){}return pr}}
+ var _A=A_;A_=function(a,v,w,el){try{
+  if(a==='gdok'){var G=gd();G.done[v]=1;if(GDSTQ&&v===GDSTQ.id)GDSTQ=null;gdHide();save();gdTick();return}
+  if(a==='gdskip'){var G2=gd();if(v==='ST'){GDSTQ=null}else{G2.ch[v]=1;GDC.forEach(function(C){if(C.id===v)C.steps.forEach(function(s){G2.done[s.id]=1})})}gdHide();save();return}
+  if(a==='gdtog'){var G3=gd();G3.off=G3.off?0:1;save();toast(G3.off?'Đã tắt hướng dẫn':'Đã bật hướng dẫn');refresh();return}
+  if(a==='gdbook'){openSheet(gdBook);return}
+ }catch(e){}return _A(a,v,w,el)};
+ /* status card shows once the result sheet is closed */
+ var _gt=gdTick;gdTick=function(){try{if(gdOn()&&!GDBT&&!gdBlocked()){if(!GDSTQ){var q=gdStatusStep();if(q)GDSTQ=q}if(GDSTQ&&gdNoModal()){gdShow(GDSTQ);return}}}catch(e){}return _gt()};
+ /* Settings: switch + glossary */
+ if(typeof viewMore==='function'){var _vm=viewMore;viewMore=function(){var h=_vm.apply(this,arguments);try{var k='<div class="card"><b>Đặt lại dữ liệu</b>';
+  var row='<div class="card row"><div class="sp"><b>Hướng dẫn tân thủ</b><div class="sm mute">Quân sư Thanh Y chỉ dẫn từng bước khi một tính năng mới mở.</div></div><button class="btn sm alt" data-a="gdbook">Sổ tay</button><button class="btn sm" data-a="gdtog">'+(gd().off?'Bật':'Tắt')+'</button></div>';
+  if(h.indexOf(k)>=0)h=h.replace(k,row+k)}catch(e){}return h}}
+ setInterval(gdTick,400);
+}catch(e){}})();
 </script>
