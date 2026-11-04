@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V241';
+var BUILD='V242';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13962,4 +13962,29 @@ var BGCALM=1;
    c.restore();BT.bgCalm={s:+st.s.toFixed(2),l:+st.l.toFixed(2),w:+st.w.toFixed(2),de:+de.toFixed(2),dim:+dim.toFixed(2)}}catch(e){}
   return r};
 }catch(e){try{console.error('bg238',e)}catch(x){}}})();
+/* ================= V242 (art agent, user 2026-11-04 12:27, screenshot of an enemy skill banner "Đột Kích · Hoàng Cân Bộ Binh · Tân Binh":
+   "make the banner appear longer so the player can actually read the skill name; also the enemy logo has not been replaced").
+   (1) The skill banner (#cut) was on screen for 900 ms at 1× (the stylesheet's !important 900 ms beat the speed-scaled inline time) — about
+       0.6 s readable, less at 2×/4×. Now a copy of the banner is shown for 2.2 s at 1× (1.55 s at 2×, 1.4 s at 4×; slide in, hold, fade);
+       the battle does NOT wait longer: the original #cut keeps its timing (hidden), so the battle pace is unchanged and the banner simply
+       stays up while the skill plays. A new cast replaces the banner at once.
+   (2) Enemy units without a hero portrait showed the old code-drawn cartoon face in the banner; it now shows the painted soldier
+       (art/enemies/soldiers.webp via enArt, V172) or the painted boss, the same art as the turn strip and the stage board.
+   The copy uses id "cut" too (inserted after the original, so getElementById('cut') still returns the original) and inherits every #cut
+   style. Transform/opacity animation only (V225). CUT242=0 turns it off. */
+var CUT242=1;
+(function(){try{
+ var C=null,T=0;
+ function art(u){try{if(!u||u.side==='A')return null;return enArt(u,BT.meta||{})}catch(e){return null}}
+ var _c=cutin;cutin=function(d,name){var p=_c.apply(this,arguments);
+  try{if(!CUT242||BT.skip)return p;var el=document.getElementById('cut');if(!el||!el.parentNode)return p;
+   if(!C||!C.isConnected){C=document.createElement('div');C.id='cut';C.setAttribute('aria-hidden','true');el.parentNode.insertBefore(C,el.nextSibling)}
+   el.style.setProperty('visibility','hidden','important');
+   C.innerHTML=el.innerHTML;C.setAttribute('data-side',el.getAttribute('data-side')||'A');C.style.cssText=el.style.cssText;C.style.removeProperty('visibility');
+   var a=art(d&&d.u);if(a){var pw=C.querySelector('.pw');if(pw){pw.className='pw';pw.innerHTML='<img class="ga" src="'+a+'" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 22%" decoding="async">'}}
+   var sp=Math.max(1,BT.speed||1),D=Math.round(Math.max(1400,2200/Math.sqrt(sp)));
+   C.className='';void C.offsetWidth;C.style.setProperty('animation-duration',D+'ms','important');C.className='go';
+   clearTimeout(T);T=setTimeout(function(){if(C)C.className=''},D+40)}catch(e){try{el.style.removeProperty('visibility')}catch(x){}}
+  return p};
+}catch(e){try{console.error('cut242',e)}catch(x){}}})();
 </script>
