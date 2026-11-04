@@ -10245,9 +10245,9 @@ var EMBI=null;(function(){try{var im=new Image();im.onload=function(){EMBI=im};i
  if(!EMBI||!EMBI.naturalWidth)return _emb185(c,x,y,s,mo,cost,lk,id);
  try{mo=Math.max(0,mo||0);var r=mo/cost,ov=mo-cost,t=BT.t||0,ph=((id||'').length*37+(id||'').charCodeAt(1||0))%100,alt=Math.floor((t+ph*13)/170)%2;
   var cell=lk?7:r<.34?0:r<.67?1:r<1?2:ov>15?5+alt:3+alt;
-  var fl=lk?1:1+Math.sin(t/95+ph)*.05+Math.sin(t/41+ph*2)*.03,pu=(!lk&&r>=1)?1+.07*Math.sin(t/120+ph):1,k=.24*Math.min(1.2,s)*fl*pu;
-  k*=[1.9,1.5,1.2,1,1,1.05,1.05,1.1][cell];var cw=256*k,bx=x,by=y-(BT.rh||90)*.08;
-  c.save();c.globalCompositeOperation='lighter';c.globalAlpha=lk?.9:Math.min(1,.65+.35*Math.min(1,r));
+  var fl=lk?1:1+Math.sin(t/95+ph)*.05+Math.sin(t/41+ph*2)*.03,pu=(!lk&&r>=1)?1+.03*Math.sin(t/120+ph):1,k=.11*Math.min(1.2,s)*fl*pu;/* V217 (user 2026-11-04 07:07 "the morale flame looks ridiculously big and pulls the eye from the battle"): about half the size, calm until ready */
+  k*=[1.25,1.15,1.05,1,1,1.05,1.05,1][cell];var cw=256*k,bx=x,by=y-(BT.rh||90)*.08;
+  c.save();c.globalCompositeOperation='lighter';c.globalAlpha=lk?.75:r>=1?.95:.4+.3*r;
   c.drawImage(EMBI,(cell%4)*256,Math.floor(cell/4)*256,256,256,bx-cw/2,by-205*k,cw,cw);c.restore()}catch(e){try{_emb185(c,x,y,s,mo,cost,lk,id)}catch(_){}}}})();
 /* C. Tier 5 final unit names (Tier 5 Design Bible "[Art] Tier 5 unit names FINAL", 2026-11-02 22:55): replace F5P + F5S. EN names kept for the EN build. */
 var F5N={a:{inf:'Phượng Dực Vệ',cav:'Phượng Hoàng Kỵ',arc:'Phượng Linh Tiễn',mac:'Phượng Hỏa Pháo',str:'Phượng Vũ Sư',sup:'Phượng Minh Cổ'},
@@ -10860,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V217';
+var BUILD='V218';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12775,42 +12775,43 @@ function ord215Sheet(){var p=ord215Price(),n=ord215Used(),ok=S.res.gold>=p,cap=1
   'html body #sheet .ord215p img,html body #sheet .ord215p svg{width:18px;height:18px}';
  document.head.appendChild(st);
 }catch(e){}})();
-/* ===== V217 Thông Thiên Tháp opens at Màn 7 (user 2026-11-04 06:50 "find a first Màn level to allow player to enter Thông Thiên Tháp,
-   e.g. Màn 7, make sure it balances with game flow and rewards"). Bot study: tower open from day 1 vs gated at Màn 5 / 7 / 9 changes the
-   campaign clear days by less than the bot noise (±1 day); a gated player catches up ~12 floors in the first sitting and is back on the
-   ungated floor curve within ~1 week (day 20: floor 75 gated vs 78 open). Opening at Màn 7 = right after the Màn 6 boss, when the player
-   has 5 generals (5 v 5 from Màn 5) and understands counters; Trần Cung (floor 25) and the tower silver sweep arrive just before the Màn 9 silver wall.
-   Rule: open when Màn 6 is cleared, or the save has already climbed (ev().tw.best>0 — older saves keep it).
-   Locked: hub buttons dimmed with a lock, tap toasts the condition, the daily task "Khiêu chiến Thông Thiên Tháp" is removed from the
-   daily list until open (so the big daily chest stays reachable). First time it opens: a "Tính năng mới" sheet (design kit) with "Vào tháp". */
-var TW217MI=5; /* index of the Màn that must be cleared (Màn 6) → the tower opens on reaching Màn 7 */
-function tw217Open(){try{if(S.camp&&S.camp.mapDone&&S.camp.mapDone[TW217MI])return true;var e=ev();return!!(e&&e.tw&&e.tw.best>0)}catch(x){return true}}
-var TW217TASK=null;
-function tw217Sync(){try{
- var op=tw217Open();document.body.classList.toggle('tw217lk',!op);
- if(typeof DAILY!=='undefined'){var i=-1;for(var k=0;k<DAILY.length;k++)if(DAILY[k].k==='tower')i=k;
-  if(!op&&i>=0){TW217TASK=DAILY[i];DAILY.splice(i,1)}
-  else if(op&&i<0&&TW217TASK){DAILY.push(TW217TASK)}}
- if(!op)S.tw217lk=1;
- else if(S.tw217lk&&!S.tw217pop&&typeof fighting!=='undefined'&&!fighting&&document.getElementById('modal').hidden){S.tw217pop=1;try{save()}catch(x){}try{openSheet(tw217Sheet)}catch(x){}}
-}catch(e){}}
-function tw217Sheet(){var rw=twReward(1),r25=twReward(25);
- var h='<h3>Tính năng mới</h3>';
- h+='<div class="dsinf"><div class="dsl">Thông Thiên Tháp</div><div class="sm">Leo 300 tầng, mỗi tầng là một đề bài khắc chế. Không tốn Quân lệnh — chỉ cần bổ sung quân sau mỗi trận.</div></div>';
- h+='<div class="sec">Phần thưởng</div><div class="stack dslist">'+
-  '<div class="card row"><div class="sp"><b>Lần đầu vượt tầng</b><div class="sm mute">Bạc, Binh Thư, Thí Luyện Lệnh · mỗi 5 tầng có vàng · mỗi 10 tầng Binh Phù và rương trang bị</div></div></div>'+
-  '<div class="card row"><div class="sp"><b>Danh tướng</b><div class="sm mute">Tầng 25 Trần Cung · 60 Cao Thuận · 100 Điêu Thuyền · 150 Lữ Bố</div></div></div>'+
-  '<div class="card row"><div class="sp"><b>Quét tháp mỗi ngày</b><div class="sm mute">Nhận thưởng theo tầng cao nhất đã vượt</div></div></div></div>';
- h+='<div class="sbar"><button class="btn wide" data-a="tower">Vào tháp</button></div>';
- return h}
+/* ================= V218 (art agent, user 2026-11-04 07:12 "if a player clicks on a unit they can view its current health and morale") =================
+   Tap any squad during a battle: a small card shows its general, troop type, troops now / max, morale now / skill cost
+   (Sẵn sàng when the skill is ready) and its current statuses. The card follows the live numbers, closes on the next tap
+   outside a unit, after 4 s, or when the battle ends. Pure display — the battle keeps running underneath. */
 (function(){try{
- var _A=A_;A_=function(a,v,w,el){try{
-  if((a==='tower'||a==='twfight'||a==='twsweep')&&!tw217Open()){toast('Thông Thiên Tháp mở khi tới Màn 7 (vượt Màn 6)');return}
- }catch(e){}return _A(a,v,w,el)};
- setInterval(tw217Sync,1000);tw217Sync();
- var st=document.createElement('style');st.textContent=
-  'body.tw217lk [data-a="tower"]{position:relative;filter:grayscale(1);opacity:.5}'+
-  'body.tw217lk [data-a="tower"]::after{content:"Màn 7";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font:700 10px/1.4 var(--ds-fb,"Be Vietnam Pro",sans-serif);color:#f6e6c4;background:rgba(20,14,10,.85);border:1px solid rgba(226,178,90,.5);border-radius:6px;padding:0 4px;white-space:nowrap;pointer-events:none}';
- document.head.appendChild(st);
-}catch(e){}})();
+ var SN=['Choáng','Thiêu đốt','Hỗn loạn','Khiêu khích','Giáp khí','Làm chậm','Suy yếu','Phá giáp','Đi sau','Hồi phục','Câm lặng','Trúng độc','Khóa sĩ khí'],
+  SB={4:1,9:1},BRN={inf:'Bộ binh',cav:'Kỵ binh',arc:'Cung thủ',mac:'Cơ giới',str:'Mưu sĩ',sup:'Trống trận'};
+ var card=null,cur=null,tm=0,iv=0;
+ function nm(u){try{if(u.gid&&GENS[u.gid])return u.gid==='lord'&&S.pname?S.pname:GENS[u.gid].n;return u.n||u.name||(BRN[u.br]||'Quân')}catch(e){return'Quân'}}
+ function hide(){if(card){card.remove();card=null}cur=null;clearInterval(iv);clearTimeout(tm)}
+ function f(n){try{return fmt(Math.max(0,Math.round(n)))}catch(e){return String(Math.round(n))}}
+ function paint(){try{if(!card||!cur||!BT||!BT.on){hide();return}var d=cur,u=d.u,mx=u.max||d.trT||1,tr=Math.max(0,d.trT),cost=(u.tact&&u.tact.cost)||100,mo=Math.max(0,Math.round(d.moT||0));
+   var cast=u.canCast&&!(u.t&&u.t.noMorale),lk=d.sf&&(d.sf[12]||d.sf[10]);
+   var st=(d.sf||[]).map(function(x,i){return x?'<i class="'+(SB[i]?'g':'b')+'">'+SN[i]+'</i>':''}).join('');
+   card.className='bt217 '+(u.side==='A'?'us':'foe');
+   card.innerHTML='<div class="h"><b>'+nm(u)+'</b><span>'+(u.side==='A'?'Quân ta':'Quân địch')+' · '+(BRN[u.br]||'')+(u.isBoss?' · Trùm':'')+'</span></div>'+
+    '<div class="r"><span>Quân</span><em>'+f(tr)+' / '+f(mx)+'</em></div><div class="bar tr"><i style="width:'+Math.min(100,tr/mx*100).toFixed(1)+'%"></i></div>'+
+    (cast?'<div class="r"><span>Sĩ khí</span><em>'+mo+' / '+cost+(lk?' · bị khóa':mo>=cost?' · Sẵn sàng':'')+'</em></div><div class="bar mo'+(lk?' lk':'')+'"><i style="width:'+Math.min(100,mo/cost*100).toFixed(1)+'%"></i></div>':'<div class="r"><span>Sĩ khí</span><em>không dùng kế</em></div>')+
+    (st?'<div class="st">'+st+'</div>':'')+(tr<=0?'<div class="dead">Đã bị tiêu diệt</div>':'')}catch(e){hide()}}
+ function show(d){hide();var w=document.querySelector('.bw');if(!w)return;card=document.createElement('div');w.appendChild(card);cur=d;paint();
+   try{var cv=document.getElementById('cv'),r=cv.getBoundingClientRect(),wr=w.getBoundingClientRect(),x=r.left-wr.left+d.x*(r.width/BT.W),y=r.top-wr.top+d.y*(r.height/BT.H);
+    var cw=card.offsetWidth||190,ch=card.offsetHeight||110,L=Math.max(8,Math.min(wr.width-cw-8,x-cw/2)),T=y-ch-BT.rh*.7;if(T<56)T=y+BT.rh*.55;card.style.left=L+'px';card.style.top=Math.max(8,Math.min(wr.height-ch-8,T))+'px'}catch(e){}
+   iv=setInterval(paint,200);tm=setTimeout(hide,4000)}
+ function pick(e){try{if(typeof BT==='undefined'||!BT.on||!BT.list)return;var cv=document.getElementById('cv'),r=cv.getBoundingClientRect(),p=e.touches?e.touches[0]:e,
+   x=(p.clientX-r.left)*(BT.W/r.width),y=(p.clientY-r.top)*(BT.H/r.height),best=null,bd=1e9;
+   BT.list.forEach(function(d){var s=d.s||1,dx=(x-d.x)/(BT.cwN*s*.6),dy=(y-d.y)/(BT.rh*s*.75),q=dx*dx+dy*dy;if(q<1&&q<bd){bd=q;best=d}});
+   if(best)show(best);else hide()}catch(x){}}
+ document.addEventListener('pointerdown',function(e){if(e.target&&e.target.id==='cv')pick(e);else if(card&&!(e.target.closest&&e.target.closest('.bt217')))hide()},true);
+ var css=document.createElement('style');css.textContent=
+  '.bw{position:relative}.bt217{position:absolute;z-index:30;width:200px;padding:10px 12px;border-radius:12px;background:rgba(18,13,10,.94);border:1px solid rgba(226,178,90,.55);box-shadow:0 6px 20px rgba(0,0,0,.5);color:#f3e6c8;font:500 12px "Be Vietnam Pro",system-ui,sans-serif;pointer-events:none}'+
+  '.bt217.foe{border-color:rgba(230,110,100,.7)}.bt217.us{border-color:rgba(120,210,140,.7)}'+
+  '.bt217 .h b{display:block;font:700 15px Philosopher,Georgia,serif;color:#fff2cf}.bt217 .h span{font-size:11px;color:#b9a98a}'+
+  '.bt217 .r{display:flex;justify-content:space-between;margin-top:7px}.bt217 .r span{color:#b9a98a}.bt217 .r em{font:600 13px "Barlow Condensed",sans-serif;font-style:normal;color:#fff}'+
+  '.bt217 .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:3px;overflow:hidden}.bt217 .bar i{display:block;height:100%}'+
+  '.bt217 .tr i{background:linear-gradient(90deg,#d0574a,#6cc283)}.bt217 .mo i{background:linear-gradient(90deg,#c48a2c,#ffd36a)}.bt217 .mo.lk i{background:#7f93b8}'+
+  '.bt217 .st{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.bt217 .st i{font-style:normal;font-size:11px;padding:2px 7px;border-radius:9px;background:rgba(230,110,100,.18);color:#ffb3a8}.bt217 .st i.g{background:rgba(108,194,131,.18);color:#a8e6b7}'+
+  '.bt217 .dead{margin-top:6px;color:#e07d68;font-size:11px}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('bt217',e)}catch(x){}}})();
 </script>
