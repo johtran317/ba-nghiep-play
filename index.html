@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V233';
+var BUILD='V234';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13742,4 +13742,97 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
  document.head.appendChild(st);
  try{var im=new Image();im.src=IMG}catch(e){}
 }catch(e){try{console.error('gd229',e)}catch(x){}}})();
+/* ================= V234 (art agent, user 2026-11-04 10:33 "organize this screen — make it look cleaner; if the player wants to see
+   more info they can click on buttons where floating windows pop up") — battle result sheet.
+   Last wrapper on resultSheet: re-lays out prepui.js's .rs2 result (logic, rewards and buttons untouched).
+   Main sheet: big title + stars (tap → star rules), stage · rounds; rewards as one row of item-art tiles (×2 first-win tag on silver,
+   found gear as its own tile); generals as one tappable strip of faces with a thin troop bar and +KN; then small "more" chips —
+   Tướng & Binh Đạo, Báo cáo trận, Vì sao? — each opens a floating panel (#rs9p, same style as the V227 troop panel: centred card,
+   max 75vh, light backdrop blur on ONE layer, no animation on it — V225 iPhone rule). A loss keeps its advice line on the sheet; the
+   game's own "Vì sao thua?" card with fix buttons (advisor.js) stays below, so the extra tip goes to the "Gợi ý" chip. Action rs9 (open, v = key), rs9x (close); any other button inside the panel closes it
+   and then runs (e.g. Xem lại). Everything wrapped: on any error the old layout is returned. */
+var RS9={};
+(function(){try{
+ var ICO={'Bạc':'silver','Lương':'grain','Quân công':'merit','Vàng':'gold','Lần đầu':'gold'};
+ function tile(ic,val,lab,tag,act){return'<'+(act?'button data-a="rs9" data-v="'+act+'"':'div')+' class="rs9t">'+(tag?'<em>'+tag+'</em>':'')+'<span class="rs9i">'+ic+'</span><b>'+val+'</b><small>'+lab+'</small></'+(act?'button':'div')+'>'}
+ function more(k,lab,cls){return'<button class="rs9m'+(cls?' '+cls:'')+'" data-a="rs9" data-v="'+k+'">'+lab+'<i>›</i></button>'}
+ var _rs=resultSheet;resultSheet=function(R){var h=_rs.apply(this,arguments);
+  try{var box=document.createElement('div');box.innerHTML=h;var rs=box.querySelector('.rs2');if(!rs)return h;RS9={};
+   var hd=rs.querySelector('.rs-hd'),h3=hd&&hd.querySelector('h3');if(!h3)return h;var lose=/bad/.test(h3.className);
+   var stars=hd.querySelector('.rstars'),cr=hd.querySelector('.rs-cr'),sub=hd.querySelector('.rs-sub');
+   var secs=[].slice.call(rs.querySelectorAll(':scope>.rs-sec')),secBy=function(t){return secs.filter(function(s){var x=s.querySelector(':scope>.rs-h');return x&&x.textContent.trim()===t})[0]};
+   var rw=secBy('Phần thưởng'),gs=secBy('Tướng'),bd=secBy('Binh Đạo');
+   var notes=[].slice.call(rs.querySelectorAll(':scope>.rs-note')),why=notes.filter(function(n){return/why/.test(n.className)})[0];
+   var items=notes.filter(function(n){return n!==why&&n.querySelector('.gi')}),other=notes.filter(function(n){return n!==why&&items.indexOf(n)<0});
+   var rep=rs.querySelector('details.rep'),rply=rs.querySelector('.rs-rp,[data-a="replay"]'),bar=rs.querySelector(':scope>.sbar,:scope>.row:last-child');
+   /* header */
+   var x='<div class="rs9"><div class="rs9hd'+(lose?' lose':'')+'"><div class="rs9tt">'+h3.textContent+'</div>';
+   if(stars){x+='<button class="rs9st" data-a="rs9" data-v="crit" aria-label="Điều kiện sao">'+stars.outerHTML+'<i>i</i></button>';
+    if(cr)RS9.crit='<h4>Điều kiện sao</h4><div class="rs9cr">'+[].map.call(cr.children,function(s){var on=/on/.test(s.className);return'<div class="'+(on?'on':'')+'"><b>'+(on?'★':'☆')+'</b>'+s.textContent.replace(/^[★☆]\s*/,'')+'</div>'}).join('')+'</div><p class="rs9n">Ba sao để mở Càn quét cho ải này.</p>'}
+   if(sub)x+='<div class="rs9sub">'+sub.textContent+'</div>';x+='</div>';
+   /* loss: advice first */
+   if(lose){other.forEach(function(n){x+='<div class="rs9note">'+n.innerHTML+'</div>'});other=[];}
+   /* rewards */
+   var tl='';if(rw)[].forEach.call(rw.querySelectorAll('.rs-t'),function(t){var lb=(t.querySelector('span')||{}).textContent||'',b=t.querySelector('b'),em=t.querySelector('em');if(!b)return;
+     var key=ICO[lb.trim()],u=b.querySelector('use'),val=b.textContent.trim();if(u&&/gold/.test(u.getAttribute('href')||''))key='gold';
+     tl+=tile(key?objH(key):'',/^[+−-]/.test(val)||lb.trim()==='Lần đầu'?(lb.trim()==='Lần đầu'?'+'+val:val):'+'+val,lb.trim()==='Lần đầu'?'Vàng':lb.trim(),em?em.textContent.replace('lần đầu','').trim():(lb.trim()==='Lần đầu'?'lần đầu':''))});
+   items.forEach(function(n,i){var gi=n.querySelector('.gi'),nm=n.querySelector('.sp b');RS9['it'+i]='<h4>Chiến lợi phẩm</h4><div class="rs9item">'+n.innerHTML+'</div>';tl+=tile(gi?gi.outerHTML:'','',nm?nm.textContent.split(' ').slice(-2).join(' '):'Trang bị','mới','it'+i)});
+   if(tl)x+='<div class="rs9sec"><div class="rs9h">Phần thưởng</div><div class="rs9rw">'+tl+'</div></div>';
+   /* generals strip */
+   if(gs){var g=[].slice.call(gs.querySelectorAll('.rs-g')),kn='';
+    var faces=g.map(function(r){var pw=r.querySelector('.pw'),bb=r.querySelector('.rs-gb i'),k=r.querySelector('.rs-gn span');if(k&&!kn)kn=k.textContent;
+     return'<span class="rs9f">'+(pw?pw.outerHTML:'')+(bb?'<span class="rs9fb"><i class="'+bb.className+'" style="'+bb.getAttribute('style')+'"></i></span>':'')+'</span>'}).join('');
+    RS9.gen='<h4>Tướng</h4><div class="rs2">'+gs.innerHTML.replace(/<div class="rs-h"[^>]*>Tướng<\/div>/,'')+'</div>'+(bd?'<h4>Binh Đạo</h4><div class="rs2">'+bd.querySelector('.rs-bd').outerHTML+'</div>':'');
+    x+='<button class="rs9gs" data-a="rs9" data-v="gen"><span class="rs9h">Tướng</span><span class="rs9fs">'+faces+'</span>'+(kn?'<span class="rs9kn">'+kn+'</span>':'')+'<i>›</i></button>'}
+   /* other notes on a win stay visible, one compact card */
+   if(other.length)x+='<div class="rs9note">'+other.map(function(n){return n.innerHTML}).join('<hr>')+'</div>';
+   /* more chips */
+   var m='';if(bd&&!gs)RS9.gen='<h4>Binh Đạo</h4><div class="rs2">'+bd.querySelector('.rs-bd').outerHTML+'</div>';
+   if(bd){var nb=bd.querySelectorAll('.rs-bd span').length;m+=more('gen','Binh Đạo +'+nb)}
+   if(rep){rep.setAttribute('open','');RS9.rep='<h4>Báo cáo trận</h4><div class="rs2 rs9rep">'+rep.innerHTML.replace(/<summary[^>]*>.*?<\/summary>/,'')+'</div>'+(rply?'<div class="rs9pb">'+rply.outerHTML.replace(/btn alt sm rs-rp/,'btn alt')+'</div>':'');m+=more('rep','Báo cáo trận')}
+   if(why){RS9.why='<h4>Gợi ý</h4><div class="rs9why">'+why.innerHTML.replace(/<b[^>]*>Vì sao\?<\/b>/,'')+'</div>';m+=more('why','Gợi ý')}
+   if(m)x+='<div class="rs9mr">'+m+'</div>';
+   x+='</div>';
+   /* keep everything after the report (sticky action bar etc.) */
+   var tail='',after=false;[].forEach.call(rs.children,function(c){if(c.classList.contains('rs-rw')||c.tagName==='DETAILS'){after=true;return}if(after&&c!==rply)tail+=c.outerHTML});
+   if(!tail&&bar)tail=bar.outerHTML;
+   var pre=h.slice(0,h.indexOf('<div class="rs2"'));return pre+x+tail}catch(e){try{console.warn('rs234',e)}catch(z){}return h}};
+ /* floating panel */
+ var P=null;function close(){if(P){P.remove();P=null}}
+ function open(k){var c=RS9[k];if(!c)return;close();P=document.createElement('div');P.id='rs9p';P.innerHTML='<div class="rs9bg" data-a="rs9x"></div><div class="rs9in" role="dialog" aria-modal="true"><button class="rs9c" data-a="rs9x" aria-label="Đóng">✕</button>'+c+'</div>';document.body.appendChild(P);requestAnimationFrame(function(){if(P)P.classList.add('in')})}
+ var _A=A_;A_=function(a,v,w,el){if(a==='rs9'){open(v);return}if(a==='rs9x'){close();return}
+  if(P&&el&&el.closest&&el.closest('#rs9p'))close();return _A.apply(this,arguments)};
+ var _cs=closeSheet;closeSheet=function(){close();return _cs.apply(this,arguments)};
+ document.addEventListener('keydown',function(e){if(P&&e.key==='Escape')close()});
+ var st=document.createElement('style');st.id='rs9css';st.textContent=
+  '.rs9{display:flex;flex-direction:column;gap:14px;padding-bottom:6px}'+
+  '.rs9hd{text-align:center;padding:6px 0 2px}.rs9tt{font:700 30px/1.1 var(--ds-fd,Philosopher,Georgia,serif);color:#8fe0a6;text-shadow:0 2px 12px rgba(80,200,120,.25)}.rs9hd.lose .rs9tt{color:#f08a74;text-shadow:0 2px 12px rgba(220,90,70,.25)}'+
+  '.rs9st{display:inline-flex;align-items:center;gap:6px;margin:6px auto 0;background:none;border:0;padding:4px 8px;border-radius:12px;cursor:pointer}.rs9st .rstars{margin:0!important}.rs9st>i{font:italic 700 11px Georgia,serif;width:18px;height:18px;border-radius:50%;border:1px solid rgba(226,178,90,.55);color:#e2b25a;display:grid;place-items:center;font-style:italic}'+
+  '.rs9sub{font-size:13px;color:var(--ds-mu,#b9a98a);margin-top:4px}'+
+  '.rs9sec{display:flex;flex-direction:column;gap:8px}.rs9h{font:700 11.5px var(--ds-fb,sans-serif);letter-spacing:.14em;text-transform:uppercase;color:#c9a35a}'+
+  '.rs9rw{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}'+
+  '.rs9t{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px 8px;border-radius:14px;background:linear-gradient(180deg,rgba(60,44,28,.55),rgba(24,17,12,.6));border:1px solid rgba(226,178,90,.28);color:inherit;font:inherit}'+
+  'button.rs9t{cursor:pointer}.rs9t .rs9i{width:36px;height:36px;display:block}.rs9t .rs9i .objx{width:100%;height:100%}.rs9t .rs9i .gi{width:36px!important;height:36px!important;transform:none}'+
+  '.rs9t b{font:700 17px/1.1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}.rs9t small{font-size:11.5px;color:var(--ds-mu,#b9a98a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}'+
+  '.rs9t em{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font:700 10px var(--ds-fb,sans-serif);font-style:normal;padding:1px 7px;border-radius:8px;background:#2f7d4f;color:#e9fff0;white-space:nowrap}'+
+  '.rs9gs{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(226,178,90,.25);color:inherit;font:inherit;cursor:pointer;text-align:left}'+
+  '.rs9gs .rs9h{flex:none}.rs9fs{flex:1;display:flex;gap:6px;min-width:0;overflow:hidden}.rs9f{flex:none;width:40px;display:flex;flex-direction:column;gap:3px}.rs9f .pw{width:40px!important;height:40px!important;border-radius:10px;overflow:hidden}.rs9f .pw img{width:100%;height:100%;object-fit:cover}'+
+  '.rs9fb{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden}.rs9fb i{display:block;height:100%;background:#6cc283}.rs9fb i.md{background:#e2b25a}.rs9fb i.lo{background:#d0574a}'+
+  '.rs9kn{flex:none;font:700 13px var(--ds-fn,sans-serif);color:#8fe0a6}.rs9gs>i,.rs9m>i,.rs9why1>i{font-style:normal;color:#e2b25a;font-size:18px;line-height:1}'+
+  '.rs9mr{display:flex;gap:8px}.rs9m{flex:1 1 0;min-width:0;justify-content:center;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(226,178,90,.35);color:#f3e6c8;font:600 13px var(--ds-fb,sans-serif);cursor:pointer}'+
+  '.rs9note{font-size:13px;line-height:1.5;color:#e8dcc0;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.2);border:1px solid rgba(226,178,90,.18)}.rs9note hr{border:0;border-top:1px solid rgba(226,178,90,.15);margin:8px 0}.rs9note .row{display:flex;gap:10px;align-items:center}'+
+  '.rs9why1{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:0 14px;border-radius:12px;background:rgba(240,160,80,.12);border:1px solid rgba(240,160,80,.55);color:#f3c27a;font:700 14px var(--ds-fb,sans-serif);cursor:pointer}'+
+  /* panel */
+  '#rs9p{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px))}'+
+  '#rs9p .rs9bg{position:absolute;inset:0;background:rgba(8,5,3,.4);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);opacity:0;transition:opacity .2s}'+
+  '#rs9p .rs9in{position:relative;width:min(94vw,440px);max-height:75vh;overflow:auto;overscroll-behavior:contain;padding:14px 14px 16px;border-radius:18px;background:linear-gradient(180deg,rgba(40,29,20,.97),rgba(24,17,12,.97));'+
+   'border:1px solid rgba(226,178,90,.55);box-shadow:0 18px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,230,170,.12);color:#f3e6c8;transform:translateY(14px) scale(.97);opacity:0;transition:transform .22s cubic-bezier(.2,.9,.3,1.2),opacity .18s}'+
+  '#rs9p.in .rs9bg{opacity:1}#rs9p.in .rs9in{transform:none;opacity:1}'+
+  '#rs9p .rs9c{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:10px;border:1px solid rgba(226,178,90,.45);background:rgba(0,0,0,.25);color:#f6dfa6;cursor:pointer}'+
+  '#rs9p h4{margin:2px 0 10px;font:700 18px var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;padding-right:44px}#rs9p h4+*{margin-bottom:12px}#rs9p .rs2 h4{margin-top:14px}'+
+  '#rs9p .rs9cr div{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(226,178,90,.15);color:#a99f8c;font-size:14px}#rs9p .rs9cr div:first-child{border-top:0}#rs9p .rs9cr b{font-size:18px;color:#6b604f}#rs9p .rs9cr .on{color:#f3e6c8}#rs9p .rs9cr .on b{color:#f2c45c}'+
+  '#rs9p .rs9n{font-size:12.5px;color:var(--ds-mu,#b9a98a);margin:6px 0 0}#rs9p .rs9why{font-size:14px;line-height:1.55}#rs9p .rs9item{display:flex;gap:12px;align-items:center}#rs9p .rs9item>div:first-child{flex:none}#rs9p .rs9pb{margin-top:10px}#rs9p .rs9pb .btn{width:100%}'+
+  '@media (prefers-reduced-motion:reduce){#rs9p .rs9in,#rs9p .rs9bg{transition:none}}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('rs234',e)}catch(x){}}})();
 </script>
