@@ -10844,7 +10844,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V205';
+var BUILD='V206';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12341,6 +12341,9 @@ S2FX.caocao_a={T:3600,play:function(a,ev,T){
  var sy=Math.max(BT.H*.08,F2.y0-BT.rh*.7),sw=Math.min(BT.W*.86,F2.w*1.2);
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
   dimAll(c,p,'18,6,30',.45);
+  /* V206: Cao Cao's statue (his skin painting as a gold-lit ghost, same size as the other skin statues) rises over his troop */
+  var stq=out(seg(p,0,.18))*(1-seg(p,.4,.55));if(stq>0){var sH=Math.min(BT.rh*1.7,BT.H*.21),sy2=A0.y+(side==='A'?-sH*.5:sH*.5)+(1-stq)*sH*.15*(side==='A'?1:-1);
+   glow(c,A0.x,sy2,sH*.5,'255,210,120',.25*stq);pc(c,'P',6,A0.x,sy2,sH*480/720,stq*.9,0,1,null,'ghost')}
   /* golden imperial edict unrolls across the sky (blank silk) */
   var uq=out(seg(p,.02,.24))*fo;if(uq>0&&!S2P(c,'caocao_a',0,BT.W/2,sy,sw*uq,uq,0,.35)){var w=sw*uq,h=BT.rh*.55,x0=BT.W/2-w/2;
    c.save();c.globalCompositeOperation='source-over';var sg=c.createLinearGradient(0,sy-h/2,0,sy+h/2);sg.addColorStop(0,'rgba(232,190,90,'+(.95*uq)+')');sg.addColorStop(.5,'rgba(255,234,160,'+(.95*uq)+')');sg.addColorStop(1,'rgba(200,150,60,'+(.95*uq)+')');c.fillStyle=sg;c.fillRect(x0,sy-h/2,w,h);
@@ -12375,7 +12378,7 @@ S2FX.zhangfei_a={T:3500,pre:[['zhangfei','k_tiger'],['zhangfei','roar'],['zhangf
  fx(T,function(c,p,t){var I={ti:sigImg(g,'k_tiger'),ro:sigImg(g,'roar'),dm:sigImg(g,'k_dome'),cl:sigImg(g,'k_cloud')},fo=1-seg(p,.9,1),cc=cw(A0);
   dimAll(c,p,'34,8,0',.45);c.save();c.globalCompositeOperation='lighter';
   /* a giant roaring tiger spirit of red flame rises behind Zhang Fei */
-  var tq=out(seg(p,0,.25))*(1-seg(p,.7,.9)),th=Math.min(BT.H*.42,BT.rh*2.8);if(tq>0){var ty=A0.y+(up<0?-th*.42:th*.42)*tq;
+  var tq=out(seg(p,0,.25))*(1-seg(p,.7,.9)),th=Math.min(BT.H*.21,BT.rh*1.4);if(tq>0){var ty=A0.y+(up<0?-th*.42:th*.42)*tq;
    if(!S2P(c,'zhangfei_a',0,A0.x,ty,th*(.7+.3*tq),tq,0)){if(I.ti)img(c,I.ti,A0.x,ty,th*(.7+.3*tq),tq*.95,0);else glow(c,A0.x,A0.y,th*.4,'255,80,20',.6*tq)}}
   /* three roar shockwaves blast toward the enemy */
   [.24,.31,.38].forEach(function(at,k){var q=seg(p,at,at+.2);if(q<=0||q>=1)return;var yy=A0.y+(F2.cy-A0.y)*out(q),w=BT.W*(.4+.7*q);
