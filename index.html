@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V197';
+var BUILD='V198';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11766,5 +11766,121 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '@media (prefers-reduced-motion:reduce){html body #sheet .dswt,html body #sheet .dswres{animation:none}}';
  function addCss(){try{var s=document.getElementById('ds197bcss');if(!s){s=document.createElement('style');s.id='ds197bcss';s.textContent=CSS}document.head.appendChild(s)}catch(e){}}
  try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss);window.addEventListener('load',addCss)}catch(e){}
+})();
+/* ===== V198: Chinh chiến map — real troops instead of numbered circles (art agent) =====
+   User 2026-11-03 17:35: "for map - replace the circle to actual troop - and the troop must have movements. when they
+   defeated, they lay down on the road etc. use gemini banana for art".
+   Gemini credits were depleted at build time, so this uses the painted battle sprite sheets already in the game
+   (art/troops/<branch>/sprites/front|back.webp, 10 frames: 0-3 idle, 4 hit, 5-9 attack; SPRM metadata in spr.js).
+   MAPT.sheet(br,side) is the one place that picks the sheet, so dedicated map sprites (walk + lying frames) can be
+   swapped in later without touching the rest.
+   - Each stage node: the stage's own enemy units (buildEnemy, seeded = always the same) stand on the road as a small
+     squad (3, boss 4 with the boss in front and bigger) with a waving banner in the enemy colour (foeMeta).
+     Open stage: idle loop + a small patrol sway, every few seconds the squad attacks; orange pulse kept.
+     Cleared: soldiers lie on the road (hit frame turned flat, darker), banner fallen; green tick + stars kept.
+     Locked: idle, greyed out; lock badge kept.
+   - Our army (player faction colour) marches along the road from the last cleared stage to the current one, strikes,
+     then starts again.
+   - Number chip on each squad, stage names unchanged, tap area unchanged (the old circle stays as an invisible target).
+   - One timer, runs only while the map is on screen and the page is visible; reduced motion → still poses.
+   Everything wrapped: any error leaves the old circles. */
+(function(){
+ var NS='http://www.w3.org/2000/svg',SEL='#main .mapbox>svg';
+ window.MAPT={sheet:function(br,side){var k=br+'_'+side;if(typeof SPRM==='undefined'||!SPRM[k]||typeof TRDIR==='undefined')return null;var m=SPRM[k];
+   return{href:'art/troops/'+TRDIR[br]+'/sprites/'+side+'.webp?v=2',w:m.w,h:m.h,ax:m.ax,ay:m.ay,bh:m.bh,n:10,idle:[0,1,2,3],hit:4,atk:[5,6,7,8,9]}}};
+ function E(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+ var SPR=[],OURS=null,timer=0,tick=0,RM=false;
+ try{RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+
+ /* one sprite = nested svg cropping a frame of the sheet */
+ function sprite(sh,x,y,hgt,o){var s=hgt/sh.bh,w=sh.w*s,h=sh.h*s,g=E('g',{transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+')'});
+  var inner=E('g',{});var sv=E('svg',{x:(-sh.ax*s).toFixed(1),y:(-sh.ay*s).toFixed(1),width:w.toFixed(1),height:h.toFixed(1),viewBox:'0 0 '+sh.w+' '+sh.h,overflow:'hidden'});
+  sv.appendChild(E('image',{href:sh.href,x:0,y:0,width:sh.w*sh.n,height:sh.h,preserveAspectRatio:'none'}));inner.appendChild(sv);g.appendChild(inner);
+  var r={g:g,inner:inner,sv:sv,sh:sh,ph:(o&&o.ph)||0,mode:(o&&o.mode)||'idle',f:-1,x:x,y:y};set(r,o&&o.frame!=null?o.frame:sh.idle[0]);return r}
+ function set(r,f){if(r.f===f)return;r.f=f;r.sv.setAttribute('viewBox',(f*r.sh.w)+' 0 '+r.sh.w+' '+r.sh.h)}
+ function banner(x,y,c,fallen,h){h=h||30;var g=E('g',{class:'mtbn'+(fallen?' down':''),transform:'translate('+x+' '+y+')'+(fallen?' rotate(-82)':'')});
+  g.appendChild(E('path',{d:'M0 0V'+(-h),stroke:'#5a3a22','stroke-width':1.8,'stroke-linecap':'round'}));
+  g.appendChild(E('circle',{cx:0,cy:-h-1.5,r:1.8,fill:'#e8c26a'}));
+  var f=E('path',{class:'mtfl',d:'M0.8 '+(-h+1)+'h15q-3 5 0 10h-15z',fill:c,stroke:'rgba(0,0,0,.45)','stroke-width':.8});g.appendChild(f);return g}
+
+ function enemyUnits(mi,s){try{var en=buildEnemy(mi,s,'stage');return en.units}catch(e){return[]}}
+ function foe(mi){try{return foeMeta(mi)}catch(e){return{foeCol:'#8a3a2a'}}}
+
+ function build(svg){
+  if(svg.dataset.mt)return;svg.dataset.mt='1';
+  var nodes=[].slice.call(svg.querySelectorAll('g.node[data-v]'));if(!nodes.length)return;
+  var lay=E('g',{class:'mtlay'}),pos={},cur=null,lastCl=null;SPR=SPR.filter(function(r){return r.g.isConnected});
+  nodes.forEach(function(nd){try{
+   var v=nd.getAttribute('data-v').split('|'),mi=+v[0],s=+v[1];
+   var cs=[].slice.call(nd.querySelectorAll(':scope>circle')).filter(function(c){return+c.getAttribute('r')>=18});
+   var main=cs.filter(function(c){return c.getAttribute('stroke')})[0];if(!main)return;
+   var P=[+main.getAttribute('cx'),+main.getAttribute('cy')],R=+main.getAttribute('r'),boss=R>26;
+   var cl=!!(S.camp.stage[mi+'-'+s]),op=stageOpen(mi,s),isCur=op&&!cl;pos[s]=P;if(isCur)cur={s:s,P:P,mi:mi};if(cl)lastCl=s;
+   /* hide circle + number, keep it as the tap target */
+   cs.forEach(function(c){if(c===main){c.setAttribute('fill','rgba(0,0,0,0)');c.setAttribute('stroke','none');c.setAttribute('r',boss?34:28)}else if(!c.classList.contains('npulse'))c.style.display='none'});
+   var num=[].slice.call(nd.querySelectorAll(':scope>text')).filter(function(t){return+t.getAttribute('font-size')>=18})[0];if(num)num.style.display='none';
+   var g=E('g',{class:'mtsq'+(cl?' dn':op?' op':' lk'),'pointer-events':'none'});
+   g.appendChild(E('ellipse',{cx:P[0],cy:P[1]+9,rx:boss?27:22,ry:boss?7:6,fill:'rgba(0,0,0,.42)'}));
+   var us=enemyUnits(mi,s),F=foe(mi),col=F.foeCol||'#8a3a2a';
+   var slots=boss?[[-15,0,.9],[15,0,.9],[-6,4,.95],[5,9,1.25]]:[[-13,1,1],[13,1,1],[0,8,1]];
+   var pick=us.slice();if(boss){var b=pick.filter(function(u){return u.isBoss||u.main})[0];if(b){pick=pick.filter(function(u){return u!==b});pick=pick.slice(0,3);pick.push(b)}}
+   if(!cl)g.appendChild(banner(P[0]+(boss?24:20),P[1]+6,col,false,boss?36:30));
+   slots.forEach(function(sl,i){var u=pick[i]||pick[0]||{br:'inf'},sh=MAPT.sheet(u.br,'front')||MAPT.sheet('inf','front');if(!sh)return;
+    var hgt=(u.br==='cav'?31:u.br==='mac'?23:28)*sl[2]*(boss?1.05:1);
+    if(cl){var x=P[0]+sl[0]*1.3,y=P[1]+sl[1]+3;var r=sprite(sh,x,y,hgt,{frame:sh.hit,mode:'dead'});
+      r.inner.setAttribute('transform','rotate('+(i%2?80:-80)+') translate('+(i%2?-4:4)+' 0)');g.appendChild(r.g)}
+    else{var r2=sprite(sh,P[0]+sl[0],P[1]+sl[1],hgt,{ph:(s*3+i*2)%4,mode:op?'act':'idle'});r2.px=sl[0]*.12;g.appendChild(r2.g);SPR.push(r2)}});
+   if(cl)g.appendChild(banner(P[0]+16,P[1]+10,col,true,26));
+   /* number chip */
+   var ch=E('g',{class:'mtno',transform:'translate('+(P[0]-(boss?36:31))+' '+(P[1]-2)+')'});
+   ch.appendChild(E('circle',{r:boss?11:9.5,fill:'#17110c',stroke:isCur?'#ffb04a':cl?'#e8c26a':'#9a7a5c','stroke-width':1.6}));
+   var tx=E('text',{y:boss?4.2:3.8,'text-anchor':'middle','font-size':boss?13:11.5,'font-weight':700,fill:op||cl?'#f6e9cf':'#9d8c78','font-family':'Barlow Condensed,sans-serif'});tx.textContent=String(s+1);ch.appendChild(tx);
+   g.appendChild(ch);
+   /* squad sits under the badges (tick / lock / recruit flag / name) */
+   var first=[].slice.call(nd.childNodes).filter(function(c){return c.nodeType===1&&!(c.tagName==='circle')})[0];
+   nd.insertBefore(g,first||null);
+  }catch(e){}});
+  /* our army marching to the current stage */
+  try{OURS=null;if(cur){var from=lastCl!=null&&pos[lastCl]?pos[lastCl]:[cur.P[0],cur.P[1]+70];var mine=(typeof FAC!=='undefined'&&FAC[S.nation])?FAC[S.nation].c:'#3a8a5c';
+    var og=E('g',{class:'mtour','pointer-events':'none'}),sq=E('g',{});og.appendChild(sq);
+    sq.appendChild(E('ellipse',{cx:0,cy:5,rx:17,ry:5,fill:'rgba(0,0,0,.4)'}));
+    sq.appendChild(banner(-15,4,mine,false,28));
+    var shB=MAPT.sheet('inf','back'),list=[];if(shB){[[-8,-2],[8,-2],[0,4]].forEach(function(o,i){var r=sprite(shB,o[0],o[1],21,{ph:i,mode:'march'});sq.appendChild(r.g);list.push(r)})}
+    var tag=svg.querySelector('g.node[data-v="'+cur.mi+'|'+cur.s+'|stage"]');svg.insertBefore(og,tag||null);
+    OURS={g:og,from:from,to:cur.P,list:list}}}catch(e){OURS=null}
+  start()}
+
+ function start(){if(timer||RM)return;timer=setInterval(step,120)}
+ function stop(){if(timer){clearInterval(timer);timer=0}}
+ function step(){try{
+   if(document.hidden)return;var live=SPR.filter(function(r){return r.g.isConnected});SPR=live;if(!live.length&&!(OURS&&OURS.g.isConnected)){stop();return}
+   tick++;var t=tick*0.12;
+   live.forEach(function(r){var sh=r.sh;
+    if(r.mode==='act'){var cyc=(tick+r.ph*7)%46;if(cyc<10){set(r,sh.atk[Math.min(4,cyc>>1)])}else set(r,sh.idle[((tick>>2)+r.ph)%4]);
+      var dx=Math.sin(t*.9+r.ph)*2.2+r.px*Math.sin(t*.35);r.g.setAttribute('transform','translate('+(r.x+dx).toFixed(1)+' '+r.y.toFixed(1)+')')}
+    else if(r.mode==='idle'){set(r,sh.idle[((tick>>2)+r.ph)%4])}
+    else if(r.mode==='march'){set(r,sh.idle[((tick>>1)+r.ph)%4]);r.inner.setAttribute('transform','translate(0 '+(((tick+r.ph)%4<2)?-1.2:0)+')')}});
+   if(OURS&&OURS.g.isConnected){var L=58,k=tick%L,a=OURS.from,b=OURS.to,p,op=1;
+     if(k<36){p=.22+.5*(k/36)}else{p=.72;if(k>=36&&k<46){OURS.list.forEach(function(r){r.mode='hit';set(r,r.sh.atk[Math.min(4,(k-36)>>1)])})}else OURS.list.forEach(function(r){r.mode='march'})}
+     if(k>=36&&k<46){}else if(k<36)OURS.list.forEach(function(r){r.mode='march'});
+     if(k>50)op=Math.max(0,1-(k-50)/8);if(k<4)op=k/4;
+     var x=a[0]+(b[0]-a[0])*p,y=a[1]+(b[1]-a[1])*p;OURS.g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');OURS.g.setAttribute('opacity',op.toFixed(2))}
+  }catch(e){stop()}}
+
+ function run(){try{var svg=document.querySelector(SEL);if(svg&&!svg.dataset.mt)build(svg)}catch(e){}}
+ var pend=0;function sched(){if(!pend){pend=1;(window.requestAnimationFrame||setTimeout)(function(){pend=0;run()})}}
+ try{var mo=new MutationObserver(sched);function attach(){var m=document.getElementById('main');if(m&&!m.dataset.mtmo){m.dataset.mtmo='1';mo.observe(m,{childList:true,subtree:true})}}
+   attach();document.addEventListener('DOMContentLoaded',function(){attach();sched()});setTimeout(function(){attach();sched()},0);setInterval(attach,3000);
+   document.addEventListener('visibilitychange',function(){if(!document.hidden&&SPR.length)start()})}catch(e){}
+
+ var CSS='#main .mapbox .mtsq.lk image{filter:grayscale(.75) brightness(.55)}'+
+  '#main .mapbox .mtsq.dn image{filter:brightness(.8) saturate(.7)}'+
+  '#main .mapbox .mtbn .mtfl{transform-box:fill-box;transform-origin:0 50%;animation:mtwv 1.6s ease-in-out infinite alternate}'+
+  '#main .mapbox .mtbn.down .mtfl{animation:none;opacity:.8}'+
+  '#main .mapbox .mtsq.lk .mtbn{opacity:.55}'+
+  '@keyframes mtwv{0%{transform:skewY(-6deg) scaleX(.92)}100%{transform:skewY(5deg) scaleX(1.04)}}'+
+  '@media (prefers-reduced-motion:reduce){#main .mapbox .mtbn .mtfl{animation:none}}';
+ function addCss(){try{var s=document.getElementById('ds198css');if(!s){s=document.createElement('style');s.id='ds198css';s.textContent=CSS}document.head.appendChild(s)}catch(e){}}
+ try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss)}catch(e){}
 })();
 </script>
