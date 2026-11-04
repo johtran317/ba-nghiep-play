@@ -10950,7 +10950,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V222';
+var BUILD='V223';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13103,4 +13103,168 @@ function pv220Ctr(){try{var en=buildEnemy(PV220.mi,PV220.si,PV220.kind),cnt={};e
  /* the boot already opened the old intro before this file loaded: swap it */
  try{if(S&&S.f204&&document.querySelector('#sheet .wcbox:not(.t2)')&&!document.querySelector('#sheet .wcf'))welcome()}catch(e){}
 }catch(e){try{console.error('start221',e)}catch(x){}}})();
+/* ===== V223 Lôi Đài phase 1 (coding, user 2026-11-04 06:50 plan + 07:34 answers: settlement 21:00, 10 free tries a day, no VIP extras,
+   Tranh Bá later at tower floor 50, "okay to battle offline players"). Plan doc: https://claude.ai/artifact/5tYwc5fmQCjHACuk6oK3mJ §2.
+   Replaces the V1 50-lord ladder (arena.js) whose rivals were rebuilt from the player's own level.
+   - Opens on reaching Màn 5 (Màn 4 cleared, 5 v 5 starts). Locked: buttons greyed with a tag, daily task hidden, "Tính năng mới" card on open.
+   - 1,000 rivals with FIXED strength: rival id = its starting rank; power AR2 curve from ~Màn-5 strength (rank 1000) to above an
+     end-game account (rank 1), geometric in log(rank). A new player starts unranked (1001). Win = swap ranks.
+   - Targets scale with rank (2/5/9/14 % above) + one "Thách đấu" stretch target (~25 % above, double Uy Danh).
+   - 10 free challenges a day (S.day), extra ones 10 × n gold (resets daily), 10-minute cooldown after a loss. No VIP extras.
+   - Settlement every day at 21:00 local (game clock): rivals below first try to take your spot (2–3 attempts, decided by their power
+     vs your defence team), then the rank pays Uy Danh + silver + a little gold. Missed days are paid up to 7.
+   - Defence team = Đội 1/2/3 (S.ar2.def). Battle report with Phục thù. Uy Danh shop. 6 tiers (Đồng … Đế), 14-day seasons.
+   Save key S.ar2. Actions ar2, ar2f, ar2b, ar2d, ar2s, ar2sb, ar2r (checked unused). Everything wrapped. */
+var AR2N=1000,AR2FREE=10,AR2MI=3,AR2CD=600000,AR2SEASON=14;
+var AR2PLO=2500,AR2PHI=225000,AR2K=1; /* power at rank 1000 / rank 1 (arnPower units; bot: Màn 5 ≈ 4k, Màn 10 ≈ 12k, end-game account ≈ 200k); AR2K = calibration factor */
+var AR2TIER=[{n:'Đế',r:3,c:'#e8433a'},{n:'Long',r:30,c:'#f0c24a'},{n:'Ngọc',r:100,c:'#4cc27a'},{n:'Vàng',r:300,c:'#e2b25a'},{n:'Bạc',r:600,c:'#c9d2dc'},{n:'Đồng',r:99999,c:'#c07a45'}];
+var AR2MS=[[900,{v:10},50],[700,{v:15},80],[500,{v:20},100],[300,{v:30},150],[100,{v:50},200],[30,{v:80},300],[10,{v:120},400],[3,{v:200},600],[1,{v:300},1000]];
+function ar2Open(){try{return!!(S.camp&&S.camp.mapDone&&S.camp.mapDone[AR2MI])}catch(e){return true}}
+function ar2(){var a=S.ar2;if(!a){a=S.ar2={me:AR2N+1,m:{},best:AR2N+1,day:null,tries:0,buy:0,cd:0,ud:0,log:[],set:null,def:null,ms:{},sbest:6,badge:null}}
+ if(a.day!==S.day){a.day=S.day;a.tries=0;a.buy=0}return a}
+function ar2At(r){var a=ar2();if(r===a.me||r<1||r>AR2N+1)return null;var v=a.m[r];return v!=null?v:(r<=AR2N?r:null)}
+function ar2Swap(t){var a=ar2(),old=a.me,id=ar2At(t);if(id==null)return;a.me=t;delete a.m[t];if(old<=AR2N+1){if(id===old)delete a.m[old];else a.m[old]=id}if(t<a.best)a.best=t}
+function ar2X(r){return Math.max(0,Math.min(1,(r-1)/(AR2N-1)))} /* power is exponential in rank: every ~7 ranks ≈ +3 % */
+function ar2Pw(r){return AR2PHI*Math.pow(AR2PLO/AR2PHI,ar2X(r))}
+function ar2TierI(r){for(var i=0;i<AR2TIER.length;i++)if(r<=AR2TIER[i].r)return i;return AR2TIER.length-1}
+function ar2Emb(i,sz){var T=AR2TIER[i];sz=sz||22;
+ return'<svg class="ar2e" width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" aria-label="'+T.n+'"><circle cx="12" cy="12" r="10.5" fill="'+T.c+'" opacity=".22" stroke="'+T.c+'" stroke-width="1.6"/><path d="M12 5.5l5.5 3v5.2c0 2.6-2.3 4.4-5.5 5.8-3.2-1.4-5.5-3.2-5.5-5.8V8.5z" fill="'+T.c+'" opacity=".85"/>'+(i<=2?'<path d="M12 9l1.1 2.2 2.4.3-1.8 1.6.5 2.4-2.2-1.2-2.2 1.2.5-2.4-1.8-1.6 2.4-.3z" fill="#1a120c" opacity=".75"/>':'')+'</svg>'} /* code shield until the painted tier medallions (Art To-Do A3) land */
+function ar2Name(id){var rng=mulberry32(5150+id*97);return ARN_SUR[Math.floor(rng()*ARN_SUR.length)]+' '+ARN_GIV[Math.floor(rng()*ARN_GIV.length)]}
+function ar2Fac(id){return['shu','wei','wu','qun'][mulberry32(5150+id*97+1)()*4|0]}
+var AR2C={};
+function ar2Team(id){if(AR2C[id])return AR2C[id];
+ var rng=mulberry32(9100+id*131),x=ar2X(id),lv=Math.round(20*Math.pow(270/20,1-x)),tier=lv<35?1:lv<55?2:lv<75?3:4;
+ var fid=FORM_ORDER[Math.floor(rng()*FORM_ORDER.length)],F=FORM[fid],cells=F.cells.slice().sort(function(a,b){return a.charAt(0)-b.charAt(0)}).slice(0,5);if(cells.indexOf(F.main)<0)cells[cells.length-1]=F.main;
+ var pool=Object.keys(GENS).filter(function(g){var G=GENS[g];return G&&G.br&&BR[G.br]&&g!=='lord'&&G.rar}),used={},us=[];
+ var rows=[['inf','cav','inf'],['arc','cav','str','inf'],['str','sup','arc','mac','sup']];
+ cells.forEach(function(c,i){var r=+c.charAt(0),l=+c.charAt(2),br=rows[Math.min(2,r)][Math.floor(rng()*rows[Math.min(2,r)].length)];
+  var ro=rng(),want=ro<.12+.6*(1-x)?'SSR':ro<.55+.3*(1-x)?'SR':'R',cand=pool.filter(function(g){return!used[g]&&GENS[g].br===br&&GENS[g].rar===want});
+  if(!cand.length)cand=pool.filter(function(g){return!used[g]&&GENS[g].br===br});if(!cand.length)cand=pool.filter(function(g){return!used[g]});
+  var gid=cand[Math.floor(rng()*cand.length)],G=GENS[gid];used[gid]=1;
+  var path=tier>=4?'abcde'.charAt(Math.floor(rng()*5)):tier>=2?(rng()<.5?'A':'B'):null;
+  var u=makeUnit({id:'D'+i,side:'D',name:G.n,br:G.br,path:path,tier:tier,lv:lv,tong:G.tong,dung:G.dung,tri:G.tri,tact:G.tact,pas:G.pas,fac:G.fac,cell:[r,l],fid:fid,fl:1+Math.min(9,Math.floor(lv/30)),main:c===F.main,look:gid,isBoss:false});
+  u.pvp=1;us.push(u)});
+ /* real players carry Bậc 4/5 forms, gear, stars and skins that arnPower undercounts, so a rival needs ×1.15 (Màn 5) … ×1.8 (end game)
+    of the player's arnPower for an even fight (calibrated with battle(): ~50 % at equal shown power). Shown power = the curve value. */
+ var pw=arnPower(us),kf=AR2K*(1.82-.7*x),k=Math.max(.05,ar2Pw(id)*kf/Math.max(1,pw));
+ us.forEach(function(u){u.A*=k;u.D=u.D.map(function(d){return d*k});u.max=Math.max(1,Math.round(u.max*k));u.troops=u.max});
+ return(AR2C[id]={units:us,lv:lv,fid:fid,pw:Math.round(ar2Pw(id))})}
+function ar2Fresh(id){var T=ar2Team(id);return T.units.map(function(u){var c=Object.assign({},u);c.D=u.D.slice();c.st={stun:0,burn:0,chaos:0,shield:0,taunt:0,lock:0};c.troops=c.max;c.morale=u.main?50:0;return c})}
+function ar2DefUnits(){var a=ar2(),act=S.fm.act,d=a.def==null?act:a.def,o=[];try{S.fm.act=d;o=playerUnits(true)}catch(e){}S.fm.act=act;return o}
+function ar2MyPw(){try{return arnPower(playerUnits(true))}catch(e){return 1}}
+/* targets ≈ +2 / +5 / +9 / +14 % power above you, stretch ≈ +22 % (fixed rank gaps because power is exponential in rank) */
+var AR2OFF=[4,11,19,29],AR2STO=44;
+function ar2Targets(){var a=ar2(),r=Math.min(a.me,AR2N+1),o=[];
+ if(r<=6){for(var k=r-1;k>=1&&o.length<4;k--)o.push(k);return{list:o,st:null}}
+ AR2OFF.forEach(function(d){var t=r-d;if(t<1)t=1;if(o.indexOf(t)<0&&t<r)o.push(t)});
+ var st=r-AR2STO;if(st<1||o.indexOf(st)>=0)st=null;return{list:o,st:st}}
+function ar2Reward(r){var x=r>AR2N?1:ar2X(r),ti=r>AR2N?6:ar2TierI(r);return{ud:Math.round(20+280*(1-x)),s:Math.round(3000+30000*(1-x)),v:[40,25,15,8,5,3,0][ti]}}
+function ar2Rt(rw){var p=[];if(rw.ud)p.push('<span class="gold">'+rw.ud+' Uy Danh</span>');var o=rewardTxt({s:rw.s||0,v:rw.v||0,m:rw.m||0});if(o)p.push(o);return p.join(' · ')}
+function ar2Give(rw){var a=ar2();a.ud+=rw.ud||0;giveRw({s:rw.s||0,v:rw.v||0,m:rw.m||0})}
+function ar2Log(o){var a=ar2();o.t=S.clock;a.log.unshift(o);if(a.log.length>12)a.log.length=12}
+function ar2Ms(){var a=ar2(),got=[];AR2MS.forEach(function(m){if(a.best<=m[0]&&!a.ms[m[0]]){a.ms[m[0]]=1;var rw={ud:m[2],v:m[1].v};ar2Give(rw);got.push('Mốc hạng '+m[0]+': '+ar2Rt(rw))}});return got}
+/* ---- 21:00 settlement (game clock, local time) ---- */
+function ar2SetIdx(){return Math.floor((lms()-75600000)/86400000)}
+function ar2Attacks(idx){var a=ar2();if(a.me>AR2N)return;var rng=mulberry32(7000+idx*13+a.me),n=2+(rng()<.4?1:0),dp=arnPower(ar2DefUnits());
+ for(var i=0;i<n;i++){var r=a.me,span=40,fr=Math.min(AR2N,r+1+Math.floor(rng()*span)),id=ar2At(fr);if(id==null)continue;
+  var ratio=ar2Team(id).pw/Math.max(1,dp),p=1/(1+Math.exp(-7*(ratio-1)));
+  if(rng()<p){a.me=fr;delete a.m[fr];if(id===r)delete a.m[r];else a.m[r]=id;ar2Log({k:'lost',id:id,from:r,to:fr})}
+  else{a.ud+=2;ar2Log({k:'held',id:id,r:r})}}}
+function ar2Season(idx){var a=ar2(),s=Math.floor(idx/AR2SEASON);if(a.season==null){a.season=s;return}if(s===a.season)return;
+ var bi=Math.min(a.sbest,a.me>AR2N?6:ar2TierI(a.me));if(bi<6){var rw={ud:[3000,1500,800,400,200,100][bi],v:[200,120,80,40,20,10][bi]};ar2Give(rw);a.badge=a.badge==null?bi:Math.min(a.badge,bi);ar2Log({k:'season',ti:bi,rw:rw})}
+ if(a.me<=AR2N){var ti=ar2TierI(a.me),floor=ti<5?AR2TIER[ti].r:a.me;if(floor>a.me&&floor<=AR2N){var old=a.me;var id=ar2At(floor);a.me=floor;delete a.m[floor];if(id!=null){if(id===old)delete a.m[old];else a.m[old]=id}}}
+ a.season=s;a.sbest=a.me>AR2N?6:ar2TierI(a.me)}
+function ar2Settle(){try{if(!S||!S.camp||!ar2Open())return;var a=ar2(),cur=ar2SetIdx();if(a.set==null){a.set=cur;a.season=Math.floor(cur/AR2SEASON);return}
+ if(cur<=a.set)return;var from=Math.max(a.set+1,cur-6),paid=0,tot={ud:0,s:0,v:0};
+ for(var k=from;k<=cur;k++){ar2Season(k);ar2Attacks(k);if(a.me<=AR2N){var rw=ar2Reward(a.me);ar2Give(rw);tot.ud+=rw.ud;tot.s+=rw.s;tot.v+=rw.v;paid++;ar2Log({k:'pay',r:a.me,rw:rw})}
+  a.sbest=Math.min(a.sbest,a.me>AR2N?6:ar2TierI(a.me))}
+ a.set=cur;if(paid){try{toast('Bổng Lôi Đài 21:00: '+tot.ud+' Uy Danh'+(tot.v?' · '+tot.v+' vàng':''))}catch(e){}try{save()}catch(e){}}}catch(e){}}
+function ar2Next(){var ms=86400000,t=lms()-75600000,left=ms-(((t%ms)+ms)%ms);var h=Math.floor(left/3600000),m=Math.floor(left%3600000/60000);return h+' giờ '+m+' phút'}
+function ar2Left(){var a=ar2();return AR2FREE+a.buy-a.tries}
+/* ---- sheets ---- */
+function ar2Row(t,st,mp){var id=ar2At(t);if(id==null)return'';var T=ar2Team(id),rat=T.pw/Math.max(1,mp),ti=ar2TierI(t),a=ar2(),left=ar2Left(),cd=a.cd>S.clock;
+ return'<div class="card row'+(st?' ar2st':'')+'"><div class="ar2rk">'+ar2Emb(ti,26)+'<b>'+t+'</b></div><div class="sp"><b>'+esc(ar2Name(id))+'</b> <span class="sm" style="color:'+(FAC[ar2Fac(id)]?FAC[ar2Fac(id)].c:'#ccc')+'">'+(FAC[ar2Fac(id)]?FAC[ar2Fac(id)].n:'')+'</span>'+
+  '<div class="sm mute">'+FORM[T.fid].n+' · '+T.units.map(function(u){return TAGS[u.br]}).join(' ')+'</div>'+
+  '<div class="sm '+(rat<.9?'ok':rat<1.1?'gold':'bad')+'">Sức '+fmt(T.pw)+' · '+(rat<.9?'dễ':rat<1.1?'ngang sức':'khó')+(st?' · <b class="gold">Thách đấu · Uy Danh ×2</b>':'')+'</div></div>'+
+  '<button class="btn sm" data-a="ar2f" data-v="'+t+'"'+(left<=0||cd?' disabled':'')+'>Khiêu chiến</button></div>'}
+function ar2Place(){var a=ar2();if(a.placed)return;a.placed=1;try{var mp=ar2MyPw(),y=Math.log(.85*mp/AR2PHI)/Math.log(AR2PLO/AR2PHI),r=Math.round(1+(AR2N-1)*y);
+ if(r<=AR2N&&a.me>AR2N){r=Math.max(4,r);ar2Swap(r);ar2Log({k:'place',r:r});save()}}catch(e){}} /* one-time placement so existing late-game saves don't start at the bottom */
+function ar2Sheet(){ar2Settle();ar2Place();var a=ar2(),r=a.me,ti=r>AR2N?6:ar2TierI(r),mp=ar2MyPw(),left=ar2Left(),rw=ar2Reward(r),tg=ar2Targets();
+ var h='<h3>Lôi Đài</h3>';
+ h+='<div class="dsinf"><div class="dsl">Hạng của bạn</div><div class="dsg">'+
+  '<div><span>Hạng</span><b>'+(r>AR2N?'—':r)+'</b></div>'+
+  '<div><span>Bậc</span><b class="ar2tb">'+(ti<6?ar2Emb(ti,20)+AR2TIER[ti].n:'—')+'</b></div>'+
+  '<div><span>Uy Danh</span><b>'+fmt(a.ud)+'</b></div></div>'+
+  '<div class="sm mute">'+(r>AR2N?'Thắng một trận để vào bảng 1.000 hạng.':'Bổng lúc 21:00 (còn '+ar2Next()+'): '+ar2Rt(rw))+'</div>'+
+  (a.badge!=null?'<div class="sm">Huy hiệu mùa cao nhất: '+ar2Emb(a.badge,16)+' '+AR2TIER[a.badge].n+'</div>':'')+'</div>';
+ h+='<div class="sec">Khiêu chiến <span class="sm mute">· lượt '+Math.max(0,left)+'/'+(AR2FREE+a.buy)+'</span></div>';
+ if(a.cd>S.clock)h+='<div class="sm bad" style="margin:0 0 6px">Nghỉ quân sau trận thua: còn '+Math.ceil((a.cd-S.clock)/60000)+' phút.</div>';
+ h+='<div class="stack dslist">'+tg.list.map(function(t){return ar2Row(t,false,mp)}).join('')+(tg.st?ar2Row(tg.st,true,mp):'')+'</div>';
+ if(left<=0)h+='<button class="btn alt wide" style="margin-top:8px" data-a="ar2b">Mua thêm 1 lượt · '+(10*(a.buy+1))+' vàng</button>';
+ h+='<div class="sec">Đội phòng thủ</div><div class="sm mute" style="margin-bottom:6px">Trước 21:00 các chư hầu xếp dưới sẽ đánh vào hạng của bạn bằng đội này. Sức thủ: <b>'+fmt(arnPower(ar2DefUnits()))+'</b></div>';
+ var dd=a.def==null?S.fm.act:a.def;h+='<div class="pills">'+[0,1,2].map(function(i){return'<button class="pill'+(dd===i?' on':'')+'" data-a="ar2d" data-v="'+i+'">Đội '+(i+1)+'</button>'}).join('')+'</div>';
+ if(a.log.length){h+='<div class="sec">Báo chiến</div><div class="stack dslist">'+a.log.slice(0,6).map(function(e){var tx='',btn='';
+  if(e.k==='lost'){var cr=ar2RankOf(e.id);tx='<b class="bad">'+esc(ar2Name(e.id))+'</b> chiếm hạng '+e.from+', bạn xuống '+e.to;if(cr&&cr<a.me)btn='<button class="btn sm" data-a="ar2r" data-v="'+e.id+'">Phục thù</button>'}
+  else if(e.k==='held')tx='Giữ vững hạng '+e.r+' trước <b>'+esc(ar2Name(e.id))+'</b> · +2 Uy Danh';
+  else if(e.k==='pay')tx='Bổng 21:00 · hạng '+e.r+': '+ar2Rt(e.rw);
+  else if(e.k==='season')tx='Kết mùa · bậc '+AR2TIER[e.ti].n+': '+ar2Rt(e.rw);
+  else if(e.k==='place')tx='Xếp hạng khởi điểm theo lực chiến: hạng '+e.r;
+  else if(e.k==='win')tx='Thắng <b>'+esc(ar2Name(e.id))+'</b> · lên hạng '+e.r;
+  else if(e.k==='loss')tx='Thua <b>'+esc(ar2Name(e.id))+'</b> · giữ hạng '+e.r;
+  return'<div class="card row"><div class="sp sm">'+tx+'</div>'+btn+'</div>'}).join('')+'</div>'}
+ h+='<div class="sec">Mốc hạng</div><div class="stack dslist">'+AR2MS.map(function(m){var got=a.ms[m[0]];return'<div class="card row"><div class="sp sm'+(got?' ok':'')+'">Top '+m[0]+': '+ar2Rt({ud:m[2],v:m[1].v})+'</div>'+(got?'<span class="ok">✓</span>':'')+'</div>'}).join('')+'</div>';
+ h+='<div class="sm mute" style="margin-top:8px">Top 3: '+[1,2,3].map(function(k){return k+'. '+(a.me===k?'<b class="gold">Bạn</b>':esc(ar2Name(ar2At(k))))}).join(' · ')+'</div>';
+ h+='<div class="sbar"><button class="btn wide" data-a="ar2s">Cửa hàng Uy Danh</button></div>';
+ return h}
+function ar2RankOf(id){var a=ar2();for(var k in a.m)if(a.m[k]===id)return+k;if(id<=AR2N&&a.m[id]==null&&a.me!==id)return id;return null}
+var AR2SHOP=[{id:'phu',n:'Binh Phù ×1',d:'Nguyên liệu Bậc 4',p:300,lim:1,give:function(){tp().phu+=1}},
+ {id:'sh',n:'Mảnh Thiên Mệnh Phù ×5',d:'10 mảnh ghép 1 Phù',p:250,lim:2,give:function(){giveRw({sh:5})}},
+ {id:'hon',n:'Hồn Tướng ×10',d:'Đổi mảnh tướng tùy chọn ở Tửu Quán',p:200,lim:2,give:function(){if(S.hon==null)S.hon=0;S.hon+=10}},
+ {id:'bst',n:'Đá thần thú ×1',d:'Chọn loại đá Bậc 5',p:200,lim:2,pick:1},
+ {id:'sil',n:'20.000 bạc',d:'',p:60,lim:5,give:function(){S.res.silver+=20000}}];
+function ar2ShopUsed(id){var a=ar2();if(!a.shop||a.shop.day!==S.day)a.shop={day:S.day};return a.shop[id]||0}
+function ar2ShopSheet(){var a=ar2(),h='<h3>Cửa hàng Uy Danh</h3><div class="dsinf"><div class="dsl">Uy Danh</div><div class="dsg"><div><span>Đang có</span><b>'+fmt(a.ud)+'</b></div></div><div class="sm mute">Nhận từ bổng 21:00, trận thắng, mốc hạng và kết mùa. Giới hạn mua làm mới mỗi ngày.</div></div><div class="stack dslist">';
+ AR2SHOP.forEach(function(it){var u=ar2ShopUsed(it.id),ok=a.ud>=it.p&&u<it.lim;
+  h+='<div class="card row"><div class="sp"><b>'+it.n+'</b><div class="sm mute">'+it.d+(it.d?' · ':'')+'còn '+(it.lim-u)+'/'+it.lim+' hôm nay</div>'+
+   (it.pick?'<div class="chips ar2ch" style="margin-top:6px">'+BSTK.map(function(f){return'<button class="chip" data-a="ar2sb" data-v="bst:'+f+'"'+(ok?'':' disabled')+'>'+BST[f].replace(' Thạch','')+'</button>'}).join('')+'</div>':'')+'</div>'+
+   (it.pick?'<span class="gold">'+(u>=it.lim?'Hết lượt':it.p+' Uy Danh')+'</span>':'<button class="btn sm" data-a="ar2sb" data-v="'+it.id+'"'+(ok?'':' disabled')+'>'+(u>=it.lim?'Hết lượt':it.p+' Uy Danh')+'</button>')+'</div>'});
+ return h+'</div><div class="sbar"><button class="btn wide" data-a="ar2">Về Lôi Đài</button></div>'}
+function ar2UnlockSheet(){return'<h3>Tính năng mới</h3><div class="dsinf"><div class="dsl">Lôi Đài</div><div class="sm">Leo bảng 1.000 chư hầu. Thắng thì đổi hạng; hạng lúc 21:00 mỗi ngày quyết định bổng Uy Danh. Trước giờ đó, chư hầu xếp dưới sẽ đánh vào đội phòng thủ của bạn.</div></div>'+
+ '<div class="sec">Phần thưởng</div><div class="stack dslist"><div class="card row"><div class="sp"><b>Bổng 21:00</b><div class="sm mute">Uy Danh, bạc và vàng theo hạng</div></div></div><div class="card row"><div class="sp"><b>Cửa hàng Uy Danh</b><div class="sm mute">Binh Phù, Mảnh Thiên Mệnh Phù, Hồn Tướng, Đá thần thú</div></div></div><div class="card row"><div class="sp"><b>Bậc và mùa giải</b><div class="sm mute">Đồng · Bạc · Vàng · Ngọc · Long · Đế · mùa 14 ngày</div></div></div></div>'+
+ '<div class="sbar"><button class="btn wide" data-a="ar2">Vào Lôi Đài</button></div>'}
+function ar2Fight(t){var a=ar2();if(!ar2Open())return;if(ar2Left()<=0){toast('Hết lượt hôm nay');return}if(a.cd>S.clock){toast('Đang nghỉ quân');return}
+ var id=ar2At(t);if(id==null||t>=a.me)return;var tg=ar2Targets(),st=tg.st===t;if(tg.list.indexOf(t)<0&&!st&&!a.rev)return;a.rev=0;
+ var D=ar2Fresh(id),fac=ar2Fac(id),nm=ar2Name(id);
+ runSpecial(D,{title:'Lôi Đài · '+nm,info:'Hạng '+t+' · '+FORM[ar2Team(id).fid].n,foeCol:FAC[fac]?FAC[fac].c:'#8a6a9a',foeFac:fac},null,function(res,out,A){
+  a.tries++;var win=!out.retreat&&res.win==='att',R={win:win,title:'Lôi Đài · '+nm,rounds:res.rounds,again:'ar2',againT:'Về Lôi Đài'};
+  if(win){var old=a.me;if(ar2At(t)===id&&t<a.me)ar2Swap(t);var rw={ud:st?20:10,m:300};ar2Give(rw);R.head='Thắng! Lên hạng '+a.me;R.lines=['<span class="gold">+'+rw.ud+' Uy Danh</span>'+(st?' · Thách đấu ×2':'')].concat(ar2Ms());R.rw={m:300};ar2Log({k:'win',id:id,r:a.me});
+   var ti=ar2TierI(a.me);if(old>AR2N||ar2TierI(old)>ti){R.lines.unshift(ar2Emb(ti,40)+' <b class="gold">Lên bậc '+AR2TIER[ti].n+'!</b>')}a.sbest=Math.min(a.sbest,ti)}
+  else{a.ud+=3;a.cd=S.clock+AR2CD;R.head='Thất bại';R.lines=['Hạng giữ nguyên ('+(a.me>AR2N?'—':a.me)+'). +3 Uy Danh. Nghỉ quân 10 phút trước trận kế tiếp.'];ar2Log({k:'loss',id:id,r:a.me})}
+  try{mastGain(A,ar2Team(id).lv,win?1:0)}catch(e){}save();return R})}
+/* ---- wiring ---- */
+(function(){try{
+ var _A=A_;A_=function(a,v,w,el){try{
+  if(a==='arena'||a==='ar2'||a==='arfight'||a==='arclaim'){if(!ar2Open()){toast('Lôi Đài mở khi tới Màn 5 (vượt Màn 4)');return}openSheet(ar2Sheet);return}
+  if(a==='ar2f'){ar2Fight(+v);return}
+  if(a==='ar2r'){var r=ar2RankOf(+v),A2=ar2();if(r&&r<A2.me){A2.rev=1;ar2Fight(r)}return}
+  if(a==='ar2b'){var B=ar2(),p=10*(B.buy+1);if(S.res.gold<p){toast('Cần '+p+' vàng');return}S.res.gold-=p;B.buy++;toast('+1 lượt Lôi Đài · −'+p+' vàng');save();refresh();openSheet(ar2Sheet,true);return}
+  if(a==='ar2d'){ar2().def=+v;save();openSheet(ar2Sheet,true);return}
+  if(a==='ar2s'){openSheet(ar2ShopSheet);return}
+  if(a==='ar2sb'){var C=ar2(),k=String(v).split(':'),it=AR2SHOP.filter(function(x){return x.id===k[0]})[0];if(!it)return;var u=ar2ShopUsed(it.id);
+   if(u>=it.lim||C.ud<it.p){toast('Chưa đủ Uy Danh');return}C.ud-=it.p;C.shop[it.id]=u+1;if(it.id==='bst'&&BST[k[1]])bstAdd(k[1],1,false);else if(it.give)it.give();toast('Đã đổi '+(it.id==='bst'?BST[k[1]]:it.n));save();refresh();openSheet(ar2ShopSheet,true);return}
+ }catch(e){}return _A(a,v,w,el)};
+ /* hub / quick button badge = tries left (+1 when the stretch target is up) */
+ var _vc=viewCity;viewCity=function(){var h=_vc.apply(this,arguments);try{var n=ar2Open()?Math.max(0,ar2Left()):0;h=h.replace(/(<button class="qbtn" data-a="arena">[\s\S]*?Lôi Đài)(<i>\d+<\/i>)?/,function(m0,p1){return p1+(n?'<i>'+n+'</i>':'')})}catch(e){}return h};
+ var TASK=null;function sync(){try{var op=ar2Open();document.body.classList.toggle('ar2lk',!op);
+  var i=-1;for(var k=0;k<DAILY.length;k++)if(DAILY[k].k==='arena')i=k;if(!op&&i>=0){TASK=DAILY[i];DAILY.splice(i,1)}else if(op&&i<0&&TASK)DAILY.push(TASK);
+  if(!op){S.ar2lk=1;return}ar2Settle();
+  if(S.ar2lk&&!S.ar2pop&&typeof fighting!=='undefined'&&!fighting&&document.getElementById('modal').hidden){S.ar2pop=1;try{save()}catch(x){}openSheet(ar2UnlockSheet)}}catch(e){}}
+ setInterval(sync,1000);sync();
+ var st=document.createElement('style');st.textContent=
+  'body.ar2lk [data-a="arena"]{position:relative;filter:grayscale(1);opacity:.5}body.ar2lk [data-a="arena"]::after{content:"Màn 5";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font:700 10px/1.4 var(--ds-fb,"Be Vietnam Pro",sans-serif);color:#f6e6c4;background:rgba(20,14,10,.85);border:1px solid rgba(226,178,90,.5);border-radius:6px;padding:0 4px;white-space:nowrap;pointer-events:none}'+
+  'html body #sheet .ar2rk{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:44px;font:700 15px var(--ds-fn,"Barlow Condensed",sans-serif);color:var(--ds-ts,#f6e6c4)}'+
+  'html body #sheet .ar2st{border-color:var(--ds-line2,rgba(226,178,90,.5))!important;background:rgba(226,178,90,.08)!important}'+
+  'html body #sheet .ar2ch{flex-wrap:wrap;overflow:visible}html body #sheet .ar2tb{display:inline-flex;align-items:center;gap:4px}.ar2e{vertical-align:middle;flex:none}';
+ document.head.appendChild(st);
+}catch(e){}})();
 </script>
