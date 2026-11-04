@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V194';
+var BUILD='V195';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11239,6 +11239,152 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  var pend=0;function run(){pend=0;head();bars();fm();misc();minText()}
  function sched(){if(!pend){pend=1;(window.requestAnimationFrame||setTimeout)(run)}}
  try{var mo=new MutationObserver(sched);function attach(){['modal','main'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.dataset.dsmo){e.dataset.dsmo='1';mo.observe(e,{childList:true,subtree:true})}})}
+   attach();document.addEventListener('DOMContentLoaded',function(){attach();sched()});setTimeout(function(){attach();sched()},0);setInterval(attach,3000)}catch(e){}
+})();
+/* ===== V195: Redesign Bible P2 screens (art agent) =====
+   Approved by the user 2026-11-03 16:42 ("ok to process now"); mockups on the canvas
+   https://claude.ai/artifact/5FPKsevg92FjgU9hBLHsGe (3rd row), spec in the Redesign Bible "P2 screen mockups".
+   Builds on ds194.js (load after it). CSS + DOM post-processing only; no game logic, no art files.
+   - Hero sheet: duplicate stat pills under the name hidden; Lv as a chip; Ngoại trang button moved onto the
+     portrait (bottom-right); key numbers in skill / talent texts highlighted (.dsnum, gold Barlow).
+   - World city / node sheets: half-height sheets; influence as 3 faction stats with the gap still needed;
+     node rewards as 3 stats; the action is the one primary at the bottom.
+   - Thảo Phạt tab: boss header + HP + counter in one card; Xuất chinh moved right under it with today's turns;
+     reward tiers as one list; unreached tiers say "Chưa đạt", claimed ones a green "Đã nhận".
+   - Sự kiện: "Nhận tất cả" moves into the header; calendar day labels 12 px / amounts 13 px Barlow; claimed days
+     dimmed with a green tick.
+   - Thời tiết: painted weather icons instead of emoji, time of day as a segmented control with line icons,
+     Hiệu ứng động as a real on/off switch.
+   Everything wrapped; any error leaves the V194 look. */
+(function(){
+ var S_='html body #sheet ',M_='html body #main ';
+ var CSS=
+ /* hero sheet */
+ S_+'.hsh .u185st{display:none!important}'+
+ S_+'.hsh h3{font:700 28px/1.1 var(--ds-fd)!important;color:var(--ds-ts)!important;margin:0!important}'+
+ S_+'.hsh .hslv{height:32px!important;padding:0 12px!important;border-radius:16px!important;border:1px solid rgba(226,178,90,.45)!important;background:rgba(226,178,90,.14)!important;color:#f6dfa6!important;font:700 15px/30px var(--ds-fn)!important;box-shadow:none!important}'+
+ S_+'.hero .hhint{display:none!important}'+
+ S_+'.skbtn.dsonp{position:absolute!important;right:14px!important;left:auto!important;z-index:6!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 14px!important;border-radius:20px!important;'+
+   'background:rgba(23,17,12,.8)!important;border:1px solid rgba(242,207,124,.6)!important;border-image:none!important;color:#f6dfa6!important;font:600 13px var(--ds-fb)!important;box-shadow:0 4px 12px rgba(0,0,0,.45)!important;width:auto!important}'+
+ S_+'.hsl{font:500 11px var(--ds-fb)!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--ds-mu)!important}'+
+ S_+'.hsk,'+S_+'.hsk .pas{font-size:13px!important;line-height:1.5!important;color:#e6d8bf!important}'+
+ 'html body .dsnum{font:700 15px/1 var(--ds-fn)!important;color:#f2cf7c!important;letter-spacing:.01em}'+
+
+ /* world city / node: half-height sheet */
+ 'html body #sheet.sheet.dswh{height:auto!important;max-height:78%!important;margin:auto auto 0!important;border-radius:22px 22px 0 0!important;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))!important}'+
+ S_+'.dsinf{padding:12px 14px;border-radius:16px;background:var(--ds-s1);border:1px solid var(--ds-line);display:flex;flex-direction:column;gap:10px;margin:8px 0}'+
+ S_+'.dsinf .dsl{font:500 11px var(--ds-fb);letter-spacing:.08em;text-transform:uppercase;color:var(--ds-mu)}'+
+ S_+'.dsinf .dsg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}'+
+ S_+'.dsinf .dsg>div{display:flex;flex-direction:column;gap:4px;min-width:0}'+
+ S_+'.dsinf .dsg span{font:600 12px var(--ds-fb)}'+
+ S_+'.dsinf .dsg b{font:700 22px/1 var(--ds-fn);color:var(--ds-ts)}'+
+ S_+'.dsinf .dsg i{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.08)}'+
+ S_+'.dsinf .dsg i u{display:block;height:4px;border-radius:2px}'+
+ S_+'.dsinf .dsgap{font:400 13px var(--ds-fb);color:#f3c27a}'+
+ S_+'.dsinf .dsgap.ok{color:#9fdcb0}'+
+ 'html body #sheet.dswh .stack.dswh-old>div:not(.row){display:none!important}'+
+ 'html body #sheet.dswh .stack.dswh-old>.row{padding:12px 14px;border-radius:16px;background:var(--ds-s1);border:1px solid var(--ds-line)}'+
+ 'html body #sheet.dswh .dsprim{width:100%!important;min-height:52px!important;margin-top:12px!important;border-radius:14px!important;font:700 18px var(--ds-fd)!important}'+
+ 'html body #sheet.dswh .dsnode{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 14px;border-radius:16px;background:var(--ds-s1);border:1px solid var(--ds-line);margin:8px 0}'+
+ 'html body #sheet.dswh .dsnode div{display:flex;flex-direction:column;min-width:0}'+
+ 'html body #sheet.dswh .dsnode span{font:400 12px var(--ds-fb);color:var(--ds-mu)}'+
+ 'html body #sheet.dswh .dsnode b{font:700 22px/1.1 var(--ds-fn);color:var(--ds-ts)}'+
+
+ /* Thảo Phạt tab */
+ M_+'.dsboss{padding:12px 14px;border-radius:16px;background:linear-gradient(110deg,rgba(120,24,30,.45),var(--ds-s1) 60%);border:1px solid rgba(226,178,90,.3);display:flex;flex-direction:column;gap:10px;margin-bottom:12px}'+
+ M_+'.dsboss .bsh,'+M_+'.dsboss .bshp{margin:0!important}'+
+ M_+'.dsboss h3{font:700 22px var(--ds-fd)!important;color:var(--ds-ts)!important}'+
+ M_+'.dsboss>.card{background:transparent!important;border:0!important;padding:0!important}'+
+ M_+'.dsatk{display:flex;align-items:center;gap:12px;margin:0 0 14px}'+
+ M_+'.dsatk .dst{display:flex;flex-direction:column}'+
+ M_+'.dsatk .dst span{font:500 10.5px var(--ds-fb);letter-spacing:.06em;text-transform:uppercase;color:var(--ds-mu)}'+
+ M_+'.dsatk .dst b{font:700 22px/1 var(--ds-fn);color:var(--ds-t)}'+
+ M_+'.dsatk .btn{flex:1 1 auto!important;width:auto!important;min-height:52px!important;border-radius:14px!important;font:700 18px var(--ds-fd)!important;margin:0!important}'+
+ 'html body .stack.dslist{gap:0!important;background:var(--ds-s1)!important;border:1px solid var(--ds-line)!important;border-radius:16px!important;overflow:hidden}'+
+ 'html body .stack.dslist>.card{border:0!important;border-radius:0!important;background:transparent!important;border-top:1px solid rgba(226,178,90,.12)!important;margin:0!important}'+
+ 'html body .stack.dslist>.card:first-child{border-top:0!important}'+
+ 'html body .btn.dsnot{background:rgba(255,255,255,.05)!important;border:1px solid rgba(226,178,90,.16)!important;color:var(--ds-mu)!important;opacity:1!important;filter:none!important;font-weight:600!important;min-height:32px!important;border-radius:16px!important}'+
+ 'html body .btn.dsgot{background:rgba(108,194,131,.10)!important;border:1px solid rgba(108,194,131,.45)!important;color:#9fdcb0!important;opacity:1!important;filter:none!important;min-height:32px!important;border-radius:16px!important}'+
+
+ /* Sự kiện */
+ 'html body #sheet>.snav .btn.dsev{background:linear-gradient(180deg,var(--ds-g1),var(--ds-g2))!important;border:1px solid #f6dc99!important;color:#2a1a0c!important;font:700 13.5px var(--ds-fb)!important;height:40px!important;min-height:40px!important;padding:0 14px!important;width:auto!important}'+
+ S_+'.evday{position:relative!important}'+
+ S_+'.evday b{font:600 12px var(--ds-fb)!important}'+
+ S_+'.evday em.u185tc{font:700 13px var(--ds-fn)!important;font-style:normal!important}'+
+ S_+'.evday.ok{opacity:.6}'+
+ S_+'.evday.ok::after{content:"";position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:8px;background:#3f9a5c url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 12.5l4.5 4.5L19 7.5%27/%3E%3C/svg%3E") center/9px no-repeat}'+
+
+ /* Thời tiết */
+ S_+'.wxl{font:700 17px var(--ds-fd)!important;color:var(--ds-ts)!important;letter-spacing:0!important;text-transform:none!important;margin:14px 0 8px!important}'+
+ S_+'.wxg:not(.four){display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}'+
+ S_+'.wxg:not(.four) .wxo{height:74px!important;border-radius:12px!important;border:1px solid rgba(226,178,90,.18)!important;background:var(--ds-s1)!important;color:#c9b796!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0!important;box-shadow:none!important}'+
+ S_+'.wxg:not(.four) .wxo.on{border:1.5px solid var(--ds-gold)!important;background:rgba(226,178,90,.16)!important;color:#f6dfa6!important}'+
+ S_+'.wxo b{font:600 12px var(--ds-fb)!important}'+
+ S_+'.wxg.four{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:3px!important;padding:3px!important;border-radius:12px!important;background:var(--ds-s1)!important;border:1px solid rgba(226,178,90,.18)!important}'+
+ S_+'.wxg.four .wxo{height:56px!important;border:0!important;border-radius:9px!important;background:transparent!important;color:#c9b796!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0!important;box-shadow:none!important}'+
+ S_+'.wxg.four .wxo.on{background:linear-gradient(180deg,#f2cf7c,#c98f34)!important;color:#2a1a0c!important}'+
+ S_+'.wxo .dswi{display:block;width:30px;height:30px}'+
+ S_+'.btn.dssw{position:relative!important;width:52px!important;min-width:52px!important;height:32px!important;min-height:32px!important;padding:0!important;border-radius:16px!important;font-size:0!important;color:transparent!important}'+
+ S_+'.btn.dssw::after{content:"";position:absolute;top:3px;width:24px;height:24px;border-radius:12px;transition:left .15s}'+
+ S_+'.btn.dssw.on{background:linear-gradient(180deg,#f2cf7c,#c98f34)!important;border:1px solid #f6dc99!important}'+
+ S_+'.btn.dssw.on::after{left:24px;background:#2a1a0c}'+
+ S_+'.btn.dssw.off{background:var(--ds-s2)!important;border:1px solid rgba(226,178,90,.35)!important}'+
+ S_+'.btn.dssw.off::after{left:3px;background:#8f7f69}'+
+ 'html body #sheet .btn.alt[data-a="close"]:not(.snb){display:none!important}';
+
+ function addCss(){try{var s=document.getElementById('ds195css');if(!s){s=document.createElement('style');s.id='ds195css';s.textContent=CSS}document.head.appendChild(s)}catch(e){}}
+ try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss);window.addEventListener('load',addCss)}catch(e){}
+
+ /* gold numbers in skill / talent texts */
+ var NUM=/(×\s?\d+(?:[.,]\d+)?|[+\-−]?\d+(?:[.,]\d+)?\s?(?:%|lần|hiệp|lượt|đạo|sĩ khí)?)/g;
+ function nums(root){try{var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),list=[],n;
+   while((n=w.nextNode())){var p=n.parentElement;if(!p||p.closest('.sktag,.dsnum')||(p.tagName==='B'&&p.parentElement===root&&!p.closest('.pas')))continue;if(/\d/.test(n.nodeValue))list.push(n)}
+   list.forEach(function(t){var s=t.nodeValue;NUM.lastIndex=0;if(!NUM.test(s))return;NUM.lastIndex=0;var f=document.createDocumentFragment(),last=0,m;
+     while((m=NUM.exec(s))){if(!m[0].trim()){NUM.lastIndex++;continue}if(m.index>last)f.appendChild(document.createTextNode(s.slice(last,m.index)));var sp=document.createElement('span');sp.className='dsnum';sp.textContent=m[0];f.appendChild(sp);last=m.index+m[0].length}
+     if(last<s.length)f.appendChild(document.createTextNode(s.slice(last)));t.parentNode.replaceChild(f,t)})}catch(e){}}
+
+ function hero(sh){try{var h=sh.querySelector(':scope>.hero');if(!h)return;
+   sh.querySelectorAll('.hsk').forEach(function(k){if(!k.dataset.dsn){k.dataset.dsn='1';nums(k)}});
+   var sk=sh.querySelector('.skbtn[data-a="skinw"]');if(sk){if(!sk.classList.contains('dsonp')){sk.classList.add('dsonp');if(getComputedStyle(sh).position==='static')sh.style.position='relative'}
+     sk.style.top=Math.max(0,h.offsetTop+h.offsetHeight-52)+'px'}}catch(e){}}
+
+ var FC=[['#8fd6a3','#3f9a5c'],['#7ea6e6','#4a78c8'],['#e88a7e','#c8463a'],['#c4a6e8','#9a7bc8']];
+ function world(sh){try{var city=sh.querySelector('[data-a="winv"]'),node=sh.querySelector('[data-a="wocc"]');if(!city&&!node)return;sh.classList.add('dswh');
+   if(city&&!sh.querySelector('.dsinf')){var st=city.closest('.stack');if(st){var rows=[].filter.call(st.children,function(c){return !c.classList.contains('row')&&c.querySelector('.row')});
+     var data=rows.map(function(r){var b=r.querySelector('b'),v=r.querySelector('.row>span');return{n:b?b.textContent.trim():'',v:v?v.textContent.trim():'0',num:+(v?v.textContent:'0').replace(/\D/g,'')}});
+     if(data.length){var mx=Math.max.apply(null,data.map(function(d){return d.num}))||1,me=data.filter(function(d){return /bạn/.test(d.n)})[0],oth=data.filter(function(d){return d!==me}),top=oth.sort(function(a,b){return b.num-a.num})[0];
+       var box=document.createElement('div');box.className='dsinf';var g='<div class="dsl">Ảnh hưởng</div><div class="dsg">';
+       data.forEach(function(d,i){var c=FC[i%4];g+='<div><span style="color:'+c[0]+'">'+d.n+'</span><b>'+d.v+'</b><i><u style="width:'+Math.round(d.num/mx*100)+'%;background:'+c[1]+'"></u></i></div>'});g+='</div>';
+       if(me&&top){var gap=top.num-me.num+1;g+=gap>0?'<div class="dsgap">Cần thêm <span class="dsnum">'+gap.toLocaleString('vi-VN')+'</span> ảnh hưởng để vượt '+top.n.replace(/\s*\(.*\)/,'')+'.</div>':'<div class="dsgap ok">Bạn đang dẫn đầu ảnh hưởng ở thành này.</div>'}
+       box.innerHTML=g;st.parentNode.insertBefore(box,st);st.classList.add('dswh-old');
+       if(!city.classList.contains('dsprim')){city.classList.remove('sm');city.classList.add('wide','dsprim');st.parentNode.appendChild(city)}}}}
+   if(node&&!sh.querySelector('.dsnode')){var p=sh.querySelector(':scope>p.sm.mute');if(p){var t=p.textContent,mh=/(\d+)\s*giờ/.exec(t),ms=/([\d.]+)\s*bạc/.exec(t),mb=/(\d+)\s*Binh Thư/.exec(t),ml=/(\d+)\s*Thí Luyện/.exec(t);
+     if(ms){var d=document.createElement('div');d.className='dsnode';d.innerHTML='<div><span>Bạc</span><b>'+ms[1]+'</b></div><div><span>Binh Thư</span><b>'+(mb?mb[1]:'—')+'</b>'+(ml?'<span>+'+ml[1]+' Thí Luyện Lệnh</span>':'')+'</div><div><span>Thời gian</span><b>'+(mh?mh[1]+' giờ':'—')+'</b></div>';
+       p.parentNode.insertBefore(d,p.nextSibling);p.style.fontSize='12.5px'}}
+     node.classList.add('dsprim')}}catch(e){}}
+
+ function boss(){try{var m=document.getElementById('main');if(!m)return;var bp=m.querySelector('.bosspage');if(!bp||bp.querySelector('.dsboss'))return;
+   var bsh=bp.querySelector(':scope>.bsh'),hp=bp.querySelector(':scope>.bshp'),ctr=hp&&hp.nextElementSibling&&hp.nextElementSibling.classList.contains('card')?hp.nextElementSibling:null;if(!bsh||!hp)return;
+   var w=document.createElement('div');w.className='dsboss';bp.insertBefore(w,bsh);w.appendChild(bsh);w.appendChild(hp);if(ctr)w.appendChild(ctr);
+   var fb=bp.querySelector('[data-a="bfight"]'),st=bp.querySelector('.stack');
+   if(fb){var turns='';bp.querySelectorAll(':scope>.row.sm').forEach(function(r){if(r.querySelector('[data-a="shop"]')){var b=r.querySelector('b');if(b)turns=b.textContent.trim()}});
+     var a=document.createElement('div');a.className='dsatk';a.innerHTML=turns?'<div class="dst"><span>Lượt hôm nay</span><b>'+turns+'</b></div>':'';a.appendChild(fb);w.parentNode.insertBefore(a,w.nextSibling)}
+   if(st&&st.children.length>=3)st.classList.add('dslist');
+   bp.querySelectorAll('.btn[data-a="bclaim"]').forEach(function(b){if(!b.disabled)return;if(/Đã nhận/.test(b.textContent))b.classList.add('dsgot');else{b.classList.add('dsnot');b.textContent='Chưa đạt'}})}catch(e){}}
+
+ function events(sh){try{var ev=sh.querySelector(':scope>.btn[data-a="evall"]'),nav=sh.querySelector(':scope>.snav');if(ev&&nav&&!nav.contains(ev)){ev.classList.remove('wide');ev.classList.add('dsev');ev.textContent=ev.textContent.replace(/\s*\((\d+)\)/,' · $1');nav.appendChild(ev)}}catch(e){}}
+
+ var WXN={'Trời quang':0,'Nắng nóng':0,'Nhiều mây':1,'Mưa phùn':2,'Mưa':2,'Giông bão':3,'Tuyết rơi':4,'Bão tuyết':4,'Sương mù':5,'Hoa đào bay':6,'Gió thu':8};
+ var TP={'Tự động':'M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4','Bình minh':'M3 18h18M7 18a5 5 0 0 1 10 0M12 4v4M5 9l2 2M19 9l-2 2','Ban ngày':'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5','Hoàng hôn':'M3 18h18M7 18a5 5 0 0 1 10 0M12 12V8M9 9l3-3 3 3','Ban đêm':'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z'};
+ function svg(p,s){return'<svg class="dswi" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+p+'"/></svg>'}
+ function weather(sh){try{var g=sh.querySelectorAll('.wxg');if(!g.length)return;
+   sh.querySelectorAll('.wxo').forEach(function(o){if(o.dataset.dsw)return;o.dataset.dsw='1';var b=o.querySelector('b'),sp=o.querySelector('span');if(!b||!sp)return;var t=b.textContent.trim(),four=o.closest('.wxg.four');
+     if(four){sp.innerHTML=svg(TP[t]||TP['Tự động'],20)}else if(WXN[t]!=null&&typeof wxIcon==='function'){sp.innerHTML=wxIcon(WXN[t],30)}else{sp.innerHTML=svg(TP['Tự động'],30);sp.style.color='#f2cf7c'}});
+   var tg=sh.querySelector('.btn[data-a="wxtog"]');if(tg&&!tg.classList.contains('dssw')){var on=/Bật/.test(tg.textContent);tg.classList.add('dssw',on?'on':'off');tg.setAttribute('role','switch');tg.setAttribute('aria-checked',on?'true':'false');tg.setAttribute('aria-label','Hiệu ứng động')}}catch(e){}}
+
+ var pend=0;function run(){pend=0;var sh=document.getElementById('sheet');if(sh){hero(sh);world(sh);events(sh);weather(sh)}boss()}
+ function sched(){if(!pend){pend=1;(window.requestAnimationFrame||setTimeout)(run)}}
+ try{var mo=new MutationObserver(sched);function attach(){['modal','main'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.dataset.ds5mo){e.dataset.ds5mo='1';mo.observe(e,{childList:true,subtree:true})}})}
    attach();document.addEventListener('DOMContentLoaded',function(){attach();sched()});setTimeout(function(){attach();sched()},0);setInterval(attach,3000)}catch(e){}
 })();
 </script>
