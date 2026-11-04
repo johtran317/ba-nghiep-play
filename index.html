@@ -11023,7 +11023,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V256';
+var BUILD='V257';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14270,7 +14270,7 @@ function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S|
   /* Tướng list: red dot on the general's card */
   document.querySelectorAll('#main button[data-a="gen"][data-v], #sheet button.hc[data-a="gen"][data-v]').forEach(function(b){var id=b.dataset.v;if(!S.gens[id])return;
    /* V255 (user 14:33 "redesign the red button in hero profile" — the red dot on the Tướng cards covered the rarity letter): the same red
-      lacquer seal with a gold double chevron as the gear-slot marker, at the top centre of the portrait (between rarity and faction); bobs 2 px (transform only). */
+      lacquer seal with a gold double chevron as the gear-slot marker, at the bottom centre of the portrait, between Lv and the stars (V257: was top centre, which covered the face); bobs 2 px (transform only). */
    var on=eq247Any(id,worn),d=b.querySelector('.eq247d'),host=b.querySelector('.hca')||b;if(on&&!d){d=document.createElement('i');d.className='eq247d';d.setAttribute('aria-label','Có trang bị tốt hơn');
     d.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12.6l5-4.6 5 4.6M7 17l5-4.6 5 4.6" fill="none" stroke="#fbe7a6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';host.appendChild(d)}else if(!on&&d)d.remove()})
  }catch(e){}}
@@ -14287,7 +14287,7 @@ function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S|
    '@keyframes eq248b{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}'+
    '@media (prefers-reduced-motion:reduce){button.slot.eq247on .gi::after,button.slot .eq247{animation:none}}'+
    '.eq247b{font-weight:700}'+
-   'button[data-a="gen"]{position:relative}button[data-a="gen"] .hca{position:relative}button[data-a="gen"] .hca .eq247d{position:absolute;top:6px;left:50%;z-index:4;display:block;width:24px!important;height:24px!important;padding:0;border-radius:7px;background:linear-gradient(#e2493c,#8f1c16);border:1.5px solid #f1cf6a;box-shadow:0 2px 6px rgba(0,0,0,.55);font-style:normal;pointer-events:none;transform:translateX(-50%);animation:eq255b 2.4s ease-in-out infinite}button[data-a="gen"] .hca .eq247d svg{display:block;width:100%!important;height:100%!important}@keyframes eq255b{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-2px)}}@media (prefers-reduced-motion:reduce){button[data-a="gen"] .hca .eq247d{animation:none}}'+
+   'button[data-a="gen"]{position:relative}button[data-a="gen"] .hca{position:relative}button[data-a="gen"] .hca .eq247d{position:absolute;bottom:7px;left:50%;z-index:4;display:block;width:24px!important;height:24px!important;padding:0;border-radius:7px;background:linear-gradient(#e2493c,#8f1c16);border:1.5px solid #f1cf6a;box-shadow:0 2px 6px rgba(0,0,0,.55);font-style:normal;pointer-events:none;transform:translateX(-50%);animation:eq255b 2.4s ease-in-out infinite}button[data-a="gen"] .hca .eq247d svg{display:block;width:100%!important;height:100%!important}@keyframes eq255b{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-2px)}}@media (prefers-reduced-motion:reduce){button[data-a="gen"] .hca .eq247d{animation:none}}'+
    '';
   document.head.appendChild(st);
   var t=0;function sched(){if(t)return;t=setTimeout(function(){t=0;eq247Run()},120)}
