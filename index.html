@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V200';
+var BUILD='V201';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11916,6 +11916,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    us.sort(function(a,b){return(b.cell&&b.cell[0]===0?0:0)-(0)||(b.A*b.max)-(a.A*a.max)});var g=us[0].gid;return{n:GENS[g].n,src:srcOf(g),pos:GART[g].pos||'50% 20%'}}catch(e){return null}}
  var RM=false;try{RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
 
+ var VFX=false,VFA='art/ui/victory_fx.webp?v=1';try{var _vi=new Image();_vi.onload=function(){VFX=true};_vi.src=VFA}catch(e){}
  window.playMapClear=function(mi){try{
    if(document.getElementById('vcin'))return;var M=MAPS[mi];if(!M)return;var B=bossOf(mi),H=heroOf();
    var el=document.createElement('div');el.id='vcin';el.className=RM?'rm':'';el.setAttribute('role','dialog');el.setAttribute('aria-label','Đại thắng · Màn '+(mi+1));
@@ -11928,8 +11929,11 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
      '<div class="vcmn"><span>Màn '+(mi+1)+'</span><b>'+esc(M.n)+'</b></div>'+
      (B.src?'<div class="vcboss"><div class="vcb0" style="background-image:url(\''+B.src+'\')"></div><div class="vcb1" style="background-image:url(\''+B.src+'\')"></div><div class="vcb2" style="background-image:url(\''+B.src+'\')"></div></div>':'')+
      (H&&H.src?'<div class="vchero"><div class="vch" style="background-image:url(\''+H.src+'\');background-position:'+H.pos+'"></div></div><div class="vcdash" style="background-image:url(\''+H.src+'\');background-position:'+H.pos+'"></div>':'')+
-     '<div class="vcflash"></div>'+sl+'<div class="vcink">'+ink+'</div><div class="vcemb">'+emb+'</div><div class="vcrays"></div>'+
-     '<div class="vcwin"><div class="vcseal"><span>Đại thắng</span></div><div class="vcsub">Đã hạ <b>'+esc(B.n)+'</b><br>Bình định Màn '+(mi+1)+'</div></div>'+
+     '<div class="vcflash"></div>'+(VFX?'':sl)+(VFX?'':'<div class="vcink">'+ink+'</div>')+'<div class="vcemb">'+emb+'</div>'+(VFX?'':'<div class="vcrays"></div>')+
+     (VFX?'<div class="vp vp7 vfr"></div><div class="vp vp0 vfs1"></div><div class="vp vp3 vfh1"></div><div class="vp vp1 vfs2"></div><div class="vp vp3 vfh2"></div><div class="vp vp2 vfs3"></div><div class="vp vp3 vfh3"></div>'+
+       '<div class="vp vp5 vfink"></div><div class="vp vp6 vfwave"></div><div class="vp vp4 vfemb"></div>'+
+       '<div class="vp vq4 vfhelm"></div><div class="vp vq3 vfspear"></div><div class="vp vq5 vfflag"></div>':'')+
+     '<div class="vcwin">'+(VFX?'<div class="vp vq1 vfmed"></div><div class="vfrib"><div class="vp vq0"></div><span>Đại thắng</span></div>':'<div class="vcseal"><span>Đại thắng</span></div>')+'<div class="vcsub">Đã hạ <b>'+esc(B.n)+'</b><br>Bình định Màn '+(mi+1)+'</div></div>'+
      '<div class="vctap">Chạm để tiếp tục</div>';
    document.body.appendChild(el);
    var t0=Date.now(),done=false;function end(){if(done)return;done=true;el.classList.add('out');setTimeout(function(){try{el.remove()}catch(e){}},450)}
@@ -11995,7 +11999,43 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '@keyframes vcShk{0%,100%{translate:0 0}10%{translate:-9px 5px}20%{translate:8px -6px}30%{translate:-7px -4px}40%{translate:6px 6px}50%{translate:-5px 3px}60%{translate:4px -4px}70%{translate:-3px 2px}80%{translate:2px -2px}}'+
  /* reduced motion: still frames */
  '#vcin.rm *{animation:none!important}#vcin.rm .vcb0,#vcin.rm .vcdash,#vcin.rm .vcsl,#vcin.rm .vcink,#vcin.rm .vcemb{display:none}#vcin.rm .vcb1,#vcin.rm .vcb2{visibility:visible;filter:grayscale(1) brightness(.4)}#vcin.rm .vcb1{transform:translate(-10%,-6%) rotate(-6deg)}#vcin.rm .vcb2{transform:translate(8%,12%) rotate(7deg)}#vcin.rm .vcwin,#vcin.rm .vctap,#vcin.rm .vcmn{opacity:1}';
- function addCss(){try{var s=document.getElementById('ds199css');if(!s){s=document.createElement('style');s.id='ds199css';s.textContent=C}document.head.appendChild(s)}catch(e){}}
+ 
+ var V='#vcin .vp{position:absolute;pointer-events:none;background:url('+VFA+') 0 0/800% 200% no-repeat;opacity:0}'+
+ [0,1,2,3,4,5,6,7].map(function(i){return'#vcin .vp'+i+'{background-position:'+(i/7*100).toFixed(3)+'% 0%}'}).join('')+
+ [0,1,2,3,4,5].map(function(i){return'#vcin .vq'+i+'{background-position:'+(i/7*100).toFixed(3)+'% 100%}'}).join('')+
+ /* slashes across the boss: wipe in, then fade */
+ '#vcin .vfs1,#vcin .vfs2,#vcin .vfs3{z-index:5;left:12%;top:20%;width:96%;aspect-ratio:1;mix-blend-mode:screen}'+
+ '#vcin .vfs1{animation:vfSl .5s 2.08s ease-out forwards}#vcin .vfs2{animation:vfSl2 .5s 2.28s ease-out forwards}#vcin .vfs3{top:30%;animation:vfSl .55s 2.48s ease-out forwards}'+
+ '@keyframes vfSl{0%{opacity:1;clip-path:inset(0 0 0 100%);transform:scale(1.15)}35%{opacity:1;clip-path:inset(0 0 0 0)}100%{opacity:0;clip-path:inset(0 0 0 0);transform:scale(1)}}'+
+ '@keyframes vfSl2{0%{opacity:1;clip-path:inset(0 100% 0 0);transform:scale(1.15)}35%{opacity:1;clip-path:inset(0 0 0 0)}100%{opacity:0;clip-path:inset(0 0 0 0);transform:scale(1)}}'+
+ '#vcin .vfh1,#vcin .vfh2,#vcin .vfh3{z-index:6;width:46%;aspect-ratio:1;left:40%;top:30%;mix-blend-mode:screen}'+
+ '#vcin .vfh1{animation:vfHit .35s 2.2s ease-out forwards}#vcin .vfh2{left:48%;top:38%;animation:vfHit .35s 2.4s ease-out forwards}#vcin .vfh3{left:36%;top:44%;animation:vfHit .4s 2.62s ease-out forwards}'+
+ '@keyframes vfHit{0%{opacity:1;transform:scale(.3) rotate(0)}40%{opacity:1;transform:scale(1.1) rotate(20deg)}100%{opacity:0;transform:scale(1.4) rotate(35deg)}}'+
+ /* boss break: ink, shockwave, embers */
+ '#vcin .vfink{z-index:4;width:90%;aspect-ratio:1;left:22%;top:20%;animation:vfInk 1.6s 2.8s ease-out forwards}'+
+ '@keyframes vfInk{0%{opacity:0;transform:scale(.3)}12%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}'+
+ '#vcin .vfwave{z-index:5;width:80%;aspect-ratio:1;left:26%;top:26%;mix-blend-mode:screen;animation:vfWave 1s 2.85s ease-out forwards}'+
+ '@keyframes vfWave{0%{opacity:1;transform:scale(.2)}100%{opacity:0;transform:scale(1.8)}}'+
+ '#vcin .vfemb{z-index:6;width:70%;aspect-ratio:1;left:30%;top:30%;mix-blend-mode:screen;animation:vfEm 1.5s 2.85s ease-out forwards}'+
+ '@keyframes vfEm{0%{opacity:0;transform:scale(.5)}15%{opacity:1}100%{opacity:0;transform:scale(1.5) translateY(-12%)}}'+
+ /* the boss's gear falls to the ground where he stood */
+ '#vcin .vfhelm{z-index:3;width:24%;aspect-ratio:1;left:72%;top:72%;animation:vfDrop .7s 3.15s cubic-bezier(.5,0,.7,1.4) forwards}'+
+ '#vcin .vfspear{z-index:3;width:32%;aspect-ratio:1;left:62%;top:70%;animation:vfDrop2 .8s 3.05s cubic-bezier(.5,0,.7,1.3) forwards}'+
+ '#vcin .vfflag{z-index:2;width:34%;aspect-ratio:1;left:66%;top:58%;animation:vfFlag 1.2s 3.25s ease-out forwards}'+
+ '@keyframes vfDrop{0%{opacity:1;transform:translateY(-120%) rotate(-30deg)}100%{opacity:1;transform:none}}'+
+ '@keyframes vfDrop2{0%{opacity:1;transform:translateY(-90%) rotate(40deg)}100%{opacity:1;transform:rotate(-8deg)}}'+
+ '@keyframes vfFlag{0%{opacity:0;transform:rotate(0) translateY(-10%)}100%{opacity:.9;transform:rotate(14deg)}}'+
+ /* light column behind our returning hero */
+ '#vcin .vfr{z-index:2;width:110%;aspect-ratio:1;left:-14%;top:4%;mix-blend-mode:screen;animation:vfRay 3s 3.55s ease-out forwards}'+
+ '@keyframes vfRay{0%{opacity:0;transform:scaleY(.6)}30%{opacity:1}100%{opacity:.85;transform:scaleY(1)}}'+
+ /* victory ribbon + medallion */
+ '#vcin .vcwin .vfmed{position:absolute;left:50%;top:-74px;width:200px;height:200px;margin-left:-100px;z-index:-1;opacity:.95;animation:vfSpin 12s linear infinite}'+
+ '@keyframes vfSpin{to{transform:rotate(360deg)}}'+
+ '#vcin .vfrib{position:relative;width:min(92vw,360px);aspect-ratio:1/.27;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 8px 16px rgba(0,0,0,.6))}'+
+ '#vcin .vfrib .vp{inset:0;width:100%;height:auto;aspect-ratio:1;top:50%;transform:translateY(-50%);opacity:1}'+
+ '#vcin .vfrib span{position:relative;z-index:1;font:700 38px/1 Philosopher,Georgia,serif;color:#fff1c8;letter-spacing:.03em;text-shadow:0 2px 0 #4a0a06,0 0 14px rgba(0,0,0,.5)}'+
+ '#vcin.rm .vp{display:none}';
+ function addCss(){try{var s=document.getElementById('ds199css');if(!s){s=document.createElement('style');s.id='ds199css';s.textContent=C+V}document.head.appendChild(s)}catch(e){}}
  try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss)}catch(e){}
 })();
 </script>
