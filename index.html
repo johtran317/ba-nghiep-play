@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V248';
+var BUILD='V249';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13685,7 +13685,7 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
 (function(){try{
  var box=null;
  function body(){var gid=ROTGID,g=S.gens[gid],G=GENS[gid];if(!g||!G)return'';var bs=hBrs(gid),busy=brBusy(gid),c=sw211Cost(),left=Math.max(0,SW211F-sw211().n);
-  var h='<div class="rt226h"><b>Đổi binh chủng · '+esc(gid==='lord'&&S.pname?S.pname:G.n)+'</b><button class="rt226c" data-a="rt226x" aria-label="Đóng">✕</button></div>'+
+  var h='<div class="rt226h"><button class="rt226c" data-a="rt226x" aria-label="Quay lại"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b>Đổi binh chủng · '+esc(gid==='lord'&&S.pname?S.pname:G.n)+'</b></div>'+
    '<div class="rt226t">Chạm vào hình binh chủng để chọn ô xuất chiến. Hôm nay còn <b>'+left+'</b> lần đổi miễn phí'+(left?'':' · lần này '+c+' vàng')+'.</div>';
   bs.forEach(function(b,i){var on=b===G.br;
    var foot='<div class="sw211 rt244f"><button class="btn alt sm rt244b" data-a="rt244r" data-v="'+i+'">Đổi</button><span class="sm mute">ngẫu nhiên sang binh chủng khác</span>'+
@@ -13724,7 +13724,7 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
    'color:var(--ds-t,#f3e6c8);transform:translateY(14px) scale(.97);opacity:0;transition:transform .22s cubic-bezier(.2,.9,.3,1.2),opacity .18s}'+
   '#rt226.in .rt226bg{opacity:1}#rt226.in .rt226in{transform:none;opacity:1}'+
   '#rt226 .rt226h{display:flex;align-items:center;gap:10px;margin:0 0 4px}#rt226 .rt226h b{flex:1;min-width:0;font:700 19px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;text-wrap:balance}'+
-  '#rt226 .rt226c{flex:none;width:38px;height:38px;border-radius:10px;border:1px solid rgba(226,178,90,.45);background:rgba(0,0,0,.25);color:#f6dfa6;font-size:16px;cursor:pointer}'+
+  '#rt226 .rt226c{flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:10px;border:1px solid rgba(226,178,90,.45);background:rgba(0,0,0,.25);color:#f6dfa6;font-size:16px;cursor:pointer}'+
   '#rt226 .rt226t{font-size:12.5px;line-height:1.45;color:var(--ds-mu,#b9a98a);margin:0 0 6px}#rt226 .rt226t b{color:#fff}'+
   '#rt226 .rtslot{margin-top:8px}#rt226 .rowlbl{text-align:center;font-size:12px;color:var(--ds-mu,#b9a98a);margin-bottom:4px}'+
   '#rt226 .rt226p{cursor:pointer;border-radius:12px;margin:-4px;padding:4px;transition:background .15s}'+
@@ -14032,7 +14032,7 @@ var PV243={ctx:null,k:null,on:0};
    var hd=p.querySelector('.rt226h'),hb=hd&&hd.querySelector('b');if(hb)hb.textContent='Tướng & binh chủng';if(hd)hd.insertAdjacentHTML('afterend',h);else p.insertAdjacentHTML('afterbegin',h);
    var bs=hBrs(gid);[].forEach.call(p.querySelectorAll('.rtslot'),function(s,i){var b=bs[i];if(b&&gb[b]){var t=s.querySelector('.rth .sp');if(t)t.insertAdjacentHTML('afterbegin','<span class="pv243k">✓ Khắc địch</span>')}});
    [].forEach.call(p.querySelectorAll('.sw211 .chip[data-w]'),function(c){if(gb[c.getAttribute('data-w')])c.classList.add('pv243kc')});
-   if(document.querySelector('#sheet [data-a="fight"]'))p.insertAdjacentHTML('beforeend','<div class="pv243f"><button class="btn alt" data-a="rt226x">Xong</button><button class="btn" data-a="pv243go">'+esc((document.querySelector('#sheet [data-a="fight"]').textContent||'Tấn công').trim())+'</button></div>')}catch(e){try{console.warn('pv243',e)}catch(x){}}}
+   /* V249 (user 13:53 "do we need Xong and Tấn công here? a back button is sufficient"): footer removed; the header back button closes the panel and Tấn công stays on the stage sheet. */}catch(e){try{console.warn('pv243',e)}catch(x){}}}
  /* the panel re-renders with innerHTML: watch it */
  var mo=new MutationObserver(function(){var box=document.getElementById('rt226');if(!box){PV243.on=0;return}deco()});
  mo.observe(document.body,{childList:true,subtree:false});
