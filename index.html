@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V235';
+var BUILD='V236';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13580,7 +13580,18 @@ function gdPick(){var G=gdN();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch
    if(s.when())return s;break}
   if(C.steps.every(function(s){return G.done[s.id]}))G.ch[C.id]=1}
  return null}
-function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s){gdShow(s);if(s.nav&&GDNV[s.id]==null)GDNV[s.id]=gdNavTab()}else gdHide()}catch(e){gdHide()}}
+/* V236: while Thanh Y is talking (card visible) the page and the open sheet do not scroll (body.gdlk), so the spotlight stays
+   on its target; taps and drags still work. On each new step the target is scrolled into view first. */
+var GDLKS=null;
+function gdLockSync(){try{var c=document.getElementById('gdcard'),on=!!(c&&!c.hidden&&getComputedStyle(c).display!=='none'&&c.getBoundingClientRect().height>0&&!GDBT);
+  var b=document.body;if(!on){b.classList.remove('gdlk');GDLKS=null;return}
+  var t=c.textContent;if(t!==GDLKS){GDLKS=t;b.classList.remove('gdlk');var s=gdPick(),sel=s&&(typeof s.p==='function'?s.p():s.p),el=sel&&document.querySelector(sel);
+   if(el){var r=el.getBoundingClientRect(),lo=innerHeight-130,top=70;if(r.top<top||r.bottom>lo){var sc=el.parentElement;while(sc&&sc!==document.body){var cs=getComputedStyle(sc);if(/(auto|scroll)/.test(cs.overflowY)&&sc.scrollHeight>sc.clientHeight)break;sc=sc.parentElement}
+     var d=r.height>lo-top?r.top-top:r.bottom-lo;if(sc&&sc!==document.body)sc.scrollTop+=d;else el.scrollIntoView({block:'end'})}}}
+  b.classList.add('gdlk')}catch(e){try{document.body.classList.remove('gdlk')}catch(x){}}}
+(function(){try{var st=document.createElement('style');st.textContent='body.gdlk #main,body.gdlk #sheet{overflow:hidden!important;overscroll-behavior:none}';document.head.appendChild(st)}catch(e){}})();
+function gdTick(){gdTick0();gdLockSync()}
+function gdTick0(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s){gdShow(s);if(s.nav&&GDNV[s.id]==null)GDNV[s.id]=gdNavTab()}else gdHide()}catch(e){gdHide()}}
 /* V231 fix: a 'go to tab' step (nav:1) counts as done when the player is already on that tab, even if it was never shown.
    Before, two chapters' nav steps (g3.0 Về Thành / g4.0 Vào Tướng) sent the player back and forth forever. */
 /* in-battle tips: timed, drawn over the battle, never touching the battle loop */
