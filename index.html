@@ -8980,7 +8980,7 @@ async function sweepRun(mi,si,n){if(SWEEPING||!swOk(mi,si))return;if(S.ord<1)ret
   if(rw.s>0)t+=T9(objH('silver'),'+'+fmt(rw.s),'Bạc');if(rw.g>0)t+=T9(objH('grain'),'+'+fmt(rw.g),'Lương');if(rw.m>0)t+=T9(objH('merit'),'+'+fmt(rw.m),'Chiến công');if(rw.v>0)t+=T9(objH('gold'),'+'+rw.v,'Vàng');
   if(rw.b>0)t+=T9(objH('book'),'+'+rw.b,'Binh Thư');if(rw.phu>0)t+=T9(objH('phu'),'+'+rw.phu,'Binh Phù');
   nit.forEach(function(it){var g='';try{g=gearIcon(it)}catch(e){}t+=T9(g,'','Trang bị '+(GQ[it.q]||GQ[0]).n)});
-  var lose=wins<done,o='<div class="rs9 sw254"><div class="rs9hd'+(lose?' lose':'')+'"><div class="rs9tt">Càn quét xong</div>'+
+  var lose=wins<done,o='<div class="rs9 sw254">'+sw255Ban(mi,wins,done)+'<div class="rs9hd'+(lose?' lose':'')+'"><div class="rs9tt">'+(wins===0?'Càn quét thất bại':'Càn quét xong')+'</div>'+
    '<div class="rs9sub">Màn '+(mi+1)+' · Ải '+(si+1)+' · '+done+' trận · thắng '+wins+'/'+done+'</div></div>'+
    (t?'<div class="rs9sec"><div class="rs9h">Phần thưởng</div><div class="rs9rw">'+t+'</div></div>':'<div class="sw254n">Không có thưởng</div>')+
    (lose?'<div class="sw254w">Có trận thua — quân chưa đủ mạnh để quét chắc thắng.</div>':'')+
@@ -8988,7 +8988,44 @@ async function sweepRun(mi,si,n){if(SWEEPING||!swOk(mi,si))return;if(S.ord<1)ret
    '<div class="sw254b"><button class="btn" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="1"'+(S.ord<1?' disabled':'')+'>Quét lại ×1</button>'+
    '<button class="btn alt" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="5"'+(S.ord<5?' disabled':'')+'>Quét ×5'+(S.ord<5?' <small>cần 5 lệnh</small>':'')+'</button></div></div>';
   return o})}
+
+/* V255 (art agent, user 14:30 "add some image to make Càn quét win and loss interesting"): a scene banner on top of the sweep card,
+   built only from art already in the build (file budget 512/512): the Màn's battle background (btPath), the Màn's own enemy army
+   (map_troops row via MAPT.map) and our army (MAPT.ours). All won → enemies lie on the field, two of ours cheer, a gold medallion
+   turns slowly behind (victory_fx). All lost → ours kneel, the enemy cheers, torn banner + broken spear (victory_fx), red dusk tint.
+   Some lost → the win scene with one of ours kneeling. Transform/opacity animation only (V225 rule); reduced motion → still. */
+function sw255Ban(mi,wins,done){try{
+ var bg='';try{var p=btPath('m'+(mi+1)+'_b'),h=p.split('#');bg=h[1]?'background-image:url('+h[0]+');background-size:200% 100%;background-position:'+(h[1]==='a'?'0%':'100%')+' 50%':'background-image:url('+p+');background-size:cover;background-position:50% 50%'}catch(e){}
+ var en=MAPT&&MAPT.map?MAPT.map(mi):null,us=MAPT&&MAPT.ours?MAPT.ours():null;
+ var fr=function(sh,f,cls,st){if(!sh)return'';var r=Math.round((sh.oy||0)/148);return'<i class="sw5s '+cls+'" style="'+(st||'')+';background-position:'+(f/11*100).toFixed(3)+'% '+(r/12*100).toFixed(3)+'%"></i>'};
+ var vf=function(c,cls){return'<i class="sw5v '+cls+'" style="background-position:'+(c%8/7*100).toFixed(3)+'% '+(c>7?100:0)+'%"></i>'};
+ var all=wins===done,none=wins===0,o='<div class="sw5b '+(none?'lose':'win')+'"><div class="sw5bg" style="'+bg+'"></div><div class="sw5sh"></div>';
+ if(!none){o+=vf(9,'med')+vf(4,'emb')+
+   fr(us,7,'u1','left:6%')+fr(us,all?7:6,'u2'+(all?'':' kn'),'left:22%')+
+   fr(en,4,'d1','left:52%')+fr(en,5,'d2','left:66%')+fr(en,4,'d3','left:80%')}
+ else{o+=vf(13,'tb')+vf(11,'bs')+
+   fr(us,6,'k1','left:8%')+fr(us,6,'k2','left:24%')+
+   fr(en,7,'e1','left:58%')+fr(en,0,'e2','left:76%')}
+ return o+'</div>'}catch(e){return''}}
 (function(){try{var st=document.createElement('style');st.id='sw254css';st.textContent=
+
+ '.sw5b{position:relative;height:118px;margin:-4px 0 -2px;border-radius:14px;overflow:hidden;border:1px solid rgba(226,178,90,.35);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}'+
+ '.sw5bg{position:absolute;inset:0;transform:scale(1.04)}'+
+ '.sw5sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.15),rgba(14,10,6,.1) 45%,rgba(14,10,6,.75))}'+
+ '.sw5b.lose .sw5sh{background:linear-gradient(180deg,rgba(60,12,8,.35),rgba(30,8,6,.35) 45%,rgba(14,6,4,.82))}.sw5b.lose .sw5bg{opacity:.75}'+
+ '.sw5s{position:absolute;bottom:4px;width:58px;height:54px;background-image:url(art/troops/map_troops.webp?v=1);background-size:1200% 1300%;background-repeat:no-repeat}'+
+ '.sw5s.d1,.sw5s.d2,.sw5s.d3{bottom:0;opacity:.92}.sw5s.d2{transform:scaleX(-1)}'+
+ '.sw5s.u1{animation:sw5j 1.1s ease-in-out infinite}.sw5s.u2{animation:sw5j 1.1s .35s ease-in-out infinite}.sw5s.kn{animation:none}'+
+ '.sw5s.e1{transform:scaleX(-1);animation:sw5j 1.2s ease-in-out infinite}.sw5s.e2{transform:scaleX(-1)}.sw5s.k1,.sw5s.k2{opacity:.9}'+
+ '.sw5v{position:absolute;background-image:url(art/ui/victory_fx.webp?v=1);background-size:800% 200%;background-repeat:no-repeat}'+
+ '.sw5v.med{left:50%;top:6px;width:84px;height:84px;margin-left:-42px;opacity:.9;animation:sw5r 14s linear infinite}'+
+ '.sw5v.emb{left:30%;top:0;width:150px;height:110px;opacity:.55;animation:sw5f 2.6s ease-in-out infinite}'+
+ '.sw5v.tb{left:42%;top:4px;width:96px;height:96px;transform-origin:50% 0;animation:sw5w 3.2s ease-in-out infinite}'+
+ '.sw5v.bs{left:36%;bottom:-6px;width:70px;height:70px;transform:rotate(-18deg);opacity:.95}'+
+ '@keyframes sw5j{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}'+
+ '@keyframes sw5r{to{transform:rotate(360deg)}}@keyframes sw5f{0%,100%{opacity:.35}50%{opacity:.7}}'+
+ '@keyframes sw5w{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}'+
+ '@media (prefers-reduced-motion:reduce){.sw5b *{animation:none!important}}'+
  '.sw254 .rs9sub{margin-top:4px}.sw254n{text-align:center;color:var(--ds-mu,#b9a98a);padding:8px 0}'+
  '.sw254w{padding:8px 12px;border-radius:10px;background:rgba(220,90,70,.12);border:1px solid rgba(220,90,70,.35);color:#f3b3a4;font-size:13px}'+
  '.sw254o{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(226,178,90,.18)}'+
@@ -10986,7 +11023,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V254';
+var BUILD='V255';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14177,6 +14214,12 @@ var RT245=1;
   '#sheet .snav:has(+ button.hero)>*{pointer-events:auto}'+
   '#sheet .snav+button.hero{margin-top:-58px!important}'+
   '#sheet .snav:has(+ button.hero) .snb{background-color:rgb(35,26,18)!important;box-shadow:0 2px 8px rgba(0,0,0,.45)!important}'+
+  /* V255 (user 14:38 "it looks very loud and hides the hero name. redo"): the floating back button rode over the rarity row and the
+     hero name while scrolling. Now: over the portrait = floating button only; once the portrait has scrolled away a solid one-row
+     header (lacquer band + gold hairline, back button + the hero's name) fades in, so content never sits under a lone button. */
+  '#sheet .snav:has(+ button.hero) .hs255n{flex:1;min-width:0;opacity:0;font:700 19px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .18s}'+
+  '#sheet .snav.hs255s:has(+ button.hero){background:linear-gradient(rgba(24,18,14,.98),rgba(24,18,14,.96))!important;box-shadow:0 1px 0 rgba(226,178,90,.35),0 6px 14px rgba(0,0,0,.45)!important;pointer-events:auto;transition:background .18s}'+
+  '#sheet .snav.hs255s:has(+ button.hero) .hs255n{opacity:1}#sheet .snav.hs255s .snb{box-shadow:none!important}'+
   '#sheet .hsl.hs246t span{color:#f2cf7c!important;font-weight:600}'+
   '#sheet .hs246b{display:flex;align-items:center;gap:10px;width:100%;margin:10px 0 4px;min-height:52px;padding:0 14px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.35);color:#f3e6c8;font:inherit;text-align:left;cursor:pointer}'+
   '#sheet .hs246b b{font:700 17px var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}#sheet .hs246b .rtag{margin:0}'+
@@ -14184,6 +14227,13 @@ var RT245=1;
   '#sheet .hs246b:not(:has(.hs246d))>i{margin-left:auto}#sheet .hs246b:active{background:rgba(226,178,90,.1)}'+
   '#rs9p .hs246p>.row{display:flex;align-items:center;gap:8px;margin-bottom:8px}#rs9p .hs246p .bdl{margin-top:8px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.25);font-size:14px;line-height:1.5}';
  document.head.appendChild(st);
+ /* V255 scroll watcher: one passive listener (capture) — toggles .hs255s on the hero-profile header after the portrait. */
+ function hs255(){try{var sh=document.getElementById('sheet');if(!sh)return;var nv=sh.querySelector(':scope>.snav'),hero=nv&&nv.nextElementSibling;
+   if(!nv||!hero||!hero.matches('button.hero'))return;var n=nv.querySelector('.hs255n');
+   if(!n){n=document.createElement('b');n.className='hs255n';var h=sh.querySelector('h3');n.textContent=h?h.textContent.trim():'';var sp=nv.querySelector(':scope>span');if(sp)sp.replaceWith(n);else nv.appendChild(n)}
+   nv.classList.toggle('hs255s',sh.scrollTop>Math.max(60,hero.offsetHeight-210))}catch(e){}}
+ document.addEventListener('scroll',function(e){if(e.target&&e.target.id==='sheet')hs255()},{capture:true,passive:true});
+ new MutationObserver(function(){hs255()}).observe(document.body,{childList:true,subtree:false});setInterval(hs255,1200);
 }catch(e){try{console.error('hs246',e)}catch(x){}}})();
 /* V247 (coding, user 2026-11-04 13:29 "if a hero has a better item in the inventory that they can equip - create a red button to guide
    player that they can go in that slot to equip"). Display only, no new actions, no save keys.
@@ -14219,7 +14269,10 @@ function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S|
      b.classList.remove('alt');b.classList.add('red','eq247b');b.textContent=best&&best.id===it.id?'Tốt nhất · Mặc':'Mặc ▲'})}}
   /* Tướng list: red dot on the general's card */
   document.querySelectorAll('#main button[data-a="gen"][data-v], #sheet button.hc[data-a="gen"][data-v]').forEach(function(b){var id=b.dataset.v;if(!S.gens[id])return;
-   var on=eq247Any(id,worn),d=b.querySelector('.eq247d');if(on&&!d){d=document.createElement('i');d.className='eq247d';d.setAttribute('aria-label','Có trang bị tốt hơn');b.appendChild(d)}else if(!on&&d)d.remove()})
+   /* V255 (user 14:33 "redesign the red button in hero profile" — the red dot on the Tướng cards covered the rarity letter): the same red
+      lacquer seal with a gold double chevron as the gear-slot marker, at the top centre of the portrait (between rarity and faction); bobs 2 px (transform only). */
+   var on=eq247Any(id,worn),d=b.querySelector('.eq247d'),host=b.querySelector('.hca')||b;if(on&&!d){d=document.createElement('i');d.className='eq247d';d.setAttribute('aria-label','Có trang bị tốt hơn');
+    d.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12.6l5-4.6 5 4.6M7 17l5-4.6 5 4.6" fill="none" stroke="#fbe7a6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';host.appendChild(d)}else if(!on&&d)d.remove()})
  }catch(e){}}
 (function(){try{
   var st=document.createElement('style');st.id='eq247css';st.textContent=
@@ -14234,7 +14287,7 @@ function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S|
    '@keyframes eq248b{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}'+
    '@media (prefers-reduced-motion:reduce){button.slot.eq247on .gi::after,button.slot .eq247{animation:none}}'+
    '.eq247b{font-weight:700}'+
-   'button[data-a="gen"]{position:relative}button[data-a="gen"] .eq247d{position:absolute;top:6px;left:6px;z-index:4;width:12px;height:12px;border-radius:50%;background:#e0463b;box-shadow:0 0 0 2px #2a0b08;pointer-events:none}'+
+   'button[data-a="gen"]{position:relative}button[data-a="gen"] .hca{position:relative}button[data-a="gen"] .hca .eq247d{position:absolute;top:6px;left:50%;z-index:4;display:block;width:24px!important;height:24px!important;padding:0;border-radius:7px;background:linear-gradient(#e2493c,#8f1c16);border:1.5px solid #f1cf6a;box-shadow:0 2px 6px rgba(0,0,0,.55);font-style:normal;pointer-events:none;transform:translateX(-50%);animation:eq255b 2.4s ease-in-out infinite}button[data-a="gen"] .hca .eq247d svg{display:block;width:100%!important;height:100%!important}@keyframes eq255b{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-2px)}}@media (prefers-reduced-motion:reduce){button[data-a="gen"] .hca .eq247d{animation:none}}'+
    '';
   document.head.appendChild(st);
   var t=0;function sched(){if(t)return;t=setTimeout(function(){t=0;eq247Run()},120)}
