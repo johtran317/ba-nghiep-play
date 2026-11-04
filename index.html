@@ -10860,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V214';
+var BUILD='V215';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12637,7 +12637,7 @@ function curve208Fill(){try{if(!S||!S.camp||!S.gens||(typeof fighting!=='undefin
 (function(){try{setInterval(curve208Fill,1500)}catch(e){}})();
 (function(){try{var _t=tick;tick=function(dt){var r=_t.apply(this,arguments);curve208Fill();return r}}catch(e){}})();
 /* ===== V213 "think, don't grind" set (user 2026-11-03 23:25, picks 1 / 2 / 4 / 7 from the Ngọa Long comparison) =====
-   (1) A lost or retreated campaign battle gives its Quân lệnh back (only wins cost a lệnh).
+   (1) [removed in V215] lost battles refunded their Quân lệnh.
    (2) Đổi binh chủng: pick the branch yourself (no more random roll). 10 free changes per day, then 10 / 20 / 30 / 40 / 50 gold
        (cap 50) for each further change that day. Switching which of the 2 slots fights ("Xuất chiến") stays free.
    (4) Tiền đồn: each Tinh binh stage of a Màn ever won weakens that Màn's boss stage by 8% attack and troops (3 → −24%).
@@ -12652,10 +12652,7 @@ function hon211(){if(S.hon==null)S.hon=0;if(!S.honD||S.honD.day!==S.day)S.honD={
  try{var F=hfr();Object.keys(F).forEach(function(k){if(S.gens[k]&&F[k]>0){S.hon+=F[k];F[k]=0}})}catch(e){}return S.hon}
 function td211(mi){var n=0;try{for(var e=0;e<3;e++)if(S.camp.eliteDone&&S.camp.eliteDone[mi+'-'+e])n++}catch(x){}return n}
 
-/* (1) refund the Quân lệnh when the campaign battle is not won (resultSheet is re-drawn, so only once per result) */
-(function(){try{var _rs=resultSheet;resultSheet=function(R){var h=_rs.apply(this,arguments);try{if(R&&!R.win&&R.key&&!R.ref211){R.ref211=1;S.ord+=1;try{save()}catch(e){}}
- if(R&&R.ref211)h+='<div class="sm ok" style="margin-top:6px">Thua không mất Quân lệnh · đã hoàn 1 lệnh. Đổi đội hình rồi thử lại.</div>'}catch(e){}return h}}catch(e){}})();
-
+/* (1) the lost-battle refund was removed again in V215 (user 2026-11-04 06:33): losing costs a Quân lệnh; Quân lệnh can be bought with gold instead (src/ord215.js). */
 /* (2) troop change: pick the branch, daily free count, rising price */
 (function(){try{
  var _rot=rotSheet;rotSheet=function(){var h=_rot.apply(this,arguments);try{var gid=ROTGID,g=S.gens[gid];if(!g)return h;var bs=hBrs(gid),c=sw211Cost(),left=Math.max(0,SW211F-sw211().n);
@@ -12740,4 +12737,31 @@ function lack214(c){try{c=c||{};var R=S.res;return R.silver<(c.s||0)?'Thiếu b�
   'html body #sheet .card.sm>b:first-child+.row,html body #sheet .card.sm>.row{padding:6px 0!important;border-top:1px solid rgba(226,178,90,.12)}';
  document.head.appendChild(css);
 }catch(e){try{console.error('ds213',e)}catch(x){}}})();
+/* ===== V215 Quân lệnh for gold (user 2026-11-04 06:33 "add back losing will cost Quân lệnh, but allow player to buy Quân lệnh by using gold,
+   but the price must scale and reset by day"). Losing costs a lệnh again (V213 refund removed; the old newbie refund while Chính Sảnh ≤ 35 stays).
+   Buy 1 lệnh at a time: the n-th purchase of the day costs ORD215(n) = 10 × n gold (10, 20, 30 …); the count resets with the day (ev().shop).
+   Where: Thương Điếm › Tạp Hóa (replaces "Quân lệnh ×3, 30 vàng, 2/day"), tapping the Quân lệnh counter in the HUD, and the
+   "Tấn công" press when no lệnh is left. Actions ord215 / ord215b (checked unused). Everything wrapped. */
+function ord215Used(){try{return ev().shop.ord3||0}catch(e){return 0}}
+function ord215Price(){return 10*(ord215Used()+1)}
+(function(){try{var L=SHOP.tap.items,it=L.filter(function(x){return x.id==='ord3'})[0];if(!it)return;
+ it.n='Quân lệnh ×1';it.d='Giá tăng 10 vàng mỗi lần mua trong ngày, về lại 10 vàng mỗi ngày.';it.give={ord:1};it.lim=function(){return 999};
+ Object.defineProperty(it,'p',{configurable:true,get:function(){return{v:ord215Price()}},set:function(){}})}catch(e){}})();
+function ord215Sheet(){var p=ord215Price(),n=ord215Used(),ok=S.res.gold>=p;
+ return'<h3>Mua Quân lệnh</h3><div class="card"><div class="row"><div class="sp"><b>Quân lệnh: '+Math.floor(S.ord)+'</b><div class="sm mute">Hôm nay đã mua '+n+' lần. Lần tiếp theo: <b class="gold">'+p+' vàng</b> (mỗi lần +10, về 10 vàng mỗi ngày).</div><div class="sm mute">Vàng: '+fmt(S.res.gold)+'</div></div>'+
+  '<button class="btn" data-a="ord215b"'+(ok?'':' disabled')+'>+1 · '+p+' vàng</button></div></div>'+
+  '<div class="sm mute" style="margin-top:8px">Thắng hay thua đều tốn 1 Quân lệnh. Quân lệnh cũng hồi theo thời gian.</div>'}
+(function(){try{
+ var _A=A_;A_=function(a,v,w,el){try{
+  if(a==='ord215'){openSheet(ord215Sheet);return}
+  if(a==='ord215b'){var p=ord215Price();if(S.res.gold<p){toast('Cần '+p+' vàng');return}S.res.gold-=p;S.ord+=1;var e=ev();e.shop.ord3=(e.shop.ord3||0)+1;
+   toast('+1 Quân lệnh · −'+p+' vàng');save();refresh();openSheet(ord215Sheet);return}
+ }catch(e){}return _A(a,v,w,el)};
+ var _f=fight;fight=function(mi,si,kind){try{if(!fighting&&S.ord<1){openSheet(ord215Sheet);return}}catch(e){}return _f.apply(this,arguments)};
+ document.addEventListener('click',function(e){try{var t=e.target.closest&&e.target.closest('.ordc');if(t&&!fighting){e.stopPropagation();openSheet(ord215Sheet)}}catch(x){}},true);
+ var st=document.createElement('style');st.textContent='.ordc{cursor:pointer}';document.head.appendChild(st);
+}catch(e){}})();
+(function(){try{var _ss=shopSheet;shopSheet=function(){var h=_ss.apply(this,arguments);try{h=h.replace(/ · hôm nay (\d+)\/999/g,' · hôm nay đã mua $1')}catch(e){}return h}}catch(e){}})();
+(function(){try{if(typeof SHMAP!=='undefined'&&SHMAP.ord3)SHMAP.ord3[1]='×1';
+ var _ss2=shopSheet;shopSheet=function(){var h=_ss2.apply(this,arguments);try{h=h.replace(/<span class="tdlim">(\d+)\/999<\/span>/g,function(m,l){return'<span class="tdlim">'+(999-(+l))+' lần</span>'})}catch(e){}return h}}catch(e){}})();
 </script>
