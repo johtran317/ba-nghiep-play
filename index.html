@@ -3338,7 +3338,7 @@ function swPose(br,path,e,po,idle){
  }return 0}
 var SQK=.45,BTTILES=0;/* V183 (user 2026-11-03 12:16: fewer soldiers, each slot clear of its neighbours) — was .64 */ /* V164/V168: 20% + another 20% fewer soldiers per squad (user: battle too crowded) */
 function drawSquad(c,d,col,dir){
- var u=d.u,dead=d.trT<=0,L=SQ[u.br]||SQ.inf,n=dead?0:Math.max(1,Math.ceil(Math.round(L.length*SQK)*Math.max(0,d.trD)/u.max));
+ var u=d.u,dead=d.trT<=0,L=SQ[u.br]||SQ.inf,n=dead?0:Math.max(1,Math.min(Math.round(L.length*SQK),Math.ceil(Math.round(L.length*SQK)*Math.max(0,d.trD)/(d.s0||(d.s0=Math.max(1,d.trD))))));/* V262 full at start */
  if(!n)return;
  var cy=d.y+d.oy-BT.rh*pvS(pvZofY(d.y+d.oy))*.14,zc=pvZofY(cy),sc=pvS(zc),cw=BT.cwN*sc,rh=BT.rh*sc;
  /* attack timing (playAct sets d.sw while attacking) */
@@ -3452,7 +3452,8 @@ function procFrame(br,path,tier,dir,col,swq,wq){
  PCACHE[k]=cv;return cv}
 drawSquad=function(c,d,col,dir){
  var u=d.u,dead=d.trT<=0,N=Math.max(3,Math.round((SQN[u.br]||30)*(typeof SQK!=='undefined'?SQK:1)));
- var n=dead?0:Math.max(1,Math.min(N,Math.ceil(N*Math.max(0,d.trD)/u.max)));
+ /* V262 (user 2026-11-04 15:26): every squad starts the battle FULL on screen — soldiers drawn = share of the troops it STARTED with (d.s0), not of its max, so a hero entering short of troops still shows a full squad */
+ if(d.s0==null&&!dead)d.s0=Math.max(1,d.trD);var n=dead?0:Math.max(1,Math.min(N,Math.ceil(N*Math.max(0,d.trD)/(d.s0||u.max))));
  if(!n)return;
  var cy=d.y+d.oy,zc=pvZofY(cy),sc=pvS(zc),cw=BT.cwN*sc,rh=BT.rh*sc;
  if(d.sw&&!d.actT)d.actT=BT.t;if(d.sw)d.actE=BT.t+260;
@@ -11023,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V261';
+var BUILD='V262';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
