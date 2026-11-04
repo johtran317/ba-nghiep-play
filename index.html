@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V244';
+var BUILD='V245';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14066,4 +14066,55 @@ var PV243={ctx:null,k:null,on:0};
   '#rt226 .sw211 .chip.pv243kc{border-color:rgba(108,194,131,.8)!important;color:#bff0cb!important;box-shadow:0 0 0 1px rgba(108,194,131,.35)}#rt226 .sw211 .chip.pv243kc::before{content:"✓ "}';
  document.head.appendChild(st);
 }catch(e){try{console.error('pv243',e)}catch(x){}}})();
+/* ================= V245 (art agent, user 2026-11-04 13:05 "add motion to Binh Chủng avatar to make it more real").
+   In the Đổi binh chủng / Tướng & binh chủng panel (#rt226) each troop card's still portrait (.rth img) is replaced by a small live canvas
+   that plays the REAL battle sprite of that troop at the hero's own Bậc / form (sprKey + sprImg: the same sheets the battle uses —
+   tiers.webp Bậc 1–3, t4 forms, t5 armies): idle loop (frames 0–3) with a soft breathing bob, and every 3–5 s an attack (frames 5–9,
+   short lunge, a held strike frame, a dust puff at the feet); the inactive slot's card stays a little calmer. Drawn on a round dark
+   lacquer medallion with a gold rim (the portrait frame look) and a ground shadow. The still portrait shows until the sheet has loaded.
+   One requestAnimationFrame loop at ~24 fps, only while the panel is open and the page visible; canvases are 56 px (×DPR) — no CSS
+   filter / blend / will-change (V225 iPhone rule). Reduced motion → idle frame 0, still. RT245=0 turns it off. */
+var RT245=1;
+(function(){try{
+ var C=[],raf=0,RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+ var D=56,DPR=Math.min(2,window.devicePixelRatio||1);
+ function key(gid,b){try{var g=S.gens[gid];return sprKey({br:b,tier:g.tier||1,path:g.path},1)}catch(e){return null}}
+ function make(img,gid,b,on){var k=key(gid,b);if(!k)return;var cv=document.createElement('canvas');cv.width=cv.height=D*DPR;cv.className='rt245';
+  img.setAttribute('data-sp','1');img.parentNode.insertBefore(cv,img.nextSibling);
+  C.push({cv:cv,img:img,k:k,on:on,t0:performance.now()-Math.random()*900,next:performance.now()+1200+Math.random()*2200,atk:-1,ready:false})}
+ function bg(x){var r=D/2;x.save();x.beginPath();x.arc(r,r,r-1.5,0,7);x.clip();
+  var gr=x.createRadialGradient(r,r*.8,4,r,r,r);gr.addColorStop(0,'#4a3622');gr.addColorStop(1,'#1c130c');x.fillStyle=gr;x.fillRect(0,0,D,D);
+  return r}
+ function draw(c,now){var x=c.cv.getContext('2d');x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,D,D);
+  var sh=sprImg(c.k),m=SPRM[c.k];if(!sh||!m)return false;
+  var r=bg(x),t=now-c.t0,fr,lx=0,dust=0;
+  if(RM){fr=0}else{
+   if(c.atk<0&&now>c.next){c.atk=now}
+   if(c.atk>=0){var a=now-c.atk,seq=[5,6,7,7,8,9],ix=Math.floor(a/95);if(ix>=seq.length){c.atk=-1;c.next=now+(c.on?2600:3800)+Math.random()*1800;fr=0}else{fr=seq[ix];lx=(ix>=2&&ix<=3)?2.5:ix===4?1.2:0;dust=(ix>=2&&ix<=4)?1-(a-190)/290:0}}
+   if(c.atk<0)fr=[0,1,2,3][Math.floor(t/170)%4]}
+  var bob=RM?0:Math.sin(t/520)*.8,s=(D*.72)/Math.max(40,m.bh),fx=r+lx,fy=D*.9;
+  /* ground shadow */
+  x.fillStyle='rgba(0,0,0,.45)';x.beginPath();x.ellipse(fx,fy,D*.24,D*.06,0,0,7);x.fill();
+  if(dust>0){x.fillStyle='rgba(210,180,130,'+(.35*dust).toFixed(2)+')';for(var i=0;i<3;i++){x.beginPath();x.arc(fx-10+i*10,fy-2-(1-dust)*6,3+(1-dust)*4,0,7);x.fill()}}
+  x.drawImage(sh,fr*m.w,0,m.w,m.h,fx-m.ax*s,fy+bob-m.ay*s,m.w*s,m.h*s);
+  x.restore();
+  /* gold rim */
+  x.lineWidth=2;x.strokeStyle='#b8893f';x.beginPath();x.arc(r,r,r-1.5,0,7);x.stroke();x.lineWidth=1;x.strokeStyle='rgba(255,226,160,.35)';x.beginPath();x.arc(r,r,r-3.5,0,7);x.stroke();
+  return true}
+ function loop(now){raf=0;var box=document.getElementById('rt226');C=C.filter(function(c){return c.cv.isConnected});
+  if(!box||!C.length||!RT245)return;if(document.visibilityState==='visible'){
+   C.forEach(function(c){if(c._last&&now-c._last<40)return;c._last=now;var ok=draw(c,now);if(ok&&!c.ready){c.ready=true;c.img.style.visibility='hidden';c.cv.classList.add('on')}})}
+  if(!RM||C.some(function(c){return!c.ready}))raf=requestAnimationFrame(loop)}
+ function scan(){try{if(!RT245)return;var box=document.getElementById('rt226');if(!box)return;var gid=ROTGID;if(!gid||!S.gens[gid])return;var bs=hBrs(gid),cur=GENS[gid].br;
+   [].forEach.call(box.querySelectorAll('.rtslot'),function(sl,i){var img=sl.querySelector('.rth img:not([data-sp])');if(img&&bs[i])make(img,gid,bs[i],bs[i]===cur)});
+   if(C.length&&!raf)raf=requestAnimationFrame(loop)}catch(e){try{console.warn('rt245',e)}catch(x){}}}
+ new MutationObserver(function(){var box=document.getElementById('rt226');if(box&&!box._rt245){box._rt245=1;new MutationObserver(scan).observe(box,{childList:true,subtree:true})}scan()}).observe(document.body,{childList:true});
+ var st=document.createElement('style');st.id='rt245css';st.textContent=
+  '#rt226 .rth{position:relative}#rt226 .rth canvas.rt245{position:absolute;left:0;top:50%;width:56px;height:56px;margin-top:-28px;border-radius:50%;opacity:0;transition:opacity .25s;pointer-events:none}'+
+  '#rt226 .rth canvas.rt245.on{opacity:1}#rt226 .rt226p .rth canvas.rt245,#rt226 .rth.rt226p canvas.rt245{left:4px}'+
+  '#rt226 .rth.rt226p canvas.rt245{box-shadow:0 0 0 2px rgba(108,194,131,.75),0 0 14px rgba(108,194,131,.35);animation:rt226g 2.2s ease-in-out infinite}'+
+  '#rt226 .rth.rt226p.busy canvas.rt245{box-shadow:none;animation:none;opacity:.55}'+
+  '@media (prefers-reduced-motion:reduce){#rt226 .rth canvas.rt245{animation:none!important;transition:none}}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('rt245',e)}catch(x){}}})();
 </script>
