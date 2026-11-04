@@ -6696,7 +6696,7 @@ var WXATT=0;
 function wxLoop(ts){
  /* V250 perf: a 20 fps timer instead of a 60 fps requestAnimationFrame (every rAF tick forced a full frame on the phone);
     asleep during battles, when the page is hidden or in smooth mode; the canvas/chip check runs once a second, not every tick */
- ts=performance.now();setTimeout(wxLoop,50);
+ ts=performance.now();setTimeout(wxLoop,66);/* V259: 15 fps */
  if(document.hidden||typeof S==='undefined'||!S)return;
  if((typeof BT!=='undefined'&&BT.on)||S.smooth249){WXLAST=ts;if(S.smooth249){try{document.querySelectorAll('canvas.wxc').forEach(function(c){if(!c.__clr){c.getContext('2d').clearRect(0,0,c.width,c.height);c.__clr=1}})}catch(x){}}return}
  var dt=Math.min(.1,(ts-WXLAST)/1000);WXLAST=ts;WXST.t+=dt;
@@ -11023,7 +11023,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V258';
+var BUILD='V259';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11143,7 +11143,7 @@ function wkStep(dt,still){var adj=wkAdj();WK.list.forEach(function(w){var p=wkPo
 function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!bt&&!document.hidden?wkAttach():null;
   if(svg){var dt=Math.min(.1,Math.max(0,(now-(WK.last||now))/1000));WK.last=now;
    var still=false;try{still=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-   wkStep(dt,still);WK.raf=setTimeout(function(){wkLoop(performance.now())},50);return}/* V250 perf: 20 fps timer, not a 60 fps rAF */
+   wkStep(dt,still);WK.raf=setTimeout(function(){wkLoop(performance.now())},80);return}/* V250 perf: timer, not a 60 fps rAF; V259: 12.5 fps */
   WK.last=0}catch(e){try{if(WK.g&&WK.g.parentNode)WK.g.parentNode.removeChild(WK.g)}catch(x){}WK.g=null;WK.off=1;return}
   WK.idle=setTimeout(function(){WK.idle=0;if(!WK.raf&&!WK.off)WK.raf=setTimeout(function(){wkLoop(performance.now())},50)},700)}
 (function(){try{WK.raf=setTimeout(function(){wkLoop(performance.now())},50)}catch(e){}})();
@@ -14407,4 +14407,50 @@ try{var _ud=updDyn;updDyn=function(){if(busy()){pend.dyn=1;return}return _ud.app
   '#sheet .bd6go{width:100%;min-height:46px}';
  document.head.appendChild(st);
 }catch(e){try{console.error('bd256',e)}catch(x){}}})();
+/* ===== Smoothness pass 2 (server agent, user 2026-11-04 14:38 "review the game again and optimize to ensure a smooth gameplay") =====
+   Measured on a late-game save (all 100 generals, iPhone size, CPU ×4 slower):
+   - Tướng tab render 104–213 ms, half of it in u185Fit (ui185.js), which read and wrote layout for each of the ~100 name labels
+     in turn (layout thrash: ~100 forced layouts per render). Now: all reads, then all writes, then one read; only names that really
+     overflow get the per-element shrink loop. Same result.
+   - every tap re-rendered the whole screen a second time on the next 1 s tick (game3.js sets dirty=true after every action),
+     even when the action had just drawn it — on the Tướng tab that is a second 100+ ms freeze per tap. Now the tick redraw is
+     skipped when the tap already redrew what is on screen.
+   - Tướng tab: hero cards far off screen skip layout/paint (content-visibility:auto) → render 114 → 44 ms.
+   - SSR/UR card light sweep animated background-position (repaints every card every frame, ~47% busy on the Tướng tab); now the
+     same sweep moves with transform (GPU only, no repaint).
+   - battles: if the phone cannot keep up (median frame gap > 28 ms over ~1.5 s), the battle canvas steps down to 1.5× and then
+     1.25× pixel density; the step is remembered on this device (localStorage 'bn-btcap'). Fast phones stay at 2×.
+   - weather particles 20 → 15 fps, townsfolk 20 → 12.5 fps (weather.js / walkers.js; movement is time-based, same speed). */
+(function(){
+/* --- 1. batched name fitting --- */
+try{if(typeof u185Fit==='function'&&typeof U185NM==='string'){u185Fit=function(root){root=root||document;var L=root.querySelectorAll(U185NM),A=[],i,e,vh=innerHeight||800;
+ for(i=0;i<L.length;i++){e=L[i];var hc=e.closest&&e.closest('#main .hc');if(hc){var rr=hc.getBoundingClientRect();if(rr.bottom<-vh||rr.top>2*vh)continue}var w=e.offsetWidth;if(!w)continue;var cw=e.clientWidth,tx=e.textContent;if(e._u185t===tx&&e._u185w===cw)continue;A.push([e,tx,cw])}
+ for(i=0;i<A.length;i++){e=A[i][0];e._u185t=A[i][1];e._u185w=A[i][2];e.style.removeProperty('font-size');e.style.removeProperty('white-space');e.classList.remove('u185w2');e.style.setProperty('text-overflow','clip','important')}
+ var O=[];for(i=0;i<A.length;i++){e=A[i][0];if(e.scrollWidth>e.clientWidth+1)O.push(e)}
+ O.forEach(function(e){var fs=parseFloat(getComputedStyle(e).fontSize)||12;while(fs>11&&e.scrollWidth>e.clientWidth+1){fs-=.5;e.style.setProperty('font-size',fs+'px','important')}
+  if(e.scrollWidth>e.clientWidth+1){e.style.setProperty('white-space','normal','important');e.classList.add('u185w2')}})}}}catch(e){}
+/* hero cards far off screen are not laid out or painted until scrolled near (content-visibility); their names are fitted when they come near */
+try{var st0=document.createElement('style');st0.textContent='#main .hc{content-visibility:auto;contain-intrinsic-size:auto 180px}';document.head.appendChild(st0)}catch(e){}
+try{var sT=0;document.addEventListener('scroll',function(ev){var m=document.getElementById('main');if(!m||ev.target!==m)return;clearTimeout(sT);sT=setTimeout(function(){try{u185Fit(m)}catch(e){}},150)},true)}catch(e){}
+/* --- 2. no second redraw after a tap that already redrew --- */
+var R={m:0,s:0},c0=null;
+try{var _rm=renderMain;renderMain=function(){R.m++;return _rm.apply(this,arguments)}}catch(e){}
+try{var _rf=refresh;refresh=function(){R.m++;R.s++;return _rf.apply(this,arguments)}}catch(e){}
+try{var _os=openSheet;openSheet=function(){R.s++;return _os.apply(this,arguments)}}catch(e){}
+window.addEventListener('click',function(){c0={m:R.m,s:R.s}},true);
+document.addEventListener('click',function(){try{if(!c0)return;var mod=document.getElementById('modal'),open=mod&&!mod.hidden;
+ if(open?(R.s>c0.s):(R.m>c0.m))window.dirty=false}catch(e){}c0=null});
+/* --- 3. SSR/UR sweep on the GPU --- */
+try{var st=document.createElement('style');st.id='smooth2';st.textContent=
+ '.hc.rSSR .hca::after,.hc.rUR .hca::after{inset:0 auto 0 0!important;width:260%!important;background-size:100% 100%!important;background-position:0 0!important;animation-name:ssrSweepT!important;transform:translateX(-98.5%)}'+
+ '@keyframes ssrSweepT{0%{transform:translateX(-98.5%)}55%,100%{transform:translateX(36.9%)}}';
+ document.head.appendChild(st)}catch(e){}
+/* --- 4. adaptive battle resolution --- */
+var CAPK='bn-btcap',cap=0;try{cap=+localStorage.getItem(CAPK)||0}catch(e){}
+var G=[],lastN=0;
+function capNow(){try{if(cap&&BT.dpr>cap){var cv=document.getElementById('cv');BT.dpr=cap;cv.width=Math.round(BT.W*cap);cv.height=Math.round(BT.H*cap);BT.bg=null;btLayout()}}catch(e){}}
+try{var _br=btResize;btResize=function(){var r=_br.apply(this,arguments);capNow();return r}}catch(e){}
+try{var _bf=btFrame;btFrame=function(now){try{if(BT.on&&!BT.skip&&lastN&&now>lastN&&now-lastN<250&&!document.hidden){G.push(now-lastN);if(G.length>=90){var s=G.slice().sort(function(a,b){return a-b}),med=s[45];G=[];
+   if(med>28&&BT.dpr>1.25){cap=BT.dpr>1.5?1.5:1.25;try{localStorage.setItem(CAPK,cap)}catch(e){}capNow()}}}lastN=now}catch(e){}return _bf.apply(this,arguments)}}catch(e){}
+})();
 </script>
