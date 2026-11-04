@@ -671,6 +671,7 @@ function pattern(p,t,L){
  if(p==='row')return L.filter(function(x){return x.r===t.r});
  if(p==='rear'){var q=L.filter(function(x){return x.l===t.l}).sort(function(a,b){return b.r-a.r});return[q[0]]}
  if(p==='cross')return L.filter(function(x){return x===t||Math.abs(x.r-t.r)+Math.abs(x.l-t.l)===1});
+ if(p==='backrow'){var mr=-1;L.forEach(function(x){if(x.troops>0&&x.r>mr)mr=x.r});return L.filter(function(x){return x.r===mr})}   /* V202: the enemy's whole rearmost row */
  return[t]}
 /* ---- troop counters (khắc chế): attacker vs target multiplier ---- */
 /* Branch cycle (tiers 1-3): Kỵ > Mưu > Cơ > Bộ > Kỵ, Kỵ also hunts Cung/Phụ, Cung hunts soft back-liners and is blunted by shields.
@@ -806,8 +807,9 @@ function battle(att,def,seed,opt){
   if(T.pat==='heal'){var shp=healShapeOf(u),LM=healTargets(u,living(mates),shp),hdk=Math.pow(HDEC,u.hcN||0);u.hcN=(u.hcN||0)+1;LM.forEach(function(m){var hsk=(m.hR===R?HSTK:1)*Math.pow(HRK,m.hRc||0);m.hR=R;m.hRc=(m.hRc||0)+1;var h=Math.min(Math.round((m.max-m.troops)*HLOST),Math.round(SPD*m.max*T.heal*HSHM[shp]*(u.healB||1)*Math.min(mult,HMCAP)*hdk*hsk*HFAT(R)*(TWRULE===5?.5:1)));m.troops+=h;if(!(m.st.lock>0))m.morale+=T.mo||0;if(T.cleanse){m.st.burn=0;m.st.stun=0;m.st.chaos=0;m.st.poi=0;m.st.poiV=0}ev.tg.push({id:m.id,res:'heal',d:h})});return}
   var t=pickTarget(u,fo),ts=pattern(T.pat,t,fo),ty=T.type==='strategy'?'strategy':'tactic';
   if(T.hits){ts=[];for(var hk=0;hk<T.hits;hk++){var LL=living(fo);if(!LL.length)break;var hx=LL[Math.floor(rng()*LL.length)];if(ts.indexOf(hx)<0)ts.push(hx);hit(u,hx,ty,T.c*mult*((T.exec&&hx.troops/hx.max<.5)?1+T.exec:1),ev.tg)}}
-  else ts.forEach(function(x){if(x.troops>0)hit(u,x,ty,T.c*mult*((T.exec&&x.troops/x.max<.5)?1+T.exec:1),ev.tg)});
-  if(T.shield){var shk=(TWRULE===5?.5:1);/* V178: skill shields no longer fade (user 2026-11-03 07:14); regen still fades */living(mates).forEach(function(m){m.st.shield=Math.max(m.st.shield,Math.round(m.max*T.shield*DMGK*mult*shk))})}   /* V175: skill shields fade with fight length like heals (HFAT) */
+  else if(!T.noHit)ts.forEach(function(x){if(x.troops>0)hit(u,x,ty,T.c*mult*((T.exec&&x.troops/x.max<.5)?1+T.exec:1),ev.tg)});else ts.forEach(function(x){if(x.troops>0)ev.tg.push({id:x.id,res:'fx'})});   /* V202 noHit: status-only skills (skin redesign) */
+  if(T.shield){var shk=(TWRULE===5?.5:1);/* V178: skill shields no longer fade (user 2026-11-03 07:14); regen still fades */(T.shSelf?[u]:living(mates)).forEach(function(m){m.st.shield=Math.max(m.st.shield,Math.round(m.max*T.shield*DMGK*mult*shk))})}   /* V202 shSelf: barrier on the caster only */
+  if(T.cln)living(mates).forEach(function(m){var q=m.st;q.burn=0;q.stun=0;q.chaos=0;q.poi=0;q.poiV=0;q.weak=0;q.ddown=0;q.chill=0;q.sil=0;q.lock=0;ev.tg.push({id:m.id,res:'cln'})});   /* V202 cln: cleanse every ally (non-heal skills) */   /* V175: skill shields fade with fight length like heals (HFAT) */
   if(T.moE)living(fo).forEach(function(f){var lost=(f.mdR===R?f.mdV:0),cut=Math.max(0,Math.min(T.moE,MODRCAP-lost));f.mdR=R;f.mdV=lost+cut;f.morale=Math.max(0,f.morale-cut)});
   if(T.taunt)u.st.taunt=1;
   var ro=T.rout||(u.boss==='rout'?.1:0);
@@ -10839,7 +10841,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V201';
+var BUILD='V202';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12038,4 +12040,26 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  function addCss(){try{var s=document.getElementById('ds199css');if(!s){s=document.createElement('style');s.id='ds199css';s.textContent=C+V}document.head.appendChild(s)}catch(e){}}
  try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss)}catch(e){}
 })();
+/* ===== V202 (proposed, OFF): skin skill redesign (art agent, user 2026-11-03 18:36 "skin skills completely different
+   from the original, real wow effect, effect must follow the description"). Design + Gemini art prompts: Drive doc
+   "Bá Nghiệp – Skin skill redesign + effect art prompts" (art_src/skin_fx). Each skin gets a different role and area:
+   Bát Trận Đồ (team barrier, no damage) · Thất Tinh Lôi Phạt (7 random bolts) · Thiên Hạ Đệ Nhất Kích (cross shockwave,
+   armour break) · Ma Thần Đoạt Hồn (all, drain, fear) · Thanh Long Hiển Thánh (row, armour break) · Đơn Kỵ Phá Trận (column,
+   cleanse, self barrier) · Hiệp Thiên Tử (cross poison, lock, ally morale) · Đương Dương Kiều Đoạn (taunt, self
+   barrier, fear all) · Bế Nguyệt Hoa Vũ (heal + cleanse all).
+   SKIN2ON stays false until the numbers pass the skin-vs-hero sims (sim/skin2.js) AND a coding/balance-agent review.
+   Engine hooks used (engine.js, inert otherwise): noHit, shSelf, cln. */
+var SKIN2ON=false;
+var SKIN2={   /* numbers from sim/skin2tune.js (2026-11-03): ~50% vs the hero's base skill +10%, long and short fights */
+ zhugeliang_a:{n:'Bát Trận Đồ',pat:'all',noHit:1,shield:.3,ardr:.1,ardrT:2,cln:1},
+ zhugeliang_b:{n:'Thất Tinh Lôi Phạt',pat:'single',type:'strategy',hits:7,c:.74,stun:.2,amo:15},
+ lubu_a:{n:'Thiên Hạ Đệ Nhất Kích',pat:'cross',c:2.13,exec:.6,ddown:.25,ddownT:3,eS:1},
+ lubu_b:{n:'Ma Thần Đoạt Hồn',pat:'all',c:1.4,drain:.3,weak:.2,weakT:2,eS:1},
+ guanyu_a:{n:'Thanh Long Hiển Thánh',pat:'row',c:2.0,ddown:.15,ddownT:3,eS:1,amo:15},
+ zhaoyun_a:{n:'Đơn Kỵ Phá Trận',pat:'lane',c:2.22,cln:1,shield:.2,shSelf:1},
+ caocao_a:{n:'Hiệp Thiên Tử Lệnh Chư Hầu',pat:'cross',c:1.28,poi:.04,poiT:3,lockT:1,amo:30},
+ zhangfei_a:{n:'Đương Dương Kiều Đoạn',pat:'all',c:1.31,taunt:1,shield:.41,shSelf:1,weak:.2,weakT:2,eS:1},
+ diaochan_a:{n:'Bế Nguyệt Hoa Vũ',pat:'heal',hs:'all',heal:.12,cleanse:1,mo:30}};
+function skin2Apply(){try{for(var k in SKIN2)if(SKL[k])SKL[k].t=Object.assign({},SKIN2[k])}catch(e){}}
+if(SKIN2ON)skin2Apply();
 </script>
