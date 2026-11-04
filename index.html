@@ -8972,9 +8972,30 @@ async function sweepRun(mi,si,n){if(SWEEPING||!swOk(mi,si))return;if(S.ord<1)ret
  try{for(var i=0;i<n&&S.ord>=1;i++){await fight(mi,si,'stage');done++}}catch(e){}finally{openSheet=_os;btPlay=_bp;toast=_to;SWEEPING=0}
  var wins=(dget().p.win||0)-d0,T2=tp(),rw={s:S.res.silver-r0.s,g:S.res.grain-r0.g,m:S.res.merit-r0.m,v:S.res.gold-r0.v,b:(bkTotal?bkTotal():0)-r0.b,phu:T2.phu-r0.phu,it:S.inv.length-r0.it};
  save();refresh();
- openSheet(function(){var x=[];if(rw.s>0)x.push(ic('silver')+fmt(rw.s));if(rw.g>0)x.push(ic('grain')+fmt(rw.g));if(rw.m>0)x.push(ic('merit')+fmt(rw.m));if(rw.v>0)x.push(ic('gold')+rw.v);if(rw.b>0)x.push('Binh Thư '+rw.b);if(rw.phu>0)x.push('<b class="gold">Binh Phù '+rw.phu+'</b>');if(rw.it>0)x.push('Trang bị '+rw.it);
-  return'<h3>Càn quét xong</h3><div class="evc"><div class="evh"><b>'+done+' trận · thắng '+wins+'</b><span class="sm mute">−'+done+' quân lệnh</span></div><div class="sm">'+(x.join(' · ')||'Không có thưởng')+'</div>'+(wins<done?'<div class="sm bad" style="margin-top:6px">Có trận thua — quân chưa đủ mạnh để quét chắc thắng.</div>':'')+'</div>'+
-  '<div class="row" style="gap:8px;margin-top:10px"><button class="btn sp" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="1">Quét lại ×1</button><button class="btn sp" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="5"'+(S.ord<5?' disabled':'')+'>Quét ×5</button></div>'})}
+ /* V254 (art agent, user 2026-11-04 14:28 "redesign this window - make it a floating window"): the sweep result uses the V241 floating
+    result card (rs234.js: a direct .rs9 child of #sheet turns #modal into .rs9fl) — title + run count, rewards as item-art tiles, new gear
+    as its own tiles, Quân lệnh left, one primary "Quét lại ×1" + secondary "Quét ×5". Same actions (sweep), same numbers. */
+ var nit=[];try{nit=S.inv.slice(r0.it).slice(0,8)}catch(e){}
+ openSheet(function(){var T9=function(icn,val,lab){return'<div class="rs9t"><span class="rs9i">'+icn+'</span><b>'+val+'</b><small'+(lab.length>8?' class="w2"':'')+'>'+lab+'</small></div>'},t='';
+  if(rw.s>0)t+=T9(objH('silver'),'+'+fmt(rw.s),'Bạc');if(rw.g>0)t+=T9(objH('grain'),'+'+fmt(rw.g),'Lương');if(rw.m>0)t+=T9(objH('merit'),'+'+fmt(rw.m),'Chiến công');if(rw.v>0)t+=T9(objH('gold'),'+'+rw.v,'Vàng');
+  if(rw.b>0)t+=T9(objH('book'),'+'+rw.b,'Binh Thư');if(rw.phu>0)t+=T9(objH('phu'),'+'+rw.phu,'Binh Phù');
+  nit.forEach(function(it){var g='';try{g=gearIcon(it)}catch(e){}t+=T9(g,'','Trang bị '+(GQ[it.q]||GQ[0]).n)});
+  var lose=wins<done,o='<div class="rs9 sw254"><div class="rs9hd'+(lose?' lose':'')+'"><div class="rs9tt">Càn quét xong</div>'+
+   '<div class="rs9sub">Màn '+(mi+1)+' · Ải '+(si+1)+' · '+done+' trận · thắng '+wins+'/'+done+'</div></div>'+
+   (t?'<div class="rs9sec"><div class="rs9h">Phần thưởng</div><div class="rs9rw">'+t+'</div></div>':'<div class="sw254n">Không có thưởng</div>')+
+   (lose?'<div class="sw254w">Có trận thua — quân chưa đủ mạnh để quét chắc thắng.</div>':'')+
+   '<div class="sw254o"><span>'+objH('order')+'Quân lệnh</span><b>'+S.ord+'</b><em>−'+done+'</em></div>'+
+   '<div class="sw254b"><button class="btn" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="1"'+(S.ord<1?' disabled':'')+'>Quét lại ×1</button>'+
+   '<button class="btn alt" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="5"'+(S.ord<5?' disabled':'')+'>Quét ×5'+(S.ord<5?' <small>cần 5 lệnh</small>':'')+'</button></div></div>';
+  return o})}
+(function(){try{var st=document.createElement('style');st.id='sw254css';st.textContent=
+ '.sw254 .rs9sub{margin-top:4px}.sw254n{text-align:center;color:var(--ds-mu,#b9a98a);padding:8px 0}'+
+ '.sw254w{padding:8px 12px;border-radius:10px;background:rgba(220,90,70,.12);border:1px solid rgba(220,90,70,.35);color:#f3b3a4;font-size:13px}'+
+ '.sw254o{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(226,178,90,.18)}'+
+ '.sw254o span{flex:1;display:flex;align-items:center;gap:8px;color:var(--ds-mu,#b9a98a);font-size:13px}.sw254o span .objx{flex:none;width:28px!important;height:28px!important;min-width:0!important;max-width:28px!important}'+
+ '.sw254o b{font:700 18px var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}.sw254o em{font-style:normal;font-size:12px;color:#e0907c}'+
+ '.sw254b{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sw254b .btn{min-height:46px;margin:0!important;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}.sw254b .btn small{font-size:10.5px;font-weight:600;opacity:.85}';
+ document.head.appendChild(st)}catch(e){}})();
 (function(){var _ASW=A_;A_=function(a,v,w,el){if(a==='sweep'){var p=String(v).split('|');sweepRun(+p[0],+p[1],+w||1);return}return _ASW(a,v,w,el)}})();
 (function(){var _ssSW=stageSheet;stageSheet=function(mi,si,kind){var h=_ssSW.apply(this,arguments);if((kind||'stage')!=='stage'||!swOk(mi,si))return h;
  var b='<div class="swp"><span class="sm"><b>Càn quét</b> · ải 3★ đánh ngay, không xem trận</span><button class="btn sm" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="1"'+(S.ord<1?' disabled':'')+'>×1</button><button class="btn sm" data-a="sweep" data-v="'+mi+'|'+si+'" data-w="5"'+(S.ord<5?' disabled':'')+'>×5</button></div>';
@@ -10965,7 +10986,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V253';
+var BUILD='V254';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
