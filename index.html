@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V193';
+var BUILD='V194';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11023,4 +11023,222 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  document.addEventListener('dragstart',function(e){if(e.target.closest&&e.target.closest('.pv-my'))e.preventDefault()},true);
  document.addEventListener('click',function(e){if(eat&&Date.now()-eat<400){eat=0;e.stopPropagation();e.preventDefault()}},true);
 }catch(e){}})();
+/* ===== V194: Redesign Bible design kit (art agent) =====
+   Source of truth: Redesign Bible https://claude.ai/artifact/NoadZFW5w3gzwHxQQoYKc8 ("Design language"),
+   mockups https://claude.ai/artifact/5FPKsevg92FjgU9hBLHsGe. Approved by the user 2026-11-03 15:55 / 16:03.
+   Last CSS layer: one look on every screen.
+   - Tokens (--ds-*) on :root.
+   - Sheet header: one row = 44 px icon back button + the sheet title (the first h3 is moved into .snav) + right slot.
+   - Buttons: .btn = primary (gold), .btn.alt/.obr/.obs = secondary (dark + gold line), .btn.red = gold-price (red),
+     disabled = 40% of its own style. 44 px tall, .sm 36 px.
+   - Tabs (.pills, .tdtab, .tdpkr, .pust, .mtabs) = segmented control; filters (.chips .chip) = 32 px chips.
+   - Cards (.card, .card.hl, .elc, .mcard, .wscroll, shop .tdi) = flat surface, 1 px gold line, radius 14.
+     Painted frames stay only on the sheet edge and hero / rarity cards (.hc, rarity tiles).
+   - Section titles: Philosopher 17, no diamond / line ornament.
+   - Text: nothing under 12 px in sheets and tabs, except small tags on portraits.
+   Everything is wrapped; any error leaves the old look. */
+(function(){
+ var CSS=
+ ':root{--ds-bg:#17110c;--ds-s1:#231a12;--ds-s2:#2d2117;--ds-line:rgba(226,178,90,.22);--ds-line2:rgba(226,178,90,.38);'+
+ '--ds-gold:#e2b25a;--ds-g1:#f4d384;--ds-g2:#c78b2f;--ds-t:#efe4d0;--ds-ts:#f6e6c4;--ds-mu:#a8977f;--ds-red:#9e2a22;'+
+ '--ds-amber:#f3c27a;--ds-green:#6cc283;--ds-fd:Philosopher,Georgia,serif;--ds-fb:"Be Vietnam Pro",system-ui,sans-serif;--ds-fn:"Barlow Condensed",sans-serif}'+
+
+ /* ---- sheet header ---- */
+ 'html body #sheet>.snav{display:flex!important;align-items:center!important;gap:10px!important;min-height:52px!important;padding:6px 0 8px!important;margin:0 0 6px!important}'+
+ 'html body #sheet>.snav .snb{flex:none!important;width:44px!important;height:44px!important;min-width:44px!important;padding:0!important;border-radius:12px!important;'+
+   'border:1px solid rgba(226,178,90,.3)!important;border-image:none!important;background:var(--ds-s1) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23f1d49a%27 stroke-width=%272.4%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M15 5l-7 7 7 7%27/%3E%3C/svg%3E") center/20px 20px no-repeat!important;'+
+   'box-shadow:none!important;font-size:0!important;color:transparent!important;text-shadow:none!important}'+
+ 'html body #sheet>.snav .snb *{display:none!important}'+
+ 'html body #sheet>.snav>h3.dsT{flex:1 1 auto!important;min-width:0!important;margin:0!important;padding:0!important;font:700 20px/1.2 var(--ds-fd)!important;color:var(--ds-ts)!important;'+
+   'text-align:left!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;background:none!important;border:0!important;letter-spacing:0!important;text-shadow:none!important}'+
+ 'html body #sheet>.snav>h3.dsT::before,html body #sheet>.snav>h3.dsT::after{display:none!important}'+
+ 'html body #sheet>.snav>span:empty{display:none!important}'+
+ 'html body #sheet>.snav button:not(.snb){min-height:36px!important;height:36px!important;padding:0 12px!important;border-radius:10px!important;border:1px solid rgba(226,178,90,.3)!important;border-image:none!important;'+
+   'background:var(--ds-s1)!important;color:var(--ds-t)!important;font:600 13px var(--ds-fb)!important;box-shadow:none!important;text-shadow:none!important}'+
+ 'html body #sheet>h3{font:700 20px/1.2 var(--ds-fd)!important;color:var(--ds-ts)!important}'+
+ 'html body #sheet>p.sm.mute{font-size:13px!important;line-height:1.45!important;color:var(--ds-mu)!important}'+
+
+ /* ---- buttons ---- */
+ 'html body .btn,html body .sheet .btn,html body #main .btn,html body #main .card.hl .btn,html body .elc .btn,html body .mcard .btn,html body .btn.obg{'+
+   'min-height:44px!important;padding:0 16px!important;border-radius:12px!important;border:1px solid #f6dc99!important;border-image:none!important;'+
+   'background:linear-gradient(180deg,var(--ds-g1),var(--ds-g2))!important;color:#2a1a0c!important;font:700 14px/1.15 var(--ds-fb)!important;letter-spacing:0!important;'+
+   'text-shadow:none!important;box-shadow:0 2px 6px rgba(0,0,0,.3)!important}'+
+ 'html body .btn.alt,html body .sheet .btn.alt,html body #main .btn.alt,html body .btn.obr,html body .btn.obs,html body .bhead .btn{'+
+   'background:var(--ds-s2)!important;border:1px solid rgba(226,178,90,.35)!important;color:var(--ds-t)!important;font-weight:600!important;box-shadow:none!important}'+
+ 'html body .btn.red,html body .sheet .btn.red,html body .sheet .tdi .tdb{background:linear-gradient(180deg,#b8382d,#8a2019)!important;border:1px solid #e7b35d!important;color:#fff!important;box-shadow:none!important}'+
+ 'html body .btn.sm,html body .sheet .btn.sm,html body #main .btn.sm{min-height:36px!important;padding:0 12px!important;border-radius:10px!important;font-size:13px!important}'+
+ 'html body .btn[disabled],html body .sheet .btn[disabled],html body #main .btn[disabled]{opacity:.4!important;filter:saturate(.6)!important;box-shadow:none!important}'+
+ 'html body .btn:active:not([disabled]){transform:translateY(1px)!important}'+
+
+ /* Tướng tab shortcuts = three equal secondary buttons with icons */
+ 'html body #main>.row:first-child>.btn[data-a="form"],html body #main>.row:first-child>.btn[data-a="tavern"],html body #main>.row:first-child>.btn[data-a="inv"]{min-height:44px!important;height:44px!important;border:1px solid rgba(226,178,90,.3)!important;border-image:none!important;border-radius:12px!important;background-color:var(--ds-s2)!important;background-repeat:no-repeat!important;background-position:12px center!important;background-size:18px 18px!important;color:var(--ds-t)!important;font:600 13.5px/1.1 var(--ds-fb)!important;text-shadow:none!important;box-shadow:none!important;padding:0 8px 0 34px!important}'+'html body #main>.row:first-child>.btn[data-a="form"]{background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23f2cf7c%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M4 4h6v6H4zM14 4h6v6h-6zM9 14h6v6H9z%27/%3E%3C/svg%3E")!important}'+'html body #main>.row:first-child>.btn[data-a="tavern"]{background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23f2cf7c%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 10h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 11h2a2 2 0 0 1 0 4h-2M8 4c0 1.5 1 1.5 1 3M12 4c0 1.5 1 1.5 1 3%27/%3E%3C/svg%3E")!important}'+'html body #main>.row:first-child>.btn[data-a="inv"]{background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23f2cf7c%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M4 9h16v10H4zM3 6h18v3H3zM10 13h4%27/%3E%3C/svg%3E")!important}'+
+ /* ---- tabs = segmented control ---- */
+ 'html body .pills,html body .sheet .tdtab,html body .pust{display:flex!important;flex-wrap:nowrap!important;gap:3px!important;padding:3px!important;border-radius:12px!important;'+
+   'background:var(--ds-s1)!important;border:1px solid rgba(226,178,90,.18)!important;border-image:none!important;overflow-x:auto!important;scrollbar-width:none!important;box-shadow:none!important}'+
+ 'html body .pills::-webkit-scrollbar,html body .sheet .tdtab::-webkit-scrollbar{display:none}'+
+ 'html body .pills .pill,html body .mtabs .pill,html body .sheet .tdtab button,html body .pust .pus{flex:1 0 auto!important;min-height:38px!important;height:auto!important;padding:4px 12px!important;margin:0!important;'+
+   'border:0!important;border-image:none!important;border-radius:9px!important;background:transparent!important;color:#c9b796!important;font:600 13.5px/1.2 var(--ds-fb)!important;box-shadow:none!important;text-shadow:none!important}'+
+ 'html body .pills .pill.on,html body .mtabs .pill.on,html body .sheet .tdtab button.on,html body .pust .pus.on{'+
+   'background:linear-gradient(180deg,#f2cf7c,#c98f34)!important;color:#2a1a0c!important;font-weight:700!important}'+
+ 'html body .pust .pus.lk{opacity:.45!important}'+
+
+ /* ---- filter chips ---- */
+ 'html body .chips{display:flex!important;flex-wrap:nowrap!important;gap:6px!important;overflow-x:auto!important;scrollbar-width:none!important}'+
+ 'html body .chips::-webkit-scrollbar{display:none}'+
+ 'html body .chips .chip{flex:none!important;height:32px!important;min-height:32px!important;padding:0 13px!important;border-radius:16px!important;border:1px solid rgba(226,178,90,.16)!important;border-image:none!important;'+
+   'background:transparent!important;color:#c9b796!important;font:500 13px/30px var(--ds-fb)!important;box-shadow:none!important;text-shadow:none!important}'+
+ 'html body .chips .chip.on{border-color:var(--ds-gold)!important;background:rgba(226,178,90,.16)!important;color:#f6dfa6!important;font-weight:600!important}'+
+
+ /* ---- cards ---- */
+ 'html body .card,html body #main .card.hl,html body .elc,html body .mcard,html body .wscroll,html body .sheet .tdi,html body .sheet .pusec{border:1px solid var(--ds-line)!important;border-image:none!important;'+
+   'border-radius:14px!important;background:var(--ds-s1)!important;box-shadow:none!important}'+
+ 'html body .card .card{background:var(--ds-s2)!important}'+
+
+ /* ---- section titles ---- */
+ 'html body .sec,html body #main h2.gnh{font:700 17px/1.25 var(--ds-fd)!important;color:var(--ds-ts)!important;letter-spacing:0!important;text-shadow:none!important}'+
+ 'html body .sec>i,html body .sec i::before,html body .sec i::after,html body .sec::after,html body #main h2.gnh:after{display:none!important;background:none!important}'+
+ 'html body #main h2.gnh .gno{display:none!important}'+
+
+ /* ---- building / plot sheets: one primary in the sticky bar, no lone Đóng, level chip ---- */
+ 'html body .sheet .puchip{border:1px solid rgba(226,178,90,.5)!important;border-image:none!important;background:rgba(23,17,12,.78)!important;color:#f6dfa6!important;border-radius:16px!important;font:600 13px var(--ds-fb)!important;padding:5px 12px!important;box-shadow:none!important;text-shadow:none!important}'+
+ 'html body .sheet .puchip.lk,html body .sheet .puchip.nw{color:var(--ds-mu)!important;border-color:rgba(226,178,90,.25)!important}'+
+ 'html body .sheet .pul{font:500 11px var(--ds-fb)!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--ds-mu)!important}'+
+ 'html body #sheet .bbf .btn[data-a="close"],html body #sheet .row>.btn.alt[data-a="close"],html body #sheet [data-dshide]{display:none!important}'+
+ 'html body #sheet .sbar{display:flex!important;gap:8px!important;align-items:stretch!important}'+
+ 'html body #sheet .sbar .btn{flex:1 1 0!important;width:auto!important;min-height:52px!important;font:700 17px var(--ds-fd)!important}'+
+ 'html body #sheet .sbar .btn.alt{flex:0 1 auto!important;font:600 14px var(--ds-fb)!important;padding:0 16px!important}'+
+ 'html body #sheet .row .btn[data-a="plcol"]{background:var(--ds-s2)!important;border:1px solid rgba(226,178,90,.35)!important;color:var(--ds-t)!important;box-shadow:none!important}'+
+ /* ---- Bày trận (Redesign Bible spec) ---- */
+ 'html body #sheet .fm2-up{border-bottom:0!important;box-shadow:none!important}'+
+ 'html body #sheet .fm2-up .fm2-top .pill{min-height:38px!important;font-size:14px!important}'+
+ 'html body #sheet .fm2-up .fm2-sum{font-size:12px!important;color:var(--ds-mu)!important}'+
+ 'html body #sheet .fm2-up .fm2-sum b{font:700 19px/1 var(--ds-fn)!important;color:var(--ds-t)!important}'+
+ 'html body #sheet .fm2-up .fm2-sum span:last-child b{color:#f2cf7c!important}'+
+ 'html body #sheet .fm2-enemy{display:flex!important;align-items:center;gap:8px;margin:10px 0 0!important;font:700 11px var(--ds-fb)!important;letter-spacing:.14em!important;color:#e07d68!important}'+
+ 'html body #sheet .fm2-enemy::before,html body #sheet .fm2-enemy::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(214,92,72,.55))}'+
+ 'html body #sheet .fm2-enemy::after{background:linear-gradient(90deg,rgba(214,92,72,.55),transparent)}'+
+ 'html body #sheet .fm2-grid{grid-template-columns:30px repeat(3,minmax(0,1fr))!important;max-width:none!important;gap:8px!important;margin:6px 0 0!important;padding:10px 12px!important;border-radius:16px;background:linear-gradient(180deg,rgba(48,35,24,.9),rgba(32,23,16,.9));border:1px solid var(--ds-line)}'+
+ 'html body #sheet .dsrl{display:flex;align-items:center;justify-content:center}'+
+ 'html body #sheet .dsrl span{writing-mode:vertical-rl;transform:rotate(180deg);font:600 11px var(--ds-fb);letter-spacing:.12em;text-transform:uppercase;color:#8f7f69}'+
+ 'html body #sheet .fm2-c{position:relative!important;height:84px!important;min-height:84px!important;padding:0!important;border-radius:12px!important;overflow:hidden!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center}'+
+ 'html body #sheet .fm2-c:not(.lit){background:rgba(255,255,255,.025)!important;border:0!important;box-shadow:none!important;opacity:1!important}'+
+ 'html body #sheet .fm2-c.lit:not(.has){border:1.5px dashed var(--ds-line2)!important;background:rgba(226,178,90,.04)!important;box-shadow:none!important}'+
+ 'html body #sheet .fm2-c.lit.main:not(.has){border:1.5px solid var(--ds-gold)!important}'+
+ 'html body #sheet .fm2-c.lit.main:not(.has)::after{content:"Chủ tướng";font:600 11px var(--ds-fb);color:#f2cf7c;margin-top:2px}'+
+ 'html body #sheet .fm2-c .fm2-lbl{display:none!important}'+
+ 'html body #sheet .fm2-c .fm2-plus{font:300 26px/1 var(--ds-fb)!important;color:#c9a45e!important;opacity:1!important}'+
+ 'html body #sheet .fm2-c.has{border:1.5px solid var(--ds-line2)!important;background:#120d09!important;box-shadow:none!important}'+
+ 'html body #sheet .fm2-c.has.main{border-color:#f6d27c!important}'+
+ 'html body #sheet .fm2-c.has .pw{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}'+
+ 'html body #sheet .fm2-c.has .pw img.ga{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover;object-position:50% 12%;border-radius:0!important}'+
+ 'html body #sheet .fm2-c.has .pw .tag{position:absolute!important;top:5px!important;left:5px!important;right:auto!important;bottom:auto!important;z-index:3}'+
+ 'html body #sheet .fm2-c.has::before{content:"";position:absolute;left:0;right:0;bottom:0;height:48px;background:linear-gradient(180deg,transparent,rgba(10,7,4,.92));z-index:2}'+
+ 'html body #sheet .fm2-c.has .fm2-nm{position:absolute!important;left:6px;right:6px;bottom:11px;z-index:3;text-align:center;font:600 12px/1.1 var(--ds-fb)!important;color:#fff6e6!important}'+
+ 'html body #sheet .fm2-c.has .fm2-tb{position:absolute!important;left:10px;right:10px;bottom:5px;width:auto!important;height:3px!important;z-index:3}'+
+ 'html body #sheet .fm2-c.has .fm2-ord{left:auto!important;right:5px!important;top:5px!important;z-index:3;width:20px;height:20px;border-radius:10px;background:rgba(10,7,4,.78);border:1px solid rgba(242,207,124,.6);display:flex;align-items:center;justify-content:center;font:700 13px var(--ds-fn)!important;color:#f2cf7c!important}'+
+ 'html body #sheet .fm2-c .fm2-star{display:none!important}'+
+ 'html body #sheet .fm2-act{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important;margin:10px 0 0!important}'+
+ 'html body #sheet .fm2-act .btn{min-height:44px!important;background:var(--ds-s1)!important;border:1px solid rgba(226,178,90,.3)!important;color:var(--ds-t)!important;font:600 13.5px var(--ds-fb)!important;box-shadow:none!important}'+
+ 'html body #sheet .fm2-act .btn.dswarn{border-color:rgba(240,178,90,.55)!important;background:rgba(240,178,90,.10)!important}'+
+ 'html body #sheet .dsck{display:flex;gap:6px;margin:10px 0 2px}'+
+ 'html body #sheet .dsck button{flex:1 1 0;min-width:0;height:32px;border-radius:16px;font:600 12px var(--ds-fb);display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}'+
+ 'html body #sheet .dsck button.ok{border:1px solid rgba(108,194,131,.45);background:rgba(108,194,131,.10);color:#9fdcb0}'+
+ 'html body #sheet .dsck button.no{border:1px solid rgba(240,178,90,.45);background:rgba(240,178,90,.08);color:#f3c27a}'+
+ 'html body #sheet .dsck button.q{flex:0 0 32px;border:1px solid rgba(226,178,90,.3);background:var(--ds-s1);color:#c9b796}'+
+ 'html body #sheet .dspop{margin:6px 0 2px;padding:10px 12px;border-radius:12px;background:var(--ds-s2);border:1px solid var(--ds-line);font:400 13px/1.45 var(--ds-fb);color:var(--ds-t)}'+
+ 'html body #sheet .fm2-hint,html body #sheet .healhint,html body #sheet .drumhint{display:none!important}'+
+ 'html body #sheet .dsrh{display:flex;align-items:baseline;gap:8px;margin:12px 0 8px}'+
+ 'html body #sheet .dsrh b{font:700 17px var(--ds-fd);color:var(--ds-ts)}'+
+ 'html body #sheet .dsrh i{font-style:normal;font-size:13px;color:var(--ds-mu)}'+
+ 'html body #sheet .dsrh button{margin-left:auto;height:34px;padding:0 12px;border-radius:17px;border:1px solid rgba(226,178,90,.3);background:var(--ds-s1);color:var(--ds-t);font:600 13px var(--ds-fb);cursor:pointer}'+
+ 'html body #sheet .fm2-flt>.chips:first-child{display:none!important}'+
+ 'html body #sheet .fm2-flt.dsopen>.chips:first-child{display:flex!important;margin-bottom:8px}'+
+ 'html body #sheet .fm2-ros{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px 8px!important}'+
+ 'html body #sheet .fm2-h{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;position:relative;display:flex!important;flex-direction:column;gap:3px}'+
+ 'html body #sheet .fm2-h .pw{height:96px!important;border-radius:10px!important;border:1.5px solid rgba(226,178,90,.3)!important;overflow:hidden}'+
+ 'html body #sheet .fm2-h.on .pw{border-color:#6cc283!important}'+
+ 'html body #sheet .fm2-h.on .pw img{opacity:.55}'+
+ 'html body #sheet .fm2-h .pw img.ga{width:100%;height:100%;object-fit:cover;object-position:50% 10%}'+
+ 'html body #sheet .fm2-hn{font:600 12px/1.2 var(--ds-fb)!important;color:var(--ds-t)!important}'+
+ 'html body #sheet .fm2-hp{margin-top:-2px;font:600 13px var(--ds-fn)!important;color:#c9a45e!important}'+
+ 'html body #sheet .fm2-on{position:absolute!important;top:4px!important;right:4px!important;width:20px;height:20px;border-radius:10px;background:#3f9a5c!important;color:#fff!important;font:700 12px/20px var(--ds-fb)!important;text-align:center;z-index:3}'+
+ 'html body #sheet .fm2-bar .btn{min-height:52px!important;border-radius:14px!important;font:700 18px var(--ds-fd)!important}'+
+ /* ---- Tướng tab filters, shop silver prices, daily list ---- */
+ 'html body #main .chips.dsfac{display:none!important}'+
+ 'html body #main .chips.dsfac.dsopen{display:flex!important}'+
+ 'html body #main .dsphe{height:34px;padding:0 12px;border-radius:17px;border:1px solid rgba(226,178,90,.3);background:var(--ds-s1);color:var(--ds-t);font:600 13px var(--ds-fb);cursor:pointer;flex:none}'+
+ 'html body .sheet .tdi .tdb.dssil{background:var(--ds-s2)!important;border:1px solid rgba(226,178,90,.35)!important;color:var(--ds-t)!important}'+
+ 'html body #sheet .stack.dslist{gap:0!important;background:var(--ds-s1)!important;border:1px solid var(--ds-line)!important;border-radius:16px!important;overflow:hidden}'+
+ 'html body #sheet .stack.dslist>.card{border:0!important;border-radius:0!important;background:transparent!important;border-top:1px solid rgba(226,178,90,.12)!important;margin:0!important}'+
+ 'html body #sheet .stack.dslist>.card:first-child{border-top:0!important}'+
+ /* ---- text ---- */
+ 'html body .sheet .mute,html body #main .mute{color:var(--ds-mu)!important}'+
+ 'html body .sheet .sm,html body #main .sm{font-size:12.5px!important}'+
+ 'html body .bar{background:rgba(255,255,255,.08)!important;border-radius:3px!important;border:0!important}';
+
+ function addCss(){try{var s=document.getElementById('ds194css');if(!s){s=document.createElement('style');s.id='ds194css';s.textContent=CSS}
+   document.head.appendChild(s)}catch(e){}}
+ try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss);window.addEventListener('load',addCss)}catch(e){}
+
+ /* sheet header: move the sheet's first h3 into the top bar */
+ function head(){try{var sh=document.getElementById('sheet');if(!sh)return;var nav=null,h=null,k=sh.children;
+   for(var i=0;i<k.length;i++){var c=k[i];if(!nav&&c.classList&&c.classList.contains('snav')){nav=c;continue}if(nav&&c.tagName==='H3'){h=c;break}
+     if(nav&&c.tagName!=='STYLE'&&c.tagName!=='SCRIPT'&&!(c.classList&&c.classList.contains('snav')))break}
+   if(!nav)return;var b=nav.querySelector('.snb');if(b&&!b.getAttribute('aria-label'))b.setAttribute('aria-label',(b.textContent||'Trở về').replace(/[‹›]/g,'').trim()||'Trở về');
+   if(!h){h=sh.querySelector(':scope>.bbt>h3,:scope>.putt h3,.fm2-top>h3,.tdtop h3')}
+   if(!h||nav.querySelector('h3.dsT'))return;h.classList.add('dsT');if(b&&b.nextSibling)nav.insertBefore(h,b.nextSibling);else nav.appendChild(h)}catch(e){}}
+
+ /* minimum text size 12 px in sheets and the main tab, except tiny tags on portraits */
+ var lastMin=0,minT=0;
+ function minText(){try{var now=Date.now();if(now-lastMin<400){if(!minT)minT=setTimeout(function(){minT=0;minText()},420);return}lastMin=now;
+   ['sheet','main'].forEach(function(id){var r=document.getElementById(id);if(!r)return;var el=r.querySelectorAll('*');
+     for(var i=0;i<el.length&&i<4000;i++){var e=el[i];if(e.dataset.dsm)continue;var tn=e.tagName;if(tn==='svg'||tn==='SVG'||e.closest('svg')||tn==='STYLE'||tn==='SCRIPT'||tn==='CANVAS')continue;
+       var hasT=false;for(var j=0;j<e.childNodes.length;j++){var n=e.childNodes[j];if(n.nodeType===3&&n.nodeValue.trim().length>1){hasT=true;break}}if(!hasT)continue;
+       var cs=getComputedStyle(e),fs=parseFloat(cs.fontSize);e.dataset.dsm='1';if(!(fs<12)||fs<6)continue;
+       var p=e,abs=false;for(var d=0;d<3&&p;d++){var ps=getComputedStyle(p).position;if(ps==='absolute'){abs=true;break}p=p.parentElement}
+       if(abs&&fs<=11)continue;e.style.fontSize='12px'}})}catch(e){}}
+
+
+ /* one primary per sheet: the sticky bar's action hides its copies; a secondary 'Mở …' from .bbf joins the bar */
+ function bars(){try{var sh=document.getElementById('sheet');if(!sh)return;var sb=sh.querySelector('.sbar');if(!sb)return;
+   var acts={};sb.querySelectorAll('.btn[data-a]').forEach(function(b){acts[b.getAttribute('data-a')+'|'+(b.getAttribute('data-v')||'')]=1});
+   sh.querySelectorAll('.btn[data-a]').forEach(function(b){if(sb.contains(b))return;var k=b.getAttribute('data-a')+'|'+(b.getAttribute('data-v')||'');if(acts[k])b.setAttribute('data-dshide','1')});
+   var bf=sh.querySelector(':scope>.bbf');if(bf){bf.querySelectorAll('.btn[data-a]').forEach(function(b){var a=b.getAttribute('data-a');if(a==='close'||b.hasAttribute('data-dshide'))return;
+     b.classList.add('alt');sb.insertBefore(b,sb.firstChild)})}}catch(e){}}
+
+ /* Bày trận: row labels, status chips, roster header with the faction picker */
+ function fm(){try{var sh=document.getElementById('sheet');if(!sh)return;var g=sh.querySelector('.fm2-grid');if(!g)return;
+   if(!g.querySelector('.dsrl')){var c=g.querySelectorAll(':scope>.fm2-c');if(c.length===9){['Trước','Giữa','Sau'].forEach(function(t,i){var d=document.createElement('div');d.className='dsrl';d.setAttribute('aria-hidden','true');d.innerHTML='<span>'+t+'</span>';g.insertBefore(d,c[i*3])})}}
+   var up=sh.querySelector('.fm2-up'),act=sh.querySelector('.fm2-act');
+   if(act){act.querySelectorAll('.btn').forEach(function(b){if(b.getAttribute('data-a')==='refillTeam')b.classList.toggle('dswarn',/thiếu/i.test(b.textContent))})}
+   if(up&&act&&!up.querySelector('.dsck')){var hh=sh.querySelector('.healhint:not(.drumhint)'),dh=sh.querySelector('.drumhint'),hint=sh.querySelector('.fm2-hint');
+     function txt(e){return e?e.textContent.replace(/\s+/g,' ').trim():''}
+     var healOk=!!(hh&&hh.querySelectorAll('b').length>1&&txt(hh.querySelectorAll('b')[1])),drumOk=!!(dh&&dh.querySelectorAll('b').length>1&&txt(dh.querySelectorAll('b')[1])),mainOk=!!g.querySelector('.fm2-c.main.has');
+     var I_OK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+     var I_NO='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.5"/></svg>';
+     var items=[['Quân y',healOk,txt(hh)||'Chưa có tướng chữa trị.'],['Trống trận',drumOk,txt(dh)||'Chưa có trống.'],['Chủ tướng',mainOk,mainOk?'Ô ★ có chủ tướng: hiệu ứng trận pháp ×2.':'Ô ★ là ô chủ tướng (hiệu ứng trận pháp ×2). Đặt tướng mạnh nhất vào đây.']];
+     var row=document.createElement('div');row.className='dsck';var pop=null;
+     function show(t,b){if(pop&&pop.dataset.k===b.textContent){pop.remove();pop=null;return}if(pop)pop.remove();pop=document.createElement('div');pop.className='dspop';pop.dataset.k=b.textContent;pop.textContent=t;row.parentNode.insertBefore(pop,row.nextSibling)}
+     items.forEach(function(it){var b=document.createElement('button');b.type='button';b.className=it[1]?'ok':'no';b.innerHTML=(it[1]?I_OK:I_NO)+'<span>'+it[0]+'</span>';b.addEventListener('click',function(e){e.stopPropagation();show(it[2],b)});row.appendChild(b)});
+     if(hint){var q=document.createElement('button');q.type='button';q.className='q';q.setAttribute('aria-label','Hướng dẫn');q.textContent='?';q.addEventListener('click',function(e){e.stopPropagation();show(txt(hint),q)});row.appendChild(q)}
+     act.parentNode.insertBefore(row,act.nextSibling)}
+   var fl=sh.querySelector('.fm2-flt');if(fl&&!sh.querySelector('.dsrh')){var ch=fl.querySelector('.chips'),on=ch&&ch.querySelector('.chip.on'),n=sh.querySelectorAll('.fm2-ros .fm2-h').length;
+     var h=document.createElement('div');h.className='dsrh';h.innerHTML='<b>Tướng</b><i>'+n+'</i>';var b=document.createElement('button');b.type='button';
+     b.textContent='Phe: '+(on&&!/Mọi/.test(on.textContent)?on.textContent.trim():'Tất cả');b.addEventListener('click',function(e){e.stopPropagation();fl.classList.toggle('dsopen')});h.appendChild(b);fl.parentNode.insertBefore(h,fl)}
+   }catch(e){}}
+
+ /* Tướng tab: faction chips behind a 'Phe' button; shop: silver prices are secondary; task lists = one card */
+ function misc(){try{var m=document.getElementById('main');if(m){var fa=m.querySelector('.chips [data-a="genfa"]');if(fa){var row=fa.parentNode;if(!row.classList.contains('dsfac')){row.classList.add('dsfac');
+     var on=row.querySelector('.chip.on'),gh=m.querySelector('h2.gnh');var b=document.createElement('button');b.type='button';b.className='dsphe';
+     b.textContent='Phe: '+(on&&!/Mọi/.test(on.textContent)?on.textContent.trim():'Tất cả');b.addEventListener('click',function(e){e.stopPropagation();row.classList.toggle('dsopen')});
+     if(gh)gh.appendChild(b);else row.parentNode.insertBefore(b,row)}}}
+   var sh=document.getElementById('sheet');if(!sh)return;
+   sh.querySelectorAll('.tdi .tdb').forEach(function(b){if(/silver/.test(b.innerHTML)&&!/gold/.test(b.innerHTML))b.classList.add('dssil')});
+   sh.querySelectorAll('.stack').forEach(function(st){var k=st.children,n=0;for(var i=0;i<k.length;i++){if(k[i].classList.contains('card')&&k[i].classList.contains('row'))n++}if(n>=3&&n>=k.length*.7)st.classList.add('dslist')})
+  }catch(e){}}
+ var pend=0;function run(){pend=0;head();bars();fm();misc();minText()}
+ function sched(){if(!pend){pend=1;(window.requestAnimationFrame||setTimeout)(run)}}
+ try{var mo=new MutationObserver(sched);function attach(){['modal','main'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.dataset.dsmo){e.dataset.dsmo='1';mo.observe(e,{childList:true,subtree:true})}})}
+   attach();document.addEventListener('DOMContentLoaded',function(){attach();sched()});setTimeout(function(){attach();sched()},0);setInterval(attach,3000)}catch(e){}
+})();
 </script>
