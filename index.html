@@ -10852,7 +10852,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V209';
+var BUILD='V210';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12598,4 +12598,30 @@ function np206Give(i){var p=NP206[i];if(!p)return;var N=np206();if(i!==N.n)retur
 var NP206EK=[1,.7,.66,.63,.6,.58,.56,.54],NP206EM=4;
 (function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{var n=S&&S.np206?S.np206.n:0;
  if(n&&mi<NP206EM&&(kind==='stage'||kind==='elite')){var k=NP206EK[Math.min(n,NP206EK.length-1)];(r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)})}}catch(e){}return r}}catch(e){}})();
+/* ===== V210 campaign pace curve (internal names CURVE208*) (user 2026-11-03 22:14: "I prefer Màn 1–10 to be fast-paced and easy to progress, and later Màn get harder and take longer to clear").
+   For EVERY save, campaign enemies (stage + elite) on Màn 1–15 field CURVE208[mi] of their attack and troops: Màn 1–10 very light,
+   Màn 11–15 a bridge back to full strength at Màn 16. Enemy drum teams start at Màn 11 (were Màn 5). Replaces the V205 F204EK (Màn 1–3, new saves only). The V207 Bạch Mã Lệnh (payers, Màn 1–4)
+   still stacks on top. Màn 16+ unchanged. Tuned with the fresh-start bot (see bible V208). */
+var CURVE208=[.6,.45,.36,.32,.35,.32,.31,.3,.25,.25,.35,.45,.55,.7,.85];/* Màn 1–10 easy, Màn 11–15 a bridge back to full strength at Màn 16 */
+try{EDRUM_MI=10}catch(e){}/* enemy drum teams from Màn 11 (were Màn 5) */
+try{F204EK=[]}catch(e){}
+(function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{var k=CURVE208[mi];
+ if(k!=null&&k<1&&(kind==='stage'||kind==='elite'))(r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)})}catch(e){}return r}}catch(e){}})();
+/* Army size (user 22:16 "from stage 3 the player must have 3 troops and from stage 5 the player must have 5 troops — same with the enemy"):
+   Màn 1 stages 1–2: player 2, enemy 1 / 2 · stages 3–4: 3 v 3 · from stage 5 on (and every later Màn): 5 v 5.
+   So nobody faces 5 enemies with only 3 generals, the game hands out free R generals when a step opens:
+   a new save gets a 2nd general at once, clearing 1-2 fills the roster to 3, clearing 1-4 fills it to 5 (CURVE208H order, only heroes not owned yet). */
+var CURVE208H=['chuthuong','hejin','lieuhoa','sunqian','jianyong','zhangbao'];
+(function(){try{if(MAPS[0])MAPS[0].cnt=MAPS[0].cnt.map(function(x,i){return i<1?1:i<2?2:i<4?3:5});
+ for(var i=1;i<MAPS.length;i++)MAPS[i].cnt=MAPS[i].cnt.map(function(){return 5})}catch(e){}})();
+(function(){try{var _di=deployInfo;deployInfo=function(fid){var r;try{r=_di(fid)}catch(e){r={n:2,why:''}}try{var c=S.camp||{},st=c.stage||{},md=c.mapDone||{};
+ var n=(st['0-3']||md[0])?5:st['0-1']?3:2,why=n===2?'3 tướng: phá ải 1-2':n===3?'5 tướng: phá ải 1-4':'';
+ var F=typeof FORM!=='undefined'&&FORM[fid];if(F&&F.cells&&F.cells.length<n)n=F.cells.length;return{n:n,why:why}}catch(e){return r}}}catch(e){}})();
+function curve208Fill(){try{if(!S||!S.camp||!S.gens||(typeof fighting!=='undefined'&&fighting))return;var st=S.camp.stage||{},md=S.camp.mapDone||{};
+ var need=(st['0-3']||md[0])?5:st['0-1']?3:2,have=Object.keys(S.gens).length,got=[];
+ for(var i=0;i<CURVE208H.length&&have<need;i++){var id=CURVE208H[i];if(GENS[id]&&!S.gens[id]){joinHero(id,true);have++;got.push(GENS[id].n)}}
+ if(got.length){try{var P=fmP(),n=Math.min(deployInfo(P.fid).n,Object.keys(S.gens).length);if(fmPlaced(P).length<n)fmAuto()}catch(e){}
+  try{toast(got.join(', ')+' gia nhập · đủ quân '+need+' tướng')}catch(e){}try{save();refresh()}catch(e){}}}catch(e){}}
+(function(){try{setInterval(curve208Fill,1500)}catch(e){}})();
+(function(){try{var _t=tick;tick=function(dt){var r=_t.apply(this,arguments);curve208Fill();return r}}catch(e){}})();
 </script>
