@@ -10844,7 +10844,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V206';
+var BUILD='V207';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12508,4 +12508,78 @@ var F204={shown:0};
 var F204EK=[.7,.8,.9];
 (function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{if(S&&S.f204&&(kind==='stage'||kind==='elite')&&F204EK[mi]!=null){var k=F204EK[mi];
  (r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)})}}catch(e){}return r}}catch(e){}})();
+/* ===== V207 Gói Nạp Đầu (internal names NP206*) (user 2026-11-03: "add a cavalry unit in Quần faction to Gói Nạp Đầu (first top-up)";
+   "$1 for unit, $5 for helmet, $10 for chest - and go the way up. make sure top-up players can progress easily but slow down around stage 5").
+   A one-time ladder of 7 packs bought in order: 0,99 $ Công Tôn Toản (SR Quần cavalry, "Bạch Mã") → 4,99 $ helmet slot → 9,99 $ chest →
+   19,99 $ weapon → 29,99 $ horse → 49,99 $ war book → 99,99 $ talisman, so the white-horse general gets a full set.
+   The game has no helmet slot: the 4,99 $ step gives the Chiến Bào (cloak/helm slot) and the 9,99 $ step the Giáp Trụ (chest armour).
+   REAL PAYMENTS ARE OFF (server-side, waits for the user's approval): testers see the prices only; the owner account
+   (body.bn-owner / cloud am_owner) or an unlocked admin panel can simulate a purchase to test.
+   Every step is wrapped: an error here never stops the game. */
+var NP206=[
+ {usd:'0,99',hero:'gongsunzan',n:'Bạch Mã Tướng Quân',d:'Công Tôn Toản (SR · Quần · Kỵ) gia nhập ngay'},
+ {usd:'4,99',gear:{s:4,q:4,lv:5},n:'Mũ trụ Xích Diễm',d:'Chiến Bào Xích Diễm +5',rw:{v:60}},
+ {usd:'9,99',gear:{s:3,q:4,lv:5},n:'Giáp Xích Diễm',d:'Giáp Trụ Xích Diễm +5',rw:{v:120}},
+ {usd:'19,99',gear:{s:0,q:5,lv:5},n:'Thương Tử Điện',d:'Đao Kiếm Tử Điện +5',rw:{v:250,s:60000}},
+ {usd:'29,99',gear:{s:1,q:5,lv:5},n:'Bạch Mã Tử Điện',d:'Chiến Mã Tử Điện +5',rw:{v:400,s:100000}},
+ {usd:'49,99',gear:{s:2,q:5,lv:10},n:'Binh Thư Tử Điện',d:'Binh Thư Tử Điện +10',rw:{v:650,s:160000}},
+ {usd:'99,99',gear:{s:5,q:5,lv:10},n:'Ngọc Bùa Tử Điện',d:'Ngọc Bùa Tử Điện +10',rw:{v:1300,s:320000}}];
+var NP206HERO='gongsunzan';
+function np206(){if(!S.np206)S.np206={n:0,pop:0};return S.np206}
+function np206Can(){try{return !!((typeof ADM!=='undefined'&&ADM)||(typeof isOwner==='function'&&isOwner()))}catch(e){return false}}
+function np206Due(){try{return np206().n<NP206.length&&S.camp&&S.camp.mapDone&&S.camp.mapDone[0]}catch(e){return false}}
+function np206Icon(p){try{if(p.hero){var G=typeof GART!=='undefined'&&GART[p.hero];return G?'<img src="'+(G.sm||G.src)+'" alt="">':heroArt(p.hero,'card')}
+ return gearIcon({s:p.gear.s,q:p.gear.q,lv:p.gear.lv},p.gear.s)}catch(e){return''}}
+function np206Sheet(){var N=np206(),own=np206Can(),G=GENS[NP206HERO],h='<h3>Gói Nạp Đầu</h3>';
+ h+='<div class="card np6hero"><div class="np6art">'+(function(){try{return heroArt(NP206HERO,'card')}catch(e){return''}})()+'</div><div class="np6tx"><b>'+G.n+'</b><span class="np6tag">SR · Quần · Kỵ binh</span>'+
+  '<div class="sm">'+esc(G.tact.n)+' · '+(G.ds||'')+'</div><div class="sm mute">Mua theo thứ tự, mỗi gói một lần. Từ 4,99 $ trở lên là bộ trang bị Bạch Mã cho ông.</div></div></div>';
+ try{var k1=NP206EK[Math.min(N.n,NP206EK.length-1)],k2=NP206EK[Math.min(N.n+1,NP206EK.length-1)];
+  h+='<div class="card sm np6lenh"><span style="font-weight:700;color:#f6e6c4">Bạch Mã Lệnh</span> · quân địch Màn 1–'+NP206EM+' yếu đi <b class="dsnum">'+Math.round((1-k1)*100)+'%</b>'+(N.n<NP206.length?' (sau gói tiếp theo: <b class="dsnum">'+Math.round((1-k2)*100)+'%</b>)':'')+'. Từ Màn '+(NP206EM+1)+' trở đi không còn.</div>'}catch(e){}
+ h+='<div class="stack dslist np6list">'+NP206.map(function(p,i){var st=i<N.n?'done':i===N.n?'next':'lock';
+  var btn=st==='done'?'<span class="np6ok">Đã nhận</span>':st==='next'?(own?'<button class="btn sm" data-a="np206b" data-v="'+i+'">'+p.usd+' $</button>':'<button class="btn sm" disabled>'+p.usd+' $</button>'):'<span class="np6lk">'+p.usd+' $</span>';
+  var ex=p.rw?(p.rw.v?' · '+p.rw.v+' vàng':'')+(p.rw.s?' · '+fmt(p.rw.s)+' bạc':''):'';
+  return'<div class="card row np6r np6'+st+'"><div class="np6i">'+np206Icon(p)+'</div><div class="sp"><b>'+p.n+'</b><div class="sm mute">'+p.d+ex+'</div></div>'+btn+'</div>'}).join('')+'</div>';
+ h+='<div class="sm '+(own?'gold':'bad')+'" style="margin-top:8px">'+(own?'Chủ game: chạm giá để giả lập mua (chưa có thanh toán thật).':'Bản thử chưa mở thanh toán. Các gói chỉ để xem trước.')+'</div>';
+ return h}
+function np206Give(i){var p=NP206[i];if(!p)return;var N=np206();if(i!==N.n)return;
+ if(p.hero){if(!S.gens[p.hero]){joinHero(p.hero,true)}else{S.res.gold+=300}}
+ if(p.gear){var it={id:S.nid++,s:p.gear.s,q:p.gear.q,lv:p.gear.lv};S.inv.push(it);
+  try{var g=S.gens[NP206HERO];if(g){g.eq=g.eq||{};var cur=itemById(g.eq[p.gear.s]);if(!cur||gpow(cur)<gpow(it))g.eq[p.gear.s]=it.id}}catch(e){}}
+ if(p.rw)giveRw(p.rw);
+ try{var e=ev();e.vip.gold+=Math.round(parseFloat(p.usd.replace(',','.'))*65)}catch(e){}
+ N.n=i+1}
+(function(){try{
+ var st=document.createElement('style');st.id='np206css';st.textContent=
+  '.np6hero{display:flex;gap:12px;align-items:center}.np6art{flex:0 0 92px;height:122px;border-radius:12px;overflow:hidden;border:1px solid rgba(226,178,90,.45)}.np6art svg,.np6art img{width:100%;height:100%;object-fit:cover;display:block}'+
+  '.np6tx{min-width:0;display:flex;flex-direction:column;gap:4px}.np6tx b{font-size:18px;color:#f6e6c4}.np6tag{font-size:12px;color:#f1cf6a}'+
+  '.np6r{align-items:center;gap:10px}.np6i{flex:0 0 48px;width:48px;height:48px;border-radius:10px;overflow:hidden}.np6i img{width:100%;height:100%;object-fit:cover}'+
+  '.np6done{opacity:.7}.np6lock{opacity:.5}.np6ok{color:#7fd08a;font-weight:700;font-size:13px;white-space:nowrap}.np6lk{color:#9a8f80;font-size:13px;white-space:nowrap}'+
+  '.np6r .btn{min-width:84px}.qbtn .np6dot,.hub-t .np6dot{position:absolute;top:2px;right:6px;width:10px;height:10px;border-radius:50%;background:#e0524b;box-shadow:0 0 6px #e0524b}';
+ document.head.appendChild(st);
+ /* Cửa hàng hub: the pack is the first row */
+ var _hs=hubSheet;hubSheet=function(g){var h=_hs(g);try{if(g==='shop'&&np206().n<NP206.length){var p=NP206[np206().n];
+  var row='<button class="hub-t" data-a="np206"><span class="hub-i">'+np206Icon(p)+'</span><span class="hub-tx"><b>Gói Nạp Đầu</b><em>'+p.n+' · '+p.usd+' $</em></span>'+(np206Due()?'<i class="hub-b">1</i>':'')+'<span class="hub-go">›</span></button>';
+  h=h.replace('<div class="hub-list">','<div class="hub-list">'+row)}}catch(e){}return h};
+ /* Nạp · VIP tab: a link card at the top */
+ var _vh=vipHtml;vipHtml=function(){var h=_vh();try{if(np206().n<NP206.length){var p=NP206[np206().n];
+  h='<div class="card row" style="margin-bottom:8px"><div class="np6i">'+np206Icon(p)+'</div><div class="sp"><b>Gói Nạp Đầu</b><div class="sm mute">Tiếp theo: '+p.n+' · '+p.usd+' $</div></div><button class="btn sm" data-a="np206">Xem</button></div>'+h}}catch(e){}return h};
+ var _A=A_;A_=function(a,v,w,el){try{
+   if(a==='np206'){openSheet(np206Sheet);return}
+   if(a==='np206b'){if(!np206Can()){toast('Bản thử chưa mở thanh toán');return}var i=+v,p=NP206[i];if(!p||i!==np206().n)return;
+    np206Give(i);toast('Giả lập nạp '+p.usd+' $ · '+p.n);try{save();refresh()}catch(e){}openSheet(np206Sheet);return}
+  }catch(e){}return _A(a,v,w,el)};
+}catch(e){}})();
+/* red dot on the Cửa hàng hub while the next pack waits (after Màn 1); the sheet opens once by itself after Màn 1 */
+(function(){try{setInterval(function(){try{
+ var b=document.querySelector('#main .hubrail [data-a="hub"][data-v="shop"]');
+ if(b){var d=b.querySelector('.np6dot'),due=np206Due()&&np206().n===0;if(due&&!d){d=document.createElement('span');d.className='np6dot';b.style.position='relative';b.appendChild(d)}else if(!due&&d)d.remove()}
+ if(!np206Due()||np206().pop)return;if(typeof fighting!=='undefined'&&fighting)return;
+ var m=document.getElementById('modal');if(m&&!m.hidden)return;if(document.querySelector('.vp,.mapclear,.mclr'))return;
+ np206().pop=1;try{save()}catch(e){}openSheet(np206Sheet)}catch(e){}},1500)}catch(e){}})();
+/* "Bạch Mã Lệnh" (the payer head start the user asked for: easy progress, slowing around Màn 5): after a pack is bought,
+   campaign enemies on Màn 1–4 (stage + elite) field NP206EK[packs bought] of their attack and troops. From Màn 5 on
+   nothing changes; the payer keeps Công Tôn Toản and the gear. Shown on the pack sheet. */
+var NP206EK=[1,.7,.66,.63,.6,.58,.56,.54],NP206EM=4;
+(function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{var n=S&&S.np206?S.np206.n:0;
+ if(n&&mi<NP206EM&&(kind==='stage'||kind==='elite')){var k=NP206EK[Math.min(n,NP206EK.length-1)];(r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)})}}catch(e){}return r}}catch(e){}})();
 </script>
