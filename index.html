@@ -7712,7 +7712,7 @@ function sgSkin(a,sk,dur){var g=a.u.gid,K=SKL[sk],hx=function(h){h=h.replace('#'
   /* aura rings at the troop's feet */
   for(var k=0;k<3;k++){var u=((t/900)+k/3)%1;c.save();c.translate(a.x,a.y);c.scale(1,.4);c.strokeStyle='rgba('+(k%2?c2:c1)+','+((1-u)*.8*fo*q)+')';c.lineWidth=3;c.beginPath();c.arc(0,0,cw*(.4+u*.9),0,TAU);c.stroke();c.restore()}
   /* the statue: revealed bottom-up, breathing glow, behind/over the troop */
-  if(im){var H=Math.min(BT.rh*3.4,BT.H*.42),W=H*im.naturalWidth/im.naturalHeight,bx=a.x,by=a.y+BT.rh*z*.15,top=by-H;
+  if(im){var H=Math.min(BT.rh*1.7,BT.H*.21)/* V205: statue 50% smaller (user 2026-11-03 21:04) */,W=H*im.naturalWidth/im.naturalHeight,bx=a.x,by=a.y+BT.rh*z*.15,top=by-H;
    if(up>0){by=a.y-BT.rh*z*.5;top=Math.max(BT.H*.04,by-H);H=by-top;W=H*im.naturalWidth/im.naturalHeight}
    var rv=sgOut(p/.22);c.save();c.beginPath();c.rect(bx-W,by-H*rv,W*2,H*rv+2);c.clip();
    c.globalAlpha=Math.min(1,.72*fo*(.85+.15*Math.sin(t/260)));c.drawImage(im,bx-W/2,by-H,W,H);
@@ -12118,18 +12118,21 @@ function say(d,txt,col,big){try{if(d)floatTxt(d.d||d,txt,col,big)}catch(e){}}
 /* soft dust / mist puff (not additive) */
 function puff(c,x,y,r,rgb,a){if(!(a>0)||r<=0)return;var g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,'rgba('+rgb+','+a+')');g.addColorStop(1,'rgba('+rgb+',0)');c.save();c.globalCompositeOperation='source-over';c.fillStyle=g;c.beginPath();c.ellipse(x,y,r,r*.55,0,0,TAU);c.fill();c.restore()}
 function sparks(c,x,y,r,n,rgb,a,seed,p){c.save();c.globalCompositeOperation='lighter';for(var i=0;i<n;i++){var an=(i*2.399+seed)%TAU,d=r*(.3+.7*((i*.618+seed)%1))*p;c.fillStyle='rgba('+rgb+','+(a*(1-p))+')';c.beginPath();c.arc(x+Math.cos(an)*d,y+Math.sin(an)*d*.7-p*r*.3,1.6+((i*7)%3),0,TAU);c.fill()}c.restore()}
-/* a galloping horse made of fire (code shape, facing dir), until the painted one arrives */
-function horse(c,x,y,L,dir,ph,a,tilt){c.save();c.globalCompositeOperation='lighter';c.translate(x,y);c.scale(dir,1);c.rotate(tilt||0);c.lineCap='round';c.lineJoin='round';
- var g1='rgba(255,120,40,'+(.85*a)+')',g2='rgba(255,230,150,'+a+')',sw=Math.sin(ph),cw2=Math.cos(ph);
- function limb(x0,y0,a1,a2,col,w){var k=L*.2,x1=x0+Math.sin(a1)*k,y1=y0+Math.cos(a1)*k,x2=x1+Math.sin(a2)*k,y2=y1+Math.cos(a2)*k;c.strokeStyle=col;c.lineWidth=w;c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.lineTo(x2,y2);c.stroke()}
- [[g1,L*.13],[g2,L*.05]].forEach(function(q){limb(L*.24,L*.06,.5+sw*.35,-.15,q[0],q[1]*.8);limb(L*.2,L*.06,.15-sw*.35,-.1,q[0],q[1]*.8);limb(-L*.26,L*.04,-.35+cw2*.35,.2,q[0],q[1]*.8);limb(-L*.3,L*.04,-.05-cw2*.35,.25,q[0],q[1]*.8);
-  c.strokeStyle=q[0];c.lineWidth=q[1]*3.4;c.beginPath();c.moveTo(-L*.3,0);c.quadraticCurveTo(0,-L*.08,L*.26,-L*.02);c.stroke();
-  c.lineWidth=q[1]*2.2;c.beginPath();c.moveTo(L*.24,-L*.04);c.quadraticCurveTo(L*.34,-L*.2,L*.4,-L*.36);c.stroke();
-  c.lineWidth=q[1]*1.1;c.beginPath();c.moveTo(L*.38,-L*.36);c.lineTo(L*.58,-L*.26);c.stroke()});
- for(var i=0;i<9;i++){var u=i/8,mx=L*(.26+.14*u),my=-L*(.04+.32*u),fl=L*(.12+.06*Math.sin(ph*1.7+i));glow(c,mx-fl*.5,my-fl*.4,L*.07,'255,'+(110+i*12)+',30',.8*a)}
- for(var j=0;j<10;j++){var v=j/9;glow(c,-L*(.32+.4*v),-L*(.02-.12*v)+Math.sin(ph+j)*L*.05,L*(.09-.05*v),'255,'+(90+j*14)+',30',.85*a*(1-v*.6))}
- for(var b2=0;b2<8;b2++){var bx=-L*.3+b2*L*.08,ff=(ph*.3+b2*.37)%1;glow(c,bx,-L*.06-ff*L*.18,L*.07*(1-ff),'255,'+(120+b2*10)+',40',.8*a*(1-ff))}
- glow(c,L*.56,-L*.3,L*.05,'255,250,220',a);c.restore()}
+/* ---- painted pieces from atlases already in the build (V205) ----
+   V = art/ui/victory_fx.webp 8x2 of 320 (0-1 slashes, 2 crescent, 3 impact star, 4 embers, 5 ink, 6 shockwave, 7 light column)
+   M = art/tower/master_fx_g.webp 4x6 of 256 (5 fire pillar, 6 fire ring, 7 flame, 16 violet flame, 17 wave ribbon, 18 violet swirl, 19 ghosts, 22 gold ring)
+   E = art/enemies/eskill_g.webp 4x4 of 256 (1 flame, 2 sparks, 3 violet ring, 7 starburst, 10 violet vortex, 12 fire cross, 13 explosion, 14 gold ring, 15 star ring)
+   P = art/skins/portraits.webp 3x3 of 480x720 (skin avatars, SKORD order) */
+var S2A={},S2T={};
+(function(){[['V','art/ui/victory_fx.webp?v=1'],['M','art/tower/master_fx_g.webp'],['E','art/enemies/eskill_g.webp'],['P','art/skins/portraits.webp']].forEach(function(q){try{var im=new Image();im.onload=function(){S2A[q[0]]=im};im.src=q[1]}catch(e){}})})();
+var S2G={V:[320,320,8],M:[256,256,4],E:[256,256,4],P:[480,720,3]};
+function s2cell(A,i,tint,mask){var key=A+i+(tint||'')+(mask||''),c0=S2T[key];if(c0)return c0;var im=S2A[A];if(!im)return null;var g=S2G[A],w=g[0],h=g[1],sx=(i%g[2])*w,sy=Math.floor(i/g[2])*h;
+ var cv=document.createElement('canvas');cv.width=w;cv.height=h;var x=cv.getContext('2d');x.drawImage(im,sx,sy,w,h,0,0,w,h);
+ if(tint){x.globalCompositeOperation='color';x.fillStyle='rgb('+tint+')';x.fillRect(0,0,w,h);x.globalCompositeOperation='destination-in';x.drawImage(im,sx,sy,w,h,0,0,w,h)}
+ if(mask){x.globalCompositeOperation='destination-in';var gh=mask==='ghost',g1=x.createLinearGradient(0,0,w,0);g1.addColorStop(0,'rgba(0,0,0,0)');g1.addColorStop(gh?.3:.2,'rgba(0,0,0,1)');g1.addColorStop(gh?.7:.8,'rgba(0,0,0,1)');g1.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g1;x.fillRect(0,0,w,h);
+  var g2=x.createLinearGradient(0,0,0,h);g2.addColorStop(0,'rgba(0,0,0,0)');g2.addColorStop(gh?.12:.1,'rgba(0,0,0,1)');g2.addColorStop(gh?.6:.85,'rgba(0,0,0,1)');g2.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g2;x.fillRect(0,0,w,h)}
+ S2T[key]=cv;return cv}
+function pc(c,A,i,x,y,w,a,rot,sy,tint,mask,op){if(!(a>0))return;var cv=s2cell(A,i,tint,mask);if(!cv)return false;var h=w*cv.height/cv.width;c.save();c.globalCompositeOperation=op||'lighter';c.globalAlpha=Math.min(1,a);c.translate(x,y);if(sy&&sy!==1)c.scale(1,sy);if(rot)c.rotate(rot);c.drawImage(cv,-w/2,-h/2,w,h);c.restore();return true}
 /* crescent slash (code) */
 function crescent(c,x,y,r,rot,rgb,a,w){if(!(a>0))return;c.save();c.globalCompositeOperation='lighter';c.translate(x,y);c.rotate(rot);c.globalAlpha=Math.min(1,a);
  c.fillStyle='rgba('+rgb+',.9)';c.shadowColor='rgba('+rgb+',1)';c.shadowBlur=18;c.beginPath();c.arc(0,0,r,-1.25,1.25);c.arc(-r*(w||.32),0,r*1.05,1.18,-1.18,true);c.closePath();c.fill();
@@ -12208,81 +12211,59 @@ S2FX.zhugeliang_b={T:4000,pre:[['zhugeliang','star'],['zhugeliang','bolt'],['zhu
  return (async function(){var w0=sgMulti(a,ev,sched,T,7);await w0;await timeline(T*.18,[{at:.05,fn:function(){callouts(ev,['stun']);say(P(a),'+'+((u2(a).amo)||15)+' sĩ khí toàn quân','#ffd56a')}}])})()}};
 function u2(a){return a.u.tact||{}}
 
-/* ---------- 3. Lữ Bố · Thiên Hạ Đệ Nhất Kích: war aura, a fire horse leaps, a crimson crescent smashes the target, a cross shockwave ---------- */
+/* ---------- 3. Lữ Bố · Thiên Hạ Đệ Nhất Kích (V205 rebuild): fire aura, Lữ Bố himself leaps onto the target, a crimson crescent smashes down,
+   a fire cross bursts out along the cross to the 4 neighbours, shockwaves + armour sparks on everyone hit ---------- */
 S2FX.lubu_a={T:3300,play:function(a,ev,T){
- var hs=hitsOf(ev),U=uniq(hs),L=lander(a,ev),ctr=U[0];
- U.forEach(function(t){var d=BT.uds[t.id];if(!d)return;var n=U.filter(function(x){var e=BT.uds[x.id];return e&&Math.abs(e.u.r-d.u.r)+Math.abs(e.u.l-d.u.l)===1}).length;t._n=n});
+ var hs=hitsOf(ev),U=uniq(hs),L=lander(a,ev),ctr=U[0];if(!ctr)return null;
+ U.forEach(function(t){var d=BT.uds[t.id];if(!d)return;t._n=U.filter(function(x){var e=BT.uds[x.id];return e&&Math.abs(e.u.r-d.u.r)+Math.abs(e.u.l-d.u.l)===1}).length});
  U.forEach(function(t){if((t._n||0)>(ctr._n||0))ctr=t});
- var cd=ctr&&BT.uds[ctr.id];if(!cd)return null;var C0=P(cd),arms=U.filter(function(t){return t!==ctr}).map(function(t){return{t:t,o:P(BT.uds[t.id])}}).filter(function(x){return x.o.d});
- var A0=P(a),ang0=Math.atan2(C0.y-A0.y,C0.x-A0.x),cracks=[];for(var i=0;i<11;i++)cracks.push({an:i/11*TAU+((i*7)%5)*.08,l:.5+((i*13)%7)/10});
- fx(T,function(c,p,t){var fo=1-seg(p,.9,1),cwc=cw(C0);
-  dimAll(c,p,'30,4,2',.45);c.save();c.globalCompositeOperation='lighter';
-  /* red war aura rises around Lü Bu */
-  var aq=env(p,0,.5,.25);for(var k=0;k<7;k++){var fx2=A0.x+(k-3)*cw(A0)*.18,ph=(t/260+k*.37)%1;glow(c,fx2,A0.y-ph*BT.rh*1.1,cw(A0)*(.22+.1*Math.sin(k)),'255,'+(70+k*12)+',30',.7*aq*(1-ph))}
-  if(!S2P(c,'lubu_a',6,A0.x,A0.y-BT.rh*.4,cw(A0)*1.5,aq,0))glow(c,A0.x,A0.y,cw(A0)*.9,'255,60,30',.35*aq);
-  /* the fire horse leaps high in an arc */
-  var hq=seg(p,.16,.44);if(hq>0&&hq<1){var e=out(hq),hx=A0.x+(C0.x-A0.x)*e,hy=A0.y+(C0.y-A0.y)*e-Math.sin(Math.PI*e)*BT.rh*2.2,vx=(C0.x-A0.x),vy=(C0.y-A0.y)-Math.cos(Math.PI*e)*BT.rh*2.2*Math.PI,va=Math.atan2(vy,vx);
-   for(var tr=1;tr<12;tr++){var e2=Math.max(0,e-tr*.025),tx=A0.x+(C0.x-A0.x)*e2,ty=A0.y+(C0.y-A0.y)*e2-Math.sin(Math.PI*e2)*BT.rh*2.2;glow(c,tx,ty,cwc*.3*(1-tr/12),'255,'+(90+tr*10)+',30',.6*(1-tr/12))}
-   if(!S2P(c,'lubu_a',0,hx,hy,cwc*1.4,1,0)){glow(c,hx,hy,cwc*.9,'255,90,30',.55);horse(c,hx,hy,cwc*1.35,vx<0?-1:1,t/70,1,0)}}
-  /* the giant crescent slash comes down on the target */
-  var sq=seg(p,.4,.5);if(sq>0&&p<.62){var sa=1-seg(p,.5,.62),yy=C0.y-BT.rh*2*(1-out(sq));if(!S2P(c,'lubu_a',1,C0.x,yy-cwc*.2,cwc*2.2,sa,0))crescent(c,C0.x,yy-cwc*.3,cwc*1.05,-Math.PI/2,'255,60,40',sa,.3)}
-  /* crater with lava cracks + pillar of fire */
-  var iq=seg(p,.48,.95);if(iq>0){var ia=(1-iq)*fo;
-   if(!S2P(c,'lubu_a',2,C0.x,C0.y+cwc*.1,cwc*1.8,ia,0,.5)){c.strokeStyle='rgba(255,140,40,'+ia+')';c.lineWidth=3;c.shadowColor='rgba(255,80,20,1)';c.shadowBlur=10;cracks.forEach(function(k2){var l=cwc*k2.l*out(iq*3);c.beginPath();c.moveTo(C0.x,C0.y+cwc*.1);c.lineTo(C0.x+Math.cos(k2.an)*l*.55,C0.y+cwc*.1+Math.sin(k2.an)*l*.24);c.lineTo(C0.x+Math.cos(k2.an+.12)*l,C0.y+cwc*.1+Math.sin(k2.an+.12)*l*.42);c.stroke()});c.shadowBlur=0}
-   glow(c,C0.x,C0.y+cwc*.1,cwc*.7,'255,90,30',.6*ia);
-   var pq=env(p,.47,.78,.2);if(pq>0&&!S2P(c,'lubu_a',3,C0.x,C0.y-BT.rh*.9,BT.rh*2.2,pq,0)){var pw=cwc*.55*(1-seg(p,.6,.78)*.5),lg=c.createLinearGradient(C0.x-pw,0,C0.x+pw,0);lg.addColorStop(0,'rgba(255,60,20,0)');lg.addColorStop(.5,'rgba(255,230,160,'+(.85*pq)+')');lg.addColorStop(1,'rgba(255,60,20,0)');c.fillStyle=lg;c.fillRect(C0.x-pw,C0.y-BT.rh*2.6,pw*2,BT.rh*2.6+cwc*.1)}
-   sparks(c,C0.x,C0.y,cwc*1.4,18,'255,170,60',1,1,seg(p,.48,.8))}
-  flash(c,p,.46,.54,'255,200,160',.35);
-  /* red shockwaves race out along the cross to the enemies beside the target */
-  arms.forEach(function(x,j){var q=seg(p,.5,.62);if(q<=0||q>=1.2)return;var e=out(q),ex=C0.x+(x.o.x-C0.x)*e,ey=C0.y+(x.o.y-C0.y)*e;
-   c.strokeStyle='rgba(255,80,40,'+(.9*(1-seg(p,.62,.75)))+')';c.lineWidth=6;c.shadowColor='rgba(255,50,20,1)';c.shadowBlur=14;c.beginPath();c.moveTo(C0.x,C0.y);c.lineTo(ex,ey);c.stroke();c.shadowBlur=0;
-   if(!S2P(c,'lubu_a',4,ex,ey,cw(x.o)*1.1*e,1-seg(p,.62,.8),0,.5))ring(c,ex,ey,cw(x.o)*.5*e,'255,90,50',1-seg(p,.62,.8),4)});
-  /* cracked-armour shards on everyone hit */
-  U.forEach(function(t,j){var d=BT.uds[t.id];if(!d)return;var o=P(d),at=t===ctr?.49:.62,z=seg(p,at,at+.25);if(z<=0||z>=1)return;c.fillStyle='rgba(255,170,90,'+(1-z)+')';
-   for(var k=0;k<7;k++){var an=k*.9+j,dd=cw(o)*(.15+z*.6);c.beginPath();c.moveTo(o.x+Math.cos(an)*dd,o.y-cw(o)*.2+Math.sin(an)*dd*.6);c.lineTo(o.x+Math.cos(an+.25)*(dd+7),o.y-cw(o)*.2+Math.sin(an+.25)*(dd+7)*.6);c.lineTo(o.x+Math.cos(an-.2)*(dd+5),o.y-cw(o)*.2+Math.sin(an-.2)*(dd+5)*.6);c.fill()}});
-  skc(c,2,C0.x,C0.y,cwc*1.3,env(p,.48,.85,.3)*.8,0);
-  c.restore()});
+ var cd=BT.uds[ctr.id];if(!cd)return null;var C0=P(cd),A0=P(a),arms=U.filter(function(t){return t!==ctr}).map(function(t){return{t:t,o:P(BT.uds[t.id])}}).filter(function(x){return x.o.d});
+ var dx=(C0.x-A0.x)*.82,dy=(C0.y-A0.y)*.82+(C0.y<A0.y?BT.rh*.35:-BT.rh*.35);
+ fx(T,function(c,p,t){var fo=1-seg(p,.9,1),cwc=cw(C0),ca=cw(A0);
+  dimAll(c,p,'30,4,2',.5);
+  /* Lữ Bố's squad leaps in a high arc onto the target and lands back afterwards */
+  var lq=seg(p,.14,.42),bq=seg(p,.66,.82);if(p<.66){var e=out(lq);a.ox=dx*e;a.oy=dy*e-Math.sin(Math.PI*lq)*BT.rh*1.7}else{var e2=1-out(bq);a.ox=dx*e2;a.oy=dy*e2}
+  var ax=A0.x+a.ox,ay=A0.y+a.oy;
+  /* war aura: two fire pillars and a flame at his feet, the trail follows the leap */
+  var aq=env(p,0,.48,.2);pc(c,'M',5,A0.x-ca*.32,A0.y-ca*.45,ca*.75,aq*.9);pc(c,'M',5,A0.x+ca*.32,A0.y-ca*.45,ca*.75,aq*.9);pc(c,'M',7,ax,ay-ca*.1,ca*.9,env(p,0,.62,.15)*.85);
+  var fq=env(p,.12,.56,.15);if(fq>0){var fh=Math.min(BT.H*.3,BT.rh*1.9);pc(c,'P',2,ax,ay-fh*.42,fh*480/720,fq*.9,dx<0?-.12:.12,1,null,'ghost')}
+  if(lq>0&&lq<1)for(var k=1;k<7;k++){var q2=Math.max(0,lq-k*.04),e3=out(q2);pc(c,'E',1,A0.x+dx*e3,A0.y+dy*e3-Math.sin(Math.PI*q2)*BT.rh*1.7,ca*(.7-k*.07),.75*(1-k/7),0)}
+  /* the crimson crescent comes down on the target */
+  var sq=seg(p,.38,.5),sa=1-seg(p,.5,.62);if(sq>0&&p<.62){var yy=C0.y-BT.rh*1.6*(1-out(sq));pc(c,'V',2,C0.x,yy-cwc*.2,cwc*2.4,sa,-1.2,1,'255,70,40');pc(c,'V',0,C0.x,yy,cwc*1.8,sa*.9,.2,1,'255,110,50')}
+  /* impact: starburst, explosion, fire ring on the ground, embers */
+  var iq=seg(p,.48,.8);if(iq>0&&iq<1){pc(c,'V',3,C0.x,C0.y-cwc*.1,cwc*(1.2+iq*1.4),1-iq,iq,1,'255,120,50');pc(c,'E',13,C0.x,C0.y-cwc*.2,cwc*(1+iq*.8),(1-iq)*.9,0);pc(c,'M',6,C0.x,C0.y+cwc*.1,cwc*(.8+iq*1.6),(1-iq)*.9,0,.42);pc(c,'V',4,C0.x,C0.y-cwc*.3,cwc*(1.4+iq),(1-iq),0)}
+  /* the fire cross bursts out along the cross */
+  var xq=seg(p,.5,.66);if(xq>0&&p<.86){var xs=cwc*(1+out(xq)*2.6),xa=1-seg(p,.7,.86);pc(c,'E',12,C0.x,C0.y,xs,xa,0,.5)}
+  arms.forEach(function(x,j){var z=seg(p,.58,.84);if(z<=0||z>=1)return;var o=x.o;pc(c,'V',6,o.x,o.y,cw(o)*(.8+z*1.2),1-z,0,.5,'255,90,40');pc(c,'E',2,o.x,o.y-cw(o)*.2,cw(o)*(.6+z*.6),1-z,j)});
+  var dz=seg(p,.5,.75);if(dz>0&&dz<1)pc(c,'E',2,C0.x,C0.y-cwc*.25,cwc*(.8+dz*.8),1-dz,0);
+  flash(c,p,.46,.54,'255,190,150',.4);
+  if(p>.99){a.ox=0;a.oy=0}});
  var armHits=hs.filter(function(t){return t.id!==ctr.id}),ctrHits=hs.filter(function(t){return t.id===ctr.id});
- return timeline(T,[{at:.48,fn:function(){L(ctrHits);shake(18);hold(130)}},{at:.6,fn:function(){L(armHits);shake(9)}},{at:.68,fn:function(){callouts(ev,['ddown'])}}])}};
+ return timeline(T,[{at:.42,fn:function(){a.sw=1}},{at:.48,fn:function(){L(ctrHits);shake(18);hold(130)}},{at:.56,fn:function(){a.sw=0}},{at:.6,fn:function(){L(armHits);shake(9)}},{at:.68,fn:function(){callouts(ev,['ddown'])}},{at:.9,fn:function(){a.ox=0;a.oy=0}}])}};
 
-/* ---------- 4. Lữ Bố · Ma Thần Đoạt Hồn: a demon god rises, a spectral halberd sweeps the whole army, souls stream back ---------- */
+/* ---------- 4. Lữ Bố · Ma Thần Đoạt Hồn (V205 rebuild): the demon form of Lữ Bố (his skin painting, violet ghost) towers behind him,
+   a violet swirl and spectral slashes sweep the whole army, souls (painted ghosts) are torn out and fly back into him ---------- */
 S2FX.lubu_b={T:3600,play:function(a,ev,T){
  var side=a.u.side,foe=side==='A'?'D':'A',F2=sgField(foe),hs=hitsOf(ev),U=uniq(hs),L=lander(a,ev),A0=P(a),up=side==='A'?-1:1,
   heal=(ev.tg||[]).filter(function(t){return t.res==='heal'&&t.id===a.u.id});
  var tgs=U.map(function(t){var o=P(BT.uds[t.id]);o.t=t;o.at=.34+.2*C((o.x-(F2.cx-F2.w/2))/F2.w);return o}).filter(function(o){return o.d});
- function demon(c,x,y,h,a2,t){/* horned demon god of violet flame seen from behind: broad shoulders, small head, horns sweeping out and up */
-  c.save();c.globalCompositeOperation='lighter';c.translate(x,y);var w=h*.72,fl=function(k){return Math.sin(t/80+k*1.9)*h*.015};
-  c.beginPath();c.moveTo(-w*.5,0);c.quadraticCurveTo(-w*.62,-h*.3+fl(1),-w*.34,-h*.44);c.quadraticCurveTo(-w*.16,-h*.5,-w*.1,-h*.56);
-  c.quadraticCurveTo(-w*.1,-h*.72+fl(2),0,-h*.74);c.quadraticCurveTo(w*.1,-h*.72+fl(3),w*.1,-h*.56);c.quadraticCurveTo(w*.16,-h*.5,w*.34,-h*.44);
-  c.quadraticCurveTo(w*.62,-h*.3+fl(4),w*.5,0);c.closePath();
-  var g=c.createLinearGradient(0,-h*.75,0,0);g.addColorStop(0,'rgba(220,110,255,'+(.5*a2)+')');g.addColorStop(.55,'rgba(120,30,190,'+(.32*a2)+')');g.addColorStop(1,'rgba(60,0,90,0)');c.fillStyle=g;c.fill();
-  c.strokeStyle='rgba(255,170,255,'+(.45*a2)+')';c.lineWidth=2;c.stroke();
-  [-1,1].forEach(function(sd){c.beginPath();c.moveTo(sd*w*.06,-h*.68);c.bezierCurveTo(sd*w*.3,-h*.74,sd*w*.42,-h*.86+fl(5),sd*w*.36,-h*1.02+fl(6));c.bezierCurveTo(sd*w*.34,-h*.88,sd*w*.22,-h*.78,sd*w*.08,-h*.62);c.closePath();
-   var hg=c.createLinearGradient(0,-h*1.02,0,-h*.62);hg.addColorStop(0,'rgba(255,220,255,'+(.8*a2)+')');hg.addColorStop(1,'rgba(150,50,220,'+(.5*a2)+')');c.fillStyle=hg;c.fill()});
-  for(var k=0;k<14;k++){var u=k/13,ex=(u-.5)*w*1.0,ey=-h*(.42+.04*Math.sin(u*Math.PI))-Math.abs(Math.sin(t/120+k))*h*.05;glow(c,ex,ey,h*.06,'210,90,255',.5*a2)}
-  c.fillStyle='rgba(255,235,255,'+a2+')';c.beginPath();c.ellipse(-w*.035,-h*.64,w*.022,h*.008,0,0,TAU);c.ellipse(w*.035,-h*.64,w*.022,h*.008,0,0,TAU);c.fill();glow(c,0,-h*.64,w*.08,'255,120,255',.6*a2);c.restore()}
- fx(T,function(c,p,t){var fo=1-seg(p,.88,1);
-  dimAll(c,p,'26,0,40',.55);
-  /* demon god rises behind Lü Bu */
-  var dq=out(seg(p,0,.26))*fo,dh=Math.min(BT.H*.36,BT.rh*2.3),dy=up<0?A0.y+BT.rh*.35:A0.y-BT.rh*.35+dh*.75;
-  if(!S2P(c,'lubu_b',1,A0.x,dy-dh*.5*dq,dh*1.1,dq*.9,0))demon(c,A0.x,dy+(1-dq)*dh*.35,dh,dq*.85,t);
-  c.save();c.globalCompositeOperation='lighter';glow(c,A0.x,A0.y,cw(A0)*1.2,'200,80,255',.4*dq);
-  /* the spectral halberd sweeps left → right through the whole enemy formation */
-  var sq=seg(p,.3,.58);if(sq>0&&sq<1){var e=sq,hx=F2.cx-F2.w*.62+F2.w*1.24*e,hy=F2.cy,ra=Math.sin(Math.PI*sq);
-   var gr=c.createLinearGradient(hx-F2.w*.5,0,hx,0);gr.addColorStop(0,'rgba(170,60,255,0)');gr.addColorStop(1,'rgba(220,120,255,'+(.55*ra)+')');c.fillStyle=gr;c.beginPath();c.ellipse(hx-F2.w*.25,hy,F2.w*.27,(F2.y1-F2.y0)*.6,0,0,TAU);c.fill();
-   if(!S2P(c,'lubu_b',0,hx,hy,(F2.y1-F2.y0)*1.6,ra,.35)){c.save();c.translate(hx,hy);c.rotate(.35);c.strokeStyle='rgba(235,170,255,'+ra+')';c.lineWidth=4;c.shadowColor='rgba(200,80,255,1)';c.shadowBlur=16;c.beginPath();c.moveTo(0,-(F2.y1-F2.y0)*.8);c.lineTo(0,(F2.y1-F2.y0)*.8);c.stroke();
-    crescent(c,0,-(F2.y1-F2.y0)*.62,cw(F2.front)*.55,0,'210,90,255',ra,.4);c.restore()}}
-  tgs.forEach(function(o,j){var z=seg(p,o.at,o.at+.14);if(z>0&&z<1){if(!S2P(c,'lubu_b',2,o.x,o.y,cw(o)*1.6,1-z,-.3))crescent(c,o.x,o.y-cw(o)*.1,cw(o)*.55,-.2+Math.PI,'200,90,255',1-z,.35);sparks(c,o.x,o.y,cw(o)*.9,10,'255,140,240',1,j,z)}
-   /* violet tendrils cling to the terrified */
-   var tq=env(p,o.at+.05,.95,.15);if(tq>0){c.strokeStyle='rgba(170,60,230,'+(.6*tq)+')';c.lineWidth=2;for(var k=0;k<4;k++){c.beginPath();var bx=o.x+(k-1.5)*cw(o)*.18;c.moveTo(bx,o.y+cw(o)*.1);for(var s=1;s<6;s++)c.lineTo(bx+Math.sin(t/120+k+s)*6,o.y+cw(o)*.1-s*cw(o)*.09);c.stroke()}}
-   /* magenta soul wisps pulled back into Lü Bu */
-   var wq=seg(p,.56+j*.02,.84+j*.01);if(wq>0&&wq<1)for(var m=0;m<4;m++){var e2=C(wq*1.3-m*.08),mx=o.x+(A0.x-o.x)*e2+Math.sin(e2*Math.PI)*(m-1.5)*cw(o)*.5,my=o.y+(A0.y-o.y)*e2-Math.sin(e2*Math.PI)*BT.rh*.6;
-    if(e2>0&&e2<1){glow(c,mx,my,cw(o)*.16,'255,90,220',.9);for(var tl=1;tl<5;tl++){var e3=Math.max(0,e2-tl*.03);glow(c,o.x+(A0.x-o.x)*e3+Math.sin(e3*Math.PI)*(m-1.5)*cw(o)*.5,o.y+(A0.y-o.y)*e3-Math.sin(e3*Math.PI)*BT.rh*.6,cw(o)*.1*(1-tl/5),'220,60,200',.5)}}}});
-  var hq=seg(p,.82,.98);if(hq>0&&hq<1){glow(c,A0.x,A0.y,cw(A0)*(.6+hq*.6),'255,110,230',.7*(1-hq));ring(c,A0.x,A0.y,cw(A0)*(.3+hq*.6),'255,140,240',1-hq,3)}
-  skc(c,3,A0.x,A0.y,BT.cwN*1.1,env(p,0,.35,.3)*.75,p*4);
-  c.restore()});
+ fx(T,function(c,p,t){var fo=1-seg(p,.88,1),ca=cw(A0);
+  dimAll(c,p,'22,0,36',.6);
+  /* the demon god: Lữ Bố's own demon painting as a towering violet ghost behind him */
+  var dq=out(seg(p,0,.28))*(1-seg(p,.8,.95)),gh=Math.min(BT.H*.4,BT.rh*2.5),gy=A0.y+(up<0?-gh*.42:gh*.42)+(1-dq)*BT.rh*.4*(up<0?1:-1);
+  pc(c,'M',18,A0.x,A0.y,ca*1.8*dq,.45*dq,t/700,.42);
+  pc(c,'P',3,A0.x,gy,gh*480/720*(.92+.08*Math.sin(t/300)),dq,0,1,null,'ghost');
+  pc(c,'M',16,A0.x,A0.y-ca*.3,ca*.8,dq*.6);
+  /* violet swirl + spectral slashes sweep left → right through the whole army */
+  var sq=seg(p,.3,.58);if(sq>0&&sq<1){var hx=F2.cx-F2.w*.6+F2.w*1.2*sq,ra=Math.sin(Math.PI*sq);pc(c,'V',1,hx,F2.cy,(F2.y1-F2.y0)*1.7,ra,-.3,1,'200,90,255');pc(c,'V',6,hx-F2.w*.15,F2.cy,F2.w*.9,ra*.7,0,.5,'170,60,255')}
+  tgs.forEach(function(o,j){var z=seg(p,o.at,o.at+.16);if(z>0&&z<1){pc(c,'E',10,o.x,o.y,cw(o)*(.9+z*.6),1-z,t/300,.6);pc(c,'V',0,o.x,o.y-cw(o)*.1,cw(o)*1.3,1-z,.4+j,1,'220,120,255')}
+   var tq=env(p,o.at+.05,.95,.15);if(tq>0)pc(c,'M',16,o.x,o.y-cw(o)*.25,cw(o)*.55,tq*.6);
+   /* a soul (painted ghost) is pulled out and flies back into Lữ Bố */
+   var wq=seg(p,.56+j*.025,.86);if(wq>0&&wq<1){var e2=inn(wq),mx=o.x+(A0.x-o.x)*e2,my=o.y+(A0.y-o.y)*e2-Math.sin(Math.PI*e2)*BT.rh*.8;pc(c,'M',19,mx,my,cw(o)*.7,Math.sin(Math.PI*wq),Math.atan2(A0.x-o.x,o.y-A0.y)*.3,1,'255,110,230');glow(c,mx,my,cw(o)*.3,'255,90,220',.5*Math.sin(Math.PI*wq))}});
+  var hq=seg(p,.82,.98);if(hq>0&&hq<1){pc(c,'E',3,A0.x,A0.y,ca*(.8+hq*.9),1-hq,0,.5);glow(c,A0.x,A0.y,ca*(.6+hq*.6),'255,110,230',.6*(1-hq))}
+  });
  var st=tgs.map(function(o){return{at:o.at+.03,fn:function(){L(hs.filter(function(t){return t.id===o.t.id}));shake(10)}}});
- st.push({at:.62,fn:function(){callouts(ev,['weak'])}});st.push({at:.84,fn:function(){L(heal);if(heal.length)say(A0,'Hút quân','#ff9ae8')}});
+ st.push({at:.62,fn:function(){callouts(ev,['weak'])}});st.push({at:.86,fn:function(){L(heal);if(heal.length)say(A0,'Hút quân','#ff9ae8')}});
  return timeline(T,st)}};
 
 /* ---------- 5. Quan Vũ · Thanh Long Hiển Thánh: jade storm, the dragon dives down the column, a light pillar, the glaive descends ---------- */
@@ -12415,31 +12396,31 @@ S2FX.zhangfei_a={T:3500,pre:[['zhangfei','k_tiger'],['zhangfei','roar'],['zhangf
  st.push({at:.26,fn:function(){shake(20);hold(90)}});st.push({at:.6,fn:function(){say(A0,'Khiêu khích','#ff8a5a',true);callouts(ev,['weak'])}});st.push({at:.7,fn:function(){say(A0,'Giáp khí','#ffb37a')}});
  return timeline(T,st)}};
 
-/* ---------- 9. Điêu Thuyền · Bế Nguyệt Hoa Vũ: the full moon rises and hides, petals rain, moonbeams heal every ally ---------- */
+/* ---------- 9. Điêu Thuyền · Bế Nguyệt Hoa Vũ (V205 rebuild): her moonlit vision (the skin painting) appears over our army, a silk-wave ribbon
+   sweeps through falling petals, a light column falls on each ally with gold healing rings, star rings + blossoms to finish ---------- */
 S2FX.diaochan_a={T:3600,play:function(a,ev,T){
- var side=a.u.side,F=sgField(side),A0=P(a),L=lander(a,ev),heals=(ev.tg||[]).filter(function(t){return t.res==='heal'}),cl=(ev.tg||[]).filter(function(t){return t.res==='cln'}),al=team(side),up=side==='A'?-1:1;
- var FF=sgField(side==='A'?'D':'A'),mR=Math.min(F.w*.16,BT.rh*.62),mx=BT.W-mR*1.25,my=(up<0?(F.y0+FF.y1)/2:(F.y1+FF.y0)/2);
- var hl=al.map(function(o,j){o.at=.5+j*.04;o.h=heals.filter(function(t){return t.id===o.u.id});return o});
- var pet=[];for(var i=0;i<42;i++)pet.push({x:(i*.618)%1,o:(i*.37)%1,r:i*1.3,s:.7+((i*7)%5)/8});
+ var side=a.u.side,F=sgField(side),FF=sgField(side==='A'?'D':'A'),A0=P(a),L=lander(a,ev),heals=(ev.tg||[]).filter(function(t){return t.res==='heal'}),cl=(ev.tg||[]).filter(function(t){return t.res==='cln'}),al=team(side),up=side==='A'?-1:1;
+ var vh=Math.min(BT.H*.36,BT.rh*2.3),vx=F.cx,vy=(up<0?(F.y0+FF.y1)/2:(F.y1+FF.y0)/2);
+ var hl=al.map(function(o,j){o.at=.48+j*.045;o.h=heals.filter(function(t){return t.id===o.u.id});return o});
+ var pet=[];for(var i=0;i<46;i++)pet.push({x:(i*.618)%1,o:(i*.37)%1,r:i*1.3,s:.6+((i*7)%5)/7,c:i%4});
+ var PC=['255,150,200','255,205,225','255,240,246','240,120,180'];
  fx(T,function(c,p,t){var fo=1-seg(p,.9,1);
-  dimAll(c,p,'20,6,22',.45);c.save();c.globalCompositeOperation='lighter';
-  /* the full moon rises behind our army, soft clouds slide across */
-  var mq=out(seg(p,0,.28))*fo,myy=my-(1-mq)*BT.rh*.6*up;
-  if(mq>0&&!S2P(c,'diaochan_a',0,mx,myy,mR*2.6,mq*.9,0)){glow(c,mx,myy,mR*2.4,'255,170,220',.3*mq);c.save();c.globalCompositeOperation='source-over';var mg=c.createRadialGradient(mx-mR*.35,myy-mR*.35,mR*.05,mx,myy,mR);mg.addColorStop(0,'rgba(255,253,250,'+(.97*mq)+')');mg.addColorStop(.7,'rgba(255,232,240,'+(.95*mq)+')');mg.addColorStop(1,'rgba(240,200,225,'+(.9*mq)+')');c.fillStyle=mg;c.beginPath();c.arc(mx,myy,mR,0,TAU);c.fill();
-   c.fillStyle='rgba(215,170,200,'+(.35*mq)+')';[[.3,-.2,.18],[-.25,.25,.14],[.05,.4,.1],[-.35,-.3,.09]].forEach(function(k){c.beginPath();c.arc(mx+k[0]*mR,myy+k[1]*mR,k[2]*mR,0,TAU);c.fill()});c.restore();c.strokeStyle='rgba(255,240,250,'+(.8*mq)+')';c.lineWidth=2;c.beginPath();c.arc(mx,myy,mR,0,TAU);c.stroke()}
-  c.restore();var cq=seg(p,.15,.75);if(cq>0)for(var k=0;k<3;k++)puff(c,mx-mR*1.6+mR*3.2*C(cq+k*.12),myy+mR*(.15+k*.2),mR*.8,'60,40,70',.45*mq*Math.sin(Math.PI*C(cq+k*.1)));
-  c.save();c.globalCompositeOperation='lighter';
-  /* peach petals rain over all our units; a pink silk ribbon swirls through them */
-  var pq=env(p,.12,.98,.12);if(pq>0)pet.forEach(function(q,j){var x=F.cx-F.w*.6+q.x*F.w*1.2+Math.sin(t/400+q.r)*12,yy=F.y0-BT.rh*.8+((q.o+t/2600*q.s)%1)*((F.y1-F.y0)+BT.rh*1.4);c.save();c.translate(x,yy);c.rotate(q.r+t/500);c.fillStyle=j%3?'rgba(255,150,200,'+(.85*pq)+')':'rgba(255,225,240,'+(.85*pq)+')';c.beginPath();c.ellipse(0,0,4.6*q.s,2.4*q.s,0,0,TAU);c.fill();c.restore()});
-  var rq=env(p,.22,.82,.2);if(rq>0&&!S2P(c,'diaochan_a',4,F.cx,F.cy,F.w*1.1,rq,t/900,.5)){c.strokeStyle='rgba(255,140,200,'+(.75*rq)+')';c.lineWidth=5;c.shadowColor='rgba(255,120,190,1)';c.shadowBlur=12;c.beginPath();for(var s=0;s<=60;s++){var u=s/60,an=u*TAU*1.6+t/500;c.lineTo(F.cx+Math.cos(an)*F.w*.45*(.4+u*.6),F.cy+Math.sin(an)*F.w*.16*(.4+u*.6)-BT.rh*.2)}c.stroke();c.shadowBlur=0}
-  /* a moonlight beam falls on each ally; healing rings rise */
-  hl.forEach(function(o,j){var bq=env(p,o.at-.08,o.at+.22,.25);if(bq>0){var bw=cw(o)*.38,lg=c.createLinearGradient(mx,myy,o.x,o.y);lg.addColorStop(0,'rgba(255,245,250,'+(.15*bq)+')');lg.addColorStop(1,'rgba(255,235,245,'+(.6*bq)+')');c.fillStyle=lg;c.beginPath();c.moveTo(mx-mR*.25,myy);c.lineTo(mx+mR*.25,myy);c.lineTo(o.x+bw,o.y+cw(o)*.1);c.lineTo(o.x-bw,o.y+cw(o)*.1);c.closePath();c.fill()}
-   var z=seg(p,o.at,o.at+.25);if(z>0&&z<1){for(var r=0;r<3;r++){var zz=C(z*1.4-r*.2);ring(c,o.x,o.y-zz*cw(o)*.6,cw(o)*(.3+zz*.25),'255,200,230',(1-zz)*.9,2.5)}glow(c,o.x,o.y,cw(o)*.6,'255,190,225',.4*(1-z))}});
-  /* sparkles and a final blossom burst */
-  var fq=seg(p,.78,1);if(fq>0&&fq<1){skc(c,8,A0.x,A0.y,cw(A0)*(1+fq*.6),1-fq,fq);sparks(c,A0.x,A0.y,cw(A0)*1.8,22,'255,210,235',1,3,fq)}
-  c.restore()});
- var st=hl.map(function(o){return{at:o.at+.02,fn:function(){L(o.h,false)}}});
- st.push({at:.72,fn:function(){L(cl);al.forEach(function(o){say(o,'Giải trừ','#ffe6f4')})}});st.push({at:.82,fn:function(){say(A0,'+'+((u2(a).mo)||20)+' sĩ khí toàn quân','#ffc3e6')}});
+  dimAll(c,p,'26,8,26',.5);
+  /* the moonlit vision of Điêu Thuyền rises over the gap between the armies */
+  var vq=out(seg(p,0,.3))*(1-seg(p,.62,.85));pc(c,'P',8,vx,vy-(1-vq)*BT.rh*.3,vh*480/720,vq*.85,0,1,null,'ghost');glow(c,vx,vy-vh*.25,vh*.5,'255,200,235',.18*vq);
+  /* petals rain over our army */
+  var pq=env(p,.1,.98,.12);if(pq>0)pet.forEach(function(q){var x=F.cx-F.w*.62+q.x*F.w*1.24+Math.sin(t/420+q.r)*14,yy=F.y0-BT.rh*.9+((q.o+t/2800*q.s)%1)*((F.y1-F.y0)+BT.rh*1.5);c.save();c.translate(x,yy);c.rotate(q.r+t/520);c.globalAlpha=.9*pq;c.fillStyle='rgb('+PC[q.c]+')';c.beginPath();c.moveTo(0,-5*q.s);c.quadraticCurveTo(4.5*q.s,-1*q.s,0,5*q.s);c.quadraticCurveTo(-4.5*q.s,-1*q.s,0,-5*q.s);c.fill();c.restore()});
+  /* a silk-wave ribbon sweeps through our army */
+  var rq=seg(p,.2,.7);if(rq>0&&rq<1)pc(c,'M',17,F.cx-F.w*.5+F.w*rq,F.cy-BT.rh*.15,F.w*1.1,Math.sin(Math.PI*rq)*.9,0,.7,'255,140,200');
+  /* a light column and gold healing rings on each ally */
+  hl.forEach(function(o,j){var bq=env(p,o.at-.06,o.at+.24,.25);if(bq>0)pc(c,'V',7,o.x,o.y-BT.rh*.75,cw(o)*1.1,bq*.85,0,1,'255,200,230','soft');
+   var z=seg(p,o.at,o.at+.26);if(z>0&&z<1){pc(c,'E',14,o.x,o.y-z*cw(o)*.5,cw(o)*(.6+z*.4),(1-z),0,.42,'255,210,150');pc(c,'E',15,o.x,o.y-cw(o)*.2,cw(o)*(.7+z*.5),(1-z)*.9,t/600,.5)}});
+  /* cleanse sparkle + final blossom */
+  var cq=seg(p,.7,.9);if(cq>0&&cq<1)al.forEach(function(o,j){sparks(c,o.x,o.y-cw(o)*.3,cw(o)*1.1,10,'255,225,240',1,j,cq)});
+  var fq=seg(p,.8,1);if(fq>0&&fq<1){skc(c,8,A0.x,A0.y,cw(A0)*(1+fq*.6),1-fq,fq);pc(c,'E',15,A0.x,A0.y,cw(A0)*(1.2+fq),1-fq,fq*2,.6)}
+  });
+ var st=hl.map(function(o){return{at:o.at+.03,fn:function(){L(o.h,false)}}});
+ st.push({at:.74,fn:function(){L(cl);al.forEach(function(o){say(o,'Giải trừ','#ffe6f4')})}});st.push({at:.84,fn:function(){say(A0,'+'+((u2(a).mo)||20)+' sĩ khí toàn quân','#ffc3e6')}});
  return timeline(T,st)}};
 
 /* ---------- hook: the new skin skill plays its own scene instead of the normal cast / old signature ---------- */
@@ -12452,7 +12433,7 @@ playAct=async function(ev){var a=BT.uds[ev.a],sk=!BT.skip&&a&&s2Match(a,ev);if(!
   try{sgSkin(a,sk,T*.42*(BT.pace||1))}catch(e){}
   a.sw=1;setTimeout(function(){a.sw=0},250);var w=F.play(a,ev,T);if(!w){applySnap(ev.s);await wait(200);return}
   await w;var rf=selfHits(ev);if(rf.length)impact(a,rf,false)}catch(e){try{console.error(e)}catch(x){}}
- finally{a.sw=0;BT.s2c=0}
+ finally{a.sw=0;BT.s2c=0;a.ox=0;a.oy=0}
  applySnap(ev.s);await wait(220)};
 /* skins without a painted statue: stop sgSkin asking the server for files that do not exist (404) */
 try{['lubu','caocao','diaochan'].forEach(function(g){if(SIGI[g+'_k_statue']===undefined)SIGI[g+'_k_statue']=null});['lubu_a','lubu_b','caocao_a','diaochan_a'].forEach(function(k){var g=k.split('_')[0];if(SIGI[g+'_statue_'+k]===undefined)SIGI[g+'_statue_'+k]=null})}catch(e){}
