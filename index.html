@@ -10965,7 +10965,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V250';
+var BUILD='V251';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14148,6 +14148,12 @@ var RT245=1;
     c.replaceWith(btn);ch=1});
    return ch?box.innerHTML:h}catch(e){try{console.warn('hs246',e)}catch(x){}return h}};
  var st=document.createElement('style');st.id='hs246css';st.textContent=
+  /* V250 (user 14:00 "the back button in hero profile has a black stripe"): on the hero profile the sticky header band (ds194 .snav gradient)
+     lay over the top of the portrait. Here the header has no band; the back button floats on the portrait with its own lacquer fill + shadow. */
+  '#sheet .snav:has(+ button.hero){background:none!important;box-shadow:none!important;border:0!important;pointer-events:none}'+
+  '#sheet .snav:has(+ button.hero)>*{pointer-events:auto}'+
+  '#sheet .snav+button.hero{margin-top:-58px!important}'+
+  '#sheet .snav:has(+ button.hero) .snb{background-color:rgb(35,26,18)!important;box-shadow:0 2px 8px rgba(0,0,0,.45)!important}'+
   '#sheet .hsl.hs246t span{color:#f2cf7c!important;font-weight:600}'+
   '#sheet .hs246b{display:flex;align-items:center;gap:10px;width:100%;margin:10px 0 4px;min-height:52px;padding:0 14px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.35);color:#f3e6c8;font:inherit;text-align:left;cursor:pointer}'+
   '#sheet .hs246b b{font:700 17px var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}#sheet .hs246b .rtag{margin:0}'+
