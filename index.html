@@ -10965,7 +10965,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V252';
+var BUILD='V251';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14095,10 +14095,8 @@ var RT245=1;
   var r=bg(x),t=now-c.t0,fr,lx=0,dust=0;
   if(RM){fr=0}else{
    if(c.atk<0&&now>c.next){c.atk=now}
-   if(c.atk>=0){var a=now-c.atk,seq=[5,5,7,7,8,9],ix=Math.floor(a/95);if(ix>=seq.length){c.atk=-1;c.next=now+(c.on?2600:3800)+Math.random()*1800;fr=0}else{fr=seq[ix];lx=(ix>=2&&ix<=3)?2.5:ix===4?1.2:0;dust=(ix>=2&&ix<=4)?1-(a-190)/290:0}}
-   if(c.atk<0)fr=[0,1,2,1][Math.floor(t/170)%4]}
-  /* V252 (user 14:12 "the avatar of Bộ, Tân Binh is missing a sword"): sprite frames 3 (idle) and 6 (wind-up) show the soldier
-     without his sword (battle transition poses); the avatar now loops idle 0-1-2-1 and the attack skips 6. */
+   if(c.atk>=0){var a=now-c.atk,seq=[5,6,7,7,8,9],ix=Math.floor(a/95);if(ix>=seq.length){c.atk=-1;c.next=now+(c.on?2600:3800)+Math.random()*1800;fr=0}else{fr=seq[ix];lx=(ix>=2&&ix<=3)?2.5:ix===4?1.2:0;dust=(ix>=2&&ix<=4)?1-(a-190)/290:0}}
+   if(c.atk<0)fr=[0,1,2,3][Math.floor(t/170)%4]}
   var bob=RM?0:Math.sin(t/520)*.8,s=(D*.72)/Math.max(40,m.bh),fx=r+lx,fy=D*.9;
   /* ground shadow */
   x.fillStyle='rgba(0,0,0,.45)';x.beginPath();x.ellipse(fx,fy,D*.24,D*.06,0,0,7);x.fill();
@@ -14150,12 +14148,6 @@ var RT245=1;
     c.replaceWith(btn);ch=1});
    return ch?box.innerHTML:h}catch(e){try{console.warn('hs246',e)}catch(x){}return h}};
  var st=document.createElement('style');st.id='hs246css';st.textContent=
-  /* V250 (user 14:00 "the back button in hero profile has a black stripe"): on the hero profile the sticky header band (ds194 .snav gradient)
-     lay over the top of the portrait. Here the header has no band; the back button floats on the portrait with its own lacquer fill + shadow. */
-  '#sheet .snav:has(+ button.hero){background:none!important;box-shadow:none!important;border:0!important;pointer-events:none}'+
-  '#sheet .snav:has(+ button.hero)>*{pointer-events:auto}'+
-  '#sheet .snav+button.hero{margin-top:-58px!important}'+
-  '#sheet .snav:has(+ button.hero) .snb{background-color:rgb(35,26,18)!important;box-shadow:0 2px 8px rgba(0,0,0,.45)!important}'+
   '#sheet .hsl.hs246t span{color:#f2cf7c!important;font-weight:600}'+
   '#sheet .hs246b{display:flex;align-items:center;gap:10px;width:100%;margin:10px 0 4px;min-height:52px;padding:0 14px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.35);color:#f3e6c8;font:inherit;text-align:left;cursor:pointer}'+
   '#sheet .hs246b b{font:700 17px var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}#sheet .hs246b .rtag{margin:0}'+
@@ -14246,5 +14238,31 @@ function card(){return'<div class="card row" id="sm250"><div class="sp"><b>Chế
 try{var _vm250=viewMore;viewMore=function(){var h=_vm250.apply(this,arguments);try{var k='<div class="card"><b>Đặt lại dữ liệu</b>';if(h.indexOf('id="sm250"')<0)h=h.indexOf(k)>=0?h.replace(k,card()+k):h+card()}catch(e){}return h}}catch(e){}
 try{var _A250=A_;A_=function(a,v,w,el){if(a==='smooth250'){S.smooth250=S.smooth250?0:1;save();apply();try{toast(S.smooth250?'Đã bật chế độ mượt':'Đã tắt chế độ mượt')}catch(e){}try{refresh()}catch(e){}return}return _A250.apply(this,arguments)}}catch(e){}
 try{apply();setInterval(apply,2000)}catch(e){}
+})();
+/* ===== V251 tap-safe screen updates (server agent, user 2026-11-04 14:08 "buttons are not responsive — sometimes it needs 2 clicks") =====
+   Every second the game re-builds the HUD (#top: the gold +, the Quân lệnh +) from scratch, and after any tap it re-builds the whole
+   screen (#main) or the open sheet on the next one-second tick. If that re-build lands while a finger is on a button, the button
+   the finger pressed is thrown away and replaced by a copy — iPhone Safari then drops the tap, so the player has to tap again.
+   Fix: (1) while a finger/pointer is down, the timed re-builds (renderTop / renderMain / refresh / updDyn) wait and run right after it
+   lifts; re-builds started by the tap itself (inside A_) still run at once. (2) If the HUD re-build produces exactly the same HTML,
+   the write is skipped, so the HUD buttons stay the same elements. */
+(function(){
+var DOWN=0,inA=0,pend={},fl=0;
+function busy(){return DOWN&&!inA}
+function flush(){fl=0;var p=pend;pend={};try{if(p.refresh)refresh();else{if(p.top)renderTop();if(p.main)renderMain();if(p.dyn)updDyn()}}catch(e){}}
+function later(){if(!fl)fl=setTimeout(flush,60)}
+window.addEventListener('pointerdown',function(e){if(e.isPrimary!==false)DOWN=1},true);
+['pointerup','pointercancel'].forEach(function(t){window.addEventListener(t,function(){DOWN=0;if(Object.keys(pend).length)later()},true)});
+window.addEventListener('blur',function(){DOWN=0});
+try{var _A=A_;A_=function(){inA++;try{return _A.apply(this,arguments)}finally{inA--}}}catch(e){}
+/* the HUD writes #top.innerHTML (ui.js) and #top .res innerHTML (currency.js) every second; skip a write whose HTML is the same as
+   last time, so the HUD buttons (gold +, Quân lệnh +, avatar) stay the same elements */
+var D=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');
+function guard(el){try{if(!el||el.__g251||!D||!D.set)return;el.__g251=1;var last=null;Object.defineProperty(el,'innerHTML',{configurable:true,get:function(){return D.get.call(this)},set:function(v){v=String(v);if(v===last&&this.firstChild)return;last=v;D.set.call(this,v)}})}catch(e){}}
+try{var _rt=renderTop;renderTop=function(){if(busy()){pend.top=1;return}var r=_rt.apply(this,arguments);guard(document.querySelector('#top .res'));return r}}catch(e){}
+guard(document.getElementById('top'));try{guard(document.querySelector('#top .res'))}catch(e){}
+try{var _rm=renderMain;renderMain=function(){if(busy()){pend.main=1;return}return _rm.apply(this,arguments)}}catch(e){}
+try{var _rf=refresh;refresh=function(){if(busy()){pend.refresh=1;return}return _rf.apply(this,arguments)}}catch(e){}
+try{var _ud=updDyn;updDyn=function(){if(busy()){pend.dyn=1;return}return _ud.apply(this,arguments)}}catch(e){}
 })();
 </script>
