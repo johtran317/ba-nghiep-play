@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V245';
+var BUILD='V246';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14117,4 +14117,38 @@ var RT245=1;
   '@media (prefers-reduced-motion:reduce){#rt226 .rth canvas.rt245{animation:none!important;transition:none}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('rt245',e)}catch(x){}}})();
+/* ================= V246 (art agent, user 2026-11-04 13:18, hero sheet screenshots: "in hero profile — remove Troop type selection; also Vai trò
+   should be a button that displays a floating window").
+   Last genSheet wrapper (DOM post-processing; logic untouched, on any error the old sheet is returned):
+   (1) "Binh chủng xuất chiến": the two selectable troop cards (.brp, action setbr) are removed. The section title now names the troop that
+       fights ("BỘ · Tân Binh · Bậc 1 ★1") and keeps "Đổi binh chủng ›" (opens the floating troop panel, where the slot is picked and
+       the Đổi roll lives) and "Binh Đạo · nâng bậc & hình thái".
+   (2) The Vai trò card (role tag + Duyên list) becomes ONE row button "Vai trò · <role> · Duyên n/m ›" that opens the content in the
+       V234 floating panel (#rs9p, action rs9 v=role; same look as the other floating windows). */
+(function(){try{
+ var _gs=genSheet;genSheet=function(gid){var h=_gs.apply(this,arguments);
+  try{var box=document.createElement('div');box.innerHTML=h;var ch=0;
+   /* (1) troop selection */
+   [].forEach.call(box.querySelectorAll('.hsl'),function(l){if(!/Binh chủng xuất chiến/.test(l.textContent))return;var sec=l.parentNode,brp=sec&&sec.querySelector('.brp');if(!brp)return;
+    var on=brp.querySelector('.brb.on')||brp.querySelector('.brb');brp.remove();
+    var sp=l.querySelector('span');var g=S.gens[gid],G=GENS[gid],txt='';try{txt=TAGS[G.br]+' · '+unitName(G.br,g.path,g.tier)+' · Bậc '+g.tier+(g.star?' ★'+g.star:'')}catch(e){txt=on?on.textContent.replace(/\s+/g,' ').trim():''}
+    if(sp)sp.textContent=txt;else l.insertAdjacentHTML('beforeend','<span>'+esc(txt)+'</span>');l.classList.add('hs246t');ch=1});
+   /* (2) role card → button + floating window */
+   [].forEach.call(box.querySelectorAll('.card'),function(c){var b=c.querySelector('b.sp');if(!b||b.textContent.trim()!=='Vai trò')return;
+    var tag=c.querySelector('.rtag'),bd=c.querySelectorAll('.bdl'),have=0;[].forEach.call(bd,function(x){var m=(x.querySelector('.mute')||{}).textContent||'';if(/^2\/2|đủ/.test(m.trim()))have++});
+    var inner=c.innerHTML.replace(/<b class="sp"[^>]*>Vai trò<\/b>/,'');
+    RS9.role='<h4>Vai trò</h4><div class="hs246p">'+inner+'</div>';
+    var btn=document.createElement('button');btn.className='hs246b';btn.setAttribute('data-a','rs9');btn.setAttribute('data-v','role');
+    btn.innerHTML='<b>Vai trò</b>'+(tag?'<span class="rtag" style="'+(tag.getAttribute('style')||'')+'">'+tag.textContent+'</span>':'')+(bd.length?'<span class="hs246d">Duyên '+have+'/'+bd.length+'</span>':'')+'<i>›</i>';
+    c.replaceWith(btn);ch=1});
+   return ch?box.innerHTML:h}catch(e){try{console.warn('hs246',e)}catch(x){}return h}};
+ var st=document.createElement('style');st.id='hs246css';st.textContent=
+  '#sheet .hsl.hs246t span{color:#f2cf7c!important;font-weight:600}'+
+  '#sheet .hs246b{display:flex;align-items:center;gap:10px;width:100%;margin:10px 0 4px;min-height:52px;padding:0 14px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.35);color:#f3e6c8;font:inherit;text-align:left;cursor:pointer}'+
+  '#sheet .hs246b b{font:700 17px var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}#sheet .hs246b .rtag{margin:0}'+
+  '#sheet .hs246b .hs246d{flex:1;text-align:right;font-size:12.5px;color:var(--ds-mu,#b9a98a)}#sheet .hs246b>i{font-style:normal;color:#e2b25a;font-size:20px;line-height:1}'+
+  '#sheet .hs246b:not(:has(.hs246d))>i{margin-left:auto}#sheet .hs246b:active{background:rgba(226,178,90,.1)}'+
+  '#rs9p .hs246p>.row{display:flex;align-items:center;gap:8px;margin-bottom:8px}#rs9p .hs246p .bdl{margin-top:8px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.25);font-size:14px;line-height:1.5}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('hs246',e)}catch(x){}}})();
 </script>
