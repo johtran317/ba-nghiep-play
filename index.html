@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V237';
+var BUILD='V238';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13859,4 +13859,28 @@ var RS9={};
   '@media (prefers-reduced-motion:reduce){#rs9p .rs9in,#rs9p .rs9bg{transition:none}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('rs234',e)}catch(x){}}})();
+/* ================= V238 (art agent, user 2026-11-04 11:22 "the battle background looks great, but it can interrupt the player's eye,
+   especially on maps with a dominant colour like Hoàng Cân") — calmer battlefield.
+   btMakeBg builds the painted background ONCE per battle into BT.bg; this wrapper post-processes that canvas only (troops, numbers
+   and effects are drawn later on top and stay at full colour). It samples the finished background at 24×24 and adapts:
+   colour is pulled 30–70% toward grey ('saturation' composite; more for saturated and warm/fiery maps), the map is dimmed 20–42% (more for warm or bright maps),
+   and a wider edge vignette pushes burning houses / torches at the sides back while the middle where the squads stand stays
+   readable. One-time canvas work — no CSS filter or blend on screen (V225 iPhone rule). BGCALM=0 turns it off. */
+var BGCALM=1;
+(function(){try{
+ function stats(cv){try{var t=document.createElement('canvas');t.width=t.height=24;var x=t.getContext('2d');x.drawImage(cv,0,0,24,24);
+   var d=x.getImageData(0,0,24,24).data,S=0,L=0,warm=0,n=0;
+   for(var i=0;i<d.length;i+=4){var r=d[i]/255,g=d[i+1]/255,b=d[i+2]/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;
+    S+=mx===mn?0:(mx-mn)/(1-Math.abs(2*l-1)||1);L+=l;if(r>g&&g>b&&r-b>.25)warm++;n++}
+   return{s:S/n,l:L/n,w:warm/n}}catch(e){return null}}
+ var _mb=btMakeBg;btMakeBg=function(){var r=_mb.apply(this,arguments);
+  try{if(!BGCALM)return r;var cv=BT.bg;if(!cv||!cv.getContext)return r;var c=cv.getContext('2d'),W=cv.width,H=cv.height,st=stats(cv);if(!st)return r;
+   var de=Math.max(.3,Math.min(.7,.35+(st.s-.3)*1.2+st.w*.4)),dim=Math.max(.2,Math.min(.42,.2+st.w*.6+Math.max(0,st.l-.25)*.8));
+   c.save();c.setTransform(1,0,0,1,0,0);
+   c.globalCompositeOperation='saturation';c.globalAlpha=de;c.fillStyle='#808080';c.fillRect(0,0,W,H);
+   c.globalCompositeOperation='source-over';c.globalAlpha=1;c.fillStyle='rgba(10,8,6,'+dim.toFixed(3)+')';c.fillRect(0,0,W,H);
+   var v=c.createRadialGradient(W/2,H*.56,Math.min(W,H)*.28,W/2,H*.56,Math.max(W,H)*.72);v.addColorStop(0,'rgba(8,6,5,0)');v.addColorStop(1,'rgba(8,6,5,.5)');c.fillStyle=v;c.fillRect(0,0,W,H);
+   c.restore();BT.bgCalm={s:+st.s.toFixed(2),l:+st.l.toFixed(2),w:+st.w.toFixed(2),de:+de.toFixed(2),dim:+dim.toFixed(2)}}catch(e){}
+  return r};
+}catch(e){try{console.error('bg238',e)}catch(x){}}})();
 </script>
