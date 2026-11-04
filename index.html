@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V228';
+var BUILD='V229';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13646,4 +13646,85 @@ function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="
   '@media (prefers-reduced-motion:reduce){#rt226 .rt226in,#rt226 .rt226bg{transition:none}#rt226 .rt226p img,#rt226 .rt226on,#rt226 .rt226on i{animation:none}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('rt226',e)}catch(x){}}})();
+/* ================= V229 (art agent, user 2026-11-04 09:04 "new player guide is prepped by coder agent. design the art for it. make it modern
+   and compete with top tier game in same category") — painted Quân sư Thanh Y on top of coding's src/guide.js (engine, steps and save untouched).
+   Art: ONE atlas art/ui/guide.webp 1440×720 (made by the user with Gemini Nano Banana Pro from the art agent's prompt doc, keyed + packed by the
+   art agent): row 0 = 4 waist-up poses 360×480 (0 cười, 1 nghiêm, 2 chỉ, 3 khen); row 1 = closed-fan pointer (2,500 236×200, tip lower-left)
+   and a blank crimson/gold scroll (325,482 549×236). nav_more.webp was deleted to keep 512 files (that tab became Thảo Phạt; never loaded).
+   Look: dimmed screen with a spotlight cut-out on the target (one box-shadow, no blur — V225 iPhone rule), gold double ring + tap ripple, the
+   painted fan bobbing at the target, Thanh Y standing on a lacquer dialogue panel (breaks its top edge), teal nameplate, key words in gold,
+   step dots, "Bỏ qua chương" + "Tiếp ›". A new chapter opens with the painted scroll ("Chương N · name"), once per chapter (S.gd.bn).
+   In battle: a slim chip with her face at the top, pointer-events none. Overrides gdShow / gdHide only. */
+(function(){try{
+ var IMG='art/ui/guide.webp',SC=.4167,BW=150,BH=200;
+ var NAMES={G1:['1','Xuất Trận'],G2:['2','Bày Binh Bố Trận'],G3:['3','Trị Thành'],G3b:['3','Hồi Binh'],G4:['4','Dưỡng Tướng'],G5:['5','Quân Lệnh'],G6:['6','Chiêu Hiền Nạp Sĩ'],G7:['7','Chọn Minh Chủ'],G8:['8','Ngũ Tướng Xuất Chinh'],G9:['9','Thông Thiên Tháp'],G10:['10','Trống Trận Quân Địch']};
+ var KW=['Thông Thiên Tháp','Nhiệm vụ ngày','Chinh chiến','Tấn công','Hồi binh','Thu thuế','Chính Sảnh','Tửu Quán','Lôi Đài','Quét tháp','Quân lệnh','Tinh binh','Tình báo','sĩ khí','Quân Trống','Quân y','Thiên hạ','Ba sao','Tướng','Thành'];
+ var sp=null,bn=null,cur=null,bnT=0,bnI=0;
+ function face(s){var f=s.f||0;try{if(s.id==='g1.7'&&!gdH3('Thất bại'))f=3;if(/^(Thắng|Năm tướng)/.test(typeof s.t==='string'?s.t:''))f=3}catch(e){}return f}
+ function hl(h){try{var n=esc(S.pname||'Chủ Công');if(n)h=h.split(n).join('<b class="g9n">'+n+'</b>');KW.forEach(function(k){h=h.replace(new RegExp('(^|[^\\wÀ-ỹ>])('+k+')(?![\\wÀ-ỹ])','g'),'$1<b>$2</b>')})}catch(e){}return h}
+ function dots(s){try{for(var i=0;i<GDC.length;i++){var C=GDC[i];if(C.id!==s.ch)continue;var k=C.steps.findIndex(function(x){return x.id===s.id});if(k<0||C.steps.length<2)return'';
+   return'<span class="g9d">'+C.steps.map(function(x,j){return'<i'+(j<=k?' class="on"':'')+'></i>'}).join('')+'</span>'}}catch(e){}return''}
+ function ensure(){gdUI();if(sp)return;sp=document.createElement('div');sp.id='g9sp';sp.hidden=true;sp.innerHTML='<i class="r1"></i><i class="r2"></i>';document.body.appendChild(sp);
+  bn=document.createElement('div');bn.id='g9bn';bn.hidden=true;document.body.appendChild(bn);
+  GDPT.innerHTML='<i class="g9rp"></i><i class="g9rp b"></i><span class="g9fan"></span>'}
+ function banner(s){try{var G=gd();if(!G.bn)G.bn={};var N=NAMES[s.ch];if(!N||G.bn[s.ch])return;var C=GDC.filter(function(c){return c.id===s.ch})[0];if(!C||C.steps[0].id!==s.id)return;
+   G.bn[s.ch]=1;bn.innerHTML='<div class="g9sc"><small>CHƯƠNG '+N[0]+'</small><b>'+N[1]+'</b></div>';bn.hidden=false;bn.classList.remove('go');void bn.offsetWidth;bn.classList.add('go');
+   clearTimeout(bnT);var t0=Date.now(),ch=s.ch;clearInterval(bnI);bnI=setInterval(function(){try{
+    if(document.querySelector('#hrev,#vcin')){bn.hidden=true;clearInterval(bnI);delete gd().bn[ch];return}  /* a hero reveal took the screen: replay the scroll later */
+    if(Date.now()-t0>2600){bn.hidden=true;clearInterval(bnI)}}catch(e){clearInterval(bnI)}},150)}catch(e){}}
+ gdShow=function(s,mode){ensure();var bt=mode==='bt',key=s.id+(mode||''),f=face(s);
+  if(cur!==key){cur=key;GDCUR=key;
+   if(bt){GDEL.className='g9 bt';GDEL.innerHTML='<span class="g9av"></span><div class="g9t">'+hl(gdText(s.t))+'</div>'}
+   else{GDEL.className='g9';GDEL.innerHTML='<span class="g9bu" style="background-position:'+(-f*BW)+'px 0"></span><span class="g9np"><i>QUÂN SƯ</i>Thanh Y</span><div class="g9t">'+hl(gdText(s.t))+'</div>'+
+    '<div class="g9f">'+dots(s)+'<span class="g9sp"></span><button class="gdsk" data-a="gdskip" data-v="'+s.ch+'">'+(s.tap?'Bỏ qua':'Bỏ qua chương')+'</button>'+(s.tap?'<button class="btn sm g9ok" data-a="gdok" data-v="'+s.id+'">Tiếp ›</button>':'')+'</div>';banner(s)}}
+  GDEL.hidden=false;
+  var sel=typeof s.p==='function'?s.p():s.p,tg=sel?gdQ(sel):null,r=null;
+  if(tg&&tg.tagName&&tg.tagName.toLowerCase()==='g'){var cs=tg.querySelectorAll('circle');for(var i=0;i<cs.length;i++){var cr=cs[i].getBoundingClientRect();if(cr.width>4){r=cr;break}}}
+  if(!r&&tg)r=tg.getBoundingClientRect();
+  if(!bt){var low=r?r.top+r.height/2<innerHeight*.5:gdNoModal();
+   /* target in the top half: panel at the bottom. Target in the bottom half: panel just above it (room for the fan), else at the top */
+   var bot=null;if(low)bot=84;else if(r){var b2=innerHeight-r.top+(r.top>innerHeight-110?44:58);if(innerHeight-b2-(GDEL.offsetHeight||130)>150)bot=b2}
+   GDEL.style.top=bot!=null?'auto':'calc(118px + env(safe-area-inset-top,0px))';GDEL.style.bottom=bot!=null?(bot===84?'calc(84px + env(safe-area-inset-bottom,0px))':bot+'px'):'auto';
+   if(r){var pd=6,w=r.width+pd*2,h=r.height+pd*2,round=Math.abs(w-h)<14&&w<90;sp.hidden=false;sp.style.left=(r.left-pd)+'px';sp.style.top=(r.top-pd)+'px';sp.style.width=w+'px';sp.style.height=h+'px';sp.style.borderRadius=round?'50%':'14px'}
+   else sp.hidden=true}
+  else sp.hidden=true;
+  if(r){var cx=r.left+r.width/2,cy=r.top+r.height/2;GDPT.hidden=false;GDPT.style.left=cx+'px';GDPT.style.top=cy+'px';GDPT.classList.toggle('fl',cx>innerWidth-140);GDPT.classList.toggle('dn',cy<150)}else GDPT.hidden=true};
+ var _gh=gdHide;gdHide=function(){cur=null;if(sp)sp.hidden=true;return _gh.apply(this,arguments)};
+ var st=document.createElement('style');st.id='g9css';st.textContent=
+  /* panel */
+  '#gdcard.g9{display:block;padding:14px 14px 10px 132px;min-height:118px;border-radius:18px;background:linear-gradient(180deg,rgba(36,27,18,.98),rgba(17,12,8,.98));border:1px solid rgba(226,178,90,.75);'+
+   'box-shadow:0 16px 40px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,230,170,.16),inset 0 0 0 3px rgba(17,12,8,.9),inset 0 0 0 4px rgba(226,178,90,.22);overflow:visible;animation:g9in .32s cubic-bezier(.2,.9,.3,1.1)}'+
+  '#gdcard.g9 .g9bu{position:absolute;left:-4px;bottom:0;width:'+BW+'px;height:'+BH+'px;background:url('+IMG+') no-repeat;background-size:'+Math.round(1440*SC)+'px '+Math.round(720*SC)+'px;'+
+   '-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent);border-bottom-left-radius:18px;animation:g9bu .4s cubic-bezier(.2,.9,.3,1.1)}'+
+  '#gdcard.g9 .g9np{position:absolute;left:122px;top:-14px;padding:4px 14px 4px 12px;border-radius:999px;background:linear-gradient(180deg,#2f6f66,#163c38);border:1px solid #9fd6c4;'+
+   'font:700 13px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#eafff7;box-shadow:0 3px 10px rgba(0,0,0,.5);white-space:nowrap}#gdcard.g9 .g9np i{font:700 10px var(--ds-fb,sans-serif);font-style:normal;letter-spacing:.14em;color:#f2cf7c;margin-right:6px}'+
+  '#gdcard.g9 .g9t{font:400 15px/1.5 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);color:#f6ead0;margin-top:6px;animation:g9tx .35s .08s both}#gdcard.g9 .g9t b{color:#f2cf7c;font-weight:700}#gdcard.g9 .g9t b.g9n{color:#9fe3cf}'+
+  '#gdcard.g9 .g9f{display:flex;align-items:center;gap:6px;margin-top:8px;min-height:36px}#gdcard.g9 .g9sp{flex:1}'+
+  '#gdcard.g9 .g9d{display:flex;gap:4px}#gdcard.g9 .g9d i{width:14px;height:4px;border-radius:2px;background:rgba(255,255,255,.16)}#gdcard.g9 .g9d i.on{background:#f2cf7c}'+
+  '#gdcard.g9 .gdsk{white-space:nowrap;font-size:12.5px;color:rgba(246,230,196,.55);padding:8px 4px}#gdcard.g9 .g9ok{min-height:36px;padding:0 18px;font-weight:700;white-space:nowrap;flex:none;width:auto!important}'+
+  /* battle chip */
+  '#gdcard.g9.bt{display:flex;align-items:center;gap:10px;padding:7px 14px 7px 7px;min-height:0;border-radius:999px;background:rgba(15,11,8,.9);border-color:rgba(159,214,196,.7);animation:g9in .3s ease-out}'+
+  '#gdcard.g9.bt .g9av{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid #9fd6c4;background:#163c38 url('+IMG+') no-repeat -39px -22px;background-size:452px 226px}'+
+  '#gdcard.g9.bt .g9t{font-size:13.5px;line-height:1.4;margin:0}'+
+  /* spotlight */
+  '#g9sp{position:fixed;z-index:99987;pointer-events:none;box-shadow:0 0 0 200vmax rgba(6,4,3,.72),0 0 0 2px #f6d27a,0 0 18px rgba(246,210,122,.55);transition:left .25s,top .25s,width .25s,height .25s}'+
+  '#g9sp .r1{position:absolute;inset:-7px;border-radius:inherit;border:2px solid rgba(246,210,122,.45);animation:g9ring 1.6s ease-in-out infinite}'+
+  /* pointer: ripple + painted fan */
+  '#gdptr .g9rp{position:absolute;left:-30px;top:-30px;width:60px;height:60px;border-radius:50%;border:2px solid rgba(246,210,122,.85);animation:g9rip 1.6s ease-out infinite}#gdptr .g9rp.b{animation-delay:.8s}'+
+  '#gdptr .g9fan{position:absolute;left:4px;top:-104px;width:118px;height:100px;background:url('+IMG+') no-repeat -1px -250px;background-size:720px 360px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.6));animation:g9poke 1.1s ease-in-out infinite}'+
+  '#gdptr.fl .g9fan{left:auto;right:4px;transform:scaleX(-1)}#gdptr.dn .g9fan{top:4px;transform:scaleY(-1)}#gdptr.fl.dn .g9fan{transform:scale(-1,-1)}'+
+  /* chapter banner */
+  '#g9bn{position:fixed;left:0;right:0;top:30%;z-index:99991;pointer-events:none;display:flex;justify-content:center}'+
+  '#g9bn .g9sc{width:min(340px,90vw);aspect-ratio:549/236;background:url('+IMG+') no-repeat;background-size:'+(1440/549*100).toFixed(2)+'% '+(720/236*100).toFixed(2)+'%;background-position:'+(325/(1440-549)*100).toFixed(2)+'% '+(482/(720-236)*100).toFixed(2)+'%;'+
+   'display:flex;flex-direction:column;align-items:center;justify-content:center;filter:drop-shadow(0 10px 22px rgba(0,0,0,.7))}'+
+  '#g9bn small{font:700 11px var(--ds-fb,sans-serif);letter-spacing:.32em;color:#f6d27a;margin-bottom:2px}#g9bn b{font:700 clamp(22px,7vw,28px)/1.15 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;text-shadow:0 2px 6px rgba(0,0,0,.65);text-align:center;padding:0 18%}'+
+  '#g9bn.go .g9sc{animation:g9open 2.6s cubic-bezier(.2,.9,.3,1) both}'+
+  '@keyframes g9open{0%{transform:scaleX(.08);opacity:0}14%{transform:scaleX(1.03);opacity:1}20%{transform:scaleX(1)}82%{transform:none;opacity:1}100%{transform:translateY(-10px);opacity:0}}'+
+  '@keyframes g9in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes g9bu{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}@keyframes g9tx{from{opacity:0}to{opacity:1}}'+
+  '@keyframes g9ring{50%{inset:-11px;opacity:.15}}@keyframes g9rip{0%{transform:scale(.55);opacity:.95}100%{transform:scale(1.45);opacity:0}}'+
+  '@keyframes g9poke{0%,100%{translate:0 0}50%{translate:7px -7px}}'+
+  '@media (prefers-reduced-motion:reduce){#gdcard.g9,#gdcard.g9 .g9bu,#gdcard.g9 .g9t,#g9sp .r1,#gdptr .g9rp,#gdptr .g9fan,#g9bn.go .g9sc{animation:none}#g9sp{transition:none}}';
+ document.head.appendChild(st);
+ try{var im=new Image();im.src=IMG}catch(e){}
+}catch(e){try{console.error('gd229',e)}catch(x){}}})();
 </script>
