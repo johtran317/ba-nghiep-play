@@ -10860,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V218';
+var BUILD='V219';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12775,7 +12775,46 @@ function ord215Sheet(){var p=ord215Price(),n=ord215Used(),ok=S.res.gold>=p,cap=1
   'html body #sheet .ord215p img,html body #sheet .ord215p svg{width:18px;height:18px}';
  document.head.appendChild(st);
 }catch(e){}})();
-/* ===== V218 Thông Thiên Tháp opens at Màn 7 (user 2026-11-04 06:50 "find a first Màn level to allow player to enter Thông Thiên Tháp,
+/* ================= V218 (art agent, user 2026-11-04 07:12 "if a player clicks on a unit they can view its current health and morale") =================
+   Tap any squad during a battle: a small card shows its general, troop type, troops now / max, morale now / skill cost
+   (Sẵn sàng when the skill is ready) and its current statuses. The card follows the live numbers, closes on the next tap
+   outside a unit, after 4 s, or when the battle ends. Pure display — the battle keeps running underneath. */
+(function(){try{
+ var SN=['Choáng','Thiêu đốt','Hỗn loạn','Khiêu khích','Giáp khí','Làm chậm','Suy yếu','Phá giáp','Đi sau','Hồi phục','Câm lặng','Trúng độc','Khóa sĩ khí'],
+  SB={4:1,9:1},BRN={inf:'Bộ binh',cav:'Kỵ binh',arc:'Cung thủ',mac:'Cơ giới',str:'Mưu sĩ',sup:'Trống trận'};
+ var card=null,cur=null,tm=0,iv=0;
+ function nm(u){try{if(u.gid&&GENS[u.gid])return u.gid==='lord'&&S.pname?S.pname:GENS[u.gid].n;return u.n||u.name||(BRN[u.br]||'Quân')}catch(e){return'Quân'}}
+ function hide(){if(card){card.remove();card=null}cur=null;clearInterval(iv);clearTimeout(tm)}
+ function f(n){try{return fmt(Math.max(0,Math.round(n)))}catch(e){return String(Math.round(n))}}
+ function paint(){try{if(!card||!cur||!BT||!BT.on){hide();return}var d=cur,u=d.u,mx=u.max||d.trT||1,tr=Math.max(0,d.trT),cost=(u.tact&&u.tact.cost)||100,mo=Math.max(0,Math.round(d.moT||0));
+   var cast=u.canCast&&!(u.t&&u.t.noMorale),lk=d.sf&&(d.sf[12]||d.sf[10]);
+   var st=(d.sf||[]).map(function(x,i){return x?'<i class="'+(SB[i]?'g':'b')+'">'+SN[i]+'</i>':''}).join('');
+   card.className='bt217 '+(u.side==='A'?'us':'foe');
+   card.innerHTML='<div class="h"><b>'+nm(u)+'</b><span>'+(u.side==='A'?'Quân ta':'Quân địch')+' · '+(BRN[u.br]||'')+(u.isBoss?' · Trùm':'')+'</span></div>'+
+    '<div class="r"><span>Quân</span><em>'+f(tr)+' / '+f(mx)+'</em></div><div class="bar tr"><i style="width:'+Math.min(100,tr/mx*100).toFixed(1)+'%"></i></div>'+
+    (cast?'<div class="r"><span>Sĩ khí</span><em>'+mo+' / '+cost+(lk?' · bị khóa':mo>=cost?' · Sẵn sàng':'')+'</em></div><div class="bar mo'+(lk?' lk':'')+'"><i style="width:'+Math.min(100,mo/cost*100).toFixed(1)+'%"></i></div>':'<div class="r"><span>Sĩ khí</span><em>không dùng kế</em></div>')+
+    (st?'<div class="st">'+st+'</div>':'')+(tr<=0?'<div class="dead">Đã bị tiêu diệt</div>':'')}catch(e){hide()}}
+ function show(d){hide();var w=document.querySelector('.bw');if(!w)return;card=document.createElement('div');w.appendChild(card);cur=d;paint();
+   try{var cv=document.getElementById('cv'),r=cv.getBoundingClientRect(),wr=w.getBoundingClientRect(),x=r.left-wr.left+d.x*(r.width/BT.W),y=r.top-wr.top+d.y*(r.height/BT.H);
+    var cw=card.offsetWidth||190,ch=card.offsetHeight||110,L=Math.max(8,Math.min(wr.width-cw-8,x-cw/2)),T=y-ch-BT.rh*.7;if(T<56)T=y+BT.rh*.55;card.style.left=L+'px';card.style.top=Math.max(8,Math.min(wr.height-ch-8,T))+'px'}catch(e){}
+   iv=setInterval(paint,200);tm=setTimeout(hide,4000)}
+ function pick(e){try{if(typeof BT==='undefined'||!BT.on||!BT.list)return;var cv=document.getElementById('cv'),r=cv.getBoundingClientRect(),p=e.touches?e.touches[0]:e,
+   x=(p.clientX-r.left)*(BT.W/r.width),y=(p.clientY-r.top)*(BT.H/r.height),best=null,bd=1e9;
+   BT.list.forEach(function(d){var s=d.s||1,dx=(x-d.x)/(BT.cwN*s*.6),dy=(y-d.y)/(BT.rh*s*.75),q=dx*dx+dy*dy;if(q<1&&q<bd){bd=q;best=d}});
+   if(best)show(best);else hide()}catch(x){}}
+ document.addEventListener('pointerdown',function(e){if(e.target&&e.target.id==='cv')pick(e);else if(card&&!(e.target.closest&&e.target.closest('.bt217')))hide()},true);
+ var css=document.createElement('style');css.textContent=
+  '.bw{position:relative}.bt217{position:absolute;z-index:30;width:200px;padding:10px 12px;border-radius:12px;background:rgba(18,13,10,.94);border:1px solid rgba(226,178,90,.55);box-shadow:0 6px 20px rgba(0,0,0,.5);color:#f3e6c8;font:500 12px "Be Vietnam Pro",system-ui,sans-serif;pointer-events:none}'+
+  '.bt217.foe{border-color:rgba(230,110,100,.7)}.bt217.us{border-color:rgba(120,210,140,.7)}'+
+  '.bt217 .h b{display:block;font:700 15px Philosopher,Georgia,serif;color:#fff2cf}.bt217 .h span{font-size:11px;color:#b9a98a}'+
+  '.bt217 .r{display:flex;justify-content:space-between;margin-top:7px}.bt217 .r span{color:#b9a98a}.bt217 .r em{font:600 13px "Barlow Condensed",sans-serif;font-style:normal;color:#fff}'+
+  '.bt217 .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:3px;overflow:hidden}.bt217 .bar i{display:block;height:100%}'+
+  '.bt217 .tr i{background:linear-gradient(90deg,#d0574a,#6cc283)}.bt217 .mo i{background:linear-gradient(90deg,#c48a2c,#ffd36a)}.bt217 .mo.lk i{background:#7f93b8}'+
+  '.bt217 .st{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.bt217 .st i{font-style:normal;font-size:11px;padding:2px 7px;border-radius:9px;background:rgba(230,110,100,.18);color:#ffb3a8}.bt217 .st i.g{background:rgba(108,194,131,.18);color:#a8e6b7}'+
+  '.bt217 .dead{margin-top:6px;color:#e07d68;font-size:11px}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('bt217',e)}catch(x){}}})();
+/* ===== V219 Thông Thiên Tháp opens at Màn 7 (user 2026-11-04 06:50 "find a first Màn level to allow player to enter Thông Thiên Tháp,
    e.g. Màn 7, make sure it balances with game flow and rewards"). Bot study: tower open from day 1 vs gated at Màn 5 / 7 / 9 changes the
    campaign clear days by less than the bot noise (±1 day); a gated player catches up ~12 floors in the first sitting and is back on the
    ungated floor curve within ~1 week (day 20: floor 75 gated vs 78 open). Opening at Màn 7 = right after the Màn 6 boss, when the player
