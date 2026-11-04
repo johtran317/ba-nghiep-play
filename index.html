@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V262';
+var BUILD='V263';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14454,4 +14454,60 @@ try{var _br=btResize;btResize=function(){var r=_br.apply(this,arguments);capNow(
 try{var _bf=btFrame;btFrame=function(now){try{if(BT.on&&!BT.skip&&lastN&&now>lastN&&now-lastN<250&&!document.hidden){G.push(now-lastN);if(G.length>=90){var s=G.slice().sort(function(a,b){return a-b}),med=s[45];G=[];
    if(med>28&&BT.dpr>1.25){cap=BT.dpr>1.5?1.5:1.25;try{localStorage.setItem(CAPK,cap)}catch(e){}capNow()}}}lastN=now}catch(e){}return _bf.apply(this,arguments)}}catch(e){}
 })();
+/* ================= V263 (art agent, user 2026-11-04 15:31 "when the building upgrades successfully add a banner to congratz",
+   15:34 picked option B of 5 mockups). A centred "Nâng cấp thành công" card when a building / house / plot finishes:
+   the building art rises in a gold light column (victory_fx cell 7), name (+ Nhà N / slot N), level chip "Cấp a → b", the
+   building's current effect (bfx), one "Tiếp tục" button. Display only — no logic, save or balance change.
+   How: a 400 ms watcher diffs S.q; an entry that left the queue and whose level was reached = finished (works for every code
+   path: tick, speed-up "Xác nhận", offline catch-up, plots.js). Finishes found together share one card (first big, the rest as
+   rows). Waits while a battle, the splash, a hero reveal or the map-clear scene is on screen. The old "… đã lên cấp N" toast is
+   skipped for these. Own overlay #bu263 (z above the guide), dim only (no blur — V250 rule), transform/opacity animation,
+   reduced motion → still. BU263=0 turns it off. No new art (in_<id>.webp / ob_<plot>.webp / victory_fx.webp). */
+var BU263=1;
+(function(){try{
+ var prev=[],pend=[],RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+ function done(q){try{if(q.id==='house')return(S.b.house[q.i]||0)>=q.to;
+   if(q.id&&q.id.indexOf('p_')===0){var k=q.id.slice(2);return((pl()[k]||[])[q.i]||{}).lv>=q.to}
+   return(S.b[q.id]||0)>=q.to}catch(e){return false}}
+ function info(q){var id=q.id,o={lv:q.to,from:q.to-1};
+  if(id&&id.indexOf('p_')===0){var k=id.slice(2);o.n=PLT[k].n+' '+(q.i+1);o.img='art/buildings/ob_'+k+'.webp';o.fx='Sản lượng '+PLT[k].rn+' tăng';return o}
+  o.n=BLD[id].n+(id==='house'?' · Nhà '+(q.i+1):'');o.img='art/buildings/in_'+id+'.webp';
+  try{o.fx=bfx(id)}catch(e){o.fx=''}return o}
+ function blocked(){try{if(typeof fighting!=='undefined'&&fighting)return true;var sp=document.getElementById('splash');if(sp&&!sp.classList.contains('out')&&sp.offsetParent!==null)return true;
+   if(document.getElementById('hrev')||document.getElementById('vcin')||document.getElementById('bu263'))return true;if(S&&S.f204&&!S.pname)return true}catch(e){}return false}
+ function show(list){var a=list[0],rest=list.slice(1),d=document.createElement('div');d.id='bu263';
+  var h='<div class="bu3c" role="dialog" aria-label="Nâng cấp thành công"><div class="bu3l"></div><div class="bu3k">'+(a.from<1?'Xây dựng thành công':'Nâng cấp thành công')+'</div><div class="bu3n">'+a.n+'</div>'+
+   '<div class="bu3a"><img src="'+a.img+'" alt=""></div><div class="bu3s"><span class="bu3p">'+(a.from<1?'<b>Cấp '+a.lv+'</b>':'Cấp '+a.from+' <b>→ '+a.lv+'</b>')+'</span></div>'+
+   (a.fx?'<div class="bu3f">'+a.fx+'</div>':'');
+  if(rest.length)h+='<div class="bu3r">'+rest.map(function(r){return'<div><img src="'+r.img+'" alt=""><span>'+r.n+'</span><b>Cấp '+r.lv+'</b></div>'}).join('')+'</div>';
+  h+='<button class="btn bu3b" type="button">Tiếp tục</button></div>';d.innerHTML=h;
+  function close(){if(!d.isConnected)return;d.classList.add('out');setTimeout(function(){try{d.remove()}catch(e){}},RM?0:180)}
+  d.addEventListener('click',function(e){if(e.target===d||e.target.closest('.bu3b')){e.stopPropagation();close()}});
+  document.body.appendChild(d)}
+ function scan(){try{if(!BU263||!S||!S.q)return;var cur=S.q.slice(),gone=prev.filter(function(q){return cur.indexOf(q)<0&&done(q)});prev=cur;
+   if(gone.length)pend.push(gone.map(info));
+   if(pend.length&&!blocked()){var all=[];pend.forEach(function(g){all=all.concat(g)});pend=[];show(all)}}catch(e){try{console.warn('bu263',e)}catch(x){}}}
+ setTimeout(function(){try{prev=(S&&S.q||[]).slice()}catch(e){}setInterval(scan,400)},1500);
+ /* the card replaces the old one-line toast for finished buildings */
+ var _t=toast;toast=function(m){try{if(BU263&&typeof m==='string'&&/ (đã )?lên cấp \d+$/.test(m)){var nm=m.replace(/ (đã )?lên cấp \d+$/,'').replace(/ \d+$/,'');
+   var names=Object.keys(BLD).map(function(k){return BLD[k].n});if(names.indexOf(nm)>=0)return}}catch(e){}return _t.apply(this,arguments)};
+ var st=document.createElement('style');st.id='bu263css';st.textContent=
+  '#bu263{position:fixed;inset:0;z-index:99995;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(6,4,3,.66);animation:bu3fd .2s ease-out}'+
+  '#bu263.out{opacity:0;transition:opacity .18s}'+
+  '#bu263 .bu3c{position:relative;width:min(340px,100%);padding:22px 18px 20px;border-radius:20px;text-align:center;background:linear-gradient(180deg,#3d2c18,#1c140c);border:1.5px solid rgba(241,207,106,.72);box-shadow:0 0 0 1px #000,0 18px 40px rgba(0,0,0,.6);animation:bu3in .34s cubic-bezier(.2,1.3,.4,1)}'+
+  '#bu263 .bu3l{position:absolute;left:50%;top:-44px;width:220px;height:250px;margin-left:-110px;background:url(art/ui/victory_fx.webp) 100% 0/800% 200% no-repeat;opacity:.9;pointer-events:none;transform-origin:50% 0;animation:bu3lc 2.6s ease-in-out infinite}'+
+  '#bu263 .bu3k{position:relative;font:700 12px/1 var(--ds-fb,system-ui,sans-serif);letter-spacing:.16em;text-transform:uppercase;color:#f6d77d}'+
+  '#bu263 .bu3n{position:relative;margin:6px 0 4px;font:700 24px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}'+
+  '#bu263 .bu3a{position:relative;height:150px;display:flex;align-items:center;justify-content:center}'+
+  '#bu263 .bu3a img{max-width:230px;max-height:150px;object-fit:contain;animation:bu3up .7s cubic-bezier(.2,1.2,.4,1) .08s both}'+
+  '#bu263 .bu3s{margin:12px 0 6px}#bu263 .bu3p{display:inline-block;padding:5px 12px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(241,207,106,.5);font:600 14px var(--ds-fb,system-ui,sans-serif);color:#f3e6c8}#bu263 .bu3p b{color:#8fe0a6}'+
+  '#bu263 .bu3f{margin:2px 0 14px;font-size:13px;color:var(--ds-mu,#c9b48a)}'+
+  '#bu263 .bu3r{margin:0 0 14px;text-align:left;border-top:1px solid rgba(241,207,106,.18)}#bu263 .bu3r div{display:flex;align-items:center;gap:10px;padding:7px 2px;border-bottom:1px solid rgba(241,207,106,.12);font-size:14px;color:#f3e6c8}'+
+  '#bu263 .bu3r img{width:34px;height:26px;object-fit:contain}#bu263 .bu3r span{flex:1}#bu263 .bu3r b{color:#8fe0a6;font-weight:600}'+
+  '#bu263 .bu3b{width:min(220px,100%);min-height:46px;margin:0 auto;display:block}'+
+  '@keyframes bu3fd{from{opacity:0}}@keyframes bu3in{from{opacity:0;transform:scale(.86) translateY(14px)}}'+
+  '@keyframes bu3up{from{opacity:0;transform:translateY(26px) scale(.9)}}@keyframes bu3lc{0%,100%{opacity:.75;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.06)}}'+
+  '@media (prefers-reduced-motion:reduce){#bu263,#bu263 *{animation:none!important}}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('bu263',e)}catch(x){}}})();
 </script>
