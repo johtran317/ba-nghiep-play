@@ -944,7 +944,7 @@ var TRDIR={inf:'infantry',cav:'cavalry',arc:'archer',mac:'siege',str:'strategist
 function heroArtPath(gid,file){return'art/heroes/'+gid+'/'+file+'.webp'}
 function btPath(k){var m=/^m(\d+)_([ab])$/.exec(k);if(m)return'art/maps/battle/chapter_'+('0'+m[1]).slice(-2)+'/'+m[2]+'.webp';m=/^(boss|tower)_([ab])$/.exec(k);if(m)return'art/maps/battle/'+m[1]+'/'+m[2]+'.webp';return'art/maps/battle/'+k+'.webp'}
 /* ================= ART: portraits (SVG) and soldier sprites (canvas) ================= */
-var FAC={shu:{n:'Thục',c:'#3a8a5c',d:'#10281a'},wei:{n:'Ngụy',c:'#2f5d9e',d:'#10213b'},wu:{n:'Ngô',c:'#b3262d',d:'#3d0f12'},qun:{n:'Quần Hùng',c:'#a9822e',d:'#33250a'},han:{n:'Hoàng Cân',c:'#c9a227',d:'#3a2c06'},tay:{n:'Tây Lương',c:'#7a3a2a',d:'#2b1410'}};
+var FAC={shu:{n:'Thục',c:'#3a8a5c',d:'#10281a'},wei:{n:'Ngụy',c:'#2f5d9e',d:'#10213b'},wu:{n:'Ngô',c:'#b3262d',d:'#3d0f12'},qun:{n:'Quần Hùng',c:'#a9822e',d:'#33250a'},han:{n:'Hoàng Cân',c:'#c9a227',d:'#3a2c06'},tay:{n:'Tây Lương',c:'#7a3a2a',d:'#2b1410'},tl:{n:'Tự Lập',c:'#8a9cb2',d:'#1a2230'}};   /* V204 tl = independent lord before the faction pick */
 var PCACHE={};
 function propSvg(p,k){
  var g='';
@@ -1341,6 +1341,7 @@ function fmt(n){n=Math.floor(n);if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e5
 function fmtT(ms){ms=Math.max(0,Math.ceil(ms/1000));var h=Math.floor(ms/3600),m=Math.floor(ms%3600/60),s=ms%60;return(h?h+':'+(m<10?'0':''):'')+m+':'+(s<10?'0':'')+s}
 var TAGS={inf:'BỘ',cav:'KỴ',arc:'CUNG',mac:'CƠ',str:'MƯU',sup:'TRỐNG'};
 var GENS={
+ lord:{n:'Chủ Công',fac:'tl',br:'inf',tong:72,dung:74,tri:58,cost:0,gr:'B',rar:'R',src:'start',tact:{n:'Tiên Phong Đột Trận',pat:'single',c:1.9,cost:80},ds:'Đánh 1 địch hệ số 1.9.'},   /* V204: the player's own general (R), named after the player */
  liubei:{n:'Lưu Bị',fac:'shu',br:'inf',tong:78,dung:72,tri:80,cost:0,gr:'A',tact:{n:'Nhân Đức Chi Lực',pat:'heal',heal:.15,mo:20},ds:'Hồi 8% quân cho toàn quân, +20 sĩ khí.'},
  chuthuong:{n:'Chu Thương',fac:'shu',br:'inf',tong:70,dung:76,tri:40,cost:3000,tact:{n:'Hộ Chủ Xung Kích',pat:'single',c:1.8,taunt:1},ds:'Đánh 1 địch hệ số 1.8, khiêu khích 1 lượt.'},
  zhugeliang:{n:'Gia Cát Lượng',fac:'shu',br:'str',tong:72,dung:38,tri:100,cost:0,gr:'A',tact:{n:'Không Thành Diệu Kế',pat:'all',c:1.7,chaos:.2},ds:'Đánh toàn quân 1.7, 20% gây hỗn loạn.'},
@@ -1365,16 +1366,16 @@ var S,toastT=0,dirty=false;
 var KEY='ckt-save-v2';
 function fresh(){
  var t=Date.now();
- return{v:2,clock:t,real:t,speed:1,name:'',nation:'shu',res:{silver:600,grain:1000,gold:20,merit:50,prestige:0},ord:11,
+ return{v:2,clock:t,real:t,speed:1,name:'',nation:'tl',f204:1,zgGiven:1,res:{silver:600,grain:1000,gold:20,merit:50,prestige:0},ord:11,
   b:{mc:1,house:[1,1,1,1,1],field:0,tech:0,market:0,barracks:0,train:0,acct:0,mint:0},q:[],q3:false,research:[],reserve:2000,levyUsed:0,levyAt:0,taxUsed:0,day:-99999,mu:[0,0,0],fs:0,vol:0,
-  tech2:{recruit:0},gens:{liubei:{lv:1,exp:0,troops:null,path:null,tier:1,reb:0,tb:0,bonus:{tong:0,dung:0,tri:0}}},train:[null,null,null],
-  fm:{act:0,pre:[{fid:'truong',c:{'2-1':'liubei'}},{fid:'ngu',c:{}},{fid:'phong',c:{}}],fl:{truong:1,ngu:1,phong:1,nhan:1,chuy:1,yen:1,that:1,bat:1}},
+  tech2:{recruit:0},gens:{lord:{lv:1,exp:0,troops:null,path:null,tier:1,reb:0,tb:40,bonus:{tong:0,dung:0,tri:0}}},train:[null,null,null],
+  fm:{act:0,pre:[{fid:'truong',c:{'2-1':'lord'}},{fid:'ngu',c:{}},{fid:'phong',c:{}}],fl:{truong:1,ngu:1,phong:1,nhan:1,chuy:1,yen:1,that:1,bat:1}},
   camp:{stage:{},flag:{},elite:{},eliteDone:{},mapDone:{},chest:{},hint:{}},auto:1,seen:{},hist:[]}}
 function load(){
  var raw=null;try{raw=localStorage.getItem(KEY)}catch(e){}
  var s=null;try{s=raw?JSON.parse(raw):null}catch(e){s=null}
  if(!s||s.v!==2||!s.res)s=fresh();
- S=s;if(S.gens.liubei&&S.gens.liubei.troops==null)S.gens.liubei.troops=gmax('liubei');
+ S=s;['liubei','lord'].forEach(function(g){if(S.gens[g]&&S.gens[g].troops==null)S.gens[g].troops=gmax(g)});
  var now=Date.now(),dt=Math.max(0,now-S.real);S.real=now;
  if(dt>20000){tick(Math.min(dt,86400000));if(dt>120000)S.offline=Math.min(dt,86400000)}}
 function save(){try{S.real=Date.now();localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -2559,7 +2560,7 @@ var _pwC={t:0,v:0};
 function myPower(){var now=Date.now();if(now-_pwC.t>3000){try{_pwC.v=powerOf(playerUnits(false))}catch(e){_pwC.v=0}_pwC.t=now}return _pwC.v}
 function renderTop(){
  var cap=10+S.b.mc,s=season(),left=((1-S.ord%1)/(s===0?1.5:1))*3600000,F=FAC[S.nation]||FAC.shu;
- var ava='<div class="ava"><div class="pw">'+(GART.liubei?artImg('liubei',true,' style="object-position:50% 30%;transform:scale(1.6) translateY(4%)"'):portraitSvg(LOOKS.liubei,S.nation,'hud'))+'</div><span class="lvb">Lv '+S.b.mc+'</span></div>';
+ var hg=S.gens&&S.gens.lord?'lord':'liubei',ava='<div class="ava"><div class="pw">'+(GART[hg]?artImg(hg,true,' style="object-position:50% 30%;transform:scale(1.6) translateY(4%)"'):portraitSvg(LOOKS[hg],S.nation,'hud'))+'</div><span class="lvb">Lv '+S.b.mc+'</span></div>';
  var who='<div class="who"><b>Chúa Công · '+F.n+'</b><span class="pwr">'+ic('power')+fmt(myPower())+'</span><span class="ssn">Mùa '+SEASONS[s].n+(S.speed>1?' · TEST x'+S.speed:'')+'</span></div>';
  var ord='<div class="ordc"><div class="cap">'+ic('order')+Math.floor(S.ord)+'/'+cap+'</div><small>'+(S.ord<cap?'+1 sau <b>'+fmtT(left)+'</b>':'Quân lệnh đầy')+'</small></div>';
  function ch(n,v){return'<div class="chip">'+ic(n)+'<b>'+v+'</b></div>'}
@@ -2998,6 +2999,7 @@ function A_(a,v,w,el){
  case'fight':{var f=v.split('|');fight(+f[0],+f[1],f[2]);break}
  case'spd':S.speed=+v;refresh();break;
  case'nation':S.nation=v;S.name='x';closeSheet();save();refresh();break;
+  case'wcgo':S.name='x';try{if(S.born==null)S.born=S.day}catch(e){}closeSheet();save();refresh();break;   /* V204: intro button (no faction yet) */
  case'reset':if(el.getAttribute('data-sure')){try{localStorage.removeItem(KEY)}catch(e){}S=fresh();save();closeSheet();tab='city';refresh();welcome()}else{el.setAttribute('data-sure','1');el.textContent='Chạm lần nữa để xác nhận'}break;
  case'bspd':{var cur=BT.speed;BT.speed=cur===1?2:cur===2?4:1;S.bspd=BT.speed;$('#bSpd').textContent=BT.speed+'x';break}
  case'bskip':BT.skip=true;break;
@@ -3015,9 +3017,10 @@ function welcome(){   /* V189: full-screen intro (user 2026-11-03 15:04 "make th
  openSheet(function(){var em='';for(var i=0;i<18;i++)em+='<i style="left:'+((i*37)%100)+'%;animation-delay:'+(-(i*0.83)%7).toFixed(2)+'s;animation-duration:'+(6+(i*7)%5)+'s"></i>';
   var F=[['shu','蜀','Thục','Nhân nghĩa · Lưu Bị','#2f7d4f'],['wei','魏','Ngụy','Bá đạo · Tào Tháo','#2d5a9a'],['wu','吳','Ngô','Giang Đông · Tôn Quyền','#a3332a']];
   return'<div class="wcbox"><div class="wcem" aria-hidden="true">'+em+'</div><div class="wcin"><h3 class="wclogo">'+(typeof gameName==='function'?gameName():'Bá Nghiệp')+'</h3><div class="wctag">Thống nhất thiên hạ</div>'+
-  '<p class="wcstory">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân.</p><div class="wcpick">Chọn thế lực của bạn</div><div class="wcfac">'+
-  F.map(function(f,i){return'<button class="wcf" data-a="nation" data-v="'+f[0]+'" style="--fc:'+f[4]+';animation-delay:'+(.35+i*.12)+'s"><b class="wcs">'+f[1]+'</b><span class="wcn">'+f[2]+'</span><span class="wcd">'+f[3]+'</span></button>'}).join('')+
-  '</div><p class="wcfoot">40 màn chinh chiến · 100 danh tướng</p></div></div>'})}
+  (S&&S.f204?'<p class="wcstory">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa, chưa theo phe nào. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân. Qua Màn 3, bạn sẽ chọn theo Thục, Ngụy hay Ngô.</p><div class="wcfac wcgo1"><button class="btn wcgo" data-a="wcgo">Bắt đầu chinh chiến</button></div>':
+  '<p class="wcstory">Bạn là một thái thú trẻ giữa thời Hoàng Cân khởi nghĩa. Thu thuế, xây thành, chiêu mộ tướng và đánh dẹp loạn quân.</p><div class="wcpick">Chọn thế lực của bạn</div>'+wcFacCards(F))+
+  '<p class="wcfoot">40 màn chinh chiến · 100 danh tướng</p></div></div>'})}
+function wcFacCards(F,rw){return'<div class="wcfac">'+F.map(function(f,i){var h=rw&&rw[f[0]]&&GENS[rw[f[0]]];return'<button class="wcf" data-a="nation" data-v="'+f[0]+'" style="--fc:'+f[4]+';animation-delay:'+(.35+i*.12)+'s"><b class="wcs">'+f[1]+'</b><span class="wcn">'+f[2]+'</span><span class="wcd">'+f[3]+'</span>'+(h?'<span class="wcd wcrw">Tặng tướng SR: <b>'+h.n+'</b></span>':'')+'</button>'}).join('')+'</div>'}
 /* boot */
 try{load()}catch(e){try{console.error('boot load',e)}catch(x){}}try{ensure()}catch(e){try{console.error('boot ensure',e)}catch(x){}}try{renderTop();renderStrip();renderMain()}catch(e){try{console.error('boot render',e)}catch(x){}}   /* V146: a render error here used to abort the whole script (game stuck) */
 if(!S.name)welcome();
@@ -5235,8 +5238,8 @@ var _rmCh=renderMain;renderMain=function(){var r=_rmCh.apply(this,arguments);try
               w:floor (Thông Thiên Tháp first clear) · b:boss (Thảo Phạt fragments)           */
 var HROS={
 /* ---------------- THỤC ---------------- */
- liubei:     ['Lưu Bị','shu','SSR','inf/sup',78,72,80,null,null,null,'start'],
- zhugeliang: ['Gia Cát Lượng','shu','SSR','str/sup',72,38,100,null,null,null,'start'],
+ liubei:     ['Lưu Bị','shu','SSR','inf/sup',78,72,80,null,null,null,'e:12'],   /* V204: was 'start' */
+ zhugeliang: ['Gia Cát Lượng','shu','SSR','str/sup',72,38,100,null,null,null,'e:13'],   /* V204: was 'start' */
  guanyu:     ['Quan Vũ','shu','SSR','inf/cav',92,97,75,{n:'Thanh Long Yển Nguyệt',pat:'lane',c:2.3,exec:.5},{crt:.15,dmg:.06},'Võ Thánh','c:0'],
  zhangfei:   ['Trương Phi','shu','SSR','inf/cav',85,98,45,{n:'Trường Bản Hống',pat:'row',c:1.75,stun:.25,moE:35},{lowHp:.25},'Vạn Nhân Địch','e:0'],
  zhaoyun:    ['Triệu Vân','shu','SSR','cav/inf',90,94,76,{n:'Thất Tiến Thất Xuất',pat:'single',hits:4,c:1.15},{dod:.12,dr:.06},'Đảm Lượng','c:2'],
@@ -10841,7 +10844,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V204';
+var BUILD='V205';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -10881,7 +10884,7 @@ function push(force,manual){var c=cl();if(busy||c.banned||!S||!S.name)return Pro
  .then(function(){busy=false})}
 window.cloudPush=function(){return push(false,true)};
 /* name sheet: asked once, after the nation is chosen */
-function nameSheet(){var cur=(S&&S.pname)||'';return'<h3>Tên của bạn</h3><p class="sm mute" style="margin:4px 0 10px">Tên hiển thị khi chơi thử, để quản trị viên tìm và gửi quà cho bạn. Không cần email hay mật khẩu.</p>'+
+function nameSheet(){var cur=(S&&S.pname)||'';return(S&&S.f204?'<h3>Tên chủ tướng của bạn</h3><p class="sm mute" style="margin:4px 0 10px">Vị tướng đầu tiên của bạn mang tên này trên chiến trường. Đây cũng là tên hiển thị để quản trị viên tìm và gửi quà. Không cần email hay mật khẩu.</p>':'<h3>Tên của bạn</h3><p class="sm mute" style="margin:4px 0 10px">Tên hiển thị khi chơi thử, để quản trị viên tìm và gửi quà cho bạn. Không cần email hay mật khẩu.</p>')+
  '<input id="clnm" class="ainp" type="text" maxlength="16" placeholder="Ví dụ: Tử Long" autocomplete="off" value="'+cur.replace(/"/g,'&quot;')+'">'+
  '<div class="row" style="margin-top:10px"><button class="btn sp" data-a="clname">Lưu tên</button></div><p class="sm mute" style="margin-top:8px">2–16 ký tự. Có thể đổi sau trong Thêm › Tài khoản.</p>'}
 function askName(){if(asked||!S||!S.name||S.pname)return;if(typeof fighting!=='undefined'&&fighting)return;var m=document.getElementById('modal');if(m&&!m.hidden)return;asked=true;openSheet(nameSheet)}
@@ -12459,4 +12462,66 @@ try{var _hpS2=hfxPlay;hfxPlay=function(g,k){if(BT.s2c&&k==='cmd')return;return _
 var _btRunS2=btRun;
 btRun=function(res){try{BT.list.forEach(function(d){var sk=d.u.skin;if(sk&&S2FX[sk]&&S2FX[sk].pre)S2FX[sk].pre.forEach(function(q){sigImg(q[0],q[1])})})}catch(e){}return _btRunS2(res)};
 })();
+/* ===== V204 new-player start (user 2026-11-03 20:32 + answers 20:35/20:40) =====
+   (1) The faction choice comes later: new saves start as an independent lord (nation 'tl', "Tự Lập", steel colour) and
+       choose Thục / Ngụy / Ngô after clearing Màn 3. Picking a side gives one SR hero of that faction (Ngụy Diên /
+       Từ Hoảng / Cam Ninh — mid SR, similar hero-swap scores). The Thiên hạ world map stays locked until then.
+   (2) No SSR at start: the starting hero is the player's own general `lord` (R, infantry all-rounder), named with the
+       player name (S.pname). Lưu Bị and Gia Cát Lượng are no longer free (fresh save + zgGiven); they come from the
+       Màn 13 / 14 elite shards (heroes.js src e:12 / e:13).
+   Only saves made from V204 on have S.f204; older saves keep their faction, Lưu Bị and Gia Cát Lượng.
+   Everything is wrapped: an error here never stops the game. */
+var F204SR={shu:'weiyan',wei:'xuhuang',wu:'ganning'};
+(function(){try{
+ var L=GENS.lord;
+ /* the general carries the player's name and the player's faction */
+ Object.defineProperty(L,'n',{configurable:true,get:function(){try{return(S&&S.pname)||'Chủ Công'}catch(e){return'Chủ Công'}},set:function(){}});
+ Object.defineProperty(L,'fac',{configurable:true,get:function(){try{return S&&['shu','wei','wu'].indexOf(S.nation)>=0?S.nation:'tl'}catch(e){return'tl'}},set:function(){}});
+ L.br0='inf';L.brs=['inf','cav'];L.pn=null;L.ds=typeof tdesc==='function'?tdesc(L.tact):L.ds;
+ if(typeof GBRS!=='undefined')GBRS.lord=['inf','cav'];
+ /* code-drawn look until the art agent paints his portrait */
+ if(typeof LOOKS!=='undefined'&&!LOOKS.lord){var lk=genericLook('inf','tl');lk.robe='#5d6f86';lk.hc='#3a4656';lk.beard='moust';LOOKS.lord=lk}
+ if(typeof SPL!=='undefined'&&!SPL.lord){var b=SPL.chuthuong||{};SPL.lord=Object.assign({},b,{aura:'#a9c4e6',aura2:'#ffffff',bg:'#141c28',robe:'#4a5c74',robe2:'#2a3546',trim:'#d9b45a',plume:'#a9c4e6',band:'#4a5c74',rar:'R',scar:0,old:0})}
+ if(typeof FACN!=='undefined'&&!FACN.tl)FACN.tl='Tự Lập';
+ /* styles: intro button, reward line, locked world tab */
+ var st=document.createElement('style');st.id='st204css';st.textContent=
+  '.wcgo1{display:flex;justify-content:center;margin-top:14px}.wcgo{min-width:220px;min-height:48px;font-size:17px}'+
+  '.wcf .wcrw{grid-column:2;grid-row:3;margin-top:4px;color:#f1cf6a!important}.wcrw b{color:#fff}'+
+  'body.bn-tl [data-a="tab"][data-v="world"]{opacity:.45;filter:grayscale(.8)}';
+ document.head.appendChild(st);
+}catch(e){}})();
+
+/* the general has no painted portrait yet: code-drawn, without the name banner (no text in art) */
+(function(){try{var _ha=heroArt;heroArt=function(id,mode){if(id==='lord'&&typeof GART!=='undefined'&&!GART.lord&&typeof splashSvg==='function'){try{var o={banner:false};if(mode==='card')o.crop='card';var h=splashSvg('lord',o);return mode==='show'?h.replace('xMidYMid slice','xMidYMid meet'):h}catch(e){}}return _ha(id,mode)}}catch(e){}})();
+/* the later faction pick */
+function f204Due(){try{return!!(S&&S.f204&&S.nation==='tl'&&S.camp&&S.camp.mapDone&&S.camp.mapDone[2])}catch(e){return false}}
+function factionSheet(){var em='';for(var i=0;i<18;i++)em+='<i style="left:'+((i*37)%100)+'%;animation-delay:'+(-(i*0.83)%7).toFixed(2)+'s;animation-duration:'+(6+(i*7)%5)+'s"></i>';
+ var F=[['shu','蜀','Thục','Nhân nghĩa · Lưu Bị','#2f7d4f'],['wei','魏','Ngụy','Bá đạo · Tào Tháo','#2d5a9a'],['wu','吳','Ngô','Giang Đông · Tôn Quyền','#a3332a']];
+ return'<div class="wcbox"><div class="wcem" aria-hidden="true">'+em+'</div><div class="wcin"><h3 class="wclogo">Chọn phe</h3><div class="wctag">Thiên hạ tam phân</div>'+
+  '<p class="wcstory">Ba lần đại thắng, danh tiếng '+esc(GENS.lord.n)+' đã vang khắp thiên hạ. Ba thế lực lớn đều gửi thư mời. Bạn sẽ theo ai? Phe đã chọn quyết định màu cờ, bên của bạn trên bản đồ Thiên hạ và tặng một tướng SR.</p>'+
+  '<div class="wcpick">Chọn thế lực của bạn</div>'+wcFacCards(F,F204SR)+'<p class="wcfoot">Lựa chọn này không đổi được sau này.</p></div></div>'}
+var F204={shown:0};
+(function(){try{
+ var _A=A_;A_=function(a,v,w,el){
+  try{
+   if(a==='nation'&&S&&S.f204&&S.nation==='tl'&&F204SR[v]){var r=_A(a,v,w,el),id=F204SR[v],G=GENS[id];
+    if(G){if(!S.gens[id]&&typeof joinHero==='function'){joinHero(id,true);toast(FAC[v].n+' chào đón bạn · '+G.n+' gia nhập!')}
+     else{var fr=typeof hfr==='function'?hfr():null;if(fr){fr[id]=(fr[id]||0)+(HFRAG[G.rar]||30)}toast(FAC[v].n+' chào đón bạn · +'+(HFRAG[G.rar]||30)+' mảnh '+G.n)}}
+    try{save();refresh()}catch(e){}return r}
+   if(a==='tab'&&v==='world'&&S&&S.nation==='tl'){toast('Bản đồ Thiên hạ mở khi bạn chọn phe (sau khi qua Màn 3)');return}
+  }catch(e){}
+  return _A(a,v,w,el)};
+}catch(e){}})();
+/* show the pick when it is due, the screen is free and no battle runs; if closed, ask again after 90 s */
+(function(){try{setInterval(function(){try{
+ document.body.classList.toggle('bn-tl',!!(S&&S.nation==='tl'));
+ if(!f204Due())return;if(typeof fighting!=='undefined'&&fighting)return;
+ var m=document.getElementById('modal');if(m&&!m.hidden)return;if(document.querySelector('.vp,.mapclear,.mclr'))return;
+ if(Date.now()-F204.shown<90000)return;F204.shown=Date.now();openSheet(factionSheet)}catch(e){}},1000)}catch(e){}})();
+/* enemy colours: the independent player is steel, so Hoàng Cân / Quần Hùng enemies keep their own colours */
+/* new-start early curve: without the two starting SSRs, Màn 1–2 were a 3-day wall for a free player (bot V204 stuck at 0-7
+   days 1–4). For V204 saves only, Màn 1–2 campaign enemies (stage + elite) field F204EK of their attack and troops. */
+var F204EK=[.7,.8,.9];
+(function(){try{var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{if(S&&S.f204&&(kind==='stage'||kind==='elite')&&F204EK[mi]!=null){var k=F204EK[mi];
+ (r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)})}}catch(e){}return r}}catch(e){}})();
 </script>
