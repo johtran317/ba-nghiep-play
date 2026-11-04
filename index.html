@@ -11023,7 +11023,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V255';
+var BUILD='V256';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14347,4 +14347,64 @@ try{var _rm=renderMain;renderMain=function(){if(busy()){pend.main=1;return}retur
 try{var _rf=refresh;refresh=function(){if(busy()){pend.refresh=1;return}return _rf.apply(this,arguments)}}catch(e){}
 try{var _ud=updDyn;updDyn=function(){if(busy()){pend.dyn=1;return}return _ud.apply(this,arguments)}}catch(e){}
 })();
+/* ================= V256 (art agent, user 2026-11-04 14:43, Binh Đạo screenshot: "this upgrade screen is very confusing. organize it,
+   add some pictures to help players quickly grab what is needed to upgrade").
+   Last treeSheet wrapper (DOM post-processing; logic, costs and actions untouched; on any error the old screen is returned).
+   A "BƯỚC TIẾP THEO" card right under the troop header names the ONE next upgrade and shows every requirement as a picture tile
+   (art already in the build: obj.webp silver / merit / Binh Thư / Binh Phù / hourglass, the hero's own small portrait, the Quân Cơ Xứ
+   building, the prestige star for Chuyển sinh) with "have / need" — green tick when met, red when short — plus ONE button:
+     ★ < 5 (Bậc 1–4)        → Thăng tinh ★n+1 (tstar)            tiles: Bạc, Binh Thư
+     ★5, Bậc 1–2            → Luyện Bậc n+1 (res2 / res3)         tiles: Tướng Lv, Quân Cơ Xứ, (Chuyển sinh), Bạc, Chiến công, thời gian
+     ★5, Bậc 3              → Chọn hình thái Bậc 4 ↓ (scrolls)    tiles: Quân Cơ Xứ, Chuyển sinh, Binh Phù, Bạc, Chiến công, thời gian
+   Bậc 5 (beast stones) and a running training keep their own blocks (no card). The duplicate Thăng tinh row in Tinh luyện is removed
+   when the card shows it. New action bd256go (scroll to the Bậc 4 forms; checked unused). */
+(function(){try{
+ function tile(icon,lab,have,need,f){var ok=have>=need,F=f||function(x){return x>=10000?(Math.floor(x/100)/10).toString().replace(/\.0$/,'').replace('.',',')+'K':fmt(x)};
+  return'<div class="bd6t'+(ok?' ok':' no')+'"><span class="bd6i">'+icon+'</span><small>'+lab+'</small><b><em>'+F(have)+'</em> / '+F(need)+'</b>'+(ok?'<i class="bd6k">✓</i>':'')+'</div>'}
+ function timeT(h){return'<div class="bd6t tm"><span class="bd6i">'+objH('hour')+'</span><small>Thời gian</small><b>'+h+' giờ</b></div>'}
+ function heroI(gid){try{var a=GART[gid];if(a&&a.sm)return'<img src="'+a.sm+'" alt="" style="object-position:'+(a.pos||'50% 18%')+'">'}catch(e){}return objH('chest')}
+ var TECH='<img src="art/buildings/in_tech.webp" alt="" class="bd6b">',REB='<svg class="ic bd6s" viewBox="0 0 24 24"><use href="#i-prestige"></use></svg>';
+ function card(gid){var g=S.gens[gid],G=GENS[gid];if(!g||!G)return'';var tier=g.tier||1,st=gStar(gid),TT=tp(),bk=bkTotal(),br=G.br;
+  if(tier>=5||S.research.some(function(r){return r.gid===gid}))return'';
+  var slots=S.research.length<2,stars='';for(var i=1;i<=5;i++)stars+='<i class="'+(i<=st?'on':'')+'">★</i>';
+  var o='<div class="bd6c"><div class="bd6h"><span>Bước tiếp theo</span><span class="bd6st">'+stars+'</span></div>';
+  if(st<5){var sc=starCost(tier,st),ok=S.res.silver>=sc.s&&bk>=sc.b;
+   o+='<div class="bd6tt">Thăng tinh ★'+(st+1)+'</div><div class="bd6d">+4% công / thủ, +3% quân · đủ ★5 để mở '+(tier<4?'Bậc '+(tier+1):'Bậc 5')+'</div>'+
+    '<div class="bd6g">'+tile(objH('silver'),'Bạc',S.res.silver,sc.s)+tile(objH('book'),'Binh Thư',bk,sc.b)+'</div>'+
+    '<button class="btn bd6go" data-a="tstar" data-v="'+gid+'"'+(ok?'':' disabled')+'>'+(ok?'Thăng tinh ★'+(st+1):'Chưa đủ nguyên liệu')+'</button></div>';return o}
+  if(tier<=2){var nx=tier+1,R=nx===2?{lv:30,te:20,rb:0,s:20000,m:2000,h:2,a:'res2'}:{lv:0,te:50,rb:1,s:150000,m:15000,h:8,a:'res3'};
+   var t='';if(R.lv)t+=tile(heroI(gid),'Tướng Lv',g.lv,R.lv);t+=tile(TECH,'Quân Cơ Xứ',S.b.tech||0,R.te);if(R.rb)t+=tile(REB,'Chuyển sinh',g.reb||0,R.rb);
+   t+=tile(objH('silver'),'Bạc',S.res.silver,R.s)+tile(objH('merit'),'Chiến công',S.res.merit,R.m)+timeT(R.h);
+   var ok=g.lv>=R.lv&&(S.b.tech||0)>=R.te&&(g.reb||0)>=R.rb&&S.res.silver>=R.s&&S.res.merit>=R.m;
+   o+='<div class="bd6tt">Luyện Bậc '+nx+' · '+LIN[br][nx-1]+'</div><div class="bd6d">'+LIND[br][nx-1]+'</div><div class="bd6g">'+t+'</div>'+
+    '<button class="btn bd6go" data-a="'+R.a+'" data-v="'+gid+'" data-w="L"'+(ok&&slots?'':' disabled')+'>'+(!slots?'Hết lượt luyện (2/2)':ok?'Luyện Bậc '+nx+' · '+R.h+' giờ':'Chưa đủ điều kiện')+'</button></div>';return o}
+  if(tier===3){var t4=tile(TECH,'Quân Cơ Xứ',S.b.tech||0,60)+tile(REB,'Chuyển sinh',g.reb||0,2)+tile(objH('phu'),'Binh Phù',TT.phu||0,10)+tile(objH('silver'),'Bạc',S.res.silver,600000)+tile(objH('merit'),'Chiến công',S.res.merit,60000)+timeT(24);
+   o+='<div class="bd6tt">Lên Bậc 4 · chọn hình thái</div><div class="bd6d">Công / thủ ×1.3, quân +12% và hiệu ứng riêng của hình thái.</div><div class="bd6g">'+t4+'</div>'+
+    '<button class="btn bd6go" data-a="bd256go">Chọn hình thái ↓</button></div>';return o}
+  return''}
+ var _ts=treeSheet;treeSheet=function(gid){var h=_ts.apply(this,arguments);try{var c=card(gid);if(!c)return h;
+   var d=document.createElement('div');d.innerHTML=h;
+   var bf=d.querySelector('.tbuf');if(!bf)return h;bf.insertAdjacentHTML('afterend',c);
+   if(c.indexOf('data-a="tstar"')>0){var r=d.querySelector('section.hs .hsa [data-a="tstar"]');if(r){var row=r.closest('.hsa');if(row)row.remove()}}
+   return d.innerHTML}catch(e){try{console.warn('bd256',e)}catch(x){}return h}};
+ var _A=A_;A_=function(a,v,w,el){if(a==='bd256go'){try{var t=document.querySelector('#sheet .tf4');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}return}return _A.apply(this,arguments)};
+ var st=document.createElement('style');st.id='bd256css';st.textContent=
+  '#sheet .bd6c{margin:12px 0 4px;padding:14px 14px 14px;border-radius:16px;background:linear-gradient(180deg,rgba(70,50,26,.55),rgba(26,18,12,.75));border:1.5px solid rgba(241,207,106,.6);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35)}'+
+  '#sheet .bd6h{display:flex;align-items:center;justify-content:space-between;font:700 11.5px var(--ds-fb,sans-serif);letter-spacing:.14em;text-transform:uppercase;color:#e2b25a}'+
+  '#sheet .bd6st{letter-spacing:1px;font-size:15px}#sheet .bd6st i{font-style:normal;color:rgba(255,255,255,.18)}#sheet .bd6st i.on{color:#f2c94e}'+
+  '#sheet .bd6tt{margin-top:6px;font:700 21px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}'+
+  '#sheet .bd6d{margin-top:2px;font-size:13px;color:var(--ds-mu,#b9a98a)}'+
+  '#sheet .bd6g{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin:12px 0}'+
+  '#sheet .bd6t{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;border-radius:12px;background:rgba(0,0,0,.28);border:1px solid rgba(226,178,90,.22);text-align:center}'+
+  '#sheet .bd6t.no{border-color:rgba(224,82,75,.55);background:rgba(90,20,14,.25)}#sheet .bd6t.ok{border-color:rgba(108,194,131,.5)}'+
+  '#sheet .bd6i{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;overflow:hidden}'+
+  '#sheet .bd6i .objx{width:40px!important;height:40px!important}#sheet .bd6i img{width:100%;height:100%;object-fit:cover}#sheet .bd6i img.bd6b{object-fit:contain}'+
+  '#sheet .bd6i .bd6s{width:30px;height:30px;color:#f2c94e}'+
+  '#sheet .bd6t small{font-size:11.5px;color:var(--ds-mu,#b9a98a);line-height:1.15}'+
+  '#sheet .bd6t b{font:700 14px/1.1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#d9c9a8;white-space:nowrap}#sheet .bd6t b em{font-style:normal;color:#fff2cf}'+
+  '#sheet .bd6t.no b em{color:#ff8a7a}#sheet .bd6t.ok b em{color:#8fe0a6}#sheet .bd6t.tm b{color:#fff2cf}'+
+  '#sheet .bd6k{position:absolute;top:-7px;right:-5px;width:20px;height:20px;border-radius:50%;background:#2f7d4f;color:#eaffef;font:700 12px/20px sans-serif;font-style:normal;box-shadow:0 0 0 2px #1a120c}'+
+  '#sheet .bd6go{width:100%;min-height:46px}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('bd256',e)}catch(x){}}})();
 </script>
