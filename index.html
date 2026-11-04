@@ -804,11 +804,11 @@ function battle(att,def,seed,opt){
   /* V148 Đoạt khí: a stealing skill takes morale from the enemy holding the most and gives it to our strongest caster */
   if(T.lockT){var lf=living(fo).filter(function(f){return f.canCast&&!f.t.noMorale}).sort(function(x,y){return y.morale-x.morale})[0];if(lf&&rng()<Math.pow(LKDEC,lf.lkN||0)){lf.lkN=(lf.lkN||0)+1;lf.st.lock=Math.max(lf.st.lock||0,T.lockT+1);if(T.lockD)lf.morale=Math.max(0,lf.morale-T.lockD);(ev.est||(ev.est=[])).push({id:lf.id,k:'lock'})}}/* V181 skill morale lock */
   if(T.steal){var mf=living(fo).sort(function(x,y){return y.morale-x.morale})[0];if(mf&&mf.morale>0){var sv=Math.min(T.steal,mf.morale);mf.morale-=sv;var mc=living(mates).filter(function(m){return m!==u&&m.canCast&&!m.t.noMorale}).sort(function(x,y){return y.A-x.A})[0];if(mc&&!(mc.st.lock>0))mc.morale+=sv;ev.steal={from:mf.id,to:mc?mc.id:null,v:sv}}}
-  if(T.pat==='heal'){var shp=healShapeOf(u),LM=healTargets(u,living(mates),shp),hdk=Math.pow(HDEC,u.hcN||0);u.hcN=(u.hcN||0)+1;LM.forEach(function(m){var hsk=(m.hR===R?HSTK:1)*Math.pow(HRK,m.hRc||0);m.hR=R;m.hRc=(m.hRc||0)+1;var h=Math.min(Math.round((m.max-m.troops)*HLOST),Math.round(SPD*m.max*T.heal*HSHM[shp]*(u.healB||1)*Math.min(mult,HMCAP)*hdk*hsk*HFAT(R)*(TWRULE===5?.5:1)));m.troops+=h;if(!(m.st.lock>0))m.morale+=T.mo||0;if(T.cleanse){m.st.burn=0;m.st.stun=0;m.st.chaos=0;m.st.poi=0;m.st.poiV=0}ev.tg.push({id:m.id,res:'heal',d:h})});return}
+  if(T.pat==='heal'){var shp=healShapeOf(u),LM=healTargets(u,living(mates),shp),hdk=Math.pow(HDEC,u.hcN||0);u.hcN=(u.hcN||0)+1;LM.forEach(function(m){var hsk=(m.hR===R?HSTK:1)*Math.pow(HRK,m.hRc||0);m.hR=R;m.hRc=(m.hRc||0)+1;var h=Math.min(Math.round((m.max-m.troops)*HLOST),Math.round(SPD*m.max*T.heal*HSHM[shp]*(u.healB||1)*Math.min(mult,HMCAP)*hdk*hsk*HFAT(R)*(TWRULE===5?.5:1)));m.troops+=h;if(!(m.st.lock>0))m.morale+=T.mo||0;if(T.cleanse){m.st.burn=0;m.st.stun=0;m.st.chaos=0;m.st.poi=0;m.st.poiV=0}if(T.cln){var cq=m.st;cq.weak=0;cq.ddown=0;cq.chill=0;cq.sil=0;cq.lock=0;ev.tg.push({id:m.id,res:'cln'})}/* V203: full cleanse on heal skills too */ev.tg.push({id:m.id,res:'heal',d:h})});return}
   var t=pickTarget(u,fo),ts=pattern(T.pat,t,fo),ty=T.type==='strategy'?'strategy':'tactic';
   if(T.hits){ts=[];for(var hk=0;hk<T.hits;hk++){var LL=living(fo);if(!LL.length)break;var hx=LL[Math.floor(rng()*LL.length)];if(ts.indexOf(hx)<0)ts.push(hx);hit(u,hx,ty,T.c*mult*((T.exec&&hx.troops/hx.max<.5)?1+T.exec:1),ev.tg)}}
   else if(!T.noHit)ts.forEach(function(x){if(x.troops>0)hit(u,x,ty,T.c*mult*((T.exec&&x.troops/x.max<.5)?1+T.exec:1),ev.tg)});else ts.forEach(function(x){if(x.troops>0)ev.tg.push({id:x.id,res:'fx'})});   /* V202 noHit: status-only skills (skin redesign) */
-  if(T.shield){var shk=(TWRULE===5?.5:1);/* V178: skill shields no longer fade (user 2026-11-03 07:14); regen still fades */(T.shSelf?[u]:living(mates)).forEach(function(m){m.st.shield=Math.max(m.st.shield,Math.round(m.max*T.shield*DMGK*mult*shk))})}   /* V202 shSelf: barrier on the caster only */
+  if(T.shield){var shk=(TWRULE===5?.5:1);/* V178: skill shields no longer fade (user 2026-11-03 07:14); regen still fades */(T.shSelf?[u]:living(mates)).forEach(function(m){if(T.shT)m.st.shT=T.shT;m.st.shield=Math.max(m.st.shield,Math.round(m.max*T.shield*DMGK*mult*shk))})}   /* V202 shSelf: barrier on the caster only */
   if(T.cln)living(mates).forEach(function(m){var q=m.st;q.burn=0;q.stun=0;q.chaos=0;q.poi=0;q.poiV=0;q.weak=0;q.ddown=0;q.chill=0;q.sil=0;q.lock=0;ev.tg.push({id:m.id,res:'cln'})});   /* V202 cln: cleanse every ally (non-heal skills) */   /* V175: skill shields fade with fight length like heals (HFAT) */
   if(T.moE)living(fo).forEach(function(f){var lost=(f.mdR===R?f.mdV:0),cut=Math.max(0,Math.min(T.moE,MODRCAP-lost));f.mdR=R;f.mdV=lost+cut;f.morale=Math.max(0,f.morale-cut)});
   if(T.taunt)u.st.taunt=1;
@@ -858,7 +858,7 @@ function battle(att,def,seed,opt){
   if(u.t.noBurn)u.st.burn=0;
   if(u.st.burn>0){var bd=Math.max(1,Math.round(.08*DMGK*u.troops));u.troops=Math.max(0,u.troops-bd);u.st.burn--;ev.burn=bd}
   if(u.st.poi>0){var pd=Math.max(1,Math.min(u.troops,Math.round((u.st.poiV||.03)*DMGK*u.max)));u.troops=Math.max(0,u.troops-pd);u.st.poi--;if(!u.st.poi)u.st.poiV=0;ev.burn=(ev.burn||0)+pd;ev.poi=pd}/* V181 poison: share of FULL troops per own turn */
-  if(u.st.taunt>0)u.st.taunt--;if(u.st.flip>0)u.st.flip--;if(u.st.lock>0)u.st.lock--;
+  if(u.st.shT>0){u.st.shT--;if(!u.st.shT)u.st.shield=0}/* V203 shT: a skill barrier with a duration fades after that many of the holder's turns (skin skills only) */if(u.st.taunt>0)u.st.taunt--;if(u.st.flip>0)u.st.flip--;if(u.st.lock>0)u.st.lock--;
   if(typeof T5TICK==='function')T5TICK(u,API5);
   if(u.troops<=0){ev.kind='dead';emit(ev);return}
   if(u.st.stun>0){u.st.stun--;ev.kind='stun';emit(ev);return}
@@ -5563,7 +5563,7 @@ function skOn(g){return!!skWorn(g)}
 function skData(g){var w=skWorn(g);return w?SKL[w]:null}
 function skMul(k){return 1+.02*Math.max(0,skStar(k)-1)}
 function skVariant(k,starM){var K=SKL[k],T=Object.assign({},K.t),f=(SKFAC[k]||1)*(starM||1);
- if(T.pat==='heal')T.heal=Math.round(T.heal*f*1000)/1000;else T.c=Math.round(T.c*f*100)/100;if(!T.cost)T.cost=100;return T}
+ if(T.pat==='heal')T.heal=Math.round(T.heal*f*1000)/1000;else if(T.c!=null)T.c=Math.round(T.c*f*100)/100;if(T.noHit&&T.shield)T.shield=Math.round(T.shield*f*1000)/1000;/* V203: no-damage skills (no c) scale their barrier with stars instead of c */if(!T.cost)T.cost=100;return T}
 function skTact(g){var w=skWorn(g);return w?skVariant(w,skMul(w)):GENS[g].tact}
 /* migrate the earlier one-skin-per-hero save data */
 function skMigrate(){var s=skS();Object.keys(s).forEach(function(k){if(SKL[k]||k.indexOf('|')>0)return;var nk=skinsOf(k)[0];if(nk&&!s[nk]){s[nk]={st:s[k].st||(s[k].own?1:0),p:s[k].p||0};if(s[k].on!==0&&s[nk].st)skW()[k]=nk}delete s[k]})}
@@ -10841,7 +10841,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V202';
+var BUILD='V203';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12050,16 +12050,17 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    SKIN2ON stays false until the numbers pass the skin-vs-hero sims (sim/skin2.js) AND a coding/balance-agent review.
    Engine hooks used (engine.js, inert otherwise): noHit, shSelf, cln. */
 var SKIN2ON=false;
-var SKIN2={   /* numbers from sim/skin2tune.js (2026-11-03): ~50% vs the hero's base skill +10%, long and short fights */
- zhugeliang_a:{n:'Bát Trận Đồ',pat:'all',noHit:1,shield:.3,ardr:.1,ardrT:2,cln:1},
- zhugeliang_b:{n:'Thất Tinh Lôi Phạt',pat:'single',type:'strategy',hits:7,c:.74,stun:.2,amo:15},
- lubu_a:{n:'Thiên Hạ Đệ Nhất Kích',pat:'cross',c:2.13,exec:.6,ddown:.25,ddownT:3,eS:1},
- lubu_b:{n:'Ma Thần Đoạt Hồn',pat:'all',c:1.4,drain:.3,weak:.2,weakT:2,eS:1},
- guanyu_a:{n:'Thanh Long Hiển Thánh',pat:'row',c:2.0,ddown:.15,ddownT:3,eS:1,amo:15},
- zhaoyun_a:{n:'Đơn Kỵ Phá Trận',pat:'lane',c:2.22,cln:1,shield:.2,shSelf:1},
- caocao_a:{n:'Hiệp Thiên Tử Lệnh Chư Hầu',pat:'cross',c:1.28,poi:.04,poiT:3,lockT:1,amo:30},
- zhangfei_a:{n:'Đương Dương Kiều Đoạn',pat:'all',c:1.31,taunt:1,shield:.41,shSelf:1,weak:.2,weakT:2,eS:1},
- diaochan_a:{n:'Bế Nguyệt Hoa Vũ',pat:'heal',hs:'all',heal:.12,cleanse:1,mo:30}};
+var SKIN2={   /* V203 numbers (coding balance review 2026-11-03, user 19:55 Bát Trận .18, 20:04 "a both skin fix": Thanh Long hits a column, skill barriers last 2 turns).
+   Fair sims (sim/skin2q.js troops /2 short fights, N=400; sim/tn.js Q=1): every skin ~+10% over its hero's base skill on average. */
+ zhugeliang_a:{n:'Bát Trận Đồ',pat:'all',noHit:1,shield:.18,shT:2,ardr:.1,ardrT:2,cln:1},
+ zhugeliang_b:{n:'Thất Tinh Lôi Phạt',pat:'single',type:'strategy',hits:7,c:.95,stun:.2,eS:1,amo:15},
+ lubu_a:{n:'Thiên Hạ Đệ Nhất Kích',pat:'cross',c:1.7,exec:.5,ddown:.25,ddownT:3,eS:1},
+ lubu_b:{n:'Ma Thần Đoạt Hồn',pat:'all',c:1.35,drain:.3,weak:.2,weakT:2,eS:1},
+ guanyu_a:{n:'Thanh Long Hiển Thánh',pat:'lane',c:2.7,ddown:.15,ddownT:3,eS:1,amo:15},
+ zhaoyun_a:{n:'Đơn Kỵ Phá Trận',pat:'lane',c:1.85,cln:1,shield:.2,shT:2,shSelf:1},
+ caocao_a:{n:'Hiệp Thiên Tử Lệnh Chư Hầu',pat:'cross',c:1.0,poi:.04,poiT:3,lockT:1,amo:20},
+ zhangfei_a:{n:'Đương Dương Kiều Đoạn',pat:'all',c:2.0,taunt:1,shield:.3,shT:2,shSelf:1,weak:.2,weakT:2,eS:1},
+ diaochan_a:{n:'Bế Nguyệt Hoa Vũ',pat:'heal',hs:'all',heal:.15,cleanse:1,cln:1,mo:20}};
 function skin2Apply(){try{for(var k in SKIN2)if(SKL[k])SKL[k].t=Object.assign({},SKIN2[k])}catch(e){}}
 if(SKIN2ON)skin2Apply();
 </script>
