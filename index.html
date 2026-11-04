@@ -6722,7 +6722,7 @@ fmSheet=function(){
  h+=fmNotes();
  h+=fmFormPanel(P,F,fl,di);
  h+=fmRoster(P,placed);
- h+='<div class="fm2-bar">'+(fmRet?'<button class="btn wide" data-a="fmback">'+(placed.length?'Quay lại trận ▸':'Quay lại')+'</button>':'<button class="btn wide" data-a="close">Xong</button>')+'</div>';
+ h+='<div class="fm2-bar">'+(fmRet?'<button class="btn wide" data-a="fmback">'+(placed.length?'Xong ▸':'Quay lại')+'</button>':'<button class="btn wide" data-a="close">Xong</button>')+'</div>';
  return h+'</div>'};
 var _AFM=A_;
 A_=function(a,v,w,el){
@@ -10860,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V219';
+var BUILD='V220';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12852,4 +12852,98 @@ function tw217Sheet(){var rw=twReward(1),r25=twReward(25);
   'body.tw217lk [data-a="tower"]::after{content:"Màn 7";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font:700 10px/1.4 var(--ds-fb,"Be Vietnam Pro",sans-serif);color:#f6e6c4;background:rgba(20,14,10,.85);border:1px solid rgba(226,178,90,.5);border-radius:6px;padding:0 4px;white-space:nowrap;pointer-events:none}';
  document.head.appendChild(st);
 }catch(e){}})();
+/* ================= V220 (art agent, user 2026-11-04 07:07 "these three pre-battle screens don't flow well, rethink" + 07:28
+   "Tình báo, Phần thưởng, Quân sư should be combined into one tab; when the user taps it, show those three in a separate window") =================
+   The stage sheet becomes the one place to get ready for a fight (no detour to Bày trận):
+   · our board is edited in place: drag (V193) to move, × on a hero to take it off, tap a hero in the strip below to put it on;
+     Đội 1/2/3 switch right on the board; "Trận pháp ›" still opens the full Bày trận for deep work;
+   · problems sit on the board: a misplaced hero gets an amber outline + one tip line with "Tự xếp" (moves only the misplaced heroes),
+     missing troops = one chip with Hồi binh;
+   · Tình báo / Phần thưởng / Quân sư leave the stage sheet: one row shows the key counter line and opens them in their own window
+     (3 tabs there); the stage sheet keeps the board, the warnings and the sticky Tấn công bar. */
+var PV220={mi:0,si:0,kind:'stage'},PV220T='intel';
+function pv220Warn(){var o={};try{var P=fmP(),F=FORM[P.fid],di=deployInfo(P.fid).n;Object.keys(P.c).filter(function(k){return S.gens[P.c[k]]&&F.cells.indexOf(k)>=0}).sort().slice(0,di).forEach(function(k){
+  var g=P.c[k],br=GENS[g].br,path=S.gens[g].path,r=+k.charAt(0),n=g==='lord'&&S.pname?S.pname:GENS[g].n;
+  if(r===0&&/arc|str|sup|mac/.test(br))o[k]={n:n,t:'ở hàng trước',why:BRN[br]+' nên đứng hàng sau'};
+  else if(r===2&&(br==='inf'||(br==='cav'&&path!=='A')))o[k]={n:n,t:'ở hàng sau',why:BRN[br]+' nên đứng hàng trước'}})}catch(e){}return o}
+function pv220Fix(){var P=fmP(),F=FORM[P.fid],W=pv220Warn(),moved=0;
+ Object.keys(W).forEach(function(k){var g=P.c[k];if(!g)return;var front=W[k].t==='ở hàng sau',rows=front?[0,1]:[2,1],to=null;
+  rows.some(function(r){for(var l=0;l<3;l++){var c=r+'-'+l;if(F.cells.indexOf(c)>=0&&!(P.c[c]&&S.gens[P.c[c]])){to=c;return true}}return false});
+  if(!to)rows.some(function(r){for(var l=0;l<3;l++){var c=r+'-'+l,h=P.c[c];if(F.cells.indexOf(c)>=0&&h&&S.gens[h]&&!W[c]){to=c;return true}}return false});
+  if(to){var t=P.c[to];P.c[to]=g;if(t&&S.gens[t])P.c[k]=t;else delete P.c[k];moved++}});
+ S.fmMan=1;save();return moved}
+function pv220Strip(){var P=fmP(),on={},x='';Object.keys(P.c).forEach(function(k){if(S.gens[P.c[k]])on[P.c[k]]=1});
+ var L=Object.keys(S.gens).filter(function(g){return GENS[g]&&!on[g]});
+ L.sort(function(a,b){var pa=0,pb=0;try{pa=genPower(a);pb=genPower(b)}catch(e){pa=S.gens[a].lv;pb=S.gens[b].lv}return pb-pa});
+ L.slice(0,14).forEach(function(g){var z=!(S.gens[g].troops>0);x+='<button class="pv220h'+(z?' noq':'')+'" data-a="pv220add" data-v="'+g+'">'+pt(g,TAGS[GENS[g].br],S.gens[g].lv)+'<span>'+(g==='lord'&&S.pname?S.pname:GENS[g].n)+'</span></button>'});
+ return x}
+function pv220Ctr(){try{var en=buildEnemy(PV220.mi,PV220.si,PV220.kind),cnt={};en.units.forEach(function(u){cnt[u.br]=(cnt[u.br]||0)+1});
+  var ks=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]}),k=ks[0];if(!k)return'';var cs=(typeof CT2!=='undefined'&&CT2[k])||[];
+  return'Địch chủ yếu <b>'+TAGS[k]+' ×'+cnt[k]+'</b>'+(cs.length?' · khắc bằng '+cs.map(function(c){return c[0]}).join(', '):'')}catch(e){return''}}
+(function(){try{
+ var _ss=stageSheet;
+ stageSheet=function(mi,si,kind){var h=_ss.apply(this,arguments);PV220={mi:mi,si:si,kind:kind||'stage'};
+  try{var box=document.createElement('div');box.innerHTML=h;var R=box.querySelector('.pv');if(!R)return h;
+   var P=fmP(),F=FORM[P.fid],di=deployInfo(P.fid).n,pl=fmPlaced(P),W=pv220Warn();
+   /* board header: team switch + count + full Bày trận */
+   var mh=R.querySelector('.pv-meh');if(mh)mh.outerHTML='<div class="pv220hd"><div class="pv220seg">'+[0,1,2].map(function(i){return'<button class="'+(S.fm.act===i?'on':'')+'" data-a="fpre" data-v="'+i+'">Đội '+(i+1)+'</button>'}).join('')+
+     '</div><span class="pv220n">'+Math.min(pl.length,di)+'/'+di+' tướng</span><button class="pv220lk" data-a="form">Trận pháp ›</button></div>';
+   /* board cells: × to take a hero off, amber outline on misplaced heroes */
+   [].forEach.call(R.querySelectorAll('.pv-my .fc.has'),function(c){var k=c.getAttribute('data-k');if(W[k])c.classList.add('pv220w');
+     var b=document.createElement('button');b.className='pv220x';b.setAttribute('data-a','pv220rm');b.setAttribute('data-v',k);b.setAttribute('aria-label','Gỡ tướng');b.textContent='×';c.appendChild(b)});
+   var my=R.querySelector('.pv-my');
+   if(my){var x='',wk=Object.keys(W);
+    if(wk.length)x+='<div class="pv220tip"><span class="pv220ti">!</span><span><b>'+wk.map(function(k){return W[k].n+'</b> '+W[k].t}).join(', <b>')+' — '+W[wk[0]].why+'.</span><button class="btn sm" data-a="pv220fix">Tự xếp</button></div>';
+    var q=null;try{q=needOf(teamGids())}catch(e){}
+    if(q&&q.n)x+='<div class="pv220tip am"><span class="pv220ti">!</span><span>Đội thiếu <b>'+fmt(q.n)+'</b> quân.</span><button class="btn sm" data-a="refillTeam">Hồi binh</button></div>';
+    var st=pv220Strip();x+='<div class="pv220rh"><span>Tướng chưa ra trận</span><em>chạm để đưa vào</em></div><div class="pv220st">'+(st||'<span class="sm mute">Mọi tướng đều đã ra trận.</span>')+'</div>';
+    var d=document.createElement('div');d.innerHTML=x;var after=my;while(after.nextElementSibling&&/pv-warn/.test(after.nextElementSibling.className))after=after.nextElementSibling;
+    [].slice.call(d.childNodes).reverse().forEach(function(n){after.parentNode.insertBefore(n,after.nextSibling)})}
+   /* the old "Vị trí chưa tốt" line is now on the board */
+   /* the three tabs → one row that opens its own window */
+   var tabs=R.querySelector('.pv-tabs'),pane=R.querySelector('.pv-pane');
+   if(tabs){var ct=pv220Ctr(),btn=document.createElement('button');btn.className='pv220i';btn.setAttribute('data-a','pv220i');
+    btn.innerHTML='<span class="pv220ic">❖</span><span class="pv220it"><b>Tình báo · Phần thưởng · Quân sư</b>'+(ct?'<small>'+ct+'</small>':'')+'</span><span class="pv220ar">›</span>';
+    tabs.replaceWith(btn);if(pane)pane.remove()}
+   return box.innerHTML}catch(e){if(window.console)console.warn('prep220',e);return h}};
+ /* the separate window: Tình báo / Phần thưởng / Quân sư as 3 tabs, contents built by the existing stage-sheet chain */
+ function intelSheet(){var A=PV220,keep=pvTab,parts={};
+  ['intel','rew','ke'].forEach(function(t){try{pvTab=t;var b=document.createElement('div');b.innerHTML=_ss(A.mi,A.si,A.kind);var tb=b.querySelector('.pv-tabs button.on'),pn=b.querySelector('.pv-pane');if(tb&&tb.getAttribute('data-v')===t&&pn)parts[t]=pn.innerHTML}catch(e){}});
+  pvTab=keep;var T=[['intel','Tình báo'],['rew','Phần thưởng'],['ke','Quân sư']].filter(function(t){return parts[t[0]]});
+  if(!T.some(function(t){return t[0]===PV220T}))PV220T=T.length?T[0][0]:'intel';
+  var nm='';try{nm=A.kind==='stage'?MAPS[A.mi].st[A.si].n||'':''}catch(e){}
+  return'<h3>Tình báo trận'+(nm?' · '+nm:'')+'</h3><div class="pills pv220tabs">'+T.map(function(t){return'<button class="pill'+(t[0]===PV220T?' on':'')+'" data-a="pv220t" data-v="'+t[0]+'">'+t[1]+'</button>'}).join('')+'</div>'+
+   '<div class="pv pv220pane">'+(parts[PV220T]||'<div class="sm mute">Không có thông tin.</div>')+'</div>'+
+   '<div class="sbar"><button class="btn wide" data-a="sback">Quay lại chuẩn bị</button></div>'}
+ var _A=A_;
+ A_=function(a,v,w,el){
+  if(a==='pv220i'){PV220T='intel';openSheet(intelSheet);return}
+  if(a==='pv220t'){PV220T=v;refresh();return}
+  if(a==='pv220rm'){try{fmDrop({cell:v},null)}catch(e){}return}
+  if(a==='pv220add'){try{var P=fmP(),F=FORM[P.fid],G=GENS[v],front=G&&/inf|cav/.test(G.br),order=front?[0,1,2]:[2,1,0],to=null;
+    order.some(function(r){for(var l=0;l<3;l++){var c=r+'-'+l;if(F.cells.indexOf(c)>=0&&!(P.c[c]&&S.gens[P.c[c]])){to=c;return true}}return false});
+    if(!to){toast('Bàn cờ đã kín · kéo tướng ra hoặc bấm × để thay');return}fmDrop({gid:v},to)}catch(e){}return}
+  if(a==='pv220fix'){var n=pv220Fix();toast(n?'Đã đổi chỗ '+n+' tướng':'Không còn ô trống phù hợp · xếp tay trong Trận pháp');refresh();return}
+  return _A.apply(this,arguments)};
+ var css=document.createElement('style');css.id='prep220css';css.textContent=
+  '.pv220hd{display:flex;align-items:center;gap:8px;margin:2px 0 4px}.pv220seg{display:flex;padding:2px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08)}'+
+  '.pv220seg button{padding:6px 10px;border-radius:8px;font:600 12.5px var(--ds-fb,system-ui);color:#bfb4a0;min-height:32px}.pv220seg button.on{background:linear-gradient(180deg,#6b4a22,#3e2a14);color:#f6dfa6;box-shadow:inset 0 0 0 1px rgba(255,215,122,.4)}'+
+  '.pv220n{flex:1;font-size:12px;color:var(--ds-mu,#b9a98a)}.pv220lk{font:600 12.5px var(--ds-fb,system-ui);color:#f2cf7c;padding:6px 4px;min-height:32px}'+
+  '.pv-my .fc .pv220x{position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;background:#2a1d14;border:1px solid rgba(226,178,90,.6);color:#f6dfa6;font:700 15px/1 system-ui;display:grid;place-items:center;z-index:4;padding:0}'+
+  '.pv-my .fc .pv220x::after{content:"";position:absolute;inset:-8px}'+
+  '.pv-my .fc.pv220w{outline:2px solid #f0a050;outline-offset:-1px;box-shadow:0 0 0 3px rgba(240,160,80,.2)}'+
+  '.pv220tip{display:flex;align-items:center;gap:8px;margin:8px 0 0;padding:8px 10px;border-radius:10px;background:rgba(240,160,80,.1);border:1px solid rgba(240,160,80,.5);font-size:12.5px;line-height:1.35;color:#f3e6c8}'+
+  '.pv220tip>span:nth-child(2){flex:1;min-width:0}.pv220tip .btn{flex:none}.pv220tip.am{background:rgba(150,30,24,.18);border-color:rgba(224,69,58,.5)}'+
+  '.pv220ti{flex:none;width:20px;height:20px;border-radius:50%;background:#f0a050;color:#2a1708;font:800 13px/20px system-ui;text-align:center}.pv220tip.am .pv220ti{background:#e0574a;color:#fff}'+
+  '.pv220rh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:12px 0 6px;font:600 12.5px var(--ds-fb,system-ui);color:#f3e6c8}.pv220rh em{font-style:normal;font-weight:500;font-size:11px;color:var(--ds-mu,#b9a98a);text-align:right}'+
+  '.pv220st{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}.pv220h{flex:none;width:60px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:#e8dcc0;padding:0}'+
+  '.pv220h .pw{width:60px}.pv220h span{max-width:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pv220h.noq .pw{filter:grayscale(1) brightness(.6)}'+
+  '.pv220i{display:flex;align-items:center;gap:10px;width:100%;margin:12px 0 4px;padding:12px;border-radius:14px;background:rgba(0,0,0,.3);border:1px solid rgba(226,178,90,.35);text-align:left;color:#f3e6c8;min-height:56px}'+
+  '.pv220ic{flex:none;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(226,178,90,.14);color:#f2cf7c;font-size:16px}'+
+  '.pv220it{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.pv220it b{font:700 14px var(--ds-fb,system-ui)}.pv220it small{font-size:12px;color:var(--ds-mu,#b9a98a)}.pv220it small b{font-size:12px;color:#ffb3a8}'+
+  '.pv220ar{flex:none;font-size:22px;color:#f2cf7c}.pv220tabs{margin:4px 0 10px}.pv220pane>*:first-child{margin-top:0}'+
+  '#sheet .pv .obt{position:sticky!important;bottom:0;z-index:5}'+
+  'html body #sheet .pv .pv-my{max-width:236px!important;margin-left:auto!important;margin-right:auto!important}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('prep220',e)}catch(x){}}})();
 </script>
