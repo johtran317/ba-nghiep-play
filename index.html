@@ -6692,17 +6692,22 @@ function wxAttach(){
   var rw=Math.round(r.width*Math.min(d,1)*.75),rh=Math.round(r.height*Math.min(d,1)*.75);
   if(cv.width!==rw||cv.height!==rh){cv.width=rw;cv.height=rh;cv.__o=w.classList.contains('outerw')}}}
 var WXLAST=0;
+var WXATT=0;
 function wxLoop(ts){
- requestAnimationFrame(wxLoop);
+ /* V250 perf: a 20 fps timer instead of a 60 fps requestAnimationFrame (every rAF tick forced a full frame on the phone);
+    asleep during battles, when the page is hidden or in smooth mode; the canvas/chip check runs once a second, not every tick */
+ ts=performance.now();setTimeout(wxLoop,50);
  if(document.hidden||typeof S==='undefined'||!S)return;
- var dt=Math.min(.1,(ts-WXLAST)/1000);if(ts-WXLAST<33)return;WXLAST=ts;WXST.t+=dt;
- try{wxAttach();wxPrep();
+ if((typeof BT!=='undefined'&&BT.on)||S.smooth249){WXLAST=ts;if(S.smooth249){try{document.querySelectorAll('canvas.wxc').forEach(function(c){if(!c.__clr){c.getContext('2d').clearRect(0,0,c.width,c.height);c.__clr=1}})}catch(x){}}return}
+ var dt=Math.min(.1,(ts-WXLAST)/1000);WXLAST=ts;WXST.t+=dt;
+ try{if(ts-WXATT>1000||!document.querySelector('.cityw canvas.wxc')){WXATT=ts;wxAttach()}wxPrep();
+  document.querySelectorAll('canvas.wxc').forEach(function(c){c.__clr=0});
   if(S.wxOff)return;
   var cs=document.querySelectorAll('canvas.wxc');for(var i=0;i<cs.length;i++){var cv=cs[i];if(!cv.offsetParent)continue;
    if(WXRM){if(cv.__done===WXST.key+cv.width)continue;cv.__done=WXST.key+cv.width;wxDraw(cv,0,cv.__o)}else wxDraw(cv,i?0:dt,cv.__o)}
  }catch(x){}}
 /* the particle step uses dt once per frame; draw second canvas with dt 0 so both stay in sync */
-requestAnimationFrame(wxLoop);
+setTimeout(wxLoop,50);
 /* ---------- strip old falling dots from the SVG scenes ---------- */
 var _csWX=cityScene;cityScene=function(){return _csWX.apply(this,arguments).replace(/<circle[^>]*class="fall"[^>]*\/>/g,'')};
 var _osWX=outerScene;outerScene=function(){return _osWX.apply(this,arguments).replace(/<circle[^>]*class="fall"[^>]*\/>/g,'')};
@@ -10960,7 +10965,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V249';
+var BUILD='V250';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11080,10 +11085,10 @@ function wkStep(dt,still){var adj=wkAdj();WK.list.forEach(function(w){var p=wkPo
 function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!bt&&!document.hidden?wkAttach():null;
   if(svg){var dt=Math.min(.1,Math.max(0,(now-(WK.last||now))/1000));WK.last=now;
    var still=false;try{still=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-   wkStep(dt,still);WK.raf=requestAnimationFrame(wkLoop);return}
+   wkStep(dt,still);WK.raf=setTimeout(function(){wkLoop(performance.now())},50);return}/* V250 perf: 20 fps timer, not a 60 fps rAF */
   WK.last=0}catch(e){try{if(WK.g&&WK.g.parentNode)WK.g.parentNode.removeChild(WK.g)}catch(x){}WK.g=null;WK.off=1;return}
-  WK.idle=setTimeout(function(){WK.idle=0;if(!WK.raf&&!WK.off)WK.raf=requestAnimationFrame(wkLoop)},700)}
-(function(){try{WK.raf=requestAnimationFrame(wkLoop)}catch(e){}})();
+  WK.idle=setTimeout(function(){WK.idle=0;if(!WK.raf&&!WK.off)WK.raf=setTimeout(function(){wkLoop(performance.now())},50)},700)}
+(function(){try{WK.raf=setTimeout(function(){wkLoop(performance.now())},50)}catch(e){}})();
 /* ===== V190 home layout (user 2026-11-03 15:18: "remove Quân sư gợi ý and move Nhiệm vụ, Hoạt động icon to the middle") =====
    - The Quân sư gợi ý goal banner (#main .goal, advisor.js goalHtml) is hidden on the home screen; the advisor tips still exist
      elsewhere (defeat screen, stage sheets).
@@ -14208,4 +14213,30 @@ function eq247Run(){try{if(typeof fighting!=='undefined'&&fighting)return;if(!S|
   function attach(){['modal','main'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.dataset.eq247){e.dataset.eq247='1';mo.observe(e,{childList:true,subtree:true})}})}
   attach();setInterval(function(){attach();sched()},1500);
  }catch(e){}})();
+/* ===== V250 performance pass (server agent, user 2026-11-04 13:50 "the game is very laggy after Add to Home Screen, make it play smoothly") =====
+   Measured on the home screen (headless Chrome, iPhone size, CPU ×4 slower): the main thread was ~83% busy while the player did nothing.
+   Causes: the weather particles and the townsfolk each ran a 60 fps requestAnimationFrame loop for ever (every tick forces the phone to
+   build a whole new frame), the city SVG had a CSS filter (the whole city is re-filtered each time a walker moves), the weather chip
+   blurred the moving canvas behind it (backdrop-filter), and the twinkles used a blend mode.
+   Always on (no visible change): weather + walkers at 20 fps timers (weather.js / walkers.js), city filter, twinkle blend and the
+   weather-chip blur removed.
+   "Chế độ mượt" (Quân Đoàn › Cài đặt, off by default, S.smooth250): also stops weather particles and townsfolk, pauses decorative
+   looping animations, removes every backdrop blur, and draws battles at 1.5× pixel density instead of 2× (about 45% fewer pixels). */
+(function(){
+try{var st=document.createElement('style');st.id='perf250';st.textContent=
+ 'svg.city{filter:none!important}.twk{mix-blend-mode:normal!important}'+
+ '.wxchip{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(14,10,6,.72)!important}'+
+ 'body.smooth250 *,body.smooth250 *::before,body.smooth250 *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}'+
+ 'body.smooth250 g.walkers,body.smooth250 canvas.wxc{display:none!important}'+
+ 'body.smooth250 #main .twk,body.smooth250 #main .pls,body.smooth250 #main .bob,body.smooth250 #main .evspin,body.smooth250 #main .g9t{animation:none!important}';
+ document.head.appendChild(st)}catch(e){}
+function on(){return !!(typeof S!=='undefined'&&S&&S.smooth250)}
+function apply(){try{document.body.classList.toggle('smooth250',on())}catch(e){}}
+try{var _wk250=wkStep;wkStep=function(){if(on())return;return _wk250.apply(this,arguments)}}catch(e){}
+try{var _br250=btResize;btResize=function(){var r=_br250.apply(this,arguments);try{if(on()&&BT.dpr>1.5){var cv=document.getElementById('cv');BT.dpr=1.5;cv.width=Math.round(BT.W*BT.dpr);cv.height=Math.round(BT.H*BT.dpr);BT.bg=null;btLayout()}}catch(e){}return r}}catch(e){}
+function card(){return'<div class="card row" id="sm250"><div class="sp"><b>Chế độ mượt</b><div class="sm mute">Tắt thời tiết động, người đi đường và hiệu ứng trang trí; trận đấu vẽ nhẹ hơn. Bật nếu máy bị giật, nóng hoặc nhanh hết pin.</div></div><button class="btn '+(on()?'':'alt ')+'sm" data-a="smooth250">'+(on()?'Bật':'Tắt')+'</button></div>'}
+try{var _vm250=viewMore;viewMore=function(){var h=_vm250.apply(this,arguments);try{var k='<div class="card"><b>Đặt lại dữ liệu</b>';if(h.indexOf('id="sm250"')<0)h=h.indexOf(k)>=0?h.replace(k,card()+k):h+card()}catch(e){}return h}}catch(e){}
+try{var _A250=A_;A_=function(a,v,w,el){if(a==='smooth250'){S.smooth250=S.smooth250?0:1;save();apply();try{toast(S.smooth250?'Đã bật chế độ mượt':'Đã tắt chế độ mượt')}catch(e){}try{refresh()}catch(e){}return}return _A250.apply(this,arguments)}}catch(e){}
+try{apply();setInterval(apply,2000)}catch(e){}
+})();
 </script>
