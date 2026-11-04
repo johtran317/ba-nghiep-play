@@ -643,6 +643,16 @@ body:has(#splash:not(.out)) #modal{visibility:hidden}
 @keyframes t2sp{0%,100%{opacity:0;transform:translateY(0) scale(1)}50%{opacity:.85;transform:translateY(-1.2%) scale(1.02)}}
 #splash .spbg .t2art{animation:none}
 @media (prefers-reduced-motion:reduce){.t2art i{animation:none!important}}
+/* V225 hotfix (server agent, 2026-11-04 08:32, user iPhone: Safari "A problem repeatedly occurred" = the tab ran out of memory and was killed).
+   The title scene stacked 6 full-screen masked copies of splash.webp with animated filters (V222) on top of blurred, blended, animated fog/glow
+   layers (V221); iOS Safari gives every one its own GPU bitmap. Kept: the art, its push-in, the ray, the lightning flash, the title/loader/CTA.
+   Off: the 6 hero/beast copies, every blur filter and blend mode in the scene. Rule: no animated filter:blur / mix-blend / will-change on
+   full-screen layers; test a memory-heavy effect on a real iPhone before it ships. */
+.t2art{display:none!important}
+.t2fog,.t2gl{filter:none!important;mix-blend-mode:normal!important}
+.t2fog{opacity:.35!important}.t2gl{opacity:.5}
+.t2s,.t2flash{mix-blend-mode:normal!important}
+.t2bg{filter:brightness(1.4)!important}
 </style>
 <div id="app">
   <div class="top" id="top"></div>
@@ -10950,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V224';
+var BUILD='V225';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
