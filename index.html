@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V232';
+var BUILD='V233';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13487,7 +13487,8 @@ var GDC=[
   {id:'g1.1',f:0,t:'Chúa công {ten}, tại hạ là Thanh Y. Loạn thế đã đến, hãy cùng ta dẹp giặc trước đã.',when:gdNoModal,tap:1},
   {id:'g1.2',nav:1,f:2,t:'Vào Chinh chiến để xem bản đồ.',p:'#nav [data-v="camp"]',when:function(){return gdNoModal()&&!gdTab('camp')},until:function(){return gdTab('camp')}},
   {id:'g1.3',f:2,t:'Chạm vào ải đầu tiên để xem quân địch.',p:function(){try{var n=advNext();if(n)return'#main [data-a="stage"][data-v="'+n[0]+'|'+n[1]+'|stage"]'}catch(e){}return'#main [data-a="stage"]'},when:function(){return gdTab('camp')&&gdNoModal()},until:function(){return gdSheet('[data-a="fight"]')}},
-  {id:'g1.3b',f:2,t:'Bên trên là quân địch, số % là cơ hội thắng. Trên 70% là yên tâm. Nhấn Tấn công!',p:'#sheet [data-a="fight"]',when:function(){return gdSheet('[data-a="fight"]')},until:function(){return fighting||gdSt('0-0')}},
+  {id:'g1.3w',f:2,t:'Bên trên là quân địch, số % là cơ hội thắng.',p:'#sheet .pv-win',tap:1,when:function(){return gdSheet('[data-a="fight"]')&&!!gdQ('#sheet .pv-win')},until:function(){return fighting||gdSt('0-0')}},
+  {id:'g1.3b',f:2,t:'Trên 70% là yên tâm. Nhấn Tấn công!',p:'#sheet [data-a="fight"]',when:function(){return gdSheet('[data-a="fight"]')},until:function(){return fighting||gdSt('0-0')}},
   {id:'g1.7',f:0,t:function(){return gdH3('Thất bại')?'Thua một trận không sao. Xem Tình báo để biết bị khắc chế ở đâu, Hồi binh rồi đánh lại.':'Thắng lợi! Ba sao khi thắng gọn và ít tổn thất.'},when:function(){return!fighting&&(gdH3('Chiến thắng')||gdH3('Thất bại')||gdH3('Thắng'))},tap:1}]},
  {id:'G2',start:function(){return gdSt('0-0')},end:function(){return gdSt('0-1')},steps:[
   {id:'g2.1',f:2,t:'Đây là đội của ta. Hàng trước chịu đòn, hàng sau an toàn cho cung và mưu sĩ. Kéo tướng để đổi chỗ.',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1},
@@ -13570,7 +13571,7 @@ function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocke
 /* V231 fix: a 'go to tab' step (nav:1) counts as done when the player is already on that tab, even if it was never shown.
    Before, two chapters' nav steps (g3.0 Về Thành / g4.0 Vào Tướng) sent the player back and forth forever. */
 /* in-battle tips: timed, drawn over the battle, never touching the battle loop */
-function gdBattleTips(){var G=gdN();if(G.ch.G1)return;if(!G.done['g1.3b']&&G.done['g1.3'])G.done['g1.3b']=1;if(G.done['g1.4'])return;G.done['g1.4']=1;
+function gdBattleTips(){var G=gdN();if(G.ch.G1)return;if(G.done['g1.3']){G.done['g1.3w']=1;G.done['g1.3b']=1}if(G.done['g1.4'])return;G.done['g1.4']=1;
  var T=[[700,{id:'g1.4',f:1,t:'Quân ta bên trái, địch bên phải. Hai bên lần lượt tấn công theo thứ tự.'}],[7000,{id:'g1.5',f:2,t:'Ngọn lửa trên đầu là sĩ khí. Cháy đầy thì tướng tung chiến pháp! Sĩ khí vượt mức cần thì chiêu càng mạnh.'}],[14000,{id:'g1.6',f:2,t:'Bấm nút tốc độ nếu muốn xem nhanh hơn.',p:'[data-a="bspd"]'}]];
  GDBT=1;GDTM.forEach(clearTimeout);GDTM=[];T.forEach(function(x,i){GDTM.push(setTimeout(function(){try{if(!fighting){if(i===T.length-1)GDBT=null;return}gdShow(x[1],'bt');G.done[x[1].id]=1;setTimeout(function(){try{if(GDCUR===x[1].id+'bt')gdHide();if(i===T.length-1)GDBT=null}catch(e){}},5600)}catch(e){}},x[0]))})}
 var GDTM=[];function gdBattleEnd(){GDTM.forEach(clearTimeout);GDTM=[];GDBT=null;gdHide()}
