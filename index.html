@@ -10860,7 +10860,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V215';
+var BUILD='V216';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12737,20 +12737,26 @@ function lack214(c){try{c=c||{};var R=S.res;return R.silver<(c.s||0)?'Thiếu b�
   'html body #sheet .card.sm>b:first-child+.row,html body #sheet .card.sm>.row{padding:6px 0!important;border-top:1px solid rgba(226,178,90,.12)}';
  document.head.appendChild(css);
 }catch(e){try{console.error('ds213',e)}catch(x){}}})();
-/* ===== V215 Quân lệnh for gold (user 2026-11-04 06:33 "add back losing will cost Quân lệnh, but allow player to buy Quân lệnh by using gold,
-   but the price must scale and reset by day"). Losing costs a lệnh again (V213 refund removed; the old newbie refund while Chính Sảnh ≤ 35 stays).
-   Buy 1 lệnh at a time: the n-th purchase of the day costs ORD215(n) = 10 × n gold (10, 20, 30 …); the count resets with the day (ev().shop).
-   Where: Thương Điếm › Tạp Hóa (replaces "Quân lệnh ×3, 30 vàng, 2/day"), tapping the Quân lệnh counter in the HUD, and the
-   "Tấn công" press when no lệnh is left. Actions ord215 / ord215b (checked unused). Everything wrapped. */
+/* ===== V215/V216 Quân lệnh for gold (user 2026-11-04 06:33 "losing costs Quân lệnh again, but allow player to buy Quân lệnh by using gold;
+   the price must scale and reset by day"; 06:46 "remove it from shop, add a + button at the Quân lệnh indicator, the buy window follows our design language").
+   Buy 1 lệnh at a time: the n-th purchase of the day costs 10 × n gold (10, 20, 30 …); the count resets with the day (ev().shop.ord3).
+   Where: the green + on the HUD Quân lệnh counter (same look as the gold +), and pressing Tấn công with 0 lệnh. NOT in the shop any more
+   (the old "Quân lệnh ×3" Tạp Hóa item is removed). Actions ord215 / ord215b (checked unused). Everything wrapped. */
 function ord215Used(){try{return ev().shop.ord3||0}catch(e){return 0}}
-function ord215Price(){return 10*(ord215Used()+1)}
-(function(){try{var L=SHOP.tap.items,it=L.filter(function(x){return x.id==='ord3'})[0];if(!it)return;
- it.n='Quân lệnh ×1';it.d='Giá tăng 10 vàng mỗi lần mua trong ngày, về lại 10 vàng mỗi ngày.';it.give={ord:1};it.lim=function(){return 999};
- Object.defineProperty(it,'p',{configurable:true,get:function(){return{v:ord215Price()}},set:function(){}})}catch(e){}})();
-function ord215Sheet(){var p=ord215Price(),n=ord215Used(),ok=S.res.gold>=p;
- return'<h3>Mua Quân lệnh</h3><div class="card"><div class="row"><div class="sp"><b>Quân lệnh: '+Math.floor(S.ord)+'</b><div class="sm mute">Hôm nay đã mua '+n+' lần. Lần tiếp theo: <b class="gold">'+p+' vàng</b> (mỗi lần +10, về 10 vàng mỗi ngày).</div><div class="sm mute">Vàng: '+fmt(S.res.gold)+'</div></div>'+
-  '<button class="btn" data-a="ord215b"'+(ok?'':' disabled')+'>+1 · '+p+' vàng</button></div></div>'+
-  '<div class="sm mute" style="margin-top:8px">Thắng hay thua đều tốn 1 Quân lệnh. Quân lệnh cũng hồi theo thời gian.</div>'}
+function ord215Price(k){return 10*(ord215Used()+1+(k||0))}
+(function(){try{SHOP.tap.items=SHOP.tap.items.filter(function(x){return x.id!=='ord3'})}catch(e){}})();
+function ord215Sheet(){var p=ord215Price(),n=ord215Used(),ok=S.res.gold>=p,cap=10+S.b.mc;
+ var h='<h3>Mua Quân lệnh</h3>';
+ h+='<div class="dsinf"><div class="dsl">Hôm nay</div><div class="dsg">'+
+  '<div><span>Quân lệnh</span><b>'+Math.floor(S.ord)+'/'+cap+'</b></div>'+
+  '<div><span>Đã mua</span><b>'+n+'</b></div>'+
+  '<div><span>Vàng</span><b>'+fmt(S.res.gold)+'</b></div></div>'+
+  '<div class="sm mute">Thắng hay thua đều tốn 1 Quân lệnh. Mỗi lần mua +1 lệnh; giá tăng 10 vàng mỗi lần và về lại 10 vàng mỗi ngày.</div></div>';
+ h+='<div class="sec">Giá mua tiếp theo</div><div class="stack dslist ord215l">';
+ for(var k=0;k<4;k++)h+='<div class="card row'+(k?'':' on')+'"><div class="sp"><b>Lần '+(n+k+1)+'</b>'+(k?'':'<span class="sm ok"> · tiếp theo</span>')+'</div><span class="ord215p">'+ic('gold')+ord215Price(k)+'</span></div>';
+ h+='</div>';
+ h+='<div class="sbar"><button class="btn wide" data-a="ord215b"'+(ok?'':' disabled')+'>'+(ok?'Mua 1 Quân lệnh · '+p+' vàng':'Thiếu vàng · cần '+p)+'</button></div>';
+ return h}
 (function(){try{
  var _A=A_;A_=function(a,v,w,el){try{
   if(a==='ord215'){openSheet(ord215Sheet);return}
@@ -12758,10 +12764,15 @@ function ord215Sheet(){var p=ord215Price(),n=ord215Used(),ok=S.res.gold>=p;
    toast('+1 Quân lệnh · −'+p+' vàng');save();refresh();openSheet(ord215Sheet);return}
  }catch(e){}return _A(a,v,w,el)};
  var _f=fight;fight=function(mi,si,kind){try{if(!fighting&&S.ord<1){openSheet(ord215Sheet);return}}catch(e){}return _f.apply(this,arguments)};
- document.addEventListener('click',function(e){try{var t=e.target.closest&&e.target.closest('.ordc');if(t&&!fighting){e.stopPropagation();openSheet(ord215Sheet)}}catch(x){}},true);
- var st=document.createElement('style');st.textContent='.ordc{cursor:pointer}';document.head.appendChild(st);
+ /* the + on the HUD counter, same button as the gold + (currency.js .cup) */
+ function addPlus(){try{var c=document.querySelector('.ordc .cap');if(c&&!c.querySelector('.ord215plus')){var b=document.createElement('button');b.className='cup ord215plus';b.setAttribute('data-a','ord215');b.setAttribute('aria-label','Mua Quân lệnh');b.textContent='+';c.appendChild(b)}}catch(e){}}
+ var _rt=typeof renderTop==='function'?renderTop:null;if(_rt)renderTop=function(){var r=_rt.apply(this,arguments);addPlus();return r};
+ setInterval(addPlus,1000);addPlus();
+ var st=document.createElement('style');st.textContent=
+  '.ordc .cap{position:relative;padding-right:22px!important}.ordc .ord215plus{right:-6px}.ordc .ord215plus::after{content:"";position:absolute;left:50%;top:50%;width:36px;height:36px;transform:translate(-50%,-50%)}'+
+  'html body #sheet .ord215l .card.on{border-color:var(--ds-line2,rgba(226,178,90,.38))!important;background:rgba(226,178,90,.08)!important}'+
+  'html body #sheet .ord215p{display:inline-flex;align-items:center;gap:4px;font:700 18px var(--ds-fn,"Barlow Condensed",sans-serif);color:var(--ds-ts,#f6e6c4)}'+
+  'html body #sheet .ord215p img,html body #sheet .ord215p svg{width:18px;height:18px}';
+ document.head.appendChild(st);
 }catch(e){}})();
-(function(){try{var _ss=shopSheet;shopSheet=function(){var h=_ss.apply(this,arguments);try{h=h.replace(/ · hôm nay (\d+)\/999/g,' · hôm nay đã mua $1')}catch(e){}return h}}catch(e){}})();
-(function(){try{if(typeof SHMAP!=='undefined'&&SHMAP.ord3)SHMAP.ord3[1]='×1';
- var _ss2=shopSheet;shopSheet=function(){var h=_ss2.apply(this,arguments);try{h=h.replace(/<span class="tdlim">(\d+)\/999<\/span>/g,function(m,l){return'<span class="tdlim">'+(999-(+l))+' lần</span>'})}catch(e){}return h}}catch(e){}})();
 </script>
