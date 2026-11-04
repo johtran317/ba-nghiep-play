@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V239';
+var BUILD='V240';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11124,33 +11124,79 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  '#main .u185cw .outerw .wxchip{display:none!important}';document.head.appendChild(st)}catch(e){}})();
 /* ===== V193 (user 2026-11-03 15:41 "allow user to drag hero icon to change position"): on the stage sheet (Quân ta board, .pv-my) a hero can be dragged
    to another cell: onto an empty cell = move, onto a hero = swap. Uses fmDrop (fx150.js) so the formation, save and win % update exactly like Bày trận.
-   Pointer events only; the drag starts after 6 px so taps still work; everything wrapped (a failure only cancels the drag). */
+   Pointer events only; the drag starts after 6 px so taps still work; everything wrapped (a failure only cancels the drag).
+   ===== V240 (art agent, user 2026-11-04 12:03):
+   (2) heroes in the "Tướng chưa ra trận" strip (.pv220h, prep220.js) can be dragged onto a board cell too (fmDrop({gid},k)); tap still adds them
+       (pv220add). In the strip the drag starts on an upward/vertical pull or a 280 ms hold, so swiping the strip sideways still scrolls it.
+   (3) "hold the card and drop it" feel: the card lifts (scale 1.16, slight tilt, deep shadow, gold rim) and follows the finger, tilting with
+       the horizontal speed; the source cell turns into a dashed empty slot; a valid target cell glows and swells; an invalid spot (not a lit
+       formation cell) shows no glow and the card flies back. On drop the card lands in its new cell with a squash-and-settle bounce and a gold
+       ring pulse; a swapped hero settles into the old cell too. Transform/opacity only — no filter/blend/will-change (V225 iPhone rule).
+   (1) board sizes: Quân ta cells 73 → 84 px (+15%) and Quân địch's board is set to the same 84 px cells. */
 (function(){try{
+ var CW=84,GW=CW*3+16;
  var st=document.createElement('style');st.id='pvdragcss';st.textContent=
-  '.pv-my .fc.has{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}'+
-  '.pv-my .fc.pvlift{opacity:.35}'+
-  '.pv-my .fc.pvover{outline:2px solid #f1cf6a;outline-offset:-2px;box-shadow:0 0 14px rgba(241,207,106,.55) inset}'+
-  '.pvghost{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%) scale(1.08);opacity:.92;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}'+
-  '.pv-my img,.pv-my .fc *{-webkit-user-drag:none}';
+  'html body #sheet .pv .fgrid.ofg.pv-my,html body #sheet .pv .fgrid.ofg:not(.pv-my){max-width:'+GW+'px!important;width:'+GW+'px;margin-left:auto!important;margin-right:auto!important}'+
+  '.pv-my .fc.has{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}'+
+  '.pv220h{touch-action:pan-x;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}'+
+  '.pv-my img,.pv-my .fc *,.pv220h img{-webkit-user-drag:none}'+
+  '.pv-my .fc{transition:transform .16s cubic-bezier(.2,.9,.3,1.3)}'+
+  /* source: dashed empty slot */
+  '.pv-my .fc.pvlift{background:rgba(0,0,0,.28)!important;box-shadow:inset 0 0 0 2px rgba(241,207,106,.45)!important;outline:2px dashed rgba(241,207,106,.6);outline-offset:-6px}'+
+  '.pv-my .fc.pvlift>*{opacity:0}.pv220h.pvlift .pw{opacity:.25}'+
+  /* target: glow + swell */
+  '.pv-my .fc.pvover{transform:scale(1.07);z-index:3;box-shadow:0 0 0 2px #f1cf6a,0 0 18px 4px rgba(241,207,106,.55)!important}'+
+  '.pv-my.pvarm .fc.lit:not(.pvlift):not(.pvover){box-shadow:inset 0 0 0 1px rgba(241,207,106,.35)}'+
+  /* the lifted card */
+  '.pvghost{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;margin:0;border-radius:12px;transform-origin:50% 60%;transition:transform .09s linear}'+
+  '.pvghost .pw{width:100%!important;height:100%!important;border-radius:12px;box-shadow:0 0 0 2px #f1cf6a,0 22px 30px rgba(0,0,0,.6),0 8px 12px rgba(0,0,0,.45)}'+
+  '.pvghost .pv220x,.pvghost>span{display:none}'+
+  '.pvghost.back{transition:transform .22s cubic-bezier(.3,.7,.3,1),opacity .22s;opacity:0}'+
+  /* landing */
+  '@keyframes pv240land{0%{transform:scale(1.16) rotate(-3deg)}45%{transform:scale(.94) rotate(0)}72%{transform:scale(1.04)}100%{transform:none}}'+
+  '@keyframes pv240ring{0%{opacity:.95;transform:scale(.9)}100%{opacity:0;transform:scale(1.35)}}'+
+  '@keyframes pv240swap{0%{transform:scale(.86);opacity:.4}60%{transform:scale(1.04);opacity:1}100%{transform:none}}'+
+  '.pv-my .fc.pvland{animation:pv240land .42s cubic-bezier(.3,.8,.3,1) both;z-index:3}'+
+  '.pv-my .fc.pvland::after{content:"";position:absolute;inset:-3px;border-radius:12px;box-shadow:0 0 0 2px #f6d98e,0 0 16px rgba(246,217,142,.7);pointer-events:none;animation:pv240ring .5s ease-out both}'+
+  '.pv-my .fc.pvswap{animation:pv240swap .36s ease-out both}'+
+  '@media (prefers-reduced-motion:reduce){.pvghost,.pv-my .fc{transition:none}.pv-my .fc.pvland,.pv-my .fc.pvland::after,.pv-my .fc.pvswap{animation:none}}';
  document.head.appendChild(st);
  var D=null,eat=0;
  function cellAt(x,y){var el=document.elementFromPoint(x,y);return el&&el.closest?el.closest('.pv-my .fc[data-k]'):null}
- function clear(){document.querySelectorAll('.pv-my .pvover,.pv-my .pvlift').forEach(function(e){e.classList.remove('pvover','pvlift')})}
- function begin(){var r=D.el.getBoundingClientRect(),g=D.el.cloneNode(true);g.className='pvghost fc has';g.style.width=r.width+'px';g.style.height=r.height+'px';
-  document.body.appendChild(g);D.g=g;D.on=1;D.el.classList.add('pvlift');try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}
- function move(){D.g.style.left=D.x+'px';D.g.style.top=D.y+'px';var c=cellAt(D.x,D.y);
-  document.querySelectorAll('.pv-my .pvover').forEach(function(e){if(e!==c)e.classList.remove('pvover')});if(c&&c!==D.el)c.classList.add('pvover');D.t=c}
- function end(drop){var d=D;D=null;if(!d||!d.on)return;eat=Date.now();try{d.g.remove()}catch(e){}clear();
-  try{if(drop&&d.t&&d.t!==d.el){var k=d.t.getAttribute('data-k');if(k&&k!==d.k)fmDrop({cell:d.k},k)}}catch(e){if(window.console)console.warn(e)}}
- document.addEventListener('pointerdown',function(e){if(e.button>0||D)return;var c=e.target.closest&&e.target.closest('.pv-my .fc.has[data-k]');if(!c)return;
-  D={el:c,k:c.getAttribute('data-k'),x:e.clientX,y:e.clientY,x0:e.clientX,y0:e.clientY,id:e.pointerId,on:0}},true);
+ function ok(c){return c&&c.classList.contains('lit')}
+ function clear(){document.querySelectorAll('.pv-my .pvover,.pvlift').forEach(function(e){e.classList.remove('pvover','pvlift')});document.querySelectorAll('.pv-my.pvarm').forEach(function(e){e.classList.remove('pvarm')})}
+ function pos(){var g=D.g;if(!g)return;var vx=D.x-(D.px==null?D.x:D.px);D.px=D.x;D.tl=Math.max(-12,Math.min(12,(D.tl||0)*.6+vx*.9));
+  g.style.transform='translate('+(D.x-D.w/2)+'px,'+(D.y-D.h*.62)+'px) scale(1.16) rotate('+(-3+D.tl).toFixed(1)+'deg)'}
+ function begin(){var src=D.el,pw=src.querySelector('.pw');if(!pw)throw 0;var cell=document.querySelector('.pv-my .fc[data-k]'),r=cell?cell.getBoundingClientRect():src.getBoundingClientRect();
+  var g=document.createElement('div');g.className='pvghost';g.appendChild(pw.cloneNode(true));D.w=r.width;D.h=r.height;g.style.width=r.width+'px';g.style.height=r.height+'px';
+  g.style.transition='none';document.body.appendChild(g);D.g=g;D.on=1;pos();g.offsetWidth;g.style.transition='';
+  src.classList.add('pvlift');var b=document.querySelector('.pv-my');if(b)b.classList.add('pvarm');try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}
+ function move(){pos();var c=cellAt(D.x,D.y);if(c&&(c===D.el||!ok(c)))c=null;
+  document.querySelectorAll('.pv-my .pvover').forEach(function(e){if(e!==c)e.classList.remove('pvover')});if(c)c.classList.add('pvover');D.t=c}
+ function land(k,from){setTimeout(function(){try{var a=document.querySelector('.pv-my .fc[data-k="'+k+'"]');if(a){a.classList.remove('pvland');a.offsetWidth;a.classList.add('pvland');setTimeout(function(){a.classList.remove('pvland')},560)}
+   if(from){var b=document.querySelector('.pv-my .fc.has[data-k="'+from+'"]');if(b){b.classList.add('pvswap');setTimeout(function(){b.classList.remove('pvswap')},420)}}}catch(e){}},0)}
+ function end(drop){var d=D;D=null;if(!d)return;clearTimeout(d.hold);if(!d.on)return;eat=Date.now();clear();
+  var k=drop&&d.t?d.t.getAttribute('data-k'):null,done=0;
+  try{if(k&&k!==d.k){var before=JSON.stringify(fmP().c);if(d.gid)fmDrop({gid:d.gid},k);else fmDrop({cell:d.k},k);
+    if(JSON.stringify(fmP().c)!==before){done=1;land(k,d.gid?null:d.k)}}}catch(e){if(window.console)console.warn(e)}
+  var g=d.g;if(!g)return;if(done){g.remove();return}
+  try{var r=d.el.isConnected?d.el.getBoundingClientRect():null;if(r)g.style.transform='translate('+r.left+'px,'+r.top+'px) scale(1)';g.classList.add('back');setTimeout(function(){g.remove()},240)}catch(e){g.remove()}}
+ document.addEventListener('pointerdown',function(e){if(e.button>0||D)return;var t=e.target.closest&&e.target;if(!t)return;if(t.closest('.pv220x'))return;
+  var c=t.closest('.pv-my .fc.has[data-k]'),h=!c&&t.closest('#sheet .pv220h[data-a="pv220add"]');if(!c&&!h)return;
+  D={el:c||h,k:c?c.getAttribute('data-k'):null,gid:h?h.getAttribute('data-v'):null,x:e.clientX,y:e.clientY,x0:e.clientX,y0:e.clientY,id:e.pointerId,on:0};
+  if(h){var my=D;D.hold=setTimeout(function(){if(D===my&&!D.on){try{begin();move()}catch(x){end(0)}}},280)}},true);
  document.addEventListener('pointermove',function(e){if(!D||e.pointerId!==D.id)return;D.x=e.clientX;D.y=e.clientY;
-  try{if(!D.on){if(Math.abs(D.x-D.x0)+Math.abs(D.y-D.y0)<6)return;begin()}move()}catch(x){end(0)}},true);
+  try{if(!D.on){var dx=Math.abs(D.x-D.x0),dy=Math.abs(D.y-D.y0);
+    if(D.gid){if(dx>10&&dx>dy){clearTimeout(D.hold);D=null;return}if(dy<8||dy<dx)return}else if(dx+dy<6)return;
+    clearTimeout(D.hold);begin()}move()}catch(x){end(0)}},true);
  document.addEventListener('pointerup',function(e){if(D&&e.pointerId===D.id)end(1)},true);
  document.addEventListener('pointercancel',function(e){if(D&&e.pointerId===D.id)end(0)},true);
  document.addEventListener('touchmove',function(e){if(D&&D.on)e.preventDefault()},{passive:false,capture:true});
- document.addEventListener('dragstart',function(e){if(e.target.closest&&e.target.closest('.pv-my'))e.preventDefault()},true);
+ document.addEventListener('contextmenu',function(e){if(D&&D.gid)e.preventDefault()},true);
+ document.addEventListener('dragstart',function(e){if(e.target.closest&&e.target.closest('.pv-my,.pv220st'))e.preventDefault()},true);
  document.addEventListener('click',function(e){if(eat&&Date.now()-eat<400){eat=0;e.stopPropagation();e.preventDefault()}},true);
+ /* V240 (4): Bày trận — the Quân y / Trống trận / Chủ tướng / ? status chips row (ds194.js .dsck) is removed. */
+ var s2=document.createElement('style');s2.id='pv240css';s2.textContent='#sheet .dsck,#sheet .dspop{display:none!important}';document.head.appendChild(s2);
 }catch(e){}})();
 /* ===== V194: Redesign Bible design kit (art agent) =====
    Source of truth: Redesign Bible https://claude.ai/artifact/NoadZFW5w3gzwHxQQoYKc8 ("Design language"),
