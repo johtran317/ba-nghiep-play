@@ -10965,7 +10965,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V251';
+var BUILD='V252';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14095,8 +14095,10 @@ var RT245=1;
   var r=bg(x),t=now-c.t0,fr,lx=0,dust=0;
   if(RM){fr=0}else{
    if(c.atk<0&&now>c.next){c.atk=now}
-   if(c.atk>=0){var a=now-c.atk,seq=[5,6,7,7,8,9],ix=Math.floor(a/95);if(ix>=seq.length){c.atk=-1;c.next=now+(c.on?2600:3800)+Math.random()*1800;fr=0}else{fr=seq[ix];lx=(ix>=2&&ix<=3)?2.5:ix===4?1.2:0;dust=(ix>=2&&ix<=4)?1-(a-190)/290:0}}
-   if(c.atk<0)fr=[0,1,2,3][Math.floor(t/170)%4]}
+   if(c.atk>=0){var a=now-c.atk,seq=[5,5,7,7,8,9],ix=Math.floor(a/95);if(ix>=seq.length){c.atk=-1;c.next=now+(c.on?2600:3800)+Math.random()*1800;fr=0}else{fr=seq[ix];lx=(ix>=2&&ix<=3)?2.5:ix===4?1.2:0;dust=(ix>=2&&ix<=4)?1-(a-190)/290:0}}
+   if(c.atk<0)fr=[0,1,2,1][Math.floor(t/170)%4]}
+  /* V252 (user 14:12 "the avatar of Bộ, Tân Binh is missing a sword"): sprite frames 3 (idle) and 6 (wind-up) show the soldier
+     without his sword (battle transition poses); the avatar now loops idle 0-1-2-1 and the attack skips 6. */
   var bob=RM?0:Math.sin(t/520)*.8,s=(D*.72)/Math.max(40,m.bh),fx=r+lx,fy=D*.9;
   /* ground shadow */
   x.fillStyle='rgba(0,0,0,.45)';x.beginPath();x.ellipse(fx,fy,D*.24,D*.06,0,0,7);x.fill();
