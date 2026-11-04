@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V230';
+var BUILD='V231';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13485,7 +13485,7 @@ function gdH3(t){var h=document.querySelector('#sheet h3');return!gdNoModal()&&!
 var GDC=[
  {id:'G1',start:function(){return true},end:function(){return gdSt('0-0')},steps:[
   {id:'g1.1',f:0,t:'Chúa công {ten}, tại hạ là Thanh Y. Loạn thế đã đến, hãy cùng ta dẹp giặc trước đã.',when:gdNoModal,tap:1},
-  {id:'g1.2',f:2,t:'Vào Chinh chiến để xem bản đồ.',p:'#nav [data-v="camp"]',when:function(){return gdNoModal()&&!gdTab('camp')},until:function(){return gdTab('camp')}},
+  {id:'g1.2',nav:1,f:2,t:'Vào Chinh chiến để xem bản đồ.',p:'#nav [data-v="camp"]',when:function(){return gdNoModal()&&!gdTab('camp')},until:function(){return gdTab('camp')}},
   {id:'g1.3',f:2,t:'Chạm vào ải đầu tiên để xem quân địch.',p:function(){try{var n=advNext();if(n)return'#main [data-a="stage"][data-v="'+n[0]+'|'+n[1]+'|stage"]'}catch(e){}return'#main [data-a="stage"]'},when:function(){return gdTab('camp')&&gdNoModal()},until:function(){return gdSheet('[data-a="fight"]')}},
   {id:'g1.3b',f:2,t:'Bên trên là quân địch, số % là cơ hội thắng. Trên 70% là yên tâm. Nhấn Tấn công!',p:'#sheet [data-a="fight"]',when:function(){return gdSheet('[data-a="fight"]')},until:function(){return fighting||gdSt('0-0')}},
   {id:'g1.7',f:0,t:function(){return gdH3('Thất bại')?'Thua một trận không sao. Xem Tình báo để biết bị khắc chế ở đâu, Hồi binh rồi đánh lại.':'Thắng lợi! Ba sao khi thắng gọn và ít tổn thất.'},when:function(){return!fighting&&(gdH3('Chiến thắng')||gdH3('Thất bại')||gdH3('Thắng'))},tap:1}]},
@@ -13493,13 +13493,13 @@ var GDC=[
   {id:'g2.1',f:2,t:'Đây là đội của ta. Hàng trước chịu đòn, hàng sau an toàn cho cung và mưu sĩ. Kéo tướng để đổi chỗ.',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1},
   {id:'g2.2',f:0,t:'Số nhỏ trên mỗi ô là thứ tự ra đòn. Vị trí quyết định thắng thua!',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1}]},
  {id:'G3',start:function(){return gdSt('0-1')},end:function(){return gdSt('0-3')},steps:[
-  {id:'g3.0',f:2,t:'Về Thành để lo việc nội chính.',p:'#nav [data-v="city"]',when:function(){return gdNoModal()&&!gdTab('city')},until:function(){return gdTab('city')}},
+  {id:'g3.0',nav:1,f:2,t:'Về Thành để lo việc nội chính.',p:'#nav [data-v="city"]',when:function(){return gdNoModal()&&!gdTab('city')},until:function(){return gdTab('city')}},
   {id:'g3.1',f:2,t:'Thu thuế để có bạc. Bạc dùng để xây dựng và luyện tướng.',p:'[data-a="tax"]',when:function(){return gdTab('city')&&gdNoModal()},tap:1,until:function(){return(S.taxUsed||0)>0}},
   {id:'g3.2',f:1,t:'Chính Sảnh quyết định cấp tối đa của mọi công trình. Nâng nó trước!',p:'[data-a="bsheet"][data-v="mc"]',when:function(){return gdTab('city')&&gdNoModal()},tap:1,until:function(){return gdSheet('[data-a="bsheet"]')||gdH3('Chính Sảnh')}}]},
  {id:'G3b',start:function(){return gdSt('0-0')},end:function(){return gdMd(2)},steps:[
   {id:'g3.3',f:2,t:'Quân tổn thất cần bổ sung bằng lương. Bấm Hồi binh trước khi đánh tiếp.',p:'#sheet [data-a="refillTeam"]',when:function(){return gdSheet('[data-a="refillTeam"]')},tap:1,until:function(){return!gdSheet('[data-a="refillTeam"]')}}]},
  {id:'G4',start:function(){return gdSt('0-2')},end:function(){return gdMd(1)},steps:[
-  {id:'g4.0',f:2,t:'Vào Tướng để xem, luyện và trang bị cho các tướng.',p:'#nav [data-v="gen"]',when:function(){return gdNoModal()&&!gdTab('gen')},until:function(){return gdTab('gen')}},
+  {id:'g4.0',nav:1,f:2,t:'Vào Tướng để xem, luyện và trang bị cho các tướng.',p:'#nav [data-v="gen"]',when:function(){return gdNoModal()&&!gdTab('gen')},until:function(){return gdTab('gen')}},
   {id:'g4.1',f:2,t:'Chạm vào một tướng để nâng cấp và khoác trang bị từ Kho. Ô trống có dấu + là còn chỗ.',when:function(){return gdTab('gen')},tap:1},
   {id:'g4.2',f:1,t:'Bộ khắc Kỵ. Kỵ khắc Cung, Mưu và Phụ. Cơ Giới phá Bộ, Mưu phá Cơ Giới. Đổi binh chủng để khắc chế địch (10 lần miễn phí mỗi ngày).',when:function(){return gdTab('gen')||gdNoModal()},tap:1}]},
  {id:'G5',start:function(){return gdMd(0)},end:function(){return gdMd(2)},steps:[
@@ -13557,11 +13557,13 @@ function gdBlocked(){var sp=document.getElementById('splash');if(sp&&!sp.classLi
 function gdPick(){var G=gdN();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch[C.id])continue;var started=C.steps.some(function(s){return G.done[s.id]});
   if(!started&&C.end()){G.ch[C.id]=1;continue}if(!C.start())continue;
   for(var i=0;i<C.steps.length;i++){var s=C.steps[i];s.ch=C.id;if(G.done[s.id])continue;
-   if(s.until&&s.until()&&(started||i>0)){G.done[s.id]=1;started=true;continue}
+   if(s.until&&s.until()&&(started||i>0||s.nav)){G.done[s.id]=1;started=true;continue}
    if(s.when())return s;break}
   if(C.steps.every(function(s){return G.done[s.id]}))G.ch[C.id]=1}
  return null}
 function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s)gdShow(s);else gdHide()}catch(e){gdHide()}}
+/* V231 fix: a 'go to tab' step (nav:1) counts as done when the player is already on that tab, even if it was never shown.
+   Before, two chapters' nav steps (g3.0 Về Thành / g4.0 Vào Tướng) sent the player back and forth forever. */
 /* in-battle tips: timed, drawn over the battle, never touching the battle loop */
 function gdBattleTips(){var G=gdN();if(G.ch.G1)return;if(!G.done['g1.3b']&&G.done['g1.3'])G.done['g1.3b']=1;if(G.done['g1.4'])return;G.done['g1.4']=1;
  var T=[[700,{id:'g1.4',f:1,t:'Quân ta bên trái, địch bên phải. Hai bên lần lượt tấn công theo thứ tự.'}],[7000,{id:'g1.5',f:2,t:'Ngọn lửa trên đầu là sĩ khí. Cháy đầy thì tướng tung chiến pháp! Sĩ khí vượt mức cần thì chiêu càng mạnh.'}],[14000,{id:'g1.6',f:2,t:'Bấm nút tốc độ nếu muốn xem nhanh hơn.',p:'[data-a="bspd"]'}]];
