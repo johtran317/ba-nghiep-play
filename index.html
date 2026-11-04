@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V227';
+var BUILD='V228';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13586,7 +13586,8 @@ function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="
   if(h.indexOf(k)>=0)h=h.replace(k,row+k)}catch(e){}return h}}
  setInterval(gdTick,400);
 }catch(e){}})();
-/* ================= V227 (art agent, user 2026-11-04 08:40) =================
+/* V228: the active slot shows a gold "Đang xuất chiến" badge on the card's top-right edge (pulsing glow + live dot) instead of the inline text.
+================= V227 (art agent, user 2026-11-04 08:40) =================
    "remove xuat chien button, player switch troop by clicking on troop image. instead of an own window, make troop
    switching a float window - take only 3/4 of the screen and the player still can see the previous screen (blur)".
    Đổi binh chủng now opens as a floating panel (#rt226) over the current screen, which stays visible behind a blur.
@@ -13601,6 +13602,7 @@ function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="
    var foot='<div class="sw211"><span class="sm mute">Đổi ô '+(i+1)+' sang:</span>'+BR6.filter(function(x){return bs.indexOf(x)<0}).map(function(x){return'<button class="chip" data-a="sw211" data-v="'+i+'" data-w="'+x+'">'+TAGS[x]+'</button>'}).join('')+
     '<span class="sm '+(c?'gold':'ok')+'">'+(c?c+' vàng':'Miễn phí')+'</span></div>';
    var card=rotCard(gid,b,{foot:foot});
+   if(on)card=card.replace(' · <span class="rton">Đang xuất chiến</span>','').replace('<div class="rtc on">','<div class="rtc on"><span class="rt226on"><i></i>Đang xuất chiến</span>');
    if(!on)card=card.replace('<div class="rth">','<div class="rth rt226p'+(busy?' busy':'')+'" data-a="'+(busy?'rt226b':'setbr')+'" data-v="'+gid+'" data-w="'+b+'" role="button" aria-label="Xuất chiến ô '+(i+1)+'">');
    h+='<div class="rtslot"><div class="rowlbl">Ô '+(i+1)+'</div>'+card+'</div>'});
   return h}
@@ -13634,8 +13636,14 @@ function gdBook(){var G=gd();return'<h3>Sổ tay chiến trận</h3><div class="
   '#rt226 .rt226p img{box-shadow:0 0 0 2px rgba(108,194,131,.75),0 0 14px rgba(108,194,131,.35);animation:rt226g 2.2s ease-in-out infinite}'+
   '#rt226 .rt226p.busy img{box-shadow:none;animation:none;filter:grayscale(.6)}'+
   '#rt226 .rt226p .sp::after{content:"Chạm để xuất chiến";font-size:12px;color:#8fd6a0;margin-top:2px}#rt226 .rt226p.busy .sp::after{content:"Đang luyện binh";color:#e9958a}'+
+  '#rt226 .rtc{position:relative}#rt226 .rtc.on .rth .sp{padding-right:4px}'+
+  '#rt226 .rt226on{position:absolute;top:-11px;right:10px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:4px 11px 4px 9px;border-radius:999px;'+
+   'background:linear-gradient(180deg,#f6d98e,#d29c3e);color:#2a1806;font:700 12px/1.1 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);letter-spacing:.02em;white-space:nowrap;'+
+   'border:1px solid #fff0c4;box-shadow:0 0 0 2px rgba(23,16,10,.9),0 0 14px rgba(242,196,96,.55);animation:rt226on 2.4s ease-in-out infinite}'+
+  '#rt226 .rt226on i{width:7px;height:7px;border-radius:50%;background:#2f9a55;box-shadow:0 0 0 2px rgba(255,255,255,.55);animation:rt226d 1.2s ease-in-out infinite}'+
+  '@keyframes rt226on{50%{box-shadow:0 0 0 2px rgba(23,16,10,.9),0 0 22px rgba(242,196,96,.85)}}@keyframes rt226d{50%{opacity:.35}}'+
   '@keyframes rt226g{50%{box-shadow:0 0 0 2px rgba(108,194,131,.95),0 0 20px rgba(108,194,131,.55)}}'+
-  '@media (prefers-reduced-motion:reduce){#rt226 .rt226in,#rt226 .rt226bg{transition:none}#rt226 .rt226p img{animation:none}}';
+  '@media (prefers-reduced-motion:reduce){#rt226 .rt226in,#rt226 .rt226bg{transition:none}#rt226 .rt226p img,#rt226 .rt226on,#rt226 .rt226on i{animation:none}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('rt226',e)}catch(x){}}})();
 </script>
