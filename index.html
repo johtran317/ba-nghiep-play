@@ -10839,7 +10839,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V198';
+var BUILD='V199';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11881,6 +11881,110 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
   '@keyframes mtwv{0%{transform:skewY(-6deg) scaleX(.92)}100%{transform:skewY(5deg) scaleX(1.04)}}'+
   '@media (prefers-reduced-motion:reduce){#main .mapbox .mtbn .mtfl{animation:none}}';
  function addCss(){try{var s=document.getElementById('ds198css');if(!s){s=document.createElement('style');s.id='ds198css';s.textContent=CSS}document.head.appendChild(s)}catch(e){}}
+ try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss)}catch(e){}
+})();
+/* ===== V199: Màn-clear finishing cinematic (art agent) =====
+   User 2026-11-03 18:03: "when the player clears 1 map, add a quick anime that fills the entire screen showing the enemy
+   being slain, 5-7 sec".
+   Plays once, the first time a Màn's boss stage is won (game3.js sets R.map=1), on top of the result sheet:
+   0.0 letterbox + the Màn's battle background slowly zooming, Màn name · 0.4 the boss slides in (red rim glow)
+   · 1.2 our lead hero slides in, 2.0 dashes across · 2.1 white flash, three slashes, screen shake
+   · 2.8 the boss portrait splits in two, falls apart and turns grey, ink burst + embers
+   · 3.6 our hero returns in a gold light · 3.9 "Đại thắng" seal stamps in with "Đã hạ <boss> · Bình định Màn N"
+   · 5.6 "Chạm để tiếp tục" · ~6.6 s fade out. Tap skips after 1 s. Reduced motion → a short still version.
+   Art: boss portrait (enArt / GART), hero art (GART), battle background (btPath) — all already in the game.
+   Slashes, sparks, ink and the seal are code-drawn for now; painted versions are requested in the Map Troop Art Prompts
+   doc (vfx_slash.png / vfx_props.png → art/ui/victory_fx.webp). Everything wrapped; any error = no cinematic. */
+(function(){
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ function bgOf(mi){try{var p=btPath('m'+(mi+1)+'_b'),h=p.split('#');if(h[1])return'background-image:url('+h[0]+');background-size:200% 100%;background-position:'+(h[1]==='a'?'0%':'100%')+' 50%';return'background-image:url('+p+');background-size:cover;background-position:50% 50%'}catch(e){return''}}
+ function srcOf(id){try{var A=GART[id];return A?(A.src||A.sm):null}catch(e){return null}}
+ function bossOf(mi){try{var M=MAPS[mi],en=buildEnemy(mi,M.st.length-1,'stage'),u=en.units.filter(function(x){return x.isBoss})[0]||en.units[0],src=null;
+   try{src=enArt(u,{})}catch(e){}if(!src&&u.look)src=srcOf(u.look);if(!src&&u.gid)src=srcOf(u.gid);return{n:(M.boss&&M.boss.n)||u.name,src:src}}catch(e){return{n:'',src:null}}}
+ function heroOf(){try{var us=playerUnits(true).filter(function(u){return u.gid&&GART[u.gid]});if(!us.length)return null;
+   us.sort(function(a,b){return(b.cell&&b.cell[0]===0?0:0)-(0)||(b.A*b.max)-(a.A*a.max)});var g=us[0].gid;return{n:GENS[g].n,src:srcOf(g),pos:GART[g].pos||'50% 20%'}}catch(e){return null}}
+ var RM=false;try{RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+
+ window.playMapClear=function(mi){try{
+   if(document.getElementById('vcin'))return;var M=MAPS[mi];if(!M)return;var B=bossOf(mi),H=heroOf();
+   var el=document.createElement('div');el.id='vcin';el.className=RM?'rm':'';el.setAttribute('role','dialog');el.setAttribute('aria-label','Đại thắng · Màn '+(mi+1));
+   var sl='<svg class="vcsl" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="vcg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff6d0"/><stop offset="1" stop-color="#f2b84a"/></linearGradient><filter id="vcb"><feGaussianBlur stdDeviation="6"/></filter></defs>'+
+     [['M370 250Q230 390 60 560',1],['M40 300Q190 420 360 590',2],['M10 470Q200 440 385 420',3]].map(function(p){return'<g class="vs s'+p[1]+'"><path d="'+p[0]+'" stroke="#f2b84a" stroke-width="26" fill="none" filter="url(#vcb)" opacity=".7" pathLength="1"/><path d="'+p[0]+'" stroke="url(#vcg)" stroke-width="7" stroke-linecap="round" fill="none" pathLength="1"/></g>'}).join('')+'</svg>';
+   var ink='',emb='';for(var i=0;i<14;i++){var a=i/14*Math.PI*2+(i%3)*.2,d=60+(i*37)%90;ink+='<i style="--x:'+(Math.cos(a)*d).toFixed(0)+'px;--y:'+(Math.sin(a)*d).toFixed(0)+'px;--s:'+(6+(i*7)%14)+'px"></i>'}
+   for(var j=0;j<22;j++){emb+='<b style="left:'+((j*47)%100)+'%;--d:'+(2.8+(j%7)*.18).toFixed(2)+'s;--h:'+(160+(j*53)%260)+'px;--w:'+(((j*29)%60)-30)+'px"></b>'}
+   el.innerHTML='<div class="vcbg" style="'+bgOf(mi)+'"></div><div class="vcvig"></div>'+
+     '<div class="vcbar t"></div><div class="vcbar b"></div>'+
+     '<div class="vcmn"><span>Màn '+(mi+1)+'</span><b>'+esc(M.n)+'</b></div>'+
+     (B.src?'<div class="vcboss"><div class="vcb0" style="background-image:url(\''+B.src+'\')"></div><div class="vcb1" style="background-image:url(\''+B.src+'\')"></div><div class="vcb2" style="background-image:url(\''+B.src+'\')"></div></div>':'')+
+     (H&&H.src?'<div class="vchero"><div class="vch" style="background-image:url(\''+H.src+'\');background-position:'+H.pos+'"></div></div><div class="vcdash" style="background-image:url(\''+H.src+'\');background-position:'+H.pos+'"></div>':'')+
+     '<div class="vcflash"></div>'+sl+'<div class="vcink">'+ink+'</div><div class="vcemb">'+emb+'</div><div class="vcrays"></div>'+
+     '<div class="vcwin"><div class="vcseal"><span>Đại thắng</span></div><div class="vcsub">Đã hạ <b>'+esc(B.n)+'</b><br>Bình định Màn '+(mi+1)+'</div></div>'+
+     '<div class="vctap">Chạm để tiếp tục</div>';
+   document.body.appendChild(el);
+   var t0=Date.now(),done=false;function end(){if(done)return;done=true;el.classList.add('out');setTimeout(function(){try{el.remove()}catch(e){}},450)}
+   el.addEventListener('click',function(){if(Date.now()-t0>1000)end()});
+   setTimeout(end,RM?3200:6600)}catch(e){try{var x=document.getElementById('vcin');if(x)x.remove()}catch(_){}}};
+
+ try{var _rs=resultSheet;resultSheet=function(R){var h=_rs(R);try{if(R&&R.map&&R.win!==false&&!R._vc){R._vc=1;var mi=+(String(R.key||'').split('|')[0]);if(!isNaN(mi))setTimeout(function(){playMapClear(mi)},60)}}catch(e){}return h}}catch(e){}
+
+ var C='#vcin{position:fixed;inset:0;z-index:9999;overflow:hidden;background:#000;color:#f6e6c4;font-family:"Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;animation:vcIn .35s ease-out;-webkit-tap-highlight-color:transparent}'+
+ '#vcin.out{animation:vcOut .45s ease-in forwards}'+
+ '@keyframes vcIn{from{opacity:0}to{opacity:1}}@keyframes vcOut{to{opacity:0}}'+
+ '#vcin .vcbg{position:absolute;inset:-4%;filter:brightness(.55) saturate(.9)}'+
+ '@keyframes vcZoom{from{transform:scale(1.04)}to{transform:scale(1.16)}}'+
+ '#vcin .vcvig{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 45%,rgba(0,0,0,0) 30%,rgba(0,0,0,.75) 100%)}'+
+ '#vcin .vcbar{position:absolute;left:0;right:0;height:9%;background:#000;z-index:8}#vcin .vcbar.t{top:0;animation:vcBt .5s ease-out both}#vcin .vcbar.b{bottom:0;animation:vcBb .5s ease-out both}'+
+ '@keyframes vcBt{from{transform:translateY(-100%)}}@keyframes vcBb{from{transform:translateY(100%)}}'+
+ '#vcin .vcmn{position:absolute;top:11%;left:0;right:0;text-align:center;z-index:7;display:flex;flex-direction:column;gap:2px;opacity:0;animation:vcFade 2.2s .2s ease-out both}'+
+ '#vcin .vcmn span{font:600 12px var(--ds-fb,sans-serif);letter-spacing:.2em;text-transform:uppercase;color:#d9c39a}#vcin .vcmn b{font:700 22px Philosopher,Georgia,serif;color:#f6e6c4;text-shadow:0 2px 10px #000}'+
+ '@keyframes vcFade{0%{opacity:0;transform:translateY(8px)}20%,80%{opacity:1;transform:none}100%{opacity:0}}'+
+ /* boss */
+ '#vcin .vcboss{position:absolute;right:-4%;top:20%;width:78%;height:56%;z-index:2;animation:vcBossIn .7s .4s cubic-bezier(.2,.8,.2,1) both}'+
+ '@keyframes vcBossIn{from{transform:translateX(60%);opacity:0}to{transform:none;opacity:1}}'+
+ '#vcin .vcboss>div{position:absolute;inset:0;background-size:cover;background-position:50% 15%;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%)}'+
+ '#vcin .vcb0{filter:drop-shadow(0 0 18px rgba(220,40,30,.8)) brightness(.95);animation:vcBreath 1.2s 1.1s ease-in-out 2 alternate,vcHide 0s 2.8s forwards}'+
+ '@keyframes vcBreath{to{transform:scale(1.03)}}@keyframes vcHide{to{visibility:hidden}}'+
+ '#vcin .vcb1,#vcin .vcb2{visibility:hidden}'+
+ '#vcin .vcb1{clip-path:polygon(0 0,100% 0,100% 28%,0 72%);animation:vcSplitA 1.6s 2.8s cubic-bezier(.3,.1,.6,1) forwards}'+
+ '#vcin .vcb2{clip-path:polygon(0 72%,100% 28%,100% 100%,0 100%);animation:vcSplitB 1.6s 2.8s cubic-bezier(.3,.1,.6,1) forwards}'+
+ '@keyframes vcSplitA{0%{visibility:visible;filter:brightness(2.2)}15%{filter:brightness(1)}100%{visibility:visible;transform:translate(-30%,-22%) rotate(-14deg);filter:grayscale(1) brightness(.35);opacity:0}}'+
+ '@keyframes vcSplitB{0%{visibility:visible;filter:brightness(2.2)}15%{filter:brightness(1)}100%{visibility:visible;transform:translate(22%,34%) rotate(16deg);filter:grayscale(1) brightness(.35);opacity:0}}'+
+ /* hero */
+ '#vcin .vchero{position:absolute;left:-6%;bottom:9%;width:70%;height:60%;z-index:3;animation:vcHeroIn .6s 1.2s cubic-bezier(.2,.8,.2,1) both,vcHeroOff .15s 2s forwards,vcHeroBack .6s 3.6s cubic-bezier(.2,.8,.2,1) forwards}'+
+ '#vcin .vch{position:absolute;inset:0;background-size:cover;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%);filter:drop-shadow(0 0 16px rgba(242,207,124,.55))}'+
+ '@keyframes vcHeroIn{from{transform:translateX(-70%);opacity:0}to{transform:none;opacity:1}}@keyframes vcHeroOff{to{opacity:0;transform:translateX(30%)}}'+
+ '@keyframes vcHeroBack{from{opacity:0;transform:translate(10%,6%) scale(1.12)}to{opacity:1;transform:translate(14%,4%) scale(1.04)}}'+
+ '#vcin .vcdash{position:absolute;left:0;bottom:22%;width:60%;height:40%;z-index:4;background-size:cover;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 58%,transparent 100%);opacity:0;filter:brightness(2) blur(2px);animation:vcDash .22s 1.95s ease-in forwards}'+
+ '@keyframes vcDash{0%{opacity:.9;transform:translateX(-10%) skewX(-18deg)}100%{opacity:0;transform:translateX(170%) skewX(-30deg)}}'+
+ /* flash, slashes, shake */
+ '#vcin .vcflash{position:absolute;inset:0;background:#fff;z-index:6;opacity:0;animation:vcFl .5s 2.1s ease-out,vcFl .4s 2.8s ease-out}'+
+ '@keyframes vcFl{0%{opacity:.9}100%{opacity:0}}'+
+ '#vcin .vcsl{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}'+
+ '#vcin .vs path{stroke-dasharray:1;stroke-dashoffset:1;opacity:0}'+
+ '#vcin .vs.s1 path{animation:vcCut .55s 2.1s ease-out forwards}#vcin .vs.s2 path{animation:vcCut .55s 2.3s ease-out forwards}#vcin .vs.s3 path{animation:vcCut .6s 2.5s ease-out forwards}'+
+ '@keyframes vcCut{0%{stroke-dashoffset:1;opacity:1}35%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}'+
+ '#vcin .vcink,#vcin .vcemb,#vcin .vcrays{position:absolute;inset:0;pointer-events:none}'+
+ '#vcin .vcink{z-index:5;left:62%;top:44%;width:0;height:0;inset:auto}'+
+ '#vcin .vcink i{position:absolute;width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,#2a0a08 40%,#8a1c14);opacity:0;animation:vcInk .9s 2.8s cubic-bezier(.1,.7,.3,1) forwards}'+
+ '@keyframes vcInk{0%{opacity:1;transform:translate(0,0) scale(.4)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.4)}}'+
+ '#vcin .vcemb{z-index:6}#vcin .vcemb b{position:absolute;bottom:20%;width:4px;height:4px;border-radius:2px;background:#ffcf70;box-shadow:0 0 6px #ff9a3a;opacity:0;animation:vcEmb 2.2s var(--d) ease-out forwards}'+
+ '@keyframes vcEmb{0%{opacity:0}10%{opacity:1}100%{opacity:0;transform:translate(var(--w),calc(var(--h) * -1))}}'+
+ '#vcin .vcrays{z-index:1;background:conic-gradient(from 0deg at 40% 60%,rgba(242,207,124,0) 0deg,rgba(242,207,124,.22) 12deg,rgba(242,207,124,0) 24deg,rgba(242,207,124,.18) 40deg,rgba(242,207,124,0) 56deg,rgba(242,207,124,.2) 80deg,rgba(242,207,124,0) 100deg,rgba(242,207,124,0) 360deg);opacity:0;animation:vcRays 3s 3.6s ease-out forwards}'+
+ '@keyframes vcRays{0%{opacity:0;transform:rotate(-8deg)}30%{opacity:1}100%{opacity:.8;transform:rotate(6deg)}}'+
+ /* win seal */
+ '#vcin .vcwin{position:absolute;left:0;right:0;top:13%;z-index:7;display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0;animation:vcWin .45s 3.9s cubic-bezier(.2,1.4,.4,1) forwards}'+
+ '@keyframes vcWin{0%{opacity:0;transform:scale(2.2)}100%{opacity:1;transform:none}}'+
+ '#vcin .vcseal{padding:10px 26px;border:3px solid #f2cf7c;outline:1.5px solid rgba(242,207,124,.5);outline-offset:4px;background:linear-gradient(180deg,#a3241c,#6e130e);box-shadow:0 10px 30px rgba(0,0,0,.6),inset 0 0 18px rgba(0,0,0,.35);transform:rotate(-3deg)}'+
+ '#vcin .vcseal span{display:block;font:700 44px/1.1 Philosopher,Georgia,serif;color:#fff1c8;letter-spacing:.04em;text-shadow:0 2px 0 #4a0a06}'+
+ '#vcin .vcsub{text-align:center;padding:6px 14px;border-radius:12px;background:rgba(10,6,3,.62);font:500 15px/1.5 var(--ds-fb,sans-serif);color:#f0e2c4;text-shadow:0 2px 8px #000}#vcin .vcsub b{color:#ffcf70;font-weight:700}'+
+ '#vcin .vctap{position:absolute;left:0;right:0;bottom:11%;text-align:center;z-index:9;font:500 13px var(--ds-fb,sans-serif);color:#d9c39a;opacity:0;animation:vcTap 1.4s 5.4s ease-in-out infinite alternate}'+
+ '@keyframes vcTap{from{opacity:.25}to{opacity:.95}}'+
+ /* screen shake on the scene layers */
+ '#vcin .vcbg{animation:vcZoom 6.8s linear forwards,vcShk .7s 2.1s linear}'+
+ '@keyframes vcShk{0%,100%{translate:0 0}10%{translate:-9px 5px}20%{translate:8px -6px}30%{translate:-7px -4px}40%{translate:6px 6px}50%{translate:-5px 3px}60%{translate:4px -4px}70%{translate:-3px 2px}80%{translate:2px -2px}}'+
+ /* reduced motion: still frames */
+ '#vcin.rm *{animation:none!important}#vcin.rm .vcb0,#vcin.rm .vcdash,#vcin.rm .vcsl,#vcin.rm .vcink,#vcin.rm .vcemb{display:none}#vcin.rm .vcb1,#vcin.rm .vcb2{visibility:visible;filter:grayscale(1) brightness(.4)}#vcin.rm .vcb1{transform:translate(-10%,-6%) rotate(-6deg)}#vcin.rm .vcb2{transform:translate(8%,12%) rotate(7deg)}#vcin.rm .vcwin,#vcin.rm .vctap,#vcin.rm .vcmn{opacity:1}';
+ function addCss(){try{var s=document.getElementById('ds199css');if(!s){s=document.createElement('style');s.id='ds199css';s.textContent=C}document.head.appendChild(s)}catch(e){}}
  try{addCss();setTimeout(addCss,0);document.addEventListener('DOMContentLoaded',addCss)}catch(e){}
 })();
 </script>
