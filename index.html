@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V231';
+var BUILD='V232';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13554,14 +13554,19 @@ function gdShow(s,mode){gdUI();var key=s.id+(mode||'');if(GDCUR!==key){GDCUR=key
 function gdHide(){GDCUR=null;if(GDEL)GDEL.hidden=true;if(GDPT)GDPT.hidden=true}
 function gdBlocked(){var sp=document.getElementById('splash');if(sp&&!sp.classList.contains('out')&&sp.offsetParent!==null)return true;
  if(document.querySelector('#hrev,#vcin'))return true;try{if(fighting)return true}catch(e){}return false}
+/* V232: a go-to-tab tip (nav) is a suggestion, not a chase. It never shows on Chinh chiến (except the first-battle chapter G1),
+   and if the player goes to a different tab instead, it counts as done; the chapter's next steps show when the player reaches that tab. */
+var GDNV={};function gdNavTab(){try{return tab}catch(e){return''}}
 function gdPick(){var G=gdN();for(var c=0;c<GDC.length;c++){var C=GDC[c];if(G.ch[C.id])continue;var started=C.steps.some(function(s){return G.done[s.id]});
   if(!started&&C.end()){G.ch[C.id]=1;continue}if(!C.start())continue;
   for(var i=0;i<C.steps.length;i++){var s=C.steps[i];s.ch=C.id;if(G.done[s.id])continue;
    if(s.until&&s.until()&&(started||i>0||s.nav)){G.done[s.id]=1;started=true;continue}
+   if(s.nav&&C.id!=='G1'&&gdTab('camp'))break;
+   if(s.nav&&s.when()&&GDNV[s.id]!=null){var t0=gdNavTab();if(GDNV[s.id]!==t0){G.done[s.id]=1;started=true;continue}}
    if(s.when())return s;break}
   if(C.steps.every(function(s){return G.done[s.id]}))G.ch[C.id]=1}
  return null}
-function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s)gdShow(s);else gdHide()}catch(e){gdHide()}}
+function gdTick(){try{if(!S||!gdOn()||GDBT){if(!GDBT)gdHide();return}if(gdBlocked()){gdHide();return}var s=gdPick();if(s){gdShow(s);if(s.nav&&GDNV[s.id]==null)GDNV[s.id]=gdNavTab()}else gdHide()}catch(e){gdHide()}}
 /* V231 fix: a 'go to tab' step (nav:1) counts as done when the player is already on that tab, even if it was never shown.
    Before, two chapters' nav steps (g3.0 Về Thành / g4.0 Vào Tướng) sent the player back and forth forever. */
 /* in-battle tips: timed, drawn over the battle, never touching the battle loop */
