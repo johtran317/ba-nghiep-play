@@ -10960,7 +10960,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V236';
+var BUILD='V237';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -13505,7 +13505,7 @@ var GDC=[
   {id:'g1.7',f:0,t:function(){return gdH3('Thất bại')?'Thua một trận không sao. Xem Tình báo để biết bị khắc chế ở đâu, Hồi binh rồi đánh lại.':'Thắng lợi! Ba sao khi thắng gọn và ít tổn thất.'},when:function(){return!fighting&&(gdH3('Chiến thắng')||gdH3('Thất bại')||gdH3('Thắng'))},tap:1}]},
  {id:'G2',start:function(){return gdSt('0-0')},end:function(){return gdSt('0-1')},steps:[
   {id:'g2.1',f:2,t:'Đây là đội của ta. Hàng trước chịu đòn, hàng sau an toàn cho cung và mưu sĩ. Kéo tướng để đổi chỗ.',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1},
-  {id:'g2.2',f:0,t:'Số nhỏ trên mỗi ô là thứ tự ra đòn. Vị trí quyết định thắng thua!',p:'#sheet .pv-my',when:function(){return gdSheet('.pv-my')},tap:1}]},
+  {id:'g2.2',f:0,t:'Số nhỏ ở góc mỗi ô là cấp của tướng. Cấp cao đánh mạnh hơn, nhưng vị trí mới quyết định thắng thua!',p:'#sheet .pv-my .fc.has .lv',when:function(){return gdSheet('.pv-my')},tap:1}]},
  {id:'G3',start:function(){return gdSt('0-1')},end:function(){return gdSt('0-3')},steps:[
   {id:'g3.0',nav:1,f:2,t:'Về Thành để lo việc nội chính.',p:'#nav [data-v="city"]',when:function(){return gdNoModal()&&!gdTab('city')},until:function(){return gdTab('city')}},
   {id:'g3.1',f:2,t:'Thu thuế để có bạc. Bạc dùng để xây dựng và luyện tướng.',p:'[data-a="tax"]',when:function(){return gdTab('city')&&gdNoModal()},tap:1,until:function(){return(S.taxUsed||0)>0}},
