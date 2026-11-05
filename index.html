@@ -5697,7 +5697,8 @@ var _gsSK=genSheet;
 genSheet=function(gid){var h=_gsSK(gid),list=skinsOf(gid);if(!list.length)return h;var w=skWorn(gid);
  if(w)h=h.replace('<span class="hhint">',skFrame(w,true)+'<span class="hhint">').replace('<button class="hero"','<button class="hero skon"');
  var own=list.filter(function(k){return skStar(k)>=1}).length,K=w?SKL[w]:SKL[list[0]];
- var btn='<button class="skbtn" data-a="skinw" data-v="'+gid+'" style="--k1:'+K.c1+';--k2:'+K.c2+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.2 6.4.5-4.9 4.2 1.5 6.3L12 16l-5.6 3.2 1.5-6.3L3 8.7l6.4-.5z"/></svg>Ngoại trang <b>'+own+'/'+list.length+'</b></button>';
+ /* V280: a round robe symbol in the name row (label kept for screen readers, count as a badge) */
+ var btn='<button class="skbtn sk280" data-a="skinw" data-v="'+gid+'" aria-label="Ngoại trang '+own+'/'+list.length+'" style="--k1:'+K.c1+';--k2:'+K.c2+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 3 12 6.4 15.8 3l5.7 4.3-2.9 4.1-2-1.1V21H7.4V10.3l-2 1.1-2.9-4.1z"/><path class="skc" d="M9.6 4.4 12 10.2l2.4-5.8M12 10.2V21"/></svg><b>'+own+'/'+list.length+'</b></button>';
  return h.replace('<span class="hslv">',btn+'<span class="hslv">')};
 /* skin window */
 function skStars(st){var s='';for(var i=0;i<5;i++)s+='<span class="'+(i<st?'on':'')+'">★</span>';return'<span class="skst">'+s+'</span>'}
@@ -11024,7 +11025,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V279';
+var BUILD='V280';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11509,7 +11510,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  S_+'.hero .hhint{display:none!important}'+
  S_+'.skbtn.dsonp{position:absolute!important;right:14px!important;left:auto!important;z-index:6!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 14px!important;border-radius:20px!important;'+
    'background:rgba(23,17,12,.8)!important;border:1px solid rgba(242,207,124,.6)!important;border-image:none!important;color:#f6dfa6!important;font:600 13px var(--ds-fb)!important;box-shadow:0 4px 12px rgba(0,0,0,.45)!important;width:auto!important}'+
- S_+'.hsl{font:500 11px var(--ds-fb)!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--ds-mu)!important}'+
+ S_+'.hsh .skbtn.sk280{position:relative!important;flex:none;width:44px!important;height:44px!important;min-height:44px!important;margin:0 10px 0 0!important;padding:0!important;display:flex!important;align-items:center;justify-content:center;border-radius:50%!important;background:radial-gradient(circle at 50% 35%,#3a2a4a,#171019)!important;border:1.5px solid var(--k1)!important;border-image:none!important;box-shadow:0 0 0 2px rgba(0,0,0,.55),0 0 12px color-mix(in srgb,var(--k1) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.12)!important;color:#fff!important;font-size:0!important}'+S_+'.hsh .skbtn.sk280 svg{width:24px!important;height:24px!important;fill:var(--k1)!important;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}'+S_+'.hsh .skbtn.sk280 svg .skc{fill:none;stroke:rgba(20,12,24,.75);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}'+S_+'.hsh .skbtn.sk280 b{position:absolute;right:-7px;bottom:-5px;min-width:24px;height:18px;padding:0 4px;border-radius:9px;background:#171019;border:1px solid var(--k1);color:var(--k1)!important;font:700 11px/16px var(--ds-fn)!important;text-align:center;white-space:nowrap}'+S_+'.hsh .skbtn.sk280:active{transform:scale(.94)}'+S_+'.hsl{font:500 11px var(--ds-fb)!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--ds-mu)!important}'+
  S_+'.hsk,'+S_+'.hsk .pas{font-size:13px!important;line-height:1.5!important;color:#e6d8bf!important}'+
  'html body .dsnum{font:700 15px/1 var(--ds-fn)!important;color:#f2cf7c!important;letter-spacing:.01em}'+
 
@@ -11588,8 +11589,8 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
 
  function hero(sh){try{var h=sh.querySelector(':scope>.hero');if(!h)return;
    sh.querySelectorAll('.hsk').forEach(function(k){if(!k.dataset.dsn){k.dataset.dsn='1';nums(k)}});
-   var sk=sh.querySelector('.skbtn[data-a="skinw"]');if(sk){if(!sk.classList.contains('dsonp')){sk.classList.add('dsonp');if(getComputedStyle(sh).position==='static')sh.style.position='relative'}
-     sk.style.top=Math.max(0,h.offsetTop+h.offsetHeight-52)+'px'}}catch(e){}}
+   /* V280 (user 23:12 "move Ngoại trang down here and replace it with a symbol"): the skin button stays in the name row as a round symbol (no longer floated onto the portrait banner) */
+   }catch(e){}}
 
  var FC=[['#8fd6a3','#3f9a5c'],['#7ea6e6','#4a78c8'],['#e88a7e','#c8463a'],['#c4a6e8','#9a7bc8']];
  function world(sh){try{var city=sh.querySelector('[data-a="winv"]'),node=sh.querySelector('[data-a="wocc"]');if(!city&&!node)return;sh.classList.add('dswh');
