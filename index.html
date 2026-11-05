@@ -5783,7 +5783,7 @@ playerUnits=function(full){var us=_puEV(full);us.forEach(function(u){var g=u.gid
 var WSEG=[
  {k:'sk',n:10,w:1,t:'Đại Cát|10 mảnh',c:'#ffcf3a'},{k:'sk',n:3,w:4,t:'Ngoại trang|×3',c:'#b47cf0'},{k:'sk',n:1,w:16,t:'Ngoại trang|×1',c:'#7a4ab8'},
  {k:'wp',n:2,w:8,t:'Vũ khí|×2',c:'#e0524b'},{k:'wp',n:1,w:14,t:'Vũ khí|×1',c:'#9a2a2a'},{k:'hr',n:2,w:8,t:'Chiến mã|×2',c:'#3a9ad0'},{k:'hr',n:1,w:14,t:'Chiến mã|×1',c:'#1f5a8a'},
- {k:'v',n:40,w:12,t:'40|vàng',c:'#c9a227'},{k:'res',n:1,w:13,t:'Bạc|Binh Thư',c:'#5a7a68'},{k:'phu',n:1,w:10,t:'Binh Phù|×1',c:'#8a5a2a'}];
+ {k:'v',n:40,w:12,t:'40|vàng',c:'#c9a227'},{k:'res',n:1,w:13,t:'Bạc|30.000',c:'#5a7a68'},{k:'phu',n:1,w:10,t:'Binh Phù|×1',c:'#8a5a2a'}];
 var WMS=[[10,{sk:10}],[30,{sk:15,v:100}],[60,{wp:10,hr:10}],[100,{sk:30}],[150,{sk:40,v:300}]];
 function whS(){if(!S.wheel)S.wheel={n:0,wk:null,ws:0,got:{},free:null,t:'zhugeliang_a',pity:0,rot:0,last:null};var w=S.wheel,wk=Math.floor(S.day/7);if(w.wk!==wk){w.wk=wk;w.ws=0;w.got={}}
  if(!SKL[w.t])w.t=skinsOf(w.t)[0]||'zhugeliang_a';return w}
@@ -5794,7 +5794,7 @@ function addPieces(k,kind,n){var key=kind==='sk'?k:SKL[k].g+'|'+kind;skRec(key).
 function giveSeg(s,w,out){
  if(s.k==='sk'||s.k==='wp'||s.k==='hr'){var kk3=(s.k!=='sk'&&!SKIT[SKL[w.t].g])?'sk':s.k;/* V214: a skin with no named weapon/horse (Trương Phi) gets skin shards instead */addPieces(w.t,kk3,s.n);out[kk3]=(out[kk3]||0)+s.n}
  else if(s.k==='v'){S.res.gold+=s.n;out.v=(out.v||0)+s.n}
- else if(s.k==='res'){S.res.silver+=30000;var T=tp(),b=BRS6[Math.floor(Math.random()*6)];T.books[b]+=5;out.s=(out.s||0)+30000;out.bk=(out.bk||0)+5}
+ else if(s.k==='res'){/* V269: silver only (the tile shows the silver coin; the 5 random Binh Thư were dropped, user 20:27) */S.res.silver+=30000;out.s=(out.s||0)+30000}
  else if(s.k==='phu'){tp().phu+=1;out.phu=(out.phu||0)+1}}
 function outTxt(o,k){var K=SKL[k],I=SKIT[K.g],x=[];
  if(o.sk)x.push('<b style="color:'+K.c1+'">Mảnh '+K.n+' ×'+o.sk+'</b>');if(o.wp&&I)x.push('Mảnh '+I.wp.n+' ×'+o.wp);if(o.hr&&I)x.push('Mảnh '+I.hr.n+' ×'+o.hr);
@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V269';
+var BUILD='V270';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -11934,7 +11934,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    h+='<div class="whbtns dswbt"><button class="btn dsbt sec" data-a="whspin" data-v="1"'+(gold>=SPIN1?'':' disabled')+'><span>Quay ×1</span><small>'+ic('gold')+SPIN1+'</small></button>'+
      '<button class="btn dsbt pri" data-a="whspin" data-v="10"'+(gold>=SPIN10?'':' disabled')+'><span>Quay ×10</span><small>'+ic('gold')+fmt(SPIN10)+'</small></button></div>';
    /* legend */
-   var LG=[['sk','Mảnh '+K.n]].concat(I?[['wp','Mảnh '+I.wp.n],['hr','Mảnh '+I.hr.n]]:[]).concat([['v','Vàng'],['s','30K bạc + 5 Binh Thư'],['phu','Binh Phù']]);/* V214: heroes without a named weapon/horse (Trương Phi) no longer crash the wheel */
+   var LG=[['sk','Mảnh '+K.n]].concat(I?[['wp','Mảnh '+I.wp.n],['hr','Mảnh '+I.hr.n]]:[]).concat([['v','Vàng'],['s','30.000 bạc'],['phu','Binh Phù']]);/* V214: heroes without a named weapon/horse (Trương Phi) no longer crash the wheel */
    h+='<div class="dshl">Phần thưởng trên vòng</div><div class="dswl">'+LG.map(function(x){return'<div class="dswli">'+(x[0]==='sk'?'<span class="dswg2">'+'<svg viewBox="0 0 24 24" width="28" height="28">'+gem(K.c1,24)+'</svg></span>':tileIco(x[0],K))+'<span>'+x[1]+'</span></div>'}).join('')+'</div>';
    h+='<div class="dswnote">Đại Cát (ô vàng) cho 10 mảnh ngoại trang. Cần 60 mảnh để mở ngoại trang ★1.</div>';
    /* weekly milestones */
