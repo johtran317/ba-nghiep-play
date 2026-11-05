@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V272';
+var BUILD='V273';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14985,7 +14985,7 @@ var WQ269=1;
 (function(){try{
  var GA='art/icons/gear.webp',OA='art/icons/obj.webp',PA='art/skins/portraits.webp',SKO=['zhugeliang','lubu','guanyu','zhaoyun','caocao','diaochan'];
  /* face boxes include the hat; the face itself is the lower part of the box (user 20:12 "make sure the face is in the middle") */
- var FADJ={zhugeliang_b:[0,.015],caocao_a:[.075,-.065]};
+ var FADJ={zhugeliang_a:[0,.04],zhugeliang_b:[0,.015],caocao_a:[.075,-.065],lubu_a:[0,.08],lubu_b:[0,.08]};/* V273: both Lữ Bố and Ngọa Long Tiên Sư faces higher in the frame (user 21:01 / 21:03) */
  var POS=[[1,1],[1,2],[1,3],[1,4],[2,4],[3,4],[3,3],[3,2],[3,1],[2,1]];
  function face(k){try{var i=SKORD.indexOf(k),F=(typeof SKFACE!=='undefined'&&SKFACE[k])||null;if(i<0||!F)throw 0;
    var D=46,A=FADJ[k]||[0,0],cx=(F[0]+F[2]/2+A[0])*480,cy=(F[1]+F[3]*.8+A[1])*720,c=Math.max(F[2]*480,F[3]*720)*1.25,s=D/c;
