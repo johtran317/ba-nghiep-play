@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V278';
+var BUILD='V279';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15223,4 +15223,79 @@ var GS278=1;
  document.head.appendChild(css);
  try{build()}catch(e){}
 }catch(e){try{console.error('gs278',e)}catch(x){}}})();
+/* ================= V279 (art agent, user 2026-11-04 22:35, screenshot of the "Tướng & binh chủng" floating window: "also structure this
+   floating window"). Same content and actions as V227/V243/V244 (#rt226 + pv243), regrouped into three clear sections like the V278
+   Tướng tab (same diamond + fading-rule section headers):
+   1. TƯỚNG RA TRẬN — hero card + the Đổi tướng strip joined into one panel (strip is the panel's lower half).
+   2. TÌNH BÁO TRẬN — the enemy / counter line becomes a two-row panel: "Quân địch" chips, "Khắc bằng" chips.
+   3. BINH CHỦNG — the long hint line is replaced by a chip on the section header ("Miễn phí còn N" / "Đổi · N vàng"); the
+      "Chạm để xuất chiến" cue on each spare card already tells how to switch. Ô 1 / Ô 2 become small left labels; the
+      "Khắc địch" + branch tags sit side by side.
+   The window header (back button + title) stays pinned while the panel scrolls (it used to scroll away, cutting the title).
+   Sections 1–2 only exist when the window is opened from the stage board (pv243); from the Tướng tab only section 3 shows.
+   Pure DOM regrouping via CSS order + labels after each render; no new actions, no logic change. TW279=0 turns it off. */
+var TW279=1;
+(function(){try{
+ function lab(p,key,txt,right){var e=p.querySelector(':scope>.tw9s[data-s="'+key+'"]');
+  if(e){if(right!=null){var r=e.querySelector('.tw9x');if(r&&r.innerHTML!==right)r.innerHTML=right}return}
+  e=document.createElement('div');e.className='tw9s';e.setAttribute('data-s',key);e.innerHTML='<b>'+txt+'</b><i></i>'+(right!=null?'<span class="tw9x">'+right+'</span>':'');p.appendChild(e)}
+ function run(){try{if(!TW279)return;var box=document.getElementById('rt226');if(!box)return;var p=box.querySelector('.rt226in');if(!p||!p.querySelector('.rtslot'))return;
+   p.classList.add('tw9');
+   var hc=p.querySelector(':scope>.pv243h'),sw=p.querySelector(':scope>.pv243s'),ct=p.querySelector(':scope>.pv243c'),t=p.querySelector(':scope>.rt226t');
+   if(hc)lab(p,'g','Tướng ra trận');
+   p.classList.toggle('tw9ns',!!hc&&!sw);
+   if(ct){lab(p,'e','Tình báo trận');
+    if(!ct.classList.contains('tw9c')){var es=[].map.call(ct.querySelectorAll('.pv243e'),function(x){return x.outerHTML}).join(''),gs=[].map.call(ct.querySelectorAll('.pv243g'),function(x){return x.outerHTML}).join('');
+     ct.classList.add('tw9c');ct.innerHTML='<div class="tw9r"><span class="tw9l">Quân địch</span><div class="tw9v">'+es+'</div></div>'+(gs?'<div class="tw9r"><span class="tw9l">Khắc bằng</span><div class="tw9v">'+gs+'</div></div>':'')}}
+   var chip=null;if(t){var b=t.querySelector('b'),n=b?+b.textContent:0,m=/lần này\s*(\d+)\s*vàng/.exec(t.textContent);
+    chip=n>0?'Miễn phí còn <em>'+n+'</em>':(m?'Đổi · <em>'+m[1]+'</em> vàng':null)}
+   lab(p,'b','Binh chủng',chip);
+   [].forEach.call(p.querySelectorAll('.rtslot .rth .sp'),function(sp){var k=sp.querySelector(':scope>.pv243k'),tg=sp.querySelector(':scope>.rtb');
+    if(k&&tg&&!sp.querySelector(':scope>.tw9tg')){var w=document.createElement('div');w.className='tw9tg';sp.insertBefore(w,k);w.appendChild(tg);w.appendChild(k)}})
+  }catch(e){try{console.warn('tw279',e)}catch(x){}}}
+ /* the panel re-renders with innerHTML and pv243 decorates it from its own observers — re-apply after every change (idempotent) */
+ var mo=null,cur=null;
+ function watch(){var box=document.getElementById('rt226');if(box===cur)return;cur=box;if(mo){mo.disconnect();mo=null}if(!box)return;
+  mo=new MutationObserver(run);mo.observe(box,{childList:true,subtree:true});run()}
+ try{new MutationObserver(watch).observe(document.body,{childList:true})}catch(e){}
+ var Q='html body #rt226 .rt226in.tw9';
+ var css=document.createElement('style');css.id='tw279css';css.textContent=
+  Q+'{display:flex;flex-direction:column;padding-top:0}'+
+  Q+'>*{order:20;flex:none}'+
+  Q+'>.rt226h{order:0;position:sticky;top:0;z-index:4;margin:0 -12px 2px;padding:10px 12px 8px;background:linear-gradient(180deg,rgba(40,29,20,.99),rgba(36,26,18,.97));border-bottom:1px solid rgba(226,178,90,.2)}'+
+  Q+'>.tw9s[data-s="g"]{order:1}'+Q+'>.pv243h{order:2}'+Q+'>.pv243s{order:3}'+
+  Q+'>.tw9s[data-s="e"]{order:4}'+Q+'>.pv243c{order:5}'+
+  Q+'>.tw9s[data-s="b"]{order:6}'+Q+'>.rt226t{order:7;display:none}'+Q+'>.rtslot{order:8}'+
+  Q+'>.tw9s{display:flex;align-items:center;gap:9px;margin:14px 2px 8px}'+
+  Q+'>.tw9s::before{content:"";flex:none;width:7px;height:7px;transform:rotate(45deg);background:#f6d77d;box-shadow:0 0 7px rgba(246,215,125,.8)}'+
+  Q+'>.tw9s b{font:700 15px var(--ds-fd,Philosopher,Georgia,serif);color:#f6d77d;letter-spacing:.04em;white-space:nowrap}'+
+  Q+'>.tw9s i{flex:1;min-width:12px;height:1px;background:linear-gradient(90deg,rgba(246,215,125,.7),transparent)}'+
+  Q+'>.tw9s .tw9x{flex:none;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid rgba(226,178,90,.35);font:600 12px var(--ds-fb,system-ui,sans-serif);color:#c9b48a;white-space:nowrap}'+
+  Q+'>.tw9s .tw9x em{font-style:normal;font-weight:800;color:#fff2cf}'+
+  /* 1. hero + swap strip = one panel */
+  Q+'>.pv243h{margin:0!important;border-radius:14px 14px 0 0!important;border-bottom:0!important;background:rgba(0,0,0,.28)!important}'+
+  Q+'>.pv243s{margin:0!important;padding:9px 10px 10px;border-radius:0 0 14px 14px;background:rgba(0,0,0,.28);border:1px solid rgba(226,178,90,.28);border-top:1px dashed rgba(226,178,90,.22)}'+
+  Q+'.tw9ns>.pv243h{border-radius:14px!important;border-bottom:1px solid rgba(226,178,90,.28)!important}'+
+  Q+'>.pv243s .pv243sh b{color:#e8d6ad}'+
+  /* 2. intel panel */
+  Q+'>.pv243c.tw9c{display:flex;flex-direction:column;gap:7px;margin:0!important;padding:10px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid rgba(226,178,90,.28)}'+
+  Q+' .tw9r{display:flex;align-items:flex-start;gap:10px}'+Q+' .tw9l{flex:none;width:76px;text-align:left!important;padding-top:3px;font:600 12px var(--ds-fb,system-ui,sans-serif);color:#b9a98a}'+
+  Q+' .tw9v{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:6px}'+
+  /* 3. troop slots */
+  Q+'>.rtslot{margin-top:0}'+Q+'>.rtslot+.rtslot{margin-top:12px}'+
+  Q+'>.rtslot>.rowlbl{text-align:left;margin:0 0 5px 4px;font:700 11px var(--ds-fb,system-ui,sans-serif);letter-spacing:.1em;color:#a8946c}'+
+  Q+' .tw9tg{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:2px}'+Q+' .tw9tg>*{margin:0!important;align-self:center!important}';
+ document.head.appendChild(css);
+ try{watch()}catch(e){}
+}catch(e){try{console.error('tw279',e)}catch(x){}}})();
+/* ================= V279 (art agent, user 2026-11-04 22:37, stage-sheet screenshot of "10. Trương Giác": "some enemy still don't have
+   real image"). Enemy units whose look is a hero WITH painted art (e.g. the Trương Giác boss, Hoa Hùng, Đổng Trác … as enemies) fell
+   through enArt (it returns null for GART looks so the hero art "wins") to the old game2 ptU, which draws the SVG face. Now they show
+   the hero's painted portrait_small (same frame, tag and Lv as the other painted enemy cards). Board, battle and logic unchanged.
+   EP279=0 turns it off. */
+var EP279=1;
+(function(){try{var _p=ptU;ptU=function(u,meta){try{if(EP279&&u&&u.side!=='A'){var a=null;try{a=enArt(u,meta)}catch(e){}
+   var id=!a&&(u.gid&&GART[u.gid]?u.gid:(u.look&&GART[u.look]?u.look:null));
+   if(id&&GART[id].sm)return'<div class="pw'+(u.isBoss?' gS':'')+'"><img class="ga" src="'+GART[id].sm+'" alt="" style="aspect-ratio:1;object-fit:cover;object-position:'+(GART[id].pos||'50% 18%')+';width:100%;height:100%" decoding="async"><span class="tag">'+TAGS[u.br]+'</span><span class="lv">Lv.'+u.lv+'</span></div>'}}catch(e){}
+  return _p.apply(this,arguments)}}catch(e){try{console.error('ep279',e)}catch(x){}}})();
 </script>
