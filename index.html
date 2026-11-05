@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V266';
+var BUILD='V267';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14722,4 +14722,92 @@ var TR265=1,TR7SEL={},TR7H={},TR7O=null;
   '@media (prefers-reduced-motion:reduce){#sheet .tr7n.run .tr7f,:is(#sheet,#tr7w) .tr7t.on{animation:none}}';
  document.head.appendChild(css);
 }catch(e){try{console.error('tr265',e)}catch(x){}}})();
+/* ================= V267 (art agent, user 2026-11-04 19:02, two Vòng Quay screenshots: "redesign Vòng Quay for high end look —
+   we can use floating windows to help ease the eyes"). Last wheelSheet wrapper (DOM post-processing of ds197's sheet; spin logic,
+   prices, rewards, actions untouched; any error → the old sheet).
+   Main screen = one phone screen: hero picker strip → a SHOWCASE stage (the skin painting full height on the right with a soft fade,
+   name in the skin colour, path chip, skin toggle, and its shard bar "Ghép ★1 · 0/60" right there) → the wheel on a gold halo with
+   slow light rays (transform-only) → pity line + gold → Quay ×1 / Quay ×10 → three pill buttons that open floating windows:
+   "Phần thưởng" (what the wheel gives + the event note), "Mốc tuần · N/150" (weekly milestones, red dot when one can be claimed),
+   "Tiến độ" (skin / weapon / mount shard rows with Ghép / Xem).
+   The windows live INSIDE #sheet (position:fixed, like ds197's result panel), so ds197's styles still apply and they re-render with
+   the sheet; the open one is remembered in WQ7O and re-opened after an action (e.g. claiming a milestone keeps its window open).
+   Close: back chevron, tap outside, Esc. Dim only (no blur — V250 rule). No new art, no new actions. WQ267=0 turns it off. */
+var WQ267=1,WQ7O=null;
+(function(){try{
+ var _w=wheelSheet;wheelSheet=function(){var h=_w.apply(this,arguments);if(!WQ267)return h;try{
+   var d=document.createElement('div');d.innerHTML=h;
+   var tg=d.querySelector('.dswtg'),wb=d.querySelector('.dswb'),bt=d.querySelector('.dswbt');if(!tg||!wb||!bt)return h;
+   var hls=[].slice.call(d.querySelectorAll('.dshl'));
+   function take(label){for(var i=0;i<hls.length;i++){if(hls[i].textContent.indexOf(label)===0)return hls[i]}return null}
+   var hLeg=take('Phần thưởng'),hMs=take('Mốc tuần'),hPr=take('Tiến độ');
+   var leg=d.querySelector('.dswl'),note=d.querySelector('.dswnote'),sub=d.querySelector('.dssub'),ms=d.querySelector('.dswm'),pr=d.querySelector('.dswpr');
+   /* showcase: shard bar of the skin inside the stage */
+   tg.classList.add('wq7s');var tb=tg.querySelector('.dswtb');
+   if(pr&&tb){var r0=pr.querySelector('.dswr');if(r0){var pl=r0.querySelector('.dsprl'),pb=r0.querySelector('.dsbar');var box=document.createElement('div');box.className='wq7pg';
+     if(pl)box.appendChild(pl.cloneNode(true));if(pb)box.appendChild(pb.cloneNode(true));var up=r0.querySelector('[data-a="skup"]');if(up){var u=up.cloneNode(true);u.classList.add('wq7up');box.appendChild(u)}tb.appendChild(box)}}
+   wb.classList.add('wq7wb');wb.insertAdjacentHTML('afterbegin','<i class="wq7ry" aria-hidden="true"></i><i class="wq7hl" aria-hidden="true"></i>');
+   /* windows */
+   function win(k,title,nodes){var w=document.createElement('div');w.className='wq7w'+(WQ7O===k?' on':'');w.setAttribute('data-k',k);
+     w.innerHTML='<div class="wq7bg"></div><div class="wq7in" role="dialog" aria-modal="true"><div class="wq7hd"><button type="button" class="wq7x" aria-label="Quay lại">‹</button><b>'+title+'</b></div><div class="wq7b"></div></div>';
+     var b=w.querySelector('.wq7b');nodes.forEach(function(n){if(n)b.appendChild(n)});return w}
+   var wsN=0,mx=150;try{var W=whS();wsN=W.ws||0;mx=WMS[WMS.length-1][0]}catch(e){}
+   var claim=ms&&ms.querySelector('.dswm1.ok:not(:disabled)');
+   [hLeg,hMs,hPr].forEach(function(x){if(x)x.remove()});
+   var W1=win('leg','Phần thưởng trên vòng',[sub,leg,note]),W2=win('ms','Mốc tuần · '+wsN+' lượt',[ms]),W3=win('pr','Tiến độ',[pr]);
+   var pills='<div class="wq7p">'+
+    '<button type="button" class="wq7b1" data-wq="leg"><span class="wq7i">'+objH('chest')+'</span><span>Phần thưởng</span></button>'+
+    '<button type="button" class="wq7b1" data-wq="ms"><span class="wq7i">'+objH('gold')+'</span><span>Mốc tuần<small>'+wsN+'/'+mx+'</small></span>'+(claim?'<i class="wq7dot"></i>':'')+'</button>'+
+    '<button type="button" class="wq7b1" data-wq="pr"><span class="wq7i">★</span><span>Tiến độ</span></button></div>';
+   bt.insertAdjacentHTML('afterend',pills);
+   d.appendChild(W1);d.appendChild(W2);d.appendChild(W3);
+   return d.innerHTML}catch(e){try{console.warn('wq267',e)}catch(x){}return h}};
+ function show(k){WQ7O=k;[].forEach.call(document.querySelectorAll('#sheet .wq7w'),function(w){w.classList.toggle('on',w.getAttribute('data-k')===k)})}
+ document.addEventListener('click',function(e){if(!e.target.closest)return;
+   var p=e.target.closest('#sheet .wq7b1');if(p){e.preventDefault();e.stopPropagation();show(p.getAttribute('data-wq'));return}
+   if(e.target.closest('#sheet .wq7x')||(e.target.classList&&e.target.classList.contains('wq7bg'))){e.preventDefault();e.stopPropagation();show(null)}},true);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&WQ7O)show(null)});
+ /* leaving the wheel (other sheet / close) forgets the open window */
+ var _os=openSheet;openSheet=function(fn){if(fn!==wheelSheet)WQ7O=null;return _os.apply(this,arguments)};
+ var S_='html body #sheet ';
+ var css=document.createElement('style');css.id='wq267css';css.textContent=
+  /* hero strip */
+  S_+'.dswp{margin-bottom:10px!important}'+
+  /* showcase stage */
+  S_+'.dswtg.wq7s{position:relative;overflow:hidden;min-height:176px;padding:14px 16px!important;align-items:flex-end!important;border-radius:20px!important;background:radial-gradient(120% 100% at 85% 20%,color-mix(in srgb,var(--k1) 26%,transparent),transparent 60%),linear-gradient(160deg,#2a1e13,#120d09)!important;border:1.5px solid color-mix(in srgb,var(--k1) 55%,#e2b25a)!important;box-shadow:0 10px 26px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.04)}'+
+  S_+'.wq7s .dswta{position:absolute!important;right:0;top:0;bottom:0;width:62%!important;height:auto!important;border-radius:0!important;box-shadow:none!important;-webkit-mask-image:linear-gradient(to left,#000 55%,transparent);mask-image:linear-gradient(to left,#000 55%,transparent)}'+
+  S_+'.wq7s .dswta img,'+S_+'.wq7s .dswta svg{object-position:50% 12%!important}'+
+  S_+'.wq7s .dswtb{position:relative;z-index:1;max-width:66%;gap:6px!important}'+
+  S_+'.wq7s .dswtb>b{font:700 24px/1.15 var(--ds-fd,Philosopher,Georgia,serif)!important;text-shadow:0 2px 10px rgba(0,0,0,.8)}'+
+  S_+'.wq7s .dswtl{color:#e8d5ad!important;text-shadow:0 1px 4px #000}'+
+  S_+'.wq7s .dsseg{background:rgba(10,7,5,.75)!important;backdrop-filter:none}'+
+  S_+'.wq7pg{margin-top:4px;padding:8px 10px;border-radius:12px;background:rgba(10,7,5,.7);border:1px solid rgba(226,178,90,.25)}'+S_+'.wq7pg .dsprl{display:flex;justify-content:space-between;font-size:12px;color:#d9c9a8}'+S_+'.wq7pg .dsprl b{font:700 14px var(--ds-fn);color:#fff2cf}'+S_+'.wq7pg .dsbar{margin-top:5px}'+
+  S_+'.wq7pg .wq7up{width:100%;margin-top:8px!important;height:38px!important;min-height:38px!important}'+
+  /* wheel stage */
+  S_+'.dswb.wq7wb{position:relative;margin:10px 0 4px!important;isolation:isolate}'+
+  S_+'.wq7wb .wq7hl{position:absolute;left:50%;top:50%;width:min(110%,330px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(246,215,125,.28) 0%,rgba(226,178,90,.12) 42%,transparent 68%);z-index:-1;pointer-events:none}'+
+  S_+'.wq7wb .wq7ry{position:absolute;left:50%;top:50%;width:min(118%,350px);aspect-ratio:1;margin:calc(min(118%,350px)/-2) 0 0 calc(min(118%,350px)/-2);border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(246,215,125,.12) 0deg 6deg,transparent 6deg 22deg);-webkit-mask-image:radial-gradient(circle,transparent 46%,#000 52%,transparent 70%);mask-image:radial-gradient(circle,transparent 46%,#000 52%,transparent 70%);z-index:-1;pointer-events:none;animation:wq7r 60s linear infinite}'+
+  '@keyframes wq7r{to{transform:rotate(360deg)}}'+
+  S_+'.dswb.wq7wb .dswh{width:min(100%,292px)!important;height:auto!important;display:block;margin:0 auto}'+
+  /* buttons */
+  S_+'.dswbt .dsbt.pri{box-shadow:0 0 0 1px rgba(0,0,0,.4),0 6px 18px rgba(226,178,90,.35)!important}'+
+  S_+'.dswbt .dsbt:disabled{opacity:.45!important}'+
+  /* pills */
+  S_+'.wq7p{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}'+
+  S_+'.wq7b1{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;min-height:52px;padding:6px 8px;border-radius:14px;background:linear-gradient(180deg,#2a1f14,#1a130c);border:1px solid rgba(226,178,90,.38);color:#f3e6c8;font:600 13px/1.15 var(--ds-fb,system-ui,sans-serif);cursor:pointer;text-align:left}'+
+  S_+'.wq7b1:active{transform:scale(.97)}'+S_+'.wq7b1 small{display:block;font:700 11.5px var(--ds-fn,"Barlow Condensed",sans-serif);color:#c9b48a}'+
+  S_+'.wq7i{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:#f6d77d;font-size:18px}'+S_+'.wq7i .objx,'+S_+'.wq7i svg,'+S_+'.wq7i img{width:26px!important;height:26px!important}'+
+  S_+'.wq7dot{position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:#e0524b;box-shadow:0 0 0 2px #1a130c}'+
+  /* floating windows */
+  S_+'.wq7w{position:fixed;inset:0;z-index:55;display:none;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px))}'+S_+'.wq7w.on{display:flex}'+
+  S_+'.wq7bg{position:absolute;inset:0;background:rgba(6,4,3,.64)}'+
+  S_+'.wq7in{position:relative;width:min(440px,100%);max-height:84vh;display:flex;flex-direction:column;border-radius:20px;background:linear-gradient(180deg,#2c2013,#17100a);border:1.5px solid rgba(241,207,106,.6);box-shadow:0 0 0 1px #000,0 18px 40px rgba(0,0,0,.6);animation:wq7o .24s cubic-bezier(.2,1.2,.4,1)}'+
+  S_+'.wq7hd{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(226,178,90,.22)}'+S_+'.wq7hd b{font:700 19px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}'+
+  S_+'.wq7x{width:44px;height:44px;flex:none;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(226,178,90,.45);color:#f6d77d;font:400 28px/1 Georgia,serif;cursor:pointer}'+
+  S_+'.wq7b{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;display:flex;flex-direction:column;gap:12px}'+
+  S_+'.wq7b .dssub{margin:0;font-size:13px;line-height:1.4;color:#c9b48a}'+S_+'.wq7b .dswnote{margin:0}'+
+  '@keyframes wq7o{from{opacity:0;transform:scale(.94) translateY(10px)}}'+
+  '@media (prefers-reduced-motion:reduce){html body #sheet .wq7ry,html body #sheet .wq7in{animation:none}}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('wq267',e)}catch(x){}}})();
 </script>
