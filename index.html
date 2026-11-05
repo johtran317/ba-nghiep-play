@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V273';
+var BUILD='V274';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15047,4 +15047,55 @@ var WQ269=1;
   '@media (prefers-reduced-motion:reduce){html body #sheet .wq9s,html body #sheet .wq9t.hit{animation:none}}';
  document.head.appendChild(css);
 }catch(e){try{console.error('wq269',e)}catch(x){}}})();
+/* ================= V274 (art agent, user 2026-11-04 21:12, Hoạt động screenshot: "redesign the symbols to make them look high-end;
+   if banana pro is needed prepare a prompt; then make it a floating window"). The three home hubs (Hoạt động / Chiến trường /
+   Cửa hàng, homeui.js hubSheet + events2 / topup207 rows) open as a floating window instead of a full sheet; rows get painted
+   bronze medallions instead of the flat code icons. Content, badges, actions: untouched (the rows are hubSheet's own buttons).
+   Icons today = the painted quick-icon set already in the build (art/ui/qi_*.webp, nav_boss); HB4ART maps an action to a
+   medallion — when the Banana Pro hub-icon sheet lands, point HB4ART at its cells (one place). Window: body host #hb4w (z 905,
+   above the nav), back chevron / tap outside / Esc close; tapping a row closes the window then runs the row's own action.
+   Dim only, no blur (V250); transform/opacity pop. No new art, no new actions (the old `hub` action is re-routed). HB274=0 → old sheet. */
+var HB274=1;
+var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',book:'qi_form',arena:'qi_arena',tower:'qi_tower',boss:'nav_boss',shop:'qi_shop',vip:'qi_vip'};
+(function(){try{
+ function host(){var x=document.getElementById('hb4w');if(!x){x=document.createElement('div');x.id='hb4w';document.body.appendChild(x)}return x}
+ function close(){var x=document.getElementById('hb4w');if(x)x.innerHTML=''}
+ function open(g){var h='';try{h=hubSheet(g)}catch(e){return false}
+  var d=document.createElement('div');d.innerHTML=h;var t=d.querySelector('h3'),title=t?t.textContent:(HUBN[g]||'');if(t)t.remove();
+  [].forEach.call(d.querySelectorAll('.hub-t'),function(b){var a=b.getAttribute('data-a'),im=HB4ART[a],ic=b.querySelector('.hub-i');
+    if(ic&&im){ic.innerHTML='<img src="art/ui/'+im+'.webp" alt="">';ic.classList.add('hb4m')}else if(ic)ic.classList.add('hb4c')});
+  host().innerHTML='<div class="hb4bg"></div><div class="hb4in" role="dialog" aria-modal="true" aria-label="'+title+'"><div class="hb4hd"><button type="button" class="hb4x" aria-label="Quay lại">‹</button><b>'+title+'</b></div><div class="hb4bd">'+d.innerHTML+'</div></div>';
+  return true}
+ var _A=A_;A_=function(a,v,w,el){if(a==='hub'&&HB274){if(open(v))return}return _A.apply(this,arguments)};
+ document.addEventListener('click',function(e){if(!e.target.closest)return;var x=document.getElementById('hb4w');if(!x||!x.innerHTML)return;
+   if(e.target.closest('#hb4w .hb4x')||(e.target.classList&&e.target.classList.contains('hb4bg'))){e.preventDefault();e.stopPropagation();close();return}
+   if(e.target.closest('#hb4w [data-a]'))close()},true);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+ /* leaving the home screen or opening a battle closes it */
+ var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);try{if(tab!=='city')close()}catch(e){}return r};
+ var H='html body #hb4w ';
+ var css=document.createElement('style');css.id='hb274css';css.textContent=
+  H+'{position:fixed;inset:0;z-index:905;display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top,0px)) 14px max(14px,env(safe-area-inset-bottom,0px));pointer-events:none}'+
+  'html body #hb4w:empty{display:none}'+
+  H+'>*{pointer-events:auto}'+
+  H+'.hb4bg{position:absolute;inset:0;background:rgba(6,4,3,.66);animation:hb4f .18s ease-out}'+
+  H+'.hb4in{position:relative;width:min(420px,100%);max-height:84vh;display:flex;flex-direction:column;border-radius:22px;background:linear-gradient(180deg,#2e2214,#160f09);border:1.5px solid rgba(241,207,106,.6);box-shadow:0 0 0 1px #000,0 20px 44px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,240,200,.08);animation:hb4o .26s cubic-bezier(.2,1.2,.4,1)}'+
+  H+'.hb4hd{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(226,178,90,.22)}'+H+'.hb4hd b{font:700 21px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}'+
+  H+'.hb4x{width:44px;height:44px;flex:none;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(226,178,90,.45);color:#f6d77d;font:400 28px/1 Georgia,serif;cursor:pointer}'+
+  H+'.hb4bd{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px}'+
+  H+'[data-a="close"]{display:none!important}'+
+  H+'.hub-list{display:flex;flex-direction:column;gap:9px}'+
+  H+'.hub-t{position:relative;display:flex;align-items:center;gap:14px;width:100%;min-height:76px;padding:10px 14px 10px 10px;border-radius:16px;text-align:left;cursor:pointer;color:#f3e6c8;background:linear-gradient(90deg,rgba(74,52,24,.55),rgba(24,17,10,.9) 46%);border:1px solid rgba(226,178,90,.3);box-shadow:inset 0 1px 0 rgba(255,240,200,.05)}'+
+  H+'.hub-t:active{transform:scale(.98)}'+
+  H+'.hub-i{flex:none;width:58px;height:58px;display:flex;align-items:center;justify-content:center}'+
+  H+'.hub-i.hb4m img{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'+
+  H+'.hub-i.hb4c{border-radius:50%;background:radial-gradient(circle at 50% 35%,#4a3720,#1a120a);box-shadow:0 0 0 2px #b8893a,0 3px 6px rgba(0,0,0,.6)}'+H+'.hub-i.hb4c img,'+H+'.hub-i.hb4c svg{width:34px;height:34px}'+
+  H+'.hub-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}'+H+'.hub-tx b{font:700 17px/1.2 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);color:#fff2cf}'+
+  H+'.hub-tx em{font:400 13.5px/1.25 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);font-style:normal;color:#c9b48a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'+
+  H+'.hub-go{flex:none;font:400 26px/1 Georgia,serif;color:#f1cf6a}'+
+  H+'.hub-b{position:absolute;left:52px;top:8px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#d23f35;color:#fff;font:700 12px/20px var(--ds-fn,"Barlow Condensed",sans-serif);font-style:normal;text-align:center;box-shadow:0 0 0 2px #1a120a}'+
+  '@keyframes hb4f{from{opacity:0}}@keyframes hb4o{from{opacity:0;transform:scale(.94) translateY(10px)}}'+
+  '@media (prefers-reduced-motion:reduce){html body #hb4w .hb4in,html body #hb4w .hb4bg{animation:none}}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('hb274',e)}catch(x){}}})();
 </script>
