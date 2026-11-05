@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V275';
+var BUILD='V276';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15056,17 +15056,23 @@ var WQ269=1;
    above the nav), back chevron / tap outside / Esc close; tapping a row closes the window then runs the row's own action.
    Dim only, no blur (V250); transform/opacity pop. No new art, no new actions (the old `hub` action is re-routed). HB274=0 → old sheet. */
 var HB274=1;
-/* V275: the 5 dedicated Hoạt động medallions (user's Banana Pro sheet, 21:21) live in the empty cells 14–15 of art/ui/victory_fx.webp
-   (2560×640; 160 px icons at x/y below) — no new file. Other actions keep the qi_* medallions. */
-var HB4V={evs:[1920,320],wheel:[2080,320],season:[2240,320],patrol:[1920,480],book:[2080,480]};
+/* V275/V276: dedicated medallions (user's Banana Pro sheets 21:21 + 21:30) in EMPTY atlas space — no new file:
+   v = art/ui/victory_fx.webp (2560×640) cells 14–15, g = art/ui/guide.webp (1440×720) row 1 right of the scroll. 160 px icons. */
+var HB4MED={evs:['v',1920,320],wheel:['v',2080,320],season:['v',2240,320],patrol:['v',1920,480],book:['v',2080,480],
+ arena:['v',2400,320],tower:['v',2240,480],boss:['v',2400,480],np206:['g',880,480],shop:['g',1040,480],vip:['g',1200,480]};
+var HB4IMG={v:['art/ui/victory_fx.webp?v=3',2560,640],g:['art/ui/guide.webp?v=2',1440,720]};
+var HB4T='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+/* style string that paints medallion k as the background of any box (percent units, so it works at any size) */
+function hb4Style(k){var m=HB4MED[k];if(!m)return'';var I=HB4IMG[m[0]];
+ return'background-image:url('+I[0]+');background-repeat:no-repeat;background-size:'+(I[1]/160*100).toFixed(2)+'% '+(I[2]/160*100).toFixed(2)+'%;background-position:'+(m[1]/(I[1]-160)*100).toFixed(3)+'% '+(m[2]/(I[2]-160)*100).toFixed(3)+'%'}
 var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',book:'qi_form',arena:'qi_arena',tower:'qi_tower',boss:'nav_boss',shop:'qi_shop',vip:'qi_vip'};
 (function(){try{
  function host(){var x=document.getElementById('hb4w');if(!x){x=document.createElement('div');x.id='hb4w';document.body.appendChild(x)}return x}
  function close(){var x=document.getElementById('hb4w');if(x)x.innerHTML=''}
  function open(g){var h='';try{h=hubSheet(g)}catch(e){return false}
   var d=document.createElement('div');d.innerHTML=h;var t=d.querySelector('h3'),title=t?t.textContent:(HUBN[g]||'');if(t)t.remove();
-  [].forEach.call(d.querySelectorAll('.hub-t'),function(b){var a=b.getAttribute('data-a'),im=HB4ART[a],ic=b.querySelector('.hub-i'),vp=HB4V[a];
-    if(ic&&vp){var k=58/160;ic.innerHTML='<i class="hb4v" style="background-size:'+(2560*k).toFixed(1)+'px auto;background-position:'+(-vp[0]*k).toFixed(1)+'px '+(-vp[1]*k).toFixed(1)+'px"></i>';ic.classList.add('hb4m')}
+  [].forEach.call(d.querySelectorAll('.hub-t'),function(b){var a=b.getAttribute('data-a'),im=HB4ART[a],ic=b.querySelector('.hub-i');
+    if(ic&&HB4MED[a]){ic.innerHTML='<i class="hb4v" style="'+hb4Style(a)+'"></i>';ic.classList.add('hb4m')}
     else if(ic&&im){ic.innerHTML='<img src="art/ui/'+im+'.webp" alt="">';ic.classList.add('hb4m')}else if(ic)ic.classList.add('hb4c')});
   host().innerHTML='<div class="hb4bg"></div><div class="hb4in" role="dialog" aria-modal="true" aria-label="'+title+'"><div class="hb4hd"><button type="button" class="hb4x" aria-label="Quay lại">‹</button><b>'+title+'</b></div><div class="hb4bd">'+d.innerHTML+'</div></div>';
   return true}
@@ -15076,7 +15082,14 @@ var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',bo
    if(e.target.closest('#hb4w [data-a]'))close()},true);
  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
  /* leaving the home screen or opening a battle closes it */
- var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);try{if(tab!=='city')close()}catch(e){}return r};
+ var RAIL={ev:'evs',war:'arena',shop:'shop'};
+ function paint(img,k){if(!img||img.getAttribute('data-hb4')===k)return;img.setAttribute('data-hb4',k);img.src=HB4T;img.style.cssText+=';'+hb4Style(k)}
+ function homeIcons(){try{var m=document.getElementById('main');if(!m)return;
+   [].forEach.call(m.querySelectorAll('.hubrail [data-a="hub"]'),function(b){var k=RAIL[b.getAttribute('data-v')];if(!k)return;var img=b.querySelector('img');
+     if(!img){var sv=b.querySelector('.hub-svg');if(sv){sv.innerHTML='<img alt="">';img=sv.querySelector('img')}}paint(img,k)});
+   [].forEach.call(m.querySelectorAll('.hub-camp button[data-a]'),function(b){var k=b.getAttribute('data-a');if(HB4MED[k])paint(b.querySelector('img'),k)})}catch(e){}}
+ var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);try{if(tab!=='city')close();homeIcons()}catch(e){}return r};
+ try{homeIcons()}catch(e){}
  var H='html body #hb4w ';
  var css=document.createElement('style');css.id='hb274css';css.textContent=
   H+'{position:fixed;inset:0;z-index:905;display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top,0px)) 14px max(14px,env(safe-area-inset-bottom,0px));pointer-events:none}'+
@@ -15093,7 +15106,8 @@ var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',bo
   H+'.hub-t:active{transform:scale(.98)}'+
   H+'.hub-i{flex:none;width:58px;height:58px;display:flex;align-items:center;justify-content:center}'+
   H+'.hub-i.hb4m img{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'+
-  H+'.hb4v{display:block;width:58px;height:58px;background-image:url(art/ui/victory_fx.webp?v=2);background-repeat:no-repeat;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'+
+  H+'.hb4v{display:block;width:58px;height:58px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'+
+  'html body #main .hubrail img[data-hb4],html body #main .hub-camp img[data-hb4]{object-fit:fill}'+
   H+'.hub-i.hb4c{border-radius:50%;background:radial-gradient(circle at 50% 35%,#4a3720,#1a120a);box-shadow:0 0 0 2px #b8893a,0 3px 6px rgba(0,0,0,.6)}'+H+'.hub-i.hb4c img,'+H+'.hub-i.hb4c svg{width:34px;height:34px}'+
   H+'.hub-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}'+H+'.hub-tx b{font:700 17px/1.2 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);color:#fff2cf}'+
   H+'.hub-tx em{font:400 13.5px/1.25 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);font-style:normal;color:#c9b48a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'+
