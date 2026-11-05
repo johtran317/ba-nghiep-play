@@ -11025,7 +11025,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V284';
+var BUILD='V285';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15385,5 +15385,47 @@ function tg284Txt(h){return String(h).replace(/(\d+,\d\d) ?\$/g,function(m,u){re
   if(a==='tg284card'){var c=ev().vip;if(c.card>0)return;if(S.res.gold<TG284CARD){toast('Thiếu vàng · cần '+fmt(TG284CARD));return}
    S.res.gold-=TG284CARD;c.card+=30;S.res.gold+=300;c.gold+=300;toast('Đã mua Thẻ Tháng · +300 vàng, 100 vàng mỗi ngày trong 30 ngày');try{save();refresh()}catch(e){}openSheet(shopSheet);return}
  }}catch(e){}return _A(a,v,w,el)};
+}catch(e){}})();
+/* ===== V285 scroll stays put (coding, user 2026-11-05 07:07 screenshot of the "Tướng & binh chủng" window: "when i change troop - it takes me back
+   to the top of the screen instead of staying where i am. fix that and look into the game and fix the same issues").
+   Cause: screens re-draw after an action (innerHTML) and other modules decorate them afterwards (pv243 / tw279 add the hero card and
+   sections, ds194 moves titles …). While the content is short the scroll is clamped, so the old position is lost; actions that re-open the
+   same sheet (openSheet(fn) without keep, e.g. Mua in Thương Điếm, Nhận, Ghép) also reset it to 0.
+   Fix, one place for the whole game: the last scroll position the PLAYER chose is remembered per scroller (only real touch / wheel / key
+   scrolling counts, not clamps), and whenever that scroller is re-drawn or decorated it is put back. Scrollers: the sheet (#sheet, keyed by
+   its title, so a different screen still starts at the top), Bày trận roster, and every floating window (troop panel, result / role panel,
+   Binh Đạo window, Vòng Quay windows, Thảo Phạt windows, home hub window, Vòng Quay result). A window that closes forgets its spot after 1 s;
+   closeSheet forgets the sheet spots, so opening something fresh starts at the top. Everything wrapped; SC285=0 turns it off. */
+var SC285=1;
+(function(){try{
+ var SEL=['#sheet','#rt226 .rt226in','#rs9p .rs9in','#tr7w .tr7b','.wq7b','.tp8bd','.hb4bd','.dswrc','.fm2-dn','#sheet .wscroll'];
+ var ALL=SEL.join(','),REC={},CLR={},user=0;
+ function idx(el){for(var i=0;i<SEL.length;i++){try{if(el.matches(SEL[i]))return i}catch(e){}}return -1}
+ function key(el){var i=idx(el);if(i<0)return null;if(i===0){var t='';try{t=shTitle()}catch(e){}return 'sheet|'+t}return 's'+i}
+ function busy(){return Date.now()<user}
+ /* only real scrolling counts (a tap must not block the put-back that follows it) */
+ var mv=0;window.addEventListener('touchstart',function(){mv=0;user=0},{capture:true,passive:true});
+ window.addEventListener('pointerdown',function(e){if(e.pointerType!=='touch')user=0},{capture:true,passive:true});   /* a new tap ends the scroll */
+ ['touchmove','wheel','keydown'].forEach(function(ev){window.addEventListener(ev,function(){mv=1;user=Date.now()+700},{capture:true,passive:true})});
+ window.addEventListener('pointermove',function(e){if(e.buttons&&e.pointerType!=='touch'){mv=1;user=Date.now()+700}},{capture:true,passive:true});
+ window.addEventListener('touchend',function(){if(mv)user=Date.now()+2500},{capture:true,passive:true});   /* iOS momentum after a swipe */
+ document.addEventListener('scroll',function(e){try{if(!SC285||!busy())return;var el=e.target;if(!el||el.nodeType!==1)return;var k=key(el);if(k)REC[k]=el.scrollTop}catch(x){}},true);
+ function put(el,k){var t=REC[k];if(t==null||t<=0)return;var go=function(){try{if(!el.isConnected||busy()||key(el)!==k)return;if(el.scrollTop<t-4||el.scrollTop>t+4)el.scrollTop=t}catch(e){}};
+  go();requestAnimationFrame(go);setTimeout(go,60);setTimeout(go,200)}
+ function fix(el){var k=key(el);if(!k)return;if(CLR[k]){clearTimeout(CLR[k]);delete CLR[k]}if(!busy())put(el,k)}
+ var mo=new MutationObserver(function(ms){if(!SC285)return;try{var seen=[];
+  ms.forEach(function(m){var t=m.target&&m.target.nodeType===1?m.target:null;
+   if(t){var c=t.closest&&t.closest(ALL);while(c){if(seen.indexOf(c)<0)seen.push(c);c=c.parentElement&&c.parentElement.closest(ALL)}}
+   m.addedNodes&&m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.matches(ALL)&&seen.indexOf(n)<0)seen.push(n);n.querySelectorAll&&n.querySelectorAll(ALL).forEach(function(x){if(seen.indexOf(x)<0)seen.push(x)})});
+   m.removedNodes&&m.removedNodes.forEach(function(n){if(n.nodeType!==1)return;var l=[];if(n.matches(ALL))l.push(n);n.querySelectorAll&&n.querySelectorAll(ALL).forEach(function(x){l.push(x)});
+    l.forEach(function(x){var i=idx(x);if(i>0){var k='s'+i;if(!CLR[k])CLR[k]=setTimeout(function(){delete REC[k];delete CLR[k]},1000)}})})});
+  seen.forEach(function(el){if(el.isConnected)fix(el)})}catch(e){}});
+ mo.observe(document.body,{childList:true,subtree:true});
+ /* same screen re-opened after an action (openSheet without keep): keep its spot; a different screen keeps nav281's rule */
+ var _os=openSheet;openSheet=function(fn,keep){var k0=null,t0=0;try{var m=$('#modal'),sh=$('#sheet');if(SC285&&m&&!m.hidden&&sh){k0=shTitle();t0=sh.scrollTop}}catch(e){}
+  var r=_os.apply(this,arguments);
+  try{if(SC285&&k0&&!keep){var sh2=$('#sheet');if(shTitle()===k0){var k='sheet|'+k0;if(REC[k]==null)REC[k]=t0;put(sh2,k)}}}catch(e){}
+  return r};
+ var _cs=closeSheet;closeSheet=function(){try{Object.keys(REC).forEach(function(k){if(k.indexOf('sheet|')===0||k==='s8'||k==='s9')delete REC[k]})}catch(e){}return _cs.apply(this,arguments)};
 }catch(e){}})();
 </script>
