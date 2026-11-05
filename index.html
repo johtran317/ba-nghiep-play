@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V277';
+var BUILD='V278';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15158,4 +15158,69 @@ var GN277=1;
  document.head.appendChild(css);
  try{tile()}catch(e){}
 }catch(e){try{console.error('gn277',e)}catch(x){}}})();
+/* ================= V278 (art agent, user 2026-11-04 22:03 "that screen looks very unstructured — we must structure the sections,
+   give me 2 best examples", 22:08 picked A). Tướng tab in three clear blocks, cards unchanged (DOM regrouping after renderMain):
+   1. COMMAND PANEL `.gsp`: "Tướng của bạn · owned/total" (HROS, same count as Tửu Quán) + "Lực chiến" (myPower(), the team
+      power the HUD shows) over the Bày trận / Tửu Quán / Kho đồ buttons (painted medallions; Bày trận gold).
+   2. FILTER TRAY `.gtray`: the sort chip + Phe button (moved out of the old h2 header, which is hidden) and the faction / branch
+      chip rows (.gtools) in one sunken tray.
+   3. ROSTER IN RARITY SECTIONS: the one .hgrid is split into UR · Huyền Thoại / SSR · Thần Tướng / SR · Danh Tướng / R · Tướng Lĩnh
+      grids (each a real .hgrid, card order kept), each with a header in its rarity colour + count + fading rule; empty sections are
+      skipped; the V277 Chiêu mộ tile goes to the end of the last section. Filters / sort still work (they re-render #main).
+   GS278=0 turns it off. No new art, no new actions, no logic change. */
+var GS278=1;
+(function(){try{
+ var SEC=[['rUR','UR · Huyền Thoại','#ff9f6b'],['rSSR','SSR · Thần Tướng','#f6d77d'],['rSR','SR · Danh Tướng','#c79cf2'],['rR','R · Tướng Lĩnh','#8fb6e8']];
+ function fmtN(n){try{return fmt(n)}catch(e){return String(n)}}
+ function build(){try{if(!GS278||tab!=='gen')return;var m=document.getElementById('main');if(!m||m.querySelector('.gsp'))return;
+   var row=m.querySelector('#main>.row'),h2=m.querySelector('#main>h2.gnh'),gt=m.querySelector('#main>.gtools'),g=m.querySelector('#main>.hgrid');
+   if(!row||!row.querySelector('[data-a="form"]')||!g)return;
+   var ids=Object.keys(typeof HROS!=='undefined'?HROS:GENS),own=ids.filter(function(i){return S.gens[i]}).length,pw=0;try{pw=myPower()}catch(e){}
+   var pan=document.createElement('div');pan.className='gsp';
+   pan.innerHTML='<div class="gsh"><b>Tướng của bạn</b><span class="gc">'+own+' / '+ids.length+'</span><span class="gp">Lực chiến<em>'+fmtN(pw)+'</em></span></div>';
+   row.parentNode.insertBefore(pan,row);pan.appendChild(row);
+   var tv=row.querySelector('[data-a="tavern"]');if(tv&&!tv.querySelector('.dstq')){var mt=/^(.*?)\s*\((\d+)\)\s*$/.exec(tv.textContent.trim());if(mt){tv.textContent=mt[1];var q2=document.createElement('span');q2.className='dstq';q2.textContent=mt[2];tv.appendChild(q2)}}
+   if(gt){var tr=document.createElement('div');tr.className='gtray';var r1=document.createElement('div');r1.className='gtr1';
+     if(h2){var srt=h2.querySelector('.gsort'),phe=h2.querySelector('.dsphe');if(srt)r1.appendChild(srt);if(phe)r1.appendChild(phe);h2.classList.add('gshid')}
+     if(r1.children.length)tr.appendChild(r1);gt.parentNode.insertBefore(tr,gt);tr.appendChild(gt)}
+   var cards=[].slice.call(g.querySelectorAll(':scope>.hc')),add=g.querySelector(':scope>.gn7add');if(!cards.length)return;
+   var frag=document.createDocumentFragment(),last=null;
+   SEC.forEach(function(q){var L=cards.filter(function(c){return c.classList.contains(q[0])});if(!L.length)return;
+     var vis=L.filter(function(c){return c.style.display!=='none'}).length;
+     var h=document.createElement('div');h.className='gsec';h.style.setProperty('--sc',q[2]);h.innerHTML='<b>'+q[1]+'</b><i></i><span>'+vis+'</span>';
+     var ng=document.createElement('div');ng.className='hgrid gsg';L.forEach(function(c){ng.appendChild(c)});
+     if(!vis){h.style.display='none';ng.style.display='none'}else last=ng;frag.appendChild(h);frag.appendChild(ng)});
+   var rest=cards.filter(function(c){return!c.parentNode||c.parentNode===g});if(rest.length){if(!last){last=document.createElement('div');last.className='hgrid gsg';frag.appendChild(last)}rest.forEach(function(c){last.appendChild(c)})}
+   if(add&&last)last.appendChild(add);
+   g.parentNode.insertBefore(frag,g);g.remove()}catch(e){try{console.warn('gs278',e)}catch(x){}}}
+ var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);build();return r};
+ /* ds194 adds the Phe button into the (hidden) old header a moment after render — move it into the tray */
+ function phe(){try{var m=document.getElementById('main');if(!m)return;var b=m.querySelector('h2.gnh.gshid .dsphe'),t=m.querySelector('.gtray .gtr1');if(b&&t)t.appendChild(b)}catch(e){}}
+ try{var mo=new MutationObserver(function(){if(tab==='gen')phe()});var at=function(){var m=document.getElementById('main');if(m&&!m.dataset.gs8){m.dataset.gs8=1;mo.observe(m,{childList:true,subtree:true})}};at();setInterval(at,3000)}catch(e){}
+ var M='html body #main',P=M+' .gsp .row>.btn';
+ function bs(x){return[P+'[data-a="form"]'+x,P+'[data-a="tavern"]'+x,P+'[data-a="inv"]'+x].join(',')}
+ var css=document.createElement('style');css.id='gs278css';css.textContent=
+  M+' .gsp{margin:0 0 12px;padding:12px;border-radius:18px;background:linear-gradient(180deg,rgba(46,33,19,.92),rgba(20,14,9,.92));border:1px solid rgba(226,178,90,.38);box-shadow:0 8px 20px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,240,200,.06)}'+
+  M+' .gsp>.row{margin:0!important}'+
+  M+' .gsh{display:flex;align-items:center;gap:10px;margin:0 0 10px}'+M+' .gsh b{font:700 19px var(--ds-fd,Philosopher,Georgia,serif);color:#f6d77d;white-space:nowrap}'+
+  M+' .gsh .gc{padding:2px 9px;border-radius:999px;background:rgba(0,0,0,.4);border:1px solid rgba(226,178,90,.35);font:700 13px var(--ds-fn,"Barlow Condensed",system-ui);color:#fff2cf;white-space:nowrap}'+
+  M+' .gsh .gp{margin-left:auto;font:600 12px var(--ds-fb,system-ui,sans-serif);color:#c9b48a;white-space:nowrap}'+M+' .gsh .gp em{font:700 17px var(--ds-fn,"Barlow Condensed",system-ui);font-style:normal;color:#fff2cf;margin-left:4px}'+
+  bs('')+'{background-image:none!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;position:relative!important;padding:0 8px!important;font-size:14px!important;white-space:nowrap!important;line-height:1!important}'+
+  bs('::before')+'{content:""!important;flex:none;width:28px;height:28px;background:var(--gq) center/contain no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}'+
+  P+'[data-a="form"]{--gq:url(art/ui/qi_form.webp);background:linear-gradient(180deg,#f6dc95,#c9973f)!important;color:#2a1a08!important;border-color:#f3d58a!important}'+
+  P+'[data-a="tavern"]{--gq:url(art/ui/qi_tavern.webp)}'+P+'[data-a="inv"]{--gq:url(art/ui/qi_inv.webp)}'+
+  P+'[data-a="tavern"] .dstq{position:absolute!important;top:-7px!important;right:-5px!important;margin:0!important;box-shadow:0 0 0 2px #1a120a}'+
+  M+'>h2.gnh.gshid{display:none!important}'+
+  M+' .gtray{display:flex;flex-direction:column;gap:8px;margin:0 0 6px;padding:8px;border-radius:14px;background:rgba(0,0,0,.35);box-shadow:inset 0 2px 6px rgba(0,0,0,.6);border:1px solid rgba(226,178,90,.15)}'+
+  M+' .gtray .gtr1{display:flex;gap:8px;align-items:center}'+M+' .gtray .gtr1>*{margin:0!important}'+M+' .gtray .gtools{margin:0!important}'+
+  M+' .gsec{display:flex;align-items:center;gap:10px;margin:16px 2px 10px}'+
+  M+' .gsec::before{content:"";flex:none;width:8px;height:8px;transform:rotate(45deg);background:var(--sc);box-shadow:0 0 8px var(--sc)}'+
+  M+' .gsec b{font:700 16px var(--ds-fd,Philosopher,Georgia,serif);color:var(--sc);letter-spacing:.04em;white-space:nowrap}'+
+  M+' .gsec i{flex:1;height:1px;background:linear-gradient(90deg,var(--sc),transparent);opacity:.6}'+
+  M+' .gsec span{font:700 13px var(--ds-fn,"Barlow Condensed",system-ui);color:#c9b48a}'+
+  M+' .hgrid.gsg{margin-top:0!important;margin-bottom:0!important}'+
+  M+' .gsp~p.sm.mute{display:none!important}';
+ document.head.appendChild(css);
+ try{build()}catch(e){}
+}catch(e){try{console.error('gs278',e)}catch(x){}}})();
 </script>
