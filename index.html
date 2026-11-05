@@ -11025,7 +11025,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V283';
+var BUILD='V284';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15353,4 +15353,37 @@ var HP282=1;
   S_+'.hsl.hp9h .hp9lv{margin-left:auto;text-transform:none!important;letter-spacing:0!important;height:28px!important;padding:0 11px!important;border-radius:14px!important;border:1px solid rgba(226,178,90,.45)!important;background:rgba(226,178,90,.14)!important;color:#f6dfa6!important;font:700 14px/26px var(--ds-fn,"Barlow Condensed",sans-serif)!important;box-shadow:none!important}';
  document.head.appendChild(css);
 }catch(e){try{console.error('hp282',e)}catch(x){}}})();
+/* ===== V284 tester gold prices (coding, user 2026-11-05 06:51 "for tester purpose - change everything that must be purchased thru USD
+   to can be purchased by gold"). Real payments stay OFF. While TG284 is on, every USD item is bought with in-game gold by ANY player:
+   - Gói Nạp Đầu (topup207.js, 7 packs in order): 0,99 $ → 60 · 4,99 → 300 · 9,99 → 650 · 19,99 → 1.300 · 29,99 → 1.950 · 49,99 → 3.250 ·
+     99,99 → 6.500 gold (≈ the Nạp vàng rate of ~65 gold per $). Contents, Bạch Mã Lệnh reach and VIP credit unchanged.
+   - Thẻ Tháng (econ.js): 300 gold (≈ 4,99 $); same effect as the admin simulation: +300 gold now, 100 gold a day for 30 days, +300 VIP credit.
+   - Nạp vàng packs (gold for USD) stay preview only: buying gold with gold makes no sense.
+   Turn off with TG284=0 when real payments open. New action tg284card (checked unused). Everything wrapped. */
+var TG284=1,TG284P={'0,99':60,'4,99':300,'9,99':650,'19,99':1300,'29,99':1950,'49,99':3250,'99,99':6500},TG284CARD=300;
+function tg284G(usd){var g=TG284P[usd];return g!=null?g:Math.round(parseFloat(String(usd).replace(',','.'))*65)}
+function tg284Txt(h){return String(h).replace(/(\d+,\d\d) ?\$/g,function(m,u){return fmt(tg284G(u))+' vàng'})}
+(function(){try{
+ /* Gói Nạp Đầu sheet: gold prices, the next pack is buyable by everyone */
+ var _ns=np206Sheet;np206Sheet=function(){var h=_ns();if(!TG284)return h;try{var N=np206(),i=N.n,p=NP206[i];
+  if(p){var g=tg284G(p.usd),ok=S.res.gold>=g,b='<button class="btn sm" data-a="np206b" data-v="'+i+'"'+(ok?'':' disabled')+'>'+(ok?ic('gold')+fmt(g):'Thiếu vàng · '+fmt(g))+'</button>';
+   h=h.replace(/<button class="btn sm"( data-a="np206b" data-v="\d+")?( disabled)?>[^<]*<\/button>/,b)}
+  h=h.replace(/<div class="sm (gold|bad)" style="margin-top:8px">[^<]*<\/div>/,'<div class="sm gold" style="margin-top:8px">Bản thử: các gói mua bằng vàng thay cho USD (chưa có thanh toán thật). Bạn có '+fmt(S.res.gold)+' vàng.</div>');
+  h=tg284Txt(h)}catch(e){}return h};
+ var _hs=hubSheet;hubSheet=function(g){var h=_hs(g);try{if(TG284&&g==='shop')h=h.replace(/(<b>Gói Nạp Đầu<\/b><em>[^<]*)<\/em>/,function(m){return tg284Txt(m)})}catch(e){}return h};
+ /* Nạp · VIP: pack card + Thẻ Tháng for gold */
+ var _vh=vipHtml;vipHtml=function(){var h=_vh();if(!TG284)return h;try{
+  h=h.replace(/(Tiếp theo: [^<]*)/,function(m){return tg284Txt(m)});
+  var c=ev().vip;if(c.card<=0){var ok=S.res.gold>=TG284CARD;
+   h=h.replace(/(<b>Thẻ Tháng<\/b><div class="sm mute">[^<]*<\/div>(?:<div class="sm ok">[^<]*<\/div>)?<\/div>)<button class="btn sm" data-a="vcard"[^>]*>[^<]*<\/button>/,
+    '$1<button class="btn sm" data-a="tg284card"'+(ok?'':' disabled')+'>'+(ok?ic('gold')+fmt(TG284CARD):'Thiếu vàng · '+fmt(TG284CARD))+'</button>')}
+  h=h.replace('Bản thử chưa mở thanh toán. Các gói dưới đây chỉ để xem trước giá.','Bản thử chưa mở thanh toán: gói vàng chỉ để xem giá. Gói Nạp Đầu và Thẻ Tháng mua được bằng vàng.')}catch(e){}return h};
+ var _A=A_;A_=function(a,v,w,el){try{if(TG284){
+  if(a==='np206b'){var i=+v,p=NP206[i];if(!p||i!==np206().n)return;var g=tg284G(p.usd);
+   if(S.res.gold<g){toast('Thiếu vàng · cần '+fmt(g));return}
+   S.res.gold-=g;np206Give(i);toast('Đã mua '+p.n+' · −'+fmt(g)+' vàng');try{save();refresh()}catch(e){}openSheet(np206Sheet);return}
+  if(a==='tg284card'){var c=ev().vip;if(c.card>0)return;if(S.res.gold<TG284CARD){toast('Thiếu vàng · cần '+fmt(TG284CARD));return}
+   S.res.gold-=TG284CARD;c.card+=30;S.res.gold+=300;c.gold+=300;toast('Đã mua Thẻ Tháng · +300 vàng, 100 vàng mỗi ngày trong 30 ngày');try{save();refresh()}catch(e){}openSheet(shopSheet);return}
+ }}catch(e){}return _A(a,v,w,el)};
+}catch(e){}})();
 </script>
