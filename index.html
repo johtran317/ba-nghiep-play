@@ -11025,7 +11025,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V286';
+var BUILD='V287';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15001,6 +15001,7 @@ var WQ269=1;
   return'<div class="wq9t '+r+'" data-wq9="'+i+'" style="grid-row:'+POS[i][0]+';grid-column:'+POS[i][1]+'"><span class="wq9i">'+ic+'</span><span class="wq9q">'+q+'</span>'+(i===0?'<i class="wq9s" aria-hidden="true"></i>':'')+'</div>'}
  /* centre tile: the whole atlas as an <img> 300% of the tile width (one cell = tile width), then shifted so the skin's face
     (SKFACE + FADJ, same point as the small tiles) sits in the middle, a bit above centre so the name plate never covers it (user 20:51) */
+ try{window.WQ9I={face:face,atl:atl,GA:GA,OA:OA,SKO:SKO}}catch(e){}/* V287: shared with wl287 (reward legend / milestones) */
  function centre(k){var i=SKORD.indexOf(k),F=(typeof SKFACE!=='undefined'&&SKFACE[k])||null,im='';
   if(i>=0&&F){var A=FADJ[k]||[0,0],cx=(i%3)*480+(F[0]+F[2]/2+A[0])*480,cy=Math.floor(i/3)*720+(F[1]+F[3]*.8+A[1])*720;
    im='<img class="wq9ci" src="'+PA+'" alt="" style="transform:translate('+(-cx/1440*100).toFixed(3)+'%,'+(-cy/2160*100).toFixed(3)+'%)">'}
@@ -15431,4 +15432,118 @@ var SC285=1;
   return r};
  var _cs=closeSheet;closeSheet=function(){try{Object.keys(REC).forEach(function(k){if(k.indexOf('sheet|')===0||k==='s8'||k==='s9')delete REC[k]})}catch(e){}return _cs.apply(this,arguments)};
 }catch(e){}})();
+/* ================= V287 (art agent, user 2026-11-05 07:42, three screenshots):
+   1. Gear slot picker, "Trong kho": "make it look like the hero tab — just the items, no option/explanation; tapping an item opens a
+      floating window with the explanation". The list rows become a 3-column grid of item cards (painted icon in its quality frame, +lv,
+      name in the quality colour, one stat line); a red seal with gold chevrons marks an item better than the worn one, "Tốt nhất" the
+      best. Tap → the V234 floating panel (#rs9p, action rs9) with the big icon, quality, stat, +lv, who wears it, the difference vs the
+      worn item and ONE button (Mặc / Mặc ▲ / Tốt nhất · Mặc — red when better; same `equip` action, the panel closes first).
+   2. Vòng Quay "Mốc tuần" window: "redesign, add images" — a vertical track of the 5 milestones: node with the spin count on a gold
+      line that fills as spins are made, each reward as a picture tile (skin face / named weapon or mount / gold ingot) with its count,
+      and the state on the right (Nhận button = existing `whms` action / ✓ Đã nhận / "còn N lượt").
+   3. Vòng Quay "Phần thưởng trên vòng" window: "redesign, add obtain %" — all 10 prizes of the board as rows: picture tile in the
+      board's rarity frame, name + amount, the chance per spin (WSEG weight ÷ total, the real odds of pickSeg) with a thin bar;
+      the pity rule (the 10th spin without a purple/gold prize gives Mảnh ×3) and the ★1 note at the bottom.
+   No logic, odds or rewards changed; no new actions; no new art. WL287=0 turns all three off. */
+var WL287=1;
+(function(){try{
+ var CHEV='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6M6 19l6-6 6 6" fill="none" stroke="#f6d77d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ function pct(n){return(Math.round(n*10)/10).toString().replace('.',',')+'%'}
+ /* ---------- 1. gear picker grid ---------- */
+ var _pk=pickSheet;pickSheet=function(gid,si){var h=_pk.apply(this,arguments);if(!WL287)return h;try{
+   var box=document.createElement('div');box.innerHTML=h;var st=box.querySelector('.stack');if(!st)return h;
+   var g=S.gens[gid],cur=itemById((g.eq||{})[si]),cs=cur?eq247Score(cur):-1,worn=eq247Free(),best=eq247Best(gid,si,worn);
+   var rows=[].slice.call(st.querySelectorAll(':scope>.card.row')).filter(function(r){return r.querySelector('[data-a="equip"]')});if(!rows.length)return h;
+   var grid=document.createElement('div');grid.className='ik9g';
+   rows.forEach(function(r){var b=r.querySelector('[data-a="equip"]'),id=+b.getAttribute('data-v'),it=itemById(id);if(!it)return;
+     var gi=r.querySelector('.gi'),nm=r.querySelector('.sp>b'),ql=r.querySelector('.sp>.sm.mute'),stl=r.querySelector('.sp>div.sm');
+     var o=ownerOf(it),sc=eq247Score(it),better=!worn[it.id]&&sc>cs,isBest=best&&best.id===it.id,col=GQ[it.q].c;
+     var stat=(GSLOT[it.s].a?'Công':'Thủ')+' +'+(gpow(it)/10).toFixed(1)+'%';
+     var diff=cur?((gpow(it)-gpow(cur))/10):null;
+     var key='ik'+it.id,btnCls=better?'btn red':'btn',btnTx=isBest?'Tốt nhất · Mặc':better?'Mặc ▲':'Mặc';
+     RS9[key]='<div class="ik9p"><div class="ik9ph"><span class="ik9pi" style="--q:'+col+'">'+(gi?gi.outerHTML:'')+'</span><div><b style="color:'+col+'">'+(nm?nm.textContent:gname(it))+'</b><span class="ik9q" style="--q:'+col+'">'+GQ[it.q].n+(it.lv?' · +'+it.lv:'')+'</span></div></div>'+
+       '<div class="ik9rows"><div><span>Chỉ số</span><b>'+stat+'</b></div>'+
+       (diff!=null?'<div><span>So với món đang mặc</span><b class="'+(diff>0?'up':diff<0?'dn':'')+'">'+(diff>0?'+':'')+diff.toFixed(1)+'%</b></div>':'<div><span>Ô hiện tại</span><b>Đang trống</b></div>')+
+       '<div><span>Người đang mặc</span><b>'+(o?esc(o==='lord'&&S.pname?S.pname:GENS[o].n):'Trong kho')+'</b></div></div>'+
+       (o&&o!==gid?'<p class="ik9n">Mặc món này sẽ tháo nó khỏi '+esc(o==='lord'&&S.pname?S.pname:GENS[o].n)+'.</p>':'')+
+       '<button class="'+btnCls+' wide ik9b" data-a="equip" data-v="'+it.id+'" data-w="'+gid+'">'+btnTx+'</button></div>';
+     var c=document.createElement('button');c.type='button';c.className='ik9'+(better?' bt':'')+(isBest?' best':'');c.setAttribute('data-a','rs9');c.setAttribute('data-v',key);c.style.setProperty('--q',col);
+     c.setAttribute('aria-label',(nm?nm.textContent:'')+' · '+stat+(better?' · tốt hơn':''));
+     c.innerHTML='<span class="ik9i">'+(gi?gi.outerHTML:'')+(better?'<i class="ik9s">'+CHEV+'</i>':'')+(isBest?'<em>Tốt nhất</em>':'')+'</span><b>'+(nm?nm.textContent:'')+'</b><small>'+stat+(o?' · '+esc(o==='lord'&&S.pname?S.pname:GENS[o].n):'')+'</small>';
+     grid.appendChild(c)});
+   rows[0].parentNode.insertBefore(grid,rows[0]);rows.forEach(function(r){r.remove()});
+   return box.innerHTML}catch(e){try{console.warn('wl287 pick',e)}catch(x){}return h}};
+ /* ---------- 2 + 3. Vòng Quay windows ---------- */
+ function ico(kind,k,I){var W=window.WQ9I;if(!W)return'';var g=SKL[k].g,gi=W.SKO.indexOf(g);
+  if(kind==='sk'||((kind==='wp'||kind==='hr')&&gi<0))return W.face(k);
+  if(kind==='wp'||kind==='hr')return W.atl(W.GA,48,36+gi*2+(kind==='hr'?1:0));
+  if(kind==='v')return W.atl(W.OA,9,2);if(kind==='phu')return W.atl(W.OA,9,7);return W.atl(W.OA,9,0)}
+ function nm(kind,K,I){if(kind==='sk')return'Mảnh '+K.n;if(kind==='wp')return'Mảnh '+(I?I.wp.n:K.n);if(kind==='hr')return'Mảnh '+(I?I.hr.n:K.n);if(kind==='v')return'Vàng';if(kind==='phu')return'Binh Phù';return'Bạc'}
+ var _w=wheelSheet;wheelSheet=function(){var h=_w.apply(this,arguments);if(!WL287)return h;try{
+   var d=document.createElement('div');d.innerHTML=h;var w=whS(),k=w.t,K=SKL[k];if(!K)return h;var I=(typeof SKIT!=='undefined')?SKIT[K.g]:null;
+   /* 3. legend with odds */
+   var lb=d.querySelector('.wq7w[data-k="leg"] .wq7b');
+   if(lb){var tot=WSEG.reduce(function(a,s){return a+s.w},0);
+    var rows=WSEG.map(function(s,i){var r=i===0?'gd':s.k==='v'||s.k==='res'||s.k==='phu'?'br':s.n>=2?'pu':'bl',p=s.w/tot*100;
+      var q=s.k==='v'?s.n+' vàng':s.k==='res'?'30.000':'×'+s.n;
+      return'<div class="wl9r"><span class="wl9i '+r+'">'+ico(s.k,k,I)+'</span><div class="wl9t"><b>'+nm(s.k,K,I)+'</b><span>'+q+(i===0?' · <em>Đại Cát</em>':'')+'</span></div>'+
+       '<div class="wl9p"><b>'+pct(p)+'</b><i><u style="width:'+Math.max(3,p/16*100).toFixed(0)+'%"></u></i></div></div>'}).join('');
+    lb.innerHTML='<p class="wl9s">Sự kiện giới hạn · ngoại trang, binh khí và tọa kỵ của danh tướng chỉ có ở đây.</p>'+
+     '<div class="wl9h"><span>Phần thưởng</span><span>Tỉ lệ / lượt</span></div><div class="wl9l">'+rows+'</div>'+
+     '<div class="wl9n"><b>Bảo hiểm</b> · 9 lượt liên tiếp không ra ô vàng hay ×3, lượt thứ 10 chắc chắn ra <b>Mảnh ×3</b>. Cần 60 mảnh để mở ngoại trang ★1.</div>'}
+   /* 2. milestones */
+   var mb=d.querySelector('.wq7w[data-k="ms"] .wq7b');
+   if(mb){var mx=WMS[WMS.length-1][0],ws=w.ws||0;
+    var rr=WMS.map(function(m,i){var reach=ws>=m[0],got=w.got[i],r=m[1];
+      var tiles=['sk','wp','hr','v'].filter(function(x){return r[x]}).map(function(x){return'<span class="wm9t" title="'+nm(x,K,I)+'"><span class="wm9i">'+ico(x,k,I)+'</span><b>'+(x==='v'?r[x]:'×'+r[x])+'</b></span>'}).join('');
+      var right=got?'<span class="wm9d">✓ Đã nhận</span>':reach?'<button class="btn sm wm9b" data-a="whms" data-v="'+i+'">Nhận</button>':'<span class="wm9l">còn <b>'+(m[0]-ws)+'</b> lượt</span>';
+      return'<div class="wm9r'+(got?' got':reach?' ok':'')+'"><span class="wm9n"><b>'+m[0]+'</b><small>lượt</small></span><div class="wm9ts">'+tiles+'</div>'+right+'</div>'}).join('');
+    mb.innerHTML='<div class="wm9h"><span>Đã quay tuần này</span><b>'+ws+' / '+mx+'</b></div><div class="wm9bar"><i style="width:'+Math.min(100,ws/mx*100).toFixed(1)+'%"></i></div>'+
+     '<div class="wm9list">'+rr+'</div><p class="wl9s">Mốc làm mới mỗi tuần. Mảnh rơi cho ngoại trang đang chọn.</p>'}
+   return d.innerHTML}catch(e){try{console.warn('wl287 wheel',e)}catch(x){}return h}};
+ var css=document.createElement('style');css.id='wl287css';var S_='html body #sheet ',P_='html body #rs9p ';css.textContent=
+  /* picker grid */
+  S_+'.ik9g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:2px 0 6px}'+
+  S_+'.ik9{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:8px 6px 9px;border-radius:14px;background:linear-gradient(180deg,rgba(40,29,20,.95),rgba(20,14,9,.95));border:1px solid color-mix(in srgb,var(--q) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,240,200,.05);text-align:center;cursor:pointer;color:#e8dcc0}'+
+  S_+'.ik9:active{transform:scale(.97)}'+
+  S_+'.ik9i{position:relative;display:block;width:100%;aspect-ratio:1;max-width:84px}'+S_+'.ik9i .gi{width:100%!important;height:100%!important;margin:0!important}'+
+  S_+'.ik9 b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:700 13px/1.25 var(--ds-fb,system-ui,sans-serif);color:var(--q);min-height:2.5em}'+
+  S_+'.ik9 small{font:500 11.5px/1.3 var(--ds-fb,system-ui,sans-serif);color:#b9a98a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}'+
+  S_+'.ik9s{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#d0473a,#7d1a14);border:1.5px solid #f2c75a;box-shadow:0 2px 4px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}'+S_+'.ik9s svg{width:15px;height:15px}'+
+  S_+'.ik9 em{position:absolute;left:-5px;top:-7px;padding:1px 7px;border-radius:7px;background:linear-gradient(#f6dc95,#c9973f);color:#2a1a08;font:800 10.5px/1.4 var(--ds-fb,system-ui,sans-serif);font-style:normal;white-space:nowrap;box-shadow:0 0 0 1.5px #1a120a}'+
+  S_+'.ik9.bt{border-color:rgba(208,71,58,.8);box-shadow:0 0 0 1px rgba(208,71,58,.35)}'+
+  /* item window */
+  P_+'.ik9ph{display:flex;align-items:center;gap:14px;margin:4px 34px 12px 0}'+P_+'.ik9pi{flex:none;width:84px;height:84px}'+P_+'.ik9pi .gi{width:84px!important;height:84px!important;margin:0!important}'+
+  P_+'.ik9ph b{display:block;font:700 19px/1.25 var(--ds-fd,Philosopher,Georgia,serif)}'+
+  P_+'.ik9q{display:inline-block;margin-top:5px;padding:2px 9px;border-radius:999px;border:1px solid var(--q);color:var(--q);font:700 12px var(--ds-fb,system-ui,sans-serif)}'+
+  P_+'.ik9rows{display:flex;flex-direction:column;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.2);margin:0 0 10px}'+
+  P_+'.ik9rows>div{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;font:500 13.5px var(--ds-fb,system-ui,sans-serif);color:#b9a98a}'+P_+'.ik9rows>div+div{border-top:1px solid rgba(226,178,90,.12)}'+
+  P_+'.ik9rows b{color:#fff2cf;font-weight:700}'+P_+'.ik9rows b.up{color:#7fe0a0}'+P_+'.ik9rows b.dn{color:#e9958a}'+
+  P_+'.ik9n{margin:0 0 10px;font-size:12.5px;color:#e2b25a}'+P_+'.ik9b{width:100%;min-height:46px!important;font-size:16px!important}'+
+  /* legend */
+  S_+'.wl9s{margin:0 0 10px;font:500 13px/1.45 var(--ds-fb,system-ui,sans-serif);color:#b9a98a}'+
+  S_+'.wl9h{display:flex;justify-content:space-between;padding:0 4px 6px;font:600 11.5px var(--ds-fb,system-ui,sans-serif);letter-spacing:.08em;text-transform:uppercase;color:#a8946c}'+
+  S_+'.wl9l{display:flex;flex-direction:column;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.2);overflow:hidden}'+
+  S_+'.wl9r{display:flex;align-items:center;gap:12px;padding:8px 12px}'+S_+'.wl9r+.wl9r{border-top:1px solid rgba(226,178,90,.1)}'+
+  S_+'.wl9i,'+S_+'.wm9i{display:block;position:relative;flex:none;width:46px;height:46px;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 35%,#3a2e22,#15100b);box-shadow:0 0 0 1.5px var(--fr,#8a6a3a)}'+
+  S_+'.wl9i.gd{--fr:#f2c75a;box-shadow:0 0 0 2px #f2c75a,0 0 10px rgba(242,199,90,.5)}'+S_+'.wl9i.pu{--fr:#b47cf0}'+S_+'.wl9i.bl{--fr:#6a9ad8}'+S_+'.wl9i.br{--fr:#a07a45}'+
+  S_+'.wl9i .wq9f,'+S_+'.wm9i .wq9f{position:absolute;inset:0;width:46px;height:46px;border-radius:0}'+S_+'.wl9i .wq9a,'+S_+'.wm9i .wq9a{position:absolute;inset:4px;background-repeat:no-repeat}'+
+  S_+'.wl9t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}'+S_+'.wl9t b{font:700 14px/1.25 var(--ds-fb,system-ui,sans-serif);color:#fff2cf}'+S_+'.wl9t span{font:600 12.5px var(--ds-fn,"Barlow Condensed",sans-serif);color:#c9b48a}'+S_+'.wl9t em{font-style:normal;color:#f2c75a}'+
+  S_+'.wl9p{flex:none;width:64px;display:flex;flex-direction:column;align-items:flex-end;gap:4px}'+S_+'.wl9p b{font:700 17px var(--ds-fn,"Barlow Condensed",sans-serif);color:#f6d77d}'+
+  S_+'.wl9p i{display:block;width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}'+S_+'.wl9p u{display:block;height:100%;background:linear-gradient(90deg,#c9973f,#f6d77d);text-decoration:none}'+
+  S_+'.wl9n{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(180,124,240,.1);border:1px solid rgba(180,124,240,.3);font:500 13px/1.45 var(--ds-fb,system-ui,sans-serif);color:#d8c8f0}'+S_+'.wl9n b{color:#fff2cf}'+
+  /* milestones */
+  S_+'.wm9h{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 6px;font:500 13px var(--ds-fb,system-ui,sans-serif);color:#b9a98a}'+S_+'.wm9h b{font:700 18px var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}'+
+  S_+'.wm9bar{height:6px;border-radius:3px;background:rgba(0,0,0,.45);overflow:hidden;margin:0 0 12px}'+S_+'.wm9bar i{display:block;height:100%;background:linear-gradient(90deg,#c9973f,#f6d77d)}'+
+  S_+'.wm9list{position:relative;display:flex;flex-direction:column;gap:8px;margin-bottom:10px}'+
+  S_+'.wm9r{position:relative;display:flex;align-items:center;gap:12px;padding:10px 12px 10px 10px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(226,178,90,.18)}'+
+  S_+'.wm9r.ok{border-color:rgba(242,199,90,.7);box-shadow:0 0 12px rgba(242,199,90,.18);background:linear-gradient(90deg,rgba(242,199,90,.12),rgba(0,0,0,.25) 60%)}'+S_+'.wm9r.got{opacity:.6}'+
+  S_+'.wm9n{flex:none;width:48px;height:48px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,#3a2e22,#15100b);border:1.5px solid rgba(226,178,90,.45)}'+
+  S_+'.wm9r.ok .wm9n,'+S_+'.wm9r.got .wm9n{border-color:#f2c75a;background:radial-gradient(circle at 50% 35%,#7a5a22,#2a1c0a)}'+
+  S_+'.wm9n b{font:700 17px/1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}'+S_+'.wm9n small{font:600 9.5px/1.2 var(--ds-fb,system-ui,sans-serif);color:#b9a98a}'+
+  S_+'.wm9ts{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:8px}'+S_+'.wm9t{position:relative;display:block;width:46px}'+
+  S_+'.wm9t b{position:absolute;right:-4px;bottom:-5px;padding:0 4px;border-radius:6px;background:#15100b;border:1px solid rgba(226,178,90,.5);font:700 11.5px/1.35 var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}'+
+  S_+'.wm9b{flex:none;min-height:38px!important;padding:0 16px!important}'+S_+'.wm9d{flex:none;font:700 13px var(--ds-fb,system-ui,sans-serif);color:#7fe0a0}'+S_+'.wm9l{flex:none;font:500 12.5px var(--ds-fb,system-ui,sans-serif);color:#a8946c;white-space:nowrap}'+S_+'.wm9l b{color:#f6d77d}';
+ document.head.appendChild(css);
+}catch(e){try{console.error('wl287',e)}catch(x){}}})();
 </script>
