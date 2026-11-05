@@ -11025,7 +11025,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V280';
+var BUILD='V281';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15299,4 +15299,20 @@ var EP279=1;
    var id=!a&&(u.gid&&GART[u.gid]?u.gid:(u.look&&GART[u.look]?u.look:null));
    if(id&&GART[id].sm)return'<div class="pw'+(u.isBoss?' gS':'')+'"><img class="ga" src="'+GART[id].sm+'" alt="" style="aspect-ratio:1;object-fit:cover;object-position:'+(GART[id].pos||'50% 18%')+';width:100%;height:100%" decoding="async"><span class="tag">'+TAGS[u.br]+'</span><span class="lv">Lv.'+u.lv+'</span></div>'}}catch(e){}
   return _p.apply(this,arguments)}}catch(e){try{console.error('ep279',e)}catch(x){}}})();
+/* ===== V281 nav scroll memory (coding, user 2026-11-04 23:14 "whenever I click on Trang bị and equip something, then back,
+   it takes me to the top of the screen and I have to scroll back to Trang bị — make it go back to where I was").
+   Every sheet screen remembers its scroll position (keyed by its title, like navui.js's back stack) when the player leaves it for
+   another screen; coming back to that screen (back button, equip → hero sheet, etc.) restores it. Closing the sheet clears the memory,
+   so opening a hero fresh from the Tướng list still starts at the top. Display only; everything wrapped. */
+var NAV281={};
+(function(){try{
+ var _os=openSheet;openSheet=function(fn,keep){var sh=null,k0='';
+  try{var m=$('#modal');sh=$('#sheet');if(m&&!m.hidden&&sh){k0=shTitle();if(k0)NAV281[k0]=sh.scrollTop}}catch(e){}
+  var r=_os.apply(this,arguments);
+  try{if(!keep){var k=shTitle(),t=NAV281[k];sh=$('#sheet');
+   if(k&&k!==k0&&t!=null&&sh){sh.scrollTop=t;requestAnimationFrame(function(){try{if(shTitle()===k)sh.scrollTop=t}catch(e){}});
+    setTimeout(function(){try{if(shTitle()===k&&Math.abs(sh.scrollTop-t)>4)sh.scrollTop=t}catch(e){}},80)}}}catch(e){}
+  return r};
+ var _cs=closeSheet;closeSheet=function(){NAV281={};return _cs.apply(this,arguments)};
+}catch(e){}})();
 </script>
