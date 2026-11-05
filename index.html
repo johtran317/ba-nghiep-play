@@ -11026,7 +11026,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V288';
+var BUILD='V289';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15547,4 +15547,62 @@ var WL287=1;
   S_+'.wm9b{flex:none;min-height:38px!important;padding:0 16px!important}'+S_+'.wm9d{flex:none;font:700 13px var(--ds-fb,system-ui,sans-serif);color:#7fe0a0}'+S_+'.wm9l{flex:none;font:500 12.5px var(--ds-fb,system-ui,sans-serif);color:#a8946c;white-space:nowrap}'+S_+'.wm9l b{color:#f6d77d}';
  document.head.appendChild(css);
 }catch(e){try{console.error('wl287',e)}catch(x){}}})();
+/* ===== V289 first-time effect tip DURING the battle (coding, user 2026-11-05 07:59 screenshot of the after-battle card "Lần đầu gặp: Khóa sĩ
+   khí …": "for the first time encountering any effect - make this appear during the battle and point at the effect on the troop. do not wait
+   till the battle is over").
+   While a battle plays (not when skipped), the first time any unit shows one of the 12 guide statuses (GDST in guide.js), the battle pauses
+   (BT.hold), a gold ring + pointer marks that squad on the battlefield and Quân sư Thanh Y explains the effect in a card on the side away
+   from the squad: "Lần đầu gặp: <Effect>" · who has it (Quân ta / Quân địch · name) · what it does. "Đã hiểu ›" resumes the battle; several
+   new effects at once are shown one after another. Each status is marked seen in the guide save (gdN().st), so the after-battle card only
+   covers what was skipped (fast-forward / Bỏ qua). Same gate as the guide (gdOn: new-start saves with a name, guide not switched off).
+   Display + pause only; battle results are pre-computed, nothing changes. Everything wrapped; FE288=0 turns it off. */
+var FE288=1;
+(function(){try{
+ var box=null,iv=0,Q=[],cur=null,held=0,off=0;   /* off: Bỏ qua / Rút lui pressed — no more tips this battle */
+ function on(){try{return FE288&&typeof gdOn==='function'&&gdOn()&&typeof GDST!=='undefined'}catch(e){return false}}
+ function nm(u){try{if(u.gid&&GENS[u.gid])return u.gid==='lord'&&S.pname?S.pname:GENS[u.gid].n;return u.n||u.name||'Quân'}catch(e){return'Quân'}}
+ function hold(v){try{if(v){held=1;BT.hold=1e9}else if(held){held=0;BT.hold=0}}catch(e){}}
+ function close(){try{if(box){box.remove();box=null}}catch(e){}cur=null;hold(0)}
+ function scan(){try{if(!BT||!BT.on){stop();return}if(off||BT.skip||BT.abort){off=1;Q=[];close();return}if(!on())return;var G=gdN();G.st=G.st||{};
+   BT.list.forEach(function(d){if(!d.sf||d.trD<=0)return;GDST.forEach(function(q){var i=q[0]-2;if(d.sf[i]&&!G.st[q[0]]&&!Q.some(function(x){return x.q[0]===q[0]})&&!(cur&&cur.q[0]===q[0]))Q.push({q:q,d:d})})});
+   if(!cur&&Q.length)show(Q.shift());else if(cur)place()}catch(e){close()}}
+ function pos(d){var cv=document.getElementById('cv'),w=document.querySelector('#battle .bw');if(!cv||!w)return null;var r=cv.getBoundingClientRect(),rw=w.getBoundingClientRect(),k=r.width/(BT.W||r.width),
+   s=d.s||1;return{x:r.left-rw.left+(d.x+(d.ox||0))*k,y:r.top-rw.top+(d.y+(d.oy||0)-BT.rh*s*.25)*k,rad:Math.max(30,BT.cwN*s*.55*k),H:rw.height}}
+ function place(){try{if(!box||!cur)return;var p=pos(cur.d);if(!p)return;var rg=box.querySelector('.fe8r'),cd=box.querySelector('.fe8c'),ar=box.querySelector('.fe8a');
+   rg.style.left=(p.x-p.rad)+'px';rg.style.top=(p.y-p.rad)+'px';rg.style.width=rg.style.height=(p.rad*2)+'px';
+   var top=p.y>p.H*.5;cd.style.top=top?'10px':'auto';cd.style.bottom=top?'auto':'10px';
+   var ch=cd.getBoundingClientRect().height||150,ay=top?(10+ch):(p.H-10-ch);   /* pointer from the card edge to the ring */
+   var y1=top?ay:p.y+p.rad,y2=top?p.y-p.rad:ay,len=Math.max(0,y2-y1);ar.style.left=(p.x-1)+'px';ar.style.top=y1+'px';ar.style.height=len+'px';ar.className='fe8a'+(top?' dn':' up');ar.hidden=len<8}catch(e){}}
+ function show(it){var w=document.querySelector('#battle .bw');if(!w){return}cur=it;var q=it.q,u=it.d.u,us=u.side==='A';
+  try{var G=gdN();G.st[q[0]]=1;save()}catch(e){}
+  box=document.createElement('div');box.id='fe288';
+  box.innerHTML='<div class="fe8r"></div><div class="fe8a"></div><div class="fe8c" role="dialog" aria-label="Lần đầu gặp '+q[1]+'"><div class="fe8b" aria-hidden="true"></div><div class="fe8t">'+
+   '<span class="fe8n">QUÂN SƯ <b>Thanh Y</b></span><div class="fe8h">Lần đầu gặp: <b>'+q[1]+'</b></div>'+
+   '<div class="fe8w"><i class="'+(us?'us':'foe')+'">'+(us?'Quân ta':'Quân địch')+'</i> '+esc(nm(u))+' '+((q[0]===6||q[0]===11)?'đang có':'đang bị')+' <b>'+q[1]+'</b></div>'+
+   '<div class="fe8d">'+q[1]+': '+q[2]+'</div><div class="fe8f"><span>Trận đấu đang tạm dừng</span><button class="btn sm" data-a="fe288ok">Đã hiểu ›</button></div></div></div>';
+  w.appendChild(box);hold(1);place();requestAnimationFrame(place)}
+ function next(){close();if(Q.length&&BT&&BT.on&&!BT.skip)show(Q.shift())}
+ function start(){stop();Q=[];off=0;iv=setInterval(scan,120)}
+ function stop(){clearInterval(iv);iv=0;Q=[];close()}
+ var _A=A_;A_=function(a,v,w,el){if(a==='fe288ok'){next();return}if(a==='bskip'||a==='bret'){off=1;Q=[];close()}return _A.apply(this,arguments)};
+ if(typeof btPlay==='function'){var _bp=btPlay;btPlay=function(){var pr=_bp.apply(this,arguments);try{if(FE288){start();if(pr&&pr.then)pr.then(stop,stop)}}catch(e){}return pr}}
+ window.addEventListener('resize',function(){try{place()}catch(e){}});
+ var st=document.createElement('style');st.id='fe288css';st.textContent=
+  '#fe288{position:absolute;inset:0;z-index:40;pointer-events:none}'+
+  '#fe288 .fe8r{position:absolute;border-radius:50%;border:2px solid #f2c75a;box-shadow:0 0 0 3px rgba(242,199,90,.25),0 0 18px rgba(242,199,90,.6);animation:fe8p 1.1s ease-in-out infinite}'+
+  '#fe288 .fe8r::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(242,199,90,.45)}'+
+  '@keyframes fe8p{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.75}}'+
+  '#fe288 .fe8a{position:absolute;width:2px;background:linear-gradient(#f2c75a,rgba(242,199,90,.2))}#fe288 .fe8a.up{background:linear-gradient(rgba(242,199,90,.2),#f2c75a)}'+
+  '#fe288 .fe8c{position:absolute;left:10px;right:10px;pointer-events:auto;display:flex;gap:10px;padding:12px 12px 10px 8px;border-radius:14px;background:linear-gradient(180deg,rgba(40,28,18,.97),rgba(20,14,10,.97));border:1px solid rgba(226,178,90,.7);box-shadow:0 10px 30px rgba(0,0,0,.6);animation:fe8in .25s ease-out}'+
+  '@keyframes fe8in{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}'+
+  '#fe288 .fe8b{flex:0 0 72px;height:96px;align-self:flex-end;background:url(art/ui/guide.webp?v=2) -144px 0/288px auto no-repeat}'+
+  '#fe288 .fe8t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}'+
+  '#fe288 .fe8n{align-self:flex-start;font:700 10px "Be Vietnam Pro",sans-serif;letter-spacing:.12em;color:#bfe6dc;background:#1f4a44;border:1px solid #6fb5a6;border-radius:9px;padding:2px 8px}#fe288 .fe8n b{font:600 12px Philosopher,Georgia,serif;letter-spacing:0;margin-left:2px}'+
+  '#fe288 .fe8h{font:700 17px Philosopher,Georgia,serif;color:#fff2cf}#fe288 .fe8h b{color:#f2c75a}'+
+  '#fe288 .fe8w{font-size:13px;color:#d8ccb4}#fe288 .fe8w i{font-style:normal;font-size:11px;padding:1px 6px;border-radius:8px;margin-right:2px}#fe288 .fe8w i.us{background:rgba(120,210,140,.18);color:#9fe0b0}#fe288 .fe8w i.foe{background:rgba(230,110,100,.18);color:#ffb3a8}#fe288 .fe8w b{color:#f2c75a}'+
+  '#fe288 .fe8d{font-size:14px;line-height:1.4;color:#f3ead8}'+
+  '#fe288 .fe8f{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}#fe288 .fe8f span{font-size:11px;color:#9a8f80}#fe288 .fe8f .btn{min-height:40px;padding:0 16px}'+
+  '@media (prefers-reduced-motion:reduce){#fe288 .fe8r,#fe288 .fe8c{animation:none}}';
+ document.head.appendChild(st);
+}catch(e){try{console.error('fe288',e)}catch(x){}}})();
 </script>
