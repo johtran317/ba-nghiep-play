@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V264';
+var BUILD='V265';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12295,7 +12295,7 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    barrier, fear all) · Bế Nguyệt Hoa Vũ (heal + cleanse all).
    SKIN2ON stays false until the numbers pass the skin-vs-hero sims (sim/skin2.js) AND a coding/balance-agent review.
    Engine hooks used (engine.js, inert otherwise): noHit, shSelf, cln. */
-var SKIN2ON=false;
+var SKIN2ON=true;
 var SKIN2={   /* V203 numbers (coding balance review 2026-11-03, user 19:55 Bát Trận .18, 20:04 "a both skin fix": Thanh Long hits a column, skill barriers last 2 turns).
    Fair sims (sim/skin2q.js troops /2 short fights, N=400; sim/tn.js Q=1): every skin ~+10% over its hero's base skill on average. */
  zhugeliang_a:{n:'Bát Trận Đồ',pat:'all',noHit:1,shield:.18,shT:2,ardr:.1,ardrT:2,cln:1},
@@ -12309,6 +12309,15 @@ var SKIN2={   /* V203 numbers (coding balance review 2026-11-03, user 19:55 Bát
  diaochan_a:{n:'Bế Nguyệt Hoa Vũ',pat:'heal',hs:'all',heal:.15,cleanse:1,cln:1,mo:20}};
 function skin2Apply(){try{for(var k in SKIN2)if(SKL[k])SKL[k].t=Object.assign({},SKIN2[k])}catch(e){}}
 if(SKIN2ON)skin2Apply();
+/* V265 (user 2026-11-04 17:02 "yes for skilled skin"): SKIN2ON switched on; skill texts for the new skill keys
+   (noHit, shSelf, shT, cln on damage skills) so no skin reads "hệ số undefined" or "cả đội nhận khiên" when only the caster gets it. */
+(function(){try{var _td2=tdesc;tdesc=function(T){var o=_td2(T);try{if(!T)return o;
+ if(T.noHit)o=o.replace(/(Mưu kế: )?[Đđ]ánh [^;]*?, hệ số undefined/,'Không gây sát thương');
+ if(T.shield){var sh=Math.round(T.shield*100),rx=new RegExp('cả đội nhận khiên '+sh+'% quân');
+  o=o.replace(rx,(T.shSelf?'bản thân nhận khiên ':'cả đội nhận khiên ')+sh+'% quân'+(T.shT?' trong '+T.shT+' lượt':''))}
+ if(T.cln&&T.pat!=='heal'&&o.indexOf('giải mọi hiệu ứng xấu')<0)o=o.replace(/\.?\s*$/,'')+', giải mọi hiệu ứng xấu cho cả đội ta.';
+ if(!/[.)]$/.test(o.trim()))o=o.trim()+'.'}catch(e){}return o}}catch(e){}})();
+(function(){try{if(SKIN2ON)for(var k in SKIN2){var K=SKL[k];if(K&&K.ds!=null)K.ds=tdesc(K.t)}}catch(e){}})();
 /* ===== V204 (art agent, user 2026-11-03 20:15 "the coder just finished — start fx design now"): signature battle FX for the
    9 redesigned skin skills (src/skin2.js). Each one follows its skill text and the on-screen beats in the Drive doc
    "Bá Nghiệp – Skin skill redesign + effect art prompts" (art_src/skin_fx): the effect lands on the real targets and the
@@ -14531,8 +14540,8 @@ var PACE264={
  goldEvK:2.5,                                /* Tiêu Vàng weekly event: point goals ×2.5 */
  ar2BuyK:20,                                 /* Lôi Đài extra try: 20 × n gold (was 10 × n) */
  /* pace: extra enemy factor on top of CURVE208, per Màn (index = mi), normal stages and the Màn boss (last stage) */
- S:[.85,.75,.55,1.5,.8, .8,.85,.85,.7,.7, .6,.6,.6,.6,.6, .65,.65,.65,.65, .9,.9,.9,.9,.9, 1,1],
- B:[.35,.5,.42,1.7,.8, .8,.85,.85,.7,.7, .6,.6,.6,.6,.6, .65,.65,.65,.65, .9,.9,.9,.9,.9, 1,1],
+ S:[.85,.75,.55,1.5,.8, .8,.85,.85,.7, .36,.324,.36,.288,.23, .202,.18,.187,.202,.216, .25,.25,.27,.29,.3, .26,.28],   /* V265 Màn 10–26 tuned with long bot runs (see bible V265) */
+ B:[.35,.5,.42,1.7,.8, .8,.85,.85,.7, .36,.324,.36,.288,.23, .202,.18,.187,.202,.216, .25,.25,.27,.29,.3, .26,.28],
  freeOrdM:3,                                 /* first win of a stage on Màn 1–3 gives its Quân lệnh back (new players run on fights, not on lệnh) */
  /* Gói Nạp Đầu reach (Bạch Mã Lệnh): packs bought → last Màn (1-based) the discount covers, and its factor per Màn */
  reach:function(n){return n>=6?7:n>=3?5:n>=1?4:0},
