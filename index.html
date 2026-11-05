@@ -11025,7 +11025,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V285';
+var BUILD='V286';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15333,6 +15333,8 @@ var HP282=1;
   try{var box=document.createElement('div');box.innerHTML=h;var hsh=box.querySelector('.hsh'),lv=hsh&&hsh.querySelector('.hslv');if(!hsh||!lv)return h;
    var sl=null;[].forEach.call(box.querySelectorAll('.hsl'),function(l){if(!sl&&/^\s*Chỉ số/i.test(l.textContent))sl=l});
    if(sl){sl.classList.add('hp9h');lv.classList.add('hp9lv');sl.appendChild(lv)}
+   /* V286 (user 2026-11-05 07:18 "move SSR · Tuyệt kỹ next to Kỹ năng"): the skill rank chip moves from the start of the skill text onto the KỸ NĂNG header */
+   [].forEach.call(box.querySelectorAll('.hsl'),function(l){if(!/^\s*Kỹ năng/i.test(l.textContent)||l.querySelector('.sktag'))return;var sec=l.parentNode,tg=sec&&sec.querySelector('.hsk .sktag');if(!tg)return;l.classList.add('hp9k');l.appendChild(tg)});
    var rb=box.querySelector('button.hs246b[data-v="role"]');
    if(rb){var tg=rb.querySelector('.rtag'),dy=rb.querySelector('.hs246d'),tn=tg?tg.textContent.trim():'',rk='tank';
      for(var k in ROLEN)if(ROLEN[k]===tn)rk=k;var rc=(typeof ROLEC!=='undefined'&&ROLEC[rk])||'#e2b25a',m=dy?/(\d+)\s*\/\s*(\d+)/.exec(dy.textContent):null;
@@ -15350,6 +15352,7 @@ var HP282=1;
   S_+'.hsh .hp9r:active{transform:scale(.94)}'+
   S_+'.hsh .skbtn.sk280{margin-right:12px!important}'+
   S_+'.hsl.hp9h{display:flex!important;align-items:center;gap:8px}'+
+  S_+'.hsl.hp9k{display:flex!important;align-items:center;justify-content:flex-start!important;gap:10px}'+S_+'.hsl.hp9k .sktag{margin:0!important;margin-left:0!important;order:0!important;float:none!important;text-transform:none!important;letter-spacing:0!important;font-size:12px!important}'+
   S_+'.hsl.hp9h .hp9lv{margin-left:auto;text-transform:none!important;letter-spacing:0!important;height:28px!important;padding:0 11px!important;border-radius:14px!important;border:1px solid rgba(226,178,90,.45)!important;background:rgba(226,178,90,.14)!important;color:#f6dfa6!important;font:700 14px/26px var(--ds-fn,"Barlow Condensed",sans-serif)!important;box-shadow:none!important}';
  document.head.appendChild(css);
 }catch(e){try{console.error('hp282',e)}catch(x){}}})();
