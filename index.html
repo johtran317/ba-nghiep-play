@@ -3092,7 +3092,7 @@ function A_(a,v,w,el){
   S.vol+=1000;refresh();break}
  case'trset':{var ix=+w;if(v)S.train.forEach(function(x,j){if(x===v)S.train[j]=null});S.train[ix]=v||null;refresh();break}
  case'map':mapSel=+v;renderMain();break;
- case'chest':{var mi=+v;if(S.camp.chest[mi])return;S.camp.chest[mi]=1;var gv=30+20*mi,mt=500*(mi+1);S.res.gold+=gv;S.res.merit+=mt;toast('+'+gv+' vàng, +'+mt+' quân công');refresh();break}
+ case'chest':{var mi=+v;if(S.camp.chest[mi])return;S.camp.chest[mi]=1;var gv=(30+20*mi)*(typeof PACE264!=='undefined'?PACE264.chestK:1),mt=500*(mi+1);S.res.gold+=gv;S.res.merit+=mt;toast('+'+gv+' vàng, +'+mt+' quân công');refresh();break}
  case'stage':{var pr=v.split('|'),mi2=+pr[0],si=+pr[1],kd=pr[2];
   if(kd==='stage'&&!stageOpen(mi2,si))return toast('Hãy phá ải trước');
   openSheet(function(){return stageSheet(mi2,si,kd)});break}
@@ -5860,7 +5860,7 @@ A_=function(a,v,w2,el){
   toast((isIt?SKIT[gid][key.split('|')[1]].n:SKL[key].n)+(R.st===1?' đã ghép thành công!':' lên ★'+R.st));save();refresh();
   var sh=document.querySelector('#sheet');var inW=sh&&sh.querySelector('.whbox'),inPick=isIt&&sh&&sh.querySelector('.siart')&&!inW;
   openSheet(inW?wheelSheet:inPick?function(){return pickSheet(gid,SLOTI[key.split('|')[1]])}:function(){return skinSheet(gid)});return}
- if(a==='dclaim'&&v==='all'){var d=dget();if(d.c.all)return;var r0=_AEV(a,v,w2,el);if(d.c.all){S.res.gold+=50;renderTop()}return r0}
+ if(a==='dclaim'&&v==='all'){var d=dget();if(d.c.all)return;var r0=_AEV(a,v,w2,el);if(d.c.all){S.res.gold+=(typeof PACE264!=='undefined'?PACE264.dailyBig:50);renderTop()}return r0}
  return _AEV(a,v,w2,el)};
 /* city: event button on the map */
 var _rmEV=renderMain;
@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V263';
+var BUILD='V264';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -12786,8 +12786,8 @@ function np206Icon(p){try{if(p.hero){var G=typeof GART!=='undefined'&&GART[p.her
 function np206Sheet(){var N=np206(),own=np206Can(),G=GENS[NP206HERO],h='<h3>Gói Nạp Đầu</h3>';
  h+='<div class="card np6hero"><div class="np6art">'+(function(){try{return heroArt(NP206HERO,'card')}catch(e){return''}})()+'</div><div class="np6tx"><b>'+G.n+'</b><span class="np6tag">SR · Quần · Kỵ binh</span>'+
   '<div class="sm">'+esc(G.tact.n)+' · '+(G.ds||'')+'</div><div class="sm mute">Mua theo thứ tự, mỗi gói một lần. Từ 4,99 $ trở lên là bộ trang bị Bạch Mã cho ông.</div></div></div>';
- try{var k1=NP206EK[Math.min(N.n,NP206EK.length-1)],k2=NP206EK[Math.min(N.n+1,NP206EK.length-1)];
-  h+='<div class="card sm np6lenh"><span style="font-weight:700;color:#f6e6c4">Bạch Mã Lệnh</span> · quân địch Màn 1–'+NP206EM+' yếu đi <b class="dsnum">'+Math.round((1-k1)*100)+'%</b>'+(N.n<NP206.length?' (sau gói tiếp theo: <b class="dsnum">'+Math.round((1-k2)*100)+'%</b>)':'')+'. Từ Màn '+(NP206EM+1)+' trở đi không còn.</div>'}catch(e){}
+ try{var R0=typeof PACE264!=='undefined'?PACE264.reach(N.n):(N.n?NP206EM:0);
+  h+='<div class="card sm np6lenh"><span style="font-weight:700;color:#f6e6c4">Bạch Mã Lệnh</span> · '+(R0?'quân địch Màn 1–'+R0+' yếu đi <b class="dsnum">30–50%</b>. ':'')+'Gói 0,99 $: Màn 1–4 · gói 9,99 $: Màn 1–5 · gói 49,99 $: Màn 1–7.</div>'}catch(e){}
  h+='<div class="stack dslist np6list">'+NP206.map(function(p,i){var st=i<N.n?'done':i===N.n?'next':'lock';
   var btn=st==='done'?'<span class="np6ok">Đã nhận</span>':st==='next'?(own?'<button class="btn sm" data-a="np206b" data-v="'+i+'">'+p.usd+' $</button>':'<button class="btn sm" disabled>'+p.usd+' $</button>'):'<span class="np6lk">'+p.usd+' $</span>';
   var ex=p.rw?(p.rw.v?' · '+p.rw.v+' vàng':'')+(p.rw.s?' · '+fmt(p.rw.s)+' bạc':''):'';
@@ -13337,7 +13337,7 @@ function ar2Sheet(){ar2Settle();ar2Place();var a=ar2(),r=a.me,ti=r>AR2N?6:ar2Tie
  h+='<div class="sec">Khiêu chiến <span class="sm mute">· lượt '+Math.max(0,left)+'/'+(AR2FREE+a.buy)+'</span></div>';
  if(a.cd>S.clock)h+='<div class="sm bad" style="margin:0 0 6px">Nghỉ quân sau trận thua: còn '+Math.ceil((a.cd-S.clock)/60000)+' phút.</div>';
  h+='<div class="stack dslist">'+tg.list.map(function(t){return ar2Row(t,false,mp)}).join('')+(tg.st?ar2Row(tg.st,true,mp):'')+'</div>';
- if(left<=0)h+='<button class="btn alt wide" style="margin-top:8px" data-a="ar2b">Mua thêm 1 lượt · '+(10*(a.buy+1))+' vàng</button>';
+ if(left<=0)h+='<button class="btn alt wide" style="margin-top:8px" data-a="ar2b">Mua thêm 1 lượt · '+((typeof PACE264!=='undefined'?PACE264.ar2BuyK:10)*(a.buy+1))+' vàng</button>';
  h+='<div class="sec">Đội phòng thủ</div><div class="sm mute" style="margin-bottom:6px">Trước 21:00 các chư hầu xếp dưới sẽ đánh vào hạng của bạn bằng đội này. Sức thủ: <b>'+fmt(arnPower(ar2DefUnits()))+'</b></div>';
  var dd=a.def==null?S.fm.act:a.def;h+='<div class="pills">'+[0,1,2].map(function(i){return'<button class="pill'+(dd===i?' on':'')+'" data-a="ar2d" data-v="'+i+'">Đội '+(i+1)+'</button>'}).join('')+'</div>';
  if(a.log.length){h+='<div class="sec">Báo chiến</div><div class="stack dslist">'+a.log.slice(0,6).map(function(e){var tx='',btn='';
@@ -13384,7 +13384,7 @@ function ar2Fight(t){var a=ar2();if(!ar2Open())return;if(ar2Left()<=0){toast('H�
   if(a==='arena'||a==='ar2'||a==='arfight'||a==='arclaim'){if(!ar2Open()){toast('Lôi Đài mở khi tới Màn 5 (vượt Màn 4)');return}openSheet(ar2Sheet);return}
   if(a==='ar2f'){ar2Fight(+v);return}
   if(a==='ar2r'){var r=ar2RankOf(+v),A2=ar2();if(r&&r<A2.me){A2.rev=1;ar2Fight(r)}return}
-  if(a==='ar2b'){var B=ar2(),p=10*(B.buy+1);if(S.res.gold<p){toast('Cần '+p+' vàng');return}S.res.gold-=p;B.buy++;toast('+1 lượt Lôi Đài · −'+p+' vàng');save();refresh();openSheet(ar2Sheet,true);return}
+  if(a==='ar2b'){var B=ar2(),p=(typeof PACE264!=='undefined'?PACE264.ar2BuyK:10)*(B.buy+1);if(S.res.gold<p){toast('Cần '+p+' vàng');return}S.res.gold-=p;B.buy++;toast('+1 lượt Lôi Đài · −'+p+' vàng');save();refresh();openSheet(ar2Sheet,true);return}
   if(a==='ar2d'){ar2().def=+v;save();openSheet(ar2Sheet,true);return}
   if(a==='ar2s'){openSheet(ar2ShopSheet);return}
   if(a==='ar2sb'){var C=ar2(),k=String(v).split(':'),it=AR2SHOP.filter(function(x){return x.id===k[0]})[0];if(!it)return;var u=ar2ShopUsed(it.id);
@@ -13462,7 +13462,7 @@ function ar2Fight(t){var a=ar2();if(!ar2Open())return;if(ar2Left()<=0){toast('H�
   h+='<div class="ld4sec"><b>Khiêu chiến</b>'+seg('ar2at',S.fm.act)+'</div>';
   var emp=!teamGids(S.fm.act).length;if(emp){cd=true;h+='<div class="ld4warn">Đội '+(S.fm.act+1)+' chưa có tướng <button class="btn sm" data-a="form">Bày trận</button></div>'}
   else if(cd)h+='<div class="ld4warn">Nghỉ quân sau trận thua · còn '+Math.ceil((a.cd-S.clock)/60000)+' phút</div>';
-  else if(left<=0)h+='<div class="ld4warn">Hết lượt miễn phí · <button class="btn sm" data-a="ar2b">Mua 1 lượt · '+ob('gold',16)+(10*(a.buy+1))+'</button></div>';
+  else if(left<=0)h+='<div class="ld4warn">Hết lượt miễn phí · <button class="btn sm" data-a="ar2b">Mua 1 lượt · '+ob('gold',16)+((typeof PACE264!=='undefined'?PACE264.ar2BuyK:10)*(a.buy+1))+'</button></div>';
   h+='<div class="ld4list">'+(tg.st?rival(tg.st,true,mp,left,cd):'')+tg.list.map(function(t){return rival(t,false,mp,left,cd)}).join('')+'</div>';
   h+='<div class="ld4hint">Chạm vào đối thủ để xem đội hình. Thắng: '+ud(14)+' 10 Uy Danh · '+ob('merit',14)+' 300 · đổi hạng.</div>';
   /* milestones */
@@ -14510,4 +14510,61 @@ var BU263=1;
   '@media (prefers-reduced-motion:reduce){#bu263,#bu263 *{animation:none!important}}';
  document.head.appendChild(st);
 }catch(e){try{console.error('bu263',e)}catch(x){}}})();
+/* ===== V264 economy + pace pass (coding, user 2026-11-04 15:46 "the game is not exciting — players don't have enough gold to clear maps
+   and get rewards; give them free gold so they keep playing … a free player clears Màn 3 without spending, a Gói Nạp Đầu buyer reaches
+   Màn 5–6"; answers 15:5x: "free player passes Màn 3 in 2.5 hours and keeps playing … stuck at Màn 20–24 for a few days, then Màn 25–26
+   again for a few days"; "0.99 → Màn 4, 9.99 → Màn 5, 49.99 and 99.99 → Màn 7"; free gold from welcome gift + 7-day login, first-clear
+   gold, daily tasks, tower / Lôi Đài milestones; "increase the gold needed to take part in events so they save gold or buy it").
+   Internal names PACE264* / *264. Everything wrapped; no new actions. Save key S.p264 {gift, art}. */
+var PACE264={
+ /* free gold */
+ gift:300,                                   /* welcome gift, once per account (new and existing saves) */
+ nu7:[150,100,150,120,200,150,400],          /* Tân Thủ 7 Ngày gold per login day (was 50,0,80,0,100,0,200) */
+ stV:function(mi){return 10+3*mi},           /* first win of a normal stage (was 2+mi) */
+ bossV:function(mi){return 50+15*mi},        /* first win of a Màn boss stage (was 15+5mi) */
+ chestK:2,                                   /* Màn star chest gold ×2 (game3.js chest: 30+20·mi) */
+ dailyBig:110,                               /* big daily-task chest: extra gold on top of game4's 10 (was +50 → 60 total; now 120) */
+ twV:function(f){return f%10===0?20+Math.round(f/2):0},   /* first clear of every 10th tower floor */
+ arTier:[0,800,400,200,100,50],              /* Lôi Đài best-tier reached, once each (index = AR2TIER: Đế, Long, Ngọc, Vàng, Bạc, Đồng) */
+ /* event gold costs (events cost more gold → save up or buy gold) */
+ spin1:100,spin10:900,                       /* Vòng Quay (was 60 / 540) */
+ goldEvK:2.5,                                /* Tiêu Vàng weekly event: point goals ×2.5 */
+ ar2BuyK:20,                                 /* Lôi Đài extra try: 20 × n gold (was 10 × n) */
+ /* pace: extra enemy factor on top of CURVE208, per Màn (index = mi), normal stages and the Màn boss (last stage) */
+ S:[.85,.75,.55,1.5,.8, .8,.85,.85,.7,.7, .6,.6,.6,.6,.6, .65,.65,.65,.65, .9,.9,.9,.9,.9, 1,1],
+ B:[.35,.5,.42,1.7,.8, .8,.85,.85,.7,.7, .6,.6,.6,.6,.6, .65,.65,.65,.65, .9,.9,.9,.9,.9, 1,1],
+ freeOrdM:3,                                 /* first win of a stage on Màn 1–3 gives its Quân lệnh back (new players run on fights, not on lệnh) */
+ /* Gói Nạp Đầu reach (Bạch Mã Lệnh): packs bought → last Màn (1-based) the discount covers, and its factor per Màn */
+ reach:function(n){return n>=6?7:n>=3?5:n>=1?4:0},
+ pk:[.7,.7,.7,.6,.5,.5,.5]
+};
+(function(){try{
+ /* --- first-clear gold --- */
+ if(typeof firstRw==='function'){var _fr=firstRw;firstRw=function(mi,si){var rw=_fr(mi,si);try{var last=si===MAPS[mi].st.length-1;rw.v=last?PACE264.bossV(mi):PACE264.stV(mi);if(mi<PACE264.freeOrdM)rw.ord=(rw.ord||0)+1}catch(e){}return rw}}
+ /* --- Màn star chests (Sao chinh chiến) gold ×chestK --- */
+ if(typeof stRw==='function'){var _sr=stRw;stRw=function(mi,i){var rw=_sr(mi,i);try{if(rw&&rw.v)rw.v=Math.round(rw.v*PACE264.chestK)}catch(e){}return rw}}
+ /* --- Tân Thủ 7 Ngày gold --- */
+ if(typeof NU7!=='undefined')NU7.forEach(function(rw,i){if(PACE264.nu7[i]!=null)rw.v=PACE264.nu7[i]});
+ /* --- tower: gold on the first clear of every 10th floor --- */
+ if(typeof twReward==='function'){var _tw=twReward;twReward=function(f){var rw=_tw(f);try{var g=PACE264.twV(f);if(g)rw.v=(rw.v||0)+g}catch(e){}return rw}}
+ /* --- Vòng Quay price --- */
+ if(typeof SPIN1!=='undefined'){SPIN1=PACE264.spin1;SPIN10=PACE264.spin10}
+ /* --- Tiêu Vàng goals --- */
+ if(typeof EVT!=='undefined'&&EVT.gold)EVT.gold.tiers.forEach(function(t){t[0]=Math.round(t[0]*PACE264.goldEvK/50)*50});
+}catch(e){}})();
+function p264(){if(!S.p264)S.p264={gift:0,art:5};return S.p264}
+/* welcome gift + Lôi Đài tier gold, checked on the game tick */
+function p264Tick(){try{if(!S||!S.res||(typeof fighting!=='undefined'&&fighting))return;var P=p264();
+ if(!P.gift&&(S.pname||!S.f204)){P.gift=1;S.res.gold+=PACE264.gift;try{toast('Quà ra mắt: +'+PACE264.gift+' vàng')}catch(e){}try{save()}catch(e){}}
+ if(S.ar2&&typeof ar2TierI==='function'){var t=ar2TierI(S.ar2.best||99999);if(t<P.art){var g=0;for(var i=t;i<P.art;i++)g+=PACE264.arTier[i]||0;P.art=t;if(g){S.res.gold+=g;try{toast('Lôi Đài lên hạng '+AR2TIER[t].n+': +'+g+' vàng')}catch(e){}}try{save()}catch(e){}}}
+}catch(e){}}
+(function(){try{var _t=tick;tick=function(dt){var r=_t.apply(this,arguments);p264Tick();return r}}catch(e){}})();
+/* pace multipliers + Gói Nạp Đầu reach */
+(function(){try{
+ try{NP206EM=0}catch(e){}  /* the old Màn 1–4 discount is replaced by the reach table below */
+ var _be=buildEnemy;buildEnemy=function(mi,si,kind){var r=_be(mi,si,kind);try{if(kind==='stage'||kind==='elite'){
+  var last=si===MAPS[mi].st.length-1,k=(last?PACE264.B[mi]:PACE264.S[mi]);if(k==null)k=1;
+  var n=S&&S.np206?S.np206.n:0;if(n&&mi<PACE264.reach(n))k*=PACE264.pk[mi]||1;
+  if(k!==1)(r.units||[]).forEach(function(u){u.A=Math.round(u.A*k);u.max=Math.round(u.max*k);u.troops=Math.min(u.troops,u.max)})}}catch(e){}return r}
+}catch(e){}})();
 </script>
