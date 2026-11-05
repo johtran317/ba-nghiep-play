@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Bá Nghiệp · Quản trị</title>
+<title>Hegemony · Admin</title>
 <!-- Owner admin panel (server agent, 2026-11-04, user "i need option 2 but make it clean").
      Sign-in: Supabase email + password (owner account johtran317@gmail.com). Every read/write is checked on the server by
      is_admin() (RLS + security-definer functions), so this public page gives nothing to anyone else.
@@ -165,47 +165,47 @@ html,body{overflow-x:hidden}
 
 <section id="login" class="hide">
  <form class="lcard" id="lform" autocomplete="on">
-  <div class="brand"><div class="seal">霸業</div><div><b>Bá Nghiệp · Quản trị</b><span>Chỉ dành cho chủ game</span></div></div>
+  <div class="brand"><div class="seal">霸業</div><div><b>Hegemony · Admin</b><span>Game owner only</span></div></div>
   <div class="field"><label class="lb" for="lemail">Email</label><input class="in" id="lemail" type="email" autocomplete="username" required value="johtran317@gmail.com"></div>
-  <div class="field"><label class="lb" for="lpw">Mật khẩu</label><input class="in" id="lpw" type="password" autocomplete="current-password" required></div>
+  <div class="field"><label class="lb" for="lpw">Password</label><input class="in" id="lpw" type="password" autocomplete="current-password" required></div>
   <div class="err" id="lerr"></div>
-  <button class="btn pri" style="width:100%;height:40px" id="lbtn">Đăng nhập</button>
+  <button class="btn pri" style="width:100%;height:40px" id="lbtn">Sign in</button>
  </form>
 </section>
 
 <section id="app" class="hide">
  <header class="top">
-  <div class="brand"><div class="seal">霸業</div><div><b>Quản trị</b><span>Bá Nghiệp · máy chủ thử nghiệm</span></div></div>
-  <nav class="tabs"><button data-tab="players" class="on">Người chơi</button><button data-tab="log">Nhật ký</button></nav>
+  <div class="brand"><div class="seal">霸業</div><div><b>Admin</b><span>Hegemony · tester server</span></div></div>
+  <nav class="tabs"><button data-tab="players" class="on">Players</button><button data-tab="log">Activity log</button></nav>
   <div class="sp"></div>
   <span class="who" id="who"></span>
-  <button class="btn sm ghost" id="bpw" title="Đổi mật khẩu">Mật khẩu</button>
-  <button class="btn sm" id="bout"><span class="bout-l">Đăng xuất</span><span class="bout-s">Thoát</span></button>
+  <button class="btn sm ghost" id="bpw" title="Change password">Password</button>
+  <button class="btn sm" id="bout"><span class="bout-l">Sign out</span><span class="bout-s">Exit</span></button>
  </header>
  <main>
   <div id="vplayers">
    <div class="stats" id="stats"></div>
    <div class="grid">
     <div class="card plist">
-     <div class="ch"><h2>Người chơi</h2><span class="chip" id="pcount">0</span><div class="sp"></div><button class="btn sm ghost" id="breload" title="Tải lại"><svg class="ico"><use href="#i-refresh"/></svg></button></div>
+     <div class="ch"><h2>Players</h2><span class="chip" id="pcount">0</span><div class="sp"></div><button class="btn sm ghost" id="breload" title="Reload"><svg class="ico"><use href="#i-refresh"/></svg></button></div>
      <div class="cb" style="padding-bottom:10px">
-      <div class="search"><svg class="ico"><use href="#i-search"/></svg><input class="in" id="q" placeholder="Tìm tên hoặc mã người chơi"></div>
+      <div class="search"><svg class="ico"><use href="#i-search"/></svg><input class="in" id="q" placeholder="Search name or player ID"></div>
       <div style="display:flex;gap:6px;margin-top:10px">
-       <select class="in" id="sort" style="height:32px"><option value="seen">Mới hoạt động</option><option value="prog">Tiến độ cao</option><option value="name">Tên A–Z</option><option value="new">Mới tham gia</option></select>
+       <select class="in" id="sort" style="height:32px"><option value="seen">Recently active</option><option value="prog">Most progress</option><option value="name">Name A–Z</option><option value="new">Newest</option></select>
       </div>
      </div>
      <div class="list" id="plist"></div>
     </div>
-    <div class="pdet" id="pdet"><div class="card empty">Chọn một người chơi để xem và chỉnh sửa.</div></div>
+    <div class="pdet" id="pdet"><div class="card empty">Select a player to view and edit.</div></div>
    </div>
   </div>
   <div id="vlog" class="hide">
-   <div class="card"><div class="ch"><h2>Nhật ký quản trị</h2><div class="sp"></div><button class="btn sm ghost" id="blog"><svg class="ico"><use href="#i-refresh"/></svg></button></div><div id="logt"></div></div>
+   <div class="card"><div class="ch"><h2>Admin activity log</h2><div class="sp"></div><button class="btn sm ghost" id="blog"><svg class="ico"><use href="#i-refresh"/></svg></button></div><div id="logt"></div></div>
   </div>
  </main>
 </section>
 
-<div id="bar" class="hide"><div class="chips" id="barc"></div><button class="btn sm ghost" id="bdisc">Hủy</button><button class="btn sm pri" id="bsave">Lưu &amp; gửi</button></div>
+<div id="bar" class="hide"><div class="chips" id="barc"></div><button class="btn sm ghost" id="bdisc">Discard</button><button class="btn sm pri" id="bsave">Save &amp; send</button></div>
 <div id="modal" class="hide"></div>
 <div id="toast" class="hide"></div>
 
@@ -213,16 +213,16 @@ html,body{overflow-x:hidden}
 (function(){
 'use strict';
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',SK='bn-admin-v1';
-var RES=[['silver','Bạc'],['grain','Lương'],['gold','Vàng'],['merit','Quân công'],['prestige','Uy vọng'],['ord','Quân lệnh']];
-var BRN={inf:'Bộ',cav:'Kỵ',arc:'Cung',mac:'Cơ',str:'Mưu',sup:'Phụ'};
+var RES=[['silver','Silver'],['grain','Grain'],['gold','Gold'],['merit','Merit'],['prestige','Prestige'],['ord','Battle orders']];
+var BRN={inf:'Infantry',cav:'Cavalry',arc:'Archer',mac:'Siege',str:'Strategist',sup:'Support'};
 var D=null,sess=null,me=null,players=[],cur=null,ops=[],sel=null,stab='res';
 function $(s,r){return (r||document).querySelector(s)}
 function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function fmt(n){n=+n||0;return n.toLocaleString('vi-VN')}
+function fmt(n){n=+n||0;return n.toLocaleString('en-US')}
 function pid(id){return String(id||'').replace(/-/g,'').slice(0,8).toUpperCase()}
-function ago(t){if(!t)return'chưa';var s=(Date.now()-new Date(t).getTime())/1000;if(s<60)return'vừa xong';if(s<3600)return Math.round(s/60)+' phút trước';if(s<86400)return Math.round(s/3600)+' giờ trước';return Math.round(s/86400)+' ngày trước'}
-function when(t){try{return new Date(t).toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'})}catch(e){return t}}
+function ago(t){if(!t)return'never';var s=(Date.now()-new Date(t).getTime())/1000;if(s<60)return'just now';if(s<3600)return Math.round(s/60)+' min ago';if(s<86400)return Math.round(s/3600)+' h ago';return Math.round(s/86400)+' d ago'}
+function when(t){try{return new Date(t).toLocaleString('en-US',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'})}catch(e){return t}}
 function hue(s){var h=0;s=String(s);for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%360;return h}
 function avatar(p){var n=(p.display_name||'?').trim();return'<div class="av" style="background:hsl('+hue(p.id)+' 45% 42%)">'+esc(n.charAt(0).toUpperCase()||'?')+'</div>'}
 function toast(t,bad){var e=$('#toast');e.textContent=t;e.style.background=bad?'var(--bad)':'';e.classList.remove('hide');e.style.opacity=1;clearTimeout(e._t);e._t=setTimeout(function(){e.style.opacity=0;setTimeout(function(){e.classList.add('hide')},220)},2600)}
@@ -235,20 +235,20 @@ function raw(path,o){o=o||{};var h={apikey:PK,'Content-Type':'application/json'}
 function setSess(j){sess={at:j.access_token,rt:j.refresh_token,exp:Date.now()+((j.expires_in||3600)-60)*1000,email:(j.user&&j.user.email)||(sess&&sess.email)};saveSess()}
 function token(){if(!sess)return Promise.reject(new Error('no session'));if(sess.exp>Date.now())return Promise.resolve();
  return raw('/auth/v1/token?grant_type=refresh_token',{m:'POST',auth:false,b:{refresh_token:sess.rt}}).then(setSess)}
-function api(path,o){return token().then(function(){return raw(path,o)}).catch(function(e){if(e.status===401){sess=null;saveSess();showLogin('Phiên đăng nhập đã hết, hãy đăng nhập lại.')}throw e})}
+function api(path,o){return token().then(function(){return raw(path,o)}).catch(function(e){if(e.status===401){sess=null;saveSess();showLogin('Your session expired. Please sign in again.')}throw e})}
 function rpc(fn,b){return api('/rest/v1/rpc/'+fn,{m:'POST',b:b||{}})}
 /* ---------- login ---------- */
 function showLogin(msg){$('#app').classList.add('hide');$('#bar').classList.add('hide');$('#login').classList.remove('hide');$('#lerr').textContent=msg||''}
 $('#lform').addEventListener('submit',function(e){e.preventDefault();var b=$('#lbtn');b.disabled=true;$('#lerr').textContent='';
  raw('/auth/v1/token?grant_type=password',{m:'POST',auth:false,b:{email:$('#lemail').value.trim(),password:$('#lpw').value}}).then(function(j){setSess(j);$('#lpw').value='';return start()})
- .catch(function(er){$('#lerr').textContent=/invalid/i.test(er.message)?'Email hoặc mật khẩu không đúng.':('Không đăng nhập được: '+er.message)}).then(function(){b.disabled=false})});
-$('#bout').onclick=function(){if(ops.length&&!confirm('Bỏ các thay đổi chưa lưu?'))return;raw('/auth/v1/logout',{m:'POST'}).catch(function(){});sess=null;saveSess();ops=[];showLogin()};
-$('#bpw').onclick=function(){modal('<div class="ch"><h2>Đổi mật khẩu</h2></div><div class="cb"><div class="field"><label class="lb">Mật khẩu mới (ít nhất 10 ký tự)</label><input class="in" id="npw" type="password" autocomplete="new-password"></div><div class="field"><label class="lb">Nhập lại</label><input class="in" id="npw2" type="password" autocomplete="new-password"></div><div class="err" id="nerr"></div></div><div class="mfoot"><button class="btn" data-x>Hủy</button><button class="btn pri" id="npwok">Đổi mật khẩu</button></div>');
- $('#npwok').onclick=function(){var a=$('#npw').value,b=$('#npw2').value;if(a.length<10)return $('#nerr').textContent='Mật khẩu cần ít nhất 10 ký tự.';if(a!==b)return $('#nerr').textContent='Hai mật khẩu không khớp.';
-  api('/auth/v1/user',{m:'PUT',b:{password:a}}).then(function(){closeModal();toast('Đã đổi mật khẩu')}).catch(function(e){$('#nerr').textContent=e.message})}};
+ .catch(function(er){$('#lerr').textContent=/invalid/i.test(er.message)?'Wrong email or password.':('Could not sign in: '+er.message)}).then(function(){b.disabled=false})});
+$('#bout').onclick=function(){if(ops.length&&!confirm('Discard unsaved changes?'))return;raw('/auth/v1/logout',{m:'POST'}).catch(function(){});sess=null;saveSess();ops=[];showLogin()};
+$('#bpw').onclick=function(){modal('<div class="ch"><h2>Change password</h2></div><div class="cb"><div class="field"><label class="lb">New password (at least 10 characters)</label><input class="in" id="npw" type="password" autocomplete="new-password"></div><div class="field"><label class="lb">Repeat it</label><input class="in" id="npw2" type="password" autocomplete="new-password"></div><div class="err" id="nerr"></div></div><div class="mfoot"><button class="btn" data-x>Cancel</button><button class="btn pri" id="npwok">Change password</button></div>');
+ $('#npwok').onclick=function(){var a=$('#npw').value,b=$('#npw2').value;if(a.length<10)return $('#nerr').textContent='The password needs at least 10 characters.';if(a!==b)return $('#nerr').textContent='The two passwords do not match.';
+  api('/auth/v1/user',{m:'PUT',b:{password:a}}).then(function(){closeModal();toast('Password changed')}).catch(function(e){$('#nerr').textContent=e.message})}};
 /* ---------- boot ---------- */
-function start(){return Promise.all([D?Promise.resolve(D):fetch('data.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){D=d;return d}),rpc('is_admin')]).then(function(r){
-  if(r[1]!==true){showLogin('Tài khoản này không có quyền quản trị.');sess=null;saveSess();return}
+function start(){return Promise.all([D?Promise.resolve(D):fetch('data.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){D=d;D.fac={shu:'Shu',wei:'Wei',wu:'Wu',qun:'Warlords',han:'Yellow Turbans',tay:'Xiliang',tl:'Independent'};return d}),rpc('is_admin')]).then(function(r){
+  if(r[1]!==true){showLogin('This account has no admin rights.');sess=null;saveSess();return}
   $('#login').classList.add('hide');$('#app').classList.remove('hide');$('#who').textContent=sess.email||'';return loadPlayers()})}
 /* ---------- players ---------- */
 function loadPlayers(){$('#plist').innerHTML='<div class="empty"><span class="spin" style="display:inline-block"></span></div>';
@@ -256,80 +256,80 @@ function loadPlayers(){$('#plist').innerHTML='<div class="empty"><span class="sp
   var sv={};(r[1]||[]).forEach(function(s){sv[s.user_id]=s});
   players=(r[0]||[]).filter(function(p){return !p.email}).map(function(p){p.save=sv[p.id]||null;p.seen=(p.save&&p.save.updated_at)||p.last_seen||p.created_at;return p});
   renderStats();renderList();if(sel){var p=byId(sel);if(p)openPlayer(sel,true)}})
- .catch(function(e){$('#plist').innerHTML='<div class="empty">Không tải được danh sách: '+esc(e.message)+'</div>'})}
+ .catch(function(e){$('#plist').innerHTML='<div class="empty">Could not load the list: '+esc(e.message)+'</div>'})}
 function byId(id){for(var i=0;i<players.length;i++)if(players[i].id===id)return players[i];return null}
 function prog(p){return (p.save&&p.save.progress)||{}}
 function renderStats(){var n=players.length,day=0,ban=0,pend=0;players.forEach(function(p){if(p.seen&&Date.now()-new Date(p.seen)<864e5)day++;if(p.banned)ban++;if(p.save&&p.save.admin_pending)pend++});
- $('#stats').innerHTML=[['Người chơi',n],['Hoạt động 24 giờ',day],['Chờ nhận thay đổi',pend],['Bị khóa',ban]].map(function(s){return'<div class="stat"><i>'+s[0]+'</i><b>'+fmt(s[1])+'</b></div>'}).join('')}
+ $('#stats').innerHTML=[['Players',n],['Active in 24 h',day],['Changes waiting',pend],['Banned',ban]].map(function(s){return'<div class="stat"><i>'+s[0]+'</i><b>'+fmt(s[1])+'</b></div>'}).join('')}
 function renderList(){var q=$('#q').value.trim().toLowerCase(),so=$('#sort').value;
  var L=players.filter(function(p){return !q||(p.display_name||'').toLowerCase().indexOf(q)>=0||pid(p.id).toLowerCase().indexOf(q)>=0||p.id.indexOf(q)>=0});
  L.sort(function(a,b){if(so==='name')return (a.display_name||'').localeCompare(b.display_name||'','vi');if(so==='prog')return (prog(b).stages||0)-(prog(a).stages||0);if(so==='new')return new Date(b.created_at)-new Date(a.created_at);return new Date(b.seen||0)-new Date(a.seen||0)});
  $('#pcount').textContent=L.length;
  $('#plist').innerHTML=L.length?L.map(function(p){var g=prog(p),on=p.seen&&Date.now()-new Date(p.seen)<3e5;
-  return'<button class="row'+(p.id===sel?' on':'')+'" data-p="'+p.id+'">'+avatar(p)+'<div style="min-width:0"><div class="nm"><span>'+esc(p.display_name||'(chưa đặt tên)')+'</span>'+(p.banned?'<span class="chip bad">Khóa</span>':'')+(p.save&&p.save.admin_pending?'<span class="chip warn">Chờ nhận</span>':'')+'</div>'+
-  '<div class="sub num">'+pid(p.id)+' · '+(g.stages||0)+' ải · '+(g.gens||0)+' tướng</div></div><div class="rt"><div><span class="dot" style="background:'+(on?'var(--ok)':'var(--line)')+'"></span> '+ago(p.seen)+'</div><div class="num">'+esc((p.save&&p.save.build)||'—')+'</div></div></button>'}).join(''):'<div class="empty">Không có người chơi nào.</div>'}
+  return'<button class="row'+(p.id===sel?' on':'')+'" data-p="'+p.id+'">'+avatar(p)+'<div style="min-width:0"><div class="nm"><span>'+esc(p.display_name||'(no name yet)')+'</span>'+(p.banned?'<span class="chip bad">Banned</span>':'')+(p.save&&p.save.admin_pending?'<span class="chip warn">Waiting</span>':'')+'</div>'+
+  '<div class="sub num">'+pid(p.id)+' · '+(g.stages||0)+' stages · '+(g.gens||0)+' heroes</div></div><div class="rt"><div><span class="dot" style="background:'+(on?'var(--ok)':'var(--line)')+'"></span> '+ago(p.seen)+'</div><div class="num">'+esc((p.save&&p.save.build)||'—')+'</div></div></button>'}).join(''):'<div class="empty">No players yet.</div>'}
 $('#q').oninput=renderList;$('#sort').onchange=renderList;$('#breload').onclick=function(){loadPlayers()};
-$('#plist').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;if(ops.length&&sel!==b.dataset.p&&!confirm('Bỏ các thay đổi chưa lưu của người chơi này?'))return;openPlayer(b.dataset.p)});
+$('#plist').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;if(ops.length&&sel!==b.dataset.p&&!confirm('Discard unsaved changes for this player?'))return;openPlayer(b.dataset.p)});
 /* ---------- player detail ---------- */
 function openPlayer(id,keep){if(!keep){ops=[];stab=stab||'res'}sel=id;document.body.classList.add('det');renderList();var p=byId(id);if(!p)return;
  $('#pdet').innerHTML='<div class="card empty"><span class="spin" style="display:inline-block"></span></div>';
  Promise.all([api('/rest/v1/saves?user_id=eq.'+id+'&select=*'),api('/rest/v1/save_backups?user_id=eq.'+id+'&select=id,version,reason,created_at&order=created_at.desc&limit=30'),api('/rest/v1/admin_log?target_user=eq.'+id+'&select=*&order=created_at.desc&limit=50')]).then(function(r){
-  cur={p:p,save:(r[0]||[])[0]||null,backups:r[1]||[],log:r[2]||[]};renderDetail()}).catch(function(e){$('#pdet').innerHTML='<div class="card empty">Lỗi: '+esc(e.message)+'</div>'})}
+  cur={p:p,save:(r[0]||[])[0]||null,backups:r[1]||[],log:r[2]||[]};renderDetail()}).catch(function(e){$('#pdet').innerHTML='<div class="card empty">Error: '+esc(e.message)+'</div>'})}
 function data(){return (cur&&cur.save&&cur.save.data)||null}
 function mapsDone(d){var n=0;try{for(var k in d.camp.mapDone)if(d.camp.mapDone[k])n++}catch(e){}return n}
 function renderDetail(){var p=cur.p,s=cur.save,d=data();
- var h='<div class="card"><div class="dhead"><button class="btn sm ghost back" id="bback"><svg class="ico"><use href="#i-back"/></svg></button>'+avatar(p)+'<div style="min-width:0;flex:1"><h1>'+esc(p.display_name||'(chưa đặt tên)')+'</h1><div class="meta">'+
-  '<span class="chip num">Mã '+pid(p.id)+'</span>'+(s?'<span class="chip">'+esc(s.build||'')+'</span><span class="chip">Đồng bộ '+ago(s.updated_at)+'</span>':'<span class="chip warn">Chưa có bản lưu</span>')+
-  (s&&s.admin_pending?'<span class="chip warn">Thay đổi đang chờ máy nhận</span>':'')+(p.banned?'<span class="chip bad">Đã khóa</span>':'')+'</div></div>'+
-  '<button class="btn sm ghost" id="bref" title="Tải lại"><svg class="ico"><use href="#i-refresh"/></svg></button></div>';
- if(d){h+='<div class="kv"><div><i>Màn đã bình định</i><b>'+mapsDone(d)+' / '+((D.maps||[]).length||40)+'</b></div><div><i>Chính Sảnh</i><b>Cấp '+((d.b&&d.b.mc)||1)+'</b></div><div><i>Tướng</i><b>'+Object.keys(d.gens||{}).length+'</b></div><div><i>Thông Thiên Tháp</i><b>Tầng '+(((d.ev||{}).tw||{}).best||0)+'</b></div></div>';
-  h+='<div class="stabs">'+[['res','Tài nguyên'],['gens','Tướng'],['skins','Ngoại trang'],['backup','Sao lưu'],['hist','Lịch sử'],['acct','Tài khoản'],['raw','Dữ liệu']].map(function(t){return'<button data-st="'+t[0]+'" class="'+(stab===t[0]?'on':'')+'">'+t[1]+'</button>'}).join('')+'</div><div class="cb" id="stab"></div>'}
- else h+='<div class="cb mute">Người chơi này chưa đồng bộ bản lưu nào lên máy chủ, nên chưa có gì để chỉnh.</div>';
+ var h='<div class="card"><div class="dhead"><button class="btn sm ghost back" id="bback"><svg class="ico"><use href="#i-back"/></svg></button>'+avatar(p)+'<div style="min-width:0;flex:1"><h1>'+esc(p.display_name||'(no name yet)')+'</h1><div class="meta">'+
+  '<span class="chip num">ID '+pid(p.id)+'</span>'+(s?'<span class="chip">'+esc(s.build||'')+'</span><span class="chip">Synced '+ago(s.updated_at)+'</span>':'<span class="chip warn">No save yet</span>')+
+  (s&&s.admin_pending?'<span class="chip warn">Changes waiting for the phone</span>':'')+(p.banned?'<span class="chip bad">Banned</span>':'')+'</div></div>'+
+  '<button class="btn sm ghost" id="bref" title="Reload"><svg class="ico"><use href="#i-refresh"/></svg></button></div>';
+ if(d){h+='<div class="kv"><div><i>Maps cleared</i><b>'+mapsDone(d)+' / '+((D.maps||[]).length||40)+'</b></div><div><i>Main Hall</i><b>Level '+((d.b&&d.b.mc)||1)+'</b></div><div><i>Heroes</i><b>'+Object.keys(d.gens||{}).length+'</b></div><div><i>Tower</i><b>Floor '+(((d.ev||{}).tw||{}).best||0)+'</b></div></div>';
+  h+='<div class="stabs">'+[['res','Resources'],['gens','Heroes'],['skins','Skins'],['backup','Backups'],['hist','History'],['acct','Account'],['raw','Data']].map(function(t){return'<button data-st="'+t[0]+'" class="'+(stab===t[0]?'on':'')+'">'+t[1]+'</button>'}).join('')+'</div><div class="cb" id="stab"></div>'}
+ else h+='<div class="cb mute">This player has not synced a save to the server yet, so there is nothing to edit.</div>';
  h+='</div>';$('#pdet').innerHTML=h;
- $('#bback').onclick=function(){if(ops.length&&!confirm('Bỏ các thay đổi chưa lưu?'))return;ops=[];sel=null;document.body.classList.remove('det');renderBar();renderList()};
- $('#bref').onclick=function(){if(ops.length&&!confirm('Tải lại sẽ bỏ các thay đổi chưa lưu. Tiếp tục?'))return;ops=[];renderBar();openPlayer(p.id)};
+ $('#bback').onclick=function(){if(ops.length&&!confirm('Discard unsaved changes?'))return;ops=[];sel=null;document.body.classList.remove('det');renderBar();renderList()};
+ $('#bref').onclick=function(){if(ops.length&&!confirm('Reloading discards unsaved changes. Continue?'))return;ops=[];renderBar();openPlayer(p.id)};
  $$('[data-st]').forEach(function(b){b.onclick=function(){stab=b.dataset.st;renderDetail()}});
  if(d)renderTab();renderBar()}
 /* preview = save data with pending ops applied */
 function preview(){return applyOps(clone(data()),ops)}
 function renderTab(){var el=$('#stab'),d=data(),v=preview();
  if(stab==='res'){el.innerHTML='<div class="res">'+RES.map(function(r){var was=r[0]==='ord'?(d.ord||0):((d.res||{})[r[0]]||0),now=r[0]==='ord'?(v.ord||0):((v.res||{})[r[0]]||0);
-  return'<div class="rbox'+(now!==was?' ch2':'')+'"><div class="top2"><b>'+r[1]+'</b>'+(now!==was?'<span class="was">trước: '+fmt(was)+'</span>':'')+'</div><input class="in" inputmode="numeric" data-r="'+r[0]+'" value="'+now+'">'+
+  return'<div class="rbox'+(now!==was?' ch2':'')+'"><div class="top2"><b>'+r[1]+'</b>'+(now!==was?'<span class="was">was: '+fmt(was)+'</span>':'')+'</div><input class="in" inputmode="numeric" data-r="'+r[0]+'" value="'+now+'">'+
   '<div class="quick">'+(r[0]==='ord'?[5,10,50]:r[0]==='gold'?[100,1000,10000]:[10000,100000,1000000]).map(function(x){return'<button data-q="'+r[0]+'" data-v="'+x+'">+'+(x>=1e6?x/1e6+'M':x>=1e3?x/1e3+'K':x)+'</button>'}).join('')+'</div></div>'}).join('')+'</div>'+
-  '<p class="soft" style="margin:12px 0 0;font-size:12.5px">Gõ số mới hoặc bấm nút cộng nhanh. Thay đổi chỉ gửi đi khi bấm <b>Lưu &amp; gửi</b>.</p>';
+  '<p class="soft" style="margin:12px 0 0;font-size:12.5px">Type a new number or use the quick-add buttons. Nothing is sent until you press <b>Save &amp; send</b>.</p>';
   $$('[data-r]',el).forEach(function(i){i.onchange=function(){var n=Math.max(0,Math.floor(+String(i.value).replace(/[^\d]/g,'')||0));setOp({t:'res',k:i.dataset.r,v:n});renderTab()}});
   $$('[data-q]',el).forEach(function(b){b.onclick=function(){var k=b.dataset.q,cv=k==='ord'?(preview().ord||0):((preview().res||{})[k]||0);setOp({t:'res',k:k,v:cv+(+b.dataset.v)});renderTab()}})}
  else if(stab==='gens'){var ids=Object.keys(v.gens||{}),orig=d.gens||{},hm={};D.heroes.forEach(function(x){hm[x.id]=x});
   var all=Object.keys(orig).concat(ids.filter(function(i){return !orig[i]}));
-  el.innerHTML='<div class="toolbar"><button class="btn sm pri" id="badd"><svg class="ico"><use href="#i-plus"/></svg>Thêm tướng</button><span class="mute" style="font-size:12.5px">'+ids.length+' tướng · đổi cấp trực tiếp trong ô</span></div><div class="heroes">'+
-  all.map(function(id){var g=(v.gens||{})[id],o=orig[id],x=hm[id]||{n:id==='lord'?(v.pname||'Chủ Công'):id,r:'R'},del=!g,add=!o;
-   return'<div class="hero'+(add?' add':'')+(del?' del':'')+'"><img loading="lazy" src="../art/heroes/'+id+'/portrait_small.webp" alt="" onerror="this.style.visibility=\'hidden\'"><div style="flex:1;min-width:0"><div class="hn">'+esc(x.n)+' <span class="rar '+esc(x.r)+'">'+esc(x.r)+'</span></div><div class="hs">'+(del?'sẽ bị gỡ':add?'sẽ được thêm':'Bậc '+((g&&g.tier)||1)+(g&&g.reb?' · CS '+g.reb:''))+'</div></div>'+
-   (del?'<button class="btn sm" data-undo="'+id+'">Hoàn tác</button>':'<label class="soft" style="font-size:11px">Lv</label><input class="in" inputmode="numeric" data-lv="'+id+'" value="'+(g.lv||1)+'">'+(id==='lord'?'':'<button class="btn sm ghost" title="Gỡ tướng" data-del="'+id+'"><svg class="ico"><use href="#i-x"/></svg></button>'))+'</div>'}).join('')+'</div>';
+  el.innerHTML='<div class="toolbar"><button class="btn sm pri" id="badd"><svg class="ico"><use href="#i-plus"/></svg>Add hero</button><span class="mute" style="font-size:12.5px">'+ids.length+' heroes · edit the level in the box</span></div><div class="heroes">'+
+  all.map(function(id){var g=(v.gens||{})[id],o=orig[id],x=hm[id]||{n:id==='lord'?(v.pname||'Lord'):id,r:'R'},del=!g,add=!o;
+   return'<div class="hero'+(add?' add':'')+(del?' del':'')+'"><img loading="lazy" src="../art/heroes/'+id+'/portrait_small.webp" alt="" onerror="this.style.visibility=\'hidden\'"><div style="flex:1;min-width:0"><div class="hn">'+esc(x.n)+' <span class="rar '+esc(x.r)+'">'+esc(x.r)+'</span></div><div class="hs">'+(del?'will be removed':add?'will be added':'Tier '+((g&&g.tier)||1)+(g&&g.reb?' · Rebirth '+g.reb:''))+'</div></div>'+
+   (del?'<button class="btn sm" data-undo="'+id+'">Undo</button>':'<label class="soft" style="font-size:11px">Lv</label><input class="in" inputmode="numeric" data-lv="'+id+'" value="'+(g.lv||1)+'">'+(id==='lord'?'':'<button class="btn sm ghost" title="Remove hero" data-del="'+id+'"><svg class="ico"><use href="#i-x"/></svg></button>'))+'</div>'}).join('')+'</div>';
   $('#badd').onclick=heroPicker;
   $$('[data-lv]',el).forEach(function(i){i.onchange=function(){var n=Math.max(1,Math.min(300,Math.floor(+i.value||1)));setOp({t:'lv',id:i.dataset.lv,v:n},'lv'+i.dataset.lv);renderTab()}});
   $$('[data-del]',el).forEach(function(b){b.onclick=function(){var id=b.dataset.del;if(!orig[id]){ops=ops.filter(function(o){return !(o.id===id)})}else setOp({t:'del',id:id},'h'+id);renderBar();renderTab()}});
   $$('[data-undo]',el).forEach(function(b){b.onclick=function(){var id=b.dataset.undo;ops=ops.filter(function(o){return o.key!=='h'+id});renderBar();renderTab()}})}
  else if(stab==='skins'){var sk=v.skin||{},o=d.skin||{},hm2={};D.heroes.forEach(function(x){hm2[x.id]=x});
   el.innerHTML='<div class="skins">'+D.skins.map(function(s){var st=(sk[s.k]||{}).st||0,was=(o[s.k]||{}).st||0;
-   return'<div class="skin'+(st!==was?' rbox ch2':'')+'"><img loading="lazy" src="../art/heroes/'+s.g+'/portrait_small.webp" alt="" style="width:40px;height:40px;border-radius:8px;object-fit:cover;object-position:50% 15%" onerror="this.style.visibility=\'hidden\'"><div style="min-width:0"><div class="sn">'+esc(s.n)+'</div><div class="ss">'+esc((hm2[s.g]||{}).n||s.g)+(st!==was?' · trước: '+(was?'★'+was:'chưa có'):'')+'</div></div>'+
-   '<select class="in" data-sk="'+s.k+'">'+[0,1,2,3,4,5].map(function(n){return'<option value="'+n+'"'+(n===st?' selected':'')+'>'+(n?'★'+n:'Chưa có')+'</option>'}).join('')+'</select></div>'}).join('')+'</div>'+
-   '<p class="soft" style="margin:12px 0 0;font-size:12.5px">Ngoại trang ★1 trở lên là đã sở hữu. Tướng phải có trong đội hình thì mới mặc được.</p>';
+   return'<div class="skin'+(st!==was?' rbox ch2':'')+'"><img loading="lazy" src="../art/heroes/'+s.g+'/portrait_small.webp" alt="" style="width:40px;height:40px;border-radius:8px;object-fit:cover;object-position:50% 15%" onerror="this.style.visibility=\'hidden\'"><div style="min-width:0"><div class="sn">'+esc(s.n)+'</div><div class="ss">'+esc((hm2[s.g]||{}).n||s.g)+(st!==was?' · was: '+(was?'★'+was:'not owned'):'')+'</div></div>'+
+   '<select class="in" data-sk="'+s.k+'">'+[0,1,2,3,4,5].map(function(n){return'<option value="'+n+'"'+(n===st?' selected':'')+'>'+(n?'★'+n:'Not owned')+'</option>'}).join('')+'</select></div>'}).join('')+'</div>'+
+   '<p class="soft" style="margin:12px 0 0;font-size:12.5px">A skin at ★1 or higher is owned. The player needs the hero to wear it.</p>';
   $$('[data-sk]',el).forEach(function(s){s.onchange=function(){setOp({t:'skin',k:s.dataset.sk,v:+s.value},'s'+s.dataset.sk);renderTab()}})}
- else if(stab==='backup'){el.innerHTML=cur.backups.length?'<table class="t"><tr><th>Thời gian</th><th>Phiên bản</th><th>Lý do</th><th></th></tr>'+cur.backups.map(function(b){return'<tr><td class="num">'+when(b.created_at)+'<div class="soft" style="font-size:11.5px">'+ago(b.created_at)+'</div></td><td class="num">v'+b.version+'</td><td>'+esc(b.reason||'')+'</td><td style="text-align:right"><button class="btn sm" data-rb="'+b.id+'">Khôi phục</button></td></tr>'}).join('')+'</table>':'<div class="empty">Chưa có bản sao lưu.</div>';
-  $$('[data-rb]',el).forEach(function(b){b.onclick=function(){confirmBox('Khôi phục bản sao lưu?','Bản lưu hiện tại sẽ được sao lưu trước, rồi thay bằng bản này. Máy người chơi nhận ở lần đồng bộ tới.','Khôi phục',function(){return rpc('admin_restore_backup',{p_backup:+b.dataset.rb}).then(function(){toast('Đã khôi phục, chờ máy người chơi nhận');openPlayer(cur.p.id)})})}})}
+ else if(stab==='backup'){el.innerHTML=cur.backups.length?'<table class="t"><tr><th>Time</th><th>Version</th><th>Reason</th><th></th></tr>'+cur.backups.map(function(b){return'<tr><td class="num">'+when(b.created_at)+'<div class="soft" style="font-size:11.5px">'+ago(b.created_at)+'</div></td><td class="num">v'+b.version+'</td><td>'+esc(b.reason||'')+'</td><td style="text-align:right"><button class="btn sm" data-rb="'+b.id+'">Restore</button></td></tr>'}).join('')+'</table>':'<div class="empty">No backups yet.</div>';
+  $$('[data-rb]',el).forEach(function(b){b.onclick=function(){confirmBox('Restore this backup?','The current save is backed up first, then replaced with this one. The player\'s phone gets it on its next sync.','Restore',function(){return rpc('admin_restore_backup',{p_backup:+b.dataset.rb}).then(function(){toast('Restored — waiting for the player\'s phone');openPlayer(cur.p.id)})})}})}
  else if(stab==='hist'){el.innerHTML=logTable(cur.log,true)}
  else if(stab==='acct'){var p=cur.p;
-  el.innerHTML='<div class="field" style="max-width:360px"><label class="lb">Tên hiển thị</label><div style="display:flex;gap:8px"><input class="in" id="pname" maxlength="16" value="'+esc((v.pname)||p.display_name||'')+'"><button class="btn" id="bname">Đổi tên</button></div></div>'+
-  '<div class="danger"><div style="flex:1;min-width:220px"><b>'+(p.banned?'Mở khóa tài khoản':'Khóa tài khoản')+'</b><p>'+(p.banned?'Đang khóa'+(p.ban_reason?': '+esc(p.ban_reason):'')+'. Mở khóa để máy người chơi đồng bộ lại.':'Máy người chơi sẽ ngừng đồng bộ với máy chủ.')+'</p></div><button class="btn '+(p.banned?'':'bad')+'" id="bban">'+(p.banned?'Mở khóa':'Khóa')+'</button></div>'+
-  '<div class="danger"><div style="flex:1;min-width:220px"><b>Đặt lại thành người chơi mới</b><p>Xóa toàn bộ tiến trình (có sao lưu trước). Người chơi bắt đầu lại từ màn hình chào mừng.</p></div><button class="btn bad" id="breset">Đặt lại</button></div>';
-  $('#bname').onclick=function(){var n=$('#pname').value.replace(/\s+/g,' ').trim();if(n.length<2)return toast('Tên cần 2–16 ký tự',1);setOp({t:'name',v:n},'name');toast('Đã thêm vào thay đổi — bấm Lưu & gửi')};
-  $('#bban').onclick=function(){if(p.banned)return rpc('admin_ban',{p_user:p.id,p_banned:false,p_reason:null}).then(function(){toast('Đã mở khóa');loadPlayers()});
-   modal('<div class="ch"><h2>Khóa tài khoản</h2></div><div class="cb"><label class="lb">Lý do (người chơi không thấy)</label><input class="in" id="banr" placeholder="Ví dụ: gian lận"></div><div class="mfoot"><button class="btn" data-x>Hủy</button><button class="btn bad" id="banok">Khóa</button></div>');
-   $('#banok').onclick=function(){rpc('admin_ban',{p_user:p.id,p_banned:true,p_reason:$('#banr').value||null}).then(function(){closeModal();toast('Đã khóa');loadPlayers()}).catch(function(e){toast(e.message,1)})}};
-  $('#breset').onclick=function(){modal('<div class="ch"><h2>Đặt lại tài khoản</h2></div><div class="cb"><p style="margin-top:0">Tiến trình của <b>'+esc(p.display_name||pid(p.id))+'</b> sẽ bị thay bằng bản lưu người chơi mới. Bản hiện tại được sao lưu và có thể khôi phục trong mục Sao lưu.</p><label class="lb">Gõ <b>DAT LAI</b> để xác nhận</label><input class="in" id="rsc"></div><div class="mfoot"><button class="btn" data-x>Hủy</button><button class="btn bad" id="rsok" disabled>Đặt lại</button></div>');
-   $('#rsc').oninput=function(){$('#rsok').disabled=$('#rsc').value.trim().toUpperCase()!=='DAT LAI'};
-   $('#rsok').onclick=function(){var b=clone(D.blank);b.dev187=1;rpc('admin_set_save',{p_user:p.id,p_data:b,p_note:'Đặt lại thành người chơi mới'}).then(function(){closeModal();ops=[];toast('Đã đặt lại, chờ máy người chơi nhận');openPlayer(p.id);loadPlayers()}).catch(function(e){toast(e.message,1)})}}}
- else if(stab==='raw'){el.innerHTML='<p class="soft" style="margin-top:0;font-size:12.5px">Bản lưu trên máy chủ (chỉ xem). Phiên bản v'+cur.save.version+'.</p><pre class="json">'+esc(JSON.stringify(d,null,1))+'</pre>'}}
+  el.innerHTML='<div class="field" style="max-width:360px"><label class="lb">Display name</label><div style="display:flex;gap:8px"><input class="in" id="pname" maxlength="16" value="'+esc((v.pname)||p.display_name||'')+'"><button class="btn" id="bname">Rename</button></div></div>'+
+  '<div class="danger"><div style="flex:1;min-width:220px"><b>'+(p.banned?'Unban account':'Ban account')+'</b><p>'+(p.banned?'Banned'+(p.ban_reason?': '+esc(p.ban_reason):'')+'. Unban to let the player\'s phone sync again.':'The player\'s phone stops syncing with the server.')+'</p></div><button class="btn '+(p.banned?'':'bad')+'" id="bban">'+(p.banned?'Unban':'Ban')+'</button></div>'+
+  '<div class="danger"><div style="flex:1;min-width:220px"><b>Reset to a new player</b><p>Wipes all progress (a backup is made first). The player starts again from the welcome screen.</p></div><button class="btn bad" id="breset">Reset</button></div>';
+  $('#bname').onclick=function(){var n=$('#pname').value.replace(/\s+/g,' ').trim();if(n.length<2)return toast('Names need 2–16 characters',1);setOp({t:'name',v:n},'name');toast('Added to changes — press Save & send')};
+  $('#bban').onclick=function(){if(p.banned)return rpc('admin_ban',{p_user:p.id,p_banned:false,p_reason:null}).then(function(){toast('Unbanned');loadPlayers()});
+   modal('<div class="ch"><h2>Ban account</h2></div><div class="cb"><label class="lb">Reason (the player does not see it)</label><input class="in" id="banr" placeholder="e.g. cheating"></div><div class="mfoot"><button class="btn" data-x>Cancel</button><button class="btn bad" id="banok">Ban</button></div>');
+   $('#banok').onclick=function(){rpc('admin_ban',{p_user:p.id,p_banned:true,p_reason:$('#banr').value||null}).then(function(){closeModal();toast('Banned');loadPlayers()}).catch(function(e){toast(e.message,1)})}};
+  $('#breset').onclick=function(){modal('<div class="ch"><h2>Reset account</h2></div><div class="cb"><p style="margin-top:0">The progress of <b>'+esc(p.display_name||pid(p.id))+'</b> will be replaced with a new-player save. The current save is backed up and can be restored under Backups.</p><label class="lb">Type <b>RESET</b> to confirm</label><input class="in" id="rsc"></div><div class="mfoot"><button class="btn" data-x>Cancel</button><button class="btn bad" id="rsok" disabled>Reset</button></div>');
+   $('#rsc').oninput=function(){$('#rsok').disabled=$('#rsc').value.trim().toUpperCase()!=='RESET'};
+   $('#rsok').onclick=function(){var b=clone(D.blank);b.dev187=1;rpc('admin_set_save',{p_user:p.id,p_data:b,p_note:'Reset to a new player'}).then(function(){closeModal();ops=[];toast('Reset — waiting for the player\'s phone');openPlayer(p.id);loadPlayers()}).catch(function(e){toast(e.message,1)})}}}
+ else if(stab==='raw'){el.innerHTML='<p class="soft" style="margin-top:0;font-size:12.5px">Server save (read-only). Version v'+cur.save.version+'.</p><pre class="json">'+esc(JSON.stringify(d,null,1))+'</pre>'}}
 /* ---------- ops ---------- */
 function setOp(o,key){o.key=key||(o.t+':'+(o.k||o.id||''));ops=ops.filter(function(x){return x.key!==o.key});
  var d=data(),same=false;
@@ -349,40 +349,40 @@ function applyOps(d,L){var hm={};D.heroes.forEach(function(x){hm[x.id]=x});
  return d}
 function opLabel(o){var hm={};D.heroes.forEach(function(x){hm[x.id]=x});var R={};RES.forEach(function(r){R[r[0]]=r[1]});
  if(o.t==='res')return R[o.k]+' → '+fmt(o.v);if(o.t==='add')return'+ '+((hm[o.id]||{}).n||o.id);if(o.t==='del')return'− '+((hm[o.id]||{}).n||o.id);
- if(o.t==='lv')return((hm[o.id]||{}).n||o.id)+' Lv '+o.v;if(o.t==='skin')return((D.skins.filter(function(s){return s.k===o.k})[0]||{}).n||o.k)+(o.v?' ★'+o.v:' gỡ');if(o.t==='name')return'Tên → '+o.v;return o.t}
+ if(o.t==='lv')return((hm[o.id]||{}).n||o.id)+' Lv '+o.v;if(o.t==='skin')return((D.skins.filter(function(s){return s.k===o.k})[0]||{}).n||o.k)+(o.v?' ★'+o.v:' removed');if(o.t==='name')return'Name → '+o.v;return o.t}
 function renderBar(){var b=$('#bar');if(!ops.length){b.classList.add('hide');return}b.classList.remove('hide');
- $('#barc').innerHTML='<b style="margin-right:4px">'+ops.length+' thay đổi</b>'+ops.slice(0,6).map(function(o){return'<span>'+esc(opLabel(o))+'</span>'}).join('')+(ops.length>6?'<span>+'+(ops.length-6)+'</span>':'')}
+ $('#barc').innerHTML='<b style="margin-right:4px">'+ops.length+(ops.length===1?' change':' changes')+'</b>'+ops.slice(0,6).map(function(o){return'<span>'+esc(opLabel(o))+'</span>'}).join('')+(ops.length>6?'<span>+'+(ops.length-6)+'</span>':'')}
 $('#bdisc').onclick=function(){ops=[];renderBar();if(cur)renderTab()};
 $('#bsave').onclick=function(){if(!ops.length||!cur)return;var b=$('#bsave'),p=cur.p,L=ops.slice();b.disabled=true;b.innerHTML='<span class="spin"></span>';
  /* re-read the newest server save so edits land on the player's latest synced progress */
- api('/rest/v1/saves?user_id=eq.'+p.id+'&select=data,version').then(function(r){var s=(r||[])[0];if(!s)throw new Error('Không tìm thấy bản lưu');
+ api('/rest/v1/saves?user_id=eq.'+p.id+'&select=data,version').then(function(r){var s=(r||[])[0];if(!s)throw new Error('Save not found');
   var nd=applyOps(clone(s.data),L),note=L.map(opLabel).join(' · ').slice(0,400);
   return rpc('admin_set_save',{p_user:p.id,p_data:nd,p_note:note}).then(function(){var nm=L.filter(function(o){return o.t==='name'})[0];
    return nm?api('/rest/v1/profiles?id=eq.'+p.id,{m:'PATCH',b:{display_name:nm.v},h:{Prefer:'return=minimal'}}):null})})
- .then(function(){ops=[];renderBar();toast('Đã lưu. Máy người chơi nhận ở lần đồng bộ tới');openPlayer(p.id);loadPlayers()})
- .catch(function(e){toast('Không lưu được: '+e.message,1)}).then(function(){b.disabled=false;b.textContent='Lưu & gửi'})};
+ .then(function(){ops=[];renderBar();toast('Saved. The player\'s phone gets it on its next sync');openPlayer(p.id);loadPlayers()})
+ .catch(function(e){toast('Could not save: '+e.message,1)}).then(function(){b.disabled=false;b.textContent='Save & send'})};
 window.addEventListener('beforeunload',function(e){if(ops.length){e.preventDefault();e.returnValue=''}});
 /* ---------- hero picker ---------- */
 function heroPicker(){var v=preview(),owned=v.gens||{};
- modal('<div class="ch"><h2>Thêm tướng</h2><div class="sp"></div><button class="btn sm ghost" data-x><svg class="ico"><use href="#i-x"/></svg></button></div><div class="cb" style="border-bottom:1px solid var(--line)"><div style="display:flex;gap:8px"><div class="search" style="flex:1"><svg class="ico"><use href="#i-search"/></svg><input class="in" id="hq" placeholder="Tìm tướng"></div><select class="in" id="hr" style="width:110px"><option value="">Mọi bậc</option><option>SSR</option><option>SR</option><option>R</option></select></div>'+
-  '<div style="display:flex;gap:8px;align-items:center;margin-top:10px"><label class="lb" style="margin:0">Cấp khi thêm</label><input class="in" id="hlv" inputmode="numeric" value="1" style="width:80px"></div></div><div id="hl"></div>');
+ modal('<div class="ch"><h2>Add hero</h2><div class="sp"></div><button class="btn sm ghost" data-x><svg class="ico"><use href="#i-x"/></svg></button></div><div class="cb" style="border-bottom:1px solid var(--line)"><div style="display:flex;gap:8px"><div class="search" style="flex:1"><svg class="ico"><use href="#i-search"/></svg><input class="in" id="hq" placeholder="Search heroes"></div><select class="in" id="hr" style="width:110px"><option value="">All rarities</option><option>SSR</option><option>SR</option><option>R</option></select></div>'+
+  '<div style="display:flex;gap:8px;align-items:center;margin-top:10px"><label class="lb" style="margin:0">Starting level</label><input class="in" id="hlv" inputmode="numeric" value="1" style="width:80px"></div></div><div id="hl"></div>');
  function draw(){var q=$('#hq').value.trim().toLowerCase(),r=$('#hr').value;
   $('#hl').innerHTML=D.heroes.filter(function(x){return(!q||x.n.toLowerCase().indexOf(q)>=0||x.id.indexOf(q)>=0)&&(!r||x.r===r)}).map(function(x){var has=!!owned[x.id];
-   return'<button class="hpick" data-h="'+x.id+'"'+(has?' disabled':'')+'><img loading="lazy" src="../art/heroes/'+x.id+'/portrait_small.webp" alt="" onerror="this.style.visibility=\'hidden\'"><div style="flex:1"><b>'+esc(x.n)+'</b> <span class="rar '+x.r+'">'+x.r+'</span><div class="soft" style="font-size:12px">'+esc((D.fac||{})[x.f]||x.f)+' · '+x.brs.map(function(b){return BRN[b]||b}).join(' / ')+'</div></div>'+(has?'<span class="chip">Đã có</span>':'<span class="chip acc">Thêm</span>')+'</button>'}).join('')||'<div class="empty">Không có tướng phù hợp.</div>'}
+   return'<button class="hpick" data-h="'+x.id+'"'+(has?' disabled':'')+'><img loading="lazy" src="../art/heroes/'+x.id+'/portrait_small.webp" alt="" onerror="this.style.visibility=\'hidden\'"><div style="flex:1"><b>'+esc(x.n)+'</b> <span class="rar '+x.r+'">'+x.r+'</span><div class="soft" style="font-size:12px">'+esc((D.fac||{})[x.f]||x.f)+' · '+x.brs.map(function(b){return BRN[b]||b}).join(' / ')+'</div></div>'+(has?'<span class="chip">Owned</span>':'<span class="chip acc">Add</span>')+'</button>'}).join('')||'<div class="empty">No matching heroes.</div>'}
  $('#hq').oninput=draw;$('#hr').onchange=draw;draw();
  $('#hl').onclick=function(e){var b=e.target.closest('[data-h]');if(!b||b.disabled)return;var id=b.dataset.h,lv=Math.max(1,Math.min(300,Math.floor(+$('#hlv').value||1)));
-  ops=ops.filter(function(o){return o.key!=='h'+id});if(!(data().gens||{})[id])ops.push({t:'add',id:id,lv:lv,key:'h'+id});renderBar();owned=preview().gens||{};draw();renderTab();toast('Đã thêm '+((D.heroes.filter(function(x){return x.id===id})[0]||{}).n||id))}}
+  ops=ops.filter(function(o){return o.key!=='h'+id});if(!(data().gens||{})[id])ops.push({t:'add',id:id,lv:lv,key:'h'+id});renderBar();owned=preview().gens||{};draw();renderTab();toast('Added '+((D.heroes.filter(function(x){return x.id===id})[0]||{}).n||id))}}
 /* ---------- modal ---------- */
 function modal(h){var m=$('#modal');m.innerHTML='<div class="mbox">'+h+'</div>';m.classList.remove('hide');var f=m.querySelector('input');if(f)setTimeout(function(){f.focus()},30)}
 function closeModal(){$('#modal').classList.add('hide');$('#modal').innerHTML=''}
 $('#modal').addEventListener('click',function(e){if(e.target.id==='modal'||e.target.closest('[data-x]'))closeModal()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
-function confirmBox(t,body,ok,fn){modal('<div class="ch"><h2>'+esc(t)+'</h2></div><div class="cb"><p style="margin:0">'+esc(body)+'</p></div><div class="mfoot"><button class="btn" data-x>Hủy</button><button class="btn pri" id="cfok">'+esc(ok)+'</button></div>');
+function confirmBox(t,body,ok,fn){modal('<div class="ch"><h2>'+esc(t)+'</h2></div><div class="cb"><p style="margin:0">'+esc(body)+'</p></div><div class="mfoot"><button class="btn" data-x>Cancel</button><button class="btn pri" id="cfok">'+esc(ok)+'</button></div>');
  $('#cfok').onclick=function(){var b=$('#cfok');b.disabled=true;Promise.resolve(fn()).then(closeModal).catch(function(e){toast(e.message,1);b.disabled=false})}}
 /* ---------- log ---------- */
-var ACT={set_save:'Sửa bản lưu',ban:'Khóa',unban:'Mở khóa',send_mail:'Gửi thư',restore_backup:'Khôi phục'};
-function logTable(L,single){if(!L.length)return'<div class="empty">Chưa có thao tác nào.</div>';
- return'<table class="t"><tr><th>Thời gian</th>'+(single?'':'<th>Người chơi</th>')+'<th>Thao tác</th><th>Chi tiết</th></tr>'+L.map(function(l){var p=byId(l.target_user),dt=l.detail||{};
+var ACT={set_save:'Edit save',ban:'Ban',unban:'Unban',send_mail:'Send mail',restore_backup:'Restore'};
+function logTable(L,single){if(!L.length)return'<div class="empty">No actions yet.</div>';
+ return'<table class="t"><tr><th>Time</th>'+(single?'':'<th>Player</th>')+'<th>Action</th><th>Details</th></tr>'+L.map(function(l){var p=byId(l.target_user),dt=l.detail||{};
   return'<tr><td class="num" style="white-space:nowrap">'+when(l.created_at)+'</td>'+(single?'':'<td>'+(p?esc(p.display_name||pid(p.id)):'<span class="soft">'+pid(l.target_user)+'</span>')+'</td>')+'<td><span class="chip">'+esc(ACT[l.action]||l.action)+'</span></td><td style="max-width:420px">'+esc(dt.note||dt.reason||'')+(dt.version?' <span class="soft">v'+dt.version+'</span>':'')+'</td></tr>'}).join('')+'</table>'}
 function loadLog(){$('#logt').innerHTML='<div class="empty"><span class="spin" style="display:inline-block"></span></div>';
  api('/rest/v1/admin_log?select=*&order=created_at.desc&limit=200').then(function(L){$('#logt').innerHTML=logTable(L||[])}).catch(function(e){$('#logt').innerHTML='<div class="empty">'+esc(e.message)+'</div>'})}
@@ -390,7 +390,7 @@ $('#blog').onclick=loadLog;
 $$('nav.tabs button').forEach(function(b){b.onclick=function(){$$('nav.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});var t=b.dataset.tab;$('#vplayers').classList.toggle('hide',t!=='players');$('#vlog').classList.toggle('hide',t!=='log');if(t==='log')loadLog()}});
 /* ---------- go ---------- */
 try{sess=JSON.parse(localStorage.getItem(SK)||'null')}catch(e){sess=null}
-if(sess&&sess.rt)start().catch(function(e){showLogin(e.status===401?'':'Không kết nối được máy chủ: '+e.message)});else showLogin();
+if(sess&&sess.rt)start().catch(function(e){showLogin(e.status===401?'':'Could not reach the server: '+e.message)});else showLogin();
 })();
 </script>
 </body>
