@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V267';
+var BUILD='V268';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -14810,4 +14810,165 @@ var WQ267=1,WQ7O=null;
   '@media (prefers-reduced-motion:reduce){html body #sheet .wq7ry,html body #sheet .wq7in{animation:none}}';
  document.head.appendChild(css);
 }catch(e){try{console.error('wq267',e)}catch(x){}}})();
+/* ================= V268 (art agent, user 2026-11-04 19:04, Thảo Phạt screenshot: "do the same with Thảo Phạt — utilise floating or
+   new windows if needed to ease the eyes and maximise flow"). Last bossPage wrapper (the Thảo Phạt TAB page; HTML post-processing of
+   econ/newart/strat/events2 output; boss logic, rewards, actions untouched; any error → the old page).
+   Main screen = one phone screen, top to bottom in play order:
+    1. STAGE — today's battlefield (maps/battle/boss a|b) behind the boss painting (right, soft fade), "Trùm hôm nay · cấp N", name,
+       title · branch, "miễn choáng/hỗn loạn" chip, personal record, Thiên Mệnh Phù line; HP bar; 4 milestone nodes (25/50/75/100%):
+       claimable = glowing, tap claims right there; others open the "Mốc thưởng" window.
+    2. ACTION — turns left + Xuất chinh.
+    3. PILLS (2×2) → floating windows: "Khắc chế · Pha" (counter tip, phase list, rules note), "Quân Sư Kế" (kebox, Đổi kế works),
+       "Chinh Phạt Tuần" (weekly race, red dot when a tier can be claimed), and "Đổi thưởng" (Thảo Phạt Lệnh N — opens the shop direct).
+   Windows are mounted in a body host #tp8h (z above the nav) after every renderMain; the open one is remembered (TP8O) so claims keep it
+   open; leaving the tab clears the host. Claiming a milestone from this tab no longer pops the old sheet on top. Dim only, no blur
+   (V250), transform/opacity animation only. TP268=0 turns it off. No new art.
+   19:15 user "rewards with many words — images are more modern and easier to read": rewards in the Mốc thưởng and Chinh Phạt Tuần windows
+   are icon tiles with a count (window.tp8Tiles(rw), reusable; hero shards = the hero's face, Binh Thư = book + branch tag, Thảo Phạt
+   Lệnh = war drum, Thí Luyện Lệnh = tower; gold frame for Binh Phù / Thiên Mệnh Phù, purple for chests). Tap a tile = its name in a toast. */
+var TP268=1,TP8O=null;
+(function(){try{
+ var WH='';
+ function im(src){return'<img src="'+src+'" alt="">'}
+ function tile(icon,n,name,cls){return'<span class="tp8t'+(cls?' '+cls:'')+'" data-n="'+String(name).replace(/"/g,'')+(n?' ×'+n:'')+'" role="img" aria-label="'+String(name).replace(/"/g,'')+'">'+icon+(n?'<b>'+n+'</b>':'')+'</span>'}
+ /* reward object → icon tiles (no words; tap a tile = its name in a toast) */
+ window.tp8Tiles=function(rw){var o='';try{
+   if(rw.fr)Object.keys(rw.fr).forEach(function(k){var G=GENS[k];if(!G)return;var a=(typeof GART!=='undefined'&&GART[k])?(GART[k].sm||GART[k].src):null;o+=tile(a?im(a):objH('chest'),rw.fr[k],'Mảnh '+G.n,'hr r'+(G.rar||''))});
+   if(rw.phu)o+=tile(objH('tally'),rw.phu,'Binh Phù','gd');
+   if(rw.tmp)o+=tile(twIc('phu',34),rw.tmp,'Thiên Mệnh Phù','gd');if(rw.tphu)o+=tile(twIc('phu',34),rw.tphu,'Thiên Mệnh Phù','gd');
+   if(rw.gear)o+=tile(objH('chest'),'','Rương trang bị','pu');
+   if(rw.v)o+=tile(objH('gold'),fmt(rw.v),'Vàng');if(rw.s)o+=tile(objH('silver'),fmt(rw.s),'Bạc');if(rw.m)o+=tile(objH('merit'),fmt(rw.m),'Chiến công');
+   if(rw.bp)o+=tile(im('art/ui/nav_boss.webp'),rw.bp,'Thảo Phạt Lệnh');if(rw.tw)o+=tile(im('art/ui/qi_tower.webp'),rw.tw,'Thí Luyện Lệnh');
+   if(rw.b)Object.keys(rw.b).forEach(function(k){o+=tile(objH('book')+'<i>'+(TAGS[k]||'')+'</i>',rw.b[k],'Binh Thư '+(TAGS[k]||''))});
+   if(rw.ord)o+=tile(objH('order'),rw.ord,'Quân lệnh');if(rw.rt)o+=tile(twIc('refine',34),rw.rt,'Lệnh Bảo Đảm');if(rw.ng)o+=tile(twIc('ngoc',34),rw.ng,'Thức Tỉnh Ngọc');
+   if(rw.sk)o+=tile(objH('chest2'),rw.sk,'Mảnh ngoại trang','pu')}catch(e){}return'<span class="tp8ts">'+o+'</span>'};
+ function q(d,s){return d.querySelector(s)}
+ var _bp=bossPage;bossPage=function(){var h=_bp.apply(this,arguments);WH='';if(!TP268)return h;try{
+   var d=document.createElement('div');d.innerHTML=h;var bp=q(d,'.bosspage');if(!bp)return h;
+   var bsh=q(bp,'.bsh'),hp=q(bp,'.bshp'),st=q(bp,'.stack'),fb=q(bp,'[data-a="bfight"]');if(!bsh||!hp||!st||!fb)return h;
+   var ctr=hp.nextElementSibling&&hp.nextElementSibling.classList.contains('card')?hp.nextElementSibling:null;
+   var tm=null,pbl=null,note=null,tokRow=null;
+   [].forEach.call(bp.children,function(c){var t=c.textContent;
+     if(c.classList.contains('gold')&&/Thiên Mệnh Phù/.test(t))tm=c;
+     else if(/Kỷ lục/.test(t)&&c.classList.contains('sm')&&!c.classList.contains('mute'))pbl=c;
+     else if(c.classList.contains('mute')&&/Mỗi trận tối đa/.test(t))note=c;
+     else if(c.classList.contains('row')&&q(c,'[data-a="shop"]'))tokRow=c});
+   var ph=q(bp,'.gcard.red'),ke=q(bp,'.kebox'),race=q(bp,'.evc');
+   var B=todayBoss(),e=ev(),left=bossTries()-e.boss.tries,tok=(e.tok&&e.tok.bp)||0;
+   var art=q(bsh,'.bsart'),tx=q(bsh,'.sp');
+   var lab=tx&&q(tx,'.gold'),nm=tx&&q(tx,'h3'),sub=tx&&q(tx,'.mute');
+   var subT=sub?sub.textContent.replace(/\s*·\s*miễn choáng\/hỗn loạn/,''):'';
+   var bg='art/maps/battle/boss/'+((((S.day%2)+2)%2)?'b':'a')+'.webp';
+   /* milestone nodes from the claim buttons */
+   var rows=[].slice.call(st.children),nClaim=0,nodes=rows.map(function(r,i){var bt=q(r,'[data-a="bclaim"]'),got=bt&&/Đã nhận/.test(bt.textContent),ok=bt&&!bt.disabled;if(ok)nClaim++;
+     var p=Math.round(BMS[i][0]*100);
+     return'<button type="button" class="tp8n'+(ok?' ok':got?' got':'')+'"'+(ok?' data-a="bclaim" data-v="'+i+'"':' data-tp="ms"')+' aria-label="Mốc '+p+'%'+(ok?' — nhận':got?' — đã nhận':'')+'">'+
+      '<span class="tp8ni">'+objH('chest')+(got?'<i class="tp8ck">✓</i>':'')+'</span><b>'+p+'%</b><small>'+(ok?'Nhận':got?'Đã nhận':'Mốc')+'</small></button>'}).join('');
+   /* race summary */
+   var raceV='',raceDot=false;if(race){var mm=/(\d+)\s*\/\s*(\d+)/.exec((q(race,'.sm:not(.mute)')||{}).textContent||'');if(mm)raceV=mm[1]+'/'+mm[2];raceDot=!!q(race,'[data-a="evclaim"]:not([disabled])')}
+   var raceOn=!!(race&&q(race,'[data-a="evclaim"]'));
+   var o='<div class="bosspage tp8">';
+   o+='<div class="tp8st" style="--tpbg:url('+bg+')"><div class="tp8bg" aria-hidden="true"></div>'+(art?'<div class="tp8art">'+art.innerHTML+'</div>':'')+
+     '<div class="tp8tx"><div class="tp8lb">'+(lab?lab.innerHTML:'')+'</div><h3>'+(nm?nm.innerHTML:B.n)+'</h3><div class="tp8sb">'+subT+'</div><span class="tp8im">Miễn choáng · hỗn loạn</span>'+
+     (pbl?'<div class="tp8pb">'+pbl.innerHTML+'</div>':'')+'</div>'+
+     (tm?'<div class="tp8tm">'+tm.innerHTML+'</div>':'')+
+     '<div class="tp8hp">'+hp.innerHTML+'</div><div class="tp8ms">'+nodes+'</div></div>';
+   o+='<div class="tp8act"><div class="tp8tr"><span>Lượt hôm nay</span><b>'+Math.max(0,left)+'/'+bossTries()+'</b></div>'+fb.outerHTML.replace('class="btn wide"','class="btn wide tp8go"')+'</div>';
+   o+='<div class="tp8p">'+
+     '<button type="button" class="tp8b" data-tp="ctr"><span class="tp8i"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2M9.5 6.5L21 18v3h-3"/></svg></span><span>Khắc chế<small>Pha · luật</small></span></button>'+
+     (ke?'<button type="button" class="tp8b" data-tp="ke"><span class="tp8i"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span>Quân Sư Kế<small>Tự kích hoạt</small></span></button>':'')+
+     (race?'<button type="button" class="tp8b" data-tp="race"><span class="tp8i">'+objH('order')+'</span><span>Chinh Phạt Tuần<small>'+(raceOn?raceV:'Chưa mở')+'</small></span>'+(raceDot?'<i class="tp8dot"></i>':'')+'</button>':'')+
+     '<button type="button" class="tp8b" data-a="shop" data-v="bp"><span class="tp8i">'+objH('tally')+'</span><span>Đổi thưởng<small>Lệnh '+fmt(tok)+'</small></span></button></div>';
+   o+='</div>';
+   /* windows */
+   function win(k,title,inner){return'<div class="tp8w'+(TP8O===k?' on':'')+'" data-k="'+k+'"><div class="tp8wb"></div><div class="tp8in" role="dialog" aria-modal="true" aria-label="'+title+'"><div class="tp8hd"><button type="button" class="tp8x" aria-label="Đóng">‹</button><b>'+title+'</b></div><div class="tp8bd">'+inner+'</div></div></div>'}
+   st.classList.add('dslist');
+   [].forEach.call(st.querySelectorAll('.btn[data-a="bclaim"]'),function(b){if(!b.disabled)return;if(/Đã nhận/.test(b.textContent))b.classList.add('dsgot');else{b.classList.add('dsnot');b.textContent='Chưa đạt'}});
+   var msRows='<div class="tp8rl">'+rows.map(function(r,i){var bt=q(r,'[data-a="bclaim"]'),p=Math.round(BMS[i][0]*100),got=bt&&/Đã nhận/.test(bt.textContent),ok=bt&&!bt.disabled,rw={};try{rw=bmsRw(i)}catch(x){}
+     return'<div class="tp8r'+(ok?' ok':got?' got':'')+'"><div class="tp8rp"><b>'+p+'%</b><small>sinh lực</small></div>'+tp8Tiles(rw)+'<div class="tp8rb">'+(ok?'<button class="btn sm" data-a="bclaim" data-v="'+i+'">Nhận</button>':got?'<span class="tp8ok">✓</span>':'<span class="tp8lk">'+objH('chest')+'</span>')+'</div></div>'}).join('')+'</div>';
+   if(race&&typeof EVT!=='undefined'&&EVT.boss){[].forEach.call(race.querySelectorAll('.evt'),function(r,i){var sp=q(r,'.sp');if(!sp||!EVT.boss.tiers[i])return;try{sp.outerHTML=tp8Tiles(EVT.boss.tiers[i][1]())}catch(x){}})}
+   WH=win('ms','Mốc thưởng hôm nay',msRows+(tokRow?'<div class="tp8tk">'+tokRow.innerHTML+'</div>':''))+
+     win('ctr','Khắc chế · '+B.n,(ctr?'<div class="tp8cr">'+ctr.innerHTML+'</div>':'')+(ph?ph.outerHTML:'')+(note?note.outerHTML:''))+
+     (ke?win('ke','Quân Sư Kế',ke.outerHTML):'')+(race?win('race','Chinh Phạt Tuần',race.outerHTML):'');
+   return o}catch(x){try{console.warn('tp268',x)}catch(y){}WH='';return h}};
+ function host(){var x=document.getElementById('tp8h');if(!x){x=document.createElement('div');x.id='tp8h';document.body.appendChild(x)}return x}
+ function mount(){try{var m=document.getElementById('main'),on=TP268&&tab==='boss'&&m&&m.querySelector('.bosspage.tp8');var x=host();
+   if(!on){if(x.innerHTML)x.innerHTML='';if(tab!=='boss')TP8O=null;return}x.innerHTML=WH}catch(e){}}
+ var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);mount();return r};
+ function show(k){TP8O=k;[].forEach.call(document.querySelectorAll('#tp8h .tp8w'),function(w){w.classList.toggle('on',w.getAttribute('data-k')===k)})}
+ var noSheet=0;
+ document.addEventListener('click',function(e){if(!e.target.closest)return;
+   var p=e.target.closest('[data-tp]');if(p&&(p.closest('#main .tp8')||p.closest('#tp8h'))){e.preventDefault();e.stopPropagation();show(p.getAttribute('data-tp'));return}
+   if(e.target.closest('#tp8h .tp8x')||(e.target.classList&&e.target.classList.contains('tp8wb'))){e.preventDefault();e.stopPropagation();show(null);return}
+   var c=e.target.closest('[data-a="bclaim"]');if(c&&tab==='boss'&&(c.closest('#main')||c.closest('#tp8h'))&&!document.querySelector('#modal:not(.hidden) #sheet .bsh')){noSheet=1;setTimeout(function(){noSheet=0},0)}
+   var tt=e.target.closest('#tp8h .tp8t[data-n]');if(tt){try{toast(tt.getAttribute('data-n'))}catch(x){}return}
+   if(e.target.closest('#tp8h [data-a="kesheet"],#tp8h [data-a="shop"]'))show(null)},true);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&TP8O)show(null)});
+ var _os=openSheet;openSheet=function(fn){if(noSheet&&fn===bossSheet){noSheet=0;return}return _os.apply(this,arguments)};
+ var M='html body #main .tp8 ',H='html body #tp8h ';
+ var css=document.createElement('style');css.id='tp268css';css.textContent=
+  /* stage */
+  M+'.tp8st{position:relative;overflow:hidden;isolation:isolate;padding:16px 16px 12px;border-radius:20px;border:1.5px solid rgba(214,92,70,.6);background:#140c08;box-shadow:0 10px 26px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.04)}'+
+  M+'.tp8bg{position:absolute;inset:0;z-index:-2;background:var(--tpbg) 50% 38%/cover no-repeat;opacity:.5}'+
+  M+'.tp8st::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,8,5,.94) 30%,rgba(14,8,5,.25) 75%,rgba(14,8,5,.4)),linear-gradient(0deg,rgba(14,8,5,.96) 22%,transparent 60%)}'+
+  M+'.tp8art{position:absolute;right:0;top:0;width:58%;height:236px;z-index:-1;-webkit-mask-image:linear-gradient(to left,#000 50%,transparent),linear-gradient(to top,transparent,#000 30%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to left,#000 50%,transparent),linear-gradient(to top,transparent,#000 30%);mask-composite:intersect}'+
+  M+'.tp8art img,'+M+'.tp8art svg{width:100%!important;height:100%!important;object-fit:cover;object-position:50% 18%;display:block}'+
+  M+'.tp8tx{position:relative;max-width:62%;min-height:150px;display:flex;flex-direction:column;align-items:flex-start;gap:4px}'+
+  M+'.tp8lb{font:700 12px var(--ds-fb,system-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase;color:#f6d77d}'+
+  M+'.tp8tx h3{margin:0!important;font:700 30px/1.1 var(--ds-fd,Philosopher,Georgia,serif)!important;color:#fff2cf!important;text-shadow:0 2px 12px rgba(0,0,0,.9)}'+
+  M+'.tp8sb{font-size:13.5px;color:#e3cfa6;text-shadow:0 1px 4px #000}'+
+  M+'.tp8im{margin-top:4px;padding:3px 10px;border-radius:999px;background:rgba(120,30,24,.7);border:1px solid rgba(240,120,100,.55);font:600 12px var(--ds-fb,system-ui,sans-serif);color:#ffd9cf}'+
+  M+'.tp8pb{margin-top:2px;font-size:12.5px;color:#d9c9a8}'+
+  M+'.tp8tm{position:relative;margin:4px 0 2px;font-size:12.5px;color:#f6d77d}'+
+  M+'.tp8hp{position:relative;margin-top:8px}'+M+'.tp8hp .row{font-size:13px;color:#f3e6c8}'+M+'.tp8hp .row span{font:700 15px var(--ds-fn,"Barlow Condensed",sans-serif)}'+
+  M+'.tp8hp .bar{height:12px!important;margin-top:6px;border-radius:7px!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),0 0 14px rgba(200,50,40,.35)}'+
+  M+'.tp8ms{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}'+
+  M+'.tp8n{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:64px;padding:6px 2px 5px;border-radius:12px;background:rgba(10,6,4,.72);border:1px solid rgba(226,178,90,.28);color:#c9b48a;cursor:pointer}'+
+  M+'.tp8n:active{transform:scale(.96)}'+M+'.tp8n b{font:700 15px/1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#f3e6c8}'+M+'.tp8n small{font-size:11px;line-height:1.1}'+
+  M+'.tp8ni{position:relative;width:28px;height:24px;display:flex;align-items:center;justify-content:center;opacity:.6;filter:grayscale(.7)}'+M+'.tp8ni .objx{width:26px!important;height:26px!important}'+
+  M+'.tp8n.ok{border-color:#f1cf6a;background:linear-gradient(180deg,rgba(120,84,26,.85),rgba(40,26,10,.9));box-shadow:0 0 0 1px rgba(0,0,0,.5),0 0 16px rgba(246,215,125,.5);animation:tp8p 1.8s ease-in-out infinite}'+
+  M+'.tp8n.ok .tp8ni{opacity:1;filter:none}'+M+'.tp8n.ok small{color:#fff2cf;font-weight:700}'+
+  M+'.tp8n.got .tp8ni{opacity:.9;filter:none}'+M+'.tp8n.got small{color:#8fe0a6}'+
+  M+'.tp8ck{position:absolute;right:-4px;bottom:-3px;width:15px;height:15px;border-radius:50%;background:#2f8f55;color:#fff;font:700 10px/15px system-ui;font-style:normal;text-align:center}'+
+  '@keyframes tp8p{50%{transform:translateY(-2px)}}'+
+  /* action */
+  M+'.tp8act{display:flex;align-items:center;gap:12px;margin:12px 0 0}'+
+  M+'.tp8tr{flex:none;display:flex;flex-direction:column;align-items:flex-start}'+M+'.tp8tr span{font:600 11px var(--ds-fb,system-ui,sans-serif);letter-spacing:.12em;text-transform:uppercase;color:#c9b48a}'+M+'.tp8tr b{font:700 26px/1.05 var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff2cf}'+
+  M+'.tp8go{flex:1;margin:0!important;min-height:54px;font-size:19px!important}'+
+  /* pills */
+  M+'.tp8p{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}'+
+  M+'.tp8b{position:relative;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-radius:14px;background:linear-gradient(180deg,#2a1f14,#1a130c);border:1px solid rgba(226,178,90,.38);color:#f3e6c8;font:600 14px/1.15 var(--ds-fb,system-ui,sans-serif);cursor:pointer;text-align:left}'+
+  M+'.tp8b:active{transform:scale(.97)}'+M+'.tp8b small{display:block;margin-top:2px;font:600 12px var(--ds-fb,system-ui,sans-serif);color:#c9b48a}'+
+  M+'.tp8i{flex:none;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#f6d77d}'+M+'.tp8i .objx{width:28px!important;height:28px!important}'+
+  M+'.tp8dot{position:absolute;top:7px;right:7px;width:10px;height:10px;border-radius:50%;background:#e0524b;box-shadow:0 0 0 2px #1a130c}'+
+  /* windows */
+  H+'.tp8w{position:fixed;inset:0;z-index:905;display:none;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top,0px)) 12px max(14px,env(safe-area-inset-bottom,0px))}'+H+'.tp8w.on{display:flex}'+
+  H+'.tp8wb{position:absolute;inset:0;background:rgba(6,4,3,.66)}'+
+  H+'.tp8in{position:relative;width:min(440px,100%);max-height:84vh;display:flex;flex-direction:column;border-radius:20px;background:linear-gradient(180deg,#2c2013,#17100a);border:1.5px solid rgba(241,207,106,.6);box-shadow:0 0 0 1px #000,0 18px 40px rgba(0,0,0,.6);color:#f3e6c8;animation:tp8o .24s cubic-bezier(.2,1.2,.4,1)}'+
+  H+'.tp8hd{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(226,178,90,.22)}'+H+'.tp8hd b{font:700 19px/1.2 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf}'+
+  H+'.tp8x{width:44px;height:44px;flex:none;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(226,178,90,.45);color:#f6d77d;font:400 28px/1 Georgia,serif;cursor:pointer}'+
+  H+'.tp8bd{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.4}'+
+  H+'.tp8bd .stack{display:flex;flex-direction:column;gap:8px;margin:0!important}'+H+'.tp8bd .stack>.card{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(226,178,90,.2)}'+H+'.tp8bd .stack .sp{flex:1;min-width:0}'+
+  H+'.tp8bd .btn.sm{min-height:40px;padding:0 14px;flex:none}'+H+'.tp8bd .btn.dsnot,'+H+'.tp8bd .btn.dsgot{opacity:.55}'+
+  H+'.tp8tk{display:flex;align-items:center;gap:10px;font-size:13px}'+H+'.tp8tk .sp{flex:1}'+
+  H+'.tp8cr{padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(214,92,70,.35)}'+
+  H+'.tp8bd .gcard{margin:0!important}'+H+'.tp8bd .mute{color:#b9a47c}'+H+'.tp8bd .gold{color:#f6d77d}'+
+  H+'.tp8bd .evc{margin:0!important;border:0!important;padding:0!important;background:none!important}'+H+'.tp8bd .kebox{margin:0!important}'+
+  H+'.tp8rl{display:flex;flex-direction:column;gap:8px}'+
+  H+'.tp8r{display:flex;align-items:center;gap:8px;padding:9px 8px;border-radius:14px;background:rgba(0,0,0,.3);border:1px solid rgba(226,178,90,.2)}'+H+'.tp8r.ok{border-color:#f1cf6a;box-shadow:0 0 14px rgba(246,215,125,.25)}'+H+'.tp8r.got{opacity:.6}'+
+  H+'.tp8rp{flex:none;width:46px;display:flex;flex-direction:column;align-items:center}'+H+'.tp8rp b{font:700 20px/1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#f6d77d}'+H+'.tp8rp small{font-size:10.5px;color:#b9a47c}'+
+  H+'.tp8ts{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:5px}'+
+  H+'.tp8t{position:relative;width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:10px;background:radial-gradient(circle at 50% 35%,#4a3720,#1f160d);border:1px solid rgba(226,178,90,.35);overflow:hidden;cursor:pointer}'+
+  H+'.tp8t .objx,'+H+'.tp8t .twic{width:31px!important;height:31px!important}'+H+'.tp8t img{width:33px;height:33px;object-fit:contain}'+
+  H+'.tp8t.hr img{position:static!important;inset:auto!important;transform:none!important;max-width:none;width:100%;height:100%;object-fit:cover;object-position:50% 15%}'+H+'.tp8t.hr{border-color:#c58cff;background:#2a1838}'+H+'.tp8t.hr.rSSR,'+H+'.tp8t.hr.rUR{border-color:#f1cf6a}'+
+  H+'.tp8t.gd{border-color:#f1cf6a;background:radial-gradient(circle at 50% 35%,#7a5a22,#2a1c0c)}'+H+'.tp8t.pu{border-color:#b58ce0;background:radial-gradient(circle at 50% 35%,#4b2f66,#1d1228)}'+
+  H+'.tp8t>b{position:absolute;right:2px;bottom:1px;font:700 12.5px/1 var(--ds-fn,"Barlow Condensed",sans-serif);color:#fff;text-shadow:0 0 3px #000,0 1px 2px #000,0 0 6px #000}'+
+  H+'.tp8t>i{position:absolute;left:2px;top:2px;padding:0 3px;border-radius:4px;background:rgba(0,0,0,.65);font:700 9px/13px var(--ds-fb,system-ui,sans-serif);font-style:normal;color:#f6d77d}'+
+  H+'.tp8rb{flex:none;min-width:40px;display:flex;justify-content:flex-end}'+H+'.tp8ok{width:34px;height:34px;border-radius:50%;background:#2f8f55;color:#fff;font:700 18px/34px system-ui;text-align:center}'+H+'.tp8lk{opacity:.35;filter:grayscale(1)}'+H+'.tp8lk .objx{width:30px!important;height:30px!important}'+
+  H+'.tp8bd .evt{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(226,178,90,.12)}'+H+'.tp8bd .evt .evn{flex:none;width:44px;font:700 18px var(--ds-fn,"Barlow Condensed",sans-serif);color:#f6d77d}'+
+  '@keyframes tp8o{from{opacity:0;transform:scale(.94) translateY(10px)}}'+
+  '@media (prefers-reduced-motion:reduce){html body #main .tp8n.ok,html body #tp8h .tp8in{animation:none}}';
+ document.head.appendChild(css);
+ try{if(typeof S!=='undefined'&&S&&tab==='boss')renderMain()}catch(x){}
+}catch(e){try{console.error('tp268',e)}catch(x){}}})();
 </script>
