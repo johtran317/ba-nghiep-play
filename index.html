@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V271';
+var BUILD='V272';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15003,7 +15003,7 @@ var WQ269=1;
  function centre(k){var i=SKORD.indexOf(k),F=(typeof SKFACE!=='undefined'&&SKFACE[k])||null,im='';
   if(i>=0&&F){var A=FADJ[k]||[0,0],cx=(i%3)*480+(F[0]+F[2]/2+A[0])*480,cy=Math.floor(i/3)*720+(F[1]+F[3]*.8+A[1])*720;
    im='<img class="wq9ci" src="'+PA+'" alt="" style="transform:translate('+(-cx/1440*100).toFixed(3)+'%,'+(-cy/2160*100).toFixed(3)+'%)">'}
-  var nm=SKL[k].n;return'<div class="wq9c">'+im+'<span'+(nm.length>18?' class="wq9sm"':'')+'>'+esc(nm)+'</span></div>'}
+  /* V272: no name on the centre tile (user 20:56 "cleaner"); the skin name is in the showcase card above */return'<div class="wq9c" role="img" aria-label="'+esc(SKL[k].n)+'">'+im+'</div>'}
  var _w=wheelSheet;wheelSheet=function(){var h=_w.apply(this,arguments);if(!WQ269)return h;try{
    var d=document.createElement('div');d.innerHTML=h;var wb=d.querySelector('.dswb');if(!wb)return h;var k=whS().t;if(!SKL[k])return h;
    wb.className='dswb wq9b';wb.innerHTML='<div class="wq9g" role="img" aria-label="Bảng thưởng">'+WSEG.map(function(s,i){return tile(s,i,k)}).join('')+centre(k)+'</div>';
@@ -15037,7 +15037,7 @@ var WQ269=1;
   S_+'.wq9s{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,244,210,.35) 50%,transparent 65%);transform:translateX(-120%);animation:wq9s 3.2s ease-in-out infinite;pointer-events:none}'+
   '@keyframes wq9s{60%,100%{transform:translateX(120%)}}'+
   S_+'.wq9c{grid-row:2;grid-column:2/4;position:relative;border-radius:14px;overflow:hidden;background-color:#120c08;background-repeat:no-repeat;border:1.5px solid color-mix(in srgb,var(--k1,#f1cf6a) 60%,#f1cf6a)}'+
-  S_+'.wq9ci{position:absolute;left:50%;top:36%;width:300%;max-width:none!important;height:auto;display:block;pointer-events:none}'+
+  S_+'.wq9ci{position:absolute;left:50%;top:50%;width:300%;max-width:none!important;height:auto;display:block;pointer-events:none}'+
   S_+'.wq9c span.wq9sm{font-size:11.5px!important;padding-left:4px!important;padding-right:4px!important}'+
   S_+'.wq9c span{position:absolute;left:0;right:0;bottom:0;padding:12px 8px 5px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:700 13px/1.15 var(--ds-fd,Philosopher,Georgia,serif);color:#fff2cf;background:linear-gradient(transparent,rgba(0,0,0,.85));text-shadow:0 1px 3px #000}'+
   S_+'.wq9t.on{transform:scale(1.06);z-index:1;border-color:#fff2cf;box-shadow:0 0 0 2px #fff2cf,0 0 18px rgba(246,215,125,.9),inset 0 0 14px rgba(255,240,200,.45)}'+
