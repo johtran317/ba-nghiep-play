@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V274';
+var BUILD='V275';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15056,14 +15056,18 @@ var WQ269=1;
    above the nav), back chevron / tap outside / Esc close; tapping a row closes the window then runs the row's own action.
    Dim only, no blur (V250); transform/opacity pop. No new art, no new actions (the old `hub` action is re-routed). HB274=0 → old sheet. */
 var HB274=1;
+/* V275: the 5 dedicated Hoạt động medallions (user's Banana Pro sheet, 21:21) live in the empty cells 14–15 of art/ui/victory_fx.webp
+   (2560×640; 160 px icons at x/y below) — no new file. Other actions keep the qi_* medallions. */
+var HB4V={evs:[1920,320],wheel:[2080,320],season:[2240,320],patrol:[1920,480],book:[2080,480]};
 var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',book:'qi_form',arena:'qi_arena',tower:'qi_tower',boss:'nav_boss',shop:'qi_shop',vip:'qi_vip'};
 (function(){try{
  function host(){var x=document.getElementById('hb4w');if(!x){x=document.createElement('div');x.id='hb4w';document.body.appendChild(x)}return x}
  function close(){var x=document.getElementById('hb4w');if(x)x.innerHTML=''}
  function open(g){var h='';try{h=hubSheet(g)}catch(e){return false}
   var d=document.createElement('div');d.innerHTML=h;var t=d.querySelector('h3'),title=t?t.textContent:(HUBN[g]||'');if(t)t.remove();
-  [].forEach.call(d.querySelectorAll('.hub-t'),function(b){var a=b.getAttribute('data-a'),im=HB4ART[a],ic=b.querySelector('.hub-i');
-    if(ic&&im){ic.innerHTML='<img src="art/ui/'+im+'.webp" alt="">';ic.classList.add('hb4m')}else if(ic)ic.classList.add('hb4c')});
+  [].forEach.call(d.querySelectorAll('.hub-t'),function(b){var a=b.getAttribute('data-a'),im=HB4ART[a],ic=b.querySelector('.hub-i'),vp=HB4V[a];
+    if(ic&&vp){var k=58/160;ic.innerHTML='<i class="hb4v" style="background-size:'+(2560*k).toFixed(1)+'px auto;background-position:'+(-vp[0]*k).toFixed(1)+'px '+(-vp[1]*k).toFixed(1)+'px"></i>';ic.classList.add('hb4m')}
+    else if(ic&&im){ic.innerHTML='<img src="art/ui/'+im+'.webp" alt="">';ic.classList.add('hb4m')}else if(ic)ic.classList.add('hb4c')});
   host().innerHTML='<div class="hb4bg"></div><div class="hb4in" role="dialog" aria-modal="true" aria-label="'+title+'"><div class="hb4hd"><button type="button" class="hb4x" aria-label="Quay lại">‹</button><b>'+title+'</b></div><div class="hb4bd">'+d.innerHTML+'</div></div>';
   return true}
  var _A=A_;A_=function(a,v,w,el){if(a==='hub'&&HB274){if(open(v))return}return _A.apply(this,arguments)};
@@ -15089,6 +15093,7 @@ var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',bo
   H+'.hub-t:active{transform:scale(.98)}'+
   H+'.hub-i{flex:none;width:58px;height:58px;display:flex;align-items:center;justify-content:center}'+
   H+'.hub-i.hb4m img{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'+
+  H+'.hb4v{display:block;width:58px;height:58px;background-image:url(art/ui/victory_fx.webp?v=2);background-repeat:no-repeat;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'+
   H+'.hub-i.hb4c{border-radius:50%;background:radial-gradient(circle at 50% 35%,#4a3720,#1a120a);box-shadow:0 0 0 2px #b8893a,0 3px 6px rgba(0,0,0,.6)}'+H+'.hub-i.hb4c img,'+H+'.hub-i.hb4c svg{width:34px;height:34px}'+
   H+'.hub-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}'+H+'.hub-tx b{font:700 17px/1.2 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);color:#fff2cf}'+
   H+'.hub-tx em{font:400 13.5px/1.25 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif);font-style:normal;color:#c9b48a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'+
