@@ -7739,7 +7739,9 @@ SIG.zhugeliang.play=async function(a,ev){var g=a.u.gid,cf=SIG[g],T=cf.T,P=BT.pac
  var Fd=sgField(foe),tg=sgOrder(ev,.56,.84),up=foe==='D'?-1:1;
  var skyY=foe==='D'?Math.max(BT.H*.17,Fd.y0-BT.rh*.35):Math.min(BT.H*.86,Fd.y1+BT.rh*.35);
  var DIP=[[-.42,.1],[-.27,.02],[-.12,.06],[.0,.14],[.06,.34],[.3,.38],[.36,.15]].map(function(q){return[Fd.cx+q[0]*Fd.w,skyY+q[1]*BT.rh*1.4*(-up)]});
- tg.forEach(function(o,j){o.st=DIP[j%7]});
+ /* V291 (user 2026-11-05 08:22 "for the original skill do not show the 7 balls — that is for the skin only"): the Big Dipper belongs to the
+    Thất Tinh Đàn Tế skin; the base skill's bolts now fall from the night sky straight above each target (no constellation drawn). */
+ tg.forEach(function(o,j){var dx=o.d?o.d.x:Fd.cx;o.st=[dx+(j%2?1:-1)*BT.cwN*.35,skyY-up*BT.rh*.4]});
  var tw=[];for(i=0;i<60;i++)tw.push([Math.random()*BT.W,Math.random()*BT.H,Math.random()*TAU,.5+Math.random()]);
  sgMark(ev,2,'xiaoqiao');BT.sig=1;a.sw=1;
  BT.fx.push({t0:BT.t,dur:T*P,fn:function(c,p){var t=BT.t,q,k;
@@ -7758,7 +7760,7 @@ SIG.zhugeliang.play=async function(a,ev){var g=a.u.gid,cf=SIG[g],T=cf.T,P=BT.pac
   for(k=0;k<8;k++){q=sgOut((p-.24-k*.02)/.14);if(q<=0)continue;var an=k/8*TAU+t/3000,sx=Fd.cx+Math.cos(an)*bw*.47,sy=Fd.cy+Math.sin(an)*bw*.47*.46,ph=bw*.24;
    sgD(c,I.pillar,sx,sy-ph*.42*q,ph*.42,q*(1-fl)*.85)}
   /* Big Dipper + constellation lines */
-  q=sgOut((p-.36)/.16);if(q>0){c.strokeStyle='rgba(170,220,255,'+(.5*q*(1-fl))+')';c.lineWidth=1.5;c.beginPath();DIP.forEach(function(s,j){j?c.lineTo(s[0],s[1]):c.moveTo(s[0],s[1])});c.lineTo(DIP[3][0],DIP[3][1]);c.stroke();
+  q=0&&sgOut((p-.36)/.16);if(q>0){c.strokeStyle='rgba(170,220,255,'+(.5*q*(1-fl))+')';c.lineWidth=1.5;c.beginPath();DIP.forEach(function(s,j){j?c.lineTo(s[0],s[1]):c.moveTo(s[0],s[1])});c.lineTo(DIP[3][0],DIP[3][1]);c.stroke();
    DIP.forEach(function(s,j){sgD(c,I.star,s[0],s[1],BT.cwN*(.26+.06*Math.sin(t/120+j))*q,q*(1-fl)*.9);sgGlow(c,s[0],s[1],BT.cwN*.12,'230,245,255',q*(1-fl)*.8)})}
   /* starlight bolts: one per target, on schedule */
   tg.forEach(function(o){var d=o.d,tx=d.x,ty=d.y-BT.rh*pvS(d.z)*.2,q2=(p-o.at+.03)/.13;if(q2<0||q2>1)return;
@@ -11028,7 +11030,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V290';
+var BUILD='V291';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
