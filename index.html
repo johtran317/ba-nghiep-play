@@ -11024,7 +11024,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V276';
+var BUILD='V277';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -15117,4 +15117,45 @@ var HB4ART={evs:'qi_daily',wheel:'qi_event',season:'qi_vip',patrol:'qi_tower',bo
   '@media (prefers-reduced-motion:reduce){html body #hb4w .hb4in,html body #hb4w .hb4bg{animation:none}}';
  document.head.appendChild(css);
 }catch(e){try{console.error('hb274',e)}catch(x){}}})();
+/* ================= V277 (art agent, user 2026-11-04 21:47 Tướng tab: "the current layout is perfect — find a way to improve and
+   optimise it"). Same layout, same cards; polish only (CSS + one extra grid tile, no logic):
+   1. Bày trận / Tửu Quán / Kho đồ buttons: the painted bronze medallions (qi_form / qi_tavern / qi_inv) replace the thin line icons;
+      the Tửu Quán count sits on the button's top-right corner.
+   2. Branch chip row: a soft fade at the right edge so a cut-off chip reads as "scroll for more".
+   3. Rarity letter on each card (SSR / SR / R) becomes a small gem plate in its rarity colour (gold / violet / blue).
+   4. Troop bar: thicker, rounded, dark track + bright green fill (reads at a glance).
+   5. The loose hint line under the grid becomes a "Chiêu mộ" tile in the next empty grid slot (dashed bronze frame, tavern
+      medallion, the same hint text) → opens Tửu Quán (existing `tavern` action).
+   Pressed cards dip slightly. GN277=0 turns it off. No new art, no new actions. */
+var GN277=1;
+(function(){try{
+ function tile(){try{if(!GN277||tab!=='gen')return;var m=document.getElementById('main');if(!m)return;var g=m.querySelector('.hgrid');if(!g||g.querySelector('.gn7add'))return;
+   if(!g.querySelector('button[data-a="gen"]'))return;
+   var a=document.createElement('button');a.type='button';a.className='gn7add';a.setAttribute('data-a','tavern');
+   a.innerHTML='<i></i><b>Chiêu mộ</b><span>Tướng gặp trên bản đồ chờ ở Tửu Quán</span>';g.appendChild(a)}catch(e){}}
+ var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);try{document.body.classList.add('gn7')}catch(e){}tile();return r};
+ var M='html body.gn7 #main',B=M+'>.row:first-child>.btn';
+ function sel(x){return[B+'[data-a="form"]'+x,B+'[data-a="tavern"]'+x,B+'[data-a="inv"]'+x].join(',')}
+ function bc(){try{document.body.classList.add('gn7')}catch(e){}}bc();document.addEventListener('DOMContentLoaded',bc);
+ var css=document.createElement('style');css.id='gn277css';css.textContent=
+  sel('')+'{background-image:none!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;position:relative!important;padding-left:8px!important;padding-right:8px!important}'+
+  sel('::before')+'{content:""!important;flex:none;width:30px;height:30px;background:var(--gn7) center/contain no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}'+
+  B+'[data-a="form"]{--gn7:url(art/ui/qi_form.webp)}'+B+'[data-a="tavern"]{--gn7:url(art/ui/qi_tavern.webp)}'+B+'[data-a="inv"]{--gn7:url(art/ui/qi_inv.webp)}'+
+  B+'[data-a="tavern"] .dstq{position:absolute!important;top:-7px!important;right:-5px!important;margin:0!important;box-shadow:0 0 0 2px #1a120a}'+
+  M+' .gtools .chips{-webkit-mask-image:linear-gradient(90deg,#000 84%,transparent);mask-image:linear-gradient(90deg,#000 84%,transparent)}'+
+  M+' .hgrid .hc .rar{font:800 11px/1 var(--ds-fb,system-ui,sans-serif)!important;font-style:normal!important;letter-spacing:.04em;padding:3px 6px!important;border-radius:5px!important;top:6px!important;left:6px!important;text-shadow:none!important;box-shadow:0 0 0 1px rgba(0,0,0,.7),0 2px 3px rgba(0,0,0,.6)!important;-webkit-text-stroke:0!important}'+
+  M+' .hgrid .hc.rSSR .rar,'+M+' .hgrid .hc.rUR .rar{background:linear-gradient(#ffe9a3,#d79b2e)!important;color:#3a2206!important}'+
+  M+' .hgrid .hc.rSR .rar{background:linear-gradient(#e2c3ff,#8a55c9)!important;color:#22103a!important}'+
+  M+' .hgrid .hc.rR .rar{background:linear-gradient(#cfe3ff,#5b86c2)!important;color:#0f2140!important}'+
+  M+' .hgrid .hc .bar{height:5px!important;border-radius:3px!important;background:rgba(0,0,0,.55)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)!important}'+
+  M+' .hgrid .hc .bar i{border-radius:3px!important;background:linear-gradient(90deg,#3fae6a,#7fe0a0)!important}'+
+  M+' .hgrid .hc:active{transform:scale(.97)}'+
+  M+' .hgrid .gn7add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:150px;padding:10px 8px;border-radius:14px;border:1.5px dashed rgba(226,178,90,.45);background:rgba(20,14,9,.55);color:#c9b48a;font:500 12.5px/1.3 var(--ds-fb,system-ui,sans-serif);text-align:center;cursor:pointer}'+
+  M+' .hgrid .gn7add:active{transform:scale(.97)}'+
+  M+' .hgrid .gn7add i{width:54px;height:54px;background:url(art/ui/qi_tavern.webp) center/contain no-repeat;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}'+
+  M+' .hgrid .gn7add b{font:700 15px var(--ds-fd,Philosopher,Georgia,serif);color:#f6d77d}'+
+  M+' .hgrid~p.sm.mute{display:none!important}';
+ document.head.appendChild(css);
+ try{tile()}catch(e){}
+}catch(e){try{console.error('gn277',e)}catch(x){}}})();
 </script>
