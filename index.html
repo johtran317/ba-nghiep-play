@@ -6990,7 +6990,8 @@ resultSheet=function(R){var h=_rsPV(R),k='<div class="row" style="margin-top:12p
  var nx='',p=String(R.key||'').split('|');
  try{if(R.win&&p[2]==='stage'){var mi=+p[0],si=+p[1]+1;if(MAPS[mi]&&si<MAPS[mi].st.length&&stageOpen(mi,si))nx='<button class="btn sp" data-a="stage" data-v="'+mi+'|'+si+'|stage">Ải tiếp ▸</button>'}}catch(e){}
  var tail=h.slice(j).replace('<div class="row" style="margin-top:12px">','<div class="row resbar">');
- if(nx)tail=tail.replace('<button class="btn sp" data-a="stage"','<button class="btn alt" data-a="stage"').replace('<div class="row resbar">','<div class="row resbar">'+nx);
+ /* V288 (user 2026-11-05 08:02 "Ải tiếp and Đánh lại → Ải tiếp and Kết thúc"): with a next stage the second button ends the run and goes back to the campaign map (gocamp) instead of replaying */
+ if(nx)tail=tail.replace(/<button class="btn sp" data-a="stage"[^>]*>[^<]*<\/button>/,'<button class="btn alt" data-a="gocamp">Kết thúc</button>').replace('<div class="row resbar">','<div class="row resbar">'+nx);
  return h.slice(0,j)+tail};
 (function(){var s=document.createElement('style');s.textContent='.resbar{position:sticky;bottom:0;z-index:3;margin-top:12px;padding:12px 0 6px;gap:8px;background:linear-gradient(180deg,rgba(20,14,12,0),rgba(20,14,12,.97) 24%)}.resbar .btn.sp{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}';document.head.appendChild(s)})();
 (function(){var s=document.createElement('style');s.textContent='.tdw span{padding:5px 2px!important;gap:3px!important}.tdw b{font-size:11.5px!important;letter-spacing:-.02em}.tdw .tdk{flex:none}';document.head.appendChild(s)})();
@@ -11025,7 +11026,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V287';
+var BUILD='V288';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
