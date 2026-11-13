@@ -1,0 +1,271 @@
+{
+ "_note": "BN-355t plates (techart). 780x1386 = css 390x693 at dpr 2, same geometry as prebattle_plate_r8.webp (swap the image only). Baked: r115 rim composite, r7 grade, no-man's-land css 322-350 per plate. Grid, tiles, crowds, standards, haze, shadows = code. Below the plate the page is #120e0b. BN-ON1t: plates with a `rain` field also have plate_<key>_rain.webp (same geometry; the wet edit baked with the same rim, bottom fade and no-man's-land stripe as the dry plate): swap it in when it rains.",
+ "plates": {
+  "farmland": {
+   "file": "plate_farmland.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127b",
+   "mid_luma_before": 93.6,
+   "mid_luma_final": 93.6,
+   "bytes": 75790,
+   "rain": "plate_farmland_rain.webp",
+   "rain_pick": "r170b",
+   "rain_mid_luma": 82.6
+  },
+  "river": {
+   "file": "plate_river.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a",
+   "mid_luma_before": 114.9,
+   "mid_luma_final": 114.9,
+   "bytes": 66910,
+   "rain": "plate_river_rain.webp",
+   "rain_pick": "r169a",
+   "rain_mid_luma": 106.3
+  },
+  "flood": {
+   "file": "plate_flood.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127b",
+   "mid_luma_before": 87.5,
+   "mid_luma_final": 106.9,
+   "bytes": 83324,
+   "rain": "plate_flood_rain.webp",
+   "rain_pick": "r187b",
+   "rain_mid_luma": 107.1
+  },
+  "pinehills": {
+   "file": "plate_pinehills.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127b",
+   "mid_luma_before": 94.2,
+   "mid_luma_final": 94.2,
+   "bytes": 81838,
+   "rain": "plate_pinehills_rain.webp",
+   "rain_pick": "r172b",
+   "rain_mid_luma": 88.7
+  },
+  "bamboo": {
+   "file": "plate_bamboo.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127b",
+   "mid_luma_before": 92.9,
+   "mid_luma_final": 92.9,
+   "bytes": 95396,
+   "rain": "plate_bamboo_rain.webp",
+   "rain_pick": "r173b",
+   "rain_mid_luma": 86.2
+  },
+  "burned": {
+   "file": "plate_burned.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a",
+   "mid_luma_before": 83.7,
+   "mid_luma_final": 103.8,
+   "bytes": 85462,
+   "rain": "plate_burned_rain.webp",
+   "rain_pick": "r191b",
+   "rain_mid_luma": 96.1
+  },
+  "pass": {
+   "file": "plate_pass.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a",
+   "mid_luma_before": 102.3,
+   "mid_luma_final": 102.3,
+   "bytes": 63922,
+   "rain": "plate_pass_rain.webp",
+   "rain_pick": "r186b",
+   "rain_mid_luma": 96.2
+  },
+  "loess": {
+   "file": "plate_loess.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127b",
+   "mid_luma_before": 125.8,
+   "mid_luma_final": 121.4,
+   "bytes": 74438,
+   "rain": "plate_loess_rain.webp",
+   "rain_pick": "r174a",
+   "rain_mid_luma": 105.2
+  },
+  "desert": {
+   "file": "plate_desert.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a",
+   "mid_luma_before": 125.0,
+   "mid_luma_final": 125.0,
+   "bytes": 59598,
+   "rain": "plate_desert_rain.webp",
+   "rain_pick": "r190b",
+   "rain_mid_luma": 115.5
+  },
+  "snow": {
+   "file": "plate_snow.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a",
+   "mid_luma_before": 128.2,
+   "mid_luma_final": 128.2,
+   "bytes": 75150,
+   "rain": "plate_snow_rain.webp",
+   "rain_pick": "r192b",
+   "rain_mid_luma": 121.2
+  },
+  "bosscamp": {
+   "file": "plate_bosscamp.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a",
+   "mid_luma_before": 86.8,
+   "mid_luma_final": 106.0,
+   "bytes": 92798,
+   "rain": "plate_bosscamp_rain.webp",
+   "rain_pick": "r189b",
+   "rain_mid_luma": 103.0
+  },
+  "fortress": {
+   "file": "plate_fortress.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a+r131a ground transplant",
+   "mid_luma_before": 98.3,
+   "mid_luma_final": 98.3,
+   "bytes": 60150,
+   "rain": "plate_fortress_rain.webp",
+   "rain_pick": "r171a",
+   "rain_mid_luma": 90.4
+  },
+  "palace": {
+   "file": "plate_palace.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127b + r134b ground (joint-faded) transplant",
+   "mid_luma_before": 105.7,
+   "mid_luma_final": 105.7,
+   "bytes": 57696,
+   "rain": "plate_palace_rain.webp",
+   "rain_pick": "r188b",
+   "rain_mid_luma": 96.2
+  },
+  "terrace": {
+   "file": "plate_terrace.webp",
+   "size": [
+    780,
+    1386
+   ],
+   "css_size": [
+    390,
+    693
+   ],
+   "below": "#120e0b",
+   "pick": "r127a + r134a ground (joint-faded) transplant",
+   "mid_luma_before": 107.7,
+   "mid_luma_final": 107.7,
+   "bytes": 56510,
+   "rain": "plate_terrace_rain.webp",
+   "rain_pick": "r193a",
+   "rain_mid_luma": 97.3
+  }
+ }
+}

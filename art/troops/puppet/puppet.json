@@ -1,0 +1,10030 @@
+{
+ "version": 1,
+ "cut_scale": 0.5,
+ "note": "looks -> side -> type -> {atlas, atlas_size, cells[{id, body[x,y,w,h], size, anchor, parts[{name, rect, off, pivot, z, mix}]}], extra}. Px = cut-atlas px (cut_scale 0.5), same space as cut_*.json cells; cell i = soldier i of the same look/side/type in cut_*.json (r74 types: extra.layout). Draw body at the cell origin, parts at off, rotated about pivot (cell px); anchor = feet centre. z over|under body. mix group: parts sharing a group swing together. Type missing for a look/side = whole-block.",
+ "looks": {
+  "l1": {
+   "ours": {
+    "pike": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        426,
+        1912,
+        204,
+        152
+       ],
+       "size": [
+        204,
+        152
+       ],
+       "anchor": [
+        129.8,
+        152
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2394,
+          204,
+          22
+         ],
+         "off": [
+          0,
+          61
+         ],
+         "pivot": [
+          86,
+          72
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        400,
+        1126,
+        89,
+        206
+       ],
+       "size": [
+        89,
+        206
+       ],
+       "anchor": [
+        48.3,
+        206
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          605,
+          1126,
+          35,
+          205
+         ],
+         "off": [
+          54,
+          0
+         ],
+         "pivot": [
+          79,
+          95
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        1744,
+        144,
+        166
+       ],
+       "size": [
+        144,
+        166
+       ],
+       "anchor": [
+        47.3,
+        166
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          742,
+          1744,
+          144,
+          153
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          84,
+          72
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        632,
+        1912,
+        177,
+        152
+       ],
+       "size": [
+        177,
+        152
+       ],
+       "anchor": [
+        103.4,
+        152
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          729,
+          2067,
+          176,
+          83
+         ],
+         "off": [
+          1,
+          51
+         ],
+         "pivot": [
+          69,
+          105
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 142.42299994590795,
+       "pitch": 172.3,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 43.1,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 89.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1442,
+       884
+      ],
+      "block_view_h": 478.2,
+      "view_to_src": 1.8487
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        656,
+        884,
+        118,
+        222
+       ],
+       "size": [
+        118,
+        222
+       ],
+       "anchor": [
+        73.3,
+        222
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          811,
+          1912,
+          65,
+          148
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          30,
+          80
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        372,
+        1550,
+        137,
+        185
+       ],
+       "size": [
+        137,
+        185
+       ],
+       "anchor": [
+        78.4,
+        185
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          920,
+          1912,
+          33,
+          140
+         ],
+         "off": [
+          28,
+          0
+         ],
+         "pivot": [
+          38,
+          68
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "arm",
+         "rect": [
+          734,
+          2353,
+          67,
+          27
+         ],
+         "off": [
+          0,
+          58
+         ],
+         "pivot": [
+          38,
+          68
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        373,
+        1345,
+        119,
+        198
+       ],
+       "size": [
+        119,
+        198
+       ],
+       "anchor": [
+        62.5,
+        198
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          132,
+          2067,
+          44,
+          124
+         ],
+         "off": [
+          0,
+          48
+         ],
+         "pivot": [
+          20,
+          125
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        834,
+        1550,
+        134,
+        169
+       ],
+       "size": [
+        134,
+        169
+       ],
+       "anchor": [
+        80.9,
+        169
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          878,
+          1912,
+          40,
+          143
+         ],
+         "off": [
+          18,
+          7
+         ],
+         "pivot": [
+          36,
+          70
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "arm",
+         "rect": [
+          206,
+          2394,
+          34,
+          22
+         ],
+         "off": [
+          33,
+          65
+         ],
+         "pivot": [
+          36,
+          70
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 87.15789473684211,
+       "pitch": 134,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.5,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 93.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1482,
+       933
+      ],
+      "block_view_h": 491.1,
+      "view_to_src": 1.9
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        642,
+        1126,
+        124,
+        204
+       ],
+       "size": [
+        124,
+        204
+       ],
+       "anchor": [
+        54.8,
+        204
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          304,
+          2282,
+          48,
+          62
+         ],
+         "off": [
+          74,
+          0
+         ],
+         "pivot": [
+          112,
+          48
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        1345,
+        144,
+        203
+       ],
+       "size": [
+        144,
+        203
+       ],
+       "anchor": [
+        55.8,
+        203
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          975,
+          2282,
+          26,
+          42
+         ],
+         "off": [
+          110,
+          45
+         ],
+         "pivot": [
+          125,
+          72
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        491,
+        1126,
+        112,
+        206
+       ],
+       "size": [
+        112,
+        206
+       ],
+       "anchor": [
+        62.6,
+        206
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          442,
+          2282,
+          64,
+          58
+         ],
+         "off": [
+          0,
+          74
+         ],
+         "pivot": [
+          44,
+          112
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        768,
+        1126,
+        134,
+        204
+       ],
+       "size": [
+        134,
+        204
+       ],
+       "anchor": [
+        78.2,
+        204
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          877,
+          2282,
+          50,
+          48
+         ],
+         "off": [
+          68,
+          124
+         ],
+         "pivot": [
+          110,
+          136
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 99.30803177405119,
+       "pitch": 147.8,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 37,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 101.3,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1414,
+       936
+      ],
+      "block_view_h": 516.3,
+      "view_to_src": 1.8128
+     }
+    },
+    "lightcav": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        629,
+        232,
+        253
+       ],
+       "size": [
+        232,
+        253
+       ],
+       "anchor": [
+        195.7,
+        253
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          520,
+          2198,
+          126,
+          74
+         ],
+         "off": [
+          58,
+          0
+         ],
+         "pivot": [
+          133,
+          43
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        162,
+        352,
+        159,
+        273
+       ],
+       "size": [
+        159,
+        273
+       ],
+       "anchor": [
+        61.1,
+        273
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          396,
+          2067,
+          60,
+          95
+         ],
+         "off": [
+          69,
+          0
+         ],
+         "pivot": [
+          120,
+          69
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        234,
+        629,
+        207,
+        252
+       ],
+       "size": [
+        207,
+        252
+       ],
+       "anchor": [
+        161.5,
+        252
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          693,
+          2198,
+          181,
+          71
+         ],
+         "off": [
+          10,
+          1
+         ],
+         "pivot": [
+          137,
+          47
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        382,
+        0,
+        167,
+        304
+       ],
+       "size": [
+        167,
+        304
+       ],
+       "anchor": [
+        114.9,
+        304
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          283,
+          2067,
+          61,
+          98
+         ],
+         "off": [
+          106,
+          4
+         ],
+         "pivot": [
+          132,
+          76
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 209.8266871980035,
+       "pitch": 186.9,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 93.4,
+       "row_pitch_y": 173.9,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1469,
+       947
+      ],
+      "block_view_h": 502.8,
+      "view_to_src": 1.8833
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        884,
+        230,
+        240
+       ],
+       "size": [
+        230,
+        240
+       ],
+       "anchor": [
+        143.5,
+        240
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2282,
+          181,
+          69
+         ],
+         "off": [
+          43,
+          47
+         ],
+         "pivot": [
+          154,
+          89
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        625,
+        629,
+        202,
+        249
+       ],
+       "size": [
+        202,
+        249
+       ],
+       "anchor": [
+        115.2,
+        249
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          787,
+          2282,
+          88,
+          49
+         ],
+         "off": [
+          114,
+          40
+         ],
+         "pivot": [
+          144,
+          80
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        192,
+        0,
+        188,
+        330
+       ],
+       "size": [
+        188,
+        330
+       ],
+       "anchor": [
+        119.1,
+        330
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          511,
+          1550,
+          35,
+          185
+         ],
+         "off": [
+          112,
+          6
+         ],
+         "pivot": [
+          133,
+          105
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        232,
+        884,
+        201,
+        239
+       ],
+       "size": [
+        201,
+        239
+       ],
+       "anchor": [
+        125.1,
+        239
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2198,
+          171,
+          82
+         ],
+         "off": [
+          13,
+          6
+         ],
+         "pivot": [
+          139,
+          64
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 155.96169733383402,
+       "pitch": 184.2,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 92.1,
+       "row_pitch_y": 132.5,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1454,
+       901
+      ],
+      "block_view_h": 483.3,
+      "view_to_src": 1.8641
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        150,
+        1912,
+        137,
+        153
+       ],
+       "size": [
+        137,
+        153
+       ],
+       "anchor": [
+        66.9,
+        153
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          508,
+          2282,
+          49,
+          56
+         ],
+         "off": [
+          88,
+          52
+         ],
+         "pivot": [
+          94,
+          82
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        475,
+        1744,
+        152,
+        157
+       ],
+       "size": [
+        152,
+        157
+       ],
+       "anchor": [
+        70.1,
+        157
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          719,
+          2282,
+          66,
+          51
+         ],
+         "off": [
+          86,
+          59
+         ],
+         "pivot": [
+          92,
+          82
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        2067,
+        130,
+        129
+       ],
+       "size": [
+        130,
+        129
+       ],
+       "anchor": [
+        68.7,
+        129
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          701,
+          2353,
+          31,
+          28
+         ],
+         "off": [
+          95,
+          79
+         ],
+         "pivot": [
+          101,
+          86
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        289,
+        1912,
+        135,
+        153
+       ],
+       "size": [
+        135,
+        153
+       ],
+       "anchor": [
+        75.9,
+        153
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          354,
+          2282,
+          44,
+          60
+         ],
+         "off": [
+          91,
+          46
+         ],
+         "pivot": [
+          95,
+          80
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 87.45938331507278,
+       "pitch": 135.8,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 34,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 91.2,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1495,
+       954
+      ],
+      "block_view_h": 497.7,
+      "view_to_src": 1.9167,
+      "source": "r74 iso-shield-look1-ours a"
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        289,
+        2420,
+        98,
+        150
+       ],
+       "size": [
+        98,
+        150
+       ],
+       "anchor": [
+        52.1,
+        150
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        389,
+        2420,
+        87,
+        150
+       ],
+       "size": [
+        87,
+        150
+       ],
+       "anchor": [
+        42.5,
+        150
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        194,
+        2420,
+        93,
+        166
+       ],
+       "size": [
+        93,
+        166
+       ],
+       "anchor": [
+        41,
+        166
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        478,
+        2420,
+        84,
+        147
+       ],
+       "size": [
+        84,
+        147
+       ],
+       "anchor": [
+        39,
+        147
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "slots",
+       "slots_view_px": [
+        [
+         272.1,
+         474.8
+        ],
+        [
+         350.7,
+         474.8
+        ],
+        [
+         429.3,
+         474.8
+        ],
+        [
+         507.9,
+         474.8
+        ],
+        [
+         303.3,
+         403.5
+        ],
+        [
+         476.7,
+         403.5
+        ],
+        [
+         219.8,
+         403.5
+        ],
+        [
+         560.1,
+         403.5
+        ],
+        [
+         303.3,
+         332.2
+        ],
+        [
+         476.7,
+         332.2
+        ],
+        [
+         219.8,
+         332.2
+        ],
+        [
+         560.1,
+         332.2
+        ]
+       ],
+       "note": "BN-316b drum crew"
+      },
+      "block_src_size": [
+       1477,
+       899
+      ],
+      "block_view_h": 474.8,
+      "view_to_src": 1.8936,
+      "cart": {
+       "size": [
+        192,
+        270
+       ],
+       "pos_in_block": [
+        288.6,
+        105.4
+       ],
+       "pivot": [
+        96,
+        121.5
+       ],
+       "rect": [
+        0,
+        2420,
+        192,
+        270
+       ]
+      },
+      "source": "r107 BN-320 r107_drum_l1_ours_frame_b.png (frame) + crew"
+     }
+    }
+   },
+   "enemy": {
+    "pike": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        146,
+        1744,
+        167,
+        163
+       ],
+       "size": [
+        167,
+        163
+       ],
+       "anchor": [
+        75.1,
+        163
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          90,
+          2353,
+          166,
+          35
+         ],
+         "off": [
+          0,
+          72
+         ],
+         "pivot": [
+          92,
+          93
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        829,
+        629,
+        97,
+        245
+       ],
+       "size": [
+        97,
+        245
+       ],
+       "anchor": [
+        50.9,
+        245
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          928,
+          629,
+          35,
+          245
+         ],
+         "off": [
+          62,
+          0
+         ],
+         "pivot": [
+          90,
+          122
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        682,
+        1550,
+        150,
+        169
+       ],
+       "size": [
+        150,
+        169
+       ],
+       "anchor": [
+        56,
+        169
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          1912,
+          148,
+          153
+         ],
+         "off": [
+          0,
+          1
+         ],
+         "pivot": [
+          82,
+          83
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        315,
+        1744,
+        158,
+        159
+       ],
+       "size": [
+        158,
+        159
+       ],
+       "anchor": [
+        58.5,
+        159
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          458,
+          2067,
+          152,
+          92
+         ],
+         "off": [
+          6,
+          64
+         ],
+         "pivot": [
+          75,
+          115
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 107.44722339974565,
+       "pitch": 150.7,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 37.7,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 80.6,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1472,
+       934
+      ],
+      "block_view_h": 494.9,
+      "view_to_src": 1.8872
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        145,
+        1550,
+        103,
+        190
+       ],
+       "size": [
+        103,
+        190
+       ],
+       "anchor": [
+        48.7,
+        190
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          955,
+          1912,
+          41,
+          133
+         ],
+         "off": [
+          62,
+          0
+         ],
+         "pivot": [
+          90,
+          64
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        250,
+        1550,
+        120,
+        186
+       ],
+       "size": [
+        120,
+        186
+       ],
+       "anchor": [
+        55.4,
+        186
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          245,
+          2067,
+          36,
+          103
+         ],
+         "off": [
+          84,
+          19
+         ],
+         "pivot": [
+          108,
+          60
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "arm",
+         "rect": [
+          242,
+          2394,
+          55,
+          22
+         ],
+         "off": [
+          54,
+          52
+         ],
+         "pivot": [
+          62,
+          66
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          417,
+          2353,
+          36,
+          30
+         ],
+         "off": [
+          10,
+          52
+         ],
+         "pivot": [
+          36,
+          62
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        494,
+        1345,
+        107,
+        196
+       ],
+       "size": [
+        107,
+        196
+       ],
+       "anchor": [
+        49.3,
+        196
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          215,
+          2067,
+          28,
+          108
+         ],
+         "off": [
+          78,
+          86
+         ],
+         "pivot": [
+          90,
+          172
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "arm",
+         "rect": [
+          299,
+          2394,
+          5,
+          8
+         ],
+         "off": [
+          76,
+          165
+         ],
+         "pivot": [
+          80,
+          165
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        629,
+        1744,
+        111,
+        155
+       ],
+       "size": [
+        111,
+        155
+       ],
+       "anchor": [
+        47.1,
+        155
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          178,
+          2067,
+          35,
+          121
+         ],
+         "off": [
+          76,
+          18
+         ],
+         "pivot": [
+          70,
+          88
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "arm",
+         "rect": [
+          835,
+          2353,
+          28,
+          25
+         ],
+         "off": [
+          56,
+          73
+         ],
+         "pivot": [
+          60,
+          82
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          319,
+          2353,
+          30,
+          33
+         ],
+         "off": [
+          12,
+          72
+         ],
+         "pivot": [
+          32,
+          82
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 82.36325185046961,
+       "pitch": 139.5,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 34.9,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 106.4,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1254,
+       926
+      ],
+      "block_view_h": 576,
+      "view_to_src": 1.6077
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        466,
+        884,
+        109,
+        224
+       ],
+       "size": [
+        109,
+        224
+       ],
+       "anchor": [
+        51.5,
+        224
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          648,
+          2198,
+          43,
+          73
+         ],
+         "off": [
+          66,
+          0
+         ],
+         "pivot": [
+          102,
+          47
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        285,
+        1126,
+        113,
+        210
+       ],
+       "size": [
+        113,
+        210
+       ],
+       "anchor": [
+        53.6,
+        210
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          803,
+          2353,
+          30,
+          27
+         ],
+         "off": [
+          83,
+          85
+         ],
+         "pivot": [
+          104,
+          92
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        577,
+        884,
+        77,
+        224
+       ],
+       "size": [
+        77,
+        224
+       ],
+       "anchor": [
+        39.3,
+        224
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          670,
+          2282,
+          47,
+          53
+         ],
+         "off": [
+          16,
+          58
+         ],
+         "pivot": [
+          24,
+          103
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        179,
+        1126,
+        104,
+        211
+       ],
+       "size": [
+        104,
+        211
+       ],
+       "anchor": [
+        50.3,
+        211
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2353,
+          50,
+          39
+         ],
+         "off": [
+          54,
+          117
+         ],
+         "pivot": [
+          76,
+          125
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 68.42437797036622,
+       "pitch": 133.6,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.4,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 112.7,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1395,
+       900
+      ],
+      "block_view_h": 503.2,
+      "view_to_src": 1.7885
+     }
+    },
+    "lightcav": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        515,
+        352,
+        191,
+        262
+       ],
+       "size": [
+        191,
+        262
+       ],
+       "anchor": [
+        141.1,
+        262
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          442,
+          2198,
+          76,
+          79
+         ],
+         "off": [
+          14,
+          16
+         ],
+         "pivot": [
+          68,
+          39
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        352,
+        160,
+        275
+       ],
+       "size": [
+        160,
+        275
+       ],
+       "anchor": [
+        85,
+        275
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          374,
+          2198,
+          66,
+          80
+         ],
+         "off": [
+          25,
+          0
+         ],
+         "pivot": [
+          34,
+          53
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        443,
+        629,
+        180,
+        249
+       ],
+       "size": [
+        180,
+        249
+       ],
+       "anchor": [
+        105.3,
+        249
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          455,
+          2353,
+          165,
+          30
+         ],
+         "off": [
+          15,
+          48
+         ],
+         "pivot": [
+          53,
+          57
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        323,
+        352,
+        190,
+        268
+       ],
+       "size": [
+        190,
+        268
+       ],
+       "anchor": [
+        127.6,
+        268
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          222,
+          2282,
+          80,
+          65
+         ],
+         "off": [
+          2,
+          10
+         ],
+         "pivot": [
+          60,
+          50
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 153.38672817981868,
+       "pitch": 173.3,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 86.6,
+       "row_pitch_y": 172.5,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1454,
+       948
+      ],
+      "block_view_h": 508.6,
+      "view_to_src": 1.8641
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        603,
+        1345,
+        136,
+        196
+       ],
+       "size": [
+        136,
+        196
+       ],
+       "anchor": [
+        64,
+        196
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          876,
+          2198,
+          71,
+          70
+         ],
+         "off": [
+          0,
+          115
+         ],
+         "pivot": [
+          12,
+          116
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        548,
+        1550,
+        132,
+        184
+       ],
+       "size": [
+        132,
+        184
+       ],
+       "anchor": [
+        53.3,
+        184
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          599,
+          2282,
+          69,
+          54
+         ],
+         "off": [
+          0,
+          77
+         ],
+         "pivot": [
+          8,
+          100
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        741,
+        1345,
+        154,
+        194
+       ],
+       "size": [
+        154,
+        194
+       ],
+       "anchor": [
+        73.8,
+        194
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          346,
+          2067,
+          48,
+          98
+         ],
+         "off": [
+          0,
+          14
+         ],
+         "pivot": [
+          42,
+          82
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        0,
+        1550,
+        143,
+        192
+       ],
+       "size": [
+        143,
+        192
+       ],
+       "anchor": [
+        45.9,
+        192
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          907,
+          2067,
+          64,
+          83
+         ],
+         "off": [
+          3,
+          2
+         ],
+         "pivot": [
+          40,
+          80
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 100.61872841763152,
+       "pitch": 138,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 34.5,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 88.7,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1536,
+       988
+      ],
+      "block_view_h": 501.7,
+      "view_to_src": 1.9692,
+      "source": "r74 iso-shield-look1-enemy a"
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        708,
+        352,
+        241,
+        262
+       ],
+       "size": [
+        241,
+        262
+       ],
+       "anchor": [
+        154.7,
+        262
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          173,
+          2198,
+          199,
+          81
+         ],
+         "off": [
+          40,
+          48
+         ],
+         "pivot": [
+          147,
+          92
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        551,
+        0,
+        212,
+        289
+       ],
+       "size": [
+        212,
+        289
+       ],
+       "anchor": [
+        123,
+        289
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          622,
+          2353,
+          77,
+          30
+         ],
+         "off": [
+          127,
+          40
+         ],
+         "pivot": [
+          150,
+          62
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        0,
+        190,
+        350
+       ],
+       "size": [
+        190,
+        350
+       ],
+       "anchor": [
+        64.8,
+        350
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          435,
+          884,
+          29,
+          234
+         ],
+         "off": [
+          26,
+          4
+         ],
+         "pivot": [
+          35,
+          155
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        765,
+        0,
+        209,
+        283
+       ],
+       "size": [
+        209,
+        283
+       ],
+       "anchor": [
+        109.9,
+        283
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          612,
+          2067,
+          115,
+          91
+         ],
+         "off": [
+          1,
+          1
+         ],
+         "pivot": [
+          53,
+          61
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 166.84628909371833,
+       "pitch": 192,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 96,
+       "row_pitch_y": 123.2,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1464,
+       947
+      ],
+      "block_view_h": 504.5,
+      "view_to_src": 1.8769,
+      "source": "r74 iso-heavycav-look1-warox-enemy a"
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l1.webp",
+     "atlas_size": [
+      1024,
+      2692
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        776,
+        884,
+        135,
+        219
+       ],
+       "size": [
+        135,
+        219
+       ],
+       "anchor": [
+        67.2,
+        219
+       ],
+       "parts": [
+        {
+         "name": "armA",
+         "rect": [
+          183,
+          2282,
+          37,
+          66
+         ],
+         "off": [
+          0,
+          3
+         ],
+         "pivot": [
+          25,
+          66
+         ],
+         "z": "over",
+         "mix": "a"
+        },
+        {
+         "name": "armB",
+         "rect": [
+          559,
+          2282,
+          38,
+          56
+         ],
+         "off": [
+          95,
+          3
+         ],
+         "pivot": [
+          109,
+          57
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        1126,
+        177,
+        217
+       ],
+       "size": [
+        177,
+        217
+       ],
+       "anchor": [
+        63.1,
+        217
+       ],
+       "parts": [
+        {
+         "name": "armA",
+         "rect": [
+          400,
+          2282,
+          40,
+          59
+         ],
+         "off": [
+          6,
+          0
+         ],
+         "pivot": [
+          13,
+          58
+         ],
+         "z": "over",
+         "mix": "a"
+        },
+        {
+         "name": "armB",
+         "rect": [
+          865,
+          2353,
+          79,
+          24
+         ],
+         "off": [
+          95,
+          74
+         ],
+         "pivot": [
+          97,
+          91
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        146,
+        1345,
+        116,
+        200
+       ],
+       "size": [
+        116,
+        200
+       ],
+       "anchor": [
+        47.3,
+        200
+       ],
+       "parts": [
+        {
+         "name": "armA",
+         "rect": [
+          258,
+          2353,
+          59,
+          34
+         ],
+         "off": [
+          19,
+          87
+         ],
+         "pivot": [
+          24,
+          90
+         ],
+         "z": "over",
+         "mix": "a"
+        },
+        {
+         "name": "armB",
+         "rect": [
+          52,
+          2353,
+          36,
+          37
+         ],
+         "off": [
+          74,
+          69
+         ],
+         "pivot": [
+          90,
+          74
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        264,
+        1345,
+        107,
+        199
+       ],
+       "size": [
+        107,
+        199
+       ],
+       "anchor": [
+        59.8,
+        199
+       ],
+       "parts": [
+        {
+         "name": "armA",
+         "rect": [
+          351,
+          2353,
+          64,
+          31
+         ],
+         "off": [
+          9,
+          91
+         ],
+         "pivot": [
+          14,
+          96
+         ],
+         "z": "over",
+         "mix": "a"
+        },
+        {
+         "name": "armB",
+         "rect": [
+          929,
+          2282,
+          44,
+          43
+         ],
+         "off": [
+          53,
+          73
+         ],
+         "pivot": [
+          80,
+          76
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4
+       ],
+       "front_c0": 128.91514847623824,
+       "pitch": 142.9,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 35.7,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 116.6,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1400,
+       847
+      ],
+      "block_view_h": 471.9,
+      "view_to_src": 1.7949,
+      "source": "r74 r85 a"
+     }
+    }
+   }
+  },
+  "l2": {
+   "ours": {
+    "pike": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        177,
+        889,
+        122,
+        253
+       ],
+       "size": [
+        122,
+        253
+       ],
+       "anchor": [
+        54.9,
+        253
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          135,
+          1145,
+          43,
+          246
+         ],
+         "off": [
+          75,
+          0
+         ],
+         "pivot": [
+          105,
+          151
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        311,
+        624,
+        116,
+        257
+       ],
+       "size": [
+        116,
+        257
+       ],
+       "anchor": [
+        50.2,
+        257
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          298,
+          1145,
+          37,
+          241
+         ],
+         "off": [
+          77,
+          0
+         ],
+         "pivot": [
+          98,
+          142
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        301,
+        889,
+        130,
+        253
+       ],
+       "size": [
+        130,
+        253
+       ],
+       "anchor": [
+        68.9,
+        253
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          180,
+          1145,
+          44,
+          243
+         ],
+         "off": [
+          0,
+          1
+         ],
+         "pivot": [
+          18,
+          153
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        605,
+        624,
+        119,
+        254
+       ],
+       "size": [
+        119,
+        254
+       ],
+       "anchor": [
+        54.4,
+        254
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          226,
+          1145,
+          34,
+          242
+         ],
+         "off": [
+          80,
+          1
+         ],
+         "pivot": [
+          102,
+          163
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 73.80075031263027,
+       "pitch": 133.5,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.4,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 119.1,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1497,
+       968
+      ],
+      "block_view_h": 504.4,
+      "view_to_src": 1.9192
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        572,
+        1145,
+        98,
+        220
+       ],
+       "size": [
+        98,
+        220
+       ],
+       "anchor": [
+        54.1,
+        220
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          787,
+          2201,
+          54,
+          97
+         ],
+         "off": [
+          44,
+          0
+         ],
+         "pivot": [
+          90,
+          66
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        697,
+        2017,
+        116,
+        175
+       ],
+       "size": [
+        116,
+        175
+       ],
+       "anchor": [
+        54.9,
+        175
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          341,
+          2471,
+          34,
+          50
+         ],
+         "off": [
+          82,
+          24
+         ],
+         "pivot": [
+          101,
+          49
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        163,
+        2017,
+        79,
+        179
+       ],
+       "size": [
+        79,
+        179
+       ],
+       "anchor": [
+        42.8,
+        179
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          377,
+          2471,
+          54,
+          50
+         ],
+         "off": [
+          0,
+          80
+         ],
+         "pivot": [
+          46,
+          122
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        580,
+        2017,
+        115,
+        177
+       ],
+       "size": [
+        115,
+        177
+       ],
+       "anchor": [
+        63.9,
+        177
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          807,
+          2471,
+          54,
+          44
+         ],
+         "off": [
+          30,
+          120
+         ],
+         "pivot": [
+          76,
+          132
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 69.26315789473684,
+       "pitch": 139.2,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 34.8,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 84.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1482,
+       979
+      ],
+      "block_view_h": 515.3,
+      "view_to_src": 1.9
+     }
+    },
+    "lightcav": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        615,
+        356,
+        106,
+        263
+       ],
+       "size": [
+        106,
+        263
+       ],
+       "anchor": [
+        50.3,
+        263
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        309,
+        356,
+        146,
+        264
+       ],
+       "size": [
+        146,
+        264
+       ],
+       "anchor": [
+        40.4,
+        264
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2373,
+          49,
+          96
+         ],
+         "off": [
+          95,
+          37
+         ],
+         "pivot": [
+          118,
+          114
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        811,
+        0,
+        151,
+        266
+       ],
+       "size": [
+        151,
+        266
+       ],
+       "anchor": [
+        76.6,
+        266
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          569,
+          2373,
+          79,
+          79
+         ],
+         "off": [
+          71,
+          96
+         ],
+         "pivot": [
+          100,
+          118
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        156,
+        356,
+        151,
+        265
+       ],
+       "size": [
+        151,
+        265
+       ],
+       "anchor": [
+        77,
+        265
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          985,
+          2471,
+          35,
+          40
+         ],
+         "off": [
+          93,
+          104
+         ],
+         "pivot": [
+          115,
+          126
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 110.09704166240145,
+       "pitch": 131.4,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 65.7,
+       "row_pitch_y": 162.8,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1524,
+       1008
+      ],
+      "block_view_h": 515.9,
+      "view_to_src": 1.9538
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        436,
+        1613,
+        187,
+        204
+       ],
+       "size": [
+        187,
+        204
+       ],
+       "anchor": [
+        74,
+        204
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          851,
+          2373,
+          158,
+          61
+         ],
+         "off": [
+          29,
+          32
+         ],
+         "pivot": [
+          114,
+          58
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        387,
+        0,
+        137,
+        299
+       ],
+       "size": [
+        137,
+        299
+       ],
+       "anchor": [
+        46.8,
+        299
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          358,
+          2201,
+          62,
+          156
+         ],
+         "off": [
+          73,
+          6
+         ],
+         "pivot": [
+          93,
+          103
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        1145,
+        133,
+        247
+       ],
+       "size": [
+        133,
+        247
+       ],
+       "anchor": [
+        41.4,
+        247
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          591,
+          2201,
+          75,
+          129
+         ],
+         "off": [
+          55,
+          8
+         ],
+         "pivot": [
+          84,
+          89
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        772,
+        1613,
+        157,
+        201
+       ],
+       "size": [
+        157,
+        201
+       ],
+       "anchor": [
+        72.6,
+        201
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          385,
+          2373,
+          127,
+          87
+         ],
+         "off": [
+          30,
+          41
+         ],
+         "pivot": [
+          107,
+          92
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 121.59570302164366,
+       "pitch": 141.2,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 70.6,
+       "row_pitch_y": 152.2,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1474,
+       976
+      ],
+      "block_view_h": 516.5,
+      "view_to_src": 1.8897
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        2017,
+        161,
+        182
+       ],
+       "size": [
+        161,
+        182
+       ],
+       "anchor": [
+        70.7,
+        182
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          282,
+          2471,
+          57,
+          51
+         ],
+         "off": [
+          104,
+          108
+         ],
+         "pivot": [
+          113,
+          114
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           122,
+           130
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        802,
+        1145,
+        142,
+        217
+       ],
+       "size": [
+        142,
+        217
+       ],
+       "anchor": [
+        59.9,
+        217
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          514,
+          2373,
+          53,
+          84
+         ],
+         "off": [
+          0,
+          35
+         ],
+         "pivot": [
+          24,
+          110
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           16,
+           96
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        422,
+        2201,
+        108,
+        155
+       ],
+       "size": [
+        108,
+        155
+       ],
+       "anchor": [
+        54,
+        155
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          56,
+          2471,
+          36,
+          59
+         ],
+         "off": [
+          34,
+          96
+         ],
+         "pivot": [
+          38,
+          98
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           40,
+           106
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        244,
+        2017,
+        148,
+        179
+       ],
+       "size": [
+        148,
+        179
+       ],
+       "anchor": [
+        72.5,
+        179
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          650,
+          2373,
+          35,
+          73
+         ],
+         "off": [
+          113,
+          58
+         ],
+         "pivot": [
+          122,
+          124
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           126,
+           110
+          ]
+         }
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 97.30845954931658,
+       "pitch": 148.4,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 37.1,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 86.4,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1478,
+       897
+      ],
+      "block_view_h": 473.4,
+      "view_to_src": 1.8949
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        2201,
+        105,
+        170
+       ],
+       "size": [
+        105,
+        170
+       ],
+       "anchor": [
+        48.1,
+        170
+       ],
+       "parts": [
+        {
+         "name": "armA",
+         "rect": [
+          250,
+          2471,
+          30,
+          54
+         ],
+         "off": [
+          74,
+          24
+         ],
+         "pivot": [
+          84,
+          74
+         ],
+         "z": "over",
+         "mix": "a"
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        107,
+        2201,
+        95,
+        170
+       ],
+       "size": [
+        95,
+        170
+       ],
+       "anchor": [
+        47.3,
+        170
+       ],
+       "parts": [
+        {
+         "name": "armA",
+         "rect": [
+          17,
+          2533,
+          44,
+          38
+         ],
+         "off": [
+          0,
+          36
+         ],
+         "pivot": [
+          14,
+          70
+         ],
+         "z": "over",
+         "mix": "a"
+        },
+        {
+         "name": "armB",
+         "rect": [
+          63,
+          2533,
+          44,
+          38
+         ],
+         "off": [
+          46,
+          36
+         ],
+         "pivot": [
+          80,
+          72
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        204,
+        2201,
+        105,
+        170
+       ],
+       "size": [
+        105,
+        170
+       ],
+       "anchor": [
+        51.8,
+        170
+       ],
+       "parts": [
+        {
+         "name": "armB",
+         "rect": [
+          829,
+          2373,
+          20,
+          65
+         ],
+         "off": [
+          84,
+          11
+         ],
+         "pivot": [
+          88,
+          72
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        815,
+        2017,
+        85,
+        172
+       ],
+       "size": [
+        85,
+        172
+       ],
+       "anchor": [
+        37,
+        172
+       ],
+       "parts": [
+        {
+         "name": "armB",
+         "rect": [
+          0,
+          2533,
+          15,
+          39
+         ],
+         "off": [
+          70,
+          74
+         ],
+         "pivot": [
+          76,
+          108
+         ],
+         "z": "over",
+         "mix": "b"
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "slots",
+       "slots_view_px": [
+        [
+         246,
+         487.5
+        ],
+        [
+         341.9,
+         487.5
+        ],
+        [
+         437.7,
+         487.5
+        ],
+        [
+         533.6,
+         487.5
+        ],
+        [
+         204.5,
+         407.3
+        ],
+        [
+         575.1,
+         407.3
+        ],
+        [
+         110.9,
+         407.3
+        ],
+        [
+         668.7,
+         407.3
+        ],
+        [
+         204.5,
+         327.1
+        ],
+        [
+         575.1,
+         327.1
+        ],
+        [
+         110.9,
+         327.1
+        ],
+        [
+         668.7,
+         327.1
+        ]
+       ],
+       "note": "BN-316b drum crew"
+      },
+      "block_src_size": [
+       1488,
+       930
+      ],
+      "block_view_h": 487.5,
+      "view_to_src": 1.9077,
+      "cart": {
+       "size": [
+        385,
+        354
+       ],
+       "pos_in_block": [
+        188,
+        30
+       ],
+       "pivot": [
+        140,
+        215
+       ],
+       "rect": [
+        0,
+        0,
+        385,
+        354
+       ]
+      }
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        433,
+        889,
+        184,
+        250
+       ],
+       "size": [
+        184,
+        250
+       ],
+       "anchor": [
+        114.9,
+        250
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          163,
+          1394,
+          106,
+          215
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          96,
+          120
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          919,
+          2471,
+          36,
+          43
+         ],
+         "off": [
+          148,
+          121
+         ],
+         "pivot": [
+          146,
+          128
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        429,
+        624,
+        174,
+        257
+       ],
+       "size": [
+        174,
+        257
+       ],
+       "anchor": [
+        102.6,
+        257
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          271,
+          1394,
+          112,
+          211
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          100,
+          125
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          433,
+          2471,
+          24,
+          50
+         ],
+         "off": [
+          148,
+          121
+         ],
+         "pivot": [
+          146,
+          128
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        889,
+        175,
+        254
+       ],
+       "size": [
+        175,
+        254
+       ],
+       "anchor": [
+        103.4,
+        254
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          385,
+          1394,
+          116,
+          210
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          104,
+          125
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          957,
+          2471,
+          26,
+          42
+         ],
+         "off": [
+          148,
+          121
+         ],
+         "pivot": [
+          146,
+          128
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        619,
+        889,
+        183,
+        249
+       ],
+       "size": [
+        183,
+        249
+       ],
+       "anchor": [
+        109.4,
+        249
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          503,
+          1394,
+          116,
+          210
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          104,
+          125
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          459,
+          2471,
+          29,
+          47
+         ],
+         "off": [
+          148,
+          120
+         ],
+         "pivot": [
+          146,
+          128
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 120.47192864876013,
+       "pitch": 179.3,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 44.8,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 117.9,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1513,
+       1002
+      ],
+      "block_view_h": 516.6,
+      "view_to_src": 1.9397
+     }
+    }
+   },
+   "enemy": {
+    "pike": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        166,
+        1824,
+        225,
+        189
+       ],
+       "size": [
+        225,
+        189
+       ],
+       "anchor": [
+        83.3,
+        189
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          490,
+          2471,
+          224,
+          45
+         ],
+         "off": [
+          0,
+          90
+         ],
+         "pivot": [
+          124,
+          108
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        804,
+        889,
+        122,
+        247
+       ],
+       "size": [
+        122,
+        247
+       ],
+       "anchor": [
+        59.9,
+        247
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          262,
+          1145,
+          34,
+          242
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          11,
+          140
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        1824,
+        164,
+        191
+       ],
+       "size": [
+        164,
+        191
+       ],
+       "anchor": [
+        54.7,
+        191
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          528,
+          1824,
+          164,
+          182
+         ],
+         "off": [
+          0,
+          1
+         ],
+         "pivot": [
+          86,
+          87
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        694,
+        1824,
+        213,
+        182
+       ],
+       "size": [
+        213,
+        182
+       ],
+       "anchor": [
+        88.2,
+        182
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          51,
+          2373,
+          212,
+          89
+         ],
+         "off": [
+          1,
+          89
+         ],
+         "pivot": [
+          98,
+          137
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 150.9540628613476,
+       "pitch": 201.5,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 50.4,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 90.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1484,
+       981
+      ],
+      "block_view_h": 515.6,
+      "view_to_src": 1.9026
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        726,
+        624,
+        126,
+        254
+       ],
+       "size": [
+        126,
+        254
+       ],
+       "anchor": [
+        72.6,
+        254
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          265,
+          2373,
+          49,
+          89
+         ],
+         "off": [
+          7,
+          4
+         ],
+         "pivot": [
+          18,
+          62
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        672,
+        1145,
+        128,
+        217
+       ],
+       "size": [
+        128,
+        217
+       ],
+       "anchor": [
+        50.3,
+        217
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          109,
+          2533,
+          25,
+          33
+         ],
+         "off": [
+          101,
+          75
+         ],
+         "pivot": [
+          112,
+          100
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        337,
+        1145,
+        107,
+        222
+       ],
+       "size": [
+        107,
+        222
+       ],
+       "anchor": [
+        54.2,
+        222
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2471,
+          54,
+          60
+         ],
+         "off": [
+          30,
+          80
+         ],
+         "pivot": [
+          38,
+          132
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        446,
+        1145,
+        124,
+        221
+       ],
+       "size": [
+        124,
+        221
+       ],
+       "anchor": [
+        73.1,
+        221
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          863,
+          2471,
+          54,
+          44
+         ],
+         "off": [
+          46,
+          140
+         ],
+         "pivot": [
+          92,
+          152
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 82.86169216359663,
+       "pitch": 150.8,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 37.7,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 104,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1499,
+       1002
+      ],
+      "block_view_h": 521.4,
+      "view_to_src": 1.9218
+     }
+    },
+    "lightcav": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        668,
+        0,
+        141,
+        268
+       ],
+       "size": [
+        141,
+        268
+       ],
+       "anchor": [
+        81,
+        268
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          311,
+          2201,
+          45,
+          162
+         ],
+         "off": [
+          0,
+          44
+         ],
+         "pivot": [
+          19,
+          122
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        723,
+        356,
+        186,
+        263
+       ],
+       "size": [
+        186,
+        263
+       ],
+       "anchor": [
+        118,
+        263
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          316,
+          2373,
+          67,
+          88
+         ],
+         "off": [
+          0,
+          49
+         ],
+         "pivot": [
+          47,
+          119
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        152,
+        624,
+        157,
+        262
+       ],
+       "size": [
+        157,
+        262
+       ],
+       "anchor": [
+        98.7,
+        262
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          532,
+          2201,
+          57,
+          144
+         ],
+         "off": [
+          0,
+          43
+         ],
+         "pivot": [
+          33,
+          113
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        0,
+        356,
+        154,
+        266
+       ],
+       "size": [
+        154,
+        266
+       ],
+       "anchor": [
+        67.3,
+        266
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          716,
+          2471,
+          89,
+          45
+         ],
+         "off": [
+          57,
+          132
+         ],
+         "pivot": [
+          128,
+          141
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 128.08184635110587,
+       "pitch": 142.6,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 71.3,
+       "row_pitch_y": 113.7,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1460,
+       931
+      ],
+      "block_view_h": 497.4,
+      "view_to_src": 1.8718
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        457,
+        356,
+        156,
+        264
+       ],
+       "size": [
+        156,
+        264
+       ],
+       "anchor": [
+        82.7,
+        264
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          136,
+          2533,
+          156,
+          26
+         ],
+         "off": [
+          0,
+          132
+         ],
+         "pivot": [
+          52,
+          141
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        526,
+        0,
+        140,
+        295
+       ],
+       "size": [
+        140,
+        295
+       ],
+       "anchor": [
+        71.4,
+        295
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          902,
+          2017,
+          58,
+          171
+         ],
+         "off": [
+          24,
+          5
+         ],
+         "pivot": [
+          49,
+          103
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        624,
+        150,
+        263
+       ],
+       "size": [
+        150,
+        263
+       ],
+       "anchor": [
+        76.3,
+        263
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          843,
+          2201,
+          133,
+          97
+         ],
+         "off": [
+          17,
+          67
+         ],
+         "pivot": [
+          54,
+          144
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        393,
+        1824,
+        133,
+        189
+       ],
+       "size": [
+        133,
+        189
+       ],
+       "anchor": [
+        75.3,
+        189
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          668,
+          2201,
+          117,
+          100
+         ],
+         "off": [
+          8,
+          66
+         ],
+         "pivot": [
+          43,
+          94
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 7,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        3,
+        4
+       ],
+       "front_c0": 90.06303907997018,
+       "pitch": 135.8,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 67.9,
+       "row_pitch_y": 112.4,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": []
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        },
+        "6": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          1
+         ]
+        },
+        "7": {
+         "f": [
+          -1.5,
+          -0.5,
+          0.5,
+          1.5
+         ],
+         "b": [
+          -1,
+          0,
+          1
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1465,
+       869
+      ],
+      "block_view_h": 462.7,
+      "view_to_src": 1.8782
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        281,
+        1613,
+        153,
+        208
+       ],
+       "size": [
+        153,
+        208
+       ],
+       "anchor": [
+        98.9,
+        208
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          94,
+          2471,
+          75,
+          57
+         ],
+         "off": [
+          2,
+          76
+         ],
+         "pivot": [
+          26,
+          86
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           17,
+           102
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        1394,
+        161,
+        217
+       ],
+       "size": [
+        161,
+        217
+       ],
+       "anchor": [
+        62.6,
+        217
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          171,
+          2471,
+          77,
+          55
+         ],
+         "off": [
+          2,
+          114
+         ],
+         "pivot": [
+          22,
+          118
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           14,
+           140
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        394,
+        2017,
+        184,
+        178
+       ],
+       "size": [
+        184,
+        178
+       ],
+       "anchor": [
+        132.5,
+        178
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          756,
+          2373,
+          71,
+          66
+         ],
+         "off": [
+          0,
+          78
+         ],
+         "pivot": [
+          58,
+          86
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           40,
+           106
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        625,
+        1613,
+        145,
+        203
+       ],
+       "size": [
+        145,
+        203
+       ],
+       "anchor": [
+        61.7,
+        203
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          687,
+          2373,
+          67,
+          71
+         ],
+         "off": [
+          0,
+          106
+         ],
+         "pivot": [
+          20,
+          114
+         ],
+         "z": "over",
+         "mix": "",
+         "extra_pivots": {
+          "grip": [
+           12,
+           132
+          ]
+         }
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 141.4736842105263,
+       "pitch": 161,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 40.2,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 98.5,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1482,
+       921
+      ],
+      "block_view_h": 484.7,
+      "view_to_src": 1.9
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l2.webp",
+     "atlas_size": [
+      1024,
+      2574
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        766,
+        1394,
+        153,
+        209
+       ],
+       "size": [
+        153,
+        209
+       ],
+       "anchor": [
+        71.2,
+        209
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        621,
+        1394,
+        143,
+        210
+       ],
+       "size": [
+        143,
+        210
+       ],
+       "anchor": [
+        63.7,
+        210
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        1613,
+        139,
+        209
+       ],
+       "size": [
+        139,
+        209
+       ],
+       "anchor": [
+        63.2,
+        209
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        141,
+        1613,
+        138,
+        209
+       ],
+       "size": [
+        138,
+        209
+       ],
+       "anchor": [
+        64.2,
+        209
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 89.70236946499409,
+       "pitch": 145.7,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 36.4,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 100.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1455,
+       958
+      ],
+      "block_view_h": 513.6,
+      "view_to_src": 1.8654
+     }
+    }
+   }
+  },
+  "l3": {
+   "ours": {
+    "pike": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        1853,
+        150,
+        168
+       ],
+       "size": [
+        150,
+        168
+       ],
+       "anchor": [
+        65.1,
+        168
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          874,
+          2312,
+          146,
+          44
+         ],
+         "off": [
+          0,
+          95
+         ],
+         "pivot": [
+          92,
+          116
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        136,
+        1439,
+        104,
+        228
+       ],
+       "size": [
+        104,
+        228
+       ],
+       "anchor": [
+        54.2,
+        228
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          242,
+          1439,
+          34,
+          222
+         ],
+         "off": [
+          67,
+          0
+         ],
+         "pivot": [
+          87,
+          114
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        587,
+        1670,
+        140,
+        177
+       ],
+       "size": [
+        140,
+        177
+       ],
+       "anchor": [
+        49.3,
+        177
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          750,
+          1853,
+          140,
+          160
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          74,
+          77
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        152,
+        1853,
+        154,
+        166
+       ],
+       "size": [
+        154,
+        166
+       ],
+       "anchor": [
+        93.7,
+        166
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          719,
+          2312,
+          153,
+          46
+         ],
+         "off": [
+          1,
+          97
+         ],
+         "pivot": [
+          62,
+          114
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 101.6384517226712,
+       "pitch": 143.6,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 35.9,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 84.7,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1467,
+       946
+      ],
+      "block_view_h": 503,
+      "view_to_src": 1.8808
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        740,
+        1163,
+        130,
+        239
+       ],
+       "size": [
+        130,
+        239
+       ],
+       "anchor": [
+        73.4,
+        239
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          744,
+          1439,
+          54,
+          190
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          14,
+          98
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        536,
+        1439,
+        144,
+        204
+       ],
+       "size": [
+        144,
+        204
+       ],
+       "anchor": [
+        81.3,
+        204
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          696,
+          1853,
+          52,
+          161
+         ],
+         "off": [
+          10,
+          0
+         ],
+         "pivot": [
+          22,
+          82
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        278,
+        1439,
+        120,
+        207
+       ],
+       "size": [
+        120,
+        207
+       ],
+       "anchor": [
+        61.8,
+        207
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          278,
+          1670,
+          44,
+          179
+         ],
+         "off": [
+          0,
+          23
+         ],
+         "pivot": [
+          12,
+          120
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        729,
+        1670,
+        143,
+        177
+       ],
+       "size": [
+        143,
+        177
+       ],
+       "anchor": [
+        93.3,
+        177
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          85,
+          2378,
+          62,
+          37
+         ],
+         "off": [
+          0,
+          68
+         ],
+         "pivot": [
+          15,
+          100
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 104.5725593667546,
+       "pitch": 149.4,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 37.3,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 102.4,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1419,
+       944
+      ],
+      "block_view_h": 518.9,
+      "view_to_src": 1.8192
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        324,
+        1670,
+        138,
+        179
+       ],
+       "size": [
+        138,
+        179
+       ],
+       "anchor": [
+        68,
+        179
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          358,
+          2312,
+          46,
+          53
+         ],
+         "off": [
+          92,
+          78
+         ],
+         "pivot": [
+          100,
+          98
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        1670,
+        136,
+        181
+       ],
+       "size": [
+        136,
+        181
+       ],
+       "anchor": [
+        65.7,
+        181
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          406,
+          2312,
+          46,
+          53
+         ],
+         "off": [
+          90,
+          78
+         ],
+         "pivot": [
+          97,
+          100
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        511,
+        2023,
+        128,
+        152
+       ],
+       "size": [
+        128,
+        152
+       ],
+       "anchor": [
+        60,
+        152
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          319,
+          2312,
+          37,
+          56
+         ],
+         "off": [
+          91,
+          68
+         ],
+         "pivot": [
+          98,
+          98
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        138,
+        1670,
+        138,
+        181
+       ],
+       "size": [
+        138,
+        181
+       ],
+       "anchor": [
+        75.9,
+        181
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          273,
+          2312,
+          44,
+          57
+         ],
+         "off": [
+          94,
+          65
+         ],
+         "pivot": [
+          103,
+          94
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 80.56736193778791,
+       "pitch": 135.7,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.9,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 84.3,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1507,
+       938
+      ],
+      "block_view_h": 485.5,
+      "view_to_src": 1.9321,
+      "source": "r74 iso-shield-look3-ours a"
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        290,
+        1163,
+        320,
+        273
+       ],
+       "size": [
+        320,
+        273
+       ],
+       "anchor": [
+        117.3,
+        273
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          351,
+          2378,
+          147,
+          32
+         ],
+         "off": [
+          170,
+          64
+         ],
+         "pivot": [
+          214,
+          90
+         ],
+         "z": "over",
+         "mix": "h"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          454,
+          2312,
+          30,
+          52
+         ],
+         "off": [
+          212,
+          196
+         ],
+         "pivot": [
+          234,
+          198
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        282,
+        885,
+        319,
+        275
+       ],
+       "size": [
+        319,
+        275
+       ],
+       "anchor": [
+        115.9,
+        275
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          486,
+          2312,
+          152,
+          52
+         ],
+         "off": [
+          158,
+          46
+         ],
+         "pivot": [
+          214,
+          90
+         ],
+         "z": "over",
+         "mix": "h"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          175,
+          2312,
+          50,
+          60
+         ],
+         "off": [
+          190,
+          196
+         ],
+         "pivot": [
+          214,
+          198
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        603,
+        885,
+        317,
+        274
+       ],
+       "size": [
+        317,
+        274
+       ],
+       "anchor": [
+        125.1,
+        274
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          294,
+          2179,
+          96,
+          116
+         ],
+         "off": [
+          178,
+          32
+         ],
+         "pivot": [
+          226,
+          98
+         ],
+         "z": "over",
+         "mix": "d"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          227,
+          2312,
+          44,
+          60
+         ],
+         "off": [
+          200,
+          196
+         ],
+         "pivot": [
+          222,
+          198
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        0,
+        1163,
+        288,
+        274
+       ],
+       "size": [
+        288,
+        274
+       ],
+       "anchor": [
+        126.2,
+        274
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          0,
+          2179,
+          95,
+          131
+         ],
+         "off": [
+          193,
+          3
+         ],
+         "pivot": [
+          220,
+          100
+         ],
+         "z": "over",
+         "mix": "d"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          911,
+          2179,
+          52,
+          67
+         ],
+         "off": [
+          188,
+          200
+         ],
+         "pivot": [
+          212,
+          200
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 5,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        2,
+        3
+       ],
+       "front_c0": 213.36434592569466,
+       "pitch": 265.6,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 132.8,
+       "row_pitch_y": 142.6,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          0.5
+         ]
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1499,
+       969
+      ],
+      "block_view_h": 504.2,
+      "view_to_src": 1.9218
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        2447,
+        131,
+        257
+       ],
+       "size": [
+        131,
+        257
+       ],
+       "anchor": [
+        62.7,
+        257
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        439,
+        2447,
+        158,
+        229
+       ],
+       "size": [
+        158,
+        229
+       ],
+       "anchor": [
+        79.5,
+        229
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        2706,
+        108,
+        220
+       ],
+       "size": [
+        108,
+        220
+       ],
+       "anchor": [
+        56.9,
+        220
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        879,
+        2447,
+        125,
+        223
+       ],
+       "size": [
+        125,
+        223
+       ],
+       "anchor": [
+        72.5,
+        223
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 89.70962047661077,
+       "pitch": 144.5,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 36.1,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 113.7,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1414,
+       945
+      ],
+      "block_view_h": 521.3,
+      "view_to_src": 1.8128,
+      "source": "r104 strategist-look3-ours a"
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        358,
+        3300,
+        119,
+        167
+       ],
+       "size": [
+        119,
+        167
+       ],
+       "anchor": [
+        61.4,
+        167
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        479,
+        3300,
+        120,
+        153
+       ],
+       "size": [
+        120,
+        153
+       ],
+       "anchor": [
+        59.7,
+        153
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        237,
+        3300,
+        119,
+        174
+       ],
+       "size": [
+        119,
+        174
+       ],
+       "anchor": [
+        60.3,
+        174
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        122,
+        3300,
+        113,
+        184
+       ],
+       "size": [
+        113,
+        184
+       ],
+       "anchor": [
+        59.2,
+        184
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "slots",
+       "slots_view_px": [
+        [
+         237.2,
+         531.8
+        ],
+        [
+         339.1,
+         531.8
+        ],
+        [
+         440.9,
+         531.8
+        ],
+        [
+         542.8,
+         531.8
+        ],
+        [
+         344.9,
+         448
+        ],
+        [
+         435.1,
+         448
+        ],
+        [
+         236.7,
+         448
+        ],
+        [
+         543.3,
+         448
+        ],
+        [
+         344.9,
+         364.2
+        ],
+        [
+         435.1,
+         364.2
+        ],
+        [
+         236.7,
+         364.2
+        ],
+        [
+         543.3,
+         364.2
+        ]
+       ],
+       "note": "BN-316b drum crew"
+      },
+      "block_src_size": [
+       1458,
+       994
+      ],
+      "block_view_h": 531.8,
+      "view_to_src": 1.8692,
+      "cart": {
+       "size": [
+        120,
+        378
+       ],
+       "pos_in_block": [
+        325.8,
+        32.8
+       ],
+       "pivot": [
+        60,
+        170.1
+       ],
+       "rect": [
+        0,
+        3300,
+        120,
+        378
+       ]
+      },
+      "source": "r107 BN-320 chibi21_iso_drum_look3_ours_b.png (cart) + crew"
+     }
+    }
+   },
+   "enemy": {
+    "pike": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        2023,
+        192,
+        154
+       ],
+       "size": [
+        192,
+        154
+       ],
+       "anchor": [
+        71.7,
+        154
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          643,
+          2378,
+          190,
+          28
+         ],
+         "off": [
+          0,
+          90
+         ],
+         "pivot": [
+          105,
+          107
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        308,
+        1853,
+        117,
+        166
+       ],
+       "size": [
+        117,
+        166
+       ],
+       "anchor": [
+        58.6,
+        166
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          892,
+          1853,
+          34,
+          160
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          15,
+          103
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        427,
+        1853,
+        150,
+        164
+       ],
+       "size": [
+        150,
+        164
+       ],
+       "anchor": [
+        51.2,
+        164
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          194,
+          2023,
+          150,
+          154
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          84,
+          74
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        346,
+        2023,
+        163,
+        152
+       ],
+       "size": [
+        163,
+        152
+       ],
+       "anchor": [
+        110.5,
+        152
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          813,
+          2023,
+          148,
+          138
+         ],
+         "off": [
+          0,
+          8
+         ],
+         "pivot": [
+          67,
+          83
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 138.28639401835278,
+       "pitch": 166.2,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 41.5,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 105.2,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1377,
+       878
+      ],
+      "block_view_h": 497.3,
+      "view_to_src": 1.7654
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        612,
+        1163,
+        126,
+        264
+       ],
+       "size": [
+        126,
+        264
+       ],
+       "anchor": [
+        55.7,
+        264
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          641,
+          2023,
+          42,
+          142
+         ],
+         "off": [
+          84,
+          54
+         ],
+         "pivot": [
+          105,
+          85
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          835,
+          2378,
+          27,
+          27
+         ],
+         "off": [
+          20,
+          129
+         ],
+         "pivot": [
+          30,
+          139
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        872,
+        1163,
+        144,
+        233
+       ],
+       "size": [
+        144,
+        233
+       ],
+       "anchor": [
+        65.6,
+        233
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          682,
+          1439,
+          60,
+          194
+         ],
+         "off": [
+          75,
+          0
+         ],
+         "pivot": [
+          121,
+          95
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          864,
+          2378,
+          28,
+          25
+         ],
+         "off": [
+          32,
+          93
+         ],
+         "pivot": [
+          50,
+          103
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        1439,
+        134,
+        229
+       ],
+       "size": [
+        134,
+        229
+       ],
+       "anchor": [
+        57.5,
+        229
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          685,
+          2023,
+          126,
+          142
+         ],
+         "off": [
+          8,
+          72
+         ],
+         "pivot": [
+          96,
+          160
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        400,
+        1439,
+        134,
+        206
+       ],
+       "size": [
+        134,
+        206
+       ],
+       "anchor": [
+        71.4,
+        206
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          149,
+          2378,
+          118,
+          36
+         ],
+         "off": [
+          13,
+          105
+         ],
+         "pivot": [
+          60,
+          120
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 84.97613377784835,
+       "pitch": 134.7,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.7,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 111,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1474,
+       937
+      ],
+      "block_view_h": 495.8,
+      "view_to_src": 1.8897,
+      "source": "r74 iso-archer-look3-enemy a"
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        874,
+        1670,
+        114,
+        175
+       ],
+       "size": [
+        114,
+        175
+       ],
+       "anchor": [
+        62.2,
+        175
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          269,
+          2378,
+          80,
+          35
+         ],
+         "off": [
+          2,
+          87
+         ],
+         "pivot": [
+          10,
+          92
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        464,
+        1670,
+        121,
+        178
+       ],
+       "size": [
+        121,
+        178
+       ],
+       "anchor": [
+        44.4,
+        178
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          2378,
+          83,
+          44
+         ],
+         "off": [
+          29,
+          80
+         ],
+         "pivot": [
+          36,
+          96
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        579,
+        1853,
+        115,
+        163
+       ],
+       "size": [
+        115,
+        163
+       ],
+       "anchor": [
+        71,
+        163
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          504,
+          2179,
+          72,
+          74
+         ],
+         "off": [
+          0,
+          88
+         ],
+         "pivot": [
+          20,
+          91
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        800,
+        1439,
+        126,
+        181
+       ],
+       "size": [
+        126,
+        181
+       ],
+       "anchor": [
+        75.3,
+        181
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          812,
+          2179,
+          40,
+          68
+         ],
+         "off": [
+          0,
+          46
+         ],
+         "pivot": [
+          34,
+          88
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 82.74206809318014,
+       "pitch": 135.1,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.8,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 84.4,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1480,
+       965
+      ],
+      "block_view_h": 508.6,
+      "view_to_src": 1.8974,
+      "source": "r74 iso-shield-look3-enemy b"
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        264,
+        2930,
+        112,
+        190
+       ],
+       "size": [
+        112,
+        190
+       ],
+       "anchor": [
+        56.8,
+        190
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        378,
+        2930,
+        123,
+        190
+       ],
+       "size": [
+        123,
+        190
+       ],
+       "anchor": [
+        50.5,
+        190
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        503,
+        2930,
+        128,
+        189
+       ],
+       "size": [
+        128,
+        189
+       ],
+       "anchor": [
+        67.3,
+        189
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        633,
+        2930,
+        114,
+        166
+       ],
+       "size": [
+        114,
+        166
+       ],
+       "anchor": [
+        63.8,
+        166
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "slots",
+       "slots_view_px": [
+        [
+         232.6,
+         514.5
+        ],
+        [
+         337.5,
+         514.5
+        ],
+        [
+         442.5,
+         514.5
+        ],
+        [
+         547.4,
+         514.5
+        ],
+        [
+         270,
+         423.3
+        ],
+        [
+         510,
+         423.3
+        ],
+        [
+         158.5,
+         423.3
+        ],
+        [
+         621.5,
+         423.3
+        ],
+        [
+         270,
+         332.2
+        ],
+        [
+         510,
+         332.2
+        ],
+        [
+         158.5,
+         332.2
+        ],
+        [
+         621.5,
+         332.2
+        ]
+       ],
+       "note": "BN-316b drum crew"
+      },
+      "block_src_size": [
+       1463,
+       965
+      ],
+      "block_view_h": 514.5,
+      "view_to_src": 1.8756,
+      "cart": {
+       "size": [
+        262,
+        366
+       ],
+       "pos_in_block": [
+        250.3,
+        27
+       ],
+       "pivot": [
+        131,
+        164.7
+       ],
+       "rect": [
+        0,
+        2930,
+        262,
+        366
+       ]
+      },
+      "source": "r105 drum-look3-enemy cart b (left cart, 3/4 top view) + crew b"
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        620,
+        600,
+        339,
+        279
+       ],
+       "size": [
+        339,
+        279
+       ],
+       "anchor": [
+        126.8,
+        279
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          0,
+          2424,
+          174,
+          19
+         ],
+         "off": [
+          163,
+          60
+         ],
+         "pivot": [
+          226,
+          67
+         ],
+         "z": "over",
+         "mix": "h"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          454,
+          2179,
+          48,
+          78
+         ],
+         "off": [
+          158,
+          184
+         ],
+         "pivot": [
+          180,
+          186
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        885,
+        280,
+        276
+       ],
+       "size": [
+        280,
+        276
+       ],
+       "anchor": [
+        139.8,
+        276
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          578,
+          2179,
+          186,
+          70
+         ],
+         "off": [
+          83,
+          0
+         ],
+         "pivot": [
+          205,
+          39
+         ],
+         "z": "over",
+         "mix": "d"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          392,
+          2179,
+          60,
+          87
+         ],
+         "off": [
+          139,
+          187
+         ],
+         "pivot": [
+          168,
+          188
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        280,
+        600,
+        338,
+        280
+       ],
+       "size": [
+        338,
+        280
+       ],
+       "anchor": [
+        174.3,
+        280
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          97,
+          2179,
+          195,
+          121
+         ],
+         "off": [
+          143,
+          15
+         ],
+         "pivot": [
+          242,
+          74
+         ],
+         "z": "over",
+         "mix": "d"
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        0,
+        600,
+        278,
+        283
+       ],
+       "size": [
+        278,
+        283
+       ],
+       "anchor": [
+        143.3,
+        283
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          0,
+          2312,
+          173,
+          64
+         ],
+         "off": [
+          83,
+          0
+         ],
+         "pivot": [
+          189,
+          42
+         ],
+         "z": "over",
+         "mix": "d"
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 5,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        2,
+        3
+       ],
+       "front_c0": 229.04900492189168,
+       "pitch": 289.3,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 144.7,
+       "row_pitch_y": 149.8,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          0.5
+         ]
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1458,
+       965
+      ],
+      "block_view_h": 516.3,
+      "view_to_src": 1.8692,
+      "source": "r74 r85 a"
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l3.webp",
+     "atlas_size": [
+      1024,
+      3680
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        133,
+        2447,
+        156,
+        247
+       ],
+       "size": [
+        156,
+        247
+       ],
+       "anchor": [
+        95.6,
+        247
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        599,
+        2447,
+        161,
+        229
+       ],
+       "size": [
+        161,
+        229
+       ],
+       "anchor": [
+        80.4,
+        229
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        762,
+        2447,
+        115,
+        229
+       ],
+       "size": [
+        115,
+        229
+       ],
+       "anchor": [
+        60.6,
+        229
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        291,
+        2447,
+        146,
+        230
+       ],
+       "size": [
+        146,
+        230
+       ],
+       "anchor": [
+        78,
+        230
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 108.14556153888857,
+       "pitch": 173.2,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 43.3,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 114.9,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1405,
+       964
+      ],
+      "block_view_h": 535.2,
+      "view_to_src": 1.8013,
+      "source": "r104 strategist-look3-enemy a"
+     }
+    }
+   }
+  },
+  "l4": {
+   "ours": {
+    "archer": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        300,
+        1071,
+        134,
+        225
+       ],
+       "size": [
+        134,
+        225
+       ],
+       "anchor": [
+        64.7,
+        225
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          692,
+          1071,
+          52,
+          202
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          18,
+          110
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        134,
+        1071,
+        164,
+        227
+       ],
+       "size": [
+        164,
+        227
+       ],
+       "anchor": [
+        86.8,
+        227
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          427,
+          1506,
+          60,
+          172
+         ],
+         "off": [
+          15,
+          0
+         ],
+         "pivot": [
+          50,
+          88
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        468,
+        1309,
+        145,
+        184
+       ],
+       "size": [
+        145,
+        184
+       ],
+       "anchor": [
+        89.5,
+        184
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          326,
+          1844,
+          62,
+          61
+         ],
+         "off": [
+          0,
+          45
+         ],
+         "pivot": [
+          30,
+          90
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        563,
+        1071,
+        127,
+        218
+       ],
+       "size": [
+        127,
+        218
+       ],
+       "anchor": [
+        70.1,
+        218
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          119,
+          1309,
+          60,
+          192
+         ],
+         "off": [
+          0,
+          13
+         ],
+         "pivot": [
+          30,
+          120
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 92.89985781027828,
+       "pitch": 139.9,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 35,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 102.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1536,
+       987
+      ],
+      "block_view_h": 501.2,
+      "view_to_src": 1.9692
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        436,
+        1071,
+        125,
+        225
+       ],
+       "size": [
+        125,
+        225
+       ],
+       "anchor": [
+        57.9,
+        225
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          139,
+          1844,
+          57,
+          73
+         ],
+         "off": [
+          68,
+          0
+         ],
+         "pivot": [
+          116,
+          59
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        1309,
+        117,
+        195
+       ],
+       "size": [
+        117,
+        195
+       ],
+       "anchor": [
+        40.2,
+        195
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          840,
+          1844,
+          30,
+          54
+         ],
+         "off": [
+          87,
+          57
+         ],
+         "pivot": [
+          104,
+          85
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        746,
+        1071,
+        91,
+        200
+       ],
+       "size": [
+        91,
+        200
+       ],
+       "anchor": [
+        50.3,
+        200
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          785,
+          1844,
+          53,
+          56
+         ],
+         "off": [
+          0,
+          52
+         ],
+         "pivot": [
+          45,
+          100
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        839,
+        1071,
+        127,
+        196
+       ],
+       "size": [
+        127,
+        196
+       ],
+       "anchor": [
+        82.3,
+        196
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          161,
+          1920,
+          58,
+          48
+         ],
+         "off": [
+          42,
+          110
+         ],
+         "pivot": [
+          92,
+          120
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 98.3136337039204,
+       "pitch": 146.3,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 36.6,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 105.3,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1333,
+       890
+      ],
+      "block_view_h": 520.8,
+      "view_to_src": 1.709
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        604,
+        0,
+        311,
+        368
+       ],
+       "size": [
+        311,
+        368
+       ],
+       "anchor": [
+        86.3,
+        368
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          836,
+          1687,
+          154,
+          81
+         ],
+         "off": [
+          170,
+          117
+         ],
+         "pivot": [
+          208,
+          146
+         ],
+         "z": "over",
+         "mix": "h"
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        282,
+        0,
+        320,
+        374
+       ],
+       "size": [
+        320,
+        374
+       ],
+       "anchor": [
+        99.6,
+        374
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          0,
+          1844,
+          137,
+          74
+         ],
+         "off": [
+          198,
+          55
+         ],
+         "pivot": [
+          225,
+          102
+         ],
+         "z": "over",
+         "mix": "h"
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        0,
+        392,
+        214,
+        368
+       ],
+       "size": [
+        214,
+        368
+       ],
+       "anchor": [
+        127.5,
+        368
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          311,
+          1687,
+          125,
+          141
+         ],
+         "off": [
+          12,
+          -15
+         ],
+         "pivot": [
+          110,
+          99
+         ],
+         "z": "over",
+         "mix": "h"
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        0,
+        0,
+        280,
+        390
+       ],
+       "size": [
+        280,
+        390
+       ],
+       "anchor": [
+        102.7,
+        390
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          864,
+          1506,
+          105,
+          155
+         ],
+         "off": [
+          193,
+          8
+         ],
+         "pivot": [
+          220,
+          136
+         ],
+         "z": "over",
+         "mix": "h"
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 5,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        2,
+        3
+       ],
+       "front_c0": 239.6520359598096,
+       "pitch": 263.1,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 131.6,
+       "row_pitch_y": 197.8,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          0.5
+         ]
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1475,
+       977
+      ],
+      "block_view_h": 516.7,
+      "view_to_src": 1.891
+     }
+    },
+    "shield": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        1687,
+        112,
+        155
+       ],
+       "size": [
+        112,
+        155
+       ],
+       "anchor": [
+        49.3,
+        155
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          914,
+          1844,
+          32,
+          53
+         ],
+         "off": [
+          80,
+          55
+         ],
+         "pivot": [
+          84,
+          88
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        489,
+        1506,
+        123,
+        164
+       ],
+       "size": [
+        123,
+        164
+       ],
+       "anchor": [
+        58.9,
+        164
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          221,
+          1920,
+          51,
+          45
+         ],
+         "off": [
+          72,
+          78
+         ],
+         "pivot": [
+          78,
+          100
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        490,
+        1687,
+        123,
+        138
+       ],
+       "size": [
+        123,
+        138
+       ],
+       "anchor": [
+        52.5,
+        138
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          0,
+          1920,
+          83,
+          50
+         ],
+         "off": [
+          38,
+          77
+         ],
+         "pivot": [
+          44,
+          84
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        748,
+        1506,
+        114,
+        158
+       ],
+       "size": [
+        114,
+        158
+       ],
+       "anchor": [
+        52.4,
+        158
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          872,
+          1844,
+          40,
+          54
+         ],
+         "off": [
+          74,
+          61
+         ],
+         "pivot": [
+          78,
+          98
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 75.9613932018464,
+       "pitch": 135.8,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 33.9,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 86.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1487,
+       960
+      ],
+      "block_view_h": 503.6,
+      "view_to_src": 1.9064,
+      "source": "r74 iso-shield-look4-ours b"
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        870,
+        1974,
+        118,
+        172
+       ],
+       "size": [
+        118,
+        172
+       ],
+       "anchor": [
+        62.2,
+        172
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        93,
+        2348,
+        110,
+        170
+       ],
+       "size": [
+        110,
+        170
+       ],
+       "anchor": [
+        40.5,
+        170
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        205,
+        2348,
+        118,
+        167
+       ],
+       "size": [
+        118,
+        167
+       ],
+       "anchor": [
+        58.8,
+        167
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        325,
+        2348,
+        97,
+        152
+       ],
+       "size": [
+        97,
+        152
+       ],
+       "anchor": [
+        51.2,
+        152
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "slots",
+       "slots_view_px": [
+        [
+         230.4,
+         524.1
+        ],
+        [
+         336.8,
+         524.1
+        ],
+        [
+         443.2,
+         524.1
+        ],
+        [
+         549.6,
+         524.1
+        ],
+        [
+         221.2,
+         437.9
+        ],
+        [
+         558.8,
+         437.9
+        ],
+        [
+         108.1,
+         437.9
+        ],
+        [
+         671.9,
+         437.9
+        ],
+        [
+         221.2,
+         351.6
+        ],
+        [
+         558.8,
+         351.6
+        ],
+        [
+         108.1,
+         351.6
+        ],
+        [
+         671.9,
+         351.6
+        ]
+       ],
+       "note": "BN-316b drum crew"
+      },
+      "block_src_size": [
+       1384,
+       930
+      ],
+      "block_view_h": 524.1,
+      "view_to_src": 1.7744,
+      "cart": {
+       "size": [
+        335,
+        353
+       ],
+       "pos_in_block": [
+        201.2,
+        33.2
+       ],
+       "pivot": [
+        167.5,
+        158.8
+       ],
+       "rect": [
+        316,
+        1974,
+        335,
+        353
+       ]
+      },
+      "source": "r107 BN-320 r107_drum_l4_ours_cart_a.png (cart) + crew"
+     }
+    }
+   },
+   "enemy": {
+    "shield": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        283,
+        1506,
+        142,
+        173
+       ],
+       "size": [
+        142,
+        173
+       ],
+       "anchor": [
+        90.9,
+        173
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          466,
+          1920,
+          61,
+          43
+         ],
+         "off": [
+          0,
+          78
+         ],
+         "pivot": [
+          57,
+          101
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        668,
+        762,
+        198,
+        251
+       ],
+       "size": [
+        198,
+        251
+       ],
+       "anchor": [
+        106.1,
+        251
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          85,
+          1920,
+          74,
+          50
+         ],
+         "off": [
+          1,
+          117
+         ],
+         "pivot": [
+          70,
+          145
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        165,
+        1687,
+        144,
+        143
+       ],
+       "size": [
+        144,
+        143
+       ],
+       "anchor": [
+        86.5,
+        143
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          274,
+          1920,
+          69,
+          45
+         ],
+         "off": [
+          13,
+          80
+         ],
+         "pivot": [
+          18,
+          85
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        136,
+        1506,
+        145,
+        175
+       ],
+       "size": [
+        145,
+        175
+       ],
+       "anchor": [
+        61.8,
+        175
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          707,
+          1844,
+          76,
+          57
+         ],
+         "off": [
+          26,
+          89
+         ],
+         "pivot": [
+          32,
+          140
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 113.15767417496069,
+       "pitch": 144.3,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 36.1,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 82.5,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1489,
+       964
+      ],
+      "block_view_h": 505,
+      "view_to_src": 1.909,
+      "source": "r74 iso-shield-look4-enemy b"
+     }
+    },
+    "archer": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        868,
+        762,
+        136,
+        245
+       ],
+       "size": [
+        136,
+        245
+       ],
+       "anchor": [
+        66.8,
+        245
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        331,
+        1309,
+        135,
+        185
+       ],
+       "size": [
+        135,
+        185
+       ],
+       "anchor": [
+        56.3,
+        185
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          114,
+          1687,
+          49,
+          146
+         ],
+         "off": [
+          71,
+          0
+         ],
+         "pivot": [
+          108,
+          84
+         ],
+         "z": "over",
+         "mix": ""
+        },
+        {
+         "name": "draw",
+         "rect": [
+          649,
+          1920,
+          30,
+          24
+         ],
+         "off": [
+          11,
+          76
+         ],
+         "pivot": [
+          31,
+          86
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        614,
+        1506,
+        132,
+        160
+       ],
+       "size": [
+        132,
+        160
+       ],
+       "anchor": [
+        60.3,
+        160
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        181,
+        1309,
+        115,
+        186
+       ],
+       "size": [
+        115,
+        186
+       ],
+       "anchor": [
+        58.8,
+        186
+       ],
+       "parts": [
+        {
+         "name": "bow",
+         "rect": [
+          298,
+          1309,
+          31,
+          186
+         ],
+         "off": [
+          84,
+          0
+         ],
+         "pivot": [
+          107,
+          98
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 85.51904913509499,
+       "pitch": 136.1,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 34,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 88.8,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1470,
+       957
+      ],
+      "block_view_h": 507.8,
+      "view_to_src": 1.8846,
+      "source": "r74 iso-archer-look4-enemy a"
+     }
+    },
+    "heavycav": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        463,
+        392,
+        315,
+        307
+       ],
+       "size": [
+        315,
+        307
+       ],
+       "anchor": [
+        129.1,
+        307
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          390,
+          1844,
+          195,
+          58
+         ],
+         "off": [
+          116,
+          69
+         ],
+         "pivot": [
+          229,
+          103
+         ],
+         "z": "over",
+         "mix": "h"
+        },
+        {
+         "name": "legF",
+         "rect": [
+          198,
+          1844,
+          52,
+          69
+         ],
+         "off": [
+          168,
+          232
+         ],
+         "pivot": [
+          193,
+          234
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        762,
+        316,
+        307
+       ],
+       "size": [
+        316,
+        307
+       ],
+       "anchor": [
+        151.1,
+        307
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          345,
+          1920,
+          119,
+          44
+         ],
+         "off": [
+          108,
+          76
+         ],
+         "pivot": [
+          154,
+          111
+         ],
+         "z": "over",
+         "mix": "d"
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        318,
+        762,
+        348,
+        307
+       ],
+       "size": [
+        348,
+        307
+       ],
+       "anchor": [
+        212.1,
+        307
+       ],
+       "parts": [
+        {
+         "name": "arm",
+         "rect": [
+          615,
+          1687,
+          219,
+          127
+         ],
+         "off": [
+          1,
+          46
+         ],
+         "pivot": [
+          118,
+          99
+         ],
+         "z": "over",
+         "mix": "d"
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        216,
+        392,
+        245,
+        316
+       ],
+       "size": [
+        245,
+        316
+       ],
+       "anchor": [
+        128.6,
+        316
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 5,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        2,
+        3
+       ],
+       "front_c0": 224.6654768778542,
+       "pitch": 265.4,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 0,
+       "alt_shift_odd_rows": 132.7,
+       "row_pitch_y": 161.1,
+       "note": "BN-316b",
+       "by_n": {
+        "1": {
+         "f": [
+          0
+         ],
+         "b": []
+        },
+        "2": {
+         "f": [
+          -0.5,
+          0.5
+         ],
+         "b": []
+        },
+        "3": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": []
+        },
+        "4": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          0.5
+         ]
+        },
+        "5": {
+         "f": [
+          -1,
+          0,
+          1
+         ],
+         "b": [
+          -0.5,
+          0.5
+         ]
+        }
+       }
+      },
+      "block_src_size": [
+       1486,
+       981
+      ],
+      "block_view_h": 514.9,
+      "view_to_src": 1.9051,
+      "source": "r74 r85 a"
+     }
+    },
+    "strategist": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        0,
+        1071,
+        132,
+        236
+       ],
+       "size": [
+        132,
+        236
+       ],
+       "anchor": [
+        87.2,
+        236
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          438,
+          1687,
+          50,
+          140
+         ],
+         "off": [
+          0,
+          0
+         ],
+         "pivot": [
+          30,
+          140
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        811,
+        1309,
+        119,
+        182
+       ],
+       "size": [
+        119,
+        182
+       ],
+       "anchor": [
+        52.5,
+        182
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          587,
+          1844,
+          118,
+          58
+         ],
+         "off": [
+          0,
+          80
+         ],
+         "pivot": [
+          60,
+          120
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        615,
+        1309,
+        194,
+        183
+       ],
+       "size": [
+        194,
+        183
+       ],
+       "anchor": [
+        69.2,
+        183
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          529,
+          1920,
+          118,
+          33
+         ],
+         "off": [
+          75,
+          80
+         ],
+         "pivot": [
+          78,
+          98
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        0,
+        1506,
+        134,
+        179
+       ],
+       "size": [
+        134,
+        179
+       ],
+       "anchor": [
+        52.1,
+        179
+       ],
+       "parts": [
+        {
+         "name": "weapon",
+         "rect": [
+          252,
+          1844,
+          72,
+          62
+         ],
+         "off": [
+          20,
+          85
+         ],
+         "pivot": [
+          26,
+          142
+         ],
+         "z": "over",
+         "mix": ""
+        }
+       ]
+      }
+     ],
+     "extra": {
+      "count": 16,
+      "layout": {
+       "mode": "rows",
+       "rows_top_to_bottom": [
+        4,
+        4,
+        4,
+        4
+       ],
+       "front_c0": 135.3475798696442,
+       "pitch": 143.2,
+       "pitch_drop_per_row_up": 0,
+       "x_shift_per_row_up": 35.8,
+       "alt_shift_odd_rows": 0,
+       "row_pitch_y": 88,
+       "note": "BN-316b"
+      },
+      "block_src_size": [
+       1460,
+       979
+      ],
+      "block_view_h": 523,
+      "view_to_src": 1.8718,
+      "source": "r74 r85 a"
+     }
+    },
+    "drum": {
+     "atlas": "puppet_l4.webp",
+     "atlas_size": [
+      1024,
+      2522
+     ],
+     "cells": [
+      {
+       "id": "soldier0",
+       "body": [
+        761,
+        1974,
+        107,
+        173
+       ],
+       "size": [
+        107,
+        173
+       ],
+       "anchor": [
+        57.1,
+        173
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier1",
+       "body": [
+        0,
+        2348,
+        91,
+        172
+       ],
+       "size": [
+        91,
+        172
+       ],
+       "anchor": [
+        38.7,
+        172
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier2",
+       "body": [
+        653,
+        1974,
+        106,
+        181
+       ],
+       "size": [
+        106,
+        181
+       ],
+       "anchor": [
+        53.4,
+        181
+       ],
+       "parts": []
+      },
+      {
+       "id": "soldier3",
+       "body": [
+        424,
+        2348,
+        86,
+        149
+       ],
+       "size": [
+        86,
+        149
+       ],
+       "anchor": [
+        42.9,
+        149
+       ],
+       "parts": []
+      }
+     ],
+     "extra": {
+      "count": 12,
+      "layout": {
+       "mode": "slots",
+       "slots_view_px": [
+        [
+         251.7,
+         532.1
+        ],
+        [
+         343.9,
+         532.1
+        ],
+        [
+         436.1,
+         532.1
+        ],
+        [
+         528.3,
+         532.1
+        ],
+        [
+         236.6,
+         447.5
+        ],
+        [
+         543.4,
+         447.5
+        ],
+        [
+         138.6,
+         447.5
+        ],
+        [
+         641.3,
+         447.5
+        ],
+        [
+         236.6,
+         362.8
+        ],
+        [
+         543.4,
+         362.8
+        ],
+        [
+         138.6,
+         362.8
+        ],
+        [
+         641.3,
+         362.8
+        ]
+       ],
+       "note": "BN-316b drum crew"
+      },
+      "block_src_size": [
+       1435,
+       979
+      ],
+      "block_view_h": 532.1,
+      "view_to_src": 1.8397,
+      "cart": {
+       "size": [
+        314,
+        372
+       ],
+       "pos_in_block": [
+        219.3,
+        33.3
+       ],
+       "pivot": [
+        157,
+        167.4
+       ],
+       "rect": [
+        0,
+        1974,
+        314,
+        372
+       ]
+      },
+      "source": "r107 BN-320 r107_drum_l4_enemy_cart_a.png (cart) + crew"
+     }
+    }
+   }
+  }
+ }
+}

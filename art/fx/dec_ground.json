@@ -1,0 +1,110 @@
+{
+ "artmeta": 1,
+ "id": "dec_ground",
+ "build": "V301",
+ "file": "art/fx/dec_ground.webp",
+ "size": [
+  768,
+  386
+ ],
+ "bytes": 67726,
+ "note": "BN-ON1t3 r194 a, BN-ON1t4 F3 alpha recipe (review_r3): 8 flat earth marks, one per impact. Squashed y x0.58, half of the 512 cell. Outer oval ring cut (hull erode 7 px; trample and crater keep the full hull), plain earth fill is a soft smoothstep with broken noise edge (no oval), marks (dark outline, prints, clods, blades, cracks) full alpha. Draw at w/3 css (widest about 80 css), alpha 0.7 under the crowds (code fades in and out). Names in cell order; dec_charge = cell 8 (wide trample field).",
+ "pieces": {
+  "dec_hoof": {
+   "r": [
+    480,
+    138,
+    230,
+    114
+   ],
+   "css": [
+    76.7,
+    38.0
+   ]
+  },
+  "dec_skid": {
+   "r": [
+    0,
+    272,
+    234,
+    114
+   ],
+   "css": [
+    78.0,
+    38.0
+   ]
+  },
+  "dec_crater": {
+   "r": [
+    238,
+    272,
+    231,
+    101
+   ],
+   "css": [
+    77.0,
+    33.7
+   ]
+  },
+  "dec_trample": {
+   "r": [
+    480,
+    0,
+    244,
+    130
+   ],
+   "css": [
+    81.3,
+    43.3
+   ]
+  },
+  "dec_arrows": {
+   "r": [
+    0,
+    138,
+    236,
+    130
+   ],
+   "css": [
+    78.7,
+    43.3
+   ]
+  },
+  "dec_shards": {
+   "r": [
+    240,
+    138,
+    236,
+    130
+   ],
+   "css": [
+    78.7,
+    43.3
+   ]
+  },
+  "dec_drag": {
+   "r": [
+    240,
+    0,
+    236,
+    131
+   ],
+   "css": [
+    78.7,
+    43.7
+   ]
+  },
+  "dec_charge": {
+   "r": [
+    0,
+    0,
+    236,
+    134
+   ],
+   "css": [
+    78.7,
+    44.7
+   ]
+  }
+ }
+}

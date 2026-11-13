@@ -1,0 +1,397 @@
+{
+ "artmeta": 1,
+ "id": "fig_ngo",
+ "build": "V301",
+ "file": "art/heroes/fig_ngo.webp",
+ "size": [
+  3400,
+  3626
+ ],
+ "bytes": 1816896,
+ "note": "BN-ON1t2: stage cut-out figures, one per chibi card (grabCut + 1 px erode, 540x810 card px, trimmed). r = [x,y,w,h] in the atlas, cell = [left, top, card w, card h]: draw at (stageX - (cell.x + r.w/2)... i.e. the figure keeps its card scale; stand the bottom edge (r.h) on the dais. Lord is in fig_thuc. NOT approved yet: art must pass each figure from the sheets; until then show the card in the hero frame. V301 BN-ON1t5: 9 FIX figures re-cut (seed boxes of review_figs.md \u00a73, hole fill <= 300 px^2, drop islands); PASS and FAIL-Spark figures keep their pixels and rects. V301 BN-ON1t6: 11 Spark stage figures (BN-ON1r6 r211-r236, pick a) keyed, despilled, 1 px eroded and packed on the t5 atlas; other figures keep their rects. V301 BN-ON1t7: 1 FIX-again figures (BN-ON1r7 \u00a74) hand-fixed by restore/erase boxes from the BN-ON1t2 alpha; the other figures keep their rects. V301 BN-ON1t7b: despill on zhugeliang, zhonghui, huanggai, sunshangxiang (BN-ON1r8 \u00a72, violet/pink spill removed inside the boxes); \"pass\": true on the 60 figures of review_figs_r8.md \u00a73. V301 BN-ON1t8: 7 Spark stage figures (BN-ON1r10 r250-r277, picks as review_figs_r10.md \u00a71) keyed, despilled (card-non-violet only), 1 px eroded and packed on the t7b atlas; other figures keep their rects; no pass flag set. V301 BN-ON1t9: \"pass\": true on 33 figures (BN-ON1r9 \u00a71 6 + BN-ON1r11 \u00a71 27, 93 flagged in all); hand fixes zhangfei (thuc, polygon alpha), caopi and xiahoudun (nguy, box erase / hue) from BN-ON1r9 \u00a73 and BN-ON1r11 \u00a72, rects and cells unchanged; these 3 are not flagged until art passes them; the 5 Spark stage figures stay unflagged.",
+ "figs": {
+  "panzhang": {
+   "r": [
+    504,
+    745,
+    489,
+    748
+   ],
+   "cell": [
+    34,
+    13,
+    540,
+    810
+   ],
+   "feet": 748,
+   "pass": true
+  },
+  "handang": {
+   "r": [
+    1002,
+    1433,
+    476,
+    747
+   ],
+   "cell": [
+    43,
+    21,
+    540,
+    810
+   ],
+   "feet": 747,
+   "pass": true
+  },
+  "dingfeng": {
+   "r": [
+    1007,
+    0,
+    533,
+    720
+   ],
+   "cell": [
+    0,
+    49,
+    540,
+    810
+   ],
+   "feet": 720,
+   "pass": true
+  },
+  "xusheng": {
+   "r": [
+    0,
+    1512,
+    492,
+    708
+   ],
+   "cell": [
+    18,
+    0,
+    540,
+    810
+   ],
+   "feet": 708,
+   "pass": true
+  },
+  "jiangqin": {
+   "r": [
+    2053,
+    0,
+    518,
+    751
+   ],
+   "cell": [
+    11,
+    15,
+    540,
+    810
+   ],
+   "feet": 751,
+   "pass": true
+  },
+  "zumao": {
+   "r": [
+    2575,
+    0,
+    540,
+    746
+   ],
+   "cell": [
+    0,
+    38,
+    540,
+    810
+   ],
+   "feet": 746,
+   "pass": true
+  },
+  "sunquan": {
+   "r": [
+    485,
+    2830,
+    502,
+    763
+   ],
+   "cell": [
+    17,
+    12,
+    540,
+    810
+   ],
+   "feet": 763,
+   "pass": true
+  },
+  "zhoutai": {
+   "r": [
+    0,
+    745,
+    500,
+    755
+   ],
+   "cell": [
+    17,
+    31,
+    540,
+    810
+   ],
+   "feet": 755,
+   "pass": true
+  },
+  "lumeng": {
+   "r": [
+    991,
+    2907,
+    514,
+    719
+   ],
+   "cell": [
+    21,
+    41,
+    540,
+    810
+   ],
+   "feet": 719,
+   "pass": true
+  },
+  "xiaoqiao": {
+   "r": [
+    1506,
+    794,
+    465,
+    706
+   ],
+   "cell": [
+    43,
+    51,
+    540,
+    810
+   ],
+   "feet": 706,
+   "pass": true
+  },
+  "chengpu": {
+   "r": [
+    1975,
+    794,
+    501,
+    705
+   ],
+   "cell": [
+    19,
+    44,
+    540,
+    810
+   ],
+   "feet": 705,
+   "pass": true
+  },
+  "zhugejin": {
+   "r": [
+    2480,
+    794,
+    501,
+    686
+   ],
+   "cell": [
+    18,
+    74,
+    540,
+    810
+   ],
+   "feet": 686,
+   "pass": true
+  },
+  "sunce": {
+   "r": [
+    501,
+    1510,
+    485,
+    655
+   ],
+   "cell": [
+    18,
+    47,
+    540,
+    810
+   ],
+   "feet": 655,
+   "pass": true
+  },
+  "daqiao": {
+   "r": [
+    2827,
+    2207,
+    483,
+    718
+   ],
+   "cell": [
+    25,
+    45,
+    540,
+    810
+   ],
+   "feet": 718,
+   "pass": true
+  },
+  "huanggai": {
+   "r": [
+    484,
+    0,
+    512,
+    741
+   ],
+   "cell": [
+    16,
+    26,
+    540,
+    810
+   ],
+   "feet": 741,
+   "pass": true
+  },
+  "zhuran": {
+   "r": [
+    1496,
+    1512,
+    504,
+    679
+   ],
+   "cell": [
+    21,
+    31,
+    540,
+    810
+   ],
+   "feet": 679,
+   "pass": true
+  },
+  "sunjian": {
+   "r": [
+    1544,
+    0,
+    503,
+    738
+   ],
+   "cell": [
+    17,
+    29,
+    540,
+    810
+   ],
+   "feet": 738,
+   "pass": true
+  },
+  "taishici": {
+   "r": [
+    2317,
+    2207,
+    506,
+    699
+   ],
+   "cell": [
+    33,
+    56,
+    540,
+    810
+   ],
+   "feet": 699,
+   "pass": true
+  },
+  "zhouyu": {
+   "r": [
+    2480,
+    1484,
+    513,
+    719
+   ],
+   "cell": [
+    15,
+    26,
+    540,
+    810
+   ],
+   "feet": 719,
+   "pass": true
+  },
+  "lusu": {
+   "r": [
+    498,
+    2201,
+    435,
+    625
+   ],
+   "cell": [
+    78,
+    117,
+    540,
+    810
+   ],
+   "feet": 625
+  },
+  "ganning": {
+   "r": [
+    0,
+    0,
+    465,
+    686
+   ],
+   "cell": [
+    47,
+    31,
+    540,
+    810
+   ],
+   "feet": 686,
+   "pass": true
+  },
+  "sunshangxiang": {
+   "r": [
+    0,
+    2224,
+    481,
+    621
+   ],
+   "cell": [
+    31,
+    94,
+    540,
+    810
+   ],
+   "feet": 621,
+   "pass": true
+  },
+  "lingtong": {
+   "r": [
+    1509,
+    2907,
+    519,
+    672
+   ],
+   "cell": [
+    16,
+    81,
+    540,
+    810
+   ],
+   "feet": 672,
+   "pass": true
+  },
+  "luxun": {
+   "r": [
+    1394,
+    2195,
+    502,
+    708
+   ],
+   "cell": [
+    21,
+    56,
+    540,
+    810
+   ],
+   "feet": 708,
+   "pass": true
+  }
+ }
+}

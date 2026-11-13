@@ -1,0 +1,39 @@
+{
+ "artmeta": 1,
+ "id": "wx_wind",
+ "build": "V301",
+ "job": "BN-355t2 wx_windsheets_r132b.png",
+ "file": "art/fx/wx_wind.webp",
+ "size": [
+  924,
+  795
+ ],
+ "bytes": 286320,
+ "note": "3 strips stacked, r=[x,y,w,h] in the atlas. Master luma keyed to alpha (black floor 6), RGB un-premultiplied; half master size (scale to the widths in spec 8.3). Strips: puff, veil, drift. Tint by code (globalCompositeOperation source-atop on an offscreen, or fillStyle tint) per spec 8.3.",
+ "strips": {
+  "puff": {
+   "r": [
+    0,
+    0,
+    924,
+    288
+   ]
+  },
+  "veil": {
+   "r": [
+    0,
+    290,
+    895,
+    239
+   ]
+  },
+  "drift": {
+   "r": [
+    0,
+    531,
+    902,
+    264
+   ]
+  }
+ }
+}

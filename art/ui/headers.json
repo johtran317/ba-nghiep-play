@@ -1,0 +1,96 @@
+{
+ "artmeta": 1,
+ "id": "headers",
+ "build": "V301",
+ "file": "art/ui/headers.webp",
+ "size": [
+  1074,
+  3060
+ ],
+ "bytes": 390084,
+ "css": [
+  358,
+  113.3
+ ],
+ "rows": {
+  "hdr_binhdoanh": {
+   "r": [
+    0,
+    0,
+    1074,
+    340
+   ]
+  },
+  "hdr_giaotruong": {
+   "r": [
+    0,
+    340,
+    1074,
+    340
+   ]
+  },
+  "hdr_thuongdiem": {
+   "r": [
+    0,
+    680,
+    1074,
+    340
+   ]
+  },
+  "hdr_quanlenh": {
+   "r": [
+    0,
+    1020,
+    1074,
+    340
+   ]
+  },
+  "hdr_khodo": {
+   "r": [
+    0,
+    1360,
+    1074,
+    340
+   ]
+  },
+  "hdr_queue": {
+   "r": [
+    0,
+    1700,
+    1074,
+    340
+   ]
+  },
+  "hdr_legion": {
+   "r": [
+    0,
+    2040,
+    1074,
+    340
+   ]
+  },
+  "hdr_daily": {
+   "r": [
+    0,
+    2380,
+    1074,
+    340
+   ]
+  },
+  "hdr_market": {
+   "r": [
+    0,
+    2720,
+    1074,
+    340
+   ]
+  }
+ },
+ "note": "BN-ON1t r160 b (hdr_binhdoanh, hdr_giaotruong, hdr_thuongdiem, hdr_quanlenh = Binh Doanh 25, Giao Truong 36, Thuong Diem 47, Mua Quan lenh 50) + r161 b (hdr_khodo, hdr_queue, hdr_legion, hdr_daily = Kho do 22, Hang doi 37, Quan Doan 43, Nhiem vu ngay 44). 8 strips of 1074 x 340 = 3 x 358 x 113 css (r160 b native 3.17:1, r161 b stretched 4 % vertically), stacked in the order of the names. The r160 b frame (bronze, ornate corners) is pasted over all 8 so they are one set (the r161 strips were resized to the r160 shape; ~2 % of their picture at the edges sits under the r160 frame). Frame corners transparent. The LEFT 40 % of each strip is the calm dark panel for the white title. Dusk lanterns are painted shapes, no glow. BN-354b4-t: row 9 hdr_market (r285 a scene, its own frame dropped, crop ~6 % off the top to 3.16:1, r160 b frame pasted on; 9 strips now). Rows 1-8 unchanged in layout, re-encoded at webp quality 90.",
+ "title_zone": [
+  0,
+  0,
+  0.4,
+  1
+ ]
+}

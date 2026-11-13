@@ -1,0 +1,198 @@
+{
+ "artmeta": 1,
+ "id": "vip_v1",
+ "build": "V299",
+ "job": "r85 VIP ladder art (Decision 137 A)",
+ "file": "art/ui/vip.webp",
+ "size": [
+  1024,
+  1330
+ ],
+ "parts": {
+  "badge": {
+   "note": "grey master, code tints it 10 ways (multiply); shown at 32 px, 4x master",
+   "rect": [
+    266,
+    714,
+    128,
+    128
+   ],
+   "halo_pct": 0.33
+  },
+  "mark": {
+   "note": "squad-banner VIP mark (A4), shown at 48 px, 3x master; loop cord on top, tassel below",
+   "rect": [
+    184,
+    714,
+    80,
+    144
+   ],
+   "halo_pct": 0.0
+  },
+  "chest": {
+   "note": "level-up gift chest, shown at 96 px (2x master)",
+   "rect": [
+    0,
+    714,
+    182,
+    192
+   ],
+   "halo_pct": 0.0
+  },
+  "ring_bronze": {
+   "inner": [
+    146.9,
+    152.4,
+    192
+   ],
+   "note": "inner circle centre x,y and diameter in px of this rect; draw at scale avatar_d/192",
+   "rect": [
+    0,
+    405,
+    295,
+    307
+   ],
+   "halo_pct": 1.05
+  },
+  "ring_silver": {
+   "inner": [
+    146.9,
+    184.8,
+    192
+   ],
+   "note": "inner circle centre x,y and diameter in px of this rect; draw at scale avatar_d/192",
+   "rect": [
+    595,
+    0,
+    294,
+    339
+   ],
+   "halo_pct": 1.0
+  },
+  "ring_gold": {
+   "inner": [
+    145.0,
+    203.9,
+    192
+   ],
+   "note": "inner circle centre x,y and diameter in px of this rect; draw at scale avatar_d/192",
+   "rect": [
+    0,
+    0,
+    291,
+    403
+   ],
+   "halo_pct": 0.67
+  },
+  "ring_vip10": {
+   "inner": [
+    149.5,
+    183.8,
+    192
+   ],
+   "note": "inner circle centre x,y and diameter in px of this rect; draw at scale avatar_d/192",
+   "rect": [
+    293,
+    0,
+    300,
+    341
+   ],
+   "halo_pct": 0.93
+  },
+  "frame_v5": {
+   "hole": [
+    23,
+    23,
+    115,
+    190
+   ],
+   "note": "hole = inner window [x,y,w,h] px of this rect; portrait_small 160x238 sits behind it",
+   "rect": [
+    628,
+    405,
+    160,
+    238
+   ],
+   "halo_pct": 0.0
+  },
+  "frame_v10": {
+   "hole": [
+    23,
+    31,
+    115,
+    190
+   ],
+   "note": "hole = inner window [x,y,w,h] px of this rect; portrait_small 160x238 sits behind it",
+   "rect": [
+    297,
+    405,
+    167,
+    272
+   ],
+   "halo_pct": 0.0
+  },
+  "f8_body": {
+   "note": "VIP 8 frame (copy 1) without ribbons, 160 px wide",
+   "hole": [
+    28,
+    47,
+    108,
+    168
+   ],
+   "rect": [
+    466,
+    405,
+    160,
+    244
+   ],
+   "halo_pct": 0.0
+  },
+  "f8_ribL": {
+   "off": [
+    -38.0,
+    28.7
+   ],
+   "pivot": [
+    40.7,
+    0.0
+   ],
+   "note": "ribbon layer, draw UNDER f8_body at off (relative to the f8_body rect top-left); sway 2-3 px, 2.4 s loop, pivot = top attach point",
+   "rect": [
+    835,
+    405,
+    42,
+    207
+   ],
+   "halo_pct": 0.0
+  },
+  "f8_ribR": {
+   "off": [
+    155.7,
+    23.7
+   ],
+   "pivot": [
+    1.0,
+    0.0
+   ],
+   "note": "ribbon layer, draw UNDER f8_body at off (relative to the f8_body rect top-left); sway 2-3 px, 2.4 s loop, pivot = top attach point",
+   "rect": [
+    790,
+    405,
+    43,
+    216
+   ],
+   "halo_pct": 0.0
+  },
+  "advisor": {
+   "note": "advisor bust a (U48), old scholar with bamboo scroll, 360 px wide master; draw at 72-120 css px",
+   "rect": [
+    0,
+    912,
+    360,
+    418
+   ],
+   "halo_pct": 0.0
+  }
+ },
+ "note": "rect = [x,y,w,h] px in the atlas. badge: grey master, code tints it 10 ways; mark 48 px beside the banner; chest 96 px (2x master); ring_*: 4 avatar borders, inner circle 192 px diameter (parts[].inner); frame_v5/frame_v10: portrait frames, hole = window for portrait_small 160x238; f8_*: VIP 8 frame = f8_body + f8_ribL/R drawn UNDER it, ribbon sway by code"
+}

@@ -1,0 +1,448 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r3",
+ "build": "V301",
+ "job": "BN-354t2: r138 free plate, r139 side buttons + goal chip, r141 ranks, r143 ke icons (6 of 8) + r148 nghi/pha, r147 paid plate, r145 boats + r150 treasure boat (4 of 4), r146 empty states (art-approved 2026-11-13)",
+ "kit": {
+  "file": "art/ui/kit/kit_r3.webp",
+  "size": [
+   1536,
+   1262
+  ],
+  "scale": 3,
+  "note": "rects r=[x,y,w,h] at 3x css; slice = [left, top, right, bottom] atlas px; boat_treasure added by BN-ON1t",
+  "pieces": {
+   "cl_plate_free": {
+    "css": [
+     340.0,
+     67.7
+    ],
+    "scale_of_master": 1.032,
+    "note": "9-slice horizontal: caps fixed (14 % of width each end), middle stretches; draw 340 x 70 css (source aspect 4.9:1, so 70 high not 80)",
+    "slice": [
+     143,
+     0,
+     143,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     510,
+     1020,
+     203
+    ]
+   },
+   "cl_plate_paid": {
+    "css": [
+     340,
+     70
+    ],
+    "scale_of_master": 0.903,
+    "note": "paid track plate (jade bi seals), 9-slice horizontal like cl_plate_free: caps fixed (14 % each end), draw 340 x 70 css; source aspect 5.5:1 so it is stretched 13 % vertically to match the free plate",
+    "slice": [
+     143,
+     0,
+     143,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     294,
+     1020,
+     210
+    ]
+   },
+   "btn_event": {
+    "css": [
+     43.0,
+     52.0
+    ],
+    "scale_of_master": 0.348,
+    "note": "side button, 52 css tall incl. bracket; disc centre at disc_c (atlas px); pressed = code (scale .96, brightness .82)",
+    "disc_c": [
+     64,
+     92
+    ],
+    "r": [
+     1026,
+     510,
+     129,
+     156
+    ]
+   },
+   "btn_legion": {
+    "css": [
+     43.3,
+     52.0
+    ],
+    "scale_of_master": 0.347,
+    "note": "side button, 52 css tall incl. bracket; disc centre at disc_c (atlas px); pressed = code (scale .96, brightness .82)",
+    "disc_c": [
+     65,
+     91
+    ],
+    "r": [
+     1161,
+     510,
+     130,
+     156
+    ]
+   },
+   "goal_chip_plate": {
+    "css": [
+     278.0,
+     36.0
+    ],
+    "scale_of_master": 0.621,
+    "note": "9-slice horizontal: caps fixed (6.5 % each end), plain middle stretches; 36 css tall",
+    "slice": [
+     54,
+     0,
+     54,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     126,
+     869,
+     834,
+     108
+    ]
+   },
+   "rank_de": {
+    "css": [
+     53.3,
+     48.0
+    ],
+    "scale_of_master": 0.314,
+    "note": "rank emblem, 48 css (list rows 32, chips 24); centre on disc_c (hand-measured disc centre), not the crest; order = AR2TIER",
+    "disc_c": [
+     80,
+     75
+    ],
+    "r": [
+     0,
+     719,
+     160,
+     144
+    ]
+   },
+   "rank_long": {
+    "css": [
+     41.7,
+     48.0
+    ],
+    "scale_of_master": 0.33,
+    "note": "rank emblem, 48 css (list rows 32, chips 24); centre on disc_c (hand-measured disc centre), not the crest; order = AR2TIER",
+    "disc_c": [
+     62,
+     68
+    ],
+    "r": [
+     166,
+     719,
+     125,
+     144
+    ]
+   },
+   "rank_ngoc": {
+    "css": [
+     41.3,
+     48.0
+    ],
+    "scale_of_master": 0.327,
+    "note": "rank emblem, 48 css (list rows 32, chips 24); centre on disc_c (hand-measured disc centre), not the crest; order = AR2TIER",
+    "disc_c": [
+     62,
+     68
+    ],
+    "r": [
+     297,
+     719,
+     124,
+     144
+    ]
+   },
+   "rank_vang": {
+    "css": [
+     41.3,
+     48.0
+    ],
+    "scale_of_master": 0.327,
+    "note": "rank emblem, 48 css (list rows 32, chips 24); centre on disc_c (hand-measured disc centre), not the crest; order = AR2TIER",
+    "disc_c": [
+     62,
+     72
+    ],
+    "r": [
+     427,
+     719,
+     124,
+     144
+    ]
+   },
+   "rank_bac": {
+    "css": [
+     41.3,
+     48.0
+    ],
+    "scale_of_master": 0.327,
+    "note": "rank emblem, 48 css (list rows 32, chips 24); centre on disc_c (hand-measured disc centre), not the crest; order = AR2TIER",
+    "disc_c": [
+     62,
+     69
+    ],
+    "r": [
+     557,
+     719,
+     124,
+     144
+    ]
+   },
+   "rank_dong": {
+    "css": [
+     44.7,
+     48.0
+    ],
+    "scale_of_master": 0.35,
+    "note": "rank emblem, 48 css (list rows 32, chips 24); centre on disc_c (hand-measured disc centre), not the crest; order = AR2TIER",
+    "disc_c": [
+     67,
+     71
+    ],
+    "r": [
+     687,
+     719,
+     134,
+     144
+    ]
+   },
+   "ke_hoa": {
+    "css": [
+     37.7,
+     40.0
+    ],
+    "scale_of_master": 0.337,
+    "note": "Quan Su ke icon, fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     827,
+     719,
+     113,
+     120
+    ]
+   },
+   "ke_cothu": {
+    "css": [
+     40.0,
+     29.7
+    ],
+    "scale_of_master": 0.321,
+    "note": "Quan Su ke icon, fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     1290,
+     869,
+     120,
+     89
+    ]
+   },
+   "ke_khich": {
+    "css": [
+     40.0,
+     33.3
+    ],
+    "scale_of_master": 0.386,
+    "note": "Quan Su ke icon, fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     966,
+     869,
+     120,
+     100
+    ]
+   },
+   "ke_tiep": {
+    "css": [
+     37.3,
+     40.0
+    ],
+    "scale_of_master": 0.296,
+    "note": "Quan Su ke icon, fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     946,
+     719,
+     112,
+     120
+    ]
+   },
+   "ke_co": {
+    "css": [
+     33.3,
+     40.0
+    ],
+    "scale_of_master": 0.317,
+    "note": "Quan Su ke icon, fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     1064,
+     719,
+     100,
+     120
+    ]
+   },
+   "ke_loan": {
+    "css": [
+     40.0,
+     36.3
+    ],
+    "scale_of_master": 0.347,
+    "note": "Quan Su ke icon, fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     0,
+     869,
+     120,
+     109
+    ]
+   },
+   "ke_nghi": {
+    "css": [
+     40.0,
+     37.3
+    ],
+    "scale_of_master": 0.331,
+    "note": "Quan Su ke icon (r148 a), fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     1294,
+     719,
+     120,
+     112
+    ]
+   },
+   "ke_pha": {
+    "css": [
+     39.3,
+     40.0
+    ],
+    "scale_of_master": 0.301,
+    "note": "Quan Su ke icon (r148 b ram + shield pieces as one cut), fits a 40 x 40 css box; centre it in the box",
+    "r": [
+     1170,
+     719,
+     118,
+     120
+    ]
+   },
+   "boat_junk": {
+    "css": [
+     64.0,
+     49.0
+    ],
+    "scale_of_master": 0.314,
+    "note": "boat, bow right, 64 css wide (wave curls kept)",
+    "r": [
+     1297,
+     510,
+     192,
+     147
+    ]
+   },
+   "boat_sampan": {
+    "css": [
+     64.0,
+     28.3
+    ],
+    "scale_of_master": 0.29,
+    "note": "boat, bow right, 64 css wide (wave curls kept)",
+    "r": [
+     0,
+     984,
+     192,
+     85
+    ]
+   },
+   "boat_war": {
+    "css": [
+     64.0,
+     31.7
+    ],
+    "scale_of_master": 0.253,
+    "note": "boat, bow right, 64 css wide (wave curls kept)",
+    "r": [
+     1092,
+     869,
+     192,
+     95
+    ]
+   },
+   "empty_chest": {
+    "css": [
+     96.0,
+     92.3
+    ],
+    "scale_of_master": 0.59,
+    "note": "empty chest, fits 96 x 96 css",
+    "r": [
+     636,
+     0,
+     288,
+     277
+    ]
+   },
+   "empty_heroslot": {
+    "css": [
+     116.3,
+     96.0
+    ],
+    "scale_of_master": 0.569,
+    "note": "empty hero slot (rack + platform), fits 120 x 96 css",
+    "r": [
+     0,
+     0,
+     349,
+     288
+    ]
+   },
+   "empty_hourglass": {
+    "css": [
+     91.7,
+     96.0
+    ],
+    "scale_of_master": 0.658,
+    "note": "hourglass + scroll, fits 96 x 96 css; glass filled #D6DEE6 with a white highlight (art-ordered fix), nothing transparent inside",
+    "r": [
+     355,
+     0,
+     275,
+     288
+    ]
+   },
+   "empty_list": {
+    "css": [
+     120.0,
+     68.0
+    ],
+    "scale_of_master": 0.564,
+    "note": "bamboo scroll + brush (empty list), fits 120 x 96 css",
+    "r": [
+     1026,
+     294,
+     360,
+     204
+    ]
+   },
+   "boat_treasure": {
+    "css": [
+     64.0,
+     62.3
+    ],
+    "scale_of_master": 0.207,
+    "note": "treasure boat (r150 a), bow right, 64 css wide, red-white sails like the junk; unsharp mask after the downscale",
+    "r": [
+     0,
+     1075,
+     192,
+     187
+    ]
+   }
+  }
+ }
+}

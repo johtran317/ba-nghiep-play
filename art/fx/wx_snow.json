@@ -1,0 +1,205 @@
+{
+ "artmeta": 1,
+ "id": "wx_snow",
+ "build": "V301",
+ "file": "art/fx/wx_snow.webp",
+ "size": [
+  1100,
+  1683
+ ],
+ "bytes": 156100,
+ "note": "BN-ON1t4 (F1, review_r3): drift sizes and places in the json only. drift_l/drift_r css = atlas px x 0.22 by x 0.165 (light), heavy pair x 0.24 by x 0.18. Each side drift: foot at y 320 css on the plains plate, play-facing edge 6 css inside rim_line. drift_far 256 x 24 css at (67, 48) on the far rim. The atlas is unchanged (BN-ON1t3 r196 pieces, half canvas). at = top-left in plate css on the plains plate (390 x 693). Near half: no drift. Earlier note (BN-ON1t3): rim-facing edge skewed to the plains rim lean, dx/dy -0.13 left, +0.13 right. Caps and patches unchanged.",
+ "rim_line": {
+  "left": [
+   [
+    75.0,
+    75
+   ],
+   [
+    61.4,
+    180
+   ],
+   [
+    45.8,
+    300
+   ],
+   [
+    30.1,
+    420
+   ],
+   [
+    4.8,
+    615
+   ]
+  ],
+  "right": [
+   [
+    315.0,
+    75
+   ],
+   [
+    328.6,
+    180
+   ],
+   [
+    344.2,
+    300
+   ],
+   [
+    359.9,
+    420
+   ],
+   [
+    385.2,
+    615
+   ]
+  ],
+  "note": "art-confirmed r3"
+ },
+ "pieces": {
+  "drift_l": {
+   "r": [
+    322,
+    0,
+    330,
+    753
+   ],
+   "side": "left",
+   "rim_facing_edge": "left",
+   "css": [
+    72.6,
+    124.2
+   ],
+   "css_per_px_x": 0.22,
+   "css_per_px_y": 0.165,
+   "at": [
+    -23.2,
+    195.8
+   ]
+  },
+  "drift_r": {
+   "r": [
+    0,
+    0,
+    318,
+    754
+   ],
+   "side": "right",
+   "rim_facing_edge": "right",
+   "css": [
+    70.0,
+    124.4
+   ],
+   "css_per_px_x": 0.22,
+   "css_per_px_y": 0.165,
+   "at": [
+    340.4,
+    195.6
+   ]
+  },
+  "drift_l_heavy": {
+   "r": [
+    0,
+    758,
+    322,
+    728
+   ],
+   "side": "left",
+   "rim_facing_edge": "left",
+   "css": [
+    77.3,
+    131.0
+   ],
+   "css_per_px_x": 0.24,
+   "css_per_px_y": 0.18,
+   "at": [
+    -27.1,
+    189.0
+   ]
+  },
+  "drift_r_heavy": {
+   "r": [
+    656,
+    0,
+    312,
+    733
+   ],
+   "side": "right",
+   "rim_facing_edge": "right",
+   "css": [
+    74.9,
+    131.9
+   ],
+   "css_per_px_x": 0.24,
+   "css_per_px_y": 0.18,
+   "at": [
+    340.1,
+    188.1
+   ]
+  },
+  "drift_far": {
+   "r": [
+    0,
+    1490,
+    652,
+    159
+   ],
+   "css": [
+    256.0,
+    24.0
+   ],
+   "at": [
+    67.0,
+    48.0
+   ]
+  },
+  "cap_bush": {
+   "r": [
+    742,
+    758,
+    212,
+    200
+   ]
+  },
+  "cap_rock": {
+   "r": [
+    510,
+    758,
+    228,
+    210
+   ]
+  },
+  "cap_pine": {
+   "r": [
+    326,
+    758,
+    180,
+    230
+   ]
+  },
+  "patches": {
+   "r": [
+    656,
+    1490,
+    198,
+    138
+   ]
+  },
+  "slush": {
+   "r": [
+    858,
+    1490,
+    210,
+    120
+   ]
+  },
+  "frost_rim": {
+   "r": [
+    0,
+    1653,
+    220,
+    30
+   ]
+  }
+ }
+}

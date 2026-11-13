@@ -1,0 +1,162 @@
+{
+ "artmeta": 1,
+ "id": "hub_rows",
+ "build": "V301",
+ "file": "art/ui/hub_rows.webp",
+ "size": [
+  1840,
+  1380
+ ],
+ "bytes": 209864,
+ "note": "BN-354p-t (art17 approved r204 a row_event, r205 b row_firstpack). 11 plates, 920 x 230 cells = exactly 4:1 (css 330 x 82, dpr 2 1:1 at 2.8x). Layout: 2 columns x 6 rows, 1 empty cell (row 6 right); order = reading order of the names then new rows. Frame = shipped 9-slice (top/bottom 20 px, sides 18 px), scene = whole interior of the approved plate. The LEFT half is the calm dark wall: code puts the 48 css medallion and the white title there.",
+ "css": [
+  330,
+  82
+ ],
+ "scale": 2.8,
+ "rows": {
+  "row_wheel": {
+   "r": [
+    0,
+    0,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_season": {
+   "r": [
+    920,
+    0,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_patrol": {
+   "r": [
+    0,
+    230,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_book": {
+   "r": [
+    920,
+    230,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_arena": {
+   "r": [
+    0,
+    460,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_tower": {
+   "r": [
+    920,
+    460,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_boss": {
+   "r": [
+    0,
+    690,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_shop": {
+   "r": [
+    920,
+    690,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_vip": {
+   "r": [
+    0,
+    920,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_event": {
+   "r": [
+    920,
+    920,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  },
+  "row_firstpack": {
+   "r": [
+    0,
+    1150,
+    920,
+    230
+   ],
+   "css": [
+    330,
+    82
+   ],
+   "note": "4:1, medallion 48 css on the left half, title white on the left half"
+  }
+ }
+}

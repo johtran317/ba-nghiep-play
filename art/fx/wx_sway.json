@@ -1,0 +1,218 @@
+{
+ "artmeta": 1,
+ "id": "wx_sway",
+ "build": "V301",
+ "job": "BN-355t swayprops_a (art 5/5)",
+ "file": "art/fx/wx_sway.webp",
+ "size": [
+  1024,
+  685
+ ],
+ "note": "12 props. r=[x,y,w,h] in the atlas, pivot=[x,y] inside the rect (bottom-centre of the visible base); drawn at ~0.5 of master, scale to 16-40 css tall by depth; bend = skewX at the pivot. Spec \u00a78.3 plate prop lists: plains = grass_green; river = reeds + grass_green; flood = reeds; farmland = millet_stubble + millet; pinehills = pine + grass_green + fern; bamboo = bamboo_spray + fern; burned = burned_tuft + tamarisk; pass = pine + grass_dry; loess = grass_dry + tamarisk; desert = tamarisk + grass_dry; snow = snowy_pine + grass_dry; bosscamp = grass_dry + pennant; palace = none; terrace = pennant. Suggested only: art/designer may change.",
+ "props": {
+  "grass_green": {
+   "pivot": [
+    76.2,
+    226
+   ],
+   "size": [
+    158,
+    227
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    508,
+    0,
+    158,
+    227
+   ]
+  },
+  "grass_dry": {
+   "pivot": [
+    89.8,
+    217
+   ],
+   "size": [
+    192,
+    218
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    603,
+    241,
+    192,
+    218
+   ]
+  },
+  "reeds": {
+   "pivot": [
+    86.2,
+    236
+   ],
+   "size": [
+    178,
+    237
+   ],
+   "scale_of_master": 0.499,
+   "r": [
+    0,
+    0,
+    178,
+    237
+   ]
+  },
+  "millet_stubble": {
+   "pivot": [
+    98.5,
+    198
+   ],
+   "size": [
+    214,
+    199
+   ],
+   "scale_of_master": 0.499,
+   "r": [
+    486,
+    468,
+    214,
+    199
+   ]
+  },
+  "bamboo_spray": {
+   "pivot": [
+    24.1,
+    222
+   ],
+   "size": [
+    196,
+    223
+   ],
+   "scale_of_master": 0.499,
+   "r": [
+    0,
+    241,
+    196,
+    223
+   ]
+  },
+  "fern": {
+   "pivot": [
+    128.8,
+    207
+   ],
+   "size": [
+    250,
+    208
+   ],
+   "scale_of_master": 0.499,
+   "r": [
+    232,
+    468,
+    250,
+    208
+   ]
+  },
+  "pine": {
+   "pivot": [
+    80.6,
+    227
+   ],
+   "size": [
+    156,
+    228
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    348,
+    0,
+    156,
+    228
+   ]
+  },
+  "snowy_pine": {
+   "pivot": [
+    79.0,
+    235
+   ],
+   "size": [
+    162,
+    236
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    182,
+    0,
+    162,
+    236
+   ]
+  },
+  "tamarisk": {
+   "pivot": [
+    115.7,
+    216
+   ],
+   "size": [
+    228,
+    217
+   ],
+   "scale_of_master": 0.499,
+   "r": [
+    0,
+    468,
+    228,
+    217
+   ]
+  },
+  "burned_tuft": {
+   "pivot": [
+    83.7,
+    220
+   ],
+   "size": [
+    178,
+    221
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    421,
+    241,
+    178,
+    221
+   ]
+  },
+  "millet": {
+   "pivot": [
+    106.4,
+    222
+   ],
+   "size": [
+    217,
+    223
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    200,
+    241,
+    217,
+    223
+   ]
+  },
+  "pennant": {
+   "pivot": [
+    11.7,
+    226
+   ],
+   "size": [
+    186,
+    227
+   ],
+   "scale_of_master": 0.5,
+   "r": [
+    670,
+    0,
+    186,
+    227
+   ]
+  }
+ }
+}

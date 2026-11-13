@@ -1,0 +1,505 @@
+{
+ "artmeta": 1,
+ "id": "kit_bt",
+ "build": "V301",
+ "file": "art/fx/kit_bt.webp",
+ "size": [
+  2048,
+  1280
+ ],
+ "cell": 256,
+ "bytes": 473220,
+ "note": "BN-ON1t: r151 b (8 troop impacts, peak frame), r152 a (4 types x 3 frame flipbook + ground mark), r153 a (11 compact steel pieces). Every piece is a 256 x 256 cell at HALF of the 512 master cell; the piece centre = the cell centre (flip frames of one row share it, they must not jump). r = the cell rect [x,y,w,h], content = tight bbox of the opaque pixels, atlas px. Pieces are painted at 65-70 % of the cell: scale so content (not the cell) meets the squad cap (r151 0.55 x squad width, r153 0.7 x). Hit flipbook timing: hit_<type>_1 40 ms, _2 80 ms, _3 120 ms, then mark_<type> stays 600 ms (ground-flat ellipse, tint by branch in code). Colours neutral (steel, bone, earth) except r151 branch accents.",
+ "pieces": {
+  "imp_bash": {
+   "r": [
+    0,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    21,
+    28,
+    220,
+    209
+   ]
+  },
+  "imp_pierce": {
+   "r": [
+    256,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    273,
+    27,
+    222,
+    208
+   ]
+  },
+  "imp_arrows": {
+   "r": [
+    512,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    527,
+    31,
+    225,
+    199
+   ]
+  },
+  "imp_lightcav": {
+   "r": [
+    768,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    784,
+    31,
+    215,
+    199
+   ]
+  },
+  "imp_heavycav": {
+   "r": [
+    1024,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    1045,
+    16,
+    221,
+    204
+   ]
+  },
+  "imp_boulder": {
+   "r": [
+    1280,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    1297,
+    16,
+    225,
+    205
+   ]
+  },
+  "imp_ink": {
+   "r": [
+    1536,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    1557,
+    20,
+    215,
+    201
+   ]
+  },
+  "imp_drum": {
+   "r": [
+    1792,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    1806,
+    17,
+    222,
+    205
+   ]
+  },
+  "hit_blade_1": {
+   "r": [
+    0,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    43,
+    296,
+    175,
+    176
+   ]
+  },
+  "hit_blade_2": {
+   "r": [
+    256,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    274,
+    288,
+    206,
+    193
+   ]
+  },
+  "hit_blade_3": {
+   "r": [
+    512,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    549,
+    288,
+    194,
+    182
+   ]
+  },
+  "mark_blade": {
+   "r": [
+    768,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    795,
+    308,
+    207,
+    169
+   ]
+  },
+  "hit_pierce_1": {
+   "r": [
+    1024,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    1082,
+    305,
+    148,
+    151
+   ]
+  },
+  "hit_pierce_2": {
+   "r": [
+    1280,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    1321,
+    274,
+    202,
+    196
+   ]
+  },
+  "hit_pierce_3": {
+   "r": [
+    1536,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    1584,
+    291,
+    178,
+    162
+   ]
+  },
+  "mark_pierce": {
+   "r": [
+    1792,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    1820,
+    315,
+    206,
+    160
+   ]
+  },
+  "hit_blunt_1": {
+   "r": [
+    0,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    33,
+    546,
+    191,
+    181
+   ]
+  },
+  "hit_blunt_2": {
+   "r": [
+    256,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    262,
+    518,
+    244,
+    216
+   ]
+  },
+  "hit_blunt_3": {
+   "r": [
+    512,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    559,
+    555,
+    175,
+    157
+   ]
+  },
+  "mark_blunt": {
+   "r": [
+    768,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    774,
+    588,
+    234,
+    126
+   ]
+  },
+  "hit_charge_1": {
+   "r": [
+    1024,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    1062,
+    569,
+    191,
+    145
+   ]
+  },
+  "hit_charge_2": {
+   "r": [
+    1280,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    1286,
+    540,
+    244,
+    185
+   ]
+  },
+  "hit_charge_3": {
+   "r": [
+    1536,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    1569,
+    552,
+    189,
+    164
+   ]
+  },
+  "mark_charge": {
+   "r": [
+    1792,
+    512,
+    256,
+    256
+   ],
+   "content": [
+    1805,
+    567,
+    225,
+    161
+   ]
+  },
+  "st_cross": {
+   "r": [
+    0,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    23,
+    781,
+    210,
+    227
+   ]
+  },
+  "st_crescent": {
+   "r": [
+    256,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    282,
+    785,
+    203,
+    215
+   ]
+  },
+  "st_chop": {
+   "r": [
+    512,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    585,
+    784,
+    111,
+    220
+   ]
+  },
+  "st_whirl": {
+   "r": [
+    768,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    790,
+    788,
+    208,
+    213
+   ]
+  },
+  "st_chips": {
+   "r": [
+    1024,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    1059,
+    806,
+    187,
+    179
+   ]
+  },
+  "st_parry": {
+   "r": [
+    1280,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    1311,
+    797,
+    195,
+    196
+   ]
+  },
+  "st_spear": {
+   "r": [
+    1536,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    1554,
+    785,
+    220,
+    220
+   ]
+  },
+  "st_shield": {
+   "r": [
+    1792,
+    768,
+    256,
+    256
+   ],
+   "content": [
+    1816,
+    788,
+    209,
+    211
+   ]
+  },
+  "st_victory": {
+   "r": [
+    0,
+    1024,
+    256,
+    256
+   ],
+   "content": [
+    28,
+    1045,
+    198,
+    207
+   ]
+  },
+  "st_thrust2": {
+   "r": [
+    256,
+    1024,
+    256,
+    256
+   ],
+   "content": [
+    279,
+    1083,
+    212,
+    132
+   ]
+  },
+  "st_puff": {
+   "r": [
+    512,
+    1024,
+    256,
+    256
+   ],
+   "content": [
+    546,
+    1047,
+    189,
+    195
+   ]
+  }
+ }
+}

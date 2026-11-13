@@ -1,0 +1,543 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r4b",
+ "build": "V301",
+ "job": "BN-ON1t: overnight UI kit r156 hero/slot icons, r158 shop kit (mixed a/b), r159 VIP perks (flag retouched), r163 daily kit (cells 1-14), r164 calendar, r165 legion, r166 build/plot, r167 HUD, r168 Binh Phap board",
+ "kit": {
+  "file": "art/ui/kit/kit_r4b.webp",
+  "size": [
+   1536,
+   3123
+  ],
+  "scale": 3,
+  "bytes": 363702,
+  "note": "same format as kit_r3: rects r=[x,y,w,h] at 3x css; slice = [left, top, right, bottom] atlas px (auto-measured where the plain middle starts; fit stretch); css = the drawn size. Two sheets: kit_r4 = icons and small pieces, kit_r4b = frames, plates, plots, boards. Missing (r197 REDO): rib_best (jade best-value ribbon), task_elite (Han iron helmet). BN-354h-t (techart3): shard_skin_v / shard_skin_r / shard_skin_g appended below y 2973 (r198 b skin-shard icons, 48 css). Re-encoded at q90.",
+  "pieces": {
+   "bar_daily": {
+    "css": [
+     94.7,
+     28.0
+    ],
+    "scale_of_master": 0.564,
+    "note": "daily progress bar plate (recessed empty groove, code fills it); 9-slice horizontal, native 3.4:1 (not 14:1), so ~95 css wide at 28 high; stretch the middle to the bar width you need",
+    "slice": [
+     84,
+     0,
+     84,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     1152,
+     2751,
+     284,
+     84
+    ]
+   },
+   "day_tile": {
+    "css": [
+     64.0,
+     59.0
+    ],
+    "scale_of_master": 0.447,
+    "note": "calendar day tile (parchment, dark rim, bronze studs); 9-slice, draw 64 x 64 css",
+    "slice": [
+     32,
+     32,
+     32,
+     32
+    ],
+    "fit": "stretch",
+    "r": [
+     1113,
+     2161,
+     192,
+     177
+    ]
+   },
+   "day_today": {
+    "css": [
+     64.0,
+     55.7
+    ],
+    "scale_of_master": 0.393,
+    "note": "today tile, raised, gold border, red tassels hanging from the bottom corners (the tassels are part of the piece: draw 64 css wide, ~70 high)",
+    "slice": [
+     30,
+     30,
+     30,
+     50
+    ],
+    "fit": "stretch",
+    "r": [
+     444,
+     2397,
+     192,
+     167
+    ]
+   },
+   "day_lock": {
+    "css": [
+     64.0,
+     62.0
+    ],
+    "scale_of_master": 0.448,
+    "note": "locked cover (dark lacquer shutter + padlock); 64 x 64 css, lay over a tile",
+    "slice": [
+     33,
+     33,
+     33,
+     33
+    ],
+    "fit": "stretch",
+    "r": [
+     915,
+     2161,
+     192,
+     186
+    ]
+   },
+   "day_missed": {
+    "css": [
+     64.0,
+     57.3
+    ],
+    "scale_of_master": 0.45,
+    "note": "missed day tile (greyed, torn corner); 64 x 64 css, not 9-slice (torn corner)",
+    "r": [
+     246,
+     2397,
+     192,
+     172
+    ]
+   },
+   "month_plate": {
+    "css": [
+     137.3,
+     44.0
+    ],
+    "scale_of_master": 0.805,
+    "note": "month header plate (red lacquer, gold cloud ends); 9-slice horizontal, 44 css high (native 3:1, ~135 wide), stretch to the width needed",
+    "slice": [
+     86,
+     0,
+     86,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     2751,
+     412,
+     132
+    ]
+   },
+   "day_big": {
+    "css": [
+     64.0,
+     54.3
+    ],
+    "scale_of_master": 0.402,
+    "note": "big-reward day frame (jade border + gold cloud crest on top), days 7 / 30; 64 wide, crest adds ~6 css on top; 9-slice from the lower body [V301 fix: 16 px sliver of the neighbour cut off the left; css is the DRAWN width (9-slice stretches the middle), native frame is 176 px = 58.7 css]",
+    "slice": [
+     17,
+     33,
+     33,
+     33
+    ],
+    "fit": "stretch",
+    "r": [
+     1192,
+     2578,
+     176,
+     163
+    ]
+   },
+   "lg_tile": {
+    "css": [
+     78.0,
+     80.0
+    ],
+    "scale_of_master": 0.876,
+    "note": "legion shop tile frame (dark lacquer, bronze rim, plain middle); 9-slice, 80 x 80 css",
+    "slice": [
+     40,
+     40,
+     40,
+     40
+    ],
+    "fit": "stretch",
+    "r": [
+     1122,
+     1845,
+     234,
+     240
+    ]
+   },
+   "q_timer": {
+    "css": [
+     84.0,
+     24.0
+    ],
+    "scale_of_master": 0.537,
+    "note": "timer plate pill with a bronze hourglass at the left end; 9-slice horizontal, 24 css high, the left cap holds the hourglass",
+    "slice": [
+     72,
+     0,
+     36,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     412,
+     2889,
+     252,
+     72
+    ]
+   },
+   "plot_empty": {
+    "css": [
+     160.0,
+     113.7
+    ],
+    "scale_of_master": 0.972,
+    "note": "EMPTY building plot (cleared earth, stakes, rope, timber); 160 css wide, ground-flat 2:1",
+    "r": [
+     899,
+     939,
+     480,
+     341
+    ]
+   },
+   "plot_field_empty": {
+    "css": [
+     160.0,
+     99.7
+    ],
+    "scale_of_master": 0.974,
+    "note": "EMPTY field plot (ploughed paddy, dikes, marker stake); 160 css wide",
+    "r": [
+     636,
+     1845,
+     480,
+     299
+    ]
+   },
+   "hud_bar": {
+    "css": [
+     390.0,
+     55.7
+    ],
+    "scale_of_master": 0.801,
+    "note": "top bar plate, dark lacquer, bronze bottom edge with a downward scallop in the middle, cloud-scroll end caps; 9-slice horizontal, draw full width (390 css, ~39 high); scale the plate, not the scallop",
+    "slice": [
+     100,
+     0,
+     100,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     2578,
+     1170,
+     167
+    ]
+   },
+   "hud_pill": {
+    "css": [
+     120.0,
+     30.7
+    ],
+    "scale_of_master": 0.503,
+    "note": "currency pill, recessed dark with a round socket at the LEFT end for the currency icon; 9-slice horizontal, draw 120 x ~30 css; icon centre = left cap centre",
+    "slice": [
+     92,
+     0,
+     55,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     786,
+     2751,
+     360,
+     92
+    ],
+    "icon_c": [
+     46,
+     46
+    ]
+   },
+   "hud_avatar": {
+    "css": [
+     72.0,
+     76.7
+    ],
+    "scale_of_master": 0.533,
+    "note": "avatar ring (bronze + gold, interior TRANSPARENT: put the lord portrait behind it) with a small plaque socket at the bottom; 72 css wide",
+    "r": [
+     0,
+     2161,
+     216,
+     230
+    ]
+   },
+   "hud_title": {
+    "css": [
+     120.7,
+     34.0
+    ],
+    "scale_of_master": 0.576,
+    "note": "title name plate (red lacquer, gold ends); 9-slice horizontal, 120 css wide",
+    "slice": [
+     51,
+     0,
+     51,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     418,
+     2751,
+     362,
+     102
+    ]
+   },
+   "hud_season": {
+    "css": [
+     80.0,
+     58.3
+    ],
+    "scale_of_master": 0.792,
+    "note": "season chip (parchment, bronze rim); 9-slice, 80 css wide",
+    "slice": [
+     52,
+     52,
+     52,
+     52
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     2397,
+     240,
+     175
+    ]
+   },
+   "tile_gold": {
+    "css": [
+     104.0,
+     103.3
+    ],
+    "scale_of_master": 0.934,
+    "note": "gold tile frame (black lacquer + gold rim, plain middle for the gold pile picture); 9-slice, 104 x 104 css",
+    "slice": [
+     62,
+     62,
+     62,
+     62
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     1845,
+     312,
+     310
+    ]
+   },
+   "tile_gold_on": {
+    "css": [
+     104.0,
+     103.0
+    ],
+    "scale_of_master": 0.915,
+    "note": "gold tile frame SELECTED (thicker gold rim); same box; the glow of r158 a was dropped (b frames)",
+    "slice": [
+     68,
+     68,
+     68,
+     68
+    ],
+    "fit": "stretch",
+    "r": [
+     318,
+     1845,
+     312,
+     309
+    ]
+   },
+   "row_shop": {
+    "css": [
+     229.0,
+     64.0
+    ],
+    "scale_of_master": 1.0,
+    "note": "shop row plate (black lacquer, bronze end caps); 9-slice horizontal, 64 css high (native 3.6:1, ~230 wide), stretch to the row width",
+    "slice": [
+     106,
+     0,
+     106,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     222,
+     2161,
+     687,
+     192
+    ]
+   },
+   "chip_price": {
+    "css": [
+     66.3,
+     28.0
+    ],
+    "scale_of_master": 0.592,
+    "note": "price chip (bronze-rimmed black lacquer pill); 9-slice horizontal, 28 css high",
+    "slice": [
+     46,
+     0,
+     46,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     2889,
+     199,
+     84
+    ]
+   },
+   "chip_price_on": {
+    "css": [
+     67.0,
+     28.0
+    ],
+    "scale_of_master": 0.596,
+    "note": "price chip ACTIVE (gold rim, black body); 28 css high",
+    "slice": [
+     59,
+     0,
+     59,
+     0
+    ],
+    "fit": "stretch",
+    "r": [
+     205,
+     2889,
+     201,
+     84
+    ]
+   },
+   "bp_wheel": {
+    "css": [
+     297.7,
+     300.0
+    ],
+    "scale_of_master": 1.131,
+    "note": "Binh Phap counter board: six EMPTY sockets on a ring joined by clockwise arrows, plain jade centre; draw 300 x 300 css; sockets (socket_c, atlas px relative to the piece, radius socket_r) take 40 css troop icons (socket_c / socket_r are computed from the ring geometry, atlas px relative to the piece rect, clockwise from the top)",
+    "r": [
+     0,
+     939,
+     893,
+     900
+    ],
+    "socket_c": [
+     [
+      446,
+      159
+     ],
+     [
+      699,
+      304
+     ],
+     [
+      699,
+      596
+     ],
+     [
+      446,
+      741
+     ],
+     [
+      194,
+      596
+     ],
+     [
+      194,
+      304
+     ]
+    ],
+    "socket_r": 70,
+    "centre_jade": [
+     446,
+     450
+    ]
+   },
+   "bp_page": {
+    "css": [
+     240.0,
+     311.0
+    ],
+    "scale_of_master": 1.071,
+    "note": "Binh Phap parchment page plate (dark backing, bronze corner caps); 9-slice, draw 240 x 320 css",
+    "slice": [
+     108,
+     108,
+     108,
+     108
+    ],
+    "fit": "stretch",
+    "r": [
+     0,
+     0,
+     720,
+     933
+    ]
+   },
+   "shard_skin_v": {
+    "css": [
+     39.0,
+     48.0
+    ],
+    "scale_of_master": 0.168,
+    "note": "skin-shard icon (Manh ngoai trang), grade violet; r198 b, hard key + despill, erode 1 px; drawn 48 css (144 px), centre it in the 48 css box of the Chien Lenh cell",
+    "r": [
+     0,
+     2979,
+     117,
+     144
+    ]
+   },
+   "shard_skin_r": {
+    "css": [
+     39.0,
+     48.0
+    ],
+    "scale_of_master": 0.168,
+    "note": "skin-shard icon (Manh ngoai trang), grade crimson; r198 b, hard key + despill, erode 1 px; drawn 48 css (144 px), centre it in the 48 css box of the Chien Lenh cell",
+    "r": [
+     123,
+     2979,
+     117,
+     144
+    ]
+   },
+   "shard_skin_g": {
+    "css": [
+     39.0,
+     48.0
+    ],
+    "scale_of_master": 0.168,
+    "note": "skin-shard icon (Manh ngoai trang), grade gold; r198 b, hard key + despill, erode 1 px; drawn 48 css (144 px), centre it in the 48 css box of the Chien Lenh cell",
+    "r": [
+     246,
+     2979,
+     117,
+     144
+    ]
+   }
+  }
+ }
+}

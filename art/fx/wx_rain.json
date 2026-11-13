@@ -1,0 +1,110 @@
+{
+ "artmeta": 1,
+ "id": "wx_rain",
+ "build": "V301",
+ "file": "art/fx/wx_rain.webp",
+ "size": [
+  640,
+  246
+ ],
+ "bytes": 63056,
+ "note": "BN-ON1t r183 b: rain splash crowns (splash_1..3 grow, splash_side = a side-spray; bottom-centre anchor) and ripple rings (ripple_1..3 grow as concentric rings, ripple_4 = a cluster of three; centre anchor). Trimmed, half master size; r = [x,y,w,h] atlas px; anchor = ground point inside the rect. Ripples are lilac-white rings drawn flat on the ground (2:1).",
+ "pieces": {
+  "splash_1": {
+   "r": [
+    0,
+    196,
+    68,
+    50
+   ],
+   "anchor": [
+    34,
+    49
+   ]
+  },
+  "splash_2": {
+   "r": [
+    0,
+    110,
+    160,
+    82
+   ],
+   "anchor": [
+    80,
+    81
+   ]
+  },
+  "splash_3": {
+   "r": [
+    430,
+    0,
+    166,
+    89
+   ],
+   "anchor": [
+    83,
+    88
+   ]
+  },
+  "splash_side": {
+   "r": [
+    333,
+    110,
+    123,
+    64
+   ],
+   "anchor": [
+    61,
+    32
+   ]
+  },
+  "ripple_1": {
+   "r": [
+    460,
+    110,
+    148,
+    64
+   ],
+   "anchor": [
+    74,
+    32
+   ]
+  },
+  "ripple_2": {
+   "r": [
+    164,
+    110,
+    165,
+    72
+   ],
+   "anchor": [
+    82,
+    36
+   ]
+  },
+  "ripple_3": {
+   "r": [
+    202,
+    0,
+    224,
+    100
+   ],
+   "anchor": [
+    112,
+    50
+   ]
+  },
+  "ripple_4": {
+   "r": [
+    0,
+    0,
+    198,
+    106
+   ],
+   "anchor": [
+    99,
+    53
+   ]
+  }
+ }
+}

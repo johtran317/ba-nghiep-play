@@ -1,0 +1,907 @@
+{
+ "_note": "BN-270 Looks (techart V297): Look 3. Same format as cut_t3.json. Rects/anchors in atlas px (cutout = source px x cut_scale, figures scaled to the block resolution). View px = block resized to width 780 (view_to_src px each).",
+ "cut_scale": 0.5,
+ "look": 3,
+ "rule": "draw n = round(count*pct) soldiers; take slots front rows first (centre-out), back-to-front draw by y_bottom; anchor = bottom centre",
+ "sides": {
+  "ours": {
+   "atlas": "cut_l3_ours.webp",
+   "atlas_size": [
+    2048,
+    518
+   ],
+   "types": {
+    "pike": {
+     "count": 16,
+     "quality": "ok",
+     "note": "iso sheet (approved), 4 isolated figures; layout by eye from the ours back block",
+     "block_src_size": [
+      1467,
+      946
+     ],
+     "block_view_h": 503,
+     "view_to_src": 1.8808,
+     "layout": {
+      "mode": "rows",
+      "rows_top_to_bottom": [
+       4,
+       4,
+       4,
+       4
+      ],
+      "front_c0": 101.6384517226712,
+      "pitch": 143.6,
+      "pitch_drop_per_row_up": 0,
+      "x_shift_per_row_up": 35.9,
+      "alt_shift_odd_rows": 0,
+      "row_pitch_y": 84.7,
+      "note": "BN-316b"
+     },
+     "cells": [
+      {
+       "id": "soldier0",
+       "rect": [
+        793,
+        277,
+        150,
+        168
+       ],
+       "anchor": [
+        65.1,
+        168
+       ]
+      },
+      {
+       "id": "soldier1",
+       "rect": [
+        132,
+        277,
+        104,
+        228
+       ],
+       "anchor": [
+        54.2,
+        228
+       ]
+      },
+      {
+       "id": "soldier2",
+       "rect": [
+        506,
+        277,
+        140,
+        177
+       ],
+       "anchor": [
+        49.3,
+        177
+       ]
+      },
+      {
+       "id": "soldier3",
+       "rect": [
+        945,
+        277,
+        154,
+        166
+       ],
+       "anchor": [
+        93.7,
+        166
+       ]
+      }
+     ]
+    },
+    "archer": {
+     "count": 16,
+     "quality": "ok",
+     "note": "iso sheet (approved), 4 isolated figures; painting may be a diagonal grid: rows are straight",
+     "block_src_size": [
+      1419,
+      944
+     ],
+     "block_view_h": 518.9,
+     "view_to_src": 1.8192,
+     "layout": {
+      "mode": "rows",
+      "rows_top_to_bottom": [
+       4,
+       4,
+       4,
+       4
+      ],
+      "front_c0": 104.5725593667546,
+      "pitch": 149.4,
+      "pitch_drop_per_row_up": 0,
+      "x_shift_per_row_up": 37.3,
+      "alt_shift_odd_rows": 0,
+      "row_pitch_y": 102.4,
+      "note": "BN-316b"
+     },
+     "cells": [
+      {
+       "id": "soldier0",
+       "rect": [
+        0,
+        277,
+        130,
+        239
+       ],
+       "anchor": [
+        73.4,
+        239
+       ]
+      },
+      {
+       "id": "soldier1",
+       "rect": [
+        360,
+        277,
+        144,
+        204
+       ],
+       "anchor": [
+        81.3,
+        204
+       ]
+      },
+      {
+       "id": "soldier2",
+       "rect": [
+        238,
+        277,
+        120,
+        207
+       ],
+       "anchor": [
+        61.8,
+        207
+       ]
+      },
+      {
+       "id": "soldier3",
+       "rect": [
+        648,
+        277,
+        143,
+        177
+       ],
+       "anchor": [
+        93.3,
+        177
+       ]
+      }
+     ]
+    },
+    "heavycav": {
+     "count": 5,
+     "quality": "ok",
+     "note": "iso sheet (approved), 4 isolated figures; layout by eye from the ours back block",
+     "block_src_size": [
+      1499,
+      969
+     ],
+     "block_view_h": 504.2,
+     "view_to_src": 1.9218,
+     "layout": {
+      "mode": "rows",
+      "rows_top_to_bottom": [
+       2,
+       3
+      ],
+      "front_c0": 213.36434592569466,
+      "pitch": 265.6,
+      "pitch_drop_per_row_up": 0,
+      "x_shift_per_row_up": 0,
+      "alt_shift_odd_rows": 132.8,
+      "row_pitch_y": 142.6,
+      "note": "BN-316b",
+      "by_n": {
+       "1": {
+        "f": [
+         0
+        ],
+        "b": []
+       },
+       "2": {
+        "f": [
+         -0.5,
+         0.5
+        ],
+        "b": []
+       },
+       "3": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": []
+       },
+       "4": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": [
+         0.5
+        ]
+       },
+       "5": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": [
+         -0.5,
+         0.5
+        ]
+       }
+      }
+     },
+     "cells": [
+      {
+       "id": "soldier0",
+       "rect": [
+        930,
+        0,
+        320,
+        273
+       ],
+       "anchor": [
+        117.3,
+        273
+       ]
+      },
+      {
+       "id": "soldier1",
+       "rect": [
+        0,
+        0,
+        319,
+        275
+       ],
+       "anchor": [
+        115.9,
+        275
+       ]
+      },
+      {
+       "id": "soldier2",
+       "rect": [
+        321,
+        0,
+        317,
+        274
+       ],
+       "anchor": [
+        125.1,
+        274
+       ]
+      },
+      {
+       "id": "soldier3",
+       "rect": [
+        640,
+        0,
+        288,
+        274
+       ],
+       "anchor": [
+        126.2,
+        274
+       ]
+      }
+     ]
+    },
+    "lightcav": {
+     "count": 7,
+     "quality": "ok",
+     "note": "iso sheet (approved), 4 isolated figures; layout by eye from the ours back block",
+     "block_src_size": [
+      1494,
+      974
+     ],
+     "block_view_h": 508.5,
+     "view_to_src": 1.9154,
+     "layout": {
+      "mode": "rows",
+      "rows_top_to_bottom": [
+       3,
+       4
+      ],
+      "front_c0": 157.9987469980161,
+      "pitch": 163.3,
+      "pitch_drop_per_row_up": 0,
+      "x_shift_per_row_up": 0,
+      "alt_shift_odd_rows": 81.7,
+      "row_pitch_y": 164.1,
+      "note": "BN-316b",
+      "by_n": {
+       "1": {
+        "f": [
+         0
+        ],
+        "b": []
+       },
+       "2": {
+        "f": [
+         -0.5,
+         0.5
+        ],
+        "b": []
+       },
+       "3": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": []
+       },
+       "4": {
+        "f": [
+         -1.5,
+         -0.5,
+         0.5,
+         1.5
+        ],
+        "b": []
+       },
+       "5": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": [
+         -0.5,
+         0.5
+        ]
+       },
+       "6": {
+        "f": [
+         -1.5,
+         -0.5,
+         0.5,
+         1.5
+        ],
+        "b": [
+         -1,
+         1
+        ]
+       },
+       "7": {
+        "f": [
+         -1.5,
+         -0.5,
+         0.5,
+         1.5
+        ],
+        "b": [
+         -1,
+         0,
+         1
+        ]
+       }
+      }
+     },
+     "cells": [
+      {
+       "id": "soldier0",
+       "rect": [
+        1747,
+        0,
+        189,
+        243
+       ],
+       "anchor": [
+        149.4,
+        243
+       ]
+      },
+      {
+       "id": "soldier1",
+       "rect": [
+        1252,
+        0,
+        144,
+        265
+       ],
+       "anchor": [
+        56.1,
+        265
+       ]
+      },
+      {
+       "id": "soldier2",
+       "rect": [
+        1398,
+        0,
+        161,
+        262
+       ],
+       "anchor": [
+        111.8,
+        262
+       ]
+      },
+      {
+       "id": "soldier3",
+       "rect": [
+        1561,
+        0,
+        184,
+        262
+       ],
+       "anchor": [
+        122.2,
+        262
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "enemy": {
+   "atlas": "cut_l3_enemy.webp",
+   "atlas_size": [
+    2048,
+    461
+   ],
+   "types": {
+    "pike": {
+     "count": 16,
+     "quality": "ok",
+     "note": "iso sheet (approved), 4 isolated figures; layout by eye from the ours back block",
+     "block_src_size": [
+      1377,
+      878
+     ],
+     "block_view_h": 497.3,
+     "view_to_src": 1.7654,
+     "layout": {
+      "mode": "rows",
+      "rows_top_to_bottom": [
+       4,
+       4,
+       4,
+       4
+      ],
+      "front_c0": 138.28639401835278,
+      "pitch": 166.2,
+      "pitch_drop_per_row_up": 0,
+      "x_shift_per_row_up": 41.5,
+      "alt_shift_odd_rows": 0,
+      "row_pitch_y": 105.2,
+      "note": "BN-316b"
+     },
+     "cells": [
+      {
+       "id": "soldier0",
+       "rect": [
+        271,
+        0,
+        192,
+        154
+       ],
+       "anchor": [
+        71.7,
+        154
+       ]
+      },
+      {
+       "id": "soldier1",
+       "rect": [
+        0,
+        0,
+        117,
+        166
+       ],
+       "anchor": [
+        58.6,
+        166
+       ]
+      },
+      {
+       "id": "soldier2",
+       "rect": [
+        119,
+        0,
+        150,
+        164
+       ],
+       "anchor": [
+        51.2,
+        164
+       ]
+      },
+      {
+       "id": "soldier3",
+       "rect": [
+        465,
+        0,
+        163,
+        152
+       ],
+       "anchor": [
+        110.5,
+        152
+       ]
+      }
+     ]
+    },
+    "lightcav": {
+     "count": 7,
+     "quality": "ok",
+     "note": "r107 BN-320: approved iso sheet chibi74_iso_lightcav_look3_tiger_enemy_b.png, 4 isolated figures cut by connected component",
+     "block_src_size": [
+      1468,
+      964
+     ],
+     "block_view_h": 512.2,
+     "view_to_src": 1.8821,
+     "layout": {
+      "mode": "rows",
+      "rows_top_to_bottom": [
+       3,
+       4
+      ],
+      "front_c0": 185.19961744859467,
+      "pitch": 188.8,
+      "pitch_drop_per_row_up": 0,
+      "x_shift_per_row_up": 0,
+      "alt_shift_odd_rows": 94.4,
+      "row_pitch_y": 175.3,
+      "note": "BN-316b",
+      "by_n": {
+       "1": {
+        "f": [
+         0
+        ],
+        "b": []
+       },
+       "2": {
+        "f": [
+         -0.5,
+         0.5
+        ],
+        "b": []
+       },
+       "3": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": []
+       },
+       "4": {
+        "f": [
+         -1.5,
+         -0.5,
+         0.5,
+         1.5
+        ],
+        "b": []
+       },
+       "5": {
+        "f": [
+         -1,
+         0,
+         1
+        ],
+        "b": [
+         -0.5,
+         0.5
+        ]
+       },
+       "6": {
+        "f": [
+         -1.5,
+         -0.5,
+         0.5,
+         1.5
+        ],
+        "b": [
+         -1,
+         1
+        ]
+       },
+       "7": {
+        "f": [
+         -1.5,
+         -0.5,
+         0.5,
+         1.5
+        ],
+        "b": [
+         -1,
+         0,
+         1
+        ]
+       }
+      }
+     },
+     "cells": [
+      {
+       "id": "soldier0",
+       "rect": [
+        622,
+        170,
+        209,
+        246
+       ],
+       "anchor": [
+        172.4,
+        246
+       ]
+      },
+      {
+       "id": "soldier1",
+       "rect": [
+        0,
+        170,
+        200,
+        289
+       ],
+       "anchor": [
+        104,
+        289
+       ]
+      },
+      {
+       "id": "soldier2",
+       "rect": [
+        409,
+        170,
+        211,
+        252
+       ],
+       "anchor": [
+        117.8,
+        252
+       ]
+      },
+      {
+       "id": "soldier3",
+       "rect": [
+        202,
+        170,
+        205,
+        275
+       ],
+       "anchor": [
+        116.1,
+        275
+       ]
+      }
+     ]
+    }
+   }
+  }
+ },
+ "siege_trim": {
+  "_note": "BN-316 S1: per side and painted variant (a = row ours_a / enemy_a, b = the _b row), cell px of the 256x171 unflipped cell. Apply: keep rect (if any) then erase rects, each edge feathered `feather` px, then refit the cell to the remaining box. null = untouched.",
+  "feather": 5,
+  "ours": {
+   "a": null,
+   "b": null
+  },
+  "enemy": {
+   "a": null,
+   "b": null
+  }
+ },
+ "siege4": {
+  "_note": "V301 r104 (techart): 4-engine siege cutouts for the 2+2 zigzag. Not used until the coder switches siege to 4 (siege_trim 3-engine trim stays the default). Cells are in siege4.webp (cut-atlas px, same space as cut_*.json). missing = no clean cut, keep the 3-engine trim there.",
+  "atlas": "siege4.webp",
+  "atlas_size": [
+   1024,
+   447
+  ],
+  "layout": {
+   "mode": "zigzag22",
+   "slots": [
+    {
+     "cx": 0,
+     "scale": 0.84,
+     "lift": 0
+    },
+    {
+     "cx": 1.2,
+     "scale": 0.84,
+     "lift": 0
+    },
+    {
+     "cx": 0.55,
+     "scale": 0.8,
+     "lift": 0.13
+    },
+    {
+     "cx": 1.9,
+     "scale": 0.8,
+     "lift": 0.13
+    }
+   ],
+   "draw_order": [
+    2,
+    3,
+    0,
+    1
+   ],
+   "keep_order": [
+    1,
+    0,
+    2,
+    3
+   ],
+   "note": "art 7.4b pick C. Units: cx in unit_w (from the first slot centre), scale x unit size, lift in unit_h above the front baseline; anchors are feet centres (bottom centre of the cell). Draw back slots first. n engines (4/3/2/1) = first n of keep_order (back right leaves first, then back left); centre the drawn group. Slot j uses sides.<side>.slots[j] = {cell, mirror}."
+  },
+  "sides": {
+   "ours": {
+    "status": "ok",
+    "note": "4 distinct engines + 1 crew each (r105 siege4-look3-ours a)",
+    "unit": [
+     104,
+     171
+    ],
+    "cells": [
+     {
+      "id": "engine0",
+      "rect": [
+       210,
+       173,
+       102,
+       139
+      ],
+      "anchor": [
+       51,
+       139
+      ]
+     },
+     {
+      "id": "engine1",
+      "rect": [
+       0,
+       0,
+       98,
+       171
+      ],
+      "anchor": [
+       49,
+       171
+      ]
+     },
+     {
+      "id": "engine2",
+      "rect": [
+       104,
+       173,
+       104,
+       141
+      ],
+      "anchor": [
+       52,
+       141
+      ]
+     },
+     {
+      "id": "engine3",
+      "rect": [
+       314,
+       173,
+       96,
+       136
+      ],
+      "anchor": [
+       48,
+       136
+      ]
+     }
+    ],
+    "slots": [
+     {
+      "cell": 0,
+      "mirror": 0
+     },
+     {
+      "cell": 1,
+      "mirror": 0
+     },
+     {
+      "cell": 2,
+      "mirror": 0
+     },
+     {
+      "cell": 3,
+      "mirror": 0
+     }
+    ]
+   },
+   "enemy": {
+    "status": "ok",
+    "note": "4 distinct engines + 1 crew each (r105 siege4-look3-enemy b); engine 2 has two crew (one each side)",
+    "unit": [
+     110,
+     171
+    ],
+    "cells": [
+     {
+      "id": "engine0",
+      "rect": [
+       292,
+       0,
+       102,
+       170
+      ],
+      "anchor": [
+       51,
+       170
+      ]
+     },
+     {
+      "id": "engine1",
+      "rect": [
+       396,
+       0,
+       110,
+       170
+      ],
+      "anchor": [
+       55,
+       170
+      ]
+     },
+     {
+      "id": "engine2",
+      "rect": [
+       100,
+       0,
+       91,
+       171
+      ],
+      "anchor": [
+       45.5,
+       171
+      ]
+     },
+     {
+      "id": "engine3",
+      "rect": [
+       193,
+       0,
+       97,
+       171
+      ],
+      "anchor": [
+       48.5,
+       171
+      ]
+     }
+    ],
+    "slots": [
+     {
+      "cell": 0,
+      "mirror": 0
+     },
+     {
+      "cell": 1,
+      "mirror": 0
+     },
+     {
+      "cell": 2,
+      "mirror": 0
+     },
+     {
+      "cell": 3,
+      "mirror": 0
+     }
+    ]
+   }
+  },
+  "missing": []
+ }
+}

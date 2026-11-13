@@ -1,0 +1,38 @@
+{
+ "artmeta": 1,
+ "id": "wx_lamp",
+ "build": "V301",
+ "file": "art/fx/wx_lamp.webp",
+ "size": [
+  663,
+  730
+ ],
+ "bytes": 108212,
+ "note": "BN-ON1t r185 b: painted lamp light pools, master luma keyed to alpha (black floor 6), neutral white; 0.375 x master. Tint warm (source-atop) and draw additively or screen. pool_l large, pool_bar = pool with the dark frame-bar shadow across the middle, pool_s small. r = [x,y,w,h] atlas px.",
+ "pieces": {
+  "pool_l": {
+   "r": [
+    0,
+    0,
+    660,
+    224
+   ]
+  },
+  "pool_bar": {
+   "r": [
+    0,
+    228,
+    663,
+    248
+   ]
+  },
+  "pool_s": {
+   "r": [
+    0,
+    480,
+    369,
+    250
+   ]
+  }
+ }
+}

@@ -1,0 +1,786 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r4",
+ "build": "V301",
+ "job": "BN-ON1t: overnight UI kit r156 hero/slot icons, r158 shop kit (mixed a/b), r159 VIP perks (flag retouched), r163 daily kit (cells 1-14), r164 calendar, r165 legion, r166 build/plot, r167 HUD, r168 Binh Phap board",
+ "kit": {
+  "file": "art/ui/kit/kit_r4.webp",
+  "size": [
+   1536,
+   1081
+  ],
+  "scale": 3,
+  "bytes": 431632,
+  "note": "same format as kit_r3: rects r=[x,y,w,h] at 3x css; slice = [left, top, right, bottom] atlas px (auto-measured where the plain middle starts; fit stretch); css = the drawn size. Two sheets: kit_r4 = icons and small pieces, kit_r4b = frames, plates, plots, boards. r197 REDO added (BN-ON1t3): rib_best (jade best-value ribbon), task_elite (Han iron helmet), in the rows below y 879. BN-ON1t4 F2: task_elite stray fragment removed (largest component kept), helmet centred in its rect.",
+  "pieces": {
+   "stat_tong": {
+    "css": [
+     40.0,
+     37.7
+    ],
+    "scale_of_master": 0.287,
+    "note": "hero sheet stat icon (THONG leadership: tiger tally); fits 40 x 40 css, shown 24 css; centre in the box",
+    "r": [
+     1255,
+     538,
+     120,
+     113
+    ]
+   },
+   "stat_dung": {
+    "css": [
+     40.0,
+     39.7
+    ],
+    "scale_of_master": 0.274,
+    "note": "hero sheet stat icon (DUNG valour: halberd + sword); fits 40 x 40 css, shown 24 css; centre in the box",
+    "r": [
+     1129,
+     538,
+     120,
+     119
+    ]
+   },
+   "stat_tri": {
+    "css": [
+     40.0,
+     37.0
+    ],
+    "scale_of_master": 0.291,
+    "note": "hero sheet stat icon (TRI intellect: bamboo book + brush); fits 40 x 40 css, shown 24 css; centre in the box",
+    "r": [
+     0,
+     676,
+     120,
+     111
+    ]
+   },
+   "stat_binh": {
+    "css": [
+     37.3,
+     40.0
+    ],
+    "scale_of_master": 0.263,
+    "note": "hero sheet stat icon (BINH LUC troops: spears + shield); fits 40 x 40 css, shown 24 css; centre in the box",
+    "r": [
+     426,
+     538,
+     112,
+     120
+    ]
+   },
+   "stat_toc": {
+    "css": [
+     37.3,
+     40.0
+    ],
+    "scale_of_master": 0.284,
+    "note": "hero sheet stat icon (TOC speed: horse head plaque); fits 40 x 40 css, shown 24 css; centre in the box",
+    "r": [
+     544,
+     538,
+     112,
+     120
+    ]
+   },
+   "stat_sikhi": {
+    "css": [
+     40.0,
+     37.7
+    ],
+    "scale_of_master": 0.283,
+    "note": "hero sheet stat icon (SI KHI morale: war drum); fits 40 x 40 css, shown 24 css; centre in the box",
+    "r": [
+     1381,
+     538,
+     120,
+     113
+    ]
+   },
+   "slot_wp": {
+    "css": [
+     44.0,
+     44.0
+    ],
+    "scale_of_master": 0.307,
+    "note": "EMPTY weapon slot socket (muted placeholder silhouette in a dark lacquer round socket); 44 x 44 css; the 4 sockets are identical in size",
+    "r": [
+     1178,
+     388,
+     132,
+     132
+    ]
+   },
+   "slot_hr": {
+    "css": [
+     43.7,
+     44.0
+    ],
+    "scale_of_master": 0.307,
+    "note": "EMPTY horse slot socket (muted placeholder silhouette in a dark lacquer round socket); 44 x 44 css; the 4 sockets are identical in size",
+    "r": [
+     1316,
+     388,
+     131,
+     132
+    ]
+   },
+   "slot_ar": {
+    "css": [
+     44.0,
+     44.0
+    ],
+    "scale_of_master": 0.31,
+    "note": "EMPTY armour slot socket (muted placeholder silhouette in a dark lacquer round socket); 44 x 44 css; the 4 sockets are identical in size",
+    "r": [
+     0,
+     538,
+     132,
+     132
+    ]
+   },
+   "slot_tl": {
+    "css": [
+     44.0,
+     44.0
+    ],
+    "scale_of_master": 0.31,
+    "note": "EMPTY talisman slot socket (muted placeholder silhouette in a dark lacquer round socket); 44 x 44 css; the 4 sockets are identical in size",
+    "r": [
+     138,
+     538,
+     132,
+     132
+    ]
+   },
+   "cat_gear": {
+    "css": [
+     30.0,
+     40.0
+    ],
+    "scale_of_master": 0.251,
+    "note": "Kho do category GEAR: helmet on a folded cuirass; 40 x 40 css",
+    "r": [
+     662,
+     538,
+     90,
+     120
+    ]
+   },
+   "cat_mat": {
+    "css": [
+     40.0,
+     34.0
+    ],
+    "scale_of_master": 0.276,
+    "note": "Kho do category MATERIALS: ingots + cloth + jade; 40 x 40 css",
+    "r": [
+     1386,
+     676,
+     120,
+     102
+    ]
+   },
+   "chest_d1": {
+    "css": [
+     48.0,
+     43.3
+    ],
+    "scale_of_master": 0.382,
+    "note": "activity chest tier 1, CLOSED; 48 x 48 css (shown ~40); tiers get richer d1 plain wood -> d4 gold + jade",
+    "r": [
+     276,
+     538,
+     144,
+     130
+    ]
+   },
+   "chest_d2": {
+    "css": [
+     45.3,
+     48.0
+    ],
+    "scale_of_master": 0.319,
+    "note": "activity chest tier 2, CLOSED; 48 x 48 css (shown ~40); tiers get richer d1 plain wood -> d4 gold + jade",
+    "r": [
+     870,
+     220,
+     136,
+     144
+    ]
+   },
+   "chest_d3": {
+    "css": [
+     45.3,
+     48.0
+    ],
+    "scale_of_master": 0.319,
+    "note": "activity chest tier 3, CLOSED; 48 x 48 css (shown ~40); tiers get richer d1 plain wood -> d4 gold + jade",
+    "r": [
+     1012,
+     220,
+     136,
+     144
+    ]
+   },
+   "chest_d4": {
+    "css": [
+     45.7,
+     48.0
+    ],
+    "scale_of_master": 0.317,
+    "note": "activity chest tier 4, CLOSED; 48 x 48 css (shown ~40); tiers get richer d1 plain wood -> d4 gold + jade",
+    "r": [
+     1154,
+     220,
+     137,
+     144
+    ]
+   },
+   "chest_d1o": {
+    "css": [
+     45.0,
+     48.0
+    ],
+    "scale_of_master": 0.318,
+    "note": "activity chest tier 1, OPEN (lid up, goods inside); same box as the closed one, swap on claim",
+    "r": [
+     1297,
+     220,
+     135,
+     144
+    ]
+   },
+   "chest_d2o": {
+    "css": [
+     45.0,
+     48.0
+    ],
+    "scale_of_master": 0.3,
+    "note": "activity chest tier 2, OPEN (lid up, goods inside); same box as the closed one, swap on claim",
+    "r": [
+     0,
+     388,
+     135,
+     144
+    ]
+   },
+   "chest_d3o": {
+    "css": [
+     45.3,
+     48.0
+    ],
+    "scale_of_master": 0.301,
+    "note": "activity chest tier 3, OPEN (lid up, goods inside); same box as the closed one, swap on claim",
+    "r": [
+     141,
+     388,
+     136,
+     144
+    ]
+   },
+   "chest_d4o": {
+    "css": [
+     46.3,
+     48.0
+    ],
+    "scale_of_master": 0.299,
+    "note": "activity chest tier 4, OPEN (lid up, goods inside); same box as the closed one, swap on claim",
+    "r": [
+     283,
+     388,
+     139,
+     144
+    ]
+   },
+   "task_tax": {
+    "css": [
+     40.0,
+     36.7
+    ],
+    "scale_of_master": 0.273,
+    "note": "daily task icon (coin bag + tally stick); 40 x 40 css, shown 32",
+    "r": [
+     504,
+     676,
+     120,
+     110
+    ]
+   },
+   "task_build": {
+    "css": [
+     40.0,
+     36.3
+    ],
+    "scale_of_master": 0.278,
+    "note": "daily task icon (hammer on an anvil); 40 x 40 css, shown 32",
+    "r": [
+     1008,
+     676,
+     120,
+     109
+    ]
+   },
+   "task_harv": {
+    "css": [
+     40.0,
+     36.3
+    ],
+    "scale_of_master": 0.264,
+    "note": "daily task icon (sickle + wheat); 40 x 40 css, shown 32",
+    "r": [
+     1134,
+     676,
+     120,
+     109
+    ]
+   },
+   "task_levy": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.273,
+    "note": "daily task icon (recruiting drum + banner); 40 x 40 css, shown 32",
+    "r": [
+     758,
+     538,
+     120,
+     120
+    ]
+   },
+   "task_win": {
+    "css": [
+     39.0,
+     40.0
+    ],
+    "scale_of_master": 0.276,
+    "note": "daily task icon (crossed swords + pennant); 40 x 40 css, shown 32",
+    "r": [
+     884,
+     538,
+     117,
+     120
+    ]
+   },
+   "day_stamp": {
+    "css": [
+     64.0,
+     57.7
+    ],
+    "scale_of_master": 0.526,
+    "note": "CLAIMED stamp (red seal ring + brush tick, no glyph), semi-opaque ink; 64 css, lay over the tile centre",
+    "r": [
+     984,
+     0,
+     192,
+     173
+    ]
+   },
+   "lg_donate": {
+    "css": [
+     40.0,
+     24.7
+    ],
+    "scale_of_master": 0.271,
+    "note": "legion task icon DONATE (lacquer box + coin string + silk)",
+    "r": [
+     305,
+     793,
+     120,
+     74
+    ]
+   },
+   "lg_hunt": {
+    "css": [
+     40.0,
+     28.7
+    ],
+    "scale_of_master": 0.306,
+    "note": "legion task icon HUNT (tiger war horn)",
+    "r": [
+     0,
+     793,
+     120,
+     86
+    ]
+   },
+   "lg_help": {
+    "css": [
+     40.0,
+     21.3
+    ],
+    "scale_of_master": 0.271,
+    "note": "legion task icon HELP ALLIES (clasped gauntlets)",
+    "r": [
+     431,
+     793,
+     120,
+     64
+    ]
+   },
+   "lg_shop": {
+    "css": [
+     38.7,
+     40.0
+    ],
+    "scale_of_master": 0.383,
+    "note": "legion shop icon (market cart)",
+    "r": [
+     1007,
+     538,
+     116,
+     120
+    ]
+   },
+   "lg_rank1": {
+    "css": [
+     48.0,
+     44.7
+    ],
+    "scale_of_master": 0.456,
+    "note": "rank 1 LEADER: gold tiger medallion, red cord + jade bead; 48 css, shown 24-32",
+    "r": [
+     728,
+     388,
+     144,
+     134
+    ]
+   },
+   "lg_rank2": {
+    "css": [
+     48.0,
+     44.7
+    ],
+    "scale_of_master": 0.456,
+    "note": "rank 2 VICE LEADER: silver medallion, red cord",
+    "r": [
+     878,
+     388,
+     144,
+     134
+    ]
+   },
+   "lg_rank3": {
+    "css": [
+     48.0,
+     46.7
+    ],
+    "scale_of_master": 0.483,
+    "note": "rank 3 ELITE: bronze medallion, BLUE cord",
+    "r": [
+     578,
+     388,
+     144,
+     140
+    ]
+   },
+   "lg_rank4": {
+    "css": [
+     48.0,
+     47.3
+    ],
+    "scale_of_master": 0.509,
+    "note": "rank 4 MEMBER: wooden medallion, BROWN cord",
+    "r": [
+     428,
+     388,
+     144,
+     142
+    ]
+   },
+   "q_busy": {
+    "css": [
+     72.0,
+     68.3
+    ],
+    "scale_of_master": 0.579,
+    "note": "queue slot BUSY (scaffold + hammer); 72 x 72 css",
+    "r": [
+     222,
+     0,
+     216,
+     205
+    ]
+   },
+   "q_empty": {
+    "css": [
+     72.0,
+     68.0
+    ],
+    "scale_of_master": 0.578,
+    "note": "queue slot EMPTY (recessed floor + rope)",
+    "r": [
+     444,
+     0,
+     216,
+     204
+    ]
+   },
+   "q_lock": {
+    "css": [
+     72.0,
+     68.0
+    ],
+    "scale_of_master": 0.578,
+    "note": "queue slot LOCKED (padlock on chains)",
+    "r": [
+     666,
+     0,
+     216,
+     204
+    ]
+   },
+   "train_slot": {
+    "css": [
+     72.0,
+     53.3
+    ],
+    "scale_of_master": 0.48,
+    "note": "training slot platform (empty, straw mat); 72 css wide",
+    "r": [
+     222,
+     220,
+     216,
+     160
+    ]
+   },
+   "train_lock": {
+    "css": [
+     72.0,
+     54.0
+    ],
+    "scale_of_master": 0.469,
+    "note": "training slot LOCKED (cloth + padlock + chain)",
+    "r": [
+     0,
+     220,
+     216,
+     162
+    ]
+   },
+   "vip_boss": {
+    "css": [
+     40.0,
+     36.7
+    ],
+    "scale_of_master": 0.275,
+    "note": "VIP perk icon (swords + horn) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     630,
+     676,
+     120,
+     110
+    ]
+   },
+   "vip_tax": {
+    "css": [
+     40.0,
+     36.7
+    ],
+    "scale_of_master": 0.274,
+    "note": "VIP perk icon (coins + bamboo roll) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     756,
+     676,
+     120,
+     110
+    ]
+   },
+   "vip_sweep": {
+    "css": [
+     40.0,
+     36.3
+    ],
+    "scale_of_master": 0.27,
+    "note": "VIP perk icon (pagoda + flag (flag glyph painted out)) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     1260,
+     676,
+     120,
+     109
+    ]
+   },
+   "vip_exp": {
+    "css": [
+     40.0,
+     36.7
+    ],
+    "scale_of_master": 0.275,
+    "note": "VIP perk icon (jade plaque) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     882,
+     676,
+     120,
+     110
+    ]
+   },
+   "vip_silver": {
+    "css": [
+     40.0,
+     37.0
+    ],
+    "scale_of_master": 0.275,
+    "note": "VIP perk icon (silver ingots) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     126,
+     676,
+     120,
+     111
+    ]
+   },
+   "vip_stone": {
+    "css": [
+     40.0,
+     37.0
+    ],
+    "scale_of_master": 0.275,
+    "note": "VIP perk icon (stone + hammer) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     252,
+     676,
+     120,
+     111
+    ]
+   },
+   "vip_manual": {
+    "css": [
+     40.0,
+     37.0
+    ],
+    "scale_of_master": 0.274,
+    "note": "VIP perk icon (book bundle) on a dark lacquer disc; 40 x 40 css, shown 32",
+    "r": [
+     378,
+     676,
+     120,
+     111
+    ]
+   },
+   "vip_badge": {
+    "css": [
+     48.0,
+     44.7
+    ],
+    "scale_of_master": 0.33,
+    "note": "VIP badge BLANK plaque (code writes the level); 48 x 48 css",
+    "r": [
+     1028,
+     388,
+     144,
+     134
+    ]
+   },
+   "hud_plus": {
+    "css": [
+     28.0,
+     28.0
+    ],
+    "scale_of_master": 0.368,
+    "note": "plus button (red lacquer, gold rim, gold +); 28 css, + reads at 20",
+    "r": [
+     126,
+     793,
+     84,
+     84
+    ]
+   },
+   "hud_plus_p": {
+    "css": [
+     27.7,
+     28.0
+    ],
+    "scale_of_master": 0.364,
+    "note": "plus button PRESSED (darker, sunken); same box",
+    "r": [
+     216,
+     793,
+     83,
+     84
+    ]
+   },
+   "rib_first": {
+    "css": [
+     56.0,
+     55.3
+    ],
+    "scale_of_master": 0.497,
+    "note": "corner ribbon BLANK (red silk, gold edge), top-right corner of a tile; code writes x2 on it; 56 css",
+    "r": [
+     1182,
+     0,
+     168,
+     166
+    ]
+   },
+   "rib_first_banner": {
+    "css": [
+     140.0,
+     50.0
+    ],
+    "scale_of_master": 0.794,
+    "note": "first-buy banner ribbon BLANK, RED (maroon silk, forked ends, gold edge); 140 css wide; code writes the text",
+    "r": [
+     444,
+     220,
+     420,
+     150
+    ]
+   },
+   "tag_deal": {
+    "css": [
+     30.0,
+     64.0
+    ],
+    "scale_of_master": 0.552,
+    "note": "deal tag BLANK (jade ring + dark plaque + red tassel); 36 x 64 css; code writes on the plaque",
+    "r": [
+     888,
+     0,
+     90,
+     192
+    ]
+   },
+   "stamp_sold": {
+    "css": [
+     72.0,
+     71.3
+    ],
+    "scale_of_master": 0.809,
+    "note": "SOLD-OUT stamp (red seal ring with a cross of brush strokes, no glyph), tilted, semi-opaque ink; 72 css; lay over a tile",
+    "r": [
+     0,
+     0,
+     216,
+     214
+    ]
+   },
+   "task_elite": {
+    "css": [
+     40.0,
+     38.3
+    ],
+    "r": [
+     0,
+     879,
+     120,
+     115
+    ],
+    "note": "r197 a: Han riveted iron bowl helmet with lamellar neck guard, bold crack, red tassel (elite enemy, Nhiem vu ngay row 44). 40 x 40 css like the other task icons, shown 32 css. No slice. r3 F2: stray fragment removed."
+   },
+   "rib_best": {
+    "css": [
+     140.0,
+     66.0
+    ],
+    "r": [
+     128,
+     879,
+     420,
+     198
+    ],
+    "note": "r197 b: jade green silk best-value ribbon BLANK (r158 a shape, forked folded ends, gold tassels), stretched y x1.3; 140 css wide. Code writes the label (12 px) on the band. No slice."
+   }
+  }
+ }
+}

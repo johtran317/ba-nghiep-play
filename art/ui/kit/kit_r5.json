@@ -1,0 +1,184 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r5",
+ "build": "V301",
+ "job": "BN-354b4-t: UI batch 4 art (r283 b system icons, r284 b settings discs, r285 a hdr_market), approved by art26 in BN-354b4-r. BN-354w-t: bp_wheel8 (r286 b, 8-socket Binh Phap counter wheel, art27 review BN-354w-r) added at (0,120) under the 10 pieces; the 10 existing rects unchanged; atlas 1536 x 1020",
+ "kit": {
+  "file": "art/ui/kit/kit_r5.webp",
+  "size": [
+   1536,
+   1020
+  ],
+  "scale": 3,
+  "bytes": 182952,
+  "note": "same format as kit_r4: rects r=[x,y,w,h] at 3x css; css = the drawn box size; no slice (icons and discs). Use shown sizes: stat_* and ico_* 24 css, set_* 32 css. Settings OFF states are code grey + slash, not in this sheet.",
+  "pieces": {
+   "stat_thu": {
+    "css": [
+     24.3,
+     40.0
+    ],
+    "scale_of_master": 0.231,
+    "note": "system icon, shield with a red lacquer face (r283 b); rectangular and alone (not stat_binh); 40 x 40 css box, shown 24 css; centre in the box",
+    "r": [
+     0,
+     0,
+     73,
+     120
+    ]
+   },
+   "ico_city": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.267,
+    "note": "system icon, walled city with crenellations (r283 b); 40 x 40 css box, shown 24 css",
+    "r": [
+     79,
+     0,
+     120,
+     120
+    ]
+   },
+   "ico_mail": {
+    "css": [
+     40.0,
+     37.3
+    ],
+    "scale_of_master": 0.304,
+    "note": "system icon, sealed bamboo letter on a board (mail, r283 b); 40 x 40 css box, shown 24 css",
+    "r": [
+     1048,
+     0,
+     120,
+     112
+    ]
+   },
+   "ico_research": {
+    "css": [
+     27.0,
+     40.0
+    ],
+    "scale_of_master": 0.244,
+    "note": "system icon, armillary sphere + book (research, r283 b); 40 x 40 css box, shown 24 css",
+    "r": [
+     205,
+     0,
+     81,
+     120
+    ]
+   },
+   "set_sound": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.195,
+    "note": "settings disc, bell, ON state (r284 b); whole disc; 40 x 40 css box, shown 32 css; OFF = code grey + slash",
+    "r": [
+     292,
+     0,
+     120,
+     120
+    ]
+   },
+   "set_music": {
+    "css": [
+     40.0,
+     39.7
+    ],
+    "scale_of_master": 0.194,
+    "note": "settings disc, zither, ON state (r284 b); whole disc; 40 x 40 css box, shown 32 css; OFF = code grey + slash",
+    "r": [
+     922,
+     0,
+     120,
+     119
+    ]
+   },
+   "set_lang": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.195,
+    "note": "settings disc, two language scrolls (r284 b); whole disc; 40 x 40 css box, shown 32 css",
+    "r": [
+     418,
+     0,
+     120,
+     120
+    ]
+   },
+   "set_backup": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.195,
+    "note": "settings disc, locked box = backup (r284 b); whole disc; 40 x 40 css box, shown 32 css",
+    "r": [
+     544,
+     0,
+     120,
+     120
+    ]
+   },
+   "set_import": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.194,
+    "note": "settings disc, open box + scroll = import (r284 b); whole disc; 40 x 40 css box, shown 32 css",
+    "r": [
+     670,
+     0,
+     120,
+     120
+    ]
+   },
+   "set_rename": {
+    "css": [
+     40.0,
+     40.0
+    ],
+    "scale_of_master": 0.195,
+    "note": "settings disc, brush across a plaque = rename (r284 b); whole disc; 40 x 40 css box, shown 32 css",
+    "r": [
+     796,
+     0,
+     120,
+     120
+    ]
+   },
+   "bp_wheel8": {
+    "css": [
+     300.0,
+     300.0
+    ],
+    "scale_of_master": 0.4997,
+    "note": "Binh Phap counter board, 8 EMPTY sockets clockwise from the top, socket k = T8RING[k] (shd, pik, hvy, arc, rdr, drm, str, sge; Thuẫn Vệ at top = shd), 40 css troop icons from troopIco, aria-hidden picture; the 8 rows below stay the tap targets. r286 b (art27 review r286, BN-354w-r). Board circle R about 900 px in the piece space.",
+    "r": [
+     0,
+     120,
+     900,
+     900
+    ],
+    "socket_c": [
+     [450, 178],
+     [642, 259],
+     [720, 449],
+     [641, 638],
+     [450, 718],
+     [259, 638],
+     [181, 451],
+     [258, 262]
+    ],
+    "socket_r": 67,
+    "jade": [450, 450]
+   }
+  }
+ }
+}

@@ -1,0 +1,445 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r2",
+ "build": "V301",
+ "job": "BN-354t: r128 dock kit + icons, r129 stars + reward plates, r130 gold piles (art-approved 2026-11-13; r133 result banners follow)",
+ "kit": {
+  "file": "art/ui/kit/kit_r2.webp",
+  "size": [
+   1536,
+   602
+  ],
+  "scale": 3,
+  "note": "rects r=[x,y,w,h] at 3x css; slice = [left, top, right, bottom] atlas px",
+  "pieces": {
+   "nav_plate": {
+    "slice": [
+     103,
+     0,
+     103,
+     0
+    ],
+    "fit": "stretch",
+    "css_h": 64,
+    "scale_of_master": 1.073,
+    "note": "9-slice, ends fixed (caps = 12.5 % of width each side), middle stretches; draw 390 css wide x 64 css, safe-area padding under the labels",
+    "r": [
+     0,
+     0,
+     826,
+     192
+    ]
+   },
+   "socket_on": {
+    "css": [
+     56,
+     52.3
+    ],
+    "note": "raised active socket; centre it behind the icon (same visual centre as socket_off)",
+    "scale_of_master": 0.532,
+    "r": [
+     344,
+     196,
+     168,
+     157
+    ]
+   },
+   "socket_off": {
+    "css": [
+     52,
+     52.0
+    ],
+    "note": "flat inactive socket",
+    "scale_of_master": 0.545,
+    "r": [
+     516,
+     196,
+     156,
+     156
+    ]
+   },
+   "badge": {
+    "css": [
+     18,
+     18.0
+    ],
+    "note": "red lacquer badge blank, code writes the count (white bold 11 css); dot variant = draw it at 12 css",
+    "scale_of_master": 0.342,
+    "r": [
+     828,
+     487,
+     54,
+     54
+    ]
+   },
+   "lock": {
+    "css": [
+     16,
+     21.3
+    ],
+    "note": "lock overlay at the cell's lower-right corner",
+    "scale_of_master": 0.329,
+    "r": [
+     776,
+     487,
+     48,
+     64
+    ]
+   },
+   "divider": {
+    "css": [
+     8.3,
+     48
+    ],
+    "note": "optional cell divider, 48 css tall (cell 64 minus 16)",
+    "scale_of_master": 0.667,
+    "r": [
+     676,
+     196,
+     25,
+     144
+    ]
+   },
+   "ico_tuong": {
+    "css": [
+     37.0,
+     44.0
+    ],
+    "note": "pre-battle dock icon, longest side 44 css, centre inside the 48-56 css disc",
+    "scale_of_master": 0.465,
+    "r": [
+     705,
+     196,
+     111,
+     132
+    ]
+   },
+   "ico_binhchung": {
+    "css": [
+     34.3,
+     44.0
+    ],
+    "note": "pre-battle dock icon, longest side 44 css, centre inside the 48-56 css disc",
+    "scale_of_master": 0.491,
+    "r": [
+     820,
+     196,
+     103,
+     132
+    ]
+   },
+   "ico_trangbi": {
+    "css": [
+     38.0,
+     44.0
+    ],
+    "note": "pre-battle dock icon, longest side 44 css, centre inside the 48-56 css disc",
+    "scale_of_master": 0.532,
+    "r": [
+     927,
+     196,
+     114,
+     132
+    ]
+   },
+   "ico_tranphap": {
+    "css": [
+     44.0,
+     41.3
+    ],
+    "note": "pre-battle dock icon, longest side 44 css, centre inside the 48-56 css disc",
+    "scale_of_master": 0.574,
+    "r": [
+     1181,
+     196,
+     132,
+     124
+    ]
+   },
+   "ico_tinhbao": {
+    "css": [
+     44.0,
+     43.3
+    ],
+    "note": "pre-battle dock icon, longest side 44 css, centre inside the 48-56 css disc",
+    "scale_of_master": 0.603,
+    "r": [
+     1045,
+     196,
+     132,
+     130
+    ]
+   },
+   "star_lit_1": {
+    "css": [
+     56,
+     55.7
+    ],
+    "note": "lit gold star",
+    "scale_of_master": 1.012,
+    "r": [
+     1346,
+     0,
+     168,
+     167
+    ]
+   },
+   "star_lit_2": {
+    "css": [
+     56,
+     55.7
+    ],
+    "note": "lit gold star",
+    "scale_of_master": 1.012,
+    "r": [
+     0,
+     196,
+     168,
+     167
+    ]
+   },
+   "star_lit_3": {
+    "css": [
+     56,
+     55.7
+    ],
+    "note": "lit gold star",
+    "scale_of_master": 1.012,
+    "r": [
+     172,
+     196,
+     168,
+     167
+    ]
+   },
+   "star_off_1": {
+    "css": [
+     56,
+     56.0
+    ],
+    "note": "unlit star socket",
+    "scale_of_master": 1.043,
+    "r": [
+     830,
+     0,
+     168,
+     168
+    ]
+   },
+   "star_off_2": {
+    "css": [
+     56,
+     56.0
+    ],
+    "note": "unlit star socket",
+    "scale_of_master": 1.043,
+    "r": [
+     1002,
+     0,
+     168,
+     168
+    ]
+   },
+   "star_off_3": {
+    "css": [
+     56,
+     56.0
+    ],
+    "note": "unlit star socket",
+    "scale_of_master": 1.043,
+    "r": [
+     1174,
+     0,
+     168,
+     168
+    ]
+   },
+   "plate_victory": {
+    "css": [
+     340,
+     90
+    ],
+    "slice": [
+     46,
+     44,
+     46,
+     44
+    ],
+    "fit": "stretch",
+    "scale_of_master": 1.0,
+    "note": "reward plate, 9-slice on width AND height (BN-355t2): caps = slice [left, top, right, bottom] atlas px at 3x css (46 / 44 = the corner brackets). Draw 340 x 90 css (native 258 x 38.7 css is too thin for a reward row); only the flat inner fill and the straight frame lines stretch. Master rect r is unchanged.",
+    "r": [
+     0,
+     367,
+     774,
+     116
+    ]
+   },
+   "plate_defeat": {
+    "css": [
+     340,
+     90
+    ],
+    "slice": [
+     46,
+     44,
+     46,
+     44
+    ],
+    "fit": "stretch",
+    "scale_of_master": 1.0,
+    "note": "reward plate, 9-slice on width AND height (BN-355t2): caps = slice [left, top, right, bottom] atlas px at 3x css (46 / 44 = the corner brackets). Draw 340 x 90 css (native 258 x 38.7 css is too thin for a reward row); only the flat inner fill and the straight frame lines stretch. Master rect r is unchanged.",
+    "r": [
+     0,
+     487,
+     772,
+     115
+    ]
+   }
+  }
+ },
+ "gold_piles": {
+  "file": "art/ui/kit/gold_piles.webp",
+  "size": [
+   1280,
+   532
+  ],
+  "scale": 3,
+  "note": "6 tiers small -> large (pile_1..pile_6); purple drop shadow keyed out",
+  "pieces": {
+   "pile_1": {
+    "css": [
+     77.0,
+     60.7
+    ],
+    "scale_of_master": 0.717,
+    "note": "coins; contact shadow baked (black 35 %, soft ellipse under the pile), 14 px transparent padding",
+    "r": [
+     0,
+     350,
+     231,
+     182
+    ]
+   },
+   "pile_2": {
+    "css": [
+     80.3,
+     58.3
+    ],
+    "scale_of_master": 0.717,
+    "note": "ingots; contact shadow baked (black 35 %, soft ellipse under the pile), 14 px transparent padding",
+    "r": [
+     235,
+     350,
+     241,
+     175
+    ]
+   },
+   "pile_3": {
+    "css": [
+     98.3,
+     68.0
+    ],
+    "scale_of_master": 0.72,
+    "note": "ingots + pouch; contact shadow baked (black 35 %, soft ellipse under the pile), 14 px transparent padding",
+    "r": [
+     630,
+     0,
+     295,
+     204
+    ]
+   },
+   "pile_4": {
+    "css": [
+     95.7,
+     67.3
+    ],
+    "scale_of_master": 0.717,
+    "note": "chests; contact shadow baked (black 35 %, soft ellipse under the pile), 14 px transparent padding",
+    "r": [
+     929,
+     0,
+     287,
+     202
+    ]
+   },
+   "pile_5": {
+    "css": [
+     101.7,
+     87.0
+    ],
+    "scale_of_master": 0.718,
+    "note": "chests + jade bi disc; contact shadow baked (black 35 %, soft ellipse under the pile), 14 px transparent padding",
+    "r": [
+     321,
+     0,
+     305,
+     261
+    ]
+   },
+   "pile_6": {
+    "css": [
+     105.7,
+     115.3
+    ],
+    "scale_of_master": 0.718,
+    "note": "crowning ingot; contact shadow baked (black 35 %, soft ellipse under the pile), 14 px transparent padding",
+    "r": [
+     0,
+     0,
+     317,
+     346
+    ]
+   }
+  }
+ },
+ "result_banners": {
+  "file": "art/ui/kit/result_banners.webp",
+  "size": [
+   1020,
+   1075
+  ],
+  "scale": 3,
+  "pieces": {
+   "banner_victory": {
+    "css": [
+     340,
+     150
+    ],
+    "slice": [
+     0,
+     77,
+     0,
+     308
+    ],
+    "r": [
+     0,
+     0,
+     1020,
+     527
+    ],
+    "note": "vertical 9-slice only: top 77 and bottom 308 atlas px fixed, the flat cloth band between them is squeezed; draw 340 x 150 css (atlas rect is native width, 176 css tall)"
+   },
+   "banner_defeat": {
+    "css": [
+     340,
+     150
+    ],
+    "slice": [
+     0,
+     77,
+     0,
+     325
+    ],
+    "r": [
+     0,
+     533,
+     1020,
+     542
+    ],
+    "note": "vertical 9-slice only: top 77 and bottom 325 atlas px fixed, the flat cloth band between them is squeezed; draw 340 x 150 css (atlas rect is native width, 181 css tall)"
+   }
+  },
+  "note": "BN-355t3: r134a result banners (art 5/5 after this slice). rect r = [x,y,w,h] at 3x css; slice = [left, top, right, bottom] atlas px; no horizontal stretch (draw 340 css wide)."
+ }
+}

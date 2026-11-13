@@ -1,0 +1,127 @@
+{
+ "artmeta": 1,
+ "id": "wx_dust",
+ "build": "V301",
+ "file": "art/fx/wx_dust.webp",
+ "size": [
+  1024,
+  512
+ ],
+ "cell": 256,
+ "bytes": 61556,
+ "note": "BN-ON1t r154 a: soft dust, master luma keyed to alpha (black floor 6), RGB un-premultiplied neutral grey-white, half master size. Tint by code (source-atop), draw on the ground layer at alpha 0.55. Cells 3 (lunge_3) and 8 (haze) were gamma-lifted 0.7 + gain so their peak matches the others. lunge_1..3 share a centre (flipbook); ground-level pieces are 2:1 flattened. trail drags to the LEFT (flip for the other side).",
+ "pieces": {
+  "lunge_1": {
+   "r": [
+    0,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    79,
+    76,
+    104,
+    97
+   ]
+  },
+  "lunge_2": {
+   "r": [
+    256,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    301,
+    59,
+    158,
+    132
+   ]
+  },
+  "lunge_3": {
+   "r": [
+    512,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    551,
+    53,
+    166,
+    140
+   ]
+  },
+  "trail": {
+   "r": [
+    768,
+    0,
+    256,
+    256
+   ],
+   "content": [
+    790,
+    98,
+    201,
+    52
+   ]
+  },
+  "ring": {
+   "r": [
+    0,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    13,
+    337,
+    227,
+    95
+   ]
+  },
+  "skid": {
+   "r": [
+    256,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    277,
+    348,
+    213,
+    77
+   ]
+  },
+  "spray": {
+   "r": [
+    512,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    564,
+    289,
+    166,
+    173
+   ]
+  },
+  "haze": {
+   "r": [
+    768,
+    256,
+    256,
+    256
+   ],
+   "content": [
+    787,
+    348,
+    218,
+    72
+   ]
+  }
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "artmeta": 1,
+ "id": "wx_fog",
+ "build": "V301",
+ "job": "BN-355t2 wx_fogbanks_r132b.png",
+ "file": "art/fx/wx_fog.webp",
+ "size": [
+  981,
+  764
+ ],
+ "bytes": 220170,
+ "note": "3 strips stacked, r=[x,y,w,h] in the atlas. Master luma keyed to alpha (black floor 6), RGB un-premultiplied; half master size (scale to the widths in spec 8.3). Strips: thick, gapped, ribbon. Tint by code (globalCompositeOperation source-atop on an offscreen, or fillStyle tint) per spec 8.3.",
+ "strips": {
+  "thick": {
+   "r": [
+    0,
+    0,
+    981,
+    314
+   ]
+  },
+  "gapped": {
+   "r": [
+    0,
+    316,
+    954,
+    278
+   ]
+  },
+  "ribbon": {
+   "r": [
+    0,
+    596,
+    950,
+    168
+   ]
+  }
+ }
+}

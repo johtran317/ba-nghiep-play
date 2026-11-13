@@ -1,0 +1,112 @@
+{
+ "atlas": "prebattle_kit.webp",
+ "size": [
+  640,
+  480
+ ],
+ "dpr": 2,
+ "cells": {
+  "btn_attack": {
+   "x": 0,
+   "y": 0,
+   "w": 404,
+   "h": 104,
+   "slice": {
+    "l": 41,
+    "r": 41
+   }
+  },
+  "pad_clean": {
+   "x": 0,
+   "y": 106,
+   "w": 256,
+   "h": 162
+  },
+  "pad_chip": {
+   "x": 258,
+   "y": 106,
+   "w": 256,
+   "h": 162
+  },
+  "ic_helmet": {
+   "x": 516,
+   "y": 106,
+   "w": 84,
+   "h": 96
+  },
+  "ic_troops": {
+   "x": 0,
+   "y": 270,
+   "w": 95,
+   "h": 96
+  },
+  "ic_armor": {
+   "x": 97,
+   "y": 270,
+   "w": 84,
+   "h": 96
+  },
+  "ic_formation": {
+   "x": 183,
+   "y": 270,
+   "w": 96,
+   "h": 93
+  },
+  "ic_scout": {
+   "x": 281,
+   "y": 270,
+   "w": 96,
+   "h": 62
+  },
+  "ic_power": {
+   "x": 379,
+   "y": 270,
+   "w": 32,
+   "h": 96
+  },
+  "ic_rearrange": {
+   "x": 413,
+   "y": 270,
+   "w": 81,
+   "h": 96
+  },
+  "ic_undo": {
+   "x": 496,
+   "y": 270,
+   "w": 86,
+   "h": 96
+  },
+  "coin": {
+   "x": 0,
+   "y": 368,
+   "w": 112,
+   "h": 112
+  }
+ },
+ "bg": {
+  "board_css_390x844": {
+   "far_half_y": [
+    227,
+    363
+   ],
+   "board_top_y": 366,
+   "board_bottom_y": 500,
+   "board_x_top": [
+    28,
+    366
+   ],
+   "board_x_bottom": [
+    5,
+    385
+   ],
+   "note": "approx, measured from art notes (src y 805/1175 +208 stretch, x0.361); coder fine-tunes"
+  },
+  "file": "prebattle_bg.webp",
+  "size": [
+   780,
+   1688
+  ],
+  "dpr": 2,
+  "src_ref": "1080x2337 stretched plate; css 390x844"
+ }
+}

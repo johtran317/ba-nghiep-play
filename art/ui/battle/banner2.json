@@ -1,0 +1,52 @@
+{
+ "_note": "Decision 86 B banner. cloth = pole+cloth+trim, mask = cloth only (white, alpha), emblems 4x2 of 64 px in B2TY order. css = px/3 (dpr 3). Draw: cloth; tint colour through the mask (multiply on a temp canvas, clipped by the mask); emblem tile centred at emblem_on_cloth.cx,cy scaled to size (px of the cloth image).",
+ "B2TY": [
+  "shield",
+  "pike",
+  "archer",
+  "heavycav",
+  "lightcav",
+  "siege",
+  "strategist",
+  "drum"
+ ],
+ "cloth": {
+  "file": "banner2_cloth.webp",
+  "size": [
+   44,
+   96
+  ],
+  "css": [
+   14.67,
+   32.0
+  ]
+ },
+ "mask": {
+  "file": "banner2_mask.webp",
+  "size": [
+   44,
+   96
+  ],
+  "bbox": [
+   12,
+   18,
+   36,
+   76
+  ]
+ },
+ "emblems": {
+  "file": "banner2_emblems.webp",
+  "tile": 64,
+  "cols": 4,
+  "rows": 2,
+  "size": [
+   256,
+   128
+  ]
+ },
+ "emblem_on_cloth": {
+  "cx": 21.5,
+  "cy": 29.5,
+  "size": 17.2
+ }
+}

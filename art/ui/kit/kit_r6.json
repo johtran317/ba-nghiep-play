@@ -1,0 +1,144 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r6",
+ "build": "V301",
+ "job": "BN-354hf-t: cut of art-approved r287 b (dock nav icons) and r288 b (item quality frames), both from the art review BN-354hf-r (docs/art/pipeline/BN-354/hf_spark_review.md)",
+ "kit": {
+  "file": "art/ui/kit/kit_r6.webp",
+  "size": [
+   1280,
+   256
+  ],
+  "cell": [
+   256,
+   256
+  ],
+  "bytes": 84894,
+  "note": "dock nav icons (r287 b). r = one 256 px cell, icon centred, transparent around. Draw the whole cell with contain (aspect kept) into the css box: 40 x 36 css inactive, 46 x 42 css on socket_on (active). No slice (icons).",
+  "pieces": {
+   "nav2_city": {
+    "r": [
+     0,
+     0,
+     256,
+     256
+    ],
+    "css": [
+     40,
+     36
+    ],
+    "active_css": [
+     46,
+     42
+    ]
+   },
+   "nav2_general": {
+    "r": [
+     256,
+     0,
+     256,
+     256
+    ],
+    "css": [
+     40,
+     36
+    ],
+    "active_css": [
+     46,
+     42
+    ]
+   },
+   "nav2_campaign": {
+    "r": [
+     512,
+     0,
+     256,
+     256
+    ],
+    "css": [
+     40,
+     36
+    ],
+    "active_css": [
+     46,
+     42
+    ]
+   },
+   "nav2_world": {
+    "r": [
+     768,
+     0,
+     256,
+     256
+    ],
+    "css": [
+     40,
+     36
+    ],
+    "active_css": [
+     46,
+     42
+    ]
+   },
+   "nav2_bag": {
+    "r": [
+     1024,
+     0,
+     256,
+     256
+    ],
+    "css": [
+     40,
+     36
+    ],
+    "active_css": [
+     46,
+     42
+    ]
+   }
+  }
+ },
+ "frames": {
+  "it_q_lam": {
+   "file": "art/ui/kit/it_q_lam.webp",
+   "size": [
+    384,
+    384
+   ],
+   "bytes": 13332,
+   "slice": 84,
+   "note": "item quality frame (r288 b), 9-slice like r_tile_* (slice 84 of 384: ornaments stay in the corners, never stretched). border-image with border 12 css like ld4tile; centre is dark, use fill. Icon stays px-10 on top; badge and \"+N\" unchanged."
+  },
+  "it_q_vang": {
+   "file": "art/ui/kit/it_q_vang.webp",
+   "size": [
+    384,
+    384
+   ],
+   "bytes": 14922,
+   "slice": 84,
+   "note": "item quality frame (r288 b), 9-slice like r_tile_* (slice 84 of 384: ornaments stay in the corners, never stretched). border-image with border 12 css like ld4tile; centre is dark, use fill. Icon stays px-10 on top; badge and \"+N\" unchanged."
+  },
+  "it_q_do": {
+   "file": "art/ui/kit/it_q_do.webp",
+   "size": [
+    384,
+    384
+   ],
+   "bytes": 15362,
+   "slice": 84,
+   "note": "item quality frame (r288 b), 9-slice like r_tile_* (slice 84 of 384: ornaments stay in the corners, never stretched). border-image with border 12 css like ld4tile; centre is dark, use fill. Icon stays px-10 on top; badge and \"+N\" unchanged."
+  },
+  "it_q_tim": {
+   "file": "art/ui/kit/it_q_tim.webp",
+   "size": [
+    384,
+    384
+   ],
+   "bytes": 16272,
+   "slice": 84,
+   "note": "item quality frame (r288 b), 9-slice like r_tile_* (slice 84 of 384: ornaments stay in the corners, never stretched). border-image with border 12 css like ld4tile; centre is dark, use fill. Icon stays px-10 on top; badge and \"+N\" unchanged."
+  }
+ },
+ "frames_note": "The four frames are standalone files, not in the sheet: border-image needs one image per frame. Quality order lam < vang < do < tim (q2..q5)."
+}

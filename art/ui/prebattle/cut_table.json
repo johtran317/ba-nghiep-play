@@ -1,0 +1,1952 @@
+{
+ "_note": "BN-336 table figure cutouts (techart task 2). Atlas px = 0.68 x the 1080 sheet (same scale as prebattle_crowds_*_r8: draw rule s=(squad_w*1.05)/body.w etc.). 4 px halo baked, tint baked (ours x0.96, enemy 0.86/0.84/0.92): do not tint again. foot = feet point relative to rect (x centre of the lowest 30 %, y = lowest px - 6 src px), same rule as r8. Whole figures, not rows.",
+ "scale_of_master": 0.68,
+ "rule": "n shown = max(1, round(painted_count*pct)); drop back figures first (higher cell index = same row order as listed: front first); ours back view, enemy front view",
+ "sides": {
+  "ours": {
+   "atlas": "cut_table_ours.webp",
+   "atlas_size": [
+    1400,
+    1100
+   ],
+   "types": {
+    "shield": {
+     "painted_count": 8,
+     "quality": "ok",
+     "note": "r117 a: 8 isolated back-view figures",
+     "cells": [
+      {
+       "id": "fig3",
+       "rect": [
+        1163,
+        239,
+        176,
+        215
+       ],
+       "foot": [
+        80.2,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        168,
+        207
+       ]
+      },
+      {
+       "id": "fig7",
+       "rect": [
+        0,
+        472,
+        158,
+        215
+       ],
+       "foot": [
+        75.1,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        150,
+        207
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        160,
+        472,
+        199,
+        214
+       ],
+       "foot": [
+        93.1,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        191,
+        206
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        361,
+        472,
+        181,
+        214
+       ],
+       "foot": [
+        89.0,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        173,
+        206
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        544,
+        472,
+        158,
+        214
+       ],
+       "foot": [
+        77.4,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        150,
+        206
+       ]
+      },
+      {
+       "id": "fig0",
+       "rect": [
+        704,
+        472,
+        168,
+        213
+       ],
+       "foot": [
+        83.9,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        160,
+        205
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        874,
+        472,
+        153,
+        213
+       ],
+       "foot": [
+        72.0,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        145,
+        205
+       ]
+      },
+      {
+       "id": "fig6",
+       "rect": [
+        1029,
+        472,
+        191,
+        213
+       ],
+       "foot": [
+        88.0,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        183,
+        205
+       ]
+      }
+     ]
+    },
+    "pike": {
+     "painted_count": 4,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        251,
+        0,
+        119,
+        236
+       ],
+       "foot": [
+        56.4,
+        227.7
+       ],
+       "body": [
+        4,
+        4,
+        111,
+        228
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        757,
+        0,
+        120,
+        234
+       ],
+       "foot": [
+        56.7,
+        225.7
+       ],
+       "body": [
+        4,
+        4,
+        112,
+        226
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        0,
+        0,
+        127,
+        237
+       ],
+       "foot": [
+        60.4,
+        228.4
+       ],
+       "body": [
+        4,
+        4,
+        119,
+        229
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        129,
+        0,
+        120,
+        237
+       ],
+       "foot": [
+        57.4,
+        228.4
+       ],
+       "body": [
+        4,
+        4,
+        112,
+        229
+       ]
+      }
+     ]
+    },
+    "archer": {
+     "painted_count": 4,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        128,
+        689,
+        132,
+        203
+       ],
+       "foot": [
+        61.5,
+        194.4
+       ],
+       "body": [
+        4,
+        4,
+        124,
+        195
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        1222,
+        472,
+        143,
+        212
+       ],
+       "foot": [
+        69.6,
+        203.2
+       ],
+       "body": [
+        4,
+        4,
+        135,
+        204
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        0,
+        689,
+        126,
+        205
+       ],
+       "foot": [
+        67.6,
+        195.8
+       ],
+       "body": [
+        4,
+        4,
+        118,
+        197
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        262,
+        689,
+        138,
+        202
+       ],
+       "foot": [
+        73.7,
+        193.0
+       ],
+       "body": [
+        4,
+        4,
+        130,
+        194
+       ]
+      }
+     ]
+    },
+    "lightcav": {
+     "painted_count": 4,
+     "quality": "ok",
+     "note": "",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        402,
+        689,
+        64,
+        141
+       ],
+       "foot": [
+        31.5,
+        131.8
+       ],
+       "body": [
+        4,
+        4,
+        56,
+        133
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        468,
+        689,
+        64,
+        141
+       ],
+       "foot": [
+        31.9,
+        131.8
+       ],
+       "body": [
+        4,
+        4,
+        56,
+        133
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        534,
+        689,
+        63,
+        128
+       ],
+       "foot": [
+        31.2,
+        118.9
+       ],
+       "body": [
+        4,
+        4,
+        55,
+        120
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        599,
+        689,
+        60,
+        128
+       ],
+       "foot": [
+        29.8,
+        119.6
+       ],
+       "body": [
+        4,
+        4,
+        52,
+        120
+       ]
+      }
+     ],
+     "mirror_fill": 2,
+     "target_count_229A": 6
+    },
+    "heavycav": {
+     "painted_count": 6,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        906,
+        239,
+        141,
+        216
+       ],
+       "foot": [
+        59.1,
+        207.3
+       ],
+       "body": [
+        4,
+        4,
+        133,
+        208
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        129,
+        239,
+        141,
+        231
+       ],
+       "foot": [
+        58.1,
+        222.3
+       ],
+       "body": [
+        4,
+        4,
+        133,
+        223
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        879,
+        0,
+        141,
+        234
+       ],
+       "foot": [
+        60.8,
+        225.7
+       ],
+       "body": [
+        4,
+        4,
+        133,
+        226
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        757,
+        239,
+        147,
+        217
+       ],
+       "foot": [
+        63.2,
+        208.0
+       ],
+       "body": [
+        4,
+        4,
+        139,
+        209
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        580,
+        239,
+        175,
+        222
+       ],
+       "foot": [
+        77.8,
+        212.8
+       ],
+       "body": [
+        4,
+        4,
+        167,
+        214
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        1132,
+        0,
+        172,
+        233
+       ],
+       "foot": [
+        78.8,
+        224.3
+       ],
+       "body": [
+        4,
+        4,
+        164,
+        225
+       ]
+      }
+     ],
+     "target_count_229A": 6
+    },
+    "elephant": {
+     "painted_count": 2,
+     "quality": "ok",
+     "note": "",
+     "cells": [
+      {
+       "id": "fig1",
+       "rect": [
+        0,
+        239,
+        127,
+        231
+       ],
+       "foot": [
+        61.8,
+        222.3
+       ],
+       "body": [
+        4,
+        4,
+        119,
+        223
+       ]
+      },
+      {
+       "id": "fig0",
+       "rect": [
+        1049,
+        239,
+        112,
+        215
+       ],
+       "foot": [
+        51.6,
+        206.6
+       ],
+       "body": [
+        4,
+        4,
+        104,
+        207
+       ]
+      }
+     ],
+     "mirror_fill": 1,
+     "target_count_229A": 3
+    },
+    "strategist": {
+     "painted_count": 5,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        372,
+        0,
+        117,
+        235
+       ],
+       "foot": [
+        58.7,
+        226.4
+       ],
+       "body": [
+        4,
+        4,
+        109,
+        227
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        491,
+        0,
+        152,
+        235
+       ],
+       "foot": [
+        59.1,
+        226.4
+       ],
+       "body": [
+        4,
+        4,
+        144,
+        227
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        272,
+        239,
+        150,
+        231
+       ],
+       "foot": [
+        91.7,
+        222.3
+       ],
+       "body": [
+        4,
+        4,
+        142,
+        223
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        1022,
+        0,
+        108,
+        234
+       ],
+       "foot": [
+        54.0,
+        225.7
+       ],
+       "body": [
+        4,
+        4,
+        100,
+        226
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        645,
+        0,
+        110,
+        235
+       ],
+       "foot": [
+        54.7,
+        226.4
+       ],
+       "body": [
+        4,
+        4,
+        102,
+        227
+       ]
+      }
+     ]
+    },
+    "drum": {
+     "painted_count": 6,
+     "quality": "ok",
+     "note": "r210 a: empty drum cart + 6 crew (cell 7 dropped)",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        0,
+        898,
+        120,
+        200
+       ],
+       "foot": [
+        59.1,
+        191.7
+       ],
+       "body": [
+        4,
+        4,
+        112,
+        192
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        122,
+        898,
+        103,
+        200
+       ],
+       "foot": [
+        42.4,
+        191.0
+       ],
+       "body": [
+        4,
+        4,
+        95,
+        192
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        227,
+        898,
+        93,
+        200
+       ],
+       "foot": [
+        45.8,
+        191.7
+       ],
+       "body": [
+        4,
+        4,
+        85,
+        192
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        322,
+        898,
+        134,
+        200
+       ],
+       "foot": [
+        53.6,
+        191.0
+       ],
+       "body": [
+        4,
+        4,
+        126,
+        192
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        458,
+        898,
+        115,
+        200
+       ],
+       "foot": [
+        51.3,
+        191.7
+       ],
+       "body": [
+        4,
+        4,
+        107,
+        192
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        575,
+        898,
+        120,
+        200
+       ],
+       "foot": [
+        74.4,
+        191.0
+       ],
+       "body": [
+        4,
+        4,
+        112,
+        192
+       ]
+      }
+     ],
+     "base": {
+      "id": "base",
+      "rect": [
+       697,
+       898,
+       215,
+       182
+      ],
+      "foot": [
+       98.2,
+       173.3
+      ],
+      "body": [
+       4,
+       4,
+       207,
+       174
+      ],
+      "note": "prop with the crew cut out; draw first, crew cells over it"
+     }
+    },
+    "siege": {
+     "painted_count": 4,
+     "quality": "partial",
+     "note": "2 of the 4 crew stand inside the engine box and stay baked into the base (they cannot drop); 3 cut here (the 4th is the bottom-left one in the base); bits of wheel in the cuts",
+     "cells": [
+      {
+       "id": "fig2",
+       "rect": [
+        780,
+        689,
+        43,
+        96
+       ],
+       "foot": [
+        20.3,
+        87.6
+       ],
+       "body": [
+        4,
+        4,
+        35,
+        88
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        825,
+        689,
+        35,
+        94
+       ],
+       "foot": [
+        17.3,
+        85.6
+       ],
+       "body": [
+        4,
+        4,
+        27,
+        86
+       ]
+      },
+      {
+       "id": "fig0",
+       "rect": [
+        1087,
+        689,
+        35,
+        82
+       ],
+       "foot": [
+        17.3,
+        73.4
+       ],
+       "body": [
+        4,
+        4,
+        27,
+        74
+       ]
+      }
+     ],
+     "base": {
+      "id": "base",
+      "rect": [
+       424,
+       239,
+       154,
+       227
+      ],
+      "foot": [
+       76.8,
+       218.2
+      ],
+      "body": [
+       4,
+       4,
+       146,
+       219
+      ],
+      "note": "prop with the crew cut out; draw first, crew cells over it"
+     }
+    }
+   }
+  },
+  "enemy": {
+   "atlas": "cut_table_enemy.webp",
+   "atlas_size": [
+    1400,
+    1339
+   ],
+   "types": {
+    "shield": {
+     "painted_count": 6,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        157,
+        0,
+        149,
+        237
+       ],
+       "foot": [
+        73.0,
+        228.4
+       ],
+       "body": [
+        4,
+        4,
+        141,
+        229
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        0,
+        0,
+        155,
+        238
+       ],
+       "foot": [
+        75.7,
+        229.1
+       ],
+       "body": [
+        4,
+        4,
+        147,
+        230
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        478,
+        0,
+        162,
+        236
+       ],
+       "foot": [
+        78.8,
+        227.7
+       ],
+       "body": [
+        4,
+        4,
+        154,
+        228
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        1040,
+        0,
+        158,
+        232
+       ],
+       "foot": [
+        80.5,
+        223.6
+       ],
+       "body": [
+        4,
+        4,
+        150,
+        224
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        754,
+        0,
+        159,
+        235
+       ],
+       "foot": [
+        79.5,
+        226.4
+       ],
+       "body": [
+        4,
+        4,
+        151,
+        227
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        308,
+        0,
+        168,
+        237
+       ],
+       "foot": [
+        60.1,
+        228.4
+       ],
+       "body": [
+        4,
+        4,
+        160,
+        229
+       ]
+      }
+     ]
+    },
+    "pike": {
+     "painted_count": 5,
+     "quality": "ok",
+     "note": "r135 b: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        642,
+        0,
+        110,
+        236
+       ],
+       "foot": [
+        58.4,
+        227.7
+       ],
+       "body": [
+        4,
+        4,
+        102,
+        228
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        184,
+        240,
+        120,
+        230
+       ],
+       "foot": [
+        63.8,
+        221.6
+       ],
+       "body": [
+        4,
+        4,
+        112,
+        222
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        306,
+        240,
+        122,
+        230
+       ],
+       "foot": [
+        64.2,
+        220.9
+       ],
+       "body": [
+        4,
+        4,
+        114,
+        222
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        915,
+        0,
+        123,
+        235
+       ],
+       "foot": [
+        60.8,
+        226.4
+       ],
+       "body": [
+        4,
+        4,
+        115,
+        227
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        430,
+        240,
+        117,
+        230
+       ],
+       "foot": [
+        58.4,
+        220.9
+       ],
+       "body": [
+        4,
+        4,
+        109,
+        222
+       ]
+      }
+     ]
+    },
+    "archer": {
+     "painted_count": 5,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        1009,
+        240,
+        176,
+        222
+       ],
+       "foot": [
+        88.0,
+        213.4
+       ],
+       "body": [
+        4,
+        4,
+        168,
+        214
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        549,
+        240,
+        163,
+        229
+       ],
+       "foot": [
+        97.8,
+        220.2
+       ],
+       "body": [
+        4,
+        4,
+        155,
+        221
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        1187,
+        240,
+        169,
+        222
+       ],
+       "foot": [
+        103.6,
+        213.4
+       ],
+       "body": [
+        4,
+        4,
+        161,
+        214
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        0,
+        473,
+        171,
+        220
+       ],
+       "foot": [
+        84.9,
+        211.4
+       ],
+       "body": [
+        4,
+        4,
+        163,
+        212
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        0,
+        240,
+        182,
+        231
+       ],
+       "foot": [
+        88.3,
+        222.3
+       ],
+       "body": [
+        4,
+        4,
+        174,
+        223
+       ]
+      }
+     ]
+    },
+    "lightcav": {
+     "painted_count": 6,
+     "quality": "ok",
+     "note": "r135 a: isolated figures",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        599,
+        911,
+        168,
+        213
+       ],
+       "foot": [
+        86.3,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        160,
+        205
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        769,
+        911,
+        174,
+        213
+       ],
+       "foot": [
+        78.5,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        166,
+        205
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        364,
+        1126,
+        175,
+        194
+       ],
+       "foot": [
+        91.4,
+        185.6
+       ],
+       "body": [
+        4,
+        4,
+        167,
+        186
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        1044,
+        695,
+        177,
+        214
+       ],
+       "foot": [
+        91.0,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        169,
+        206
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        714,
+        240,
+        171,
+        228
+       ],
+       "foot": [
+        82.2,
+        218.9
+       ],
+       "body": [
+        4,
+        4,
+        163,
+        220
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        1200,
+        0,
+        175,
+        232
+       ],
+       "foot": [
+        100.9,
+        223.6
+       ],
+       "body": [
+        4,
+        4,
+        167,
+        224
+       ]
+      }
+     ],
+     "target_count_229A": 6
+    },
+    "heavycav": {
+     "painted_count": 6,
+     "quality": "ok",
+     "note": "r117 a: 6 riders; stray spear tips dropped; fig4 is a side charge, use as back row / mirrored fill",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        173,
+        473,
+        151,
+        215
+       ],
+       "foot": [
+        61.5,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        143,
+        207
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        326,
+        473,
+        195,
+        215
+       ],
+       "foot": [
+        82.2,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        187,
+        207
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        523,
+        473,
+        148,
+        215
+       ],
+       "foot": [
+        85.6,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        140,
+        207
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        1065,
+        911,
+        214,
+        211
+       ],
+       "foot": [
+        90.0,
+        202.6
+       ],
+       "body": [
+        4,
+        4,
+        206,
+        203
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        0,
+        1126,
+        145,
+        211
+       ],
+       "foot": [
+        85.9,
+        201.9
+       ],
+       "body": [
+        4,
+        4,
+        137,
+        203
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        147,
+        1126,
+        215,
+        209
+       ],
+       "foot": [
+        105.0,
+        199.8
+       ],
+       "body": [
+        4,
+        4,
+        207,
+        201
+       ]
+      }
+     ],
+     "target_count_229A": 6
+    },
+    "elephant": {
+     "painted_count": 2,
+     "quality": "ok",
+     "note": "",
+     "cells": [
+      {
+       "id": "fig1",
+       "rect": [
+        887,
+        240,
+        120,
+        222
+       ],
+       "foot": [
+        59.4,
+        212.8
+       ],
+       "body": [
+        4,
+        4,
+        112,
+        214
+       ]
+      },
+      {
+       "id": "fig0",
+       "rect": [
+        945,
+        911,
+        118,
+        211
+       ],
+       "foot": [
+        58.7,
+        201.9
+       ],
+       "body": [
+        4,
+        4,
+        110,
+        203
+       ]
+      }
+     ],
+     "mirror_fill": 1,
+     "target_count_229A": 3
+    },
+    "strategist": {
+     "painted_count": 6,
+     "quality": "ok",
+     "note": "r117 a: 6 isolated scholars",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        673,
+        473,
+        116,
+        215
+       ],
+       "foot": [
+        52.6,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        108,
+        207
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        791,
+        473,
+        116,
+        215
+       ],
+       "foot": [
+        54.3,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        108,
+        207
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        0,
+        695,
+        127,
+        214
+       ],
+       "foot": [
+        64.9,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        119,
+        206
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        129,
+        695,
+        143,
+        214
+       ],
+       "foot": [
+        70.0,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        135,
+        206
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        1223,
+        695,
+        141,
+        213
+       ],
+       "foot": [
+        70.6,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        133,
+        205
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        0,
+        911,
+        145,
+        213
+       ],
+       "foot": [
+        71.0,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        137,
+        205
+       ]
+      }
+     ]
+    },
+    "drum": {
+     "painted_count": 7,
+     "quality": "ok",
+     "note": "r117 a: empty cart (base) + 7 crew",
+     "cells": [
+      {
+       "id": "fig2",
+       "rect": [
+        909,
+        473,
+        103,
+        215
+       ],
+       "foot": [
+        45.8,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        95,
+        207
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        1014,
+        473,
+        129,
+        215
+       ],
+       "foot": [
+        75.4,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        121,
+        207
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        1145,
+        473,
+        136,
+        215
+       ],
+       "foot": [
+        72.3,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        128,
+        207
+       ]
+      },
+      {
+       "id": "fig5",
+       "rect": [
+        1283,
+        473,
+        101,
+        215
+       ],
+       "foot": [
+        49.6,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        93,
+        207
+       ]
+      },
+      {
+       "id": "fig0",
+       "rect": [
+        274,
+        695,
+        153,
+        214
+       ],
+       "foot": [
+        77.4,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        145,
+        206
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        429,
+        695,
+        134,
+        214
+       ],
+       "foot": [
+        66.6,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        126,
+        206
+       ]
+      },
+      {
+       "id": "fig6",
+       "rect": [
+        565,
+        695,
+        131,
+        214
+       ],
+       "foot": [
+        85.9,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        123,
+        206
+       ]
+      }
+     ],
+     "base": {
+      "id": "base",
+      "rect": [
+       757,
+       1126,
+       214,
+       185
+      ],
+      "foot": [
+       149.9,
+       176.0
+      ],
+      "body": [
+       4,
+       4,
+       206,
+       177
+      ],
+      "note": "prop with the crew cut out; draw first, crew cells over it"
+     }
+    },
+    "siege": {
+     "painted_count": 5,
+     "quality": "ok",
+     "note": "r117 b: empty catapult (base, rocks pile kept) + 5 crew",
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        698,
+        695,
+        191,
+        214
+       ],
+       "foot": [
+        128.4,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        183,
+        206
+       ]
+      },
+      {
+       "id": "fig4",
+       "rect": [
+        891,
+        695,
+        151,
+        214
+       ],
+       "foot": [
+        104.3,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        143,
+        206
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        147,
+        911,
+        137,
+        213
+       ],
+       "foot": [
+        80.8,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        129,
+        205
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        286,
+        911,
+        197,
+        213
+       ],
+       "foot": [
+        56.0,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        189,
+        205
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        485,
+        911,
+        112,
+        213
+       ],
+       "foot": [
+        56.0,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        104,
+        205
+       ]
+      }
+     ],
+     "base": {
+      "id": "base",
+      "rect": [
+       541,
+       1126,
+       214,
+       188
+      ],
+      "foot": [
+       108.0,
+       178.8
+      ],
+      "body": [
+       4,
+       4,
+       206,
+       180
+      ],
+      "note": "prop with the crew cut out; draw first, crew cells over it"
+     }
+    }
+   }
+  }
+ },
+ "_note2": "r2 (V301): ours shield + enemy heavycav/strategist/drum/siege are isolated-figure cuts. mirror_fill = mirrored copies (flip x, back rows) needed to reach the 229 A count.",
+ "_note3": "r135 (V301): ours pike/archer/heavycav/strategist and enemy shield/pike/archer/lightcav are isolated-figure cuts, quality ok; cells listed front first (fig0 = front). Ours heavycav and enemy lightcav have 6 painted, no mirror_fill."
+}

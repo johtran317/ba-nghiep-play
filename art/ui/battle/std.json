@@ -1,0 +1,699 @@
+{
+ "_note": "BN-351b squad standard atlas: standard B (ring gauge) + emblem A (medallion). Nothing wired. Coordinates in atlas px (2x css) relative to P = pole top (rod top-centre), x right, y down; frame ox,oy = top-left of the frame from P. Draw order: finial, cloth, emblem, ring_empty, ring_full clipped, (ready swaps ring_ready).",
+ "emblem_y_share": 0.43,
+ "emblem_y_share_before": 0.52,
+ "order": [
+  "finial",
+  "cloth",
+  "emblem",
+  "ring_empty",
+  "ring_full",
+  "ring_ready"
+ ],
+ "ring": {
+  "fill_start_deg": -90,
+  "direction": "clockwise",
+  "note": "starts at 12 o'clock; clip ring_full with a pie wedge from the ring centre"
+ },
+ "derived_waves": [
+  "enemy_wave",
+  "neutral_wave"
+ ],
+ "sizes": {
+  "s32": {
+   "file": "std_s32.webp",
+   "css_h": 32,
+   "scale": 0.17859,
+   "atlas": [
+    256,
+    192
+   ],
+   "frames": {
+    "cloth_ours_still": {
+     "x": 0,
+     "y": 0,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_ours_wave": {
+     "x": 52,
+     "y": 0,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_ours_droop": {
+     "x": 104,
+     "y": 0,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_enemy_still": {
+     "x": 156,
+     "y": 0,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_enemy_wave": {
+     "x": 0,
+     "y": 58,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_enemy_droop": {
+     "x": 52,
+     "y": 58,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_neutral_still": {
+     "x": 104,
+     "y": 58,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_neutral_wave": {
+     "x": 156,
+     "y": 58,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "cloth_neutral_droop": {
+     "x": 0,
+     "y": 116,
+     "w": 51,
+     "h": 57,
+     "ox": -24.56,
+     "oy": -1.07
+    },
+    "ring_empty": {
+     "x": 52,
+     "y": 116,
+     "w": 32,
+     "h": 32,
+     "ox": -16.15,
+     "oy": 7.12
+    },
+    "ring_full": {
+     "x": 85,
+     "y": 116,
+     "w": 32,
+     "h": 32,
+     "ox": -16.15,
+     "oy": 7.12
+    },
+    "ring_ready": {
+     "x": 118,
+     "y": 116,
+     "w": 32,
+     "h": 32,
+     "ox": -16.15,
+     "oy": 7.12
+    },
+    "em_shield": {
+     "x": 151,
+     "y": 116,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_pike": {
+     "x": 169,
+     "y": 116,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_archer": {
+     "x": 187,
+     "y": 116,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_lightcav": {
+     "x": 205,
+     "y": 116,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_heavycav": {
+     "x": 223,
+     "y": 116,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_elephant": {
+     "x": 0,
+     "y": 174,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_strategist": {
+     "x": 18,
+     "y": 174,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_drum": {
+     "x": 36,
+     "y": 174,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "em_siege": {
+     "x": 54,
+     "y": 174,
+     "w": 17,
+     "h": 17,
+     "ox": -8.47,
+     "oy": 14.8
+    },
+    "fin_ours": {
+     "x": 72,
+     "y": 174,
+     "w": 8,
+     "h": 14,
+     "ox": -4.13,
+     "oy": -8.46
+    },
+    "fin_enemy": {
+     "x": 81,
+     "y": 174,
+     "w": 7,
+     "h": 14,
+     "ox": -3.72,
+     "oy": -8.46
+    },
+    "fin_boss": {
+     "x": 89,
+     "y": 174,
+     "w": 10,
+     "h": 14,
+     "ox": -4.88,
+     "oy": -8.46
+    }
+   },
+   "anchors": {
+    "pole_top": [
+     0,
+     0
+    ],
+    "pole_foot": [
+     0,
+     55.54
+    ],
+    "ring_centre": [
+     0,
+     23.27
+    ],
+    "emblem_centre": [
+     0,
+     23.27
+    ],
+    "ring_diameter": 32.3,
+    "emblem_diameter": 16.94,
+    "std_top": -8.46,
+    "std_height": 64.0
+   }
+  },
+  "s40": {
+   "file": "std_s40.webp",
+   "css_h": 40,
+   "scale": 0.22323,
+   "atlas": [
+    256,
+    279
+   ],
+   "frames": {
+    "cloth_ours_still": {
+     "x": 0,
+     "y": 0,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_ours_wave": {
+     "x": 65,
+     "y": 0,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_ours_droop": {
+     "x": 130,
+     "y": 0,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_enemy_still": {
+     "x": 0,
+     "y": 72,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_enemy_wave": {
+     "x": 65,
+     "y": 72,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_enemy_droop": {
+     "x": 130,
+     "y": 72,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_neutral_still": {
+     "x": 0,
+     "y": 144,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_neutral_wave": {
+     "x": 65,
+     "y": 144,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "cloth_neutral_droop": {
+     "x": 130,
+     "y": 144,
+     "w": 64,
+     "h": 71,
+     "ox": -30.69,
+     "oy": -1.34
+    },
+    "ring_empty": {
+     "x": 195,
+     "y": 144,
+     "w": 40,
+     "h": 40,
+     "ox": -20.18,
+     "oy": 8.9
+    },
+    "ring_full": {
+     "x": 0,
+     "y": 216,
+     "w": 40,
+     "h": 40,
+     "ox": -20.18,
+     "oy": 8.9
+    },
+    "ring_ready": {
+     "x": 41,
+     "y": 216,
+     "w": 40,
+     "h": 40,
+     "ox": -20.18,
+     "oy": 8.9
+    },
+    "em_shield": {
+     "x": 82,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_pike": {
+     "x": 104,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_archer": {
+     "x": 126,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_lightcav": {
+     "x": 148,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_heavycav": {
+     "x": 170,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_elephant": {
+     "x": 192,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_strategist": {
+     "x": 214,
+     "y": 216,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_drum": {
+     "x": 0,
+     "y": 257,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "em_siege": {
+     "x": 22,
+     "y": 257,
+     "w": 21,
+     "h": 21,
+     "ox": -10.59,
+     "oy": 18.5
+    },
+    "fin_ours": {
+     "x": 44,
+     "y": 257,
+     "w": 10,
+     "h": 18,
+     "ox": -5.16,
+     "oy": -10.57
+    },
+    "fin_enemy": {
+     "x": 55,
+     "y": 257,
+     "w": 9,
+     "h": 18,
+     "ox": -4.64,
+     "oy": -10.57
+    },
+    "fin_boss": {
+     "x": 65,
+     "y": 257,
+     "w": 12,
+     "h": 18,
+     "ox": -6.1,
+     "oy": -10.57
+    }
+   },
+   "anchors": {
+    "pole_top": [
+     0,
+     0
+    ],
+    "pole_foot": [
+     0,
+     69.43
+    ],
+    "ring_centre": [
+     0,
+     29.09
+    ],
+    "emblem_centre": [
+     0,
+     29.09
+    ],
+    "ring_diameter": 40.37,
+    "emblem_diameter": 21.17,
+    "std_top": -10.57,
+    "std_height": 80.0
+   }
+  },
+  "s50": {
+   "file": "std_s50.webp",
+   "css_h": 50,
+   "scale": 0.27904,
+   "atlas": [
+    256,
+    348
+   ],
+   "frames": {
+    "cloth_ours_still": {
+     "x": 0,
+     "y": 0,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_ours_wave": {
+     "x": 81,
+     "y": 0,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_ours_droop": {
+     "x": 162,
+     "y": 0,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_enemy_still": {
+     "x": 0,
+     "y": 90,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_enemy_wave": {
+     "x": 81,
+     "y": 90,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_enemy_droop": {
+     "x": 162,
+     "y": 90,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_neutral_still": {
+     "x": 0,
+     "y": 180,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_neutral_wave": {
+     "x": 81,
+     "y": 180,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "cloth_neutral_droop": {
+     "x": 162,
+     "y": 180,
+     "w": 80,
+     "h": 89,
+     "ox": -38.37,
+     "oy": -1.67
+    },
+    "ring_empty": {
+     "x": 0,
+     "y": 270,
+     "w": 50,
+     "h": 50,
+     "ox": -25.23,
+     "oy": 11.13
+    },
+    "ring_full": {
+     "x": 51,
+     "y": 270,
+     "w": 50,
+     "h": 50,
+     "ox": -25.23,
+     "oy": 11.13
+    },
+    "ring_ready": {
+     "x": 102,
+     "y": 270,
+     "w": 50,
+     "h": 50,
+     "ox": -25.23,
+     "oy": 11.13
+    },
+    "em_shield": {
+     "x": 153,
+     "y": 270,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_pike": {
+     "x": 180,
+     "y": 270,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_archer": {
+     "x": 207,
+     "y": 270,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_lightcav": {
+     "x": 0,
+     "y": 321,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_heavycav": {
+     "x": 27,
+     "y": 321,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_elephant": {
+     "x": 54,
+     "y": 321,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_strategist": {
+     "x": 81,
+     "y": 321,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_drum": {
+     "x": 108,
+     "y": 321,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "em_siege": {
+     "x": 135,
+     "y": 321,
+     "w": 26,
+     "h": 26,
+     "ox": -13.23,
+     "oy": 23.13
+    },
+    "fin_ours": {
+     "x": 162,
+     "y": 321,
+     "w": 13,
+     "h": 22,
+     "ox": -6.45,
+     "oy": -13.22
+    },
+    "fin_enemy": {
+     "x": 176,
+     "y": 321,
+     "w": 12,
+     "h": 22,
+     "ox": -5.81,
+     "oy": -13.22
+    },
+    "fin_boss": {
+     "x": 189,
+     "y": 321,
+     "w": 15,
+     "h": 22,
+     "ox": -7.63,
+     "oy": -13.22
+    }
+   },
+   "anchors": {
+    "pole_top": [
+     0,
+     0
+    ],
+    "pole_foot": [
+     0,
+     86.78
+    ],
+    "ring_centre": [
+     0,
+     36.36
+    ],
+    "emblem_centre": [
+     0,
+     36.36
+    ],
+    "ring_diameter": 50.46,
+    "emblem_diameter": 26.47,
+    "std_top": -13.22,
+    "std_height": 100.0
+   }
+  }
+ }
+}

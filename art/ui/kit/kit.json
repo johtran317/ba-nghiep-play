@@ -1,0 +1,491 @@
+{
+ "artmeta": 1,
+ "id": "uikit_b1",
+ "build": "V299",
+ "job": "Decision 141: UI kit v2 (btn b, nav a, obj a, hub a, sealsfac b, troops a) over BN-081 batch 1",
+ "kit": {
+  "file": "art/ui/kit/kit.webp",
+  "size": [
+   2048,
+   2342
+  ],
+  "scale": 3,
+  "note": "all rects at 3x css; slice = [left, top, right, bottom] in atlas px; states share one canvas, bottom-aligned (press = swap source rect, shift content 2 css px by code only if wanted)",
+  "pieces": {
+   "sheet_frame": {
+    "id": "U01",
+    "slice": [
+     72,
+     72,
+     72,
+     72
+    ],
+    "fit": "stretch",
+    "note": "sheet frame, r21 recoloured, corner radius 20 css + dark outline",
+    "r": [
+     823,
+     0,
+     795,
+     1087
+    ]
+   },
+   "card_frame": {
+    "id": "U03",
+    "slice": [
+     48,
+     48,
+     48,
+     48
+    ],
+    "fit": "stretch",
+    "note": "card/popup frame, r21 recoloured, corner radius 16 css + dark outline",
+    "r": [
+     0,
+     0,
+     819,
+     1113
+    ]
+   },
+   "banner": {
+    "id": "U04",
+    "slice": [
+     63,
+     0,
+     63,
+     0
+    ],
+    "fit": "stretch",
+    "note": "title banner, r21 ribbon, dark outline; stretch the middle only (caps fixed), draw at height 52-72 css",
+    "r": [
+     0,
+     1784,
+     1120,
+     189
+    ]
+   },
+   "divider": {
+    "id": "U07",
+    "fit": "fixed",
+    "note": "r21, unchanged",
+    "r": [
+     0,
+     2275,
+     1144,
+     67
+    ]
+   },
+   "diamond_1": {
+    "id": "U07",
+    "fit": "fixed",
+    "note": "r21, unchanged",
+    "r": [
+     784,
+     1117,
+     256,
+     259
+    ]
+   },
+   "diamond_2": {
+    "id": "U07",
+    "fit": "fixed",
+    "note": "r21, unchanged",
+    "r": [
+     439,
+     1117,
+     341,
+     342
+    ]
+   },
+   "diamond_3": {
+    "id": "U07",
+    "fit": "fixed",
+    "note": "r21, unchanged",
+    "r": [
+     0,
+     1117,
+     435,
+     439
+    ]
+   },
+   "plaque_dark": {
+    "id": "U06",
+    "slice": [
+     48,
+     48,
+     48,
+     48
+    ],
+    "fit": "stretch",
+    "note": "U06 dark plaque (plates a), 44 css tall at 3x",
+    "r": [
+     560,
+     2133,
+     737,
+     136
+    ]
+   },
+   "plaque_red": {
+    "id": "U06",
+    "slice": [
+     48,
+     48,
+     48,
+     48
+    ],
+    "fit": "stretch",
+    "note": "U06 red plaque (plates a), 44 css tall at 3x",
+    "r": [
+     1301,
+     2133,
+     734,
+     136
+    ]
+   },
+   "btn_primary_normal": {
+    "id": "U10",
+    "slice": [
+     78,
+     56,
+     78,
+     60
+    ],
+    "fit": "stretch",
+    "state": "normal",
+    "note": "pill ends fixed (left/right inset = half height), middle stretches; states share one canvas, bottom-aligned",
+    "r": [
+     1124,
+     1784,
+     293,
+     160
+    ]
+   },
+   "btn_primary_pressed": {
+    "id": "U10",
+    "slice": [
+     78,
+     56,
+     78,
+     60
+    ],
+    "fit": "stretch",
+    "state": "pressed",
+    "note": "pill ends fixed (left/right inset = half height), middle stretches; states share one canvas, bottom-aligned",
+    "r": [
+     1421,
+     1784,
+     293,
+     160
+    ]
+   },
+   "btn_primary_disabled": {
+    "id": "U10",
+    "slice": [
+     78,
+     56,
+     78,
+     60
+    ],
+    "fit": "stretch",
+    "state": "disabled",
+    "note": "pill ends fixed (left/right inset = half height), middle stretches; states share one canvas, bottom-aligned",
+    "r": [
+     1718,
+     1784,
+     293,
+     160
+    ]
+   },
+   "btn_price_normal": {
+    "id": "U12",
+    "slice": [
+     74,
+     56,
+     74,
+     60
+    ],
+    "fit": "stretch",
+    "state": "normal",
+    "note": "pill ends fixed (left/right inset = half height), middle stretches; states share one canvas, bottom-aligned",
+    "r": [
+     0,
+     1977,
+     287,
+     152
+    ]
+   },
+   "btn_price_pressed": {
+    "id": "U12",
+    "slice": [
+     74,
+     56,
+     74,
+     60
+    ],
+    "fit": "stretch",
+    "state": "pressed",
+    "note": "pill ends fixed (left/right inset = half height), middle stretches; states share one canvas, bottom-aligned",
+    "r": [
+     291,
+     1977,
+     287,
+     152
+    ]
+   },
+   "btn_price_disabled": {
+    "id": "U12",
+    "slice": [
+     74,
+     56,
+     74,
+     60
+    ],
+    "fit": "stretch",
+    "state": "disabled",
+    "note": "pill ends fixed (left/right inset = half height), middle stretches; states share one canvas, bottom-aligned",
+    "r": [
+     582,
+     1977,
+     287,
+     152
+    ]
+   },
+   "round_bronze_normal": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "normal",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1293,
+     1977,
+     136,
+     138
+    ]
+   },
+   "round_bronze_pressed": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "pressed",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1433,
+     1977,
+     136,
+     138
+    ]
+   },
+   "round_bronze_disabled": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "disabled",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1573,
+     1977,
+     136,
+     138
+    ]
+   },
+   "round_gold_normal": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "normal",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1713,
+     1977,
+     136,
+     138
+    ]
+   },
+   "round_gold_pressed": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "pressed",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1853,
+     1977,
+     136,
+     138
+    ]
+   },
+   "round_gold_disabled": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "disabled",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     0,
+     2133,
+     136,
+     138
+    ]
+   },
+   "round_red_normal": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "normal",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     140,
+     2133,
+     136,
+     138
+    ]
+   },
+   "round_red_pressed": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "pressed",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     280,
+     2133,
+     136,
+     138
+    ]
+   },
+   "round_red_disabled": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "disabled",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     420,
+     2133,
+     136,
+     138
+    ]
+   },
+   "round_silver_normal": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "normal",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     873,
+     1977,
+     136,
+     139
+    ]
+   },
+   "round_silver_pressed": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "pressed",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1013,
+     1977,
+     136,
+     139
+    ]
+   },
+   "round_silver_disabled": {
+    "id": "U14/U16",
+    "fit": "fixed",
+    "state": "disabled",
+    "note": "round 44 css at 3x, bottom-aligned states",
+    "r": [
+     1153,
+     1977,
+     136,
+     139
+    ]
+   },
+   "nav_bar": {
+    "id": "U05",
+    "slice": [
+     86,
+     72,
+     86,
+     72
+    ],
+    "fit": "stretch",
+    "note": "nav bar, 72 css tall at 3x, draw 390 css wide; only the middle stretches",
+    "r": [
+     0,
+     1560,
+     1297,
+     220
+    ]
+   }
+  }
+ },
+ "icons": {
+  "file": "art/ui/kit/icons.webp",
+  "size": [
+   896,
+   1152
+  ],
+  "cell": [
+   128,
+   128
+  ],
+  "cols": 7,
+  "rows": 9,
+  "order": [
+   "quest",
+   "activity",
+   "battle",
+   "shop",
+   "vip",
+   "formation",
+   "tavern",
+   "storage",
+   "tower",
+   "nav_city",
+   "nav_general",
+   "nav_campaign",
+   "nav_world",
+   "nav_boss",
+   "seal_1_leather",
+   "seal_2_iron",
+   "seal_3_bronze",
+   "seal_4_steel",
+   "seal_5_blued",
+   "coin_square",
+   "grain",
+   "gold_ingot",
+   "medal",
+   "bamboo_bundle",
+   "chest",
+   "flag",
+   "tally",
+   "hourglass",
+   "badge_hoang_can",
+   "badge_ho_lao",
+   "badge_xich_bich",
+   "badge_quan_do",
+   "badge_kinh_chau",
+   "badge_tay_thuc",
+   "badge_han_trung",
+   "badge_ngu_truong",
+   "badge_than_khi",
+   "than_dao_kiem",
+   "than_chien_ma",
+   "than_chien_thu",
+   "than_giap_tru",
+   "than_chien_bao",
+   "than_ngoc_bua",
+   "fac_green",
+   "fac_blue",
+   "fac_red",
+   "fac_violet",
+   "troop_shield",
+   "troop_spear",
+   "troop_cav_armor",
+   "troop_cav_horse",
+   "troop_bow",
+   "troop_catapult",
+   "troop_strat",
+   "troop_drum",
+   "navsel_city",
+   "navsel_general",
+   "navsel_campaign",
+   "navsel_world",
+   "navsel_boss"
+  ],
+  "note": "cells 0-42 keep the old icons.webp order (0-27 re-painted: hub, nav, seals, objects; 28-42 copied unchanged: set badges, Than Khi); 43-46 faction tokens (green, blue, red, violet; map to Thuc/Nguy/Ngo/Quan is designer's), 47-54 troop types, 55-59 nav selected (gold)"
+ }
+}

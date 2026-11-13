@@ -1,0 +1,41 @@
+{
+ "artmeta": 1,
+ "id": "tavern_banners",
+ "build": "V301",
+ "file": "art/ui/tavern_banners.webp",
+ "size": [
+  981,
+  1444
+ ],
+ "rows": {
+  "thuc": [
+   0,
+   0,
+   981,
+   361
+  ],
+  "nguy": [
+   0,
+   361,
+   981,
+   361
+  ],
+  "ngo": [
+   0,
+   722,
+   981,
+   361
+  ],
+  "quan": [
+   0,
+   1083,
+   981,
+   361
+  ]
+ },
+ "css": [
+  358,
+  131.7
+ ],
+ "note": "order thuc, nguy, ngo, quan; native aspect kept (source strips are 2.7:1, so css 358 x 133, not 358 x 124); left 40 % is the dark wall for text; corners transparent"
+}

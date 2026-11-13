@@ -1,0 +1,1597 @@
+{
+ "artmeta": 1,
+ "id": "home",
+ "build": "V299",
+ "job": "front-view home ship (Decisions 149, 151 A, 152 B)",
+ "units": "vb of the 474-wide city svg (1 vb = 2 px on the shipped maps, 0.8228 css px at 390 wide). x = tile centre, foot_vb = foot line (y), tile drawn bottom-centre anchored.",
+ "atlas": {
+  "file": "art/buildings/bld_f.webp",
+  "lit": null,
+  "size": [
+   2048,
+   2510
+  ],
+  "parts": {
+   "tech_20": {
+    "r": [
+     0,
+     0,
+     460,
+     553
+    ]
+   },
+   "mc_20": {
+    "r": [
+     464,
+     0,
+     436,
+     531
+    ]
+   },
+   "train_20": {
+    "r": [
+     904,
+     0,
+     418,
+     489
+    ]
+   },
+   "mc_10": {
+    "r": [
+     1326,
+     0,
+     440,
+     459
+    ]
+   },
+   "mint_20": {
+    "r": [
+     0,
+     557,
+     485,
+     445
+    ]
+   },
+   "tech_10": {
+    "r": [
+     489,
+     557,
+     442,
+     437
+    ]
+   },
+   "barracks_20": {
+    "r": [
+     935,
+     557,
+     417,
+     431
+    ]
+   },
+   "acct_20": {
+    "r": [
+     1356,
+     557,
+     455,
+     384
+    ]
+   },
+   "tech_1": {
+    "r": [
+     0,
+     1006,
+     380,
+     383
+    ]
+   },
+   "barracks_10": {
+    "r": [
+     384,
+     1006,
+     401,
+     369
+    ]
+   },
+   "market_20": {
+    "r": [
+     789,
+     1006,
+     435,
+     360
+    ]
+   },
+   "train_10": {
+    "r": [
+     1228,
+     1006,
+     406,
+     350
+    ]
+   },
+   "mint_10": {
+    "r": [
+     1638,
+     1006,
+     383,
+     326
+    ]
+   },
+   "mc_1": {
+    "r": [
+     0,
+     1393,
+     365,
+     314
+    ]
+   },
+   "train_1": {
+    "r": [
+     369,
+     1393,
+     421,
+     311
+    ]
+   },
+   "mint_1": {
+    "r": [
+     794,
+     1393,
+     380,
+     311
+    ]
+   },
+   "market_10": {
+    "r": [
+     1178,
+     1393,
+     404,
+     311
+    ]
+   },
+   "acct_10": {
+    "r": [
+     1586,
+     1393,
+     393,
+     295
+    ]
+   },
+   "house_20": {
+    "r": [
+     0,
+     1711,
+     388,
+     288
+    ]
+   },
+   "market_1": {
+    "r": [
+     392,
+     1711,
+     394,
+     253
+    ]
+   },
+   "barracks_1": {
+    "r": [
+     790,
+     1711,
+     399,
+     249
+    ]
+   },
+   "field_20": {
+    "r": [
+     1193,
+     1711,
+     431,
+     249
+    ]
+   },
+   "house_10": {
+    "r": [
+     1628,
+     1711,
+     381,
+     244
+    ]
+   },
+   "acct_1": {
+    "r": [
+     0,
+     2003,
+     356,
+     241
+    ]
+   },
+   "field_10": {
+    "r": [
+     360,
+     2003,
+     434,
+     237
+    ]
+   },
+   "field_1": {
+    "r": [
+     798,
+     2003,
+     431,
+     225
+    ]
+   },
+   "house_1": {
+    "r": [
+     1233,
+     2003,
+     275,
+     214
+    ]
+   },
+   "farm": {
+    "r": [
+     1512,
+     2003,
+     248,
+     192
+    ]
+   },
+   "mine": {
+    "r": [
+     1764,
+     2003,
+     242,
+     192
+    ]
+   },
+   "vault": {
+    "r": [
+     0,
+     2248,
+     251,
+     192
+    ]
+   },
+   "lot_empty": {
+    "r": [
+     0,
+     2444,
+     240,
+     66
+    ]
+   },
+   "lot_locked": {
+    "r": [
+     244,
+     2444,
+     240,
+     65
+    ]
+   },
+   "dojo": {
+    "r": [
+     255,
+     2248,
+     224,
+     192
+    ]
+   }
+  },
+  "note": "parts <building>_<lv> for mc house train barracks acct mint market field tech (Lv 1/10/20) + farm mine vault. No slab, no grass strip: tiles end at the foot line. lit = none yet (empty mask until the lit pass: draw no lit rect). Outposts are stored at 3 px per vb; buildings at source scale (draw at slot w; h = w * rect h / rect w). r95: + lot_empty, lot_locked (plots b, drawn at w 80 vb) and dojo (dojo a, w 92 vb), 3 px per vb, foot = bottom edge of the rect. V300: dojo = r96 dojo a (3 px per vb, w 74.7 x h 64), replaces the old plot dojo."
+ },
+ "maps": {
+  "terrace": {
+   "file": "art/maps/home_terrace.webp",
+   "size": [
+    948,
+    1686
+   ],
+   "vb": [
+    474,
+    843
+   ]
+  },
+  "paddies": {
+   "file": "art/maps/home_paddies.webp",
+   "size": [
+    948,
+    1264
+   ],
+   "vb": [
+    474,
+    632
+   ]
+  }
+ },
+ "layout": "G (home-layout section 6 v1.5, grounded placement)",
+ "slots": {
+  "mc": {
+   "x": 237,
+   "w": 186,
+   "foot_vb": 235.6,
+   "row": 0,
+   "dy": -0.0,
+   "h": {
+    "1": 160.0,
+    "10": 194.0,
+    "20": 226.5
+   },
+   "slot_w": 186,
+   "plaque_max_w": 134,
+   "dx_lv_vb": {
+    "1": 15.5
+   },
+   "foot_dy_lv_vb": {
+    "1": 5.0
+   },
+   "dx_note": "mc_1 cell = hut + flag pole on its right, so the hut body sits 15.5 vb left of the cell centre: draw the Lv 1 tile at x + dx_lv_vb[lv] (default 0) so the hut body is centred on x 237. The hut's deck/steps end 12 cell px (~6 vb) above the cell bottom, so Lv 1 is also drawn at foot_vb + foot_dy_lv_vb[lv] (default 0) = 240.6 so the visible base meets the floor line like Lv 10/20. Plaque x, y (foot_vb + 8 = 243.6, the common mc value), w and h unchanged; contact shadow follows the tile (x + dx, foot + dy).",
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "tech": {
+   "x": 107,
+   "w": 122,
+   "slot_w": 122,
+   "foot_vb": 329.7,
+   "row": 1,
+   "dy": -6.0,
+   "h": {
+    "1": 123.0,
+    "10": 120.6,
+    "20": 146.7
+   },
+   "plaque_max_w": 134,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "barracks": {
+   "x": 372,
+   "w": 130,
+   "slot_w": 130,
+   "foot_vb": 335.7,
+   "row": 1,
+   "dy": 0.0,
+   "h": {
+    "1": 81.1,
+    "10": 119.6,
+    "20": 134.4
+   },
+   "plaque_max_w": 134,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "mint": {
+   "x": 106,
+   "w": 114,
+   "slot_w": 114,
+   "foot_vb": 484.4,
+   "row": 2,
+   "dy": -4.0,
+   "h": {
+    "1": 93.3,
+    "10": 97.0,
+    "20": 104.6
+   },
+   "plaque_max_w": 124,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "train": {
+   "x": 370,
+   "w": 111,
+   "slot_w": 111,
+   "foot_vb": 488.4,
+   "row": 2,
+   "dy": 0.0,
+   "h": {
+    "1": 82.0,
+    "10": 95.7,
+    "20": 129.9
+   },
+   "plaque_max_w": 124,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "house": {
+   "x": 107,
+   "w": 126,
+   "slot_w": 126,
+   "foot_vb": 629.2,
+   "row": 3,
+   "dy": -8.0,
+   "h": {
+    "1": 98.1,
+    "10": 80.7,
+    "20": 93.5
+   },
+   "plaque_max_w": 134,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "acct": {
+   "x": 367,
+   "w": 124,
+   "slot_w": 124,
+   "foot_vb": 635.2,
+   "row": 3,
+   "dy": -2.0,
+   "h": {
+    "1": 83.9,
+    "10": 93.1,
+    "20": 104.7
+   },
+   "plaque_max_w": 134,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "market": {
+   "x": 107,
+   "w": 126,
+   "slot_w": 126,
+   "foot_vb": 768.0,
+   "row": 4,
+   "dy": 0.0,
+   "h": {
+    "1": 80.9,
+    "10": 97.0,
+    "20": 104.3
+   },
+   "plaque_max_w": 134,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  },
+  "field": {
+   "x": 367.5,
+   "w": 125,
+   "slot_w": 125,
+   "foot_vb": 765.0,
+   "row": 4,
+   "dy": -3.0,
+   "h": {
+    "1": 65.3,
+    "10": 68.3,
+    "20": 72.2
+   },
+   "plaque_max_w": 134,
+   "foot_note": "G: foot = wall top - 22 + dy (dy = set-back, <= 0); same x/w/foot for Lv 1/10/20"
+  }
+ },
+ "wall_top_vb": {
+  "summit": 257.6,
+  "terrace2": 357.7,
+  "terrace3": 510.4,
+  "terrace4": 659.2,
+  "quay": 790.0
+ },
+ "centre_stair_vb": [
+  219,
+  255
+ ],
+ "contact_shadow": {
+  "w_factor": 0.9,
+  "h_vb": 8,
+  "black_alpha": 0.3,
+  "fade": "to 0 at the rim (radial)",
+  "centre": "foot line",
+  "order": "after ground, before tiles; draw order = tiles sorted by foot y"
+ },
+ "plaque": {
+  "x": "tile x",
+  "y_from_foot_vb": [
+   -3,
+   19
+  ],
+  "centre_dy_vb": 8,
+  "max_w_vb": 134,
+  "css_h": 18,
+  "font_css": 12,
+  "order": "drawn last",
+  "max_w_vb_terrace3": 124,
+  "note": "G: plaque centre = foot + 8 on the floor, h <= 22; max w 124 on terrace 3 (mint, train: >= 10 vb clear of the lake)"
+ },
+ "lamps_terrace_vb": [
+  [
+   459.1,
+   157.1
+  ],
+  [
+   67.6,
+   172.9
+  ],
+  [
+   446.3,
+   174.2
+  ],
+  [
+   140.4,
+   183.5
+  ],
+  [
+   334.4,
+   183.5
+  ],
+  [
+   15.4,
+   209.8
+  ],
+  [
+   20.6,
+   217.7
+  ],
+  [
+   25.5,
+   280.0
+  ],
+  [
+   191.4,
+   289.2
+  ],
+  [
+   283.1,
+   289.2
+  ],
+  [
+   27.2,
+   310.3
+  ],
+  [
+   189.2,
+   392.4
+  ],
+  [
+   285.3,
+   392.4
+  ],
+  [
+   25.0,
+   543.3
+  ],
+  [
+   189.2,
+   543.3
+  ],
+  [
+   285.7,
+   543.3
+  ],
+  [
+   449.0,
+   543.3
+  ],
+  [
+   25.0,
+   696.1
+  ],
+  [
+   189.2,
+   696.1
+  ],
+  [
+   285.7,
+   696.1
+  ],
+  [
+   449.0,
+   696.1
+  ],
+  [
+   25.0,
+   759.7
+  ],
+  [
+   189.2,
+   759.7
+  ],
+  [
+   285.7,
+   759.7
+  ],
+  [
+   449.0,
+   759.7
+  ]
+ ],
+ "lamps_note": "red-paper-lantern centres on the ground art (glow points for the code night); r95: the 2 right lamps of walls 3 and 4 moved 427.9 -> 449 vb (ground post). They stand over the wall-3/4 channel stone (see r95 debug)",
+ "paddies": {
+  "row_base_vb": [
+   262.5,
+   362.1,
+   459.1,
+   566.2
+  ],
+  "row_base_note": "measured by eye on the art (lip tops), as in the mock; the r90 spec's 230/332/434/536 is for the old layout",
+  "plot_x": [
+   80,
+   185,
+   289,
+   394
+  ],
+  "rows": [
+   "farm",
+   "mine",
+   "dojo",
+   "vault"
+  ],
+  "plot_w_vb": 80,
+  "outpost_slot_x": 80,
+  "outposts": {
+   "farm": {
+    "w": 82.6,
+    "h": 63.9
+   },
+   "mine": {
+    "w": 80.8,
+    "h": 64.1
+   },
+   "vault": {
+    "w": 83.7,
+    "h": 64.0
+   },
+   "dojo": {
+    "w": 74.7,
+    "h": 64.0
+   }
+  },
+  "plaque_x": 237,
+  "plaque_y_from_base": -79,
+  "level_disc": {
+   "dx": 34,
+   "dy": -4
+  },
+  "lamps_vb": [
+   [
+    194.9,
+    153.6
+   ],
+   [
+    278.7,
+    153.6
+   ],
+   [
+    453.8,
+    229.5
+   ],
+   [
+    453.8,
+    328.7
+   ],
+   [
+    453.8,
+    426.6
+   ],
+   [
+    453.8,
+    524.5
+   ]
+  ],
+  "outpost_h_cap_vb": 64,
+  "lots": {
+   "empty": "lot_empty",
+   "locked": "lot_locked",
+   "w": 80.0,
+   "h": {
+    "lot_empty": 22.0,
+    "lot_locked": 21.7
+   },
+   "foot": "row base (bottom of the soil band = rect bottom), tile bottom-centre anchored at (plot_x, row_base)",
+   "decision": "153 A (plots b, dojo a)"
+  },
+  "outpost_h_cap_note": "dojo is a 4.7:1 strip: h 19.4 at w 92 (cap 64 does not bind)"
+ },
+ "ground_post": {
+  "wall3": {
+   "stair_px": [
+    449,
+    631
+   ],
+   "rows": [
+    1140,
+    1345
+   ]
+  },
+  "wall4": {
+   "stair_px": [
+    443,
+    637
+   ],
+   "rows": [
+    1480,
+    1695
+   ]
+  }
+ },
+ "retire": [
+  "buildings/bld_a*",
+  "buildings/bld_b*",
+  "buildings/in_*.webp",
+  "buildings/ob_*.webp",
+  "maps/inner.webp",
+  "maps/outer.webp"
+ ],
+ "lake": {
+  "decision": 154,
+  "pond_box_vb": [
+   174.0,
+   441.0,
+   300.0,
+   493.0
+  ],
+  "poly_vb": [
+   [
+    299.5,
+    467.0
+   ],
+   [
+    297.4,
+    473.6
+   ],
+   [
+    291.1,
+    479.8
+   ],
+   [
+    281.2,
+    485.0
+   ],
+   [
+    268.2,
+    489.1
+   ],
+   [
+    253.2,
+    491.6
+   ],
+   [
+    237.0,
+    492.5
+   ],
+   [
+    220.8,
+    491.6
+   ],
+   [
+    205.8,
+    489.1
+   ],
+   [
+    192.8,
+    485.0
+   ],
+   [
+    182.9,
+    479.8
+   ],
+   [
+    176.6,
+    473.6
+   ],
+   [
+    174.5,
+    467.0
+   ],
+   [
+    176.6,
+    460.4
+   ],
+   [
+    182.9,
+    454.2
+   ],
+   [
+    192.8,
+    449.0
+   ],
+   [
+    205.7,
+    444.9
+   ],
+   [
+    220.8,
+    442.4
+   ],
+   [
+    237.0,
+    441.5
+   ],
+   [
+    253.2,
+    442.4
+   ],
+   [
+    268.2,
+    444.9
+   ],
+   [
+    281.2,
+    449.0
+   ],
+   [
+    291.1,
+    454.2
+   ],
+   [
+    297.4,
+    460.4
+   ]
+  ],
+  "walkway_vb": [
+   223.8,
+   250.2
+  ],
+  "runnel_y_vb": [
+   434.7,
+   446.9
+  ],
+  "reflect_lamps_vb": [
+   [
+    189.2,
+    392.4
+   ],
+   [
+    285.3,
+    392.4
+   ]
+  ],
+  "night": "home-lake section 4 (code): streak under each of the 2 lamps, 6 vb wide, 30 vb long, lamp glow 35% -> 0, 2-step 1.2 s shimmer; +8% lift of the water inside poly_vb, no lift on the walkway strip",
+  "pasted_px_by_candidate": "see docs/art/pipeline/r95/r95_notes.json"
+ },
+ "props": {
+  "decision": "r97 b sheets (art approved); 35 props, outer handcart cut",
+  "file": "art/maps/home_props.webp",
+  "size": [
+   1024,
+   512
+  ],
+  "ppv": 2.5,
+  "note": "parts[name].r = [x,y,w,h] in atlas px; foot = [x,y] in the part (bottom centre = where it stands). Draw at w_vb x h_vb (atlas px / ppv = vb), foot at (x_vb, foot_vb). Painter order by foot_vb together with the tiles; contact shadow optional (flag shadow). No lit mask. placements: inner = Nội Thành svg 474x843 vb, outer = Ngoại Thành svg 474x632 vb.",
+  "parts": {
+   "bamboo": {
+    "r": [
+     0,
+     0,
+     85,
+     166
+    ],
+    "foot": [
+     37,
+     166
+    ],
+    "w_vb": 34.0,
+    "h_vb": 66.4,
+    "sheet": "green"
+   },
+   "tree_gold": {
+    "r": [
+     87,
+     0,
+     135,
+     133
+    ],
+    "foot": [
+     70,
+     133
+    ],
+    "w_vb": 54.0,
+    "h_vb": 53.2,
+    "sheet": "green"
+   },
+   "tree_red": {
+    "r": [
+     224,
+     0,
+     140,
+     129
+    ],
+    "foot": [
+     68,
+     129
+    ],
+    "w_vb": 56.0,
+    "h_vb": 51.6,
+    "sheet": "green"
+   },
+   "tree_pine": {
+    "r": [
+     366,
+     0,
+     100,
+     128
+    ],
+    "foot": [
+     52,
+     128
+    ],
+    "w_vb": 40.0,
+    "h_vb": 51.2,
+    "sheet": "green"
+   },
+   "banner_teal": {
+    "r": [
+     468,
+     0,
+     55,
+     101
+    ],
+    "foot": [
+     27,
+     101
+    ],
+    "w_vb": 22.0,
+    "h_vb": 40.4,
+    "sheet": "green"
+   },
+   "banner_red": {
+    "r": [
+     525,
+     0,
+     55,
+     100
+    ],
+    "foot": [
+     27,
+     100
+    ],
+    "w_vb": 22.0,
+    "h_vb": 40.0,
+    "sheet": "green"
+   },
+   "pillar": {
+    "r": [
+     582,
+     0,
+     40,
+     94
+    ],
+    "foot": [
+     20,
+     94
+    ],
+    "w_vb": 16.0,
+    "h_vb": 37.6,
+    "sheet": "green"
+   },
+   "haystack": {
+    "r": [
+     624,
+     0,
+     70,
+     72
+    ],
+    "foot": [
+     34,
+     72
+    ],
+    "w_vb": 28.0,
+    "h_vb": 28.8,
+    "sheet": "outer"
+   },
+   "bonsai": {
+    "r": [
+     696,
+     0,
+     60,
+     69
+    ],
+    "foot": [
+     30,
+     69
+    ],
+    "w_vb": 24.0,
+    "h_vb": 27.6,
+    "sheet": "inner"
+   },
+   "lamp_post": {
+    "r": [
+     758,
+     0,
+     55,
+     69
+    ],
+    "foot": [
+     28,
+     69
+    ],
+    "w_vb": 22.0,
+    "h_vb": 27.6,
+    "sheet": "green"
+   },
+   "spears": {
+    "r": [
+     815,
+     0,
+     60,
+     66
+    ],
+    "foot": [
+     9,
+     66
+    ],
+    "w_vb": 24.0,
+    "h_vb": 26.4,
+    "sheet": "inner"
+   },
+   "well": {
+    "r": [
+     877,
+     0,
+     60,
+     66
+    ],
+    "foot": [
+     30,
+     66
+    ],
+    "w_vb": 24.0,
+    "h_vb": 26.4,
+    "sheet": "outer"
+   },
+   "scarecrow": {
+    "r": [
+     939,
+     0,
+     60,
+     64
+    ],
+    "foot": [
+     28,
+     64
+    ],
+    "w_vb": 24.0,
+    "h_vb": 25.6,
+    "sheet": "outer"
+   },
+   "lantern": {
+    "r": [
+     0,
+     168,
+     35,
+     62
+    ],
+    "foot": [
+     16,
+     62
+    ],
+    "w_vb": 14.0,
+    "h_vb": 24.8,
+    "sheet": "inner"
+   },
+   "broom": {
+    "r": [
+     37,
+     168,
+     45,
+     58
+    ],
+    "foot": [
+     21,
+     58
+    ],
+    "w_vb": 18.0,
+    "h_vb": 23.2,
+    "sheet": "inner"
+   },
+   "burner": {
+    "r": [
+     84,
+     168,
+     50,
+     58
+    ],
+    "foot": [
+     24,
+     58
+    ],
+    "w_vb": 20.0,
+    "h_vb": 23.2,
+    "sheet": "inner"
+   },
+   "rocks": {
+    "r": [
+     136,
+     168,
+     85,
+     56
+    ],
+    "foot": [
+     41,
+     56
+    ],
+    "w_vb": 34.0,
+    "h_vb": 22.4,
+    "sheet": "green"
+   },
+   "crates": {
+    "r": [
+     223,
+     168,
+     65,
+     53
+    ],
+    "foot": [
+     32,
+     53
+    ],
+    "w_vb": 26.0,
+    "h_vb": 21.2,
+    "sheet": "inner"
+   },
+   "hoe": {
+    "r": [
+     290,
+     168,
+     45,
+     52
+    ],
+    "foot": [
+     22,
+     52
+    ],
+    "w_vb": 18.0,
+    "h_vb": 20.8,
+    "sheet": "outer"
+   },
+   "shrub": {
+    "r": [
+     337,
+     168,
+     75,
+     51
+    ],
+    "foot": [
+     36,
+     51
+    ],
+    "w_vb": 30.0,
+    "h_vb": 20.4,
+    "sheet": "green"
+   },
+   "shrub_bloom": {
+    "r": [
+     414,
+     168,
+     70,
+     51
+    ],
+    "foot": [
+     34,
+     51
+    ],
+    "w_vb": 28.0,
+    "h_vb": 20.4,
+    "sheet": "green"
+   },
+   "marker": {
+    "r": [
+     486,
+     168,
+     30,
+     48
+    ],
+    "foot": [
+     15,
+     48
+    ],
+    "w_vb": 12.0,
+    "h_vb": 19.2,
+    "sheet": "outer"
+   },
+   "sacks": {
+    "r": [
+     518,
+     168,
+     60,
+     45
+    ],
+    "foot": [
+     28,
+     45
+    ],
+    "w_vb": 24.0,
+    "h_vb": 18.0,
+    "sheet": "inner"
+   },
+   "signpost": {
+    "r": [
+     580,
+     168,
+     40,
+     45
+    ],
+    "foot": [
+     20,
+     45
+    ],
+    "w_vb": 16.0,
+    "h_vb": 18.0,
+    "sheet": "inner"
+   },
+   "barrels": {
+    "r": [
+     622,
+     168,
+     60,
+     43
+    ],
+    "foot": [
+     16,
+     43
+    ],
+    "w_vb": 24.0,
+    "h_vb": 17.2,
+    "sheet": "inner"
+   },
+   "buckets": {
+    "r": [
+     684,
+     168,
+     65,
+     43
+    ],
+    "foot": [
+     32,
+     43
+    ],
+    "w_vb": 26.0,
+    "h_vb": 17.2,
+    "sheet": "outer"
+   },
+   "reeds": {
+    "r": [
+     751,
+     168,
+     40,
+     43
+    ],
+    "foot": [
+     20,
+     43
+    ],
+    "w_vb": 16.0,
+    "h_vb": 17.2,
+    "sheet": "outer"
+   },
+   "bench": {
+    "r": [
+     793,
+     168,
+     75,
+     42
+    ],
+    "foot": [
+     57,
+     42
+    ],
+    "w_vb": 30.0,
+    "h_vb": 16.8,
+    "sheet": "inner"
+   },
+   "jars": {
+    "r": [
+     870,
+     168,
+     60,
+     42
+    ],
+    "foot": [
+     30,
+     42
+    ],
+    "w_vb": 24.0,
+    "h_vb": 16.8,
+    "sheet": "outer"
+   },
+   "firewood": {
+    "r": [
+     932,
+     168,
+     55,
+     39
+    ],
+    "foot": [
+     32,
+     39
+    ],
+    "w_vb": 22.0,
+    "h_vb": 15.6,
+    "sheet": "outer"
+   },
+   "fence": {
+    "r": [
+     0,
+     232,
+     80,
+     39
+    ],
+    "foot": [
+     40,
+     39
+    ],
+    "w_vb": 32.0,
+    "h_vb": 15.6,
+    "sheet": "outer"
+   },
+   "pot": {
+    "r": [
+     82,
+     232,
+     35,
+     38
+    ],
+    "foot": [
+     17,
+     38
+    ],
+    "w_vb": 14.0,
+    "h_vb": 15.2,
+    "sheet": "inner"
+   },
+   "basket": {
+    "r": [
+     119,
+     232,
+     40,
+     37
+    ],
+    "foot": [
+     18,
+     37
+    ],
+    "w_vb": 16.0,
+    "h_vb": 14.8,
+    "sheet": "outer"
+   },
+   "table": {
+    "r": [
+     161,
+     232,
+     75,
+     36
+    ],
+    "foot": [
+     36,
+     36
+    ],
+    "w_vb": 30.0,
+    "h_vb": 14.4,
+    "sheet": "inner"
+   },
+   "stones": {
+    "r": [
+     238,
+     232,
+     75,
+     10
+    ],
+    "foot": [
+     37,
+     10
+    ],
+    "w_vb": 30.0,
+    "h_vb": 4.0,
+    "sheet": "green"
+   }
+  },
+  "shadow": [
+   "crates",
+   "barrels",
+   "sacks",
+   "bench",
+   "table",
+   "fence",
+   "firewood",
+   "rocks",
+   "jars",
+   "haystack",
+   "well",
+   "marker",
+   "burner",
+   "spears",
+   "bonsai"
+  ],
+  "placements": {
+   "inner": [
+    {
+     "p": "bench",
+     "x": 190,
+     "foot": 350
+    },
+    {
+     "p": "signpost",
+     "x": 218,
+     "foot": 352
+    },
+    {
+     "p": "burner",
+     "x": 240,
+     "foot": 337
+    },
+    {
+     "p": "bonsai",
+     "x": 262,
+     "foot": 352
+    },
+    {
+     "p": "spears",
+     "x": 287,
+     "foot": 345
+    },
+    {
+     "p": "crates",
+     "x": 188,
+     "foot": 438
+    },
+    {
+     "p": "rocks",
+     "x": 281,
+     "foot": 440
+    },
+    {
+     "p": "table",
+     "x": 196,
+     "foot": 508
+    },
+    {
+     "p": "banner_red",
+     "x": 190,
+     "foot": 612
+    },
+    {
+     "p": "stones",
+     "x": 237,
+     "foot": 618
+    },
+    {
+     "p": "banner_teal",
+     "x": 284,
+     "foot": 612
+    },
+    {
+     "p": "lantern",
+     "x": 186,
+     "foot": 654
+    },
+    {
+     "p": "pot",
+     "x": 212,
+     "foot": 652
+    },
+    {
+     "p": "broom",
+     "x": 262,
+     "foot": 652
+    },
+    {
+     "p": "lantern",
+     "x": 288,
+     "foot": 654
+    },
+    {
+     "p": "sacks",
+     "x": 214,
+     "foot": 782
+    },
+    {
+     "p": "barrels",
+     "x": 258,
+     "foot": 782
+    }
+   ],
+   "outer": [
+    {
+     "p": "reeds",
+     "x": 110,
+     "foot": 172
+    },
+    {
+     "p": "reeds",
+     "x": 355,
+     "foot": 172
+    },
+    {
+     "p": "tree_red",
+     "x": 154,
+     "foot": 200
+    },
+    {
+     "p": "tree_pine",
+     "x": 312,
+     "foot": 195
+    },
+    {
+     "p": "tree_gold",
+     "x": 405,
+     "foot": 198
+    },
+    {
+     "p": "shrub",
+     "x": 206,
+     "foot": 222
+    },
+    {
+     "p": "shrub_bloom",
+     "x": 272,
+     "foot": 222
+    },
+    {
+     "p": "bamboo",
+     "x": 448,
+     "foot": 200
+    },
+    {
+     "p": "rocks",
+     "x": 400,
+     "foot": 232
+    },
+    {
+     "p": "stones",
+     "x": 205,
+     "foot": 237
+    },
+    {
+     "p": "scarecrow",
+     "x": 168,
+     "foot": 236
+    },
+    {
+     "p": "haystack",
+     "x": 335,
+     "foot": 237
+    },
+    {
+     "p": "hoe",
+     "x": 155,
+     "foot": 337
+    },
+    {
+     "p": "basket",
+     "x": 335,
+     "foot": 337
+    },
+    {
+     "p": "marker",
+     "x": 24,
+     "foot": 345
+    },
+    {
+     "p": "buckets",
+     "x": 200,
+     "foot": 432
+    },
+    {
+     "p": "well",
+     "x": 270,
+     "foot": 432
+    },
+    {
+     "p": "jars",
+     "x": 300,
+     "foot": 433
+    },
+    {
+     "p": "firewood",
+     "x": 22,
+     "foot": 440
+    },
+    {
+     "p": "fence",
+     "x": 205,
+     "foot": 541
+    },
+    {
+     "p": "fence",
+     "x": 270,
+     "foot": 541
+    },
+    {
+     "p": "marker",
+     "x": 24,
+     "foot": 545
+    },
+    {
+     "p": "marker",
+     "x": 148,
+     "foot": 541
+    }
+   ]
+  },
+  "unplaced": [
+   "lamp_post",
+   "pillar",
+   "tree_*(inner)",
+   "bamboo(inner)",
+   "shrubs(inner)"
+  ]
+ }
+}
