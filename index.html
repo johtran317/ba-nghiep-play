@@ -29699,6 +29699,8 @@ function u354Locked(a,v){try{if(!UI354||!document.body)return'';var cl=document.
   /* BN-354q1: the fixed CTA is Home-only; hide it under Prep, any sheet/popup, battle or showcase (z 20 stays below #pb331 25 / .modal 30 / #battle 40) */
   'html.pb331on body.ui354 #main .flnext,body.ui354:has(#pb331) #main .flnext,body.ui354:has(#modal:not([hidden])) #main .flnext,body.ui354:has(#battle:not([hidden])) #main .flnext,body.ui354:has(#show:not([hidden])) #main .flnext{display:none!important;visibility:hidden!important;pointer-events:none!important}'+
   'body.ui354.u354home #main .flnext .fln1,body.ui354.u354home #main .flnext .fln2{font-size:14px!important;white-space:nowrap}body.ui354.u354home #main .flnext .fln2{margin-left:auto}body.ui354.u354home #main .flnext .u354ci{flex:none;width:24px;height:24px;object-fit:contain;margin-left:-4px}'+
+  /* BN-361f C1: the nav icon is sized on every tab (Chinh chiến drew it at its natural ~250 css) */
+  '#main .flnext .u354ci{flex:none;width:24px!important;height:24px!important;max-width:24px;object-fit:contain}#main .flrow2 .flnext .fln1,#main .flrow2 .flnext .fln2{white-space:nowrap}'+
   'body.ui354.u354home #main .hubrail.u185f{margin-bottom:6px!important;padding:6px 6px 6px!important}'+
   '.u354sb{position:absolute;z-index:6;display:flex;flex-direction:column;align-items:center;width:64px;padding:0;background:none!important;border:0!important;box-shadow:none!important;font:700 12px/14px var(--fb,system-ui,sans-serif);color:#f1e3c3;-webkit-text-stroke:1px #1a120a;paint-order:stroke fill;text-shadow:0 1px 2px #000,0 0 3px #000}'+
   '.u354sb.g{left:6px;top:62px}.u354sb.e{right:6px;top:62px}'+
@@ -29725,7 +29727,8 @@ function u354Locked(a,v){try{if(!UI354||!document.body)return'';var cl=document.
   var W=n.clientWidth||innerWidth;try{document.body.classList.toggle('u354home',typeof tab!=='undefined'&&tab==='city')}catch(e){}n.style.setProperty('--u354k',((W-68.67)/206.67).toFixed(4))}catch(e){}}
  var prev={},U354FITM={};
  function marks(){try{var b=document.body;if(!b)return;plate();
-  var ch=document.querySelector('#main .flnext');if(ch){if(!ch.querySelector('.u354cp'))['l','m','r'].forEach(function(c){var d=document.createElement('div');d.className='u354cp '+c;ch.insertBefore(d,ch.firstChild)});try{var f1=ch.querySelector('.fln1');if(f1){var tx=f1.textContent||'';if(tx.charAt(0)==='⚔')f1.textContent=tx.replace(/^⚔\s*/,'');var cid=/Nâng/.test(tx)?'city':'camp',ic=ch.querySelector('.u354ci'),src=document.querySelector('#nav [data-nav299="'+cid+'"]');src=src&&src.src;if(src&&(!ic||ic.dataset.k!==cid)){if(ic)ic.remove();ic=document.createElement('img');ic.className='u354ci';ic.alt='';ic.dataset.k=cid;ic.src=src;ch.insertBefore(ic,f1)}}}catch(e){}ch.style.setProperty('--u354c',(((ch.clientWidth||366)-36)/242).toFixed(4))}
+  /* BN-361f C1: the goal-chip plate pieces belong to the home chip only (their css is unscoped); on Chinh chiến the bar keeps its flow301v look and gets only the 24 css icon */
+  var ch=document.querySelector('#main .flnext');if(ch){if(b.classList.contains('u354home')&&!ch.querySelector('.u354cp'))['l','m','r'].forEach(function(c){var d=document.createElement('div');d.className='u354cp '+c;ch.insertBefore(d,ch.firstChild)});try{var f1=ch.querySelector('.fln1');if(f1){var tx=f1.textContent||'';if(tx.charAt(0)==='⚔')f1.textContent=tx.replace(/^⚔\s*/,'');var cid=/Nâng/.test(tx)?'city':'camp',ic=ch.querySelector('.u354ci'),src=document.querySelector('#nav [data-nav299="'+cid+'"]');src=src&&src.src;if(src&&(!ic||ic.dataset.k!==cid)){if(ic)ic.remove();ic=document.createElement('img');ic.className='u354ci';ic.alt='';ic.dataset.k=cid;ic.src=src;ch.insertBefore(ic,f1)}}}catch(e){}ch.style.setProperty('--u354c',(((ch.clientWidth||366)-36)/242).toFixed(4))}
   /* city fit: the lowest inner-city label (rows above 82 % of the scene) must end 8 css above the goal chip. Up to 60 css of need (390x844 = 35, 360x780 = 58) it is a plain shift as before; beyond that (360x740 = 98) shift 16 css and scale the layer (origin top centre, min .8) so Chính Sảnh stays under the weather chip */
   /* BN-358s3: with the valley (?hv=1) the scene is the valley town svg; the mode (plain shift / scale) is remembered per viewport + viewBox; while the
      need stays within 8 css of it, shift holds up to 64 and scale holds down to 56 (4 css hysteresis) and the scale only moves by > .01 (the counter-scaled plaques move the lowest label by ~1 css between the modes, which flipped it every ~2 s at 390x844) */
@@ -30409,11 +30412,14 @@ function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div cl
   var nav=s.querySelector('.snav'),sub=nav&&nav.nextElementSibling;(sub&&sub.classList.contains('dssub')?sub:nav).insertAdjacentElement('afterend',e)}
  /* ---------------- calendar (rows 5) ---------------- */
  function eCal(s){if(!s.querySelector('.evgrid'))return;
-  var reach=-1;try{var L=S.evt&&S.evt.login,dd=S.day;if(L&&dd>=0&&L.m===Math.floor(dd/28)&&L.days)reach=L.days.length+(27-(dd-28*Math.floor(dd/28)))}catch(e){reach=-1}
+  /* BN-361h (bn361-chinhchien-text §4): "Lỡ" = a day this player skipped, never "joined late". Missed if reach <= i < best; best = 28 - (first - c0), first = max(c0, born). Derived only, no save field. */
+  var reach=-1,best=-1;try{var L=S.evt&&S.evt.login,dd=S.day;if(L&&typeof dd==='number'&&isFinite(dd)&&dd>=0&&L.m===Math.floor(dd/28)&&L.days){var c0=28*Math.floor(dd/28),bn=S.born;
+   if(typeof bn!=='number'||!isFinite(bn)){bn=NaN;L.days.forEach(function(x){if(typeof x==='number'&&isFinite(x)&&!(x>=bn))bn=x});if(!isFinite(bn))bn=dd}
+   var first=Math.max(c0,bn);if(first>dd)first=dd;best=28-(first-c0);reach=L.days.length+(27-(dd-c0))}}catch(e){reach=-1;best=-1}
   s.querySelectorAll('.evgrid').forEach(function(g){var ds=[].slice.call(g.querySelectorAll('.evday')),last=-1;ds.forEach(function(d,i){if(d.classList.contains('ok')||d.classList.contains('got'))last=i});
    var lastOk=-1;ds.forEach(function(d,i){if(d.classList.contains('ok'))lastOk=i});
    ds.forEach(function(d,i){var big=d.classList.contains('big')||(!g.classList.contains('evg7')&&i===6),got=d.classList.contains('got'),ok=d.classList.contains('ok'),today=ok&&i===lastOk;
-    var ms=!got&&!ok&&g.classList.contains('evg7')&&reach>=0&&i>=reach;var key=(got?'g':ok?'o':ms?'m':'l')+(big?'B':'')+(today?'T':'');if(d.getAttribute('data-u354c')===key)return;d.setAttribute('data-u354c',key);
+    var ms=!got&&!ok&&g.classList.contains('evg7')&&reach>=0&&i>=reach&&i<best;var key=(got?'g':ok?'o':ms?'m':'l')+(big?'B':'')+(today?'T':'');if(d.getAttribute('data-u354c')===key)return;d.setAttribute('data-u354c',key);
     d.querySelectorAll(':scope>.u354dt,.u354dl,.u354ds').forEach(function(x){x.remove()});
     d.classList.add('u354d');d.classList.toggle('big',big);d.classList.toggle('today',today&&!big);d.classList.toggle('lk',!got&&!ok&&!ms);d.classList.toggle('ms',ms);
     d.insertAdjacentHTML('afterbegin','<span class="u354dt"></span>');var tl=d.querySelector('.u185tl');
@@ -31031,8 +31037,10 @@ function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div cl
    MS+' .sbar .btn.alt,'+MS+'>.row>.btn.alt{order:-1}';
   /* ---- ladder, every .sbar / popup button (classes set by the DOM pass) ---- */
   var B=PS+'.btn.u9b';
-  c+=B+' .u9l{position:relative;display:inline-block;line-height:1;top:var(--k9-ly,0px)}'+B+':not(.alt):not(.u9d){--k9-ly:-6px}'+B+'.alt{position:relative!important;top:-8.5px}';
-  c+=B+'{box-sizing:border-box!important;height:48px!important;min-height:48px!important;padding:0 2px 3px!important;margin:0!important;display:flex!important;align-items:center;justify-content:center;white-space:nowrap!important;letter-spacing:0!important;filter:none!important}'+
+  c+=B+' .u9l{position:relative;display:inline-block;line-height:1;top:var(--k9-ly,0px)}'+B+':not(.alt):not(.u9d){--k9-ly:-6px}'+B+'.alt{position:relative!important;top:-8.5px}'+
+   /* BN-361f C5: on the battle result bar the primary label sits at ~42 % of the pill (the -6 lift put "Ả"'s hook on the top rim) */
+   PS+'.resbar .btn.u9b:not(.alt):not(.u9d){--k9-ly:-2px}';
+  c+=B+'{box-sizing:border-box!important;height:48px!important;min-height:48px!important;padding:0 2px 3px!important;margin:0!important;display:flex!important;align-items:center;justify-content:center;white-space:nowrap!important;letter-spacing:0!important;filter:none!important;overflow:visible!important;text-overflow:clip!important}'+   /* BN-361f C5: the 9-slice borders leave a ~7 css padding box; prepui's .resbar .btn.sp{overflow:hidden} cut the result label ("Ải tiếp") to its bottom half */
    B+':not(.alt):not(.u9d){'+bi('btn_primary_normal')+';font:700 16px/1 '+SANS+'!important;color:#3b2208!important;text-shadow:none!important}'+
    B+':not(.alt):not(.u9d):active{'+bi('btn_primary_pressed')+'}'+
    B+':not(.alt):not(.u9d)[disabled]{'+bi('btn_primary_disabled')+';color:#464646!important;opacity:1!important}'+
@@ -31525,8 +31533,13 @@ var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
  try{document.body.classList.add('wc360');if(lite)document.body.classList.add('wc3lite')}catch(e){}
  /* ---------- Bỏ qua ---------- */
  var skipEl=null;
- function skipShow(){try{if(skipEl||st.skip>=1||st.glide||st.nameDone||(S&&S.pname))return;skipEl=el('button','wc3skip','Bỏ qua');skipEl.id='wc3skip';skipEl.setAttribute('aria-label','Bỏ qua phần mở đầu');skipEl.onclick=function(ev){try{ev.stopPropagation()}catch(x){}doSkip()};document.body.appendChild(skipEl)}catch(e){er('skip',e)}}
+ function skipShow(){try{if(skipEl||st.skip>=1||st.skipGone||st.glide||st.nameDone||(S&&S.pname))return;skipEl=el('button','wc3skip','Bỏ qua');skipEl.id='wc3skip';skipEl.setAttribute('aria-label','Bỏ qua phần mở đầu');skipEl.onclick=function(ev){try{ev.stopPropagation()}catch(x){}doSkip()};document.body.appendChild(skipEl)}catch(e){er('skip',e)}}
  function skipHide(){try{if(skipEl&&skipEl.parentNode)skipEl.remove();skipEl=null}catch(e){}}
+ /* BN-361g (C4): the pill belongs to the welcome only. Left the welcome another way (tab/action while the t2 card was up, or S.name already set)
+    -> it stayed fixed top-right over the HUD flag / "1/11" chip on every tab. Remove it (for good) once no welcome layer has been up for 2 polls (600 ms). */
+ var skipMiss=0;function skipPoll(){try{if(!skipEl){skipMiss=0;return}
+  var on=!(S&&S.name)&&!!(document.getElementById('wc3o')||document.getElementById('wc3g')||(modalOpen()&&document.querySelector('#sheet .wcbox')));
+  if(on){skipMiss=0;return}if(++skipMiss>=2){st.skipGone=1;lg('skip-gone');skipHide()}}catch(e){}}
  function killOverlays(){['wc3o','wc3g'].forEach(function(i){var e=document.getElementById(i);if(e)try{e.remove()}catch(x){}})}
  function doSkip(){try{if(st.skip)return;st.skip=1;lg('skip');skipHide();killOverlays();W.phase='b4';
    if(S&&!S.name){try{_Aorig('wcgo')}catch(e){er('skipgo',e)}}}catch(e){er('doSkip',e)}}
@@ -31674,7 +31687,7 @@ var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
    if(a==='clname'&&!wasName&&S&&S.pname&&!st.nameDone){st.nameDone=now()}
    if(was==='tl'&&S&&(S.nation==='shu'||S.nation==='wei'||S.nation==='wu')&&(a==='h9pick'||a==='nation'))stampFac(S.nation)}catch(e){er('A_2',e)}
   return r};
- setInterval(wakePoll,300);setInterval(holdPoll,40);
+ setInterval(wakePoll,300);setInterval(holdPoll,40);setInterval(skipPoll,300);
  /* ---------- CSS ---------- */
  css('.wc3s{display:block;flex:none;pointer-events:none}'+
  '.wc3vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}'+
@@ -31767,4 +31780,339 @@ var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
  if(fresh){openB0();later(skipShow,600)}
  W.ready=1;
 }catch(e){try{console.error('wc360',e);WC360I.err++}catch(x){}}})();
+/* ===== V301 BN-361c (coder-2): Chinh chien tab to a true 5 + first-30-minute kit wiring.
+   Spec: docs/art/pipeline/BN-361/chinhchien_review.md 3.1-3.6 and 6; mocks docs/art/pipeline/BN-361/m1/. Button ladder: docs/art/pipeline/BN-354/huy_feedback_2_panels.md.
+   Switch UI354 only (ui354c1.js). Display only: no save field, no action name, no text/number change. Off = nothing here runs.
+   Art: shipped kit atlases only (kit, kit_r2, kit_r3, kit_r4, kit_r4b + icons.webp), cropped once into blob URLs held in CSS vars --k11-<piece> / --k11-i-<icon>.
+   Chapter picture: web/art/ui/boss_header_<id>.webp when the file exists (probed once, so dropping r331/r332 in needs no code change); until then the chapter's own painted map top + the boss chibi figure.
+   Idempotent DOM pass (renderMain wrapper + MutationObserver on #main, rAF-debounced); every later wrapper of the tab stays untouched. Must stay LAST-but-audio/wc360 in FILES. ===== */
+(function(){try{
+ if(typeof UI354==='undefined'||!UI354)return;
+ var D=document,H=D.documentElement,K={},IC={},RDY=0,TO=0,MO=null,FIG={},HDR={},FADE=null;
+ var NEED={'art/ui/kit/kit':['card_frame','plaque_dark','btn_primary_normal','btn_primary_pressed','btn_primary_disabled','round_gold_normal','round_gold_pressed','round_bronze_normal','round_bronze_disabled'],
+  'art/ui/kit/kit_r2':['lock','star_lit_1','star_off_1','badge'],'art/ui/kit/kit_r3':['goal_chip_plate','empty_heroslot'],
+  'art/ui/kit/kit_r4':['task_elite','chest_d3'],'art/ui/kit/kit_r4b':['chip_price','chip_price_on','row_shop','tile_gold','tile_gold_on']};
+ var ICONS=['nav_boss','nav_city','nav_campaign','nav_world','hourglass','badge_hoang_can','badge_ho_lao','badge_xich_bich','badge_quan_do','badge_kinh_chau','badge_tay_thuc','badge_han_trung','badge_ngu_truong','badge_than_khi'];
+ var SANS='var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif)',SERIF='var(--ds-fd,Philosopher,"Times New Roman",Georgia,serif)';
+ var TS='-webkit-text-stroke:1px #140b05;paint-order:stroke fill;';
+ function J(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
+ function I(u){return new Promise(function(ok,no){var i=new Image();i.onload=function(){ok(i)};i.onerror=no;i.src=u})}
+ function crop(img,r){return new Promise(function(ok){try{var c=D.createElement('canvas');c.width=r[2];c.height=r[3];c.getContext('2d').drawImage(img,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);c.toBlob(function(b){ok(b?URL.createObjectURL(b):'')})}catch(e){ok('')}})}
+ function px(v){return(+v).toFixed(2)+'px'}
+ /* 9-slice border-image from the json (caps at atlas/3 css, times sc). Horizontal-only pieces (t = b = 0) keep zero vertical borders. */
+ function bi(n,sc){sc=sc||1;var k=K[n];if(!k||!k.u||!k.slice)return'';var s=k.slice,c=s.map(function(v){return v/3*sc});
+  var bw=[c[1],c[2],c[3],c[0]].map(px).join(' ');
+  return'border-style:solid!important;border-color:transparent!important;border-width:'+bw+'!important;border-image:var(--k11-'+n+') '+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+' fill / '+bw+' stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important'}
+ /* same but on a pseudo-element frame (content may overflow the decorated border) */
+ function fr(n,w){var k=K[n],s=k.slice;return'content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;pointer-events:none;border:solid transparent;border-width:'+px(w)+';border-image:var(--k11-'+n+') '+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+' fill / '+px(w)+' stretch'}
+ /* horizontal piece (chip) as a pseudo frame: caps at atlas/3*sc, the button keeps its full content width */
+ function frx(n,sc){sc=sc||1;var k=K[n],s=k.slice,c=s.map(function(v){return v/3*sc});var bw=[c[1],c[2],c[3],c[0]].map(px).join(' ');return'content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;pointer-events:none;border:solid transparent;border-width:'+bw+';border-image:var(--k11-'+n+') '+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+' fill / '+bw+' stretch'}
+ function ok(n){return!!(K[n]&&K[n].u)}
+ function boot(){
+  var pk=function(f){return J(f+'.json').then(function(j){return j.kit.pieces}).catch(function(){return{}})};
+  var files=Object.keys(NEED);
+  Promise.all(files.map(pk).concat([J('art/ui/kit/kit.json').then(function(j){return j.icons}).catch(function(){return null})])).then(function(js){
+   var ico=js[files.length],imgs={};
+   files.forEach(function(f,i){NEED[f].forEach(function(n){var p=js[i][n];if(!p||!p.r)return;K[n]={r:p.r,css:p.css||[p.r[2]/3,p.r[3]/3],slice:p.slice,f:f}})});
+   var jobs=files.map(function(f){return I(f+'.webp').then(function(im){imgs[f]=im},function(){})});
+   if(ico)jobs.push(I('art/ui/kit/icons.webp').then(function(im){imgs.icons=im},function(){}));
+   return Promise.all(jobs).then(function(){
+    var cr=[];
+    Object.keys(K).forEach(function(n){var im=imgs[K[n].f];if(im)cr.push(crop(im,K[n].r).then(function(u){if(u){K[n].u=u;H.style.setProperty('--k11-'+n,'url('+u+')')}}))});
+    if(ico&&imgs.icons)ICONS.forEach(function(n){var i=ico.order.indexOf(n);if(i<0)return;var cw=ico.cell[0],ch=ico.cell[1];
+     cr.push(crop(imgs.icons,[(i%ico.cols)*cw,Math.floor(i/ico.cols)*ch,cw,ch]).then(function(u){if(u){IC[n]=u;H.style.setProperty('--k11-i-'+n,'url('+u+')')}}))});
+    return Promise.all(cr)}).then(function(){
+    if(!ok('chip_price')||!ok('plaque_dark'))return;
+    var st=D.createElement('style');st.id='u354c11css';st.textContent=css();D.head.appendChild(st);H.classList.add('u354k11');RDY=1;sched();
+    try{D.fonts.ready.then(function(){RDY&&sched(1)})}catch(e){}})}).catch(function(){});
+  ['thuc','nguy','ngo','quan'].forEach(function(a){J('art/heroes/fig_'+a+'.json').then(function(j){Object.keys(j.figs||{}).forEach(function(id){var f=j.figs[id];FIG[id]={f:'art/heroes/'+(j.file?j.file.split('/').pop():'fig_'+a+'.webp'),sz:j.size,r:f.r}});sched()}).catch(function(){})})}
+ /* ---------------- css ---------------- */
+ function css(){var M='html.u354k11 body.ui354 #main#main ',c='';
+  /* 3.1 Man tabs: one groove, 64 x 28 chips, scroll-snap, fade on the right while more chips lie off-screen */
+  c+=M+'.u11tw{position:relative;height:40px;margin:0 -4px 12px;isolation:isolate}'+
+   M+'.u11tw::before{'+frx('goal_chip_plate')+'}'+
+   M+'.u11tw::after{content:"";position:absolute;right:14px;top:4px;bottom:4px;width:28px;border-radius:0 12px 12px 0;pointer-events:none;opacity:0;transition:opacity .15s;background:linear-gradient(90deg,rgba(14,9,6,0),rgba(14,9,6,.92))}'+
+   M+'.u11tw.mo::after{opacity:1}'+
+   M+'.u11tw .mtabs{position:absolute;left:14px;right:14px;top:0;bottom:0;display:flex!important;flex-wrap:nowrap!important;gap:4px!important;align-items:center;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scrollbar-width:none;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;mask-image:none!important;-webkit-mask-image:none!important}'+
+   M+'.u11tw .mtabs::-webkit-scrollbar{display:none}'+
+   M+'.u11tw .mtabs .pill{position:relative;isolation:isolate;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important;flex:none!important;width:64px!important;min-width:64px!important;height:28px!important;min-height:0!important;box-sizing:border-box!important;margin:0!important;padding:0 2px 1px!important;display:flex!important;align-items:center;justify-content:center;scroll-snap-align:start!important;opacity:1!important;filter:none!important;white-space:nowrap!important;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:none!important;letter-spacing:0!important}'+
+   M+'.u11tw .mtabs .pill::before{'+frx('chip_price')+'}'+
+   M+'.u11tw .mtabs .pill.on{color:#e8c27a!important}'+
+   M+'.u11tw .mtabs .pill.on::before{'+frx('chip_price_on')+'}'+
+   '@media(max-width:380px){'+M+'.u11tw .mtabs{gap:4px!important}'+M+'.u11tw .mtabs .pill{width:58px!important;min-width:58px!important}}'+
+   M+'.u11tw .mtabs .pill.u11lk{color:#b0a088!important;font-size:12px!important}'+
+   M+'.u11tw .mtabs .pill .u11l{display:inline-block;flex:none;width:11px;height:14.6px;margin:0 3px 0 0;background:var(--k11-lock) center/100% 100% no-repeat}';
+  /* 3.2 chapter card */
+  c+=M+'.mcard.u11c{display:block!important;position:relative;isolation:isolate;margin:0 -4px 12px!important;padding:5px 5px 0!important;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important;min-height:0}'+
+   M+'.mcard.u11c::before{'+fr('card_frame',16)+'}'+
+   M+'.u11c .u11p{position:relative;width:100%;aspect-ratio:2/1;overflow:hidden;border-radius:12px 12px 0 0;background:#1b120c}'+
+   M+'.u11c .u11bg{position:absolute;left:0;top:0;width:100%;height:100%;background-repeat:no-repeat;background-color:#1b120c}'+
+   M+'.u11c .u11fg{position:absolute;bottom:12px;background-repeat:no-repeat;filter:drop-shadow(0 6px 5px rgba(0,0,0,.55))}'+
+   M+'.u11c .u11sc{position:absolute;left:0;top:0;width:100%;height:100%;background:linear-gradient(90deg,rgba(8,5,3,.75),rgba(8,5,3,0) 62%),linear-gradient(0deg,rgba(8,5,3,.82),rgba(8,5,3,0) 46px)}'+
+   M+'.u11c .u11bd{position:absolute;left:12px;top:12px;width:34px;height:34px;background:center/contain no-repeat;filter:drop-shadow(0 1px 2px #000)}'+
+   M+'.u11c .u11tt{position:absolute;left:54px;right:60px;top:11px}'+
+   M+'.u11c .u11tt h3{margin:0!important;font:700 20px/1.15 '+SERIF+'!important;color:#fff!important;-webkit-text-stroke:1.5px #140b05;paint-order:stroke fill;text-shadow:0 2px 4px rgba(0,0,0,.6)}'+
+   M+'.u11c .u11tt .u11lv{font:500 12px/1.3 '+SANS+';color:#f3e3c0;margin-top:2px;text-shadow:0 1px 2px #000}'+
+   M+'.u11c .u11pg>span:last-child{flex:none;white-space:nowrap}'+
+   M+'.u11c .u11pg{position:absolute;left:12px;right:12px;bottom:10px;display:flex;align-items:center;gap:8px;font:500 12px/1 '+SANS+';color:#f3e3c0;text-shadow:0 1px 2px #000}'+
+   M+'.u11c .u11bar{flex:1 1 auto;width:200px;min-width:50px;max-width:200px;height:10px;box-sizing:border-box;border-radius:5px;background:#120a05;border:1px solid #8a6a38;overflow:hidden}'+
+   M+'.u11c .u11bar i{display:block;height:100%;background:linear-gradient(90deg,#c9962e,#f3cf6b)}'+
+   M+'.u11c .u11in{padding:10px 11px 16px}'+
+   M+'.u11c .u11bo{display:flex;align-items:flex-start;gap:8px;font:400 12px/1.4 '+SANS+';color:#f3e3c0}'+
+   M+'.u11c .u11bo i{flex:none;width:22px;height:22px;background:var(--k11-i-nav_boss) center/contain no-repeat}'+
+   M+'.u11c .u11bo b{display:block;font:700 13px/1.4 '+SANS+';color:#e8c27a}'+
+   M+'.u11c .u11bo em{display:block;font:400 12px/1.4 '+SANS+';font-style:normal;color:#f3e3c0}'+
+   M+'.u11c .u11bo span{min-width:0}'+
+   M+'.u11c .u11ch{position:relative;isolation:isolate;display:flex;align-items:center;gap:6px;min-height:28px;box-sizing:border-box;margin-top:6px;padding:3px 14px 4px 12px;font:700 12px/1.35 '+SANS+';color:#f3e3c0}'+
+   M+'.u11c .u11ch::before{'+frx('chip_price')+'}'+
+   M+'.u11c .u11ch i{flex:none;width:18px;height:18px;background:center/contain no-repeat}'+
+   M+'.u11c .u11ch span{min-width:0}'+
+   M+'.u11c .u11ch b{color:#e8c27a}.u11c .u11ch .u11r{color:#ff9a3c}'+
+   M+'.u11c .u11ok{margin-top:8px;font:500 12px/1.3 '+SANS+';color:#b0a088;text-align:center}'+
+   M+'.u11c .u11in>.btn{'+bi('btn_primary_normal')+';display:flex!important;align-items:center;justify-content:center;width:100%!important;height:48px!important;min-height:48px!important;box-sizing:border-box!important;margin:8px 0 0!important;padding:0 2px 3px!important;font:700 16px/1 '+SANS+'!important;color:#3b2208!important;text-shadow:none!important;letter-spacing:0!important;white-space:nowrap}'+
+   M+'.u11c .u11in>.btn:active{'+bi('btn_primary_pressed')+'}';
+  /* 3.3 Tinh binh card + button ladder (I-tier medallions) */
+  c+=M+'.cp-tb.u11t{position:relative;isolation:isolate;display:flex;align-items:center;gap:8px;min-height:78px;box-sizing:border-box;margin:0 -4px 12px!important;padding:8px 16px 8px 18px!important;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important}'+
+   M+'.cp-tb.u11t::before{'+fr('plaque_dark',16)+'}'+
+   M+'.u11t .u11ti{flex:none;width:38px;height:36.4px;background:var(--k11-task_elite) center/contain no-repeat}'+
+   M+'.u11t .cp-tbl{flex:1;min-width:0;gap:3px}'+
+   M+'.u11t .cp-tbl b{font:700 18px/1.1 '+SERIF+'!important;color:#e8c27a!important}'+
+   M+'.u11t .cp-tbl span{font:400 12px/1.25 '+SANS+';color:#f3e3c0;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}'+
+   M+'.u11t .cp-tbl em{font:700 13px/1.2 '+SANS+';color:#ffc450}'+
+   M+'.u11t .cp-tbl span:last-child{display:flex;align-items:center;gap:4px;color:#b0a088}'+
+   M+'.u11t .cp-tbl span:last-child::before{content:"";flex:none;width:14px;height:14px;background:var(--k11-i-hourglass) center/contain no-repeat}'+
+   M+'.u11t .cp-tbb{gap:0;flex:none}'+
+   M+'.u11t .cp-tbx{position:relative;width:50px;height:62px;padding:0;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;display:block;color:#fff!important}'+
+   M+'.u11t .cp-tbx::before{content:"";position:absolute;left:4px;top:0;width:42px;height:42.6px;background:var(--k11-round_bronze_disabled) center/100% 100% no-repeat}'+
+   M+'.u11t .cp-tbx.rdy::before{background-image:var(--k11-round_gold_normal)}'+
+   M+'.u11t .cp-tbx.rdy:active::before{background-image:var(--k11-round_gold_pressed)}'+
+   M+'.u11t .cp-tbx b{position:absolute;left:0;top:0;width:100%;height:42px;display:flex;align-items:center;justify-content:center;padding-bottom:3px;font:700 20px/1 '+SERIF+'!important;color:#fff!important;-webkit-text-stroke:1.5px #140b05;paint-order:stroke fill}'+
+   M+'.u11t .cp-tbx span{position:absolute;left:-4px;right:-4px;top:45px;text-align:center;font:500 12px/1.2 '+SANS+'!important;color:#f3e3c0!important;white-space:nowrap}'+
+   M+'.u11t .cp-tbx:not(.rdy) b{color:#b0a088!important}.u11t .cp-tbx:not(.rdy) span{color:#b0a088!important}';
+  /* 3.4 stage map */
+  c+=M+'.mapbox .mtbn{display:none}'+
+   M+'.mapbox .npulse{display:none}'+
+   M+'.mapbox .u11md.cur{transform-box:fill-box;transform-origin:center;animation:u11pu 1.8s ease-in-out infinite}'+
+   '@keyframes u11pu{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}@media (prefers-reduced-motion:reduce){html body #main#main .mapbox .u11md.cur{animation:none}}'+
+   M+'.sec.u11h{display:none}'+
+   M+'.mapbox{margin-bottom:0}';
+  /* 3.5 below the map */
+  c+=M+'.flrow2{display:flex;gap:8px;align-items:stretch;margin:10px 0 0}'+
+   M+'.flrow2 .flnext{'+bi('btn_primary_normal',.8)+';position:static!important;transform:none!important;flex:1;min-width:0;width:auto!important;max-width:none!important;height:48px!important;min-height:48px!important;box-sizing:border-box!important;margin:0!important;padding:0 4px 3px!important;display:flex!important;align-items:center;gap:5px;color:#3b2208!important;text-shadow:none!important;white-space:nowrap;isolation:isolate}'+
+   M+'.flrow2 .flnext:active{'+bi('btn_primary_pressed',.8)+'}'+
+   M+'.flrow2 .flnext .u354cp{display:none!important}'+
+   /* UPD-INT: keep ui354c1's hide-under-prep/modal/battle rule winning over the display:flex above */
+   'html.u354k11.pb331on body.ui354 #main#main .flrow2 .flnext,html.u354k11 body.ui354:has(#pb331) #main#main .flrow2 .flnext,html.u354k11 body.ui354:has(#modal:not([hidden])) #main#main .flrow2 .flnext,html.u354k11 body.ui354:has(#battle:not([hidden])) #main#main .flrow2 .flnext,html.u354k11 body.ui354:has(#show:not([hidden])) #main#main .flrow2 .flnext{display:none!important;visibility:hidden!important;pointer-events:none!important}'+
+   M+'.flrow2 .flnext .u354ci{display:block!important;position:static!important;flex:none;width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important;object-fit:contain;margin:0 0 0 2px!important}'+
+   M+'.flrow2 .flnext .fln1{font:700 clamp(13.5px,3.7vw,16px)/1.3 '+SANS+'!important;color:#3b2208!important;white-space:nowrap;min-width:0}'+
+   'html.u354k11 body.ui354 #main#main .flrow2 .flnext .fln1{white-space:normal!important;line-height:1.1!important;text-align:left;flex:1 1 auto}'+/* UPD-INT: "Nâng Chính Sảnh 2" ran past the button at 360 css; 16 px at 390, ~14.8 px and up to 2 lines below 380 css */
+   M+'.flrow2 .flnext .fln2{font:700 13px/1.3 '+SANS+'!important;color:#3b2208!important;margin-left:auto!important;white-space:nowrap}'+
+   M+'.flrow2 .flnext i{font:700 18px/1 '+SANS+'!important;color:#3b2208!important;margin:0 4px 0 6px!important;flex:none}'+/* breathing room between the "2" / Man number and the arrow */
+   M+'.flrow2 .flboss{'+bi('row_shop')+';position:relative;flex:none;width:122px!important;height:48px!important;min-height:48px!important;box-sizing:border-box!important;margin:0!important;padding:0 2px 0 4px!important;display:flex!important;align-items:center;justify-content:center;gap:5px;font:700 14px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:0 1px 0 #1a0f06,0 0 2px #000!important;white-space:nowrap;overflow:visible}'+
+   M+'.flrow2 .flboss::before{content:"";flex:none;width:24px;height:24px;background:var(--k11-i-nav_boss) center/contain no-repeat}'+
+   M+'.u5hint{white-space:nowrap;margin:8px 0 0!important;text-align:center;color:#b0a088!important;font-size:12px!important;line-height:1.35!important}';
+  /* star box */
+  c+=M+'.cp-box.u11b{position:relative;isolation:isolate;margin:12px -4px 0!important;padding:12px 16px 16px!important;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important}'+
+   M+'.cp-box.u11b::before{'+fr('plaque_dark',16)+'}'+
+   M+'.u11b .cp-hd>b:first-child{display:flex;align-items:center;gap:6px;font:700 16px/1 '+SERIF+'!important;color:#e8c27a!important}'+
+   M+'.u11b .cp-hd>b:first-child::before{content:"";flex:none;width:18px;height:18px;background:var(--k11-star_lit_1) center/contain no-repeat}'+
+   M+'.u11b .cp-hd>span{font:700 14px/1 '+SANS+'!important;color:#fff!important;white-space:nowrap}.u11b .cp-hd>span b{font:700 14px/1 '+SANS+'!important;color:#fff!important}'+
+   M+'.u11b .cp-bar{height:10px!important;margin:10px 0 12px!important;box-sizing:border-box;border-radius:5px!important;background:#120a05!important;border:1px solid #8a6a38}'+
+   M+'.u11b .cp-bar i{background:linear-gradient(90deg,#c9962e,#f3cf6b)!important}'+
+   M+'.u11b .cp-ch{gap:8px!important}'+
+   M+'.u11b .cp-t{position:relative;isolation:isolate;box-sizing:border-box;min-height:134px;padding:8px 6px 9px!important;gap:3px!important;justify-content:flex-start;border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;opacity:1!important}'+
+   M+'.u11b .cp-t::before{'+fr('tile_gold',20.7)+'}'+
+   M+'.u11b .cp-t.rd::before{border-image-source:var(--k11-tile_gold_on)}'+
+   M+'.u11b .cp-t .u5ch{margin:0!important;height:38px;display:flex;align-items:center;justify-content:center}'+
+   M+'.u11b .cp-t .u5ch .u5q{transform:scale(.84);transform-origin:center}'+
+   M+'.u11b .cp-t.dn .u5ch{filter:grayscale(.3) brightness(.85)}'+
+   M+'.u11b .cp-tn{display:flex;align-items:center;gap:3px;font:700 16px/1 '+SANS+'!important;color:#e8c27a!important}'+
+   M+'.u11b .cp-tn .u11s{flex:none;width:14px;height:14px;background:var(--k11-star_lit_1) center/contain no-repeat}'+
+   M+'.u11b .cp-tr{gap:1px!important;font:500 11px/1.25 '+SANS+'!important;color:#f3e3c0!important}'+
+   M+'.u11b .cp-ts{position:relative;margin-top:auto!important;flex:none;box-sizing:border-box;width:74px;height:22px;display:flex!important;align-items:center;justify-content:center;gap:3px;padding:0 0 1px;'+bi('chip_price',.786)+';font:700 12px/1 '+SANS+'!important;color:#b0a088!important;white-space:nowrap}'+
+   M+'.u11b .cp-ts .u11s{flex:none;width:12px;height:12px;background:var(--k11-star_off_1) center/contain no-repeat}'+
+   M+'.u11b .cp-ts.ok{color:#8fe0a6!important;width:auto;min-width:74px;padding:0 6px 1px}'+
+   M+'.u11b .cp-t>.btn{position:relative;margin-top:auto!important;flex:none;width:74px!important;min-width:0!important;height:28px!important;min-height:0!important;box-sizing:border-box!important;padding:0 0 2px!important;display:flex!important;align-items:center;justify-content:center;'+bi('btn_primary_normal',.53)+';font:700 13px/1 '+SANS+'!important;color:#3b2208!important;text-shadow:none!important}'+
+   M+'.u11b .cp-t>.btn:active{'+bi('btn_primary_pressed',.53)+'}';
+  /* BN-361c2 B2/B3: 360-wide fixes. Tinh binh text on two nowrap lines (helmet 32, medallions 44 apart); selected chip labels get inner room */
+  var SH='html.u354k11 body.ui354 #sheet#sheet ';
+  c+='@media (max-width:380px){'+
+   M+'.cp-tb.u11t{gap:6px;padding:8px 12px 8px 14px!important}'+
+   M+'.u11t .u11ti{width:32px;height:30.7px}'+
+   M+'.u11t .cp-tbl span{white-space:nowrap!important}'+
+   M+'.flrow2 .flboss{width:100px!important;font-size:13px!important;gap:3px}'+M+'.flrow2 .flnext .u354ci{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important}'+
+   M+'.u11t .cp-tbx{width:44px}'+
+   M+'.u11t .cp-tbx::before{left:1px}'+
+   M+'.u11tw .mtabs .pill{padding:0 5px 1px!important}'+
+   SH+'.tdtab{padding:0 10px!important;gap:0}'+
+
+   SH+'.tdtab button{font-size:12px!important}'+
+   '}'+
+   SH+'.tdtab button{flex:1 1 auto!important;padding:0 8px 1px!important}'+SH+'.tdtab button.on{padding:0 11px 1px!important}';
+  /* 3.6 bottom edge */
+  c+='html.u354k11 body.ui354 #main{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))!important}'+
+   '.u11fade{position:fixed;left:0;right:0;height:44px;pointer-events:none;z-index:5;opacity:0;transition:opacity .15s;background:linear-gradient(0deg,rgba(14,9,6,.9),rgba(14,9,6,0))}.u11fade.on{opacity:1}'+
+   'body:has(#modal:not([hidden])) .u11fade,body:has(#battle:not([hidden])) .u11fade{display:none}';
+
+  /* ===== first-30-minute screens (review 6): kit wiring only ===== */
+  var S='html.u354k11 body.ui354 #sheet#sheet ',G='html.u354k11 body.ui354 ';
+  /* Tuong tab: the empty "Chieu mo" slot = kit_r3 empty_heroslot */
+  c+=M+'.hgrid .gn7add{border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;gap:2px!important;color:#b0a088!important}'+
+   M+'.hgrid .gn7add i{width:100%!important;max-width:116px;height:84px!important;background:var(--k11-empty_heroslot) center/contain no-repeat!important;filter:none!important}'+
+   M+'.hgrid .gn7add b{font:700 15px/1.2 '+SERIF+'!important;color:#e8c27a!important}'+
+   M+'.hgrid .gn7add span{font:500 12px/1.3 '+SANS+'!important;color:#b0a088}';
+  /* Tuu Quan: faction tab = P when alone (else T chips), lock line on a chip, rows on row_shop, shard bar in a dark well */
+  c+=S+'.tvtabs{display:flex;gap:6px;flex-wrap:nowrap;margin:0 0 10px!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}'+
+   S+'.tvtabs .pill{position:relative;isolation:isolate;flex:none;height:32px!important;min-height:0!important;padding:0 14px!important;margin:0!important;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center;gap:5px;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:none!important;white-space:nowrap}'+
+   S+'.tvtabs .pill::before{'+frx('chip_price')+'}'+S+'.tvtabs .pill.on{color:#e8c27a!important}'+S+'.tvtabs .pill.on::before{'+frx('chip_price_on')+'}'+
+   S+'.tvtabs .pill:only-child{flex:1;height:48px!important;padding:0 2px 3px!important;color:#3b2208!important;font-size:16px!important}'+
+   S+'.tvtabs .pill:only-child::before{'+frx('btn_primary_normal')+'}'+
+   S+'.u3lkr{position:relative;isolation:isolate;display:flex;align-items:center;gap:6px;min-height:32px;box-sizing:border-box;margin:0 0 10px!important;padding:4px 16px!important;border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;font:600 12.5px/1.3 '+SANS+'!important;color:#e8c27a!important}'+
+   S+'.u3lkr::before{'+frx('chip_price')+'}'+
+   S+'.tvr{position:relative;isolation:isolate;border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;padding:14px 18px!important;margin:8px 0!important}'+
+   S+'.tvr::before{'+fr('plaque_dark',16)+'}'+
+   S+'.tvr.lk::before{filter:grayscale(.6) brightness(.8)}'+
+   S+'.tvr .tvfr{height:17px!important;box-sizing:border-box;border-radius:6px!important;background:#120a05!important;border:1px solid #8a6a38;position:relative;overflow:hidden}'+
+   S+'.tvr .tvfr i{background:linear-gradient(90deg,#c9962e,#f3cf6b)!important}'+
+   S+'.tvr .tvfr span{font:600 12px/15px '+SANS+'!important;color:#f3e3c0}';
+  /* Su kien: title | Nhan tat ca (P) | close, one row */
+  c+=S+'>.snav:has(.dsev){display:flex!important;align-items:center;gap:8px;padding-right:2px}'+
+   S+'>.snav:has(.dsev) .dsT{flex:1;min-width:0}'+
+   S+'>.snav .btn.dsev{order:2;'+bi('btn_primary_normal',.85)+';position:relative!important;top:auto!important;right:auto!important;flex:none;height:44px!important;min-height:44px!important;width:auto!important;min-width:128px;padding:0 4px 2px!important;margin:0!important;display:flex!important;align-items:center;justify-content:center;font:700 14px/1 '+SANS+'!important;color:#3b2208!important;text-shadow:none!important;white-space:nowrap}'+
+   S+'>.snav:has(.dsev) .w4x{order:3;position:static!important;flex:none}';
+  /* Thuong Diem / VIP (money screen: frames only): tab segment = groove + T chips, VIP header and Dac quyen on plaque_dark */
+  c+=S+'.tdtab{position:relative;isolation:isolate;display:flex!important;align-items:center;gap:4px;height:40px;box-sizing:border-box;margin:8px 0 10px!important;padding:0 16px!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}'+
+   S+'.tdtab::before{'+frx('goal_chip_plate')+'}'+
+   S+'.tdtab button{position:relative;isolation:isolate;flex:1 1 0!important;min-width:0!important;width:auto!important;height:28px!important;min-height:0!important;padding:0 2px 1px!important;margin:0!important;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important;font:700 13px/1 '+SANS+'!important;color:#cdc0a8!important;text-shadow:none!important;white-space:nowrap;display:flex!important;align-items:center;justify-content:center}'+
+   S+'.tdtab button.on{color:#e8c27a!important}'+S+'.tdtab button.on::before{'+frx('chip_price_on')+'}'+
+   S+'.vipc,'+S+'.u185vl{position:relative;isolation:isolate;border:0!important;border-image:none!important;background:none!important;box-shadow:none!important;border-radius:0!important;padding:16px!important}'+
+   S+'.vipc::before,'+S+'.u185vl::before{'+fr('plaque_dark',16)+'}'+
+   S+'.u185vt b{font:700 20px/1.2 '+SERIF+'!important;color:#e8c27a!important}';
+  /* guide card (Thanh Y): frame on plaque_dark, Bo qua = S, Tiep = P (ladder) */
+  c+=G+'#gdcard.g9:not(.bt){position:fixed;isolation:isolate;border:0!important;background:none!important;box-shadow:0 14px 30px rgba(0,0,0,.55)!important;border-radius:0!important}'+
+   G+'#gdcard.g9:not(.bt)::before{'+fr('plaque_dark',16)+'}'+
+   G+'#gdcard.g9 .g9f{gap:8px!important}'+
+   G+'#gdcard.g9 .gdsk{'+bi('row_shop',.75)+';flex:none;width:96px!important;min-width:0!important;height:48px!important;min-height:48px!important;padding:0 2px!important;display:flex!important;align-items:center;justify-content:center;font:700 15px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:0 1px 0 #1a0f06,0 0 2px #000!important}'+
+   G+'#gdcard.g9 .g9ok{'+bi('btn_primary_normal',.85)+';flex:none;width:112px!important;min-width:0!important;height:48px!important;min-height:48px!important;padding:0 2px 3px!important;display:flex!important;align-items:center;justify-content:center;font:700 16px/1 '+SANS+'!important;color:#3b2208!important;text-shadow:none!important}'+
+   G+'#gdcard.g9 .g9ok:active{'+bi('btn_primary_pressed',.85)+'}';
+  return c}
+ /* ---------------- DOM pass ---------------- */
+ /* BN-361d §3: header ids of bosses whose chapter has gid:null; Man 40 (Tu Ma Viem, gid simayi) gets no header */
+ var BNAME={'Trương Giác':'zhangjiao','Trương Nhượng':'zhangrang','Chu Du':'zhouyu','Chung Hội':'zhonghui','Tư Mã Ý':'simayi','Lục Tốn':'luxun','Mạnh Hoạch':'menghuo','Lữ Bố':'lubu'};
+ var BADGE40=['hoang_can','hoang_can','ho_lao','xich_bich','tay_thuc','ngu_truong','xich_bich','han_trung','quan_do','ho_lao','tay_thuc','than_khi','quan_do','quan_do','quan_do','quan_do','quan_do','quan_do','kinh_chau','kinh_chau','kinh_chau','kinh_chau','han_trung','xich_bich','xich_bich','tay_thuc','tay_thuc','han_trung','han_trung','kinh_chau','kinh_chau','xich_bich','han_trung','han_trung','han_trung','ngu_truong','tay_thuc','tay_thuc','xich_bich','than_khi'];
+ /* BN-361d §2.1: boss rule line by kind (player's side: quan ta / doi ta) */
+ var BRULE={chaos:'Gây hỗn loạn hàng đầu mỗi 3 hiệp.',drain:'Rút 15 sĩ khí cả đội ta mỗi 2 hiệp.',rout:'Mỗi chiến pháp làm quân ta bỏ chạy 10%.'};
+ function bossRule(mi,M){if(mi===0)return'Niệm chú gây hỗn loạn hàng đầu mỗi 3 hiệp.';if(mi===3)return'Phóng hỏa gây hỗn loạn hàng đầu mỗi 3 hiệp.';return BRULE[M.boss.kind]||M.desc||''}
+ function esc(t){return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+ function plain(h){var d=D.createElement('div');d.innerHTML=h;return d.textContent.trim()}
+ function bossId(M){if(M===MAPS[39])return'';return M.boss.gid||BNAME[M.boss.n]||''}
+ function hdrState(id){if(!id)return 0;if(HDR[id]!==undefined)return HDR[id];HDR[id]=-1;I('art/ui/boss_header_'+id+'.webp').then(function(){HDR[id]=1;sched(1)},function(){HDR[id]=0});return -1}
+ function badgeOf(mi){return'badge_'+(BADGE40[mi]||'quan_do')}
+ function pic(mi,M){var id=bossId(M),hs=hdrState(id),bg='',fg='';
+  if(hs===1){return'<i class="u11bg" style="background:url(art/ui/boss_header_'+id+'.webp) center/100% 100% no-repeat"></i><i class="u11sc"></i>'}
+  var u='art/maps/stagemap.webp',W=920,Wh=2128,x=0,y=0,cw=920,yo=150,r=null;
+  try{r=smReg(mi)}catch(e){}
+  if(r){var c=SMAPS.cells[r];u='art/maps/stagemaps.webp';W=2160;Wh=3332;x=c.x;y=c.y;cw=c.w;yo=150*c.w/920}
+  var k=356/cw;
+  bg='<i class="u11bg" style="background-image:url('+u+');background-size:'+(W*k).toFixed(1)+'px '+(Wh*k).toFixed(1)+'px;background-position:'+(-x*k).toFixed(1)+'px '+(-(y+yo)*k).toFixed(1)+'px"></i>';
+  var f=FIG[id];if(f&&f.sz&&f.r){var s=150/f.r[3],w=f.r[2]*s;fg='<i class="u11fg" style="right:-20px;width:'+w.toFixed(1)+'px;height:150px;background-image:url('+f.f+');background-size:'+(f.sz[0]*s).toFixed(1)+'px '+(f.sz[1]*s).toFixed(1)+'px;background-position:'+(-f.r[0]*s).toFixed(1)+'px '+(-f.r[1]*s).toFixed(1)+'px"></i>'}
+  return bg+fg+'<i class="u11sc"></i>'}
+ function tabs(m){var t=m.querySelector(':scope>.mtabs');if(!t||t.parentNode.classList.contains('u11tw'))return;
+  var w=D.createElement('div');w.className='u11tw';t.parentNode.insertBefore(w,t);w.appendChild(t);
+  var sel=0;[].forEach.call(t.querySelectorAll('.pill'),function(p,i){if(p.classList.contains('on'))sel=i;
+   if(/opacity/.test(p.getAttribute('style')||'')){p.classList.add('u11lk');var l=D.createElement('i');l.className='u11l';p.insertBefore(l,p.firstChild);p.style.opacity=''}});
+  function mo(){w.classList.toggle('mo',t.scrollLeft+t.clientWidth<t.scrollWidth-4)}
+  function pos(){var ps=t.querySelectorAll('.pill');t.style.scrollBehavior='auto';t.scrollLeft=sel>0&&ps[sel-1]?Math.max(0,ps[sel-1].offsetLeft-ps[0].offsetLeft):0;mo()}
+  t.addEventListener('scroll',mo,{passive:true});pos();requestAnimationFrame(pos);setTimeout(pos,150);setTimeout(pos,500)}
+ function chip(ic,html,extra){return'<div class="u11ch"><i style="background-image:'+ic+'"></i><span>'+html+'</span></div>'}
+ function card(m){var c=m.querySelector(':scope>.mcard');if(!c||c.getAttribute('data-u11'))return;
+  var mi=mapSel,M=MAPS[mi];if(!M)return;
+  var tx=c.querySelector('.mtx');if(!tx)return;
+  var h3=tx.querySelector('h3'),lv=tx.querySelector('.sm.mute'),bar=tx.querySelector('.bar i'),btn=tx.querySelector('[data-a="chest"]'),okl=tx.querySelector('.sm.ok');
+  var lines=[].slice.call(tx.querySelectorAll(':scope>.sm')).filter(function(e){return e!==lv&&e!==okl});
+  var boss='',cap='',chest='';lines.forEach(function(e){var t=e.textContent.trim();if(/^Trùm/.test(t))boss=e.innerHTML;else if(/^Phá màn/.test(t))cap=e.innerHTML;else if(/^Rương hoàn thành/.test(t))chest=e.innerHTML});
+  var pcw=bar?bar.style.width:'0%',lt=lv?lv.textContent:'',a=lt.split(' · '),lvl=a[0]||'',pg=(a[1]||'').replace(/^hoàn thành bản đồ/i,'Hoàn thành');
+  var bm=boss.match(/^(Trùm:[^.]*\.)\s*([\s\S]*)$/);
+  /* BN-361d T3/T4: bold name line + rule line by kind; the full old sentence stays in title/aria-label */
+  var oldBoss=plain(boss),bhtml=bm&&M.boss&&M.boss.n?'<b>Trùm: '+M.boss.n+'</b><em class="u11br">'+bossRule(mi,M)+'</em>':boss;
+  var oldChest=plain(chest),oldCap=plain(cap),cm=oldCap.match(/lên\s*(\d+)/);if(cm)cap='Chính Sảnh tối đa '+cm[1];/* T5 */
+  chest=chest.replace(/^Rương hoàn thành:/,'Rương:').replace(/đã có/,'Đã có');/* T6 */
+  chest=chest.replace(/\((S{1,3}R|R|N)\)/,'<span class="u11r">($1)</span>');
+  var hdOn=hdrState(bossId(M))===1,h='<div class="u11p"'+(hdOn?' data-hd="1"':'')+'>'+pic(mi,M)+'<i class="u11bd" style="background-image:var(--k11-i-'+badgeOf(mi)+')"></i><div class="u11tt"><h3>'+(h3?h3.innerHTML:'')+'</h3><div class="u11lv">'+lvl+'</div></div>'+
+   '<div class="u11pg"><span class="u11bar"><i style="width:'+pcw+'"></i></span><span>'+pg+'</span></div></div>'+
+   '<div class="u11in">'+(boss?'<div class="u11bo" title="'+esc(oldBoss)+'" aria-label="'+esc(oldBoss)+'"><i></i><span>'+bhtml+'</span></div>':'');
+  if(!btn){h+=(cap?'<div class="u11ch" title="'+esc(oldCap)+'"><i style="background-image:var(--k11-i-nav_city)"></i><span>'+cap+'</span></div>':'')+(chest?'<div class="u11ch" title="'+esc(oldChest)+'"><i style="background-image:var(--k11-chest_d3)"></i><span>'+chest+'</span></div>':'')}
+  h+='</div>';
+  var keep=btn||null;c.innerHTML=h;c.classList.add('u11c');c.setAttribute('data-u11','1');
+  var inn=c.querySelector('.u11in');if(keep)inn.appendChild(keep);
+  if(okl){var o=D.createElement('div');o.className='u11ok';o.innerHTML=okl.innerHTML;inn.appendChild(o)}
+  [].forEach.call(c.querySelectorAll('.u11ch i'),function(i){if(/chest_d3/.test(i.getAttribute('style')||''))i.style.backgroundImage='var(--k11-chest_d3)'});
+  var mv=c.querySelector('.u11ch:not(:first-child)');}
+ /* a boss_header file that lands (or finishes probing) after the card was built replaces the interim picture */
+ function repic(m){var c=m.querySelector(':scope>.mcard.u11c'),M=MAPS[mapSel];if(!c||!M)return;var pb=c.querySelector('.u11p'),id=bossId(M);
+  if(!pb||pb.getAttribute('data-hd')||hdrState(id)!==1)return;
+  [].forEach.call(pb.querySelectorAll('.u11bg,.u11fg,.u11sc'),function(e){e.remove()});pb.setAttribute('data-hd','1');pb.insertAdjacentHTML('afterbegin',pic(mapSel,M))}
+ function tinh(m){var t=m.querySelector(':scope>.cp-tb');if(!t||t.classList.contains('u11t'))return;t.classList.add('u11t');[].forEach.call(t.querySelectorAll('.cp-tbl span'),function(e){if(!e.children.length&&/^Làm mới lúc /.test(e.textContent)){e.title=e.textContent;e.textContent=e.textContent.replace(/^Làm mới lúc /,'Làm mới ')}});/* T7 */var i=D.createElement('i');i.className='u11ti';t.insertBefore(i,t.firstChild)}
+ function star(m){var b=m.querySelector(':scope>.cp-box');if(!b)return;b.classList.add('u11b');
+  [].forEach.call(b.querySelectorAll('.cp-tn,.cp-ts'),function(e){if(e.getAttribute('data-u11'))return;if(!/★/.test(e.textContent))return;e.setAttribute('data-u11','1');
+   var n=[].filter.call(e.childNodes,function(x){return x.nodeType===3&&/★/.test(x.textContent)})[0];if(!n)return;
+   n.textContent=n.textContent.replace(/\s*★/,'');var s=D.createElement('i');s.className='u11s';e.appendChild(s)})}
+ function misc(m){[].forEach.call(m.querySelectorAll('.u5hint'),function(p){if(p.getAttribute('data-u11'))return;if(/^Cờ đỏ: có tướng có thể chiêu mộ sau khi thắng. Mỗi trận thắng tốn 1 quân lệnh.$/.test(p.textContent.trim())){p.setAttribute('data-u11','1');p.title=p.textContent.trim();p.textContent='Cờ đỏ: thắng để chiêu mộ · Thắng tốn 1 quân lệnh'}});/* T1 */
+  [].forEach.call(m.querySelectorAll(':scope>.sec'),function(s){if(/^Các ải/.test(s.textContent.trim()))s.classList.add('u11h')})}
+ /* ---- stage map overlays (svg) ---- */
+ var NS='http://www.w3.org/2000/svg';
+ function E(n,a){var e=D.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e}
+ function img(n,x,y,w,h){var k=K[n];return E('image',{href:k.u,x:x,y:y,width:w,height:h,preserveAspectRatio:'none'})}
+ function plate(par,before,cx,cy,w,h,on){var n=on?'chip_price_on':'chip_price',k=K[n],sl=k.slice[0],rw=k.r[2],rh=k.r[3],cp=sl*h/rh,g=E('g',{class:'u11pl','pointer-events':'none'}),x0=cx-w/2;
+  [[0,sl,x0,cp],[sl,rw-2*sl,x0+cp,w-2*cp],[rw-sl,sl,x0+w-cp,cp]].forEach(function(p){var s=E('svg',{x:p[2],y:cy-h/2,width:p[3],height:h,viewBox:p[0]+' 0 '+p[1]+' '+rh,preserveAspectRatio:'none'});s.appendChild(E('image',{href:k.u,x:0,y:0,width:rw,height:rh}));g.appendChild(s)});
+  par.insertBefore(g,before)}
+ function nameText(t,cur,cl,op,sz){t.removeAttribute('stroke');t.removeAttribute('paint-order');t.setAttribute('font-size',sz||12);t.setAttribute('font-weight',700);t.setAttribute('fill',cur?'#e8c27a':op||cl?'#f3e3c0':'#b0a088');t.setAttribute('font-family','Be Vietnam Pro,sans-serif');t.style.pointerEvents='none'}
+ function nodes(m){var svg=m.querySelector('.mapbox svg');if(!svg||!ok('round_gold_normal'))return;var mi=mapSel,M=MAPS[mi];if(!M)return;
+  var fonts=1;try{fonts=D.fonts.status==='loaded'}catch(e){}
+  /* B1: the map redraws its nodes inside the same <svg>, so a flag on the svg alone went stale; every node carries its own mark */
+  if(svg.getAttribute('data-u11')==='2'&&!svg.querySelector('.mtno:not(.u11d)'))return;
+  /* second look after the fonts settle: drop our plates and redo with real text widths */
+  [].forEach.call(svg.querySelectorAll('.u11pl,.u11md,.u11x'),function(e){e.remove()});
+  [].forEach.call(svg.querySelectorAll('g.node'),function(g){g.classList.add('u11d');
+   var v=(g.getAttribute('data-v')||'').split('|'),s=+v[1],cl=!!S.camp.stage[mi+'-'+s],op=stageOpen(mi,s),cur=op&&!cl,boss=s===M.st.length-1;
+   var no=g.querySelector('.mtno');if(no)no.classList.add('u11d');if(no){var mt=(no.getAttribute('transform')||'').match(/translate\(([-\d.]+)[ ,]+([-\d.]+)\)/);
+    if(mt){var cx=+mt[1],cy=+mt[2],key=cur?'round_gold_normal':cl?'round_bronze_normal':'round_bronze_disabled',sz=(cur?30:cl?28:26)+(boss?4:0),sh=sz*138/136;
+     var ci=no.querySelector('circle');if(ci)ci.style.display='none';
+     var im=img(key,-sz/2,-sh/2,sz,sh);im.setAttribute('class','u11md'+(cur?' cur':''));no.insertBefore(im,no.firstChild);
+     var tx=no.querySelector('text');if(tx){tx.setAttribute('y',4.6);tx.setAttribute('font-size',13);tx.setAttribute('font-weight',700);tx.setAttribute('font-family','Be Vietnam Pro,sans-serif');tx.setAttribute('fill',cur?'#e8c27a':cl?'#f3e3c0':'#b0a088');tx.setAttribute('stroke','#140b05');tx.setAttribute('stroke-width',2.6);tx.setAttribute('paint-order','stroke')}
+     if(!op&&!cl){im.setAttribute('opacity',.8)}
+     /* B1: the lock sits on the medallion's top-right corner (it used to land under the name plate) */
+     if(!op&&!cl&&ok('lock')){var lk=img('lock',sz*.2,-sz*.72,12,15.8);lk.setAttribute('class','u11x');no.appendChild(lk)}}}
+   [].forEach.call(g.children,function(e){
+    if(e.tagName==='circle'&&e.getAttribute('fill')==='#2f9a5e'){e.style.display='none';var p=e.nextElementSibling;if(p&&p.tagName==='path')p.style.display='none'}
+    else if(e.tagName==='g'&&!e.classList.contains('mtsq')&&e.querySelector('circle[fill="#2a2a30"]'))e.style.display='none';
+    else if(e.tagName==='path'&&e.getAttribute('d')&&/^M[\d.]+ [\d.]+v16/.test(e.getAttribute('d'))){}
+    else if(e.tagName==='text'&&/Be Vietnam/.test(e.getAttribute('font-family')||'')&&e.style.display!=='none'){
+     nameText(e,cur,cl,op,12);try{var bb=e.getBBox(),pw=bb.width+24,cx0=bb.x+bb.width/2,cx1=Math.min(356-pw/2,Math.max(pw/2+4,cx0));if(cx1!==cx0)e.setAttribute('x',(+e.getAttribute('x')||0)+cx1-cx0);if(bb.width>0)plate(g,e,cx1,bb.y+bb.height/2+.5,pw,24,cur)}catch(er){}}});
+  });
+  /* stars of cleared stages and goal labels sit directly in the svg */
+  [].forEach.call(svg.querySelectorAll(':scope>text'),function(t){
+   var sp=t.querySelectorAll('tspan');
+   if(sp.length===2&&/★/.test(sp[0].textContent+sp[1].textContent)){var lit=sp[0].textContent.length,x=+t.getAttribute('x'),y=+t.getAttribute('y');t.style.display='none';
+    for(var i=0;i<3;i++){var a=img(i<lit?'star_lit_1':'star_off_1',x-22.5+i*15,y-12,14,14);a.setAttribute('class','u11x');t.parentNode.insertBefore(a,t)}}
+   else if(t.getAttribute('fill')==='#f2d684'){nameText(t,0,0,1,11);t.setAttribute('fill','#e8c27a');t.setAttribute('y',(+t.getAttribute('y')||0)-12);try{var bb=t.getBBox();if(bb.width>0)plate(svg,t,bb.x+bb.width/2,bb.y+bb.height/2+.5,bb.width+20,22,0)}catch(er){}}});
+  svg.setAttribute('data-u11',fonts?'2':'1')}
+ function below(m){try{var f=m.querySelector('.flrow2 .flnext');if(f&&!f.getAttribute('data-u11')){f.setAttribute('data-u11','1')}
+  /* a long label ("Nhận thưởng · Mục tiêu tân binh") may take 2 lines at most: step the size down to the 12 px floor until it fits the 48 px plate */
+  var l=f&&f.querySelector('.fln1');if(l&&l.getAttribute('data-fit')!==l.textContent+'|'+innerWidth){l.style.fontSize='';var fs=parseFloat(getComputedStyle(l).fontSize)||16;while(fs>12&&l.scrollHeight>l.clientHeight+1||fs>12&&l.getBoundingClientRect().height>34){fs-=.5;l.style.fontSize=fs+'px'}l.setAttribute('data-fit',l.textContent+'|'+innerWidth)}}catch(e){}}
+ function fade(){try{var m=D.getElementById('main'),n=D.getElementById('nav');if(!FADE){FADE=D.createElement('div');FADE.className='u11fade';D.body.appendChild(FADE)}
+  var on=typeof tab!=='undefined'&&tab==='camp'&&m&&m.scrollTop+m.clientHeight<m.scrollHeight-6;
+  var nt=n?n.getBoundingClientRect().top:innerHeight-64;FADE.style.bottom=Math.max(0,Math.round(innerHeight-nt))+'px';FADE.classList.toggle('on',!!on)}catch(e){}}
+ function pass(){TO=0;if(!RDY)return;try{var m=D.getElementById('main');if(!m||typeof tab==='undefined'||tab!=='camp'){fade();return}
+  if(MO)MO.disconnect();
+  try{tabs(m);card(m);repic(m);tinh(m);star(m);misc(m);nodes(m);below(m)}catch(e){if(window.console)console.warn('u354c11',e)}
+  fade();
+  if(MO)MO.observe(m,{childList:true,subtree:true,characterData:true})}catch(e){}}
+ function sched(now){if(TO)return;if(now){TO=setTimeout(pass,0);return}try{TO=requestAnimationFrame(pass)}catch(e){TO=setTimeout(pass,16)}}
+ var _rm11=renderMain;renderMain=function(){var r=_rm11.apply(this,arguments);try{sched()}catch(e){}return r};
+ function start(){var m=D.getElementById('main');if(!m){setTimeout(start,100);return}
+  try{MO=new MutationObserver(function(){sched()});MO.observe(m,{childList:true,subtree:true,characterData:true});m.addEventListener('scroll',fade,{passive:true});addEventListener('resize',fade)}catch(e){}
+  boot()}
+ if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',start);else start();
+}catch(e){if(window.console)console.warn('u354c11 load',e)}})();
 </script>
