@@ -1,0 +1,284 @@
+{
+ "task": "BN-360t",
+ "build_note": "Regenerate with tools/art/welcome_cut.py <work_dir>. Sources: approved\\ of r325 a, r326 a, r327 b+a cell 2, r328 a, splash_v3.",
+ "valley": {
+  "key": "valley.dawn",
+  "f": "valley_dawn.webp",
+  "w": 780,
+  "h": 2080,
+  "stage": "final (r329 b + r330 b composite, BN-360t2)",
+  "swap": "r329 (dawn grade) + r330 (sky) later: replace valley_dawn.webp in place, same name, same width 780. See README.md."
+ },
+ "sprites": {
+  "std.thuc": {
+   "f": "standards.webp",
+   "x": 446,
+   "y": 0,
+   "w": 232,
+   "h": 489,
+   "anchor": [
+    0.5,
+    0.0
+   ],
+   "native_wh": [
+    442,
+    932
+   ],
+   "disc": {
+    "cx": 115.6,
+    "cy": 186.7,
+    "r": 49.1
+   }
+  },
+  "std.nguy": {
+   "f": "standards.webp",
+   "x": 682,
+   "y": 0,
+   "w": 232,
+   "h": 489,
+   "anchor": [
+    0.5,
+    0.0
+   ],
+   "native_wh": [
+    442,
+    932
+   ],
+   "disc": {
+    "cx": 115.7,
+    "cy": 186.8,
+    "r": 49.1
+   }
+  },
+  "std.ngo": {
+   "f": "standards.webp",
+   "x": 918,
+   "y": 0,
+   "w": 232,
+   "h": 489,
+   "anchor": [
+    0.5,
+    0.0
+   ],
+   "native_wh": [
+    442,
+    932
+   ],
+   "disc": {
+    "cx": 115.9,
+    "cy": 186.7,
+    "r": 49.1
+   }
+  },
+  "std.thuc_big": {
+   "f": "standards.webp",
+   "x": 0,
+   "y": 0,
+   "w": 442,
+   "h": 932,
+   "anchor": [
+    0.5,
+    0.0
+   ],
+   "native_wh": [
+    442,
+    932
+   ],
+   "disc": {
+    "cx": 220.2,
+    "cy": 355.7,
+    "r": 93.5
+   }
+  },
+  "seal.stamp": {
+   "f": "seal_edict.webp",
+   "x": 0,
+   "y": 0,
+   "w": 399,
+   "h": 431,
+   "anchor": [
+    0.5,
+    0.5
+   ],
+   "native_wh": [
+    399,
+    431
+   ]
+  },
+  "seal.print": {
+   "f": "seal_edict.webp",
+   "x": 403,
+   "y": 0,
+   "w": 389,
+   "h": 378,
+   "anchor": [
+    0.5,
+    0.5
+   ],
+   "native_wh": [
+    389,
+    378
+   ]
+  },
+  "scroll.open": {
+   "f": "seal_edict.webp",
+   "x": 0,
+   "y": 435,
+   "w": 445,
+   "h": 324,
+   "anchor": [
+    0.5,
+    0.5
+   ],
+   "native_wh": [
+    445,
+    324
+   ],
+   "paper": [
+    56,
+    48,
+    332,
+    228
+   ]
+  },
+  "scroll.rolled": {
+   "f": "seal_edict.webp",
+   "x": 449,
+   "y": 435,
+   "w": 444,
+   "h": 229,
+   "anchor": [
+    0.5,
+    0.5
+   ],
+   "native_wh": [
+    444,
+    229
+   ]
+  }
+ },
+ "fx": {
+  "fx.beam": {
+   "x": 0,
+   "y": 0,
+   "w": 512,
+   "h": 512,
+   "f": "fx.webp",
+   "blend": "screen"
+  },
+  "fx.mist": {
+   "x": 0,
+   "y": 516,
+   "w": 512,
+   "h": 392,
+   "f": "fx.webp",
+   "blend": "screen"
+  },
+  "fx.embers": {
+   "x": 516,
+   "y": 0,
+   "w": 360,
+   "h": 431,
+   "f": "fx.webp",
+   "blend": "screen"
+  },
+  "fx.stroke": {
+   "x": 516,
+   "y": 516,
+   "w": 446,
+   "h": 136,
+   "f": "fx.webp",
+   "blend": "screen"
+  }
+ },
+ "fx_frames": [
+  "fx.beam",
+  "fx.mist",
+  "fx.embers",
+  "fx.stroke"
+ ],
+ "splash_masks": {
+  "native_wh": [
+   1080,
+   2150
+  ],
+  "scale": 0.75,
+  "f": "t2_masks.webp",
+  "items": {
+   "t2.hero_lb": {
+    "x": 312,
+    "y": 0,
+    "w": 394,
+    "h": 438,
+    "splash_rect": [
+     10,
+     940,
+     526,
+     584
+    ],
+    "f": "t2_masks.webp",
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "t2.hero_top": {
+    "x": 0,
+    "y": 454,
+    "w": 531,
+    "h": 352,
+    "splash_rect": [
+     356,
+     490,
+     708,
+     470
+    ],
+    "f": "t2_masks.webp",
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "t2.hero_red": {
+    "x": 0,
+    "y": 0,
+    "w": 308,
+    "h": 450,
+    "splash_rect": [
+     670,
+     1184,
+     410,
+     600
+    ],
+    "f": "t2_masks.webp",
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   },
+   "t2.flame": {
+    "x": 535,
+    "y": 454,
+    "w": 120,
+    "h": 135,
+    "splash_rect": [
+     450,
+     1610,
+     160,
+     180
+    ],
+    "f": "t2_masks.webp",
+    "anchor": [
+     0.5,
+     0.5
+    ]
+   }
+  }
+ },
+ "pick_jobs": {
+  "r325": "ART-20261113-r325-welcome-dawn-valley",
+  "r326": "ART-20261113-r326-welcome-faction-standards",
+  "r327": "ART-20261113-r327-welcome-seal-edict",
+  "r328": "ART-20261113-r328-welcome-dawn-fx"
+ }
+}

@@ -22667,7 +22667,8 @@ function bvB7(){return !!(typeof BT!=='undefined'&&BT.bv&&BVB6&&BVB6C&&BVB7)}
  function b6cOn(){return !!(BVB6&&BVB6C)}
  function drawPhase(c){var b=BT.bvPh;if(!b||BT.skip||!b6cOn())return;var e=(BT.t-b.t0)/b.dur;if(e<0||e>1)return;
   var W=BT.W,RL=null;try{if(ribOn()&&!BT.skip){if(!b.r318){b.r318=1;if(!BT.rib318Ban&&(BT.round||0)<=1){BT.rib318Ban=b;b.rl318=banL318(c,W)}}RL=b.rl318||null}}catch(e){RL=null}
-  var y=(BT.fy0||170)+24,h=RL?40+R318().banner.lh*RL.length:b.sub?44:40,a=e<.15?e/.15:e>.75?1-(e-.75)/.25:1,sc=e<.15?1.25-.25*(e/.15):1;
+  var y=(BT.fy0||170)+24,h=RL?40+R318().banner.lh*RL.length:b.sub?44:40;try{if(T336()&&window.bt336BandY){var y6=bt336BandY(h);if(y6!=null&&isFinite(y6))y=y6}}catch(x6){}   /* BN-336f3 B2: the table battle lifts the band off the enemy back row */
+  var a=e<.15?e/.15:e>.75?1-(e-.75)/.25:1,sc=e<.15?1.25-.25*(e/.15):1;
   c.save();c.globalAlpha=a;var g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,'rgba(60,12,10,0)');g.addColorStop(.25,'rgba(60,12,10,.82)');g.addColorStop(.75,'rgba(60,12,10,.82)');g.addColorStop(1,'rgba(60,12,10,0)');
   /* BN-230 (§B7 B7.1 d): when the squads took the banner band, a solid full-width band, no side fade, so no flag pokes out from under it */
   var B6=BT.bvB6c;if(bvB7()&&B6&&/d/.test(B6.fit||''))g='rgba(52,12,9,.96)';
@@ -23471,11 +23472,30 @@ var H300={ok:0,u:{},busy:{},im:{},got:0};
 H300J.props={"file":"art/maps/home_props.webp","size":[1024,512],"parts":{"bamboo":{"r":[0,0,85,166],"w":34,"h":66.4},"tree_gold":{"r":[87,0,135,133],"w":54,"h":53.2},"tree_red":{"r":[224,0,140,129],"w":56,"h":51.6},"tree_pine":{"r":[366,0,100,128],"w":40,"h":51.2},"banner_teal":{"r":[468,0,55,101],"w":22,"h":40.4},"banner_red":{"r":[525,0,55,100],"w":22,"h":40},"pillar":{"r":[582,0,40,94],"w":16,"h":37.6},"haystack":{"r":[624,0,70,72],"w":28,"h":28.8},"bonsai":{"r":[696,0,60,69],"w":24,"h":27.6},"lamp_post":{"r":[758,0,55,69],"w":22,"h":27.6},"spears":{"r":[815,0,60,66],"w":24,"h":26.4},"well":{"r":[877,0,60,66],"w":24,"h":26.4},"scarecrow":{"r":[939,0,60,64],"w":24,"h":25.6},"lantern":{"r":[0,168,35,62],"w":14,"h":24.8},"broom":{"r":[37,168,45,58],"w":18,"h":23.2},"burner":{"r":[84,168,50,58],"w":20,"h":23.2},"rocks":{"r":[136,168,85,56],"w":34,"h":22.4},"crates":{"r":[223,168,65,53],"w":26,"h":21.2},"hoe":{"r":[290,168,45,52],"w":18,"h":20.8},"shrub":{"r":[337,168,75,51],"w":30,"h":20.4},"shrub_bloom":{"r":[414,168,70,51],"w":28,"h":20.4},"marker":{"r":[486,168,30,48],"w":12,"h":19.2},"sacks":{"r":[518,168,60,45],"w":24,"h":18},"signpost":{"r":[580,168,40,45],"w":16,"h":18},"barrels":{"r":[622,168,60,43],"w":24,"h":17.2},"buckets":{"r":[684,168,65,43],"w":26,"h":17.2},"reeds":{"r":[751,168,40,43],"w":16,"h":17.2},"bench":{"r":[793,168,75,42],"w":30,"h":16.8},"jars":{"r":[870,168,60,42],"w":24,"h":16.8},"firewood":{"r":[932,168,55,39],"w":22,"h":15.6},"fence":{"r":[0,232,80,39],"w":32,"h":15.6},"pot":{"r":[82,232,35,38],"w":14,"h":15.2},"basket":{"r":[119,232,40,37],"w":16,"h":14.8},"table":{"r":[161,232,75,36],"w":30,"h":14.4},"stones":{"r":[238,232,75,10],"w":30,"h":4}},"shadow":["crates","barrels","sacks","bench","table","fence","firewood","rocks","jars","haystack","well","marker","burner","spears","bonsai"],"inner":[{"p":"bench","x":190,"foot":350},{"p":"signpost","x":218,"foot":352},{"p":"burner","x":240,"foot":337},{"p":"bonsai","x":262,"foot":352},{"p":"spears","x":287,"foot":345},{"p":"crates","x":188,"foot":438},{"p":"rocks","x":281,"foot":440},{"p":"table","x":196,"foot":508},{"p":"banner_red","x":190,"foot":612},{"p":"stones","x":237,"foot":618},{"p":"banner_teal","x":284,"foot":612},{"p":"lantern","x":186,"foot":654},{"p":"pot","x":212,"foot":652},{"p":"broom","x":262,"foot":652},{"p":"lantern","x":288,"foot":654},{"p":"sacks","x":214,"foot":782},{"p":"barrels","x":258,"foot":782}],"outer":[{"p":"reeds","x":110,"foot":172},{"p":"reeds","x":355,"foot":172},{"p":"tree_red","x":154,"foot":200},{"p":"tree_pine","x":312,"foot":195},{"p":"tree_gold","x":405,"foot":198},{"p":"shrub","x":206,"foot":222},{"p":"shrub_bloom","x":272,"foot":222},{"p":"bamboo","x":448,"foot":200},{"p":"rocks","x":400,"foot":232},{"p":"stones","x":205,"foot":237},{"p":"scarecrow","x":168,"foot":236},{"p":"haystack","x":335,"foot":237},{"p":"hoe","x":155,"foot":337},{"p":"basket","x":335,"foot":337},{"p":"marker","x":24,"foot":345},{"p":"buckets","x":200,"foot":432},{"p":"well","x":270,"foot":432},{"p":"jars","x":300,"foot":433},{"p":"firewood","x":22,"foot":440},{"p":"fence","x":205,"foot":541},{"p":"fence","x":270,"foot":541},{"p":"marker","x":24,"foot":545},{"p":"marker","x":148,"foot":541}]};/* r97 props (home.json props: parts r/w_vb/h_vb, shadow list, placements inner 17 + outer 23); check compares */
 H300J.smoke={mint_1:[244,6],mint_10:[192,6],mint_20:[240,8]};
 H300J.lvo={"mc":{"dx":{"1":15.5},"dy":{"1":5.0}}};/* V301 BN-297: home.json slots.<id>.dx_lv_vb / foot_dy_lv_vb (techart mc1-align): tile + contact shadow drawn at (x + dx, foot + dy) for that level band; plaque stays at the slot x, foot + 8; default 0 *//* stack mouths re-measured on the bld_f cut (tile px) */
+/* V301 BN-358s2 (Decision 267 A): the valley home behind ?hv=1 (default OFF until Huy switches it on). Town = maps/home_valley.webp (474 x 924 vb) with the
+   valley buildings from buildings/bld_v.webp (keys <id>_<band>, bottom on foot_vb, centre at x + dx_vb, drawn w_vb x h_vb; a key not packed yet draws
+   slots.<id>.pending[band] / atlas.pending.<key>.fallback at its own size); Ruộng Lúa (field) draws NO tile: its paddies are painted into the ground
+   (BN-359h), tap / plaque / badge / hint stay. Locked or not-built yard = hint_stake + hint_<id> (home_props.webp). Lower section = maps/home_lower.webp
+   drawn as its own svg (viewBox from valley.lower.top_vb) that overlaps the town by overlap_vb (alpha 0 -> 1 mask, margin synced to the town's drawn
+   bottom); its 16 painted pads ARE the lots ("+" chip / "CS n" pill / zone tile + level disc, hint_stake on the first locked pad per zone; tile =
+   atlas <zone>_<i> when packed, else <zone>). No props, smoke, lake or walkers on this ground. Data: home.json is fetched at boot (so a techart repack
+   needs no code change); HV358J below is the BN-359t / BN-358u snapshot used when the fetch fails (BN-358s3: regenerated from
+   home.json after techart 9ce571e3 / 1c8da5e8, so the BN-359f slot swap lives only in the json). Young Ruộng Lúa: valley.field_young drawn over the
+   ground at band 1 / locked (BN-359t3). No save change, no new actions. */
+var HV358=0;try{if(/[?#&]hv=1(?![0-9])/.test(location.href))HV358=1}catch(e){}
+var HV358J={"file":"art/maps/home_valley.webp","vb":[474,924],"lamps":[[195,268],[232,323],[272,305],[141,388],[211,408],[259,440],[216,493],[166,548],[220,606],[281,596],[234,680]],"slots":{"mc":{"x":318,"foot_vb":247,"w":176,"tap":[230.0,82.6,176,164.4],"h":{"1":92.4,"10":108.4,"20":164.4},"plaque":{"x":318,"y":255,"max_w":134},"unlock_level":1,"dx_lv_vb":{"1":-10.29,"10":-16.83,"20":6.43},"foot_dy_lv_vb":{}},"mint":{"x":135,"foot_vb":268,"w":118,"tap":[76.0,155.6,118,112.4],"h":{"1":57.2,"10":76.4,"20":112.4},"plaque":{"x":135,"y":276,"max_w":124},"unlock_level":35,"dx_lv_vb":{"1":11.36,"10":10.53,"20":13.47},"foot_dy_lv_vb":{}},"tech":{"x":96,"foot_vb":400,"w":118,"tap":[37.0,275.6,118,124.4],"h":{"1":56.0,"10":80.8,"20":124.4},"plaque":{"x":96,"y":408,"max_w":134},"unlock_level":11,"dx_lv_vb":{"1":-0.65,"10":4.42,"20":14.45},"foot_dy_lv_vb":{}},"barracks":{"x":382,"foot_vb":420,"w":140,"tap":[312.0,302.0,140,118.0],"h":{"1":52.8,"10":82.4,"20":118.0},"plaque":{"x":382,"y":428,"max_w":134},"unlock_level":15,"dx_lv_vb":{"1":7.54,"10":-9.9,"20":-0.15},"foot_dy_lv_vb":{}},"train":{"x":118,"foot_vb":537,"w":150,"tap":[43.0,420.6,150,116.4],"h":{"1":56.8,"10":55.2,"20":116.4},"plaque":{"x":118,"y":545,"max_w":124},"unlock_level":15,"dx_lv_vb":{"1":-0.71,"10":3.33,"20":-1.96},"foot_dy_lv_vb":{}},"market":{"x":348,"foot_vb":525,"w":118,"tap":[289.0,440.2,118,84.8],"h":{"1":44.0,"10":69.2,"20":84.8},"plaque":{"x":348,"y":533,"max_w":134},"unlock_level":12,"dx_lv_vb":{"1":-12.3,"10":6.92,"20":1.46},"foot_dy_lv_vb":{}},"field":{"x":409,"foot_vb":790,"w":130,"tap":[344,670,130,120],"h":{"1":120,"10":120,"20":120},"plaque":{"x":409,"y":798,"max_w":134},"unlock_level":10,"dx_lv_vb":{"1":0.0,"10":0.0,"20":0.0},"foot_dy_lv_vb":{},"no_tile":true},"house":{"x":96,"foot_vb":692,"w":128,"tap":[32.0,580.0,128,112.0],"h":{"1":45.6,"10":58.8,"20":112.0},"plaque":{"x":96,"y":700,"max_w":134},"unlock_level":1,"dx_lv_vb":{"1":-16.69,"10":-24.74,"20":24.38},"foot_dy_lv_vb":{}},"acct":{"x":378,"foot_vb":640,"w":118,"tap":[319,546,118,94],"h":{"1":62.8,"10":78.4,"20":123.2},"plaque":{"x":378,"y":648,"max_w":134},"unlock_level":25,"dx_lv_vb":{"1":-11.14,"10":-5.94,"20":-5.37},"foot_dy_lv_vb":{}}},"atlas":{"file":"art/buildings/bld_v.webp","size":[2048,1153],"px_per_vb":2.5,"lit":null,"parts":{"mc_20":{"r":[0,0,440,411],"w_vb":176.0,"h_vb":164.4,"dx_vb":6.43},"tech_20":{"r":[442,0,295,311],"w_vb":118.0,"h_vb":124.4,"dx_vb":14.45},"acct_20":{"r":[739,0,295,308],"w_vb":118.0,"h_vb":123.2,"dx_vb":-5.37},"barracks_20":{"r":[1036,0,350,295],"w_vb":140.0,"h_vb":118.0,"dx_vb":-0.15},"train_20":{"r":[1388,0,375,291],"w_vb":150.0,"h_vb":116.4,"dx_vb":-1.96},"mint_20":{"r":[0,413,295,281],"w_vb":118.0,"h_vb":112.4,"dx_vb":13.47},"house_20":{"r":[297,413,320,280],"w_vb":128.0,"h_vb":112.0,"dx_vb":24.38},"mc_10":{"r":[619,413,330,271],"w_vb":132.0,"h_vb":108.4,"dx_vb":-16.83},"mc_1":{"r":[951,413,242,231],"w_vb":96.8,"h_vb":92.4,"dx_vb":-10.29},"market_20":{"r":[1195,413,295,212],"w_vb":118.0,"h_vb":84.8,"dx_vb":1.46},"barracks_10":{"r":[1492,413,262,206],"w_vb":104.8,"h_vb":82.4,"dx_vb":-9.9},"tech_10":{"r":[1756,413,221,202],"w_vb":88.4,"h_vb":80.8,"dx_vb":4.42},"acct_10":{"r":[0,696,221,196],"w_vb":88.4,"h_vb":78.4,"dx_vb":-5.94},"mint_10":{"r":[223,696,221,191],"w_vb":88.4,"h_vb":76.4,"dx_vb":10.53},"vault":{"r":[446,696,200,183],"w_vb":80.0,"h_vb":73.2,"dx_vb":1.37},"farm_2":{"r":[648,696,200,175],"w_vb":80.0,"h_vb":70.0,"dx_vb":-1.32},"market_10":{"r":[850,696,221,173],"w_vb":88.4,"h_vb":69.2,"dx_vb":6.92},"farm_3":{"r":[1073,696,200,171],"w_vb":80.0,"h_vb":68.4,"dx_vb":-2.0},"mine":{"r":[1275,696,200,171],"w_vb":80.0,"h_vb":68.4,"dx_vb":-2.8},"acct_1":{"r":[1477,696,162,157],"w_vb":64.8,"h_vb":62.8,"dx_vb":-11.14},"farm":{"r":[1641,696,200,156],"w_vb":80.0,"h_vb":62.4,"dx_vb":3.08},"house_10":{"r":[0,894,240,147],"w_vb":96.0,"h_vb":58.8,"dx_vb":-24.74},"mint_1":{"r":[242,894,162,143],"w_vb":64.8,"h_vb":57.2,"dx_vb":11.36},"train_1":{"r":[406,894,206,142],"w_vb":82.4,"h_vb":56.8,"dx_vb":-0.71},"tech_1":{"r":[614,894,162,140],"w_vb":64.8,"h_vb":56.0,"dx_vb":-0.65},"dojo":{"r":[778,894,200,139],"w_vb":80.0,"h_vb":55.6,"dx_vb":-13.64},"train_10":{"r":[980,894,281,138],"w_vb":112.4,"h_vb":55.2,"dx_vb":3.33},"farm_1":{"r":[1263,894,200,137],"w_vb":80.0,"h_vb":54.8,"dx_vb":-6.83},"barracks_1":{"r":[1465,894,192,132],"w_vb":76.8,"h_vb":52.8,"dx_vb":7.54},"house_1":{"r":[1659,894,224,114],"w_vb":89.6,"h_vb":45.6,"dx_vb":-16.69},"market_1":{"r":[0,1043,162,110],"w_vb":64.8,"h_vb":44.0,"dx_vb":-12.3},"farm_0":{"r":[1641,696,200,156],"w_vb":80.0,"h_vb":62.4,"dx_vb":3.08}},"pending":{}},"lower":{"file":"art/maps/home_lower.webp","size":[948,1686],"vb":[474,843],"top_vb":866,"vb_per_css":1.215385,"overlap_vb":58,"road_patch":{"file":"art/maps/home_valley.webp","band_vb":[795,924],"stub_cx":242.0,"lower_cx":240.0,"width_vb":[30.0,32.0],"feather_vb":6.0},"zones":{"farm":{"n":"Ruộng Lương","unlock":[1,5,10,16],"plaque":{"x":115.5,"y":1109.1}},"mine":{"n":"Mỏ Bạc","unlock":[1,6,12,18],"plaque":{"x":111.8,"y":1332.7}},"dojo":{"n":"Võ Đường","unlock":[8,14,20,26],"plaque":{"x":364.6,"y":1342.4}},"vault":{"n":"Kim Khố","unlock":[20,28,36,44],"plaque":{"x":121.5,"y":1587.9}}},"slots":[{"id":"farm_0","zone":"farm","i":0,"unlock":1,"x":54.7,"foot_vb":1077.5,"w_vb":80.0,"tap":[14.7,1009.5,80,68]},{"id":"farm_1","zone":"farm","i":1,"unlock":5,"x":155.6,"foot_vb":1077.5,"w_vb":80.0,"tap":[115.6,1009.5,80,68]},{"id":"farm_2","zone":"farm","i":2,"unlock":10,"x":322.1,"foot_vb":1077.5,"w_vb":80.0,"tap":[282.1,1009.5,80,68]},{"id":"farm_3","zone":"farm","i":3,"unlock":16,"x":419.3,"foot_vb":1077.5,"w_vb":80.0,"tap":[379.3,1009.5,80,68]},{"id":"mine_0","zone":"mine","i":0,"unlock":1,"x":75.4,"foot_vb":1218.5,"w_vb":80.0,"tap":[35.4,1150.5,80,68]},{"id":"mine_1","zone":"mine","i":1,"unlock":6,"x":160.4,"foot_vb":1225.8,"w_vb":80.0,"tap":[120.4,1157.8,80,68]},{"id":"mine_2","zone":"mine","i":2,"unlock":12,"x":75.4,"foot_vb":1293.8,"w_vb":80.0,"tap":[35.4,1225.8,80,68]},{"id":"mine_3","zone":"mine","i":3,"unlock":18,"x":165.3,"foot_vb":1298.7,"w_vb":80.0,"tap":[125.3,1230.7,80,68]},{"id":"dojo_0","zone":"dojo","i":0,"unlock":8,"x":323.3,"foot_vb":1235.5,"w_vb":80.0,"tap":[283.3,1167.5,80,68]},{"id":"dojo_1","zone":"dojo","i":1,"unlock":14,"x":405.9,"foot_vb":1235.5,"w_vb":80.0,"tap":[365.9,1167.5,80,68]},{"id":"dojo_2","zone":"dojo","i":2,"unlock":20,"x":323.3,"foot_vb":1303.5,"w_vb":80.0,"tap":[283.3,1235.5,80,68]},{"id":"dojo_3","zone":"dojo","i":3,"unlock":26,"x":405.9,"foot_vb":1303.5,"w_vb":80.0,"tap":[365.9,1235.5,80,68]},{"id":"vault_0","zone":"vault","i":0,"unlock":20,"x":87.5,"foot_vb":1553.9,"w_vb":80.0,"tap":[47.5,1485.9,80,68]},{"id":"vault_1","zone":"vault","i":1,"unlock":28,"x":172.6,"foot_vb":1553.9,"w_vb":80.0,"tap":[132.6,1485.9,80,68]},{"id":"vault_2","zone":"vault","i":2,"unlock":36,"x":311.1,"foot_vb":1553.9,"w_vb":80.0,"tap":[271.1,1485.9,80,68]},{"id":"vault_3","zone":"vault","i":3,"unlock":44,"x":401.1,"foot_vb":1553.9,"w_vb":80.0,"tap":[361.1,1485.9,80,68]}],"lamps":[[210.3,892.7],[227.3,892.7],[210.3,969.3],[227.3,969.3],[249.2,1011.8],[266.2,1011.8],[210.3,1129.7],[227.3,1129.7],[249.2,1252.5],[266.2,1252.5],[210.3,1419.0],[227.3,1419.0],[249.2,1543.0],[266.2,1543.0]],"tap":{"size_vb":[80,68],"rule":"box centred on the pad (x, foot_vb - 34); no overlaps (checked)","overlaps":[]},"hint_stake":{"part":"hint_stake","x":"pad x - 0.32 * 80 vb","foot":"pad foot_vb - 22 css","w_css":40},"atlas":"valley.atlas (keys farm, mine, dojo, vault)"},"field_young":{"file":"art/maps/field_young.webp","size_px":[302,361],"vb":[323,633,151,180.5],"px_per_vb":2},"hint_parts":{"hint_stake":{"r":[0,272,122,157],"w_vb":48.6,"h_vb":62.8},"hint_mint":{"r":[126,272,158,131],"w_vb":63.2,"h_vb":52.4},"hint_tech":{"r":[288,272,158,137],"w_vb":63.2,"h_vb":54.8},"hint_barracks":{"r":[450,272,158,161],"w_vb":63.2,"h_vb":64.4},"hint_train":{"r":[612,272,158,215],"w_vb":63.2,"h_vb":86.0},"hint_market":{"r":[774,272,158,120],"w_vb":63.2,"h_vb":48.0},"hint_acct":{"r":[0,491,158,212],"w_vb":63.2,"h_vb":84.8},"hint_field":{"r":[162,491,158,157],"w_vb":63.2,"h_vb":62.8}}};
+/* home.json -> the valley data the draw uses (same shape as HV358J); null when a needed block is missing */
+function hv358From(j){var v=j&&j.valley;if(!v||!v.slots||!v.atlas||!v.atlas.parts||!v.lower||!v.lower.slots)return null;var hp={},pp=(j.props&&j.props.parts)||{};for(var k in pp)if(/^hint_/.test(k))hp[k]=pp[k];
+ return{file:v.file,vb:v.vb,lamps:v.lamps,slots:v.slots,atlas:v.atlas,lower:v.lower,field_young:v.field_young||null,hint_parts:hp}}
 var H300OUT={farm:'farm',mine:'mine',dojo:'dojo',vault:'vault'};
 function h300On(){return H300.ok===1&&typeof ART277!=='undefined'&&ART277&&typeof HOME300!=='undefined'&&HOME300}
 (function(){try{
  if(!(typeof ART277!=='undefined'&&ART277&&typeof HOME300!=='undefined'&&HOME300))return;
- var J=H300J,RM=false;try{RM=matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){}
+ var J=H300J,RM=false,VJ=null;try{RM=matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){}
+ /* BN-358s2: valley data (snapshot first; the fetched home.json replaces it in boot) */
+ function vUse(V){VJ=V;J.T=V.file;J.TV=V.vb;J.lamps=V.lamps;for(var k in V.hint_parts){var q=V.hint_parts[k];J.props.parts[k]={r:q.r,w:q.w_vb||q.w,h:q.h_vb||q.h}}
+  for(var u in H300.u)if(u.slice(0,2)==='v:'||u.slice(0,6)==='pr:hin'||u.slice(0,2)==='Y|'){delete H300.u[u]}}
+ if(HV358){try{vUse(HV358J)}catch(e){HV358=0;VJ=null}}
  function fail(){if(H300.ok===-1)return;H300.ok=-1;try{if(typeof K299!=='undefined'&&K299.loadBld)K299.loadBld()}catch(e){}
   try{if(H300.wx){WXLAMP=H300.wx[0];WXLAMPO=H300.wx[1]}}catch(e){}try{document.documentElement.classList.remove('h300')}catch(e){}redraw()}
  var rT=0;function redraw(){if(rT)return;rT=setTimeout(function(){rT=0;try{if(typeof S!=='undefined'&&S&&typeof tab!=='undefined'&&tab==='city'&&typeof renderMain==='function')renderMain()}catch(e){}try{scanAll()}catch(e){}},40)}
@@ -23487,21 +23507,33 @@ function h300On(){return H300.ok===1&&typeof ART277!=='undefined'&&ART277&&typeo
   for(i=0;i<p.length;i+=4){r=p[i];g=p[i+1];b=p[i+2];if(s<1){l=.2126*r+.7152*g+.0722*b;r=l+(r-l)*s;g=l+(g-l)*s;b=l+(b-l)*s}p[i]=r*k[0];p[i+1]=g*k[1];p[i+2]=b*k[2]}
   x.putImageData(d,0,0)}
  /* url of a part ('mc_20', 'farm', 'lot_empty') or a ground ('T', 'P') in mode d / n / g / b; null while it is being cut (asks for a redraw when done) */
- function url(key,m){var id=key+'|'+m;if(H300.u[id])return H300.u[id];if(key==='T'&&m==='d')return J.T;if(key==='P'&&m==='d')return J.P;
-  if(H300.busy[id]||H300.u[id]===0)return null;var G=key==='T'||key==='P',PR=key.slice(0,3)==='pr:',im=G?H300.im[key]:PR?H300.im.PR:H300.im.A,r=G?(im?[0,0,im.naturalWidth,im.naturalHeight]:null):PR?(J.props.parts[key.slice(3)]||{}).r:J.p[key];
+ function url(key,m){var id=key+'|'+m;if(H300.u[id])return H300.u[id];if(key==='T'&&m==='d')return J.T;if(key==='P'&&m==='d')return J.P;if(key==='L'&&m==='d')return VJ?VJ.lower.file:null;if(key==='Y'&&m==='d')return VJ&&VJ.field_young?VJ.field_young.file:null;
+  if(H300.busy[id]||H300.u[id]===0)return null;var G=key==='T'||key==='P'||key==='L'||key==='Y',PR=key.slice(0,3)==='pr:',VK=key.slice(0,2)==='v:',X=PR||VK||key==='Y',im=G?H300.im[key]:PR?H300.im.PR:VK?H300.im.V:H300.im.A,
+   r=G?(im?[0,0,im.naturalWidth,im.naturalHeight]:null):PR?(J.props.parts[key.slice(3)]||{}).r:VK?((VJ&&VJ.atlas.parts[key.slice(2)])||{}).r:J.p[key];   /* v:<key> = a bld_v part (BN-358s2), L = the valley lower ground */
   if(!im||!r)return null;H300.busy[id]=1;
   try{var c=document.createElement('canvas');c.width=r[2];c.height=r[3];c.getContext('2d').drawImage(im,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);if(m!=='d')grade(c,m);
-   blobOf(c,function(u){H300.busy[id]=0;if(u){H300.u[id]=u;if(H300.ok===1)redraw();else if(m==='d'&&!G&&!PR)dayDone()}else{H300.u[id]=0;if(H300.ok!==1&&!PR)fail()}})}
-  catch(e){H300.busy[id]=0;H300.u[id]=0;if(H300.ok!==1&&!PR)fail()}
+   blobOf(c,function(u){H300.busy[id]=0;if(u){H300.u[id]=u;if(H300.ok===1)redraw();else if(m==='d'&&!G&&!X)dayDone()}else{H300.u[id]=0;if(H300.ok!==1&&!X)fail()}})}
+  catch(e){H300.busy[id]=0;H300.u[id]=0;if(H300.ok!==1&&!X)fail()}
   return null}
  H300.url=url;
  var nDay=0,KEYS=Object.keys(J.p);
  function dayDone(){if(++nDay<KEYS.length||H300.ok)return;H300.ok=1;
-  try{H300.wx=[WXLAMP,WXLAMPO];WXLAMP=J.lamps;WXLAMPO=J.pad.lamps}catch(e){}
+  try{H300.wx=[WXLAMP,WXLAMPO];WXLAMP=J.lamps;WXLAMPO=J.pad.lamps;vLamps()}catch(e){}
   try{document.documentElement.classList.add('h300')}catch(e){}redraw()}
- function loaded(){if(++H300.got<3||H300.ok)return;KEYS.forEach(function(k){url(k,'d')})}
- try{var pim=new Image();pim.onload=function(){H300.im.PR=pim;if(H300.ok===1)redraw()};pim.onerror=function(){H300.errPR=1};pim.src=J.props.file}catch(e){}
- [['A',J.src],['T',J.T],['P',J.P]].forEach(function(f){var im=new Image();im.onload=function(){try{H300.im[f[0]]=im;loaded()}catch(e){}};im.onerror=function(){H300['err'+f[0]]=1;fail()};im.src=f[1]});
+ /* valley lamps: town lamps in town vb; the lower canvas sits on the lower svg, so its lamps are shifted up by top_vb */
+ function vLamps(){if(!HV358||!VJ)return;WXLAMP=VJ.lamps||WXLAMP;var t=VJ.lower.top_vb||0;WXLAMPO=(VJ.lower.lamps||[]).map(function(l){return[l[0],l[1]-t]})}
+ var FL=[];
+ function loaded(){if(++H300.got<FL.length||H300.ok)return;KEYS.forEach(function(k){url(k,'d')})}
+ function boot(){FL=HV358?[['A',J.src],['T',J.T],['V',VJ.atlas.file],['L',VJ.lower.file]]:[['A',J.src],['T',J.T],['P',J.P]];
+  try{var pim=new Image();pim.onload=function(){H300.im.PR=pim;if(H300.ok===1)redraw()};pim.onerror=function(){H300.errPR=1};pim.src=J.props.file}catch(e){}
+  /* BN-358s3: young Ruộng Lúa overlay (optional: a miss only hides it) */
+  try{if(HV358&&VJ.field_young){var yim=new Image();yim.onload=function(){H300.im.Y=yim;if(H300.ok===1)redraw()};yim.onerror=function(){H300.errY=1};yim.src=VJ.field_young.file}}catch(e){}
+  FL.forEach(function(f){var im=new Image();im.onload=function(){try{H300.im[f[0]]=im;loaded()}catch(e){}};im.onerror=function(){H300['err'+f[0]]=1;fail()};im.src=f[1]})}
+ /* BN-358s2: with the valley on, read home.json first (a techart repack then needs no code change); the snapshot is used if it fails or takes > 2.5 s.
+    A json that arrives later still replaces the snapshot (the atlas files keep their names; cut tiles are re-cut). */
+ if(HV358){var bo=0,go=function(){if(!bo){bo=1;boot()}};
+  try{fetch('art/buildings/home.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(j){try{var V=hv358From(j);if(V){vUse(V);H300.vjson=1;if(bo&&H300.ok===1){vLamps();redraw()}}}catch(e){}go()},go)}catch(e){go()}
+  setTimeout(go,2500)}else boot();
 
  /* round 97 props: part p drawn bottom-centre on (x, foot), w x h from home.json (vb); [] while the atlas / the part is being cut; foot = sort key */
  function prop(it,nt){var P=J.props.parts[it.p];if(!P||!H300.im.PR)return null;var u=url('pr:'+it.p,nt?'n':'d')||(nt?url('pr:'+it.p,'d'):null);if(!u)return null;
@@ -23589,16 +23621,93 @@ function h300On(){return H300.ok===1&&typeof ART277!=='undefined'&&ART277&&typeo
   return'<div class="cityw outerw h300w">'+o+pq+bubs+'</svg></div>'}
  H300.outer=outer;
 
+ /* ---------- BN-358s2 valley (behind ?hv=1) ---------- */
+ /* the bld_v key for a slot at a band: <id>_<band>, else the pending fallback, else the nearest packed band; null if none */
+ function vkey(id,bd){var A=VJ.atlas.parts,k=id+'_'+bd;if(A[k])return k;var s=VJ.slots[id]||{},f=(s.pending||{})[bd]||((VJ.atlas.pending||{})[k]||{}).fallback;if(f&&A[f])return f;
+  var o=[20,10,1];for(var i=0;i<3;i++)if(A[id+'_'+o[i]])return id+'_'+o[i];return null}
+ H300.vkey=function(id,bd){return VJ?vkey(id,bd):null};
+ /* one bld_v part: bottom on foot, centre at x + dx_vb, w_vb x h_vb */
+ function vtile(key,m,x,foot,ex){var P=VJ.atlas.parts[key],w=+P.w_vb,h=+P.h_vb,cx=x+(+P.dx_vb||0),u=url('v:'+key,m)||url('v:'+key,'d');
+  return{s:u?'<image href="'+u+'" x="'+(cx-w/2).toFixed(1)+'" y="'+(foot-h).toFixed(1)+'" width="'+w+'" height="'+h+'" preserveAspectRatio="none"'+(ex||'')+'/>':'',h:h,w:w}}
+ /* yard hints: stake at x - .32 w, foot - 22 css; hint_<id> at x + 4 css, foot - 6 css (home.json valley.hints) */
+ function hint1(p,x,foot,nt){var P=J.props.parts[p];if(!P||!H300.im.PR)return'';var u=url('pr:'+p,nt?'n':'d')||(nt?url('pr:'+p,'d'):null);if(!u)return'';
+  return'<image class="h3hn" href="'+u+'" x="'+(x-P.w/2).toFixed(1)+'" y="'+(foot-P.h).toFixed(1)+'" width="'+P.w+'" height="'+P.h+'" preserveAspectRatio="none"/>'}
+ function hints(id,x,foot,w,nt){return hint1('hint_stake',x-.32*w,foot-22*VB,nt)+hint1('hint_'+id,x+4*VB,foot-6*VB,nt)}
+ function vcity(){FS=fs300();var L=S.b,nt=isNight(),T=VJ.vb,SL=VJ.slots,o='<svg class="city cityin h300 h3v" viewBox="0 0 '+T[0]+' '+T[1]+'" role="group" aria-label="Nội Thành, chạm vào công trình để xem">'+DEFS;
+  o+='<image class="h3g" href="'+(nt&&url('T','n')||J.T)+'" x="0" y="0" width="'+T[0]+'" height="'+T[1]+'" preserveAspectRatio="none"/>';
+  /* BN-358s3: young Ruộng Lúa over the painted field at band 1 (Lv 1-9) and when locked; Lv 10+ shows the full painted field. Night = graded copy (shown once cut) */
+  try{var FY=VJ.field_young,fB=BLD.field||{unl:0},fLk=L.mc<(fB.unl||0);if(FY&&FY.vb&&SL.field&&band(fLk?1:lvOf('field'))===1&&H300.im.Y){var fu=nt?url('Y','n'):url('Y','d');
+   if(fu)o+='<image class="h3g h3y" href="'+fu+'" x="'+FY.vb[0]+'" y="'+FY.vb[1]+'" width="'+FY.vb[2]+'" height="'+FY.vb[3]+'" preserveAspectRatio="none" pointer-events="none"/>'}}catch(e){}
+  var ids=Object.keys(SL).sort(function(a,b){return SL[a].foot_vb-SL[b].foot_vb}),sh='',ti='',top='',pq='',lay=[];
+  ids.forEach(function(id){var s=SL[id],x=s.x,w=s.w,foot=s.foot_vb,B=BLD[id]||{n:id,unl:0},lk=L.mc<(B.unl||0),lv=lvOf(id),nb=!lk&&id!=='house'&&id!=='mc'&&lv===0,bd=band(lk?1:lv);
+   var key=id==='field'?null:vkey(id,bd),hasH=!!J.props.parts['hint_'+id],t={s:'',h:0,w:w},hn='';   /* field: the paddies are painted into the ground (BN-359h), no tile */
+   if((lk||nb)&&hasH){hn=hints(id,x,foot,w,nt);t={s:hn,h:J.props.parts['hint_'+id].h+6*VB,w:w}}
+   else if(key){t=vtile(key,lk?'g':nb?'b':nt?'n':'d',x,foot,' class="h3t"'+(nb?' opacity=".8"':''));sh+=shadow(x,foot,t.w)}
+   var nm=id==='mint'?'Xưởng Đúc':B.n,top0=t.h?foot-t.h:(s.tap?s.tap[1]:foot-40),tp=s.tap||[x-w/2,Math.min(top0,foot-35),w,foot-Math.min(top0,foot-35)];
+   var q=null;(S.q||[]).forEach(function(e){if(e.id===id)q=e});
+   lay.push({f:foot,s:'<g class="bd inb h3b" data-a="bsheet" data-v="'+id+'" data-h3="'+(key||id)+'" tabindex="0" role="button" aria-label="'+nm+(lk?', cần Chính Sảnh '+B.unl:'')+'">'+
+    '<rect x="'+tp[0]+'" y="'+tp[1]+'" width="'+tp[2]+'" height="'+(+tp[3]+19).toFixed(1)+'" fill="transparent"/>'+t.s+'</g>'});
+   var hv=id==='house'?(L.house||[]):null,plv=hv?(hv.length?Math.min.apply(null,hv):0):lk?0:lv,nmx=hv&&hv.length>1?nm+' ×'+hv.length:nm,P=s.plaque||{x:x,y:foot+J.pq[0],max_w:134};
+   pq+=plaque(P.x,P.y,nmx,plv,lk,B.unl,nb,P.max_w||134);
+   var my=t.h?foot-t.h/2:tp[1]+tp[3]/2;if(lk){if(!hn)top+=lock3(x,my)}else if(nb)top+=plus3(x,my);   /* with a hint the lock stays on the plaque */
+   if(q)top+='<g transform="translate('+Math.min(444,x+w/2-24).toFixed(1)+' '+Math.max(14,top0+10).toFixed(1)+')" pointer-events="none"><rect x="-30" y="-11" width="60" height="22" rx="11" fill="#26100f" stroke="'+GOLD+'" stroke-width="1.5"/><text y="5" text-anchor="middle" font-size="'+FS+'" font-weight="700" fill="#f2d684" data-tm="'+q.end+'">'+fmtT(q.end-S.clock)+'</text></g>'});
+  lay.sort(function(a,b){return a.f-b.f});lay.forEach(function(e){ti+=e.s});
+  o+='<g pointer-events="none">'+sh+'</g>'+ti+pq+'<g pointer-events="none">'+top+'</g>';   /* lock / + marks never eat the building's tap */
+  /* collect bubbles beside the plaque at foot level; a yard at the right edge puts it left of the plaque */
+  function at(id){var s=SL[id],P=s.plaque||{x:s.x,y:s.foot_vb+8,max_w:134},mw=P.max_w||134;if(P.x+mw/2+16>446)return[Math.max(28,P.x-mw/2-16),P.y];return[Math.min(456,P.x+mw/2+16),P.y]}
+  var coin=C_(0,0,10.5,GOLD,' stroke="#a47a22" stroke-width="1.4"')+R_(-4,-4,8,8,'#26100f'),p;
+  try{if(S.taxUsed<taxMax()&&L.house.some(function(x){return x>0})){p=at('house');o+=bub(p[0],p[1],'tax',coin,'Thu thuế')}}catch(e){}
+  try{if(L.field>0&&S.fs>=Math.max(50,fieldRate()*.4)){p=at('field');o+=bub(p[0],p[1],'harvest',ln_(-6,6,-6,-6,'#e0b73e',2.6)+ln_(0,8,0,-9,'#e0b73e',2.6)+ln_(6,6,6,-6,'#e0b73e',2.6),'Thu hoạch')}}catch(e){}
+  try{if(L.barracks>0&&S.levyUsed<levyMax()&&S.clock>=S.levyAt+600000&&S.reserve<reserveCap()){p=at('barracks');o+=bub(p[0],p[1],'levy',ln_(-8,8,8,-8,'#c9ccd1',2.6)+C_(-5,5,4,'#e3b98c'),'Gọi nghĩa binh')}}catch(e){}
+  return'<div class="cityw innerw h300w h3vw0">'+o+'</svg></div>'}
+ H300.vcity=vcity;
+ /* the lower section: its own svg in page vb (viewBox y from top_vb), ground faded in over overlap_vb; painted pads = lots */
+ function vlower(){FS=fs300();var P=pl(),nt=isNight(),Lw=VJ.lower,W=Lw.vb[0],H=Lw.vb[1],t0=Lw.top_vb,ov=Lw.overlap_vb||0,A=VJ.atlas.parts;
+  var o='<svg viewBox="0 '+t0+' '+W+' '+H+'" class="city h300o h3v" role="group" aria-label="Ngoại Thành">'+DEFS+
+   '<defs><linearGradient id="h3lf" gradientUnits="userSpaceOnUse" x1="0" y1="'+t0+'" x2="0" y2="'+(t0+ov)+'"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="1"/></linearGradient>'+
+   '<mask id="h3lm" maskUnits="userSpaceOnUse" x="0" y="'+t0+'" width="'+W+'" height="'+H+'"><rect x="0" y="'+t0+'" width="'+W+'" height="'+H+'" fill="url(#h3lf)"/></mask></defs>'+
+   '<image class="h3g" href="'+(nt&&url('L','n')||Lw.file)+'" x="0" y="'+t0+'" width="'+W+'" height="'+H+'" mask="url(#h3lm)" preserveAspectRatio="none"/>';
+  var sh='',pads=[],mk='',pq='',bubs='',first={},tH={};
+  (Lw.slots||[]).forEach(function(d){var k=d.zone,i=d.i;if(!PLT[k]||!P[k]||!P[k][i])return;var T=PLT[k],p=P[k][i],open=plOpen(k,i),busy=plBusy(k,i),x=d.x,f=d.foot_vb,tp=d.tap||[x-40,f-68,80,68],
+    key=p.lv>0?(A[k+'_'+i]?k+'_'+i:A[k]?k:null):null,s='';   /* farm_<i> (BN-359 farm outposts) when packed, else the zone tile */
+   if(key){var t=vtile(key,nt?'n':'d',x,f,' class="h3t"');sh+=shadow(x,f,t.w);s=t.s;tH[k+'|'+i]=t.h}
+   pads.push({f:f,s:'<g class="bd h3p h3vp" data-a="plot" data-v="'+k+'|'+i+'" data-h3="'+(key||'pad')+'" tabindex="0" role="button" aria-label="'+T.n+' '+(i+1)+(open?'':', cần Chính Sảnh '+T.unl[i])+'"><rect x="'+tp[0]+'" y="'+tp[1]+'" width="'+tp[2]+'" height="'+tp[3]+'" fill="transparent"/>'+s+'</g>'});
+   var dx=x+26*VB,dy=f-4*VB;
+   if(p.lv>0){var lw=Math.max(PH,String(p.lv).length*8.6+9);mk+='<g pointer-events="none" class="h3lv"><rect x="'+(dx-lw/2).toFixed(1)+'" y="'+(dy-PH/2).toFixed(1)+'" width="'+lw.toFixed(1)+'" height="'+PH+'" rx="'+(PH/2)+'" fill="#e0b04e" stroke="#7a5312" stroke-width="1.4"/><text x="'+dx.toFixed(1)+'" y="'+(dy+FS*.36).toFixed(1)+'" text-anchor="middle" font-size="'+FS+'" font-weight="800" fill="#2a1408">'+p.lv+'</text></g>'}
+   else if(open)mk+='<g pointer-events="none" class="pls" transform="translate('+(x+24*VB).toFixed(1)+' '+dy.toFixed(1)+')"><circle r="11" fill="rgba(0,0,0,.62)" stroke="#ffe39a" stroke-width="1.5"/><path d="M-5.5 0h11M0 -5.5v11" stroke="#ffe39a" stroke-width="2.4"/></g>';
+   else{if(!first[k]){first[k]=1;mk+=hint1('hint_stake',x-.32*(d.w_vb||80),f-22*VB,nt)}
+    var lt='CS '+T.unl[i],lw2=tw(lt)+28;mk+='<g pointer-events="none" class="h3cs" transform="translate('+x+' '+(f-12*VB).toFixed(1)+')"><rect x="'+(-lw2/2).toFixed(1)+'" y="'+(-PH/2)+'" width="'+lw2.toFixed(1)+'" height="'+PH+'" rx="'+(PH/2)+'" fill="rgba(14,8,6,.86)" stroke="#6a5a48" stroke-width="1"/><g transform="translate('+(-lw2/2+11).toFixed(1)+' 0)"><rect x="-4" y="-1" width="8" height="6.5" rx="1.4" fill="#d9a441"/><path d="M-2.6 -1V-3.2a2.6 2.6 0 0 1 5.2 0V-1" fill="none" stroke="#d9a441" stroke-width="1.6"/></g><text x="'+(-lw2/2+20).toFixed(1)+'" y="'+(FS*.36).toFixed(1)+'" font-size="'+FS+'" font-weight="700" fill="#e8dcc6">'+lt+'</text></g>'}
+   if(busy)mk+='<g pointer-events="none" transform="translate('+(x-26*VB).toFixed(1)+' '+dy.toFixed(1)+')"><circle r="11" fill="#2a160c" stroke="#e0b04f"/><text y="5" text-anchor="middle" font-size="'+FS+'">⚒</text></g>'});
+  pads.sort(function(a,b){return a.f-b.f});
+  var Z=Lw.zones||{};Object.keys(Z).forEach(function(k){if(!PLT[k]||!P[k]||!Z[k].plaque)return;pq+=plaque(Z[k].plaque.x,Z[k].plaque.y,PLT[k].n,0,false,0,false,134);
+   var T=PLT[k],fi=P[k].findIndex(function(p){return p.lv>0}),st=plStored(k),d=null;(Lw.slots||[]).forEach(function(e){if(e.zone===k&&e.i===fi)d=e});
+   if(d&&st>=Math.max(1,plRate(k,P[k][fi].lv)*.5))bubs+='<g class="bd h3bub" data-a="plcol" data-v="'+k+'" role="button" tabindex="0" aria-label="Thu '+T.n+'" transform="translate('+d.x+' '+Math.max(t0+28,d.foot_vb-(tH[k+'|'+fi]||60)-14).toFixed(1)+')"><circle r="27" fill="transparent"/><g class="bob"><circle r="15" fill="#26100f" stroke="#f2d684" stroke-width="2"/><use href="#i-'+T.res+'" x="-10" y="-10" width="20" height="20"/></g></g>'});
+  o+='<g pointer-events="none">'+sh+'</g>'+pads.map(function(e){return e.s}).join('')+mk+pq+bubs;   /* plaques after the lower layer */
+  return'<div class="cityw outerw h300w h3vw">'+o+'</svg></div>'}
+ H300.vlower=vlower;
+ /* the lower svg overlaps the town by overlap_vb: margin from the town's drawn bottom (ui354 may shift / scale the town layer) */
+ function vsync(){try{if(!HV358||!VJ||!h300On())return;var lo=document.querySelector('#main .cityw.h3vw'),c=document.querySelector('#main .cityw.innerw.h300w');if(!lo||!c)return;
+   var sv=c.querySelector(':scope>svg:not(.u354fill)'),ls=lo.querySelector(':scope>svg');if(!sv||!ls)return;var cr=c.getBoundingClientRect(),sr=sv.getBoundingClientRect(),lr=ls.getBoundingClientRect();if(lr.width<50)return;
+   var want=Math.min(cr.bottom,sr.bottom)-(VJ.lower.overlap_vb||0)*lr.width/VJ.lower.vb[0],cur=parseFloat(lo.style.marginTop)||0,d=want-lr.top;
+   if(Math.abs(d)>.5)lo.style.setProperty('margin-top',(cur+d).toFixed(1)+'px','important')}catch(e){}}
+ H300.vsync=vsync;
+ if(HV358){try{setInterval(vsync,400)}catch(e){}}
+
  /* ---------- wiring (outermost wrappers: with the new home on, the older layers are not called) ---------- */
- var _cs300=cityScene;cityScene=function(){if(h300On()){try{return city()}catch(e){try{console.warn('home300',e)}catch(x){}}}return _cs300.apply(this,arguments)};
- var _os300=outerScene;outerScene=function(){if(h300On()){try{return outer()}catch(e){try{console.warn('home300',e)}catch(x){}}}return _os300.apply(this,arguments)};
+ var _cs300=cityScene;cityScene=function(){if(h300On()){try{return HV358&&VJ?vcity():city()}catch(e){try{console.warn('home300',e)}catch(x){}}}return _cs300.apply(this,arguments)};
+ var _os300=outerScene;outerScene=function(){if(h300On()){try{if(HV358&&VJ){setTimeout(vsync,0);setTimeout(vsync,120)}return HV358&&VJ?vlower():outer()}catch(e){try{console.warn('home300',e)}catch(x){}}}return _os300.apply(this,arguments)};
  /* building sheet banner: the slot's piece of the terrace with the tile at the building's level */
- try{var _bb300=bBanner;bBanner=function(id,dim){try{if(h300On()&&J.slots[id]){var s=J.slots[id],k=id+'_'+band(lvOf(id)),r=J.p[k],th=s[1]*r[3]/r[2],w=Math.max(s[1]*1.7,220),h=w*9/16,
+ try{var _bb300=bBanner;bBanner=function(id,dim){try{if(h300On()&&HV358&&VJ&&VJ.slots[id]){var s=VJ.slots[id],k=id==='field'?null:vkey(id,band(lvOf(id))),Pp=k&&VJ.atlas.parts[k],th=Pp?+Pp.h_vb:(s.tap?s.tap[3]:60),
+     w=Math.max(s.w*1.7,220),h=w*9/16,cy=s.foot_vb-th/2+6,x=Math.max(0,Math.min(VJ.vb[0]-w,s.x-w/2)),y=Math.max(0,Math.min(VJ.vb[1]-h,cy-h/2)),f=dim?' style="filter:grayscale(1) brightness(.5)"':'';   /* BN-358s2: valley ground + bld_v tile (field: the painted paddies) */
+    return'<svg class="bbsv h3bb" viewBox="'+x.toFixed(1)+' '+y.toFixed(1)+' '+w.toFixed(1)+' '+h.toFixed(1)+'" preserveAspectRatio="xMidYMid slice"><g'+f+'><image href="'+VJ.file+'" x="0" y="0" width="'+VJ.vb[0]+'" height="'+VJ.vb[1]+'"/>'+(k?vtile(k,'d',s.x,s.foot_vb).s:'')+'</g></svg>'}
+   if(h300On()&&!HV358&&J.slots[id]){var s=J.slots[id],k=id+'_'+band(lvOf(id)),r=J.p[k],th=s[1]*r[3]/r[2],w=Math.max(s[1]*1.7,220),h=w*9/16,
      cx=s[0],cy=s[2]-th/2+6,x=Math.max(0,Math.min(474-w,cx-w/2)),y=Math.max(0,Math.min(843-h,cy-h/2)),f=dim?' style="filter:grayscale(1) brightness(.5)"':'';
     return'<svg class="bbsv h3bb" viewBox="'+x.toFixed(1)+' '+y.toFixed(1)+' '+w.toFixed(1)+' '+h.toFixed(1)+'" preserveAspectRatio="xMidYMid slice"><g'+f+'><image href="'+J.T+'" x="0" y="0" width="474" height="843"/>'+tile(k,'d',s[0],s[2],s[1]).s+'</g></svg>'}}catch(e){}
    return _bb300.apply(this,arguments)}}catch(e){}
  /* pictures elsewhere that still name the part 1 files: in_<id>.webp -> the bld_f tile at the building's level, ob_<k>.webp -> the outpost */
  function swapUrl(v){var m;if(!h300On()||!v||v.indexOf('art/buildings/')<0)return null;
+  if(HV358&&VJ){var A=VJ.atlas.parts,vk;if((m=/art\/buildings\/ob_(dojo|farm|mine|vault)\.webp/.exec(v)))return A[m[1]]?url('v:'+m[1],'d'):null;   /* BN-358s2: valley tiles */
+   if((m=/art\/buildings\/in_([a-z]+)\.webp/.exec(v))&&VJ.slots[m[1]]&&m[1]!=='field'&&(vk=vkey(m[1],band(lvOf(m[1])))))return url('v:'+vk,'d');}
   if((m=/art\/buildings\/ob_(dojo|farm|mine|vault)\.webp/.exec(v)))return url(H300OUT[m[1]],'d');
   if((m=/art\/buildings\/in_([a-z]+)\.webp/.exec(v))&&J.slots[m[1]])return url(m[1]+'_'+band(lvOf(m[1])),'d');return null}
  function swapEl(e){try{var a=e.tagName==='IMG'?'src':'href',v=e.getAttribute(a)||'',n=swapUrl(v);if(n){e.setAttribute(a,n);e.setAttribute('data-h300',1)}}catch(x){}}
@@ -23614,6 +23723,7 @@ function h300On(){return H300.ok===1&&typeof ART277!=='undefined'&&ART277&&typeo
  try{var _wk300=wkAttach;wkAttach=function(){try{if(document.querySelector('svg.h300'))return null}catch(e){}return _wk300.apply(this,arguments)}}catch(e){}
  try{var st=document.createElement('style');st.textContent=
   '.cwrap .cityw.h300w{border:0!important;border-radius:0!important;margin-top:0!important;margin-bottom:0!important;box-shadow:none!important}.cwrap .innerw.h300w{background:#d0dfdf}.cwrap .outerw.h300w{background:#d0dfcf}'+
+  '.cwrap .outerw.h3vw{background:transparent!important;position:relative;z-index:1}.cwrap .outerw.h3vw .wxchip{display:none!important}'+
   '.cwrap .innerw.h300w .wxchip{top:8px!important;left:8px!important;right:auto!important;bottom:auto!important}.cityw.h300w>svg{display:block}.h3b,.h3p{cursor:pointer}.h3b:active .h3t,.h3p:active .h3t{filter:brightness(1.18)}.h3b:focus-visible .cupb{stroke:#fff}'+
   '.h3pf{transform-box:fill-box;transform-origin:50% 50%;animation:h3pf 3.6s ease-out infinite;opacity:0}@keyframes h3pf{0%{opacity:0;transform:translateY(0) scale(.6)}15%{opacity:.8}100%{opacity:0;transform:translateY(-26px) scale(1.7)}}'+
   '.h3str{animation:h3str 1.2s steps(1) infinite}.h3str.d2{animation-delay:-.6s}@keyframes h3str{0%{opacity:1}50%{opacity:.55}100%{opacity:1}}'+
@@ -27655,6 +27765,9 @@ var PB331ST={on:0,mi:0,si:0,kind:'stage',free:0,sel:null,aim:null,panel:null,sub
   var _fs5=flhSeen;flhSeen=function(k){if(k==='tx.d'||k==='tx.p')return!!TXS[k];return _fs5.apply(this,arguments)};
   setInterval(function(){try{if(FLH.cur&&/^tx\./.test(FLH.cur.k))TXS[FLH.cur.k]=1}catch(e){}},500)}}catch(e){}
 }catch(e){try{console.error('prep331',e)}catch(x){}}})();
+/* BN-358m (V301, coder): the war table is a flow (flow301q rule: nothing opens by itself during prep). flIdle ignored #pb331 (a layer, not #modal), so queued
+   "Tính năng mới" / offer popups (tw217, ar2, offer) opened over the pre-battle table and covered its buttons (bn331_flow 3c/3d click timeouts). They now wait until the table closes. Display only, no save field, no action name. */
+(function(){try{if(typeof flIdle==='function'){var _flIdle358m=flIdle;flIdle=function(){try{if(typeof PB331ST!=='undefined'&&PB331ST&&PB331ST.on)return false}catch(e){}return _flIdle358m.apply(this,arguments)}}}catch(e){}})();
 /* ===== V301 BN-340 batch 1 (coder 1): first-30-minutes logic + decision 222 B =====
    Spec docs/design/onboarding/bn340-first-30.md v1.1; numbers BN340 in data/balance_campaign.js (docs/balance/V301-bn340-first30.md §3 + §7).
    Loaded last so every wrapper here is outermost. No save field: kept XP lives in g.exp (wider range while S.camp.mapDone[BN340.keepUntil] is unset),
@@ -28745,7 +28858,8 @@ var BT336={sw:0,err:0,dirty:0,cfg:null};
   REM:{a:.85,fe:3,dk:.15},                    /* r7 (7.7): the remains decal (dec_shards): outer 3 css feathered, centre 15 % darker, alpha .85, alone on its tile */
   BRC:{inf:'#d8483a',cav:'#3f86e0',arc:'#3fae5a',mac:'#e8892e',str:'#9660e6',sup:'#2fb3a6'},   /* r7 (8.2): branch colour of the call-out dot: Bộ red, Kỵ blue, Cung green, Cơ orange, Mưu violet, Phụ teal (code picks, art to confirm) */
   PILL:{rim:'#C9A24A',rw:2,fill:'rgba(26,18,12,.88)',fs:13,px:10,py:4,r:8,dot:8,gap:14,edge:12,inMs:120,outMs:200,rise:6},   /* r7 (8.3-8.4): one call-out pill for every skill / stratagem call-out */
-  STEPS:{cav:[6,5,3,2],ele:[3,2,2,1]}         /* 229 A steps at 100 / 75 / 50 / 25 % */
+  STEPS:{cav:[6,5,3,2],ele:[3,2,2,1]},        /* 229 A steps at 100 / 75 / 50 / 25 % */
+  STDB:{inL:2,top:.70,foot:4,band:26,bandGap:2,fin:26,pillCov:.25}   /* BN-336f3 (Decision 270 B, Huy "aligned"): cloth left = own tile left + inL css; cloth top = feet - top x squad width; pole foot = tile mid line + foot css; phase band min top / gap over the enemy back row; finial min y (tug bar); a pill fades a standard only over >= 25 % of its cloth */
  };
    /* BN-355: the 14 terrain plates (web/art/ui/prebattle/plates/plate_<key>.webp, 780 x 1386 = the r8 geometry); Man numbers 1-40 per plate (docs/art/bn355-table-plates.md section 2, Huy approved all 15) */
   (function(){var L={farmland:[22,37],river:[4,7,16,24,39],flood:[13,30],pinehills:[20,28],bamboo:[11,26,38],burned:[19,32],pass:[5,34,36],loess:[6,17,29],desert:[8,23,33],snow:[9,18],fortress:[3,14,21,25,31,35],palace:[2,10,27,40],terrace:[12]};
@@ -28966,21 +29080,36 @@ var EDG={e:{t:63,h:85,b:318,w0:155,w1:169.7},o:{t:354,h:94,b:636,w0:176,w1:199}}
     var cc='rgb('+Math.round(a0[0]+(a1[0]-a0[0])*u)+','+Math.round(a0[1]+(a1[1]-a0[1])*u)+','+Math.round(a0[2]+(a1[2]-a0[2])*u)+')';
     c.save();c.globalAlpha=.45*al;c.fillStyle=cc;c.beginPath();c.arc(x,y,r*2.6,0,6.3);c.fill();c.globalAlpha=al;c.beginPath();c.arc(x,y,r,0,6.3);c.fill();c.restore()}}
   /* ---------------- standard ---------------- */
- function stdSize(P){return P.sw>=84?'s40':'s32'}
+ function stdSize(P){return 's32'}   /* BN-336f3 (Decision 270 B): s32 on every squad (s40 does not fit the side gap at 390) */
+ /* BN-336f3: the phase band ("Xuất Quân / Giao Chiến!") is lifted off the enemy back row (rule B2): centre y = max(26 + h/2, top of the highest live enemy crowd - 2 - h/2), never lower than today's fy0 + 24 */
+ function bandY(h){var B=CFG.STDB,top=1e9;try{(BT.list||[]).forEach(function(d){var T=d.t336;if(!T||!T.P||d.u.side==='A'||d.trT<=0)return;var bt=T.cur&&T.cur.info?T.cur.info.bt:-.8*T.P.sw;top=Math.min(top,T.P.fy+bt)})}catch(e){}
+  var y0=(BT.fy0||170)+24;if(top>=1e9)return y0;return Math.min(y0,Math.max(B.band+h/2,top-B.bandGap-h/2))}
+ window.bt336BandY=function(h){try{return on()?bandY(h):null}catch(e){return null}};
+ /* BN-336f3 flank standard, ALIGNED (Decision 270 B + Huy 14_flag_B_align): every flag sits at the same spot of its own squad's tile, never by its soldiers:
+    cloth left = tile left + inL (inside the tile, never in the gap to the next squad), cloth top = feet - top x squad width (same y across a row),
+    pole planted on the tile at its left (foot = tile mid line + foot); lunges / hops move it with the squad; the crowd thinning does not move it */
+ function stdGeo(d,S){var T=d.t336,P=T.P,t=P.tile,B=CFG.STDB,O=window.bvOff(d),g=geo(),cl=S.frames.cloth_ours_still,clL=cl.ox/2,clR=(cl.ox+cl.w)/2,clT=cl.oy/2,clB=(cl.oy+cl.h)/2,ft=Math.abs(S.anchors.std_top)/2,hop=hopOf(d);
+  var Px=t.cx-t.w/2+B.inL-clL+O.x;Px=Math.max(2-clL,Math.min(BT.W-2-clR,Px));
+  var Py=P.fy-B.top*P.sw-clT+O.y+hop,mn=B.fin+ft;try{var bb=bandY(44)+22+B.bandGap;if(Py-ft<bb&&d.u.side!=='A')Py=bb+ft}catch(e){}   /* finial tip >= band bottom + 2 */if(Py<mn)Py=mn;
+  var foot=Math.max(Py+clB+4,t.cy+B.foot*g.ss+O.y+hop);
+  return{Px:Px,Py:Py,foot:foot,cb:[Px+clL,Py+clT,Px+clR,Py+clB],clB:clB,ft:ft}}
  function standard(c,d){var T=d.t336;if(!T||!T.P||!A.STD)return;var u=d.u,P=T.P,sz=stdSize(P),S=A.STD.sizes[sz],im=I(BD+S.file);if(im.ok!==1)return;
   var dead=d.trT<=0,tip=0,al=1;try{var pk=BT.t-(T.plqT||-999)<90?1:0,pf=T.plqF||0;pf+=(pk-pf)*Math.min(1,16/120);if(BT.reduce)pf=pk;T.plqF=pf;if(pf>.01)al=1-.65*pf}catch(e){}   /* r4: .35 under the plaque */
   if(dead){var e=BT.t-(T.dT||BT.t);if(e>420)return;tip=Math.min(1,e/400);al=1-tip*.9}
-  var O=window.bvOff(d),b=T.cur;if(!b)return;var side=u.side==='A'?'ours':'enemy',F=S.frames,g=geo(),halfW=F.cloth_ours_still.w/4,foot=S.anchors.pole_foot[1]/2,ft=Math.abs(S.anchors.std_top)/2;
-  var fx=P.x+O.x,fy=P.fy+O.y,hop=hopOf(d);
-  var clothR=(F.cloth_ours_still.ox+F.cloth_ours_still.w)/2,Px=Math.max(halfW+4,Math.min(BT.W-halfW-4,fx+b.info.bl+6-clothR)),clothB=(F.cloth_ours_still.oy+F.cloth_ours_still.h)/2,Py=fy+b.info.bt-2-clothB+hop,mn=26+ft;if(Py<mn)Py=mn;   /* art review 5: cloth right edge at the crowd's left + 6 css, cloth bottom 2 css above the 100 % crowd top: never over a head */
+  var b=T.cur;if(!b)return;var side=u.side==='A'?'ours':'enemy',F=S.frames,halfW=F.cloth_ours_still.w/4;
+  var G2=dead&&T.stdG?T.stdG:stdGeo(d,S);if(!dead)T.stdG=G2;var Px=G2.Px,Py=G2.Py,ft=G2.ft,pf0=G2.foot;T.cb=G2.cb;   /* a falling flag keeps the spot it stood on */
   var mo=0,cost=(u.tact&&u.tact.cost)||100,can=window.bv336X&&bv336X.canMo(u),ready=false,lock=false;
   var st=window.bv336X?bv336X.stList(d):[];st.forEach(function(q){if(q.i===12)lock=true});
   if(can){mo=Math.max(0,Math.min(1,(d.moD||0)/cost));ready=!dead&&(d.moD||0)>=cost}
   var wav=T.wav,droop=wav||(BT.t336res&&BT.t336res.lose&&u.side==='A');var RW=BT.t336res,winNow=!!(RW&&RW.win&&u.side==='A'&&!dead&&BT.t>=RW.t0);if(winNow&&!T.wsn){T.wsn=1;T.wsnT=BT.t}
   /* morale up: snap 1.08 -> 1 in 160 ms about the pole top */
   var sc=1;if(can&&T.mo!=null&&mo>T.mo+.001&&!BT.reduce)T.snap=BT.t;if(BT.reduce)T.snap=null;T.mo=mo;if(T.snap!=null){var sp=(BT.t-T.snap)/160;if(sp<1)sc=1.08-.08*sp;else T.snap=null}
-  c.save();c.globalAlpha=al;c.translate(Px,Py);
-  if(tip){c.translate(0,foot);c.rotate((side==='ours'?-1:1)*Math.PI/2*tip);c.translate(0,-foot)}
+  c.save();c.globalAlpha=al;
+  /* death: the whole standard falls OUTWARD (away from its squad = to the left on both sides) about the pole foot in 400 ms */
+  if(tip){c.translate(Px,pf0);c.rotate(-Math.PI/2*tip);c.translate(-Px,-pf0)}
+  /* pole: 2 css #5A3D24 with a 1 css #3A2716 right edge, from 2 css above the cloth bottom to the foot on the tile; contact shadow at the foot */
+  var p0=Py+G2.clB-2;if(pf0>p0){c.fillStyle='rgba(10,6,4,.45)';c.beginPath();c.ellipse(Px,pf0,4,1.6,0,0,6.3);c.fill();c.fillStyle='#5A3D24';c.fillRect(Px-1,p0,2,pf0-p0);c.fillStyle='#3A2716';c.fillRect(Px,p0,1,pf0-p0)}
+  c.translate(Px,Py);
   if(sc!==1)c.scale(sc,sc);
   function fr(n,a){var f=F[n];if(!f)return;if(a!=null&&a<1){var g0=c.globalAlpha;c.globalAlpha=g0*a;c.drawImage(im.im,f.x,f.y,f.w,f.h,f.ox/2,f.oy/2,f.w/2,f.h/2);c.globalAlpha=g0}else c.drawImage(im.im,f.x,f.y,f.w,f.h,f.ox/2,f.oy/2,f.w/2,f.h/2)}
   var boss=u.isBoss||u.boss;fr(boss?'fin_boss':'fin_'+side);
@@ -28998,12 +29127,14 @@ var EDG={e:{t:63,h:85,b:318,w0:155,w1:169.7},o:{t:354,h:94,b:636,w0:176,w1:199}}
   if(fk>0){var cf=(!BT.reduce&&T.flF&&BT.t-T.flF<80)?1.4:1;flGlow(c,rd/2,rc,fk,cf)}   /* r4: the glow is drawn above the ring (screen), x1.4 for 80 ms when the ring empties on a cast */
   if(T.flEm)flEmbers(c,T,rd/2,rc,boss?'b':side==='ours'?'o':'e');
   c.restore();
-  /* status glyph column right of the cloth, dark disc under each (12 css) */
-  try{if(!dead&&window.bv336X){var L=st,n=Math.min(3,L.length),gx=Px+halfW+3,gy=Py+4;for(var i=0;i<n;i++){var q=L[i],p6=d.bvPulse&&d.bvPulse.i===q.i?(BT.t-d.bvPulse.t0)/350:2,s6=p6>=0&&p6<1&&!BT.reduce?1+.25*Math.sin(p6*Math.PI):1,z=12*s6;
-    c.fillStyle='rgba(14,9,6,.78)';c.beginPath();c.arc(gx+6,gy+6,8,0,6.3);c.fill();bv336X.glyph(c,q.i,gx+6-z/2,gy+6-z/2,z);gy+=15}
-    if(L.length>3){c.font='700 12px "Barlow Condensed",sans-serif';c.fillStyle='#f3e6c8';c.textAlign='left';c.fillText('+',gx+2,gy+10)}}}catch(e){}
-  /* store for the old marker code (ribbon / floats) */
-  d.bvStd={x:Px,y:Py};T.sb=[Px-halfW,Py-ft,Px+halfW+(d.sf&&d.sf.length?18:3),Py+foot+2]}
+  /* status glyphs (BN-336f3): a column on the pole under the cloth (disc centre x = pole, first centre 8 css under the cloth, step 15) as far as the pole has room; the rest in today's column right of the cloth; max 3, then "+" */
+  var gRt=0;try{if(!dead&&window.bv336X&&st.length){var L=st,n=Math.min(3,L.length),y1=Py+G2.clB+8,room=Math.max(0,Math.floor((pf0-4-(Py+G2.clB+2))/15)),gx2=Px+halfW+3,gy2=Py+4,cx6,cy6;
+    for(var i=0;i<n;i++){var q=L[i],p6=d.bvPulse&&d.bvPulse.i===q.i?(BT.t-d.bvPulse.t0)/350:2,s6=p6>=0&&p6<1&&!BT.reduce?1+.25*Math.sin(p6*Math.PI):1,z=12*s6;
+     if(i<room){cx6=Px;cy6=y1+15*i}else{cx6=gx2+6;cy6=gy2+6;gy2+=15;gRt=1}
+     c.fillStyle='rgba(14,9,6,.78)';c.beginPath();c.arc(cx6,cy6,8,0,6.3);c.fill();bv336X.glyph(c,q.i,cx6-z/2,cy6-z/2,z)}
+    if(L.length>3){gRt=1;c.font='700 12px "Barlow Condensed",sans-serif';c.fillStyle='#f3e6c8';c.textAlign='left';c.fillText('+',gx2+2,gy2+10)}}}catch(e){}
+  /* store for the old marker code (ribbon / floats) and the pill / number avoid box: cloth + finial + pole down to the foot */
+  d.bvStd={x:Px,y:Py};T.sb=[Px-halfW,Py-ft,Px+halfW+(gRt?18:1),pf0]}
  /* ---------------- per-frame tick: beats, impact, envelopes ---------------- */
  var DEC=[],LT=[];
  function laneOf(a,ev){try{var sp=window.bvfxX&&bvfxX.spec(a,ev),el=sp&&sp.el,g=a.u.gid||'';if(/guanyu|quanvu/.test(g))el='doc';var m={hoa:'hoa',thuy:'thuy',doc:'moc',bo:'moc',mac:'muu',thep:'kim',tho:'tho',loi:'thuy',loiW:'moc'};return m[el]||'kim'}catch(e){return'kim'}}
@@ -29139,7 +29270,9 @@ var EDG={e:{t:63,h:85,b:318,w0:155,w1:169.7},o:{t:354,h:94,b:636,w0:176,w1:199}}
  function brCol(d){try{return CFG.BRC[d.u.br]||null}catch(e){return null}}
  function pillDraw(c,d,parts,e,D){var PL=CFG.PILL;if(e<0||e>D)return null;var R=pillBox(c,d,parts);if(!R)return null;var red=BT.reduce,ei=red?1:Math.min(1,e/PL.inMs),eo=Math.min(1,(D-e)/PL.outMs),al=ei*eo,sc=red?1:.9+.1*(1-(1-ei)*(1-ei)),rise=red?0:PL.rise*(1-eo);if(al<=0)return R;
   var x=R.x,y=R.y-rise,w=R.w,h=R.h,cx=x+w/2,cy=y+h/2;
-  BT.list.forEach(function(q){var sb=q.t336&&q.t336.sb;if(!sb||q.trT<=0)return;if(x+w+4>sb[0]&&x-4<sb[2]&&y+h+4>sb[1]&&y-4<sb[3])q.t336.plqT=BT.t});
+  BT.list.forEach(function(q){var sb=q.t336&&q.t336.sb,cb=q.t336&&q.t336.cb;if(!sb||q.trT<=0)return;
+   if(cb){var iw=Math.min(x+w,cb[2])-Math.max(x,cb[0]),ih=Math.min(y+h,cb[3])-Math.max(y,cb[1]);if(iw>0&&ih>0&&iw*ih>=CFG.STDB.pillCov*(cb[2]-cb[0])*(cb[3]-cb[1]))q.t336.plqT=BT.t;return}   /* BN-336f3: the .35 fade only when the pill covers >= 25 % of the cloth */
+   if(x+w+4>sb[0]&&x-4<sb[2]&&y+h+4>sb[1]&&y-4<sb[3])q.t336.plqT=BT.t});
   c.save();c.globalAlpha=al;c.translate(cx,cy);c.scale(sc,sc);c.translate(-cx,-cy);
   c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,PL.r);else c.rect(x,y,w,h);c.fillStyle=PL.fill;c.fill();c.strokeStyle=PL.rim;c.lineWidth=PL.rw;c.stroke();
   var dc=brCol(d)||(BT.bvBeat&&BT.bvBeat.ev?LANE(laneOf(d,BT.bvBeat.ev)):'#9660e6'),dx=x+PL.px+PL.dot/2;c.fillStyle=dc;c.beginPath();c.arc(dx,cy,PL.dot/2,0,6.3);c.fill();c.strokeStyle='rgba(10,6,4,.9)';c.lineWidth=1;c.stroke();
@@ -29590,23 +29723,25 @@ function u354Locked(a,v){try{if(!UI354||!document.body)return'';var cl=document.
  function plate(){try{var n=document.getElementById('nav');if(!n)return;
   if(!n.querySelector('.u354pl')){['l','m','r'].forEach(function(c){var d=document.createElement('div');d.className='u354pl '+c;n.insertBefore(d,n.firstChild)})}
   var W=n.clientWidth||innerWidth;try{document.body.classList.toggle('u354home',typeof tab!=='undefined'&&tab==='city')}catch(e){}n.style.setProperty('--u354k',((W-68.67)/206.67).toFixed(4))}catch(e){}}
- var prev={};
+ var prev={},U354FITM={};
  function marks(){try{var b=document.body;if(!b)return;plate();
   var ch=document.querySelector('#main .flnext');if(ch){if(!ch.querySelector('.u354cp'))['l','m','r'].forEach(function(c){var d=document.createElement('div');d.className='u354cp '+c;ch.insertBefore(d,ch.firstChild)});try{var f1=ch.querySelector('.fln1');if(f1){var tx=f1.textContent||'';if(tx.charAt(0)==='⚔')f1.textContent=tx.replace(/^⚔\s*/,'');var cid=/Nâng/.test(tx)?'city':'camp',ic=ch.querySelector('.u354ci'),src=document.querySelector('#nav [data-nav299="'+cid+'"]');src=src&&src.src;if(src&&(!ic||ic.dataset.k!==cid)){if(ic)ic.remove();ic=document.createElement('img');ic.className='u354ci';ic.alt='';ic.dataset.k=cid;ic.src=src;ch.insertBefore(ic,f1)}}}catch(e){}ch.style.setProperty('--u354c',(((ch.clientWidth||366)-36)/242).toFixed(4))}
   /* city fit: the lowest inner-city label (rows above 82 % of the scene) must end 8 css above the goal chip. Up to 60 css of need (390x844 = 35, 360x780 = 58) it is a plain shift as before; beyond that (360x740 = 98) shift 16 css and scale the layer (origin top centre, min .8) so Chính Sảnh stays under the weather chip */
-  try{var cw=document.querySelector('#main .cityw.innerw'),sv=cw&&cw.querySelector(':scope>svg'),cp=document.querySelector('#main .flnext');
+  /* BN-358s3: with the valley (?hv=1) the scene is the valley town svg; the mode (plain shift / scale) is remembered per viewport + viewBox; while the
+     need stays within 8 css of it, shift holds up to 64 and scale holds down to 56 (4 css hysteresis) and the scale only moves by > .01 (the counter-scaled plaques move the lowest label by ~1 css between the modes, which flipped it every ~2 s at 390x844) */
+  try{var hvOn=typeof HV358!=='undefined'&&HV358,cw=document.querySelector('#main .cityw.innerw'),sv=cw&&(hvOn&&cw.querySelector(':scope>svg.h3v.cityin')||cw.querySelector(':scope>svg:not(.u354fill)')),cp=document.querySelector('#main .flnext')||document.getElementById('nav');   /* BN-358r: no chip on home -> the dock is the floor */
    if(b.classList.contains('u354home')&&cw&&sv&&cp){var cy=parseFloat(cw.style.getPropertyValue('--u354y')),cs=parseFloat(cw.style.getPropertyValue('--u354s'));if(isNaN(cy))cy=32;if(isNaN(cs)||cs<=0)cs=1;var sr=sv.getBoundingClientRect(),cr=cp.getBoundingClientRect(),mb=0;
     if(sr.height>100&&cr.height>0){sv.querySelectorAll('text').forEach(function(t){var r=t.getBoundingClientRect();if(r.height>0&&(r.bottom-sr.top)/sr.height<.82&&r.bottom>mb)mb=r.bottom});
-     if(mb>0){var py=(mb-sr.top)/cs,top0=sr.top+cy,av=(cr.top-8)-top0,ny,ns;
-      if(py-av<=60){ny=Math.max(0,Math.round(py-av));ns=1}else{ny=16;ns=Math.max(.8,Math.min(1,Math.round((av+16)/py*1000)/1000))}
-      cw.classList.toggle('u354sc',ns<1);
-      if(Math.abs(ny-cy)>1||Math.abs(ns-cs)>.004){cw.style.setProperty('--u354y',String(ny));cw.style.setProperty('--u354s',String(ns))}
+     if(mb>0){var py=(mb-sr.top)/cs,top0=sr.top+cy,av=(cr.top-8)-top0,ny,ns,need=py-av,fk=innerWidth+'x'+innerHeight+'|'+(sv.getAttribute('viewBox')||'')+'|'+(hvOn?1:0),fm=U354FITM[fk],sh;
+      if(fm&&Math.abs(need-fm.need)<8)sh=fm.sh?need<=64:need<56;else sh=need<=60;U354FITM[fk]={need:fm&&fm.sh===sh?fm.need:need,sh:sh};
+      if(sh){ny=Math.max(0,Math.round(need));ns=1}else{ny=16;ns=Math.max(.8,Math.min(1,Math.round((av+16)/py*1000)/1000))}
+      cw.classList.toggle('u354sc',ns<1);      if(Math.abs(ny-cy)>1||Math.abs(ns-cs)>.01||(ns<1)!==(cs<1)){cw.style.setProperty('--u354y',String(ny));cw.style.setProperty('--u354s',String(ns))}
       /* side gaps of the scaled layer: a blurred, darkened copy of the unscaled scene behind it (refreshed every 3 s; no data-a, not clickable) */
       var fl=cw.querySelector(':scope>.u354fill');
       if(ns<1&&!(fl&&Date.now()-(+fl.dataset.t||0)<3000)){if(fl)fl.remove();fl=sv.cloneNode(true);fl.setAttribute('class','u354fill');fl.setAttribute('aria-hidden','true');fl.dataset.t=String(Date.now());[].forEach.call(fl.querySelectorAll('[data-a]'),function(x){x.removeAttribute('data-a')});cw.appendChild(fl)}
       else if(ns>=1&&fl)fl.remove()}}}}catch(e){}
   /* city labels: >= 12.5 css at every width (the .83/.8 scale shrinks the plaques: counter-scale each one about its centre, kept inside the scene); building + plaque whose centre sits below the goal chip's top are hidden (they peeked between chip and nav) */
-  try{var cw2=document.querySelector('#main .cityw.innerw'),sv2=cw2&&cw2.querySelector(':scope>svg:not(.u354fill)'),cp2=document.querySelector('#main .flnext');
+  try{var cw2=document.querySelector('#main .cityw.innerw'),sv2=cw2&&cw2.querySelector(':scope>svg:not(.u354fill)'),cp2=document.querySelector('#main .flnext')||document.getElementById('nav');
    if(b.classList.contains('u354home')&&sv2){var vw=(sv2.viewBox&&sv2.viewBox.baseVal&&sv2.viewBox.baseVal.width)||474,sw=sv2.getBoundingClientRect().width,ct=cp2?cp2.getBoundingClientRect().top:1e5;
     if(sw>100){[].forEach.call(sv2.querySelectorAll('.h3pq'),function(g){var rc=g.querySelector('rect.cupb'),tx=g.querySelector('text');if(!rc||!tx)return;
       var f=parseFloat(tx.getAttribute('font-size'))||15.9,eff=f*sw/vw,k=eff<12.5?Math.min(1.4,12.5/eff):1,x=+rc.getAttribute('x'),w=+rc.getAttribute('width'),y=+rc.getAttribute('y'),h=+rc.getAttribute('height'),cx=x+w/2,cy=y+h/2,nx=Math.max(4+w*k/2,Math.min(vw-4-w*k/2,cx)),
@@ -29636,7 +29771,11 @@ function u354Locked(a,v){try{if(!UI354||!document.body)return'';var cl=document.
    var art=U354ART.side[d[3]==='guild'?'guild':'ev'];
    b.className='u354sb '+d[1];b.innerHTML='<span class="u354md"><span class="u354ar">'+(art?'<img src="'+art+'" alt="">':'')+'</span>'+(n?'<i class="u354bd">'+n+'</i>':'')+'</span><span>'+d[2]+'</span>';
    cw.appendChild(b)})}catch(e){}}
- try{var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);try{side();marks()}catch(e){}return r}}catch(e){}
+ /* BN-358r (Huy 2026-11-13, ref 12_remove_danhtiep): no "Đánh tiếp · Màn x-y" bar on the home. flow301v builds it on every renderMain; it is removed here, after
+    bn340b1/b2 and fix340f have dressed it. The Chinh chiến tab keeps its bar (.flrow2). The action 'flnext' stays (bn340b2 goals call it); the first fight is reached
+    through the Chinh chiến dock tab, which is where the tutorial step g1.2 points. */
+ function noNext(){try{if(typeof tab==='undefined'||tab!=='city')return;var c=document.querySelector('#main .flnext');if(c&&!c.closest('.flrow2'))c.remove()}catch(e){}}
+ try{var _rm=renderMain;renderMain=function(){var r=_rm.apply(this,arguments);try{noNext();side();marks()}catch(e){}return r}}catch(e){}
  /* 257 B: one popup per login, never a paid offer first. The Gói Nạp Đầu offer (key 'offer', topup207.js; its once-a-day mark S.np206.od already exists) plays only when
     nothing else has popped up since the page loaded and the city has been on screen for 4 s; otherwise it is skipped this login (its day mark is untouched, so it is tried again next login). */
  try{var _fq=flQ,t0=Date.now();flQ=function(k,fn,p){if(k==='offer'&&typeof fn==='function'){var f0=fn;fn=function(){if((FLQ.played||0)>1||Date.now()-t0<4000||typeof tab==='undefined'||tab!=='city'){FLQ.played=(FLQ.played||1)-1;return}return f0.apply(this,arguments)}}return _fq.call(this,k,fn,p)}}catch(e){}
@@ -29687,10 +29826,14 @@ function u354pt(id){try{var G=GENS[id],g=G.gr||gradeOf(G.cost);if(typeof CARD300
 /* H2: the HUD name never breaks after the dot: one line, font stepped down to 16 css; only below that the faction goes to line 2 without the dot */
 function u354hn(){try{if(!UI354)return;var b=document.querySelector('.hud1 .who b');if(!b)return;var t=b.textContent;if(b.getAttribute('data-u354n')===t&&b.style.fontSize)return;
  var h=b.closest('.hud1'),o=h&&h.querySelector('.ordc'),hr=h.getBoundingClientRect(),or=o&&o.getBoundingClientRect(),lim=((or&&getComputedStyle(o).visibility!=='hidden'&&or.width>2&&or.left>b.getBoundingClientRect().left)?or.left:hr.right)-b.getBoundingClientRect().left-4;
- var fs=20;b.style.setProperty('font-size','20px','important');while(b.getBoundingClientRect().width>lim&&fs>16){fs--;b.style.setProperty('font-size',fs+'px','important')}
- if(b.getBoundingClientRect().width>lim){var m=t.match(/^(.*?)\s*·\s*(.*)$/);if(m){b.style.setProperty('white-space','normal','important');b.style.setProperty('width','auto','important');b.innerHTML='';b.appendChild(document.createTextNode(m[1]));b.appendChild(document.createElement('br'));b.appendChild(document.createTextNode(m[2]))}}
+ /* BN-358r: never two lines. The HUD re-render puts back the one-line name every ~1 s, so the old line-2 split flipped #top 107 <-> 120 css (page jump at 360 px, CS 20).
+    Now: one line, 20 -> 14 css; still too wide -> ellipsis at the limit. Re-applied in the same task as any #top change (MutationObserver), so no unfitted frame is painted. */
+ b.style.removeProperty('max-width');b.style.removeProperty('overflow');b.style.removeProperty('text-overflow');b.style.removeProperty('white-space');b.style.removeProperty('width');
+ var fs=20;b.style.setProperty('font-size','20px','important');while(b.getBoundingClientRect().width>lim&&fs>14){fs--;b.style.setProperty('font-size',fs+'px','important')}
+ if(b.getBoundingClientRect().width>lim){b.style.setProperty('max-width',Math.max(40,Math.floor(lim))+'px','important');b.style.setProperty('overflow','hidden','important');b.style.setProperty('text-overflow','ellipsis','important')}
  b.setAttribute('data-u354n',b.textContent)}catch(e){}}
 try{setInterval(function(){u354fill();u354hn()},300)}catch(e){}
+try{if(UI354){var u354hnO=function(){var t=document.getElementById('top');if(!t){setTimeout(u354hnO,200);return}new MutationObserver(function(){u354hn()}).observe(t,{childList:true,subtree:true,characterData:true})};u354hnO()}}catch(e){}
 function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div class="card"|<button|$)/g);return m&&m[i]?m[i]:null}
 (function(){try{
  var st=document.createElement('style');st.id='u354css2';st.textContent=
@@ -30052,6 +30195,7 @@ function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div cl
   var tl=g.querySelectorAll('.pkb');if(bi<0||!tl[bi])return;tl[bi].classList.add('u354rb');tl[bi].style.gridRow=String(Math.floor(bi/3)+1);tl[bi].style.gridColumn=String(bi%3+1);g.insertAdjacentHTML('beforeend','<span class="u354rbn" style="grid-row:'+(Math.floor(bi/3)+1)+';grid-column:'+(bi%3+1)+'">'+pc('rib_best',140)+'<em>Hời nhất</em></span>')}
  function go(){if(!RDY)return;try{eHub()}catch(e){}try{eHome()}catch(e){}
   var s=sheet(),t=title();
+  try{if(s){if(t!=='Kho đồ')s.classList.remove('u354inv');if(t!=='Cảng Biển')s.classList.remove('u354port')}}catch(e){}/* BN-354u4: sheet-only marker classes must not outlive their sheet */
   try{if(s&&t){if(t==='Chiến Lệnh'||s.querySelector('.sptrack'))eCl(s);if(t==='Tuần Tra')ePat(s);if(t==='Lôi Đài'){eArena(s);eArena2(s);eArena3(s)}if(t==='Quân Sư Kế')eKe(s);if(t==='Tửu Quán'){eTav(s);eTav2(s)}if(t==='Gói Nạp Đầu')ePack(s);eEmpty(s);if(t==='Cảng Biển')ePort(s);if(t==='Kho đồ')eInv(s);if(t==='Nhiệm vụ ngày')eDaily(s);if(s.querySelector('.pkg'))eVip(s)}}catch(e){}
   try{eBoss();eBoss2();if(main())eEmpty(main())}catch(e){}
   try{if(s)ePh(s);if(main())ePh(main())}catch(e){}}
@@ -30773,4 +30917,854 @@ function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div cl
    im.src='art/ui/kit/kit_r6.webp'}).catch(function(){})}
  boot();
 }catch(e){}})();
+/* V301 BN-354hf2-c (coder-2): Huy's feedback 2, art's fix lists A + B and the 5-tier button ladder. Display only, behind the UI354 switch (ui354c1.js). Off = nothing here runs.
+   A. Tướng tab top panel: one plaque_dark frame (header + 4 round icon buttons + divider + filter chips + troop groove); Bảo Khố uses the than_ngoc_bua icon.
+   B. Small popups (#modal.w4S): sheet_frame 9-slice 316 wide, banner title 230 x 46 riding the top edge, item/hero subject row on confirms, Hủy | primary equal width, scrim above the HUD.
+   Ladder: P = btn_primary, S = row_shop, T = chip_price / chip_price_on, D = btn_price (real losses only), I = round_bronze / round_gold. Applied to every .sbar button of every sheet and popup.
+   Rects, slices and sizes come from the kit jsons at runtime; art is shipped art only; no text, price, action or save change (the subject row repeats the existing sell value). Idempotent DOM pass (MutationObserver, rAF-debounced). */
+(function(){try{
+ if(typeof UI354==='undefined'||!UI354)return;
+ if(/[?#&]hf2=0(\D|$)/.test((location.search||'')+(location.hash||'')))return;
+ var D=document,H=D.documentElement,K={},RDY=0,tries=0;
+ function J(u){return fetch(u).then(function(r){if(!r.ok)throw 0;return r.json()})}
+ function I(u){return new Promise(function(ok,no){var i=new Image();i.onload=function(){ok(i)};i.onerror=no;i.src=u})}
+ function crop(img,r){return new Promise(function(ok){try{var c=D.createElement('canvas');c.width=r[2];c.height=r[3];c.getContext('2d').drawImage(img,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);c.toBlob(function(b){ok(b?URL.createObjectURL(b):'')})}catch(e){ok('')}})}
+ var NEED={'art/ui/kit/kit.webp':['plaque_dark','divider','round_bronze_normal','round_bronze_pressed','round_gold_normal','round_gold_pressed','btn_primary_normal','btn_primary_pressed','btn_primary_disabled','btn_price_normal','btn_price_pressed','sheet_frame','banner'],
+  'art/ui/kit/kit_r3.webp':['goal_chip_plate'],'art/ui/kit/kit_r4b.webp':['row_shop','chip_price','chip_price_on']};
+ var IMG={};
+ function boot(){
+  var P4b=(typeof KITR4B!=='undefined')?Promise.resolve(KITR4B):J('art/ui/kit/kit_r4b.json').then(function(j){return j.kit.pieces});
+  var pk=function(u){return J(u).then(function(j){return j.kit.pieces}).catch(function(){return{}})};
+  Promise.all([pk('art/ui/kit/kit.json'),pk('art/ui/kit/kit_r3.json'),P4b.catch(function(){return{}})]).then(function(js){
+   var src={'art/ui/kit/kit.webp':js[0],'art/ui/kit/kit_r3.webp':js[1],'art/ui/kit/kit_r4b.webp':js[2]},files={};
+   Object.keys(NEED).forEach(function(f){NEED[f].forEach(function(n){var p=src[f][n];if(!p||!p.r)return;K[n]={r:p.r,css:p.css||[p.r[2]/3,p.r[3]/3],slice:p.slice,f:f};files[f]=1})});
+   return Promise.all(Object.keys(files).map(function(f){return I(f).then(function(im){IMG[f]=im},function(){})})).then(function(){
+    return Promise.all(Object.keys(K).map(function(n){var im=IMG[K[n].f];if(!im)return null;return crop(im,K[n].r).then(function(u){if(u){K[n].u=u;H.style.setProperty('--k9-'+n,'url('+u+')')}})}))}).then(function(){buildCss();RDY=1;H.classList.add('u354k9');sched()})}).catch(function(){})}
+ function ok(n){return!!(K[n]&&K[n].u)}
+ /* 9-slice border-image from the json: slice = [l,t,r,b] atlas px, caps at atlas/3 css (native). Horizontal-only pieces (t = b = 0) keep zero vertical borders. */
+ function bi(n,w){var k=K[n];if(!k||!k.u||!k.slice)return'';var s=k.slice,c=s.map(function(v){return v/3});
+  var bw=[c[1],c[2],c[3],c[0]].map(function(v){return v.toFixed(2)+'px'}).join(' ');
+  return'border-style:solid!important;border-color:transparent!important;border-width:'+bw+'!important;border-image:var(--k9-'+n+') '+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+' fill / '+bw+' stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important'}
+ function cap(n){var k=K[n];return k&&k.slice?k.slice[0]/3:16}
+ function fixed(n,w,h){return'background:var(--k9-'+n+') center/100% 100% no-repeat!important;width:'+w+'px;height:'+h+'px'}
+ var SANS='var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif)',SERIF='var(--ds-fd,Philosopher,"Times New Roman",Georgia,serif)';
+ var st=null,BTNPAD=12.5;
+ function buildCss(){
+  var M='html.u354k9 body #main#main#main ',G=M+'.gsp',c='';
+  var rk=K.round_bronze_normal?K.round_bronze_normal.r:[0,0,136,138],rh=(58*rk[3]/rk[2]).toFixed(1);
+  /* ---- A. Tướng panel ---- */
+  c+=G+'{'+bi('plaque_dark')+';margin:0 0 12px!important;padding:0 6px 4px!important;position:relative;display:block}'+
+   G+' .gtray{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:8px 0 0!important;border-radius:0!important}'+
+   G+' .gsh{display:flex;align-items:center;gap:8px;margin:0 0 6px!important;min-height:30px}'+
+   G+' .gsh b{font:700 20px/1.1 '+SERIF+'!important;color:#e8c27a!important;white-space:nowrap;text-shadow:0 1px 2px #000}'+
+   G+' .gsh .gc{'+bi('chip_price')+';height:26px;min-width:62px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:0 2px!important;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;white-space:nowrap;margin:0}'+
+   G+' .gsh .gp{display:none!important}'+
+   /* four round icon buttons */
+   G+'>.row{display:grid!important;align-items:start!important;grid-template-columns:repeat(4,1fr);gap:0!important;margin:0!important;padding:0!important}'+
+   G+'>.row>button.btn[data-a][data-b]{position:relative;display:flex!important;flex-direction:column;align-items:center;justify-content:flex-start!important;gap:4px!important;height:auto!important;min-height:0!important;padding:0 0 2px!important;margin:0!important;border:0!important;border-image:none!important;border-radius:0!important;background:none!important;box-shadow:none!important;'+
+     'font:700 13px/16px '+SANS+'!important;color:#f3e3c0!important;text-shadow:0 1px 0 #1a0f06,0 0 2px #000!important;white-space:nowrap;filter:none!important;animation:none!important}'+
+   /* BN-354u1 fix 1: the label sits in a fixed 16 css box, 6 css under the medallion (gap 4 + 2), so a stacked diacritic cannot move one label */
+   G+'>.row>button.btn>.u9lb{display:block;flex:none;height:16px;line-height:16px;margin-top:2px;overflow:visible}'+
+   G+'>.row>button.btn::before,'+G+'>.row>button.btn::after{display:none!important;content:none!important}'+
+   G+'>.row>button.btn[data-a="form"]{color:#f6d77d!important}'+
+   G+' .u9m{position:relative;display:flex;align-items:center;justify-content:center;width:58px;height:'+rh+'px;flex:none;'+(ok('round_bronze_normal')?'background:var(--k9-round_bronze_normal) center/100% 100% no-repeat':'')+'}'+
+   G+' .u9m.g{'+(ok('round_gold_normal')?'background-image:var(--k9-round_gold_normal)':'')+'}'+
+   G+'>.row>button.btn:active .u9m{background-image:var(--k9-round_bronze_pressed)}'+G+'>.row>button.btn:active .u9m.g{background-image:var(--k9-round_gold_pressed)}'+
+   G+' .u9m img{width:36px;height:36px;display:block;margin-top:-2px}'+
+   G+'>.row>button.btn>i.fldot{position:absolute!important;top:0!important;right:calc(50% - 33px)!important;left:auto!important}'+
+   G+'>.row>button.btn>.dstq{display:none!important}'+
+   G+'>.row::after{content:"";grid-column:1/-1;display:block;width:min(330px,100%);height:19px;margin:8px auto 0;'+(ok('divider')?'background:var(--k9-divider) center/100% 100% no-repeat':'')+'}'+
+   /* filter row: T chips */
+   G+' .gtr1{display:flex!important;align-items:center;gap:8px;margin:0!important;padding:0!important;flex-wrap:nowrap;justify-content:space-between}'+
+   G+' .gtr1>button{'+bi('chip_price')+';height:32px!important;min-height:0!important;min-width:0;box-sizing:border-box;display:inline-flex!important;align-items:center;justify-content:center;gap:4px;padding:0 2px!important;margin:0!important;'+
+     'font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;white-space:nowrap;text-shadow:0 1px 0 #1a0f06;flex:none;width:auto}'+
+   G+' .gtr1>.gsort{width:96px}'+G+' .gtr1>.dsphe{width:112px}'+G+' .gtr1>.u5lo{width:74px;margin-left:0!important}'+
+   '@media(max-width:370px){'+G+' .gtr1>.gsort{width:88px}'+G+' .gtr1>.dsphe{width:104px}'+G+' .gtr1>.u5lo{width:68px}}'+
+   G+' .gtr1>.u5lo::after{content:"\\25BE";position:static!important;display:inline;min-height:0!important;left:auto!important;right:auto!important;top:auto!important;line-height:1;font-size:11px;margin-left:4px;width:auto;height:auto;background:none!important;border:0!important;transform:none!important}'+
+   'html.u354k9.u5fx body #main#main#main .gsp .gtr1>.u5lo{'+bi('chip_price_on')+';color:#e8c27a!important}'+
+   G+' .gtr1>.dsphe .u9tk{width:16px;height:16px;flex:none}'+
+   /* faction picker (opened by Phe) */
+   G+' .gtools{margin:8px 0 0!important}'+
+   G+' .gtools .dsfac{gap:6px}'+
+   G+' .gtools .dsfac .chip{'+bi('chip_price')+';height:32px!important;min-height:0!important;padding:0 2px!important;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;display:inline-flex;align-items:center;gap:4px}'+
+   G+' .gtools .dsfac .chip.on{'+bi('chip_price_on')+';color:#e8c27a!important}'+
+   /* troop groove: Tất cả + 8 icons in one bar (labelled wrapped chips return with Lọc, as before) */
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc{display:grid!important;grid-template-columns:54px repeat(8,minmax(0,1fr));align-items:center;gap:0!important;flex-wrap:nowrap;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;'+
+     bi('goal_chip_plate')+';height:40px;box-sizing:border-box;margin:0!important;padding:0!important;column-gap:0}'+
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip{height:40px!important;min-height:0!important;min-width:0!important;max-width:100%;width:100%;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;font-size:0!important;position:relative}'+
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip img.ti300{width:26px!important;height:26px!important;margin:0!important;position:relative;z-index:1}'+
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip.on:not([data-v="all"])::before{content:"";position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-17px 0 0 -17px;'+(ok('round_gold_normal')?'background:var(--k9-round_gold_normal) center/100% 100% no-repeat':'')+'}'+
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip[data-v="all"]{'+bi('chip_price')+';height:28px!important;width:54px;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;justify-self:start}'+
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip[data-v="all"].on{'+bi('chip_price_on')+';color:#e8c27a!important}'+
+   /* Lọc open: the labelled wrapped chips use the same T chips */
+   'html.u354k9.u5.u5fx body #main#main#main .gsp .gtools .c2tc .chip{'+bi('chip_price')+';height:32px!important;min-height:0!important;padding:0 2px!important;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;display:inline-flex!important;align-items:center;gap:4px}'+
+   'html.u354k9.u5.u5fx body #main#main#main .gsp .gtools .c2tc .chip.on{'+bi('chip_price_on')+';color:#e8c27a!important}'+
+   /* troop order as in art's mock: shield, spear, armoured cav, light cav, bow, catapult, strategist, drum (display order only) */
+   ['shd','pik','hvy','rdr','arc','sge','str','drm'].map(function(v,i){return'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip[data-v="'+v+'"]{order:'+(i+1)+'}'}).join('')+
+   'html.u354k9.u5:not(.u5fx) body #main#main#main .gsp .gtools .c2tc .chip[data-v="all"]{order:0}';
+  /* BN-354u1 fix 4: hero card subtitle on one line (12 px, ellipsis); room for the red badge when it shows */
+  c+=M+'.hc>small{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;font-size:12px!important;max-width:100%;box-sizing:border-box}'+
+   M+'.hc>small:has(>i.eq247d){padding-right:20px!important}';
+  /* ---- B. small popups ---- */
+  var PS='html.u354k9 #modal#modal #sheet#sheet#sheet#sheet#sheet#sheet ',MS='html.u354k9 body #modal.w4#modal>#sheet#sheet.u9pop#sheet',cf=cap('sheet_frame');
+  c+='html.u354k9 body #modal.modal.w4#modal:has(>#sheet.u9pop){z-index:39!important;background:rgba(0,0,0,.7)!important;align-items:center!important}'+
+   MS+'{'+bi('sheet_frame')+';width:min(316px,calc(100vw - 60px))!important;max-width:min(316px,calc(100vw - 60px))!important;max-height:none!important;overflow:visible!important;padding:21px 0 20px!important;margin:22px 0 0!important;box-sizing:border-box;position:relative}'+
+   MS+'::before{display:none!important}'+
+   MS+'>.snav{position:absolute!important;top:-'+(18+cf).toFixed(1)+'px!important;left:0;right:0;min-height:0!important;height:46px;padding:0!important;margin:0!important;display:flex!important;justify-content:center;align-items:flex-start;background:none!important;border:0!important}'+
+   MS+'>.snav>.snb,'+MS+'>.snav>.w4x,'+MS+'>.snav>.w4org{display:none!important}'+/* BN-354i2: "Về Kho đồ" (w4org) sat on the banner when the popup is opened from a sheet; Hủy goes back */
+   MS+'>.snav>h3{'+bi('banner')+';width:230px!important;height:46px!important;min-height:0!important;margin:0!important;padding:0 0 4px!important;box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;font:700 18px/1 '+SERIF+'!important;color:#fff0d6!important;'+
+     '-webkit-text-stroke:3px #5a0f0f;paint-order:stroke fill;text-shadow:none!important;white-space:nowrap;letter-spacing:0!important}'+
+   MS+' .u3q,'+MS+'>p{font:400 14px/1.35 '+SANS+'!important;color:#f3e3c0!important;text-align:center;margin:0 0 4px!important}'+
+   MS+' .sm.mute{text-align:center}'+
+   MS+' .u9sj{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 14px;padding:0 2px}'+
+   MS+' .u9sj .i9t{flex:none}'+
+   MS+' .u9sj .u9tx{display:flex;flex-direction:column;gap:6px;min-width:0}'+
+   MS+' .u9sj .u9nm{font:700 16px/1.2 '+SANS+';overflow-wrap:anywhere}'+
+   MS+' .u9sj .u9tx{align-items:flex-start}'+
+   MS+' .u9sj .u9pr{display:flex;align-items:center;gap:6px;font:400 14px/1 '+SANS+';color:#b0a088}'+
+   MS+' .u9sj .u9pr b{font:700 16px/1 '+SANS+';color:#fff}'+
+   MS+' .u9sj .u9pr img{width:20px;height:20px}'+
+   MS+' .u9sj .i9wf{flex:none}'+
+   MS+' .sbar,'+MS+'>.row{position:static!important;display:grid!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:12px!important;margin:18px 0 0!important;padding:0!important;background:none!important;box-shadow:none!important}'+
+   MS+' .sbar,'+MS+'>.row{margin-left:'+(BTNPAD)+'px!important;margin-right:'+(BTNPAD)+'px!important}'+
+   MS+' .sbar .btn,'+MS+'>.row>.btn{min-width:0!important;width:auto!important}'+
+   MS+' .sbar .btn.alt,'+MS+'>.row>.btn.alt{order:-1}';
+  /* ---- ladder, every .sbar / popup button (classes set by the DOM pass) ---- */
+  var B=PS+'.btn.u9b';
+  c+=B+' .u9l{position:relative;display:inline-block;line-height:1;top:var(--k9-ly,0px)}'+B+':not(.alt):not(.u9d){--k9-ly:-6px}'+B+'.alt{position:relative!important;top:-8.5px}';
+  c+=B+'{box-sizing:border-box!important;height:48px!important;min-height:48px!important;padding:0 2px 3px!important;margin:0!important;display:flex!important;align-items:center;justify-content:center;white-space:nowrap!important;letter-spacing:0!important;filter:none!important}'+
+   B+':not(.alt):not(.u9d){'+bi('btn_primary_normal')+';font:700 16px/1 '+SANS+'!important;color:#3b2208!important;text-shadow:none!important}'+
+   B+':not(.alt):not(.u9d):active{'+bi('btn_primary_pressed')+'}'+
+   B+':not(.alt):not(.u9d)[disabled]{'+bi('btn_primary_disabled')+';color:#464646!important;opacity:1!important}'+
+   B+'.alt{'+bi('row_shop')+';font:700 15px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:0 1px 0 #1a0f06,0 0 2px #000!important;padding:0 2px!important}'+
+   B+'.alt[disabled]{color:#464646!important;opacity:1!important}'+
+   B+'.u9d{'+bi('btn_price_normal')+';font:700 16px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:0 1px 0 #4a0c0c,0 0 2px #4a0c0c!important}'+
+   B+'.u9d:active{'+bi('btn_price_pressed')+'}';
+  c+=PS+'.btn.u9t{'+bi('chip_price')+';box-sizing:border-box!important;height:32px!important;min-height:32px!important;min-width:74px;padding:0 2px 1px!important;margin:0!important;display:inline-flex!important;align-items:center;justify-content:center;white-space:nowrap!important;font:700 13px/1 '+SANS+'!important;color:#f3e3c0!important;text-shadow:0 1px 0 #1a0f06!important}'+
+   PS+'.btn.u9t[disabled]{color:#464646!important;opacity:1!important}';
+  if(!st){st=D.createElement('style');st.id='u354c9css';D.head.appendChild(st)}st.textContent=c}
+ /* ---------------- DOM pass ---------------- */
+ var ICO={form:'formation',tavern:'tavern',inv:'storage',baokho:'than_ngoc_bua'};
+ var DANGER={reset:1,hon211r:1};   /* real losses only: delete save / dismiss a hero */
+ function icoImg(n,px){try{var u=typeof kitIco==='function'&&kitIco(n);return u?'<img src="'+u+'" width="'+px+'" height="'+px+'" alt="" aria-hidden="true">':''}catch(e){return''}}
+ var miss=0;
+ /* BN-354u2 B1: card subtitle shows only "Bậc N" (the troop socket on the portrait already shows the troop) */
+ function subT(m){m.querySelectorAll('.hc>small').forEach(function(sm){var n=[].filter.call(sm.childNodes,function(x){return x.nodeType===3&&/Bậc\s*\d/.test(x.textContent)})[0];if(!n)return;var mm=n.textContent.match(/Bậc\s*\d+/);if(mm&&n.textContent!==mm[0])n.textContent=mm[0]})}
+ function eTuong(m){try{subT(m)}catch(e){}var g=m.querySelector('.gsp');if(!g)return;
+  var tray=m.querySelector('.gtray');if(tray&&tray.parentNode!==g)g.appendChild(tray);
+  var row=g.querySelector(':scope>.row');if(!row)return;
+  row.querySelectorAll(':scope>button.btn[data-a]').forEach(function(b){var a=b.getAttribute('data-a'),n=ICO[a];if(!n)return;
+   try{if(b.style.fontSize)b.style.removeProperty('font-size')}catch(e){}
+   if(!b.querySelector(':scope>.u9lb')){var tn=[].filter.call(b.childNodes,function(n){return n.nodeType===3&&n.textContent.trim()})[0];if(tn){var lb=D.createElement('span');lb.className='u9lb';lb.textContent=tn.textContent.trim();b.replaceChild(lb,tn)}}
+   if(b.querySelector('.u9m'))return;var im=icoImg(n,36);if(!im){miss=1;return}
+   b.insertAdjacentHTML('afterbegin','<span class="u9m'+(a==='form'?' g':'')+'" aria-hidden="true">'+im+'</span>')})}
+ function hasQ(c){return c&&typeof c==='object'}
+ /* subject row of a confirm: item (sell) or hero (awaken / buy shard); text of the question stays untouched */
+ function subject(s){if(s.querySelector('.u9sj'))return;var q=s.querySelector('.u3q');if(!q)return;var h='';
+  try{
+   if(s.querySelector('[data-a="i9cfok"]')&&typeof I9U!=='undefined'&&hasQ(I9U.cf)&&I9U.cf.a==='i9_sell'){var it=itemById(+I9U.cf.v);
+    if(it){var pr=i9SellRet(it,false),qc=I9QC[it.q]||'#f3e3c0',co=icoImg('coin_square',20);
+     h='<div class="u9sj">'+i9Tile(it,64,{nowner:1})+'<div class="u9tx"><span class="u9nm" style="color:'+qc+'">'+esc(i9Nm(it))+'</span><span class="u9pr">Bán được '+co+'<b>'+fmt(pr)+'</b></span></div></div>'}}
+   else if(s.querySelector('[data-a="u3cfok"]')&&typeof U3!=='undefined'&&hasQ(U3.cf)&&/^h9_(aw|shop)$/.test(U3.cf.a||'')&&GENS[U3.cf.v]){
+    h='<div class="u9sj">'+i9Face(U3.cf.v,64)+'<div class="u9tx"><span class="u9nm" style="color:#f3e3c0">'+esc(GENS[U3.cf.v].n)+'</span></div></div>'}
+  }catch(e){h=''}
+  if(h){q.insertAdjacentHTML('beforebegin',h);
+   /* BN-354u1 (designer bn354-khodo-filters.md 4): sell popup text; the item row above already shows the name and the price */
+   try{if(typeof I9U!=='undefined'&&hasQ(I9U.cf)&&I9U.cf.a==='i9_sell'&&s.querySelector('[data-a="i9cfok"]')){var t3=s.querySelector('.snav>h3');if(t3)t3.textContent='Bán vật phẩm';q.textContent='Bán vật phẩm này?';q.insertAdjacentHTML('afterend','<div class="sm mute">Không thể hoàn tác.</div>')}}catch(e){}}}
+ function wrapLbl(b){var n=b.childNodes;if(n.length===1&&n[0].nodeType===1&&n[0].classList.contains('u9l'))return;
+  var ok=n.length>0;for(var i=0;i<n.length;i++)if(n[i].nodeType!==3)ok=false;if(!ok)return;
+  var sp=D.createElement('span');sp.className='u9l';sp.textContent=b.textContent;b.textContent='';b.appendChild(sp)}
+ function ePop(s){
+  s.querySelectorAll('.sbar .btn,:scope>.row>.btn').forEach(function(b){if(b.classList.contains('w4x')||b.classList.contains('snb'))return;
+   wrapLbl(b);b.classList.add('u9b');var a=b.getAttribute('data-a')||'';if(DANGER[a])b.classList.add('u9d')});
+  s.querySelectorAll('.flsl .btn').forEach(function(b){b.classList.add('u9t')});
+  var m=D.getElementById('modal');if(m&&m.classList.contains('w4S')&&s.classList.contains('w4own'))subject(s)}
+ function isPop(s,m,t){return!!m&&m.classList.contains('w4')&&t!=='Hòm thư'&&((m.classList.contains('w4S')&&s.classList.contains('w4own'))||s.classList.contains('u6pop'))}
+ function go(){if(!RDY)return;miss=0;
+  try{var m=D.getElementById('main');if(m)eTuong(m)}catch(e){}
+  try{var s=D.getElementById('sheet'),md=D.getElementById('modal');if(s&&md&&!md.hidden&&s.innerHTML.length>20){var h3=s.querySelector('h3'),pp=isPop(s,md,h3?h3.textContent.trim():'');s.classList.toggle('u9pop',pp);ePop(s)}else if(s)s.classList.remove('u9pop')}catch(e){}
+  if(miss&&tries++<20)setTimeout(sched,400)}
+ var q=0;function sched(){if(q)return;q=1;requestAnimationFrame(function(){q=0;try{go()}catch(e){}})}
+ function obs(){var m=D.getElementById('main'),s=D.getElementById('sheet'),mo=D.getElementById('modal');if(!m||!s){setTimeout(obs,100);return}
+  var o=new MutationObserver(sched);[m,s].forEach(function(x){o.observe(x,{childList:true,subtree:true})});if(mo)o.observe(mo,{attributes:true,attributeFilter:['hidden','class']});sched()}
+ boot();obs();
+ window.u354c9=function(){return{K:K,rdy:RDY}}
+}catch(e){if(window.console)console.warn('ui354c9',e)}})();
+/* ===== V301 BN-354hf3-c (coder): Kho đồ rework (art fix list docs/art/pipeline/BN-354/huy_feedback_3_khodo.md) + Huy's item-type filter row.
+   Switch UI354 only; display only: no save field, no new action name (the filter row uses its own click listener, state lives in this closure and resets when the sheet closes).
+   Runs after ui354c3.js eInv (needs its .u354hk header plate). Art: kit_r4b chip_price/_on, kit_r3 goal_chip_plate, kit round_gold_normal, kit_r5 ico_mail, kit_r4 slot and cat pieces, k_close.webp, k_badge.webp. ===== */
+(function(){try{
+ if(typeof UI354==='undefined'||!UI354)return;
+ var D=document,H=D.documentElement,K={},Z={},RDY=0,F='all',LT='',st=null;
+ var SRC={'art/ui/kit/kit_r4b':['chip_price','chip_price_on'],'art/ui/kit/kit_r3':['goal_chip_plate','empty_list'],'art/ui/kit/kit_r2':['ico_tuong','ico_binhchung','ico_trangbi','socket_off'],'art/ui/kit/kit':['round_gold_normal'],'art/ui/kit/kit_r5':['ico_mail'],'art/ui/kit/kit_r4':['slot_wp','slot_ar','slot_hr','slot_tl','cat_gear','cat_mat']};
+ /* filter order as Huy listed it: all, weapon, armour, horse, talisman (I9B.slots keys) */
+ var FT=[['wp','slot_wp','Binh Khí'],['ar','slot_ar','Giáp Trụ'],['hr','slot_hr','Chiến Mã'],['tl','slot_tl','Bảo Vật']];
+ /* BN-354u1 (designer bn354-khodo-filters.md): Nguyên liệu tab groups, same row with 3 sockets */
+ var FM=[['tu','ico_tuong','Tướng'],['bi','ico_binhchung','Binh'],['tb','ico_trangbi','Trang bị']],MG={'Thức Tỉnh Ngọc':'tu','Binh Thư':'bi','Binh Phù':'bi','Thiên Mệnh Phù':'bi','Lệnh Bảo Đảm':'bi','Đá Khắc':'tb','Thần Binh Hạch':'tb'};
+ function crop(img,r){return new Promise(function(ok){try{var c=D.createElement('canvas');c.width=r[2];c.height=r[3];c.getContext('2d').drawImage(img,r[0],r[1],r[2],r[3],0,0,r[2],r[3]);c.toBlob(function(b){ok(b?URL.createObjectURL(b):'')})}catch(e){ok('')}})}
+ function boot(){Promise.all(Object.keys(SRC).map(function(f){return fetch(f+'.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){var P=j.kit.pieces;
+   return new Promise(function(ok){var im=new Image();im.onload=function(){Promise.all(SRC[f].map(function(n){var p=P[n];if(!p||!p.r)return 0;return crop(im,p.r).then(function(u){if(u){K[n]=u;Z[n]=p.css||[p.r[2]/3,p.r[3]/3];H.style.setProperty('--k10-'+n,'url('+u+')')}})})).then(ok,ok)};im.onerror=function(){ok()};im.src=f+'.webp'})}).catch(function(){})})).then(function(){
+   if(!K.chip_price)return;st=D.createElement('style');st.id='u354c10css';st.textContent=css();D.head.appendChild(st);H.classList.add('u354k10');RDY=1;sched()})}
+ /* BN-354i2: ui354c3 never removes .u354inv from #sheet, so scope to the Kho đồ content (.i9ch) or every later sheet loses its title bar and close */
+ function css(){var S='html.u354k10 #sheet.u354inv:has(.u354hk)',T='-webkit-text-stroke:1px #140b05;paint-order:stroke fill;';return ''+
+  /* one 16 css margin (sheet border 14 + 2), plate 14 css from the top, the empty title bar goes */
+  S+'{border-top-width:14px!important;padding:0 2px 4px!important}'+S+'>.snav{display:none!important}'+
+  /* 1-3 header plate: title + count, close on the plate */
+  S+' .u354hk{margin:0!important}'+S+' .u354hk .u354hkn{top:0;bottom:0;transform:none;width:44%}'+
+  S+' .u354hk .u354hkn b{position:absolute;left:0;top:calc(43% - 20px);font:700 24px/1 Philosopher,"Times New Roman",Georgia,serif;color:#f2cf7c;'+T+'text-shadow:0 2px 4px #000;white-space:nowrap}'+
+  S+' .u354hk .u354hkn span{position:absolute;left:0;top:calc(43% + 12px);font:700 15px/1 var(--fb,system-ui,sans-serif);color:#f3e3c0;'+T+'text-shadow:0 1px 3px #000;white-space:nowrap}'+
+  '.u10x{position:absolute;top:8px;right:8px;width:34px;height:34px;padding:0;border:0;background:url(art/ui/k_close.webp) center/contain no-repeat;cursor:pointer;z-index:2}.u10x::after{content:"";position:absolute;inset:-5px}.u10x:active{transform:scale(.94)}'+
+  /* 4 Hòm thư chip on the plate picture */
+  '.u10m{position:absolute;right:14px;bottom:13px;width:92px;height:28px;padding:0 0 0 9px;border:0;background:none;display:flex;align-items:center;gap:4px;isolation:isolate;cursor:pointer;z-index:2}'+
+  '.u10m::before{content:"";position:absolute;inset:0;z-index:-1;border:solid transparent;border-width:0 15.3px;border-image:var(--k10-chip_price) 0 46 fill/0 15.3px stretch}.u10m:active::before{border-image-source:var(--k10-chip_price_on)}'+
+  '.u10m i{flex:none;width:20px;height:20px;background:var(--k10-ico_mail) center/contain no-repeat}'+
+  '.u10m b{font:700 12px/1 var(--fb,system-ui,sans-serif);color:#f3e3c0;'+T+'white-space:nowrap}'+
+  '.u10m em{position:absolute;top:-6px;right:-6px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;background:url(art/ui/k_badge.webp) center/contain no-repeat;font:700 11px/1 var(--fb,system-ui,sans-serif);font-style:normal;color:#fff;text-shadow:0 1px 1px #000}'+
+  /* 5 tabs: one chip_price groove, two segments, chip_price_on on the active one */
+  S+' .i9ch{position:relative;display:flex!important;flex-wrap:nowrap!important;gap:0!important;margin:10px 0 0!important;height:44px;padding:0 8px;isolation:isolate}'+
+  S+' .i9ch::before{content:"";position:absolute;inset:0;z-index:-1;border:solid transparent;border-width:0 24px;border-image:var(--k10-chip_price) 0 46 fill/0 24px stretch}'+
+  S+' .i9ch .i9c[data-a="i9mailo"]{display:none!important}'+
+  S+' .i9ch .i9c{position:relative;flex:1 1 0!important;min-width:0;height:44px!important;min-height:44px!important;margin:0!important;padding:0 4px!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center;justify-content:center;gap:6px;isolation:isolate;font:700 14px/1 var(--fb,system-ui,sans-serif)!important;color:#cdc0a8!important;'+T+'white-space:nowrap}'+
+  S+' .i9ch .i9c.on{color:#e8c27a!important}'+S+' .i9ch .i9c.on::before{content:"";position:absolute;left:0;right:0;top:5px;bottom:5px;z-index:-1;border:solid transparent;border-width:0 23.9px;border-image:var(--k10-chip_price_on) 0 59 fill/0 23.9px stretch}'+
+  S+' .i9ch .i9c .u354pc{width:28px!important;height:28px!important;margin:0!important;background-size:contain!important;background-position:center!important;vertical-align:middle}'+
+  S+' .i9ch .i9c:not(.on) .u354pc{filter:saturate(.35);opacity:.7}'+
+  /* Huy: item-type filter row (Trang bị tab), the Tướng troop-bar look: goal_chip_plate groove, "Tất cả" chip, slot sockets, gold ring on the active one */
+  /* BN-354u1 6-8: groove 40 css (the Tướng troop groove height), 8 css under the tab groove; Tất cả 54 + 8 gap, the sockets split the rest into equal cells; the selected icon lights gold */
+  '.u10f{position:relative;display:flex;align-items:center;height:40px;margin:8px 0 0;padding:0 21.5px 0 8px;isolation:isolate}'+
+  '.u10f::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:-1;border:solid transparent;border-width:0 20px;border-image:var(--k10-goal_chip_plate) 0 54 fill/0 20px stretch}'+
+  '.u10f button{position:relative;height:40px;padding:0;margin:0;border:0;background:none;display:flex;align-items:center;justify-content:center;isolation:isolate;cursor:pointer}'+
+  '.u10f .u10a{flex:none;width:54px;margin-right:8px;font:700 13px/1 var(--fb,system-ui,sans-serif);color:#f3e3c0;'+T+'white-space:nowrap}'+
+  '.u10f .u10a::before{content:"";position:absolute;left:0;right:0;top:6px;bottom:6px;z-index:-1;border:solid transparent;border-width:0 15.3px;border-image:var(--k10-chip_price) 0 46 fill/0 15.3px stretch}'+
+  '.u10f .u10a.on{color:#e8c27a}.u10f .u10a.on::before{border-width:0 19.7px;border-image:var(--k10-chip_price_on) 0 59 fill/0 19.7px stretch}'+
+  '.u10f .u10s{flex:1 1 0;min-width:0}.u10f .u10s i{width:28px;height:28px;background:center/contain no-repeat;filter:saturate(.55) brightness(.85);opacity:.85}'+
+  /* BN-354u2 B2: padding-right 21.5 = cap inner edge (pixel-measured, 13.5 from the groove edge) + 8, so the visible gap chip -> first socket equals last socket -> end cap; Nguyên liệu sockets reuse the Trang bị ring (socket_off, same 28 css) with the colour icon inside */
+  '.u10f[data-tab="mat"] .u10s i{position:relative;background:var(--k10-socket_off) center/contain no-repeat}.u10f[data-tab="mat"] .u10s i::after{content:"";position:absolute;left:3px;right:3px;top:3px;bottom:3px;background:var(--ic) center/contain no-repeat}'+
+  /* BN-354u3 B2c: off state on the mat tab does not dim the ring; the icon goes light grey like the Trang bị glyphs */
+  '.u10f[data-tab="mat"] .u10s:not(.on) i{filter:none;opacity:1}.u10f[data-tab="mat"] .u10s:not(.on) i::after{filter:grayscale(1) brightness(1.3) contrast(1.1);opacity:.85}'+
+  '.u10f .u10s.on::before{content:"";position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;z-index:-1;background:var(--k10-round_gold_normal) center/contain no-repeat}'+
+  '.u10f .u10s.on i{filter:sepia(1) saturate(3) brightness(1.15);opacity:1}.u10f button:active{transform:scale(.95)}'+
+  S+' .i9r.u10h{display:none!important}'+
+  /* 9 "Túi đầy" on the chip_price 9-slice, full width x 32, no CSS border or fill */
+  S+' .i9wn{box-sizing:border-box;height:32px;margin:10px 0 0!important;padding:0 4px!important;display:flex;align-items:center;justify-content:center;text-align:center;border:solid transparent!important;border-width:0 15.3px!important;border-image:var(--k10-chip_price) 0 46 fill/0 15.3px stretch!important;border-radius:0!important;background:none!important;box-shadow:none!important;font:700 13px/1 var(--fb,system-ui,sans-serif)!important;color:#e8c27a!important;'+T+'white-space:nowrap}'+
+  /* 6 grid attached: 10 css under the control, 4 columns, gap 8, tiles fill the column */
+  S+' .i9g.i9g4{margin-top:10px;gap:8px!important}'+S+' .i9g4 .i9gi{padding:0!important;min-height:0!important}'+S+' .i9g4 .i9gi.u10h{display:none!important}'+
+  S+' .i9g4 .i9gi .i9t{width:100%!important;height:auto!important;aspect-ratio:1/1;min-height:0;max-width:none!important}'+
+  /* the frame at full tile size (slice 84 of 384 = 21.875 %), not a fixed 12 css 9-slice ring */
+  S+' .i9g4 .i9t:not(.i9e){border-image-width:21.875%!important}'+
+  /* 7 bead inset 12 % of the tile, "+n" 14 white with a dark stroke inside the frame's inner edge (frame border is 12 css) */
+  S+' .i9g4 .i9t .i9sb{left:-2px!important;top:-2px!important}'+
+  S+' .i9g4 .i9t .i9lv{right:0!important;bottom:-1px!important;font:800 14px/1 var(--fb,system-ui,sans-serif)!important;color:#fff!important;-webkit-text-stroke:1.5px #140b05;paint-order:stroke fill;text-shadow:0 1px 2px #000!important}'+
+  S+' .u10em{margin-top:10px}'+
+  /* empty state: ui354c3 eEmpty and ui354c7 both put a chest on the same .i9em (race) -> keep one */
+  S+' .i9em.u354em.u5em2>:not(:last-child)~:not(:last-child){display:none!important}'+
+  S+' .i9rows{margin-top:10px}'}
+ function slotOf(id){try{var it=itemById(+id);return it?I9B.slots[i9K(it.s)]:''}catch(e){return''}}
+ function emHtml(t){var z=Z.empty_list||[112,112],k=112/Math.max(z[0],z[1]);return'<i class="u10ep" style="display:block;width:'+(z[0]*k).toFixed(1)+'px;height:'+(z[1]*k).toFixed(1)+'px;background:var(--k10-empty_list) center/contain no-repeat"></i><span>'+t+'</span>'}
+ function applyF(s,tab){var g=tab==='gear'?s.querySelector('.i9g.i9g4'):s.querySelector('.i9rows');if(!g)return;var n=0;
+  if(tab==='gear')g.querySelectorAll('.i9gi[data-v]').forEach(function(b){var hide=F!=='all'&&slotOf(b.getAttribute('data-v'))!==F;b.classList.toggle('u10h',hide);if(!hide)n++});
+  else g.querySelectorAll('.i9r').forEach(function(r){var b=r.querySelector('.sp>b'),grp=MG[b?b.textContent.trim():'']||'',hide=F!=='all'&&grp!==F;r.classList.toggle('u10h',hide);if(!hide)n++});
+  var lab='';(tab==='gear'?FT:FM).forEach(function(t){if(t[0]===F)lab=t[2]});
+  var tx=tab==='gear'?'Chưa có '+lab.toLowerCase()+'.':'Chưa mở nguyên liệu '+lab.toLowerCase()+'.';
+  var em=s.querySelector('.u10em');
+  if(!n){if(!em){em=D.createElement('div');em.className='i9em u10em u354em';em.setAttribute('data-u354e','1');em.setAttribute('data-u5','1');g.parentNode.insertBefore(em,g.nextSibling)}
+   if(em.getAttribute('data-t')!==tx){em.setAttribute('data-t',tx);em.innerHTML=emHtml(tx)}}else if(em)em.remove();
+  s.querySelectorAll('.u10f button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-f')===F)})}
+ /* item art at 74 % of the tile (the sprite is sized in px, so scale it) */
+ function fitArt(s){var t=s.querySelector('.i9g4 .i9gi:not(.u10h) .i9t');if(!t)return;var w=t.getBoundingClientRect().width;if(!w)return;
+  var z=Math.round(.74*w*10)/10;
+  s.querySelectorAll('.i9g4 .i9t>.i9ic').forEach(function(ic){var px=parseFloat(ic.getAttribute('data-u10px')||ic.style.width)||70;if(!ic.getAttribute('data-u10px')){var bp=(ic.style.backgroundPosition||'').match(/-?[\d.]+/g)||[0,0];ic.setAttribute('data-u10px',px);ic.setAttribute('data-u10c',Math.round(-bp[0]/px)+','+Math.round(-bp[1]/px))}
+   var c=ic.getAttribute('data-u10c').split(',');ic.style.width=ic.style.height=z+'px';ic.style.backgroundSize=(z*4)+'px '+(z*10)+'px';ic.style.backgroundPosition=(-c[0]*z)+'px '+(-c[1]*z)+'px';ic.style.flex='none'})}
+ function pass(){if(!RDY)return;var s=D.querySelector('#sheet.u354inv:has(.u354hk)'),ch=s&&s.querySelector('.i9ch');if(!s||!ch){F='all';LT='';return}
+  var hk=s.querySelector('.u354hk');if(!hk)return;
+  if(!hk.querySelector('.u10x')){var x=D.createElement('button');x.className='u10x';x.setAttribute('data-a','close');x.setAttribute('aria-label','Đóng');hk.appendChild(x)}
+  if(!hk.querySelector('.u10m')){var ml=0;try{ml=i9Mail().length|0}catch(e){}var m=D.createElement('button');m.className='u10m';m.setAttribute('data-a','i9mailo');m.setAttribute('aria-label','Hòm thư'+(ml>0?' '+ml:''));
+   m.innerHTML='<i></i><b>Hòm thư</b>'+(ml>0?'<em>'+(ml>99?'99+':ml)+'</em>':'');hk.appendChild(m)}
+  if(!ch.getAttribute('data-u10')){ch.setAttribute('data-u10','1');
+   [['gear','cat_gear'],['mat','cat_mat']].forEach(function(z){var b=ch.querySelector('.i9c[data-v="'+z[0]+'"]');if(b&&!b.querySelector('.u354pc')&&K[z[1]])b.insertAdjacentHTML('afterbegin','<span class="u354pc" style="background-image:var(--k10-'+z[1]+')"></span>')})}
+  var tab=ch.querySelector('.i9c.on[data-v="mat"]')?'mat':'gear';if(tab!==LT){LT=tab;F='all'}
+  var g=tab==='gear'?s.querySelector('.i9g.i9g4'):s.querySelector('.i9rows');
+  if(tab==='mat'&&g&&(S.tlTok|0)>0&&!g.querySelector('.u10lb'))g.insertAdjacentHTML('beforeend','<div class="i9r u10lb"><span class="i9ri">'+(typeof twIc==='function'?twIc('refine',32):'')+'</span><span class="sp"><b>Lệnh Bảo Đảm</b><span class="sm mute">Thông Thiên Tháp</span></span><b class="u3h">'+fmt(S.tlTok|0)+'</b></div>');
+  var old=s.querySelector('.u10f');if(old&&old.getAttribute('data-tab')!==tab){old.remove();old=null}
+  if(g&&!old){var f=D.createElement('div');f.className='u10f';f.setAttribute('data-tab',tab);
+   var h='<button class="u10a" data-f="all" aria-label="Tất cả">Tất cả</button>';(tab==='gear'?FT:FM).forEach(function(t){h+='<button class="u10s" data-f="'+t[0]+'" aria-label="'+t[2]+'"><i style="'+(tab==='gear'?'background-image:var(--k10-'+t[1]+')':'--ic:var(--k10-'+t[1]+')')+'"></i></button>'});
+   f.innerHTML=h;f.addEventListener('click',function(e){var b=e.target.closest('button[data-f]');if(!b)return;e.stopPropagation();F=b.getAttribute('data-f');applyF(s,tab);if(tab==='gear')fitArt(s)});
+   ch.parentNode.insertBefore(f,ch.nextSibling)}
+  if(g){applyF(s,tab);if(tab==='gear')fitArt(s)}}
+ var q=0;function sched(){if(q)return;q=1;requestAnimationFrame(function(){q=0;try{pass()}catch(e){}})}
+ function obs(){var m=D.getElementById('modal');if(!m){setTimeout(obs,150);return}/* a close (hidden added: oldValue null) resets the filter, even when the sheet is reopened in the same task */
+  new MutationObserver(function(rs){for(var i=0;i<rs.length;i++)if(rs[i].target===m&&rs[i].attributeName==='hidden'&&rs[i].oldValue===null)F='all';sched()}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden'],attributeOldValue:true});addEventListener('resize',sched);sched()}
+ boot();obs();
+ window.u354c10=function(){return{K:K,rdy:RDY,f:F}}
+}catch(e){if(window.console)console.warn('ui354c10',e)}})();
+/* audio301.js (V301, AUD-1c, plan docs/code/audio-plan.md, design docs/design/audio.md §2 M4, §3, §6; files techart AUD-1t web/audio/).
+   Switch AUD: ?aud=1 (default OFF). Off = this file only defines AUD=0, AUD301 (stub) and a no-op snd(), and wraps nothing.
+   On: silent until the first user gesture (pointerdown/touchend/keydown, capture). That gesture creates/resumes the AudioContext (iOS:
+   inside the handler), plays a 1-sample silent buffer, primes the two music <audio> elements (play+pause, so later play() calls work on
+   iOS without a gesture) and decodes the sting sprite (decodeAudioData). Later taps re-resume a suspended/interrupted context.
+   Music: streamed <audio> elements (never decoded), two ping-pong elements of the same file for a gapless loop: when the playing one reaches
+   loop_end - tail, the other starts at loop_start (+ the tick's lateness, so the beat lines up) with an equal-power crossfade over tail.
+   Graph: el -> MediaElementSource -> xfade gain -> mBus (scene fade) -> duck -> mVol -> vis -> destination; sprites -> voice gain -> sVol -> vis.
+   file:// or no WebAudio: element.volume carries the same product (a MediaElementSource on file:// would be silent: tainted).
+   Scene 'battle' (M4): btPlay wrapper waits for BT.on (the first battle frame), starts the loop at full from 0 (intro once), never restarts
+   (speed buttons do not touch it). btPlay resolves: music fades 300 ms, duck, sting 'win' (res.win==='att' and not retreat) else 'lose',
+   then back to the scene before the battle (silence today) 600 ms after the sting.
+   Tab hidden: 200 ms fade, elements paused, context suspended; visible: resume. snd('id'[,o]) = sprite one-shot (no-op when off/locked/muted);
+   voice limit 10, 2 per id, 45 ms gap per id, steal lowest prio oldest.
+   Settings: per-device localStorage 'bn_aud' {m:0-10, s:0-10, mm:0/1, sm:0/1} (defaults m 7, s 8: audio.md §6.4), read in try/catch,
+   no save field. Card "Âm thanh" in Quân Đoàn › Cài đặt (gdCard 'aud') only when AUD is on; inline handlers audSet(), no action name.
+   Code at load never throws; every call is wrapped so audio can never stop the game or the battle loop. */
+var AUD=0;
+window.snd=function(){};
+var AUD301={on:0,log:[],err:0};
+(function(){try{var Q='';try{Q=location.search||''}catch(e){}if(/[?&]aud=1(\D|$)/.test(Q))AUD=1}catch(e){}})();
+(function(){try{
+ if(!AUD)return;
+ AUD301.on=1;
+ var BASE='audio/',KEY='bn_aud';
+ var CFG={music:{battle:{file:'m_battle.m4a',intro_ms:3466,loop_start_ms:3466,loop_end_ms:114683,tail:2.0,gain:0}},
+  sprites:{'sfx_sting.m4a':{win:[0,3500,1,3,0],lose:[3600,3500,1,3,0]}}};
+ var L=AUD301.log;function lg(k,o){try{o=o||{};o.k=k;o.t=Math.round(performance.now());L.push(o);if(L.length>400)L.shift()}catch(e){}}
+ function fail(w,e){AUD301.err++;lg('err',{w:w,e:String(e&&e.message||e)})}
+ function now(){try{return performance.now()}catch(e){return Date.now()}}
+ /* ---------- settings (per device) ---------- */
+ var ST={m:7,s:8,mm:0,sm:0};
+ function cl(v,d){v=Math.round(+v);return isFinite(v)&&v>=0&&v<=10?v:d}
+ try{var r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&typeof r==='object'){ST.m=cl(r.m,7);ST.s=cl(r.s,8);ST.mm=r.mm?1:0;ST.sm=r.sm?1:0}}catch(e){}
+ function stSave(){try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}}
+ function vG(v){return Math.pow(v/10,2)}                  /* slider step -> gain (perceptual square) */
+ function mOn(){return !ST.mm&&ST.m>0}
+ function sOn(){return !ST.sm&&ST.s>0}
+ AUD301.st=ST;
+ /* ---------- context + graph ---------- */
+ var ctx=null,WA=0,vis,mVol,duckG,mBus,sVol,els=[],xg=[],ok=0,FB=0;
+ var FV={x:[1,0],bus:1,duck:1};                          /* fallback (no WebAudio graph): JS values multiplied into el.volume */
+ try{FB=location.protocol==='file:'?1:0}catch(e){}
+ function P(g,v,t,ms){try{var a=g.gain,c=ctx.currentTime;a.cancelScheduledValues(c);a.setValueAtTime(a.value,c);if(ms>0)a.linearRampToValueAtTime(v,c+ms/1000);else a.setValueAtTime(v,c)}catch(e){fail('P',e)}}
+ function mkEl(){var e=document.createElement('audio');e.preload='auto';e.setAttribute('playsinline','');e.crossOrigin='anonymous';e.loop=false;return e}
+ function build(){
+  var C=window.AudioContext||window.webkitAudioContext;
+  try{if(navigator.audioSession)navigator.audioSession.type='ambient'}catch(e){}
+  if(C){try{ctx=new C()}catch(e){ctx=null;fail('ctx',e)}}
+  if(ctx){WA=1;vis=ctx.createGain();vis.connect(ctx.destination);mVol=ctx.createGain();mVol.connect(vis);duckG=ctx.createGain();duckG.connect(mVol);
+   mBus=ctx.createGain();mBus.connect(duckG);sVol=ctx.createGain();sVol.connect(vis);
+   try{var b=ctx.createBuffer(1,1,22050),s=ctx.createBufferSource();s.buffer=b;s.connect(ctx.destination);s.start(0)}catch(e){fail('warm',e)}}
+  for(var i=0;i<2;i++){var e=mkEl();els.push(e);
+   if(WA&&!FB){try{var src=ctx.createMediaElementSource(e),g=ctx.createGain();g.gain.value=0;src.connect(g);g.connect(mBus);xg.push(g)}catch(x){fail('mes',x);FB=1}}}
+  vols();ok=1}
+ function vols(){try{var mv=mOn()?vG(ST.m):0,sv=sOn()?vG(ST.s):0;
+  if(WA){P(mVol,mv,0,60);P(sVol,sv,0,60)}
+  if(FB)fbApply()}catch(e){fail('vols',e)}}
+ function fbApply(){try{var mv=mOn()?vG(ST.m):0;for(var i=0;i<els.length;i++)els[i].volume=Math.max(0,Math.min(1,FV.x[i]*FV.bus*FV.duck*mv*(document.hidden?0:1)))}catch(e){}}
+ /* JS ramp for the fallback path */
+ var RAMPS=[];function fbRamp(set,from,to,ms){RAMPS.push({set:set,a:from,b:to,t0:now(),ms:Math.max(1,ms)})}
+ function fbStep(){if(!RAMPS.length)return;var t=now();RAMPS=RAMPS.filter(function(r){var p=Math.min(1,(t-r.t0)/r.ms);r.set(r.a+(r.b-r.a)*p);return p<1});fbApply()}
+ /* equal-power crossfade on element i, 'in' or 'out' */
+ function xf(i,dir,ms){
+  if(!FB&&WA){try{var a=xg[i].gain,c=ctx.currentTime,n=32,cv=new Float32Array(n);for(var k=0;k<n;k++){var p=k/(n-1);cv[k]=dir==='in'?Math.sin(p*Math.PI/2):Math.cos(p*Math.PI/2)}
+    a.cancelScheduledValues(c);a.setValueCurveAtTime(cv,c,ms/1000)}catch(e){fail('xf',e);try{xg[i].gain.value=dir==='in'?1:0}catch(x){}}}
+  else{fbRamp(function(v){FV.x[i]=dir==='in'?Math.sin(v*Math.PI/2):Math.cos(v*Math.PI/2)},0,1,ms)}}
+ function xset(i,v){if(!FB&&WA){try{var a=xg[i].gain;a.cancelScheduledValues(ctx.currentTime);a.setValueAtTime(v,ctx.currentTime)}catch(e){}}else FV.x[i]=v}
+ function bus(v,ms){if(!FB&&WA)P(mBus,v,0,ms);else fbRamp(function(x){FV.bus=x},FV.bus,v,ms||1)}
+ /* ---------- unlock ---------- */
+ var UNL=0;
+ function gesture(){try{
+  if(!UNL){UNL=1;build();lg('unlock',{ctx:ctx?ctx.state:'none',fb:FB});
+   if(ctx&&ctx.resume)try{var pr=ctx.resume();if(pr&&pr.catch)pr.catch(function(){})}catch(e){}
+   prime();loadSprites();
+   if(M.want&&!M.scene)music(M.want);return}
+  if(ctx&&ctx.state!=='running'&&!document.hidden){var r2=ctx.resume();if(r2&&r2.catch)r2.catch(function(){})}
+ }catch(e){fail('gesture',e)}}
+ function prime(){els.forEach(function(e){try{var f=CFG.music.battle.file;e.src=BASE+f;e.muted=true;var p=e.play();if(p&&p.then)p.then(function(){if(!e._live){e.pause()}e.muted=false},function(){e.muted=false});else{if(!e._live)e.pause();e.muted=false}}catch(x){fail('prime',x)}})}
+ try{['pointerdown','touchend','keydown'].forEach(function(n){document.addEventListener(n,gesture,true)})}catch(e){}
+ /* ---------- config from web/audio/audio.json (built-in copy above is the fallback) ---------- */
+ try{if(window.fetch)fetch(BASE+'audio.json').then(function(r){return r.ok?r.json():null}).then(function(j){try{if(!j)return;
+  if(j.music)Object.keys(j.music).forEach(function(k){var m=j.music[k];if(m&&m.file&&m.loop_end_ms>m.loop_start_ms)CFG.music[k]=m});
+  if(j.sprites)Object.keys(j.sprites).forEach(function(f){CFG.sprites[f]=j.sprites[f]});lg('cfg',{});if(ctx&&UNL)loadSprites()}catch(e){}}).catch(function(){})}catch(e){}
+ /* ---------- music ---------- */
+ var M={scene:null,want:null,prev:null,cur:0,sw:0,prep:0,tm:0,cfg:null,live:0};AUD301.M=M;AUD301.els=els;
+ function elsStop(){els.forEach(function(e,i){try{e._live=0;e.pause()}catch(x){}xset(i,0)})}
+ function tickOn(){if(!M.tm)M.tm=setInterval(tick,50)}
+ function tickOff(){if(M.tm){clearInterval(M.tm);M.tm=0}}
+ function music(id,fadeMs){try{
+  M.want=id;
+  if(id&&id===M.scene)return;                                  /* same scene: never restart */
+  if(!ok){return}
+  if(!id){var was=M.scene;M.scene=null;if(!was)return;bus(0,fadeMs||300);var tok=++M.live;setTimeout(function(){try{if(M.live===tok&&!M.scene){elsStop();tickOff()}}catch(e){}},(fadeMs||300)+60);lg('mstop',{f:fadeMs||300});return}
+  var c=CFG.music[id];if(!c){lg('nomusic',{id:id});return}
+  M.scene=id;M.cfg=c;M.live++;
+  if(!mOn()){lg('mmuted',{id:id});return}                         /* slider 0 / muted: the file is not loaded */
+  start(c);
+ }catch(e){fail('music',e)}}
+ function start(c){
+  elsStop();var e=els[0];M.cur=0;M.sw=0;M.prep=0;
+  if(e.src.indexOf(c.file)<0)e.src=BASE+c.file;
+  try{e.currentTime=0}catch(x){}
+  xset(0,1);xset(1,0);bus(1,0);
+  e._live=1;var p=e.play();if(p&&p.catch)p.catch(function(x){fail('play0',x)});
+  lg('mstart',{f:c.file});tickOn()}
+ function tick(){try{
+  fbStep();
+  if(!M.scene||!M.cfg||document.hidden)return;
+  var c=M.cfg,A=els[M.cur],B=els[1-M.cur],ls=c.loop_start_ms/1000,le=c.loop_end_ms/1000,X=+c.tail||2,at=le-X,t=A.currentTime;
+  if(!M.prep&&t>=at-3){M.prep=1;try{if(B.src.indexOf(c.file)<0)B.src=BASE+c.file;B.pause();B.currentTime=ls}catch(x){}}   /* pre-seek the other element */
+  if(A.ended&&A._live){                                          /* safety: the switch was missed (no seek on the host, stall): restart at once */
+   try{if(B.src.indexOf(c.file)<0)B.src=BASE+c.file;B.currentTime=ls}catch(x){}
+   B._live=1;var p2=B.play();if(p2&&p2.catch)p2.catch(function(x){fail('play2',x)});xset(1-M.cur,1);xset(M.cur,0);A._live=0;
+   lg('wrapend',{from:M.cur});M.cur=1-M.cur;M.prep=0;M.sw++;return}
+  if(t>=at&&!A.paused){
+   var d=Math.max(0,t-at);
+   try{if(Math.abs(B.currentTime-(ls+d))>.015)B.currentTime=ls+d}catch(x){}
+   B._live=1;var pr=B.play();if(pr&&pr.catch)pr.catch(function(x){fail('play1',x)});
+   xf(1-M.cur,'in',X*1000);xf(M.cur,'out',X*1000);
+   lg('switch',{from:M.cur,to:1-M.cur,at:+t.toFixed(3),late:Math.round(d*1000),bpos:+(ls+d).toFixed(3)});
+   var old=A;setTimeout(function(){try{if(old!==els[M.cur]){old._live=0;old.pause()}}catch(e){}},X*1000+150);
+   M.cur=1-M.cur;M.prep=0;M.sw++}
+ }catch(e){fail('tick',e)}}
+ /* ---------- sprites ---------- */
+ var BUF={},SPR={},GRP={},VOX=[],LAST={},LASTG={},LASTV={},MISS={},SLOAD=0,SL={};AUD301.miss=MISS;
+ /* SPR: full id ('u1-tap_2') -> sprite entry; GRP: code ('u1') -> its variations, so snd('u1') picks one without repeating the last */
+ function idx(){SPR={};GRP={};Object.keys(CFG.sprites).forEach(function(f){var m=CFG.sprites[f];Object.keys(m).forEach(function(id){SPR[id]={f:f,e:m[id]};var c=id.split('-')[0];if(c!==id){(GRP[c]=GRP[c]||[]).push(id)}})})}
+ function resolve(id){if(SPR[id])return id;var g=GRP[id];if(!g||!g.length)return null;var c=g,l=LASTV[id];if(g.length>1&&l)c=g.filter(function(x){return x!==l});var p=c[Math.floor(Math.random()*c.length)];LASTV[id]=p;return p}
+ function btOn(){try{return typeof BT!=='undefined'&&!!BT.on}catch(e){return false}}
+ function decode(ab,ok2,ko){try{var r=ctx.decodeAudioData(ab,ok2,ko);if(r&&r.catch)r.catch(function(){})}catch(e){ko(e)}}
+ function loadSprites(){try{if(!ctx||!sOn())return;SLOAD=1;idx();
+  Object.keys(CFG.sprites).forEach(function(f){
+   if(SL[f])return;SL[f]=1;
+   fetch(BASE+f).then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.arrayBuffer()}).then(function(ab){
+    decode(ab,function(b){BUF[f]=b;lg('sprite',{f:f,dur:+b.duration.toFixed(3),ch:b.numberOfChannels})},function(e){fail('decode '+f,e)})}).catch(function(e){fail('fetch '+f,e)})})}catch(e){fail('loadSprites',e)}}
+ function duck(level,ms,holdMs){try{if(!ok)return;level=level==null?.35:level;
+  if(!FB&&WA){var a=duckG.gain,c=ctx.currentTime;a.cancelScheduledValues(c);a.setValueAtTime(a.value,c);a.linearRampToValueAtTime(level,c+(ms||80)/1000);a.setTargetAtTime(1,c+((ms||80)+(holdMs||0))/1000,.5/3)}
+  else{fbRamp(function(v){FV.duck=v},FV.duck,level,ms||80);setTimeout(function(){fbRamp(function(v){FV.duck=v},FV.duck,1,500)},(ms||80)+(holdMs||0))}
+  lg('duck',{l:level,hold:holdMs||0})}catch(e){fail('duck',e)}}
+ function play(id,o){try{
+  o=o||{};if(!ok||!ctx||!sOn())return null;if(!SLOAD)loadSprites();if(!SPR[id]&&!GRP[id])idx();
+  var code=GRP[id]?id:id.split('-')[0],full=resolve(id),s=full&&SPR[full];
+  if(!s){if(!MISS[id]){MISS[id]=1;lg('noid',{id:id})}return null}
+  var b=BUF[s.f];if(!b){lg('notready',{id:full});return null}
+  var e=s.e,off=e[0]/1000,dur=e[1]/1000,prio=o.prio!=null?o.prio:(e[3]||1),gdb=e[4]||0,t=now(),sp=o.speed||1;
+  if(LASTG[code]&&t-LASTG[code]<45/sp)return null;                       /* min gap per sound code, scaled by battle speed */
+  VOX=VOX.filter(function(v){return !v.done});
+  if(VOX.filter(function(v){return v.code===code}).length>=(code==='b1'?3:2))return null;
+  var cat=o.cat||'u';
+  var capB=VOX.filter(function(v){return v.cat==='b'});
+  var steal=null;
+  if(cat==='b'&&capB.length>=8)steal=capB.slice().sort(function(a,b2){return a.prio-b2.prio||a.t-b2.t})[0];
+  else if(VOX.length>=12)steal=VOX.slice().sort(function(a,b2){return a.prio-b2.prio||a.t-b2.t})[0];
+  if(steal){if(steal.prio>prio)return null;kill(steal,.01)}
+  var src=ctx.createBufferSource(),g=ctx.createGain(),g0=Math.pow(10,(gdb+(o.db||0))/20);src.buffer=b;g.gain.value=g0;
+  if(!o.nopitch){try{src.playbackRate.value=1+(Math.random()*2-1)*.03}catch(x){}}   /* +-3 % spread */
+  src.connect(g);g.connect(sVol);
+  var v={id:full,code:code,src:src,g:g,prio:prio,t:t,done:0,cat:cat};src.onended=function(){v.done=1};VOX.push(v);LASTG[code]=t;LAST[full]=t;
+  var play1=dur;
+  if(o.short&&dur>.3){try{var c0=ctx.currentTime,hf=dur*.5;g.gain.setValueAtTime(g0,c0+hf);g.gain.linearRampToValueAtTime(0,c0+hf+.15);play1=hf+.16}catch(x){}}   /* 3x/4x: 150 ms fade at 50 % */
+  src.start(0,off,play1);lg('snd',{id:full,off:off,dur:play1,code:code});
+  if(o.duck)duck(.35,80,e[1]+300);
+  return v}catch(e){fail('snd',e);return null}}
+ AUD301.vox=function(c){VOX=VOX.filter(function(v){return !v.done});return VOX.filter(function(v){return !c||v.cat===c}).length};
+ function kill(v,sec){try{var c=ctx.currentTime;v.g.gain.cancelScheduledValues(c);v.g.gain.setValueAtTime(v.g.gain.value,c);v.g.gain.linearRampToValueAtTime(0,c+sec);v.src.stop(c+sec+.005)}catch(e){try{v.src.stop()}catch(x){}}v.done=1}
+ function killBattle(sec){VOX.forEach(function(v){if(v.cat==='b'&&!v.done)kill(v,sec)})}
+ window.snd=function(id,o){try{if(!AUD||document.hidden)return null;return play(id,o)}catch(e){return null}};
+ AUD301.kill=killBattle;
+ AUD301.music=music;AUD301.duck=duck;AUD301.ctx=function(){return ctx};AUD301.ready=function(){return !!BUF['sfx_sting.m4a']};
+ /* ---------- tab hidden / visible ---------- */
+ var HID=[];
+ try{document.addEventListener('visibilitychange',function(){try{if(!ok)return;
+  if(document.hidden){HID=els.filter(function(e){return e._live&&!e.paused});
+   if(WA&&!FB)P(vis,0,0,200);else fbApply();
+   setTimeout(function(){try{if(!document.hidden)return;HID.forEach(function(e){e.pause()});if(ctx&&ctx.suspend){var r=ctx.suspend();if(r&&r.catch)r.catch(function(){})}}catch(e){}},220);lg('hide',{n:HID.length})}
+  else{if(ctx&&ctx.resume){var r=ctx.resume();if(r&&r.catch)r.catch(function(){})}
+   HID.forEach(function(e){if(e._live){var p=e.play();if(p&&p.catch)p.catch(function(){})}});HID=[];
+   if(WA&&!FB)P(vis,1,0,200);else fbApply();lg('show',{})}
+ }catch(e){fail('vis',e)}})}catch(e){}
+ /* ---------- battle hooks (no battle file edited) ---------- */
+ try{if(typeof btPlay==='function'){var _bpAU=btPlay;btPlay=function(A,D,res){
+  var pr=_bpAU.apply(this,arguments);
+  try{M.prev=M.scene&&M.scene!=='battle'?M.scene:M.prev;M.want='battle';
+   var n=0;(function wt(){try{if(typeof BT!=='undefined'&&BT.on){music('battle');bsfx();return}if(++n<300)requestAnimationFrame(wt)}catch(e){}})();   /* first battle frame */
+   if(pr&&pr.then)pr.then(function(out){end(res,out)},function(){end(null,null)})}catch(e){fail('btPlay',e)}
+  return pr}}}catch(e){fail('wrap',e)}
+ function end(res,out){try{
+  var win=!!(res&&res.win==='att'&&!(out&&out.retreat));
+  music(null,300);
+  var v=play(win?'win':'lose',{duck:1});
+  lg('end',{win:win,sting:!!v});
+  var back=M.prev;M.prev=null;
+  setTimeout(function(){try{if(!M.scene&&back)music(back)}catch(e){}},(v?3500:0)+600);   /* back to the scene before (silence today) */
+ }catch(e){fail('end',e)}}
+ /* ---------- AUD-2c: battle SFX (poll of BT.li / d.trT; no battle draw function is edited, works for old battle and ?bt336=1) ---------- */
+ var A_TY={pik:'a2',hvy:'a3',rdr:'a4',arc:'a5',sge:'a6'},          /* a1 shield (shd) and a7 tactic (str) are not in the sprites yet: silent */
+  A_BR={inf:function(u){return u.path==='B'?'a2':null},cav:function(u){return u.path==='B'?'a4':'a3'},arc:function(){return'a5'},mac:function(){return'a6'}},
+  HIT_MS={inf:160,cav:200,arc:340,mac:400};
+ function atkId(u){try{if(!u)return null;if(u.ty&&A_TY[u.ty])return A_TY[u.ty];if(u.ty)return null;var f=A_BR[u.br];return f?f(u):null}catch(e){return null}}
+ var BP=null;
+ function bsfx(){try{
+  if(BP&&BP.on)return;
+  var st=BP={on:1,li:-1,rd:-1,drum:-1,tr:{},hc:{},skip:0,id:Math.random()};
+  st.sk=function(){st.skip=1;killBattle(.05)};
+  var sp=function(){try{return BT.speed||1}catch(e){return 1}};
+  var B=function(code,o){o=o||{};o.cat='b';o.speed=sp();return window.snd(code,o)};
+  setTimeout(function(){if(BP===st&&btOn())B('b10',{prio:3})},60);   /* battle-start drums */
+  function hit(tg,br,k){try{
+   var n=0;(tg||[]).forEach(function(x){if(!x||x.res!=='hit')return;if(n>=3)return;var i=n++;
+    if(sp()>=2&&!x.cr){st.hc[x.id]=(st.hc[x.id]||0)+1;if(st.hc[x.id]%2===0)return}   /* 2x and up: B1 only for every 2nd hit on the same squad */
+    var d=(HIT_MS[br]||300)/sp()+i*45;
+    setTimeout(function(){if(BP!==st||!btOn()||st.skip)return;B(x.cr?'b2':'b1',{prio:x.cr?2:0})},d)})}catch(e){fail('hit',e)}}
+  function ev1(ev){try{
+   if(!ev)return;
+   if(ev.k==='round'){st.rd=ev.n;return}
+   if(ev.k!=='act')return;
+   var d=BT.uds&&BT.uds[ev.a],u=d&&d.u,kd=ev.kind;
+   if(kd==='normal'||kd==='strategy'){var a=kd==='strategy'?'a7':atkId(u);if(a)B(a,{prio:1,short:sp()>=3});hit(ev.tg,u&&u.br,kd)}
+   else if(kd==='support'){if(/^Trống Trận/.test(ev.name||'')&&!/yếu/.test(ev.name||'')&&st.drum!==st.rd){st.drum=st.rd;B('a8',{prio:2})}}
+   else if(kd==='tactic'){B('c1',{prio:2});B('k0',{prio:2});hit(ev.tg,u&&u.br,kd)}   /* c1 / k1-k8 missing: silent no-ops */
+  }catch(e){fail('ev1',e)}}
+  AUD301.bev=ev1;                                                  /* test hook: feed one battle log event */
+  (function fr(){try{
+   if(BP!==st)return;
+   if(!btOn()){BP=null;st.on=0;return}
+   if(BT.skip&&!st.skip)st.sk();
+   if(!BT.skip&&!st.skip){
+    if(BT.log&&BT.li!==st.li&&BT.li!=null){st.li=BT.li;ev1(BT.log[BT.li])}
+    (BT.list||[]).forEach(function(d){var id=d.u.id,p=st.tr[id],c=d.trT;if(c==null)return;if(p>0&&c<=0)B('b8',{prio:3});st.tr[id]=c})}
+   else (BT.list||[]).forEach(function(d){if(d.trT!=null)st.tr[d.u.id]=d.trT});
+   requestAnimationFrame(fr)}catch(e){fail('bfr',e);try{requestAnimationFrame(fr)}catch(x){}}})();
+ }catch(e){fail('bsfx',e)}}
+ /* ---------- AUD-2c: UI SFX (one delegated click listener + a toast wrapper; plan decided after the game's own handler ran) ---------- */
+ var U_CLOSE=/^(close|sback|h9back|fmback|pbclose|ar2b|devendback|bvlogx)$/,U_UP=/^(build|enh|i9_enh|tstar|skup|plup|fup|trp8_up|h9_star|gstar|gaup|i9_dkup|trpick)$/,
+  U_CLAIM=/claim|^(daily|liclaim|nuclaim|gck|bclaim|dclaim|i9mailo|i9_mail)$/,U_COIN=/^(plcol|harvest|wcollect|tax)$/,U_FLIP=/^(hire|vcard|vcardbuy|whspin|wheelspin|tlroll|rotroll)$/;
+ var ERRAT=0,INCLK=0,TGL={};
+ function uiPlan(el,t){try{
+  var a=el.getAttribute('data-a')||'',tx=(el.textContent||'').trim();
+  if(U_CLOSE.test(a)||/^(×|✕|✖|Đóng|Về |Quay lại)/.test(tx))return'u3';
+  if(U_CLAIM.test(a))return'u8';
+  if(U_UP.test(a))return'u7';
+  if(U_COIN.test(a))return'u6a';
+  if(U_FLIP.test(a))return'u9';
+  var c=el.classList;if(c&&c.contains('btn')&&!c.contains('alt'))return'u1';
+  return'u2'}catch(e){return'u2'}}
+ AUD301.uiPlan=uiPlan;
+ try{document.addEventListener('click',function(e){try{
+  if(!ok)return;
+  var tg=e.target,el=tg&&tg.closest?tg.closest('[data-a]'):null,t0=now(),plan;
+  try{if(el&&el.getAttribute('data-a')==='bskip'&&BP&&BP.sk)BP.sk()}catch(x){}   /* skip battle: SFX stop in 50 ms (the skip ends within a frame, so a poll would miss BT.skip) */
+  if(!el){if(tg&&tg.id==='modal'&&!(typeof fighting!=='undefined'&&fighting)){plan='u3'}else return}
+  else{if(el.disabled||el.closest&&el.closest('#audCard'))return;plan=uiPlan(el,t0)}
+  INCLK=1;
+  setTimeout(function(){INCLK=0;try{                                  /* after the game's handler: an error toast replaces the planned sound */
+   if(ERRAT&&ERRAT>=t0-5)plan='u4';
+   window.snd(plan)}catch(x){}},0)
+ }catch(x){fail('click',x)}},true)}catch(e){}
+ try{if(typeof toast==='function'){var _toAU=toast;toast=function(m){
+  var r=_toAU.apply(this,arguments);
+  try{var s=String(m==null?'':m).trim();if(s&&ok){
+   var te=typeof TSTERR!=='undefined'?TSTERR:/^(Không|Cần |Hãy |Hết |Sai |Chưa|Đang )/;
+   if(te.test(s)){ERRAT=now();if(!INCLK)window.snd('u4')}                 /* inside a tap: the plan is swapped for u4 */
+   else if(!btOn()&&/^(\+|Nhận|Thu |Bổng|Quét|Rương|Điểm danh)/.test(s)&&!(TGL[s]&&now()-TGL[s]<3000)){TGL[s]=now();
+    window.snd(/vàng|ngọc|Vàng/.test(s)?'u6b':'u6a')}}}catch(e){}
+  return r}}}catch(e){}
+ /* ---------- settings card (Quân Đoàn › Cài đặt) ---------- */
+ window.audSet=function(k,v){try{
+  if(k==='m'||k==='s'){ST[k]=cl(v,ST[k])}else if(k==='mm'||k==='sm'){ST[k]=ST[k]?0:1}else return;
+  stSave();if(ok)vols();
+  if(k==='m'||k==='mm'){if(mOn()){if(M.scene&&els.every(function(e){return e.paused}))start(M.cfg)}else if(M.scene&&ok){elsStop();tickOff()}}
+  if((k==='s'||k==='sm')&&sOn())loadSprites();
+  if(k==='m'||k==='s'){var nb=document.getElementById('audV'+k);if(nb)nb.textContent=ST[k];return}   /* slider: only the number (a re-render would drop the drag) */
+  var el=document.getElementById('audCard');if(el)el.outerHTML=card();
+ }catch(e){fail('set',e)}};
+ function row(lb,k,mk){var on=!ST[mk];return'<div class="row" style="margin-top:8px;align-items:center;gap:8px"><span class="sm" style="flex:0 0 74px">'+lb+'</span>'+
+  '<input type="range" min="0" max="10" step="1" value="'+ST[k]+'" oninput="audSet(\''+k+'\',this.value)" onchange="audSet(\''+k+'\',this.value)" aria-label="'+lb+'" style="flex:1;min-width:0;accent-color:#d9a441">'+
+  '<b class="sm" id="audV'+k+'" style="flex:0 0 18px;text-align:right">'+ST[k]+'</b><button class="btn '+(on?'':'alt ')+'sm" onclick="audSet(\''+mk+'\')">'+(on?'Bật':'Tắt')+'</button></div>'}
+ function card(){try{return'<div class="card" id="audCard"><b>Âm thanh</b><div class="sm mute">Âm thanh bắt đầu sau lần chạm đầu tiên.</div>'+row('Nhạc nền','m','mm')+row('Hiệu ứng','s','sm')+'</div>'}catch(e){return''}}
+ try{if(typeof gdCard==='function')gdCard('aud',card)}catch(e){}
+}catch(e){try{console.error('audio301',e)}catch(x){}}})();
+/* ================= wc360.js (V301, BN-360c, coder-2; art storyboard docs/art/pipeline/BN-360/welcome_redesign.md, text docs/design/ui/bn360-welcome-text.md, art key sheet web/art/ui/welcome/welcome.json) =================
+   The WOW welcome flow, presentation only. Switch WC360: ?wc360=1 (localStorage 'bn-wc360'='1'), OFF with ?wc360=0, default OFF. Off = this file defines WC360=0 and wraps nothing.
+   Same steps, inputs, actions, saves and rewards as today (t2go, wcgo, clname, nm221r, u3lp, trp8_lord, h9ask, h9pick, nation); no save field, no number, no rule.
+   New global: WC360, WC360I (state for tests). New CSS prefix wc3. New action names: none. Skip button text "Bỏ qua" (designer).
+   B0 cold open + B1 title (overlay #wc3o, black, seal slam, fuse), B2 welcome (hero masks bob, flame flicker, story typed), B3 dawn glide (overlay #wc3g, WAAPI pan of valley_dawn.webp),
+   B4 name scroll + stamp (decorates .nm221, clname delayed 0.9 s only when valid), B5 lord pair (standards cards, lord figure, sticky button), B6 hero reveal on opaque black (CSS),
+   B7 home wakes (once), B8 faction standards + visible title + "Theo {phe}" stamp, R1 reset edict (CSS on .u3wc).
+   Every overlay has a timeout and removes itself; Bỏ qua works in B0-B3; lite mode (reduced motion, hardwareConcurrency<=4, deviceMemory<=2, or ?wclite=1; ?wclite=0 forces full) = crossfades only.
+   Missing art -> today's flow. Code at load never throws. */
+var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
+(function(){try{var q='';try{q=location.search+location.hash}catch(e){}
+ if(/[?#&]wc360=1(\D|$)/.test(q)){WC360=1;try{localStorage.setItem('bn-wc360','1')}catch(e){}}
+ else if(/[?#&]wc360=0(\D|$)/.test(q)){WC360=0;try{localStorage.removeItem('bn-wc360')}catch(e){}}
+ else{try{WC360=localStorage.getItem('bn-wc360')==='1'?1:0}catch(e){}}}catch(e){}})();
+(function(){try{
+ if(!WC360)return;
+ var W=WC360I,AB='art/ui/welcome/',now=function(){return Date.now()};
+ function lg(k){try{W.log.push(k+'@'+now()%100000);if(W.log.length>60)W.log.shift()}catch(e){}}
+ function er(w,e){W.err++;try{console.error('wc360 '+w,e)}catch(x){}}
+ function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+ var q0='';try{q0=location.search||''}catch(e){}
+ var RM=false;try{RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)}catch(e){}
+ var lite=RM||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||/[?&]wclite=1(\D|$)/.test(q0);
+ if(/[?&]wclite=0(\D|$)/.test(q0)&&!RM)lite=false;
+ W.lite=lite?1:0;
+ /* atlases: file -> [w,h]; sprite rects from welcome.json */
+ var AT={'valley_dawn.webp':[0,0],'standards.webp':[1280,932],'seal_edict.webp':[1024,759],'fx.webp':[1024,908],'t2_masks.webp':[1024,806]};
+ var SP={stamp:['seal_edict.webp',0,0,399,431],print:['seal_edict.webp',403,0,389,378],scroll:['seal_edict.webp',0,435,445,324],rolled:['seal_edict.webp',449,435,444,229],
+  shu:['standards.webp',446,0,232,489],wei:['standards.webp',682,0,232,489],wu:['standards.webp',918,0,232,489],
+  beam:['fx.webp',0,0,512,512],mist:['fx.webp',0,516,512,392],embers:['fx.webp',516,0,360,431],stroke:['fx.webp',516,516,446,136]};
+ var MK={hero_lb:[312,0,394,438,10,940,526,584],hero_top:[0,454,531,352,356,490,708,470],hero_red:[0,0,308,450,670,1184,410,600],flame:[535,454,120,135,450,1610,160,180]};
+ /* sprite as a positioned background box; w = css width */
+ function spr(k,w,cls,st){var s=SP[k],A=AT[s[0]],f=w/s[3],h=Math.round(s[4]*f);
+  return'<i class="wc3s '+(cls||'')+'" style="width:'+w+'px;height:'+h+'px;background:url('+AB+s[0]+') '+(-s[1]*f).toFixed(2)+'px '+(-s[2]*f).toFixed(2)+'px/'+(A[0]*f).toFixed(2)+'px '+(A[1]*f).toFixed(2)+'px no-repeat;'+(st||'')+'"></i>'}
+ var loaded={};try{fetch(AB+'welcome.json').then(function(r){return r.json()}).then(function(j){try{if(j&&j.valley&&j.valley.w&&j.valley.h&&!loaded['valley_dawn.webp'])AT['valley_dawn.webp']=[j.valley.w,j.valley.h]}catch(e){}})['catch'](function(){})}catch(e){}
+ Object.keys(AT).forEach(function(f){try{var im=new Image();im.onload=function(){loaded[f]=1;if(f==='valley_dawn.webp'&&im.naturalWidth){AT[f]=[im.naturalWidth,im.naturalHeight]}};im.onerror=function(){loaded[f]=-1};im.src=AB+f}catch(e){}});
+ var FACN={shu:'Thục',wei:'Ngụy',wu:'Ngô'},FACG={shu:'蜀',wei:'魏',wu:'吳'};
+ try{if(typeof TX_FACPICK!=='undefined')TX_FACPICK.forEach(function(f){if(f&&f[0]&&f[2])FACN[f[0]]=f[2]})}catch(e){}
+ var CSS='';
+ function css(s){CSS+=s}
+ /* ---------- state ---------- */
+ var fresh=false;try{fresh=!!(S&&S.f204&&!S.name)}catch(e){}
+ W.fresh=fresh?1:0;
+ var st={skip:0,glide:0,nameDone:0,waked:0};
+ var timers=[];function later(f,ms){var t=setTimeout(function(){try{f()}catch(e){er('later',e)}},ms);timers.push(t);return t}
+ try{document.body.classList.add('wc360');if(lite)document.body.classList.add('wc3lite')}catch(e){}
+ /* ---------- Bỏ qua ---------- */
+ var skipEl=null;
+ function skipShow(){try{if(skipEl||st.skip>=1||st.glide||st.nameDone||(S&&S.pname))return;skipEl=el('button','wc3skip','Bỏ qua');skipEl.id='wc3skip';skipEl.setAttribute('aria-label','Bỏ qua phần mở đầu');skipEl.onclick=function(ev){try{ev.stopPropagation()}catch(x){}doSkip()};document.body.appendChild(skipEl)}catch(e){er('skip',e)}}
+ function skipHide(){try{if(skipEl&&skipEl.parentNode)skipEl.remove();skipEl=null}catch(e){}}
+ function killOverlays(){['wc3o','wc3g'].forEach(function(i){var e=document.getElementById(i);if(e)try{e.remove()}catch(x){}})}
+ function doSkip(){try{if(st.skip)return;st.skip=1;lg('skip');skipHide();killOverlays();W.phase='b4';
+   if(S&&!S.name){try{_Aorig('wcgo')}catch(e){er('skipgo',e)}}}catch(e){er('doSkip',e)}}
+ /* ---------- B0 + B1: cold open overlay ---------- */
+ function openB0(){try{
+  var o=el('div','wc3o');o.id='wc3o';var em='';for(var i=0;i<9;i++)em+='<i style="left:'+(30+i*5.5)+'%;animation-delay:'+(.05+i*.07).toFixed(2)+'s"></i>';
+  o.innerHTML='<div class="wc3ink"></div><div class="wc3em">'+em+'</div><div class="wc3sealw"><b class="wc3seal" id="wc3seal" aria-hidden="true">霸<br>業</b></div><div class="wc3fuse"><i></i><span>Đang dàn trận…</span></div>';
+  document.body.appendChild(o);W.phase='b0';lg('b0');
+  var t0=now();
+  var sw=function(){try{if(loaded['seal_edict.webp']===1){var s=document.getElementById('wc3seal');if(s){s.classList.add('img');s.innerHTML=spr('stamp',124,'wc3stp');var pm=document.createElement('div');pm.className='wc3pm';pm.innerHTML=spr('print',150)+'<b>霸<br>業</b>';s.parentNode.appendChild(pm)}}}catch(e){}};
+  later(sw,60);later(sw,200);
+  o.onclick=function(){if(now()-t0>600)lift()};
+  later(skipShow,600);
+  var lifted=0;function lift(){if(lifted)return;lifted=1;W.phase='b1';lg('lift');o.classList.add('out');later(function(){try{o.remove()}catch(e){}},520);
+   var b=document.querySelector('#sheet .wcbox.t2');if(b)b.classList.add('wc3in');W.lifted=1;
+   later(function(){if(W.phase==='b1')W.phase='b2'},900)}
+  later(lift,(lite?900:1650)+(+((/[?&]wc3hold=(\d+)/.exec(q0)||[])[1])||0));later(function(){try{var e=document.getElementById('wc3o');if(e)e.remove()}catch(x){}},3600+(+((/[?&]wc3hold=(\d+)/.exec(q0)||[])[1])||0));
+ }catch(e){er('openB0',e);try{var x=document.getElementById('wc3o');if(x)x.remove()}catch(y){}}}
+ /* ---------- B2: welcome decoration ---------- */
+ function placeMasks(bg){try{
+  var iw=window.innerWidth,ih=window.innerHeight,Wd=bg.clientWidth||iw,H=bg.clientHeight||ih,s=Wd/1080,shift=Math.min(120,Math.max(0,1.574*iw-.95*ih+200)),top=H+shift-2150*s,f=s/.75;
+  var A=AT['t2_masks.webp'],h='';
+  Object.keys(MK).forEach(function(k,i){var m=MK[k];
+   h+='<i class="wc3m '+(k==='flame'?'fl':'bob b'+i)+'" style="left:'+(m[4]*s).toFixed(1)+'px;top:'+(top+m[5]*s).toFixed(1)+'px;width:'+(m[6]*s).toFixed(1)+'px;height:'+(m[7]*s).toFixed(1)+'px;background:url('+AB+'t2_masks.webp) '+(-m[0]*f).toFixed(1)+'px '+(-m[1]*f).toFixed(1)+'px/'+(A[0]*f).toFixed(1)+'px '+(A[1]*f).toFixed(1)+'px no-repeat"></i>'});
+  bg.insertAdjacentHTML('beforeend',h)}catch(e){er('masks',e)}}
+ function typeStory(p){try{
+  var n=0,walk=function(nd){var c=nd.childNodes;for(var i=0;i<c.length;i++){var k=c[i];if(k.nodeType===3){n+=k.nodeValue.length}else walk(k)}};walk(p);
+  var d=Math.min(30,3200/Math.max(n,1)),idx=0;
+  var wrap=function(nd){var c=Array.prototype.slice.call(nd.childNodes);c.forEach(function(k){
+   if(k.nodeType===3){var f=document.createDocumentFragment(),t=k.nodeValue;for(var i=0;i<t.length;i++){var sp=document.createElement('span');sp.className='wc3ch';sp.style.animationDelay=(.9+idx*d/1000).toFixed(3)+'s';idx++;sp.textContent=t.charAt(i);f.appendChild(sp)}nd.replaceChild(f,k)}
+   else wrap(k)})};wrap(p)}catch(e){er('type',e)}}
+ function decT2(b){try{b.classList.add('wc3d');var bg=b.querySelector('.t2bg');
+  if(!lite&&bg&&loaded['t2_masks.webp']===1)placeMasks(bg);
+  if(!lite&&!W.typed){var p=b.querySelector('.t2story');if(p){W.typed=1;typeStory(p)}}
+  if(!b.classList.contains('wc3in')&&(!fresh||W.lifted||!document.getElementById('wc3o'))){b.classList.add('wc3in');if(W.t2in)b.classList.add('wc3still');else W.t2in=1}
+  W.phase=W.phase==='b0'||W.phase==='b1'?W.phase:'b2'}catch(e){er('decT2',e)}}
+ /* ---------- B3: dawn glide ---------- */
+  function startGlide(done){
+  var fin=0;function go(){if(fin)return;fin=1;lg('glide-done');W.phase='b4';skipHide();try{done()}catch(e){er('glide go',e)}
+   var t0=now(),iv=setInterval(function(){var g=document.getElementById('wc3g');if(!g){clearInterval(iv);return}
+    if(document.querySelector('#sheet .nm221')||now()-t0>3000){clearInterval(iv);g.classList.add('out');setTimeout(function(){try{g.remove()}catch(e){}},420)}},100)}
+  try{
+   if(loaded['valley_dawn.webp']!==1||!document.body.animate&&!lite){lg('glide-skip');go();return}
+   W.phase='b3';lg('b3');
+   var VW=AT['valley_dawn.webp'][0],VH=AT['valley_dawn.webp'][1];if(!VW||!VH){lg('glide-skip');go();return}
+   var iw=window.innerWidth,ih=window.innerHeight,pw=Math.round(iw*1.35),ph=Math.round(pw*VH/VW),dy=Math.max(0,ph-ih),x0=-Math.round(pw*136/526),x1=-Math.round(pw*68/526);
+   var g=el('div','wc3g'+(lite?' lite':''));g.id='wc3g';
+   g.innerHTML='<div class="wc3gw"><div class="wc3plate" style="width:'+pw+'px;height:'+ph+'px"></div>'+
+    '<i class="wc3bd" style="left:30%;top:14%"></i><i class="wc3bd" style="left:44%;top:11%;animation-delay:.4s"></i><i class="wc3bd" style="left:58%;top:16%;animation-delay:.9s"></i></div>'+
+    '<div class="wc3beam"></div><div class="wc3mist"></div><i class="wc3bar t"></i><i class="wc3bar b"></i><div class="wc3cap">Năm 184 · Đông Hán mạt niên</div>';
+   g.onclick=function(){try{if(pan)pan.finish();else go()}catch(e){go()}};
+   document.body.appendChild(g);var gw=g.querySelector('.wc3gw'),pl=g.querySelector('.wc3plate'),pan=null,pan2=null;
+   later(function(){if(!fin){lg('glide-failsafe');go()}},9000);
+   if(lite){pl.style.transform='translate('+x1+'px,'+(-dy)+'px)';g.style.opacity=0;g.animate([{opacity:0},{opacity:1}],{duration:300,fill:'forwards'});later(go,900);return}
+   g.animate([{opacity:0},{opacity:1}],{duration:450,fill:'forwards'});
+   g.querySelector('.wc3mist').animate([{transform:'translateY(60%)',opacity:1},{transform:'translateY(-80%)',opacity:0}],{duration:900,easing:'ease-out',fill:'forwards'});
+   var ez='cubic-bezier(.45,0,.2,1)';
+   pan2=gw.animate([{transform:'scale(1.15)'},{transform:'scale(1)'}],{duration:2400,delay:150,easing:ez,fill:'forwards'});
+   pl.animate([{transform:'translate('+x0+'px,0)'},{transform:'translate('+x1+'px,'+(-dy)+'px)'}],{duration:2400,delay:150,easing:ez,fill:'forwards'});
+   pan=pl.getAnimations?pl.getAnimations()[0]:null;
+   g.querySelector('.wc3beam').animate([{opacity:.65},{opacity:0,offset:.4},{opacity:0}],{duration:2400,delay:150,fill:'forwards'});
+   g.querySelector('.wc3bar.t').animate([{transform:'translateY(-100%)'},{transform:'none'}],{duration:300,fill:'forwards'});
+   g.querySelector('.wc3bar.b').animate([{transform:'translateY(100%)'},{transform:'none'}],{duration:300,fill:'forwards'});
+   g.querySelector('.wc3cap').animate([{opacity:0},{opacity:1}],{duration:500,delay:1250,fill:'forwards'});
+   pan.onfinish=function(){later(go,550)};
+  }catch(e){er('glide',e);go()}}
+ /* ---------- B4: name scroll ---------- */
+ var animT={};function animOnce(k){var t=now();if(animT[k]&&t-animT[k]<6000)return false;animT[k]=t;return true}
+ function decNm(c){try{c.classList.add('wc3d');var first=c.classList.contains('first');
+  var h3=c.querySelector('.nmt'),txt=h3?h3.textContent:'Danh xưng chủ tướng';
+  var SW=Math.min(340,window.innerWidth-28);var sc=el('div','wc3sc'+(lite?' lite':'')+(animOnce('nm')?'':' still'),'<div class="wc3scr" aria-hidden="true">'+spr('scroll',SW,'wc3scrl')+'</div><div class="wc3pp"><div class="wc3t" aria-hidden="true">'+txt+'</div></div>');
+  sc.style.setProperty('--scw',SW+'px');sc.style.setProperty('--sch',Math.round(SW*324/445)+'px');var pp=sc.querySelector('.wc3pp');
+  ['.nms','.nmrow'].forEach(function(s){var n=c.querySelector(s);if(n)pp.appendChild(n)});
+  if(h3){h3.classList.add('wc3vh');pp.insertBefore(h3,pp.firstChild)}
+  var seal=c.querySelector('.nmseal');if(seal)seal.style.display='none';
+  c.insertBefore(sc,c.firstChild);
+  var lord=el('div','wc3lord','Chủ tướng');lord.id='wc3lord';pp.appendChild(lord)}catch(e){er('decNm',e)}}
+ var stamping=0;
+ function stampName(go){try{
+  var c=document.querySelector('#sheet .nm221.first');if(!c||lite)return false;
+  var i=document.getElementById('clnm'),n=i?String(i.value||'').replace(/\s+/g,' ').trim():'';if(n.length<2||n.length>16)return false;
+  if(stamping)return true;stamping=1;lg('stamp');
+  document.body.classList.add('wc3stamping');
+  var sc=c.querySelector('.wc3sc'),r=sc?sc.getBoundingClientRect():null;
+  if(r&&loaded['seal_edict.webp']===1){var o=el('div','wc3st','<div class="wc3pr" aria-hidden="true">'+spr('print',74)+'<b>霸<br>業</b></div>');
+   o.id='wc3st';o.style.cssText='left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px';document.body.appendChild(o);
+   var pr=o.querySelector('.wc3pr');if(pr){pr.style.left=(r.width*.77)+'px';pr.style.top=(r.height*.5)+'px'}}
+  later(function(){stamping=0;try{if(!document.getElementById('wc3hold')){var hd=el('div','wc3hold');hd.id='wc3hold';document.body.appendChild(hd);st.holdAt=now();lg('hold0')}}catch(e){}var o2=document.getElementById('wc3st');if(o2)o2.remove();document.body.classList.remove('wc3stamping');go()},900);return true}catch(e){er('stamp',e);stamping=0;document.body.classList.remove('wc3stamping');return false}}
+ /* ---------- B5: lord pair ---------- */
+ function decLord(c){try{c.classList.add('wc3d');var sh=c.parentNode,nm=(S&&S.pname)||'Chủ Công';
+  var fig='';try{var k=104/787;fig='<i class="wc3fig" style="width:'+Math.round(563*k)+'px;height:104px;background:url(art/heroes/fig_thuc.webp) 0 0/'+Math.round(3400*k)+'px '+Math.round(3549*k)+'px no-repeat"></i>'}catch(e){}
+  c.insertAdjacentHTML('beforebegin','<div class="wc3lh">'+fig+'<div class="wc3ln"><b>'+esc(nm)+'</b><span>Chủ tướng</span></div></div>');
+  var cols=['#c43b36','#3a73c8','#3f9b5b','#d9892b'];
+  var an=animOnce('lp');var cards=c.querySelectorAll('.u3pc');for(var i=0;i<cards.length;i++){cards[i].classList.add('wc3pc');cards[i].style.setProperty('--sc',cols[i%4]);if(an)cards[i].style.animationDelay=(i*80)+'ms';else cards[i].style.animation='none'}}catch(e){er('decLord',e)}}
+ /* ---------- B8: faction ---------- */
+ function decFac(b){try{b.classList.add('wc3d');
+  var lg0=b.querySelector('.wclogo');if(lg0)lg0.classList.add('wc3vh');
+  var tag=b.querySelector('.wctag');var t=el('div','wc3t wc3ft','Chọn phe');t.setAttribute('aria-hidden','true');if(tag)tag.parentNode.insertBefore(t,tag);
+  var fa=animOnce('fac');var cards=b.querySelectorAll('.wcf');for(var i=0;i<cards.length;i++){var cd=cards[i],v=cd.getAttribute('data-v');if(!SP[v])continue;cd.classList.add('wc3f');
+   cd.insertAdjacentHTML('afterbegin','<span class="wc3std" aria-hidden="true" style="'+(fa?'animation-delay:'+(i*120)+'ms':'animation:none')+'">'+spr(v,66)+'<b>'+(FACG[v]||'')+'</b></span>')}}catch(e){er('decFac',e)}}
+ function stampFac(f){try{if(lite){return}
+  var o=el('div','wc3fw','<div class="wc3tint" style="--fc:'+({shu:'#2f8f55',wei:'#2f61b8',wu:'#b8362f'}[f]||'#888')+'"></div><div class="wc3fs"><div class="wc3fst">'+spr(f,150)+'<b>'+(FACG[f]||'')+'</b></div><div class="wc3fsl">Theo '+(FACN[f]||'')+'</div></div>');
+  o.id='wc3fw';document.body.appendChild(o);lg('facstamp');later(function(){o.classList.add('out');later(function(){try{o.remove()}catch(e){}},420)},1900)}catch(e){er('stampFac',e)}}
+ /* ---------- sheet observer ---------- */
+ var sched=0;function scan(){sched=0;try{
+  var sh=document.getElementById('sheet');if(!sh)return;
+  var t2=sh.querySelector('.wcbox.t2:not(.wc3d)');if(t2)decT2(t2);
+  var nm=sh.querySelector('.nm221:not(.wc3d)');if(nm){decNm(nm);if(W.phase!=='b6')W.phase='b4'}
+  var lp=sh.querySelector('.u3lord:not(.wc3d)');if(lp)decLord(lp);
+  var fb=sh.querySelector('.wcbox:not(.t2):not(.wc3d) .wcfac');if(fb){var bx=fb.closest('.wcbox');if(bx)decFac(bx)}
+ }catch(e){er('scan',e)}}
+ function startObs(){try{var sh=document.getElementById('sheet');if(!sh){later(startObs,100);return}
+  new MutationObserver(function(){if(!sched){sched=1;(window.requestAnimationFrame||setTimeout)(scan)}}).observe(sh,{childList:true,subtree:true});scan()}catch(e){er('obs',e)}}
+ function modalOpen(){var m=document.getElementById('modal');return!!(m&&!m.hidden)}
+ function nmOpen(){return modalOpen()&&!!document.querySelector('#sheet .nm221')}
+ /* ---------- B7: home wakes ---------- */
+ function wake(){try{if(st.waked)return;st.waked=1;lg('wake');W.phase='b7';
+  var o=el('div','wc3w');o.id='wc3w';document.body.appendChild(o);document.body.classList.add('wc3wk');
+  later(function(){try{o.remove()}catch(e){}document.body.classList.remove('wc3wk')},lite?400:1700)}catch(e){er('wake',e)}}
+ function holdPoll(){try{
+  var h=document.getElementById('wc3hold');if(!st.nameDone||st.waked){if(h&&st.waked)h.remove();return}
+  var hr=!!document.getElementById('hrev');if(hr&&!st.hrFirst)st.hrFirst=now();
+  var sheetOpen=modalOpen()&&!!document.querySelector('#sheet .u3lord,#sheet .wcbox');
+  if(st.hrFirst){if(h&&now()-st.hrFirst>450)h.remove();return}
+  if(!sheetOpen&&!h&&!st.holdOff){h=el('div','wc3hold');h.id='wc3hold';document.body.appendChild(h);st.holdAt=st.holdAt||now();lg('hold')}
+  else if(sheetOpen&&h)h.remove();
+  else if(h&&now()-st.holdAt>6000){h.remove();st.holdOff=1}
+ }catch(e){}}
+ function wakePoll(){try{
+  if(st.waked||!st.nameDone)return;var t=now()-st.nameDone;
+  if(document.getElementById('hrev')){st.hrSeen=now();return}
+  if(t>2600&&(!st.hrSeen||now()-st.hrSeen>700)&&!nmOpen()&&!(modalOpen()&&document.querySelector('#sheet .u3lord')))wake();
+  else if(t>9000)wake()}catch(e){}}
+ /* ---------- actions ---------- */
+ var _Aorig=A_,busy=0;
+ A_=function(a,v,w,el2){
+  try{
+   if(a==='t2go'&&fresh&&!st.skip){
+    if(busy)return;busy=1;st.glide=1;startGlide(function(){busy=0;_Aorig('wcgo')});return}
+   if(a==='clname'&&document.querySelector('#sheet .nm221.first')){if(stampName(function(){st.nameDone=now();W.phase='b5';_Aorig('clname')}))return;}
+  }catch(e){er('A_',e)}
+  var was=null;try{was=S&&S.nation}catch(e){}var wasName=null;try{wasName=S&&S.pname}catch(e){}
+  var r=_Aorig.apply(this,arguments);
+  try{
+   if(a==='clname'&&!wasName&&S&&S.pname&&!st.nameDone){st.nameDone=now()}
+   if(was==='tl'&&S&&(S.nation==='shu'||S.nation==='wei'||S.nation==='wu')&&(a==='h9pick'||a==='nation'))stampFac(S.nation)}catch(e){er('A_2',e)}
+  return r};
+ setInterval(wakePoll,300);setInterval(holdPoll,40);
+ /* ---------- CSS ---------- */
+ css('.wc3s{display:block;flex:none;pointer-events:none}'+
+ '.wc3vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}'+
+ '.wc3skip{position:fixed;z-index:10003;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;min-width:56px;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid rgba(255,225,160,.45);background:rgba(10,6,3,.55);color:#f6e7bf;font:600 12px/44px "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.06em;animation:wc3fi .4s ease-out both;cursor:pointer}'+
+ '.wc3skip:active{transform:scale(.96)}'+
+ '@keyframes wc3fi{from{opacity:0}to{opacity:1}}'+
+ /* B0 */
+ '.wc3o{position:fixed;inset:0;z-index:10001;background:#050302;overflow:hidden;transition:opacity .5s ease-out}.wc3o.out{opacity:0;pointer-events:none}'+
+ '.wc3ink{position:absolute;left:50%;top:44%;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,rgba(190,28,22,.85) 0,rgba(120,14,10,.55) 38%,rgba(60,6,4,0) 70%);transform:scale(.4);opacity:0;animation:wc3ink .9s ease-out .28s both}'+
+ '@keyframes wc3ink{0%{transform:scale(.4);opacity:0}30%{opacity:1}100%{transform:scale(1.15);opacity:.55}}'+
+ '.wc3em i{position:absolute;bottom:34%;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#fff0b0,#ffb347 45%,rgba(255,120,30,0) 70%);opacity:0;animation:wc3emb 1.6s ease-out both}'+
+ '@keyframes wc3emb{0%{opacity:0;transform:translateY(0)}20%{opacity:1}100%{opacity:0;transform:translateY(-260px) translateX(18px)}}'+
+ '.wc3sealw{position:absolute;left:50%;top:44%;width:0;height:0;animation:wc3shk .14s linear .27s 1}'+
+ '@keyframes wc3shk{0%,100%{transform:none}25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,2px)}}'+
+ '.wc3seal{position:absolute;left:-46px;top:-60px;width:92px;height:120px;display:flex;align-items:center;justify-content:center;font:900 40px/1.05 "Noto Serif SC",serif;color:#fff1e0;background:linear-gradient(160deg,#c8352b,#8e1f18);border-radius:8px;box-shadow:0 0 0 3px rgba(255,230,200,.25) inset,0 0 40px rgba(220,60,40,.55);opacity:0;transform:scale(1.8);animation:wc3slam .42s cubic-bezier(.2,1.4,.4,1) .25s both}'+
+ '.wc3seal.img{background:none;box-shadow:none;left:-62px;top:-70px;width:124px;height:134px;animation:wc3slam .42s cubic-bezier(.2,1.4,.4,1) .25s both,wc3lift .5s ease-in .85s forwards}.wc3seal.img .wc3stp{filter:drop-shadow(0 0 22px rgba(230,60,40,.6))}'+
+ '.wc3pm{position:absolute;left:-75px;top:-72px;width:150px;height:146px;opacity:0;animation:wc3pr .25s cubic-bezier(.2,1.4,.4,1) .62s both}.wc3pm b{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;font:900 44px/1.05 "Noto Serif SC",serif;color:#ffecdc;text-align:center}'+
+ '@keyframes wc3lift{to{transform:translateY(-120px) scale(1.05);opacity:0}}'+
+ '@keyframes wc3slam{0%{opacity:0;transform:scale(1.8)}55%{opacity:1;transform:scale(.94)}100%{opacity:1;transform:scale(1)}}'+
+ '.wc3fuse{position:absolute;left:50%;bottom:calc(46px + env(safe-area-inset-bottom,0px));width:min(56vw,240px);transform:translateX(-50%);text-align:center;opacity:0;animation:wc3fi .3s ease-out .7s both}'+
+ '.wc3fuse i{display:block;position:relative;height:2px;width:0;background:linear-gradient(90deg,rgba(255,210,120,0),#ffd98a);box-shadow:0 0 10px rgba(255,200,110,.9);animation:wc3fz .85s ease-out .75s forwards}'+
+ '.wc3fuse i::after{content:"";position:absolute;right:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:#fff3cf;box-shadow:0 0 12px 3px rgba(255,210,120,.9)}'+
+ '@keyframes wc3fz{to{width:100%}}'+
+ '.wc3fuse span{display:block;margin-top:10px;font:500 12px/1 "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.14em;color:rgba(243,223,174,.75)}'+
+ 'body.wc3lite .wc3ink,body.wc3lite .wc3seal,body.wc3lite .wc3sealw{animation-duration:.2s!important;animation-delay:0s!important}body.wc3lite .wc3em{display:none}'+
+ /* B1 / B2 */
+ '.wcbox.t2.wc3in .t2name{-webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 55%);mask-image:linear-gradient(90deg,#000 45%,transparent 55%);-webkit-mask-size:260% 100%;mask-size:260% 100%;animation:wc3wipe .75s ease-out both}'+
+ '@keyframes wc3wipe{from{-webkit-mask-position:100% 0;mask-position:100% 0}to{-webkit-mask-position:0 0;mask-position:0 0}}'+
+ '.wcbox.t2.wc3in .t2lk{animation:wc3fi .6s ease-out both}.wcbox.t2.wc3still .t2name,.wcbox.t2.wc3still .t2lk,.wcbox.t2.wc3still .t2story,.wcbox.t2.wc3still .t2cta,.wcbox.t2.wc3still .t2meta{animation:none!important;-webkit-mask-image:none;mask-image:none;opacity:1;transform:none}'+
+ '.wc3m{position:absolute;pointer-events:none;will-change:transform}.wc3m.bob{animation:wc3bob 3.2s ease-in-out infinite alternate}.wc3m.b1{animation-delay:-1s}.wc3m.b2{animation-delay:-2.1s}.wc3m.b3{animation-delay:-.4s}'+
+ '@keyframes wc3bob{from{transform:translateY(0)}to{transform:translateY(-2px)}}'+
+ '.wc3m.fl{animation:wc3fl 1.4s ease-in-out infinite alternate;mix-blend-mode:normal}@keyframes wc3fl{0%{filter:brightness(1) saturate(1)}50%{filter:brightness(1.25) saturate(1.15)}100%{filter:brightness(.95)}}'+
+ '.wc3ch{opacity:0;animation:wc3chi .08s linear forwards}@keyframes wc3chi{to{opacity:1}}'+
+ /* B3 */
+ '.wc3g{position:fixed;inset:0;z-index:10002;background:#1a1410;overflow:hidden;transition:opacity .4s}.wc3g.out{opacity:0;pointer-events:none}'+
+ '.wc3gw{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform}'+
+ '.wc3plate{position:absolute;left:0;top:0;background:url('+AB+'valley_dawn.webp) 0 0/100% 100% no-repeat;will-change:transform}'+
+ '.wc3bd{position:absolute;width:12px;height:6px;border-top:2px solid rgba(60,40,30,.7);border-radius:50% 50% 0 0;opacity:.8;animation:wc3bd 2.4s ease-in-out infinite alternate}@keyframes wc3bd{to{transform:translate(16px,-8px)}}'+
+ '.wc3beam{position:absolute;right:-40px;top:-40px;width:420px;height:420px;background:url('+AB+'fx.webp) 0 0/'+(1024*420/512)+'px '+(908*420/512)+'px no-repeat;mix-blend-mode:screen;opacity:.65;pointer-events:none}'+
+ '.wc3mist{position:absolute;left:-10%;right:-10%;bottom:-10%;height:70%;background:url('+AB+'fx.webp) 0 -'+(516*480/512)+'px/'+(1024*480/512)+'px '+(908*480/512)+'px no-repeat,linear-gradient(0deg,rgba(235,225,205,.9),rgba(235,225,205,0));mix-blend-mode:screen;pointer-events:none}'+
+ '.wc3bar{position:absolute;left:0;right:0;height:46px;background:#050302;z-index:3}.wc3bar.t{top:0}.wc3bar.b{bottom:0}'+
+ '.wc3cap{position:absolute;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:4;text-align:center;font:500 13px/26px "Philosopher",Georgia,serif;letter-spacing:.1em;color:#f3dfae;opacity:0}'+
+ '.wc3g.lite .wc3cap{opacity:1}'+
+ /* B4 */
+ 'html body.wc360 #modal.u6nmb:has(.nm221.first){background:linear-gradient(rgba(8,5,3,.5),rgba(8,5,3,.66)),url('+AB+'valley_dawn.webp) 50% 100%/cover no-repeat!important}'+
+ 'html body.wc360 #modal.u6nmb:has(.nm221.first) #sheet#sheet#sheet#sheet{background:none!important;background-attachment:scroll!important}'+
+ 'body.wc360 #sheet:has(.nm221.first)>.snav{display:none!important}'+
+ '.nm221.wc3d{background:none!important;border:0!important;box-shadow:none!important;padding:0 0 4px!important;width:min(92vw,360px);margin:0 auto}.nm221.wc3d::before,.nm221.wc3d::after{display:none}.nm221.wc3d.anim{animation:none}'+
+ '.wc3sc{position:relative;width:var(--scw,340px);height:var(--sch,247px);margin:0 auto;transform-origin:50% 0;animation:wc3unr .75s cubic-bezier(.2,.9,.3,1) both}.wc3sc.lite{animation:wc3fi .3s both}.wc3sc.still{animation:none}'+
+ '@keyframes wc3unr{0%{transform:translateY(-34px);clip-path:inset(0 50% 0 50%);opacity:0}35%{transform:none;opacity:1}100%{clip-path:inset(0 0 0 0)}}'+
+ '.wc3scr{position:absolute;inset:0}'+
+ '.wc3pp{position:absolute;left:12.6%;top:14.8%;width:74.6%;height:70.4%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;z-index:1}'+
+ '.wc3t{font:700 20px/1.2 Philosopher,Times New Roman,Georgia,serif;color:#7a1f14;text-shadow:0 1px 0 rgba(255,240,200,.7)}'+
+ '.wc3pp .nms{margin:4px 0 8px!important;font-size:12px!important;color:rgba(70,36,18,.85)!important}'+
+ '.wc3pp .nmrow{width:100%;border-bottom:1px solid rgba(120,50,20,.55)!important;box-shadow:none!important}'+
+ '.wc3pp .nmi{color:#4a1608!important;font-size:21px!important}.wc3pp .nmi::placeholder{color:rgba(90,40,20,.4)!important}'+
+ '.wc3pp .nmd{border-color:rgba(120,50,20,.5)!important;color:#7a1f14!important;background:rgba(255,235,190,.5)!important;width:40px;height:40px}'+
+ '.wc3lord{margin-top:4px;font:600 12px/1.2 "Be Vietnam Pro",system-ui,sans-serif;color:#7a1f14;opacity:0;transition:opacity .4s .5s}.nm221.wc3stamp .wc3lord{opacity:1}'+
+ '.nm221.wc3d .nmok{margin-top:14px;width:min(80vw,300px)}.nm221.wc3d .nmh{margin-top:10px}'+
+ '.wc3st{position:fixed;z-index:10002;pointer-events:none}.wc3str{position:absolute;opacity:0;mix-blend-mode:multiply;filter:sepia(1) saturate(3) hue-rotate(-12deg);animation:wc3sti .35s ease-out .3s forwards}@keyframes wc3sti{to{opacity:.7}}'+
+ '.wc3pr{position:absolute;width:74px;height:72px;animation:wc3pr .22s cubic-bezier(.2,1.4,.4,1) both}.wc3pr b{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;font:900 22px/1.05 "Noto Serif SC",serif;color:#ffecdc;text-align:center}'+
+ '@keyframes wc3pr{from{opacity:0;transform:scale(1.7)}to{opacity:1;transform:none}}'+
+ 'body.wc3stamping .wc3pp .nmi{color:#9a6212!important;-webkit-text-fill-color:#9a6212;transition:color .4s .2s}body.wc3stamping .wc3lord{opacity:1}body.wc3stamping .wc3pp .nmrow{border-bottom-color:#d9a548!important;box-shadow:0 2px 8px rgba(217,165,72,.6)!important}body.wc3stamping .wc3sc{animation:wc3shk .14s linear 1}'+
+ /* B5 */
+ '#sheet:has(.u3lord){display:flex;flex-direction:column}#sheet:has(.u3lord) .sbar{margin-top:auto!important;position:sticky!important;bottom:0}'+
+ '.u3lord{padding-bottom:72px}.wc3lh{display:flex;align-items:flex-end;gap:12px;margin:2px 0 6px}.wc3fig{display:block;flex:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.6))}'+
+ '.wc3ln b{display:block;font:700 18px/1.2 Philosopher,Georgia,serif;color:#f4d98a}.wc3ln span{font:600 12px/1.3 "Be Vietnam Pro",system-ui,sans-serif;color:rgba(243,223,174,.8)}'+
+ '.u3lord .u3pc.wc3pc{animation:wc3up .3s ease-out both;transition:transform .15s,filter .15s}.u3lord .u3pc.wc3pc.on{transform:translateY(-3px)}'+
+ '@keyframes wc3up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}'+
+ /* B6 */
+ 'body.wc360 #hrev{background:radial-gradient(ellipse at 50% 60%,rgba(var(--rcr),.28),rgba(0,0,0,0) 68%),#000!important;z-index:10000}'+
+ '.wc3hold{position:fixed;inset:0;z-index:9998;background:#050302;pointer-events:none}'+
+ /* B7 */
+ '.wc3w{position:fixed;inset:0;z-index:8999;pointer-events:none;background:linear-gradient(180deg,rgba(255,150,70,.4),rgba(255,205,130,.2));animation:wc3wk 1.5s ease-out both}@keyframes wc3wk{from{opacity:1}to{opacity:0}}'+
+ 'body.wc3wk:not(.wc3lite) #top{animation:wc3td .4s ease-out both}body.wc3wk:not(.wc3lite) #nav{animation:wc3nu .4s ease-out .15s both}@keyframes wc3td{from{transform:translateY(-60px);opacity:0}to{transform:none;opacity:1}}@keyframes wc3nu{from{transform:translateY(80px);opacity:0}to{transform:none;opacity:1}}'+
+ /* B8 */
+ '.wc3ft{text-align:center;font-size:24px;color:#f4d98a;margin:2px 0 2px}'+
+ '.wcf.wc3f .u3fb48{display:none}.wcf.wc3f{position:relative;padding-left:84px!important;min-height:100px;overflow:visible}'+
+ '.wc3std{position:absolute;left:8px;top:-6px;width:66px;transform-origin:50% 0;animation:wc3unf .5s ease-out both;pointer-events:none}.wc3std b{position:absolute;left:0;width:66px;top:41px;text-align:center;font:900 24px/1 "Noto Serif SC",serif;color:#1c3a24;text-shadow:0 1px 0 rgba(255,255,255,.4)}'+
+ '@keyframes wc3unf{from{transform:scaleY(.05);opacity:0}to{transform:none;opacity:1}}'+
+ '.wc3fw{position:fixed;inset:0;z-index:100000;pointer-events:none;display:flex;align-items:center;justify-content:center;transition:opacity .4s}.wc3fw.out{opacity:0}.wc3tint{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,var(--fc),rgba(0,0,0,.85) 85%);opacity:0;animation:wc3tn .8s ease-out forwards}@keyframes wc3tn{to{opacity:.82}}'+
+ '.wc3fs{position:relative;display:flex;flex-direction:column;align-items:center}.wc3fst{position:relative;transform-origin:50% 0;animation:wc3unf .5s ease-out .3s both;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}.wc3fst b{position:absolute;left:0;right:0;top:calc(38% - 20px);text-align:center;font:900 40px/40px "Noto Serif SC",serif;color:#1c3a24}.wc3fsl{margin-top:14px;font:700 22px/26px Philosopher,Georgia,serif;letter-spacing:.06em;color:#f4d98a;text-shadow:0 2px 6px rgba(0,0,0,.8);opacity:0;animation:wc3fi .4s ease-out .75s both}'+
+ 'body.wc360:has(.wcbox .wcfac) #toast{top:calc(env(safe-area-inset-top,0px) + 8px)!important;bottom:auto!important}'+
+ /* R1 */
+ '.wc360 .u3wc{border:1px solid rgba(160,90,40,.6)!important;border-radius:10px;background:linear-gradient(180deg,rgba(247,226,180,.94),rgba(229,196,138,.94))!important;color:#4a1608!important;box-shadow:0 8px 24px rgba(0,0,0,.6),inset 0 0 0 3px rgba(150,40,26,.55)}.wc360 .u3wc *{color:#4a1608!important;text-shadow:none!important}.wc360 .u3wc .u3wt{color:#7a1f14!important;font-weight:700}'+
+ '@media (prefers-reduced-motion:reduce){.wc3o *,.wc3g *,.wc3m,.wc3ch,.wc3sc,.wc3std{animation:none!important}.wc3ch{opacity:1}}');
+ try{var s=document.createElement('style');s.id='wc360css';s.textContent=CSS;document.head.appendChild(s)}catch(e){er('css',e)}
+ /* ---------- boot ---------- */
+ startObs();
+ if(fresh){openB0();later(skipShow,600)}
+ W.ready=1;
+}catch(e){try{console.error('wc360',e);WC360I.err++}catch(x){}}})();
 </script>

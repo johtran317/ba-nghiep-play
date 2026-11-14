@@ -832,10 +832,10 @@
   "file": "art/maps/home_props.webp",
   "size": [
    1024,
-   512
+   768
   ],
   "ppv": 2.5,
-  "note": "parts[name].r = [x,y,w,h] in atlas px; foot = [x,y] in the part (bottom centre = where it stands). Draw at w_vb x h_vb (atlas px / ppv = vb), foot at (x_vb, foot_vb). Painter order by foot_vb together with the tiles; contact shadow optional (flag shadow). No lit mask. placements: inner = Nội Thành svg 474x843 vb, outer = Ngoại Thành svg 474x632 vb.",
+  "note": "parts[name].r = [x,y,w,h] in atlas px; foot = [x,y] in the part (bottom centre = where it stands). Draw at w_vb x h_vb (atlas px / ppv = vb), foot at (x_vb, foot_vb). Painter order by foot_vb together with the tiles; contact shadow optional (flag shadow). No lit mask. placements: inner = Nội Thành svg 474x843 vb, outer = Ngoại Thành svg 474x632 vb. BN-358t: hint_* parts (8 yard hints, r299 a) in rows y >= 272; w_vb = css x 474/390 (stake 40 css, building hints 52 css).",
   "parts": {
    "bamboo": {
     "r": [
@@ -1361,6 +1361,126 @@
     "w_vb": 30.0,
     "h_vb": 4.0,
     "sheet": "green"
+   },
+   "hint_stake": {
+    "r": [
+     0,
+     272,
+     122,
+     157
+    ],
+    "foot": [
+     61.0,
+     157
+    ],
+    "w_vb": 48.6,
+    "h_vb": 62.8,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_mint": {
+    "r": [
+     126,
+     272,
+     158,
+     131
+    ],
+    "foot": [
+     79.0,
+     131
+    ],
+    "w_vb": 63.2,
+    "h_vb": 52.4,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_tech": {
+    "r": [
+     288,
+     272,
+     158,
+     137
+    ],
+    "foot": [
+     79.0,
+     137
+    ],
+    "w_vb": 63.2,
+    "h_vb": 54.8,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_barracks": {
+    "r": [
+     450,
+     272,
+     158,
+     161
+    ],
+    "foot": [
+     79.0,
+     161
+    ],
+    "w_vb": 63.2,
+    "h_vb": 64.4,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_train": {
+    "r": [
+     612,
+     272,
+     158,
+     215
+    ],
+    "foot": [
+     79.0,
+     215
+    ],
+    "w_vb": 63.2,
+    "h_vb": 86.0,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_market": {
+    "r": [
+     774,
+     272,
+     158,
+     120
+    ],
+    "foot": [
+     79.0,
+     120
+    ],
+    "w_vb": 63.2,
+    "h_vb": 48.0,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_acct": {
+    "r": [
+     0,
+     491,
+     158,
+     212
+    ],
+    "foot": [
+     79.0,
+     212
+    ],
+    "w_vb": 63.2,
+    "h_vb": 84.8,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
+   },
+   "hint_field": {
+    "r": [
+     162,
+     491,
+     158,
+     157
+    ],
+    "foot": [
+     79.0,
+     157
+    ],
+    "w_vb": 63.2,
+    "h_vb": 62.8,
+    "sheet": "r299 a (Decision 267 A, BN-358t)"
    }
   },
   "shadow": [
@@ -1593,5 +1713,1566 @@
    "bamboo(inner)",
    "shrubs(inner)"
   ]
+ },
+ "valley": {
+  "decision": 267,
+  "job": "BN-359t2: approved valley tiles packed in bld_v.webp (BN-359r picks + r316 mc_10/tech_1, r322 house_10/house_1, r321 farm_0..3); Ruong Lua painted in the ground (no tile); Truong Phong x 378 foot 640, Ruong Lua x 409 foot 790",
+  "file": "art/maps/home_valley.webp",
+  "size": [
+   948,
+   1848
+  ],
+  "vb": [
+   474,
+   924
+  ],
+  "grade": "GRADE (hue 44 +/-14, sat ramp from .35, hue +6, sat -10 %, value -3 %) applied in processing",
+  "slots": {
+   "mc": {
+    "x": 318,
+    "foot_vb": 247,
+    "w": 176,
+    "tap": [
+     230.0,
+     82.6,
+     176,
+     164.4
+    ],
+    "h": {
+     "1": 92.4,
+     "10": 108.4,
+     "20": 164.4
+    },
+    "plaque": {
+     "x": 318,
+     "y": 255,
+     "max_w": 134
+    },
+    "unlock_level": 1,
+    "name": "Chính Sảnh",
+    "dx_lv_vb": {
+     "1": -10.29,
+     "10": -16.83,
+     "20": 6.43
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "mint": {
+    "x": 135,
+    "foot_vb": 268,
+    "w": 118,
+    "tap": [
+     76.0,
+     155.6,
+     118,
+     112.4
+    ],
+    "h": {
+     "1": 57.2,
+     "10": 76.4,
+     "20": 112.4
+    },
+    "plaque": {
+     "x": 135,
+     "y": 276,
+     "max_w": 124
+    },
+    "unlock_level": 35,
+    "name": "Xưởng Đúc",
+    "dx_lv_vb": {
+     "1": 11.36,
+     "10": 10.53,
+     "20": 13.47
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "tech": {
+    "x": 96,
+    "foot_vb": 400,
+    "w": 118,
+    "tap": [
+     37.0,
+     275.6,
+     118,
+     124.4
+    ],
+    "h": {
+     "1": 56.0,
+     "10": 80.8,
+     "20": 124.4
+    },
+    "plaque": {
+     "x": 96,
+     "y": 408,
+     "max_w": 134
+    },
+    "unlock_level": 11,
+    "name": "Quân Cơ Xứ",
+    "dx_lv_vb": {
+     "1": -0.65,
+     "10": 4.42,
+     "20": 14.45
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "barracks": {
+    "x": 382,
+    "foot_vb": 420,
+    "w": 140,
+    "tap": [
+     312.0,
+     302.0,
+     140,
+     118.0
+    ],
+    "h": {
+     "1": 52.8,
+     "10": 82.4,
+     "20": 118.0
+    },
+    "plaque": {
+     "x": 382,
+     "y": 428,
+     "max_w": 134
+    },
+    "unlock_level": 15,
+    "name": "Doanh Trại",
+    "dx_lv_vb": {
+     "1": 7.54,
+     "10": -9.9,
+     "20": -0.15
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "train": {
+    "x": 118,
+    "foot_vb": 537,
+    "w": 150,
+    "tap": [
+     43.0,
+     420.6,
+     150,
+     116.4
+    ],
+    "h": {
+     "1": 56.8,
+     "10": 55.2,
+     "20": 116.4
+    },
+    "plaque": {
+     "x": 118,
+     "y": 545,
+     "max_w": 124
+    },
+    "unlock_level": 15,
+    "name": "Giáo Trường",
+    "dx_lv_vb": {
+     "1": -0.71,
+     "10": 3.33,
+     "20": -1.96
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "market": {
+    "x": 348,
+    "foot_vb": 525,
+    "w": 118,
+    "tap": [
+     289.0,
+     440.2,
+     118,
+     84.8
+    ],
+    "h": {
+     "1": 44.0,
+     "10": 69.2,
+     "20": 84.8
+    },
+    "plaque": {
+     "x": 348,
+     "y": 533,
+     "max_w": 134
+    },
+    "unlock_level": 12,
+    "name": "Chợ",
+    "dx_lv_vb": {
+     "1": -12.3,
+     "10": 6.92,
+     "20": 1.46
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "field": {
+    "x": 409,
+    "foot_vb": 790,
+    "w": 130,
+    "tap": [
+     344,
+     670,
+     130,
+     120
+    ],
+    "h": {
+     "1": 120,
+     "10": 120,
+     "20": 120
+    },
+    "plaque": {
+     "x": 409,
+     "y": 798,
+     "max_w": 134
+    },
+    "unlock_level": 10,
+    "name": "Ruộng Lúa",
+    "dx_lv_vb": {
+     "1": 0.0,
+     "10": 0.0,
+     "20": 0.0
+    },
+    "foot_dy_lv_vb": {},
+    "no_tile": true
+   },
+   "house": {
+    "x": 96,
+    "foot_vb": 692,
+    "w": 128,
+    "tap": [
+     32.0,
+     580.0,
+     128,
+     112.0
+    ],
+    "h": {
+     "1": 45.6,
+     "10": 58.8,
+     "20": 112.0
+    },
+    "plaque": {
+     "x": 96,
+     "y": 700,
+     "max_w": 134
+    },
+    "unlock_level": 1,
+    "name": "Dân Cư ×5",
+    "dx_lv_vb": {
+     "1": -16.69,
+     "10": -24.74,
+     "20": 24.38
+    },
+    "foot_dy_lv_vb": {}
+   },
+   "acct": {
+    "x": 378,
+    "foot_vb": 640,
+    "w": 118,
+    "tap": [
+     319,
+     546,
+     118,
+     94
+    ],
+    "h": {
+     "1": 62.8,
+     "10": 78.4,
+     "20": 123.2
+    },
+    "plaque": {
+     "x": 378,
+     "y": 648,
+     "max_w": 134
+    },
+    "unlock_level": 25,
+    "name": "Trướng Phòng",
+    "dx_lv_vb": {
+     "1": -11.14,
+     "10": -5.94,
+     "20": -5.37
+    },
+    "foot_dy_lv_vb": {}
+   }
+  },
+  "lamps": [
+   [
+    195,
+    268
+   ],
+   [
+    232,
+    323
+   ],
+   [
+    272,
+    305
+   ],
+   [
+    141,
+    388
+   ],
+   [
+    211,
+    408
+   ],
+   [
+    259,
+    440
+   ],
+   [
+    216,
+    493
+   ],
+   [
+    166,
+    548
+   ],
+   [
+    220,
+    606
+   ],
+   [
+    281,
+    596
+   ],
+   [
+    234,
+    680
+   ]
+  ],
+  "hints": {
+   "locked_yard_stake": {
+    "part": "hint_stake",
+    "x": "x - 0.32 * tile_w (css)",
+    "foot": "foot - 22 css",
+    "w_css": 40
+   },
+   "building": {
+    "part": "hint_<slot>",
+    "x": "x + 4 css",
+    "foot": "foot - 6 css",
+    "w_css": 52
+   },
+   "stake_w_css": 40,
+   "note": "a not-yet-built or locked slot draws stake + building hint; a built slot draws the bld_f tile"
+  },
+  "retire_after_switch": [
+   "maps/home_terrace.webp"
+  ],
+  "notes": "BN-359t2 (Decision 267 A): r297 b ground + road seam (912b5192) + r319 b dress (Z1/Z2, town rows only; lower Z2 strip y 924-1000 not yet in home_lower) + Ruong Lua painted patch (Z3, river bend). Town tiles in valley.atlas (bld_v.webp). Band 1/10 drawn at 0.55/0.75 of slot w, house band 1 at 0.70 (r322). Hall w 176 (190 hits the Su kien medallion). Lower section in valley.lower.",
+  "field_young": {
+   "job": "BN-359t3 (techart, 2026-11-13): r323 approved young patch, cut to its Z3 alpha box (8 vb feather)",
+   "file": "art/maps/field_young.webp",
+   "size_px": [302, 361],
+   "vb": [323, 633, 151, 180.5],
+   "px_per_vb": 2,
+   "draw": "over the town ground (home_valley.webp) at vb (323, 633), alpha blend; band 1 and locked only, not at Lv 10+",
+   "replaces": "nothing: the full field stays painted in home_valley.webp"
+  },
+  "lower": {
+   "decision": 267,
+   "job": "BN-358u (techart, 2026-11-13): r307 a (river plain, art 4.5) cut under the valley town",
+   "source": "ART-20261113-r307-home-lower-riverplain-fix/approved/home_lower_riverplain_ground.png",
+   "file": "art/maps/home_lower.webp",
+   "size": [
+    948,
+    1686
+   ],
+   "vb": [
+    474,
+    843
+   ],
+   "top_vb": 866,
+   "page_vb": [
+    474,
+    1709
+   ],
+   "css": [
+    390,
+    693
+   ],
+   "vb_per_css": 1.215385,
+   "overlap_vb": 58,
+   "overlap_note": "lower drawn at y = top_vb; linear alpha 0 -> 1 over its top overlap_vb",
+   "grade": "GRADE (as the town) + seam ramp: grass value x 0.78 at the top edge -> x 1.0 at 150 vb (value only, GRADE mask); light unsharp r1.2 40 % t3 after the scale",
+   "road_patch": {
+    "file": "art/maps/home_valley.webp",
+    "band_vb": [
+     795,
+     924
+    ],
+    "stub_cx": 242.0,
+    "lower_cx": 240.0,
+    "width_vb": [
+     30.0,
+     32.0
+    ],
+    "feather_vb": 6.0,
+    "note": "road strip from the graded r307 top (its top 130 vb placed from y 795); only the band x 210..270 vb changes"
+   },
+   "zones": {
+    "farm": {
+     "n": "Ruộng Lương",
+     "unlock": [
+      1,
+      5,
+      10,
+      16
+     ],
+     "plaque": {
+      "x": 115.5,
+      "y": 1109.1
+     }
+    },
+    "mine": {
+     "n": "Mỏ Bạc",
+     "unlock": [
+      1,
+      6,
+      12,
+      18
+     ],
+     "plaque": {
+      "x": 111.8,
+      "y": 1332.7
+     }
+    },
+    "dojo": {
+     "n": "Võ Đường",
+     "unlock": [
+      8,
+      14,
+      20,
+      26
+     ],
+     "plaque": {
+      "x": 364.6,
+      "y": 1342.4
+     }
+    },
+    "vault": {
+     "n": "Kim Khố",
+     "unlock": [
+      20,
+      28,
+      36,
+      44
+     ],
+     "plaque": {
+      "x": 121.5,
+      "y": 1587.9
+     }
+    }
+   },
+   "slots": [
+    {
+     "id": "farm_0",
+     "zone": "farm",
+     "i": 0,
+     "unlock": 1,
+     "x": 54.7,
+     "foot_vb": 1077.5,
+     "w_vb": 80.0,
+     "tap": [
+      14.7,
+      1009.5,
+      80,
+      68
+     ],
+     "css": [
+      45,
+      174
+     ]
+    },
+    {
+     "id": "farm_1",
+     "zone": "farm",
+     "i": 1,
+     "unlock": 5,
+     "x": 155.6,
+     "foot_vb": 1077.5,
+     "w_vb": 80.0,
+     "tap": [
+      115.6,
+      1009.5,
+      80,
+      68
+     ],
+     "css": [
+      128,
+      174
+     ]
+    },
+    {
+     "id": "farm_2",
+     "zone": "farm",
+     "i": 2,
+     "unlock": 10,
+     "x": 322.1,
+     "foot_vb": 1077.5,
+     "w_vb": 80.0,
+     "tap": [
+      282.1,
+      1009.5,
+      80,
+      68
+     ],
+     "css": [
+      265,
+      174
+     ]
+    },
+    {
+     "id": "farm_3",
+     "zone": "farm",
+     "i": 3,
+     "unlock": 16,
+     "x": 419.3,
+     "foot_vb": 1077.5,
+     "w_vb": 80.0,
+     "tap": [
+      379.3,
+      1009.5,
+      80,
+      68
+     ],
+     "css": [
+      345,
+      174
+     ]
+    },
+    {
+     "id": "mine_0",
+     "zone": "mine",
+     "i": 0,
+     "unlock": 1,
+     "x": 75.4,
+     "foot_vb": 1218.5,
+     "w_vb": 80.0,
+     "tap": [
+      35.4,
+      1150.5,
+      80,
+      68
+     ],
+     "css": [
+      62,
+      290
+     ]
+    },
+    {
+     "id": "mine_1",
+     "zone": "mine",
+     "i": 1,
+     "unlock": 6,
+     "x": 160.4,
+     "foot_vb": 1225.8,
+     "w_vb": 80.0,
+     "tap": [
+      120.4,
+      1157.8,
+      80,
+      68
+     ],
+     "css": [
+      132,
+      296
+     ]
+    },
+    {
+     "id": "mine_2",
+     "zone": "mine",
+     "i": 2,
+     "unlock": 12,
+     "x": 75.4,
+     "foot_vb": 1293.8,
+     "w_vb": 80.0,
+     "tap": [
+      35.4,
+      1225.8,
+      80,
+      68
+     ],
+     "css": [
+      62,
+      352
+     ]
+    },
+    {
+     "id": "mine_3",
+     "zone": "mine",
+     "i": 3,
+     "unlock": 18,
+     "x": 165.3,
+     "foot_vb": 1298.7,
+     "w_vb": 80.0,
+     "tap": [
+      125.3,
+      1230.7,
+      80,
+      68
+     ],
+     "css": [
+      136,
+      356
+     ]
+    },
+    {
+     "id": "dojo_0",
+     "zone": "dojo",
+     "i": 0,
+     "unlock": 8,
+     "x": 323.3,
+     "foot_vb": 1235.5,
+     "w_vb": 80.0,
+     "tap": [
+      283.3,
+      1167.5,
+      80,
+      68
+     ],
+     "css": [
+      266,
+      304
+     ]
+    },
+    {
+     "id": "dojo_1",
+     "zone": "dojo",
+     "i": 1,
+     "unlock": 14,
+     "x": 405.9,
+     "foot_vb": 1235.5,
+     "w_vb": 80.0,
+     "tap": [
+      365.9,
+      1167.5,
+      80,
+      68
+     ],
+     "css": [
+      334,
+      304
+     ]
+    },
+    {
+     "id": "dojo_2",
+     "zone": "dojo",
+     "i": 2,
+     "unlock": 20,
+     "x": 323.3,
+     "foot_vb": 1303.5,
+     "w_vb": 80.0,
+     "tap": [
+      283.3,
+      1235.5,
+      80,
+      68
+     ],
+     "css": [
+      266,
+      360
+     ]
+    },
+    {
+     "id": "dojo_3",
+     "zone": "dojo",
+     "i": 3,
+     "unlock": 26,
+     "x": 405.9,
+     "foot_vb": 1303.5,
+     "w_vb": 80.0,
+     "tap": [
+      365.9,
+      1235.5,
+      80,
+      68
+     ],
+     "css": [
+      334,
+      360
+     ]
+    },
+    {
+     "id": "vault_0",
+     "zone": "vault",
+     "i": 0,
+     "unlock": 20,
+     "x": 87.5,
+     "foot_vb": 1553.9,
+     "w_vb": 80.0,
+     "tap": [
+      47.5,
+      1485.9,
+      80,
+      68
+     ],
+     "css": [
+      72,
+      566
+     ]
+    },
+    {
+     "id": "vault_1",
+     "zone": "vault",
+     "i": 1,
+     "unlock": 28,
+     "x": 172.6,
+     "foot_vb": 1553.9,
+     "w_vb": 80.0,
+     "tap": [
+      132.6,
+      1485.9,
+      80,
+      68
+     ],
+     "css": [
+      142,
+      566
+     ]
+    },
+    {
+     "id": "vault_2",
+     "zone": "vault",
+     "i": 2,
+     "unlock": 36,
+     "x": 311.1,
+     "foot_vb": 1553.9,
+     "w_vb": 80.0,
+     "tap": [
+      271.1,
+      1485.9,
+      80,
+      68
+     ],
+     "css": [
+      256,
+      566
+     ]
+    },
+    {
+     "id": "vault_3",
+     "zone": "vault",
+     "i": 3,
+     "unlock": 44,
+     "x": 401.1,
+     "foot_vb": 1553.9,
+     "w_vb": 80.0,
+     "tap": [
+      361.1,
+      1485.9,
+      80,
+      68
+     ],
+     "css": [
+      330,
+      566
+     ]
+    }
+   ],
+   "lamps": [
+    [
+     210.3,
+     892.7
+    ],
+    [
+     227.3,
+     892.7
+    ],
+    [
+     210.3,
+     969.3
+    ],
+    [
+     227.3,
+     969.3
+    ],
+    [
+     249.2,
+     1011.8
+    ],
+    [
+     266.2,
+     1011.8
+    ],
+    [
+     210.3,
+     1129.7
+    ],
+    [
+     227.3,
+     1129.7
+    ],
+    [
+     249.2,
+     1252.5
+    ],
+    [
+     266.2,
+     1252.5
+    ],
+    [
+     210.3,
+     1419.0
+    ],
+    [
+     227.3,
+     1419.0
+    ],
+    [
+     249.2,
+     1543.0
+    ],
+    [
+     266.2,
+     1543.0
+    ]
+   ],
+   "tile": {
+    "part_per_zone": {
+     "farm": "farm",
+     "mine": "mine",
+     "dojo": "dojo",
+     "vault": "vault"
+    },
+    "w_css": 66,
+    "w_vb": 80,
+    "anchor": "bottom-centre on (x, foot_vb)"
+   },
+   "tap": {
+    "size_vb": [
+     80,
+     68
+    ],
+    "rule": "box centred on the pad (x, foot_vb - 34); no overlaps (checked)",
+    "overlaps": []
+   },
+   "lot_rule": "on this ground the painted pad IS the lot: no lot_empty / lot_locked tiles. Open = \"+\" chip, locked = \"CS n\" pill, built = the zone tile. hint_stake on the first locked pad of each zone",
+   "hint_stake": {
+    "part": "hint_stake",
+    "x": "pad x - 0.32 * 80 vb",
+    "foot": "pad foot_vb - 22 css",
+    "w_css": 40
+   },
+   "retire_after_switch": [
+    "maps/home_paddies.webp"
+   ],
+   "notes": "Lower section = the river plain (Direction 2, BN-358b). Plaque x,y = centre. Lamps = 14 lantern heads (7 posts), night glow only.",
+   "atlas": "valley.atlas (keys farm, mine, dojo, vault)"
+  },
+  "atlas": {
+   "file": "art/buildings/bld_v.webp",
+   "size": [
+    2048,
+    1153
+   ],
+   "px_per_vb": 2.5,
+   "lit": null,
+   "parts": {
+    "mc_20": {
+     "r": [
+      0,
+      0,
+      440,
+      411
+     ],
+     "anchor_px": [
+      203.9,
+      411
+     ],
+     "w_vb": 176.0,
+     "h_vb": 164.4,
+     "dx_vb": 6.43,
+     "src": {
+      "job": "ART-20261113-r308-home-bld-a-b20",
+      "var": "b",
+      "cell": "mc",
+      "round": 308,
+      "src_w": 889
+     }
+    },
+    "tech_20": {
+     "r": [
+      442,
+      0,
+      295,
+      311
+     ],
+     "anchor_px": [
+      111.4,
+      311
+     ],
+     "w_vb": 118.0,
+     "h_vb": 124.4,
+     "dx_vb": 14.45,
+     "src": {
+      "job": "ART-20261113-r308-home-bld-a-b20",
+      "var": "a",
+      "cell": "tech",
+      "round": 308,
+      "src_w": 780
+     }
+    },
+    "acct_20": {
+     "r": [
+      739,
+      0,
+      295,
+      308
+     ],
+     "anchor_px": [
+      160.9,
+      308
+     ],
+     "w_vb": 118.0,
+     "h_vb": 123.2,
+     "dx_vb": -5.37,
+     "src": {
+      "job": "ART-20261113-r309-home-bld-b-b20",
+      "var": "b",
+      "cell": "acct",
+      "round": 309,
+      "src_w": 890
+     }
+    },
+    "barracks_20": {
+     "r": [
+      1036,
+      0,
+      350,
+      295
+     ],
+     "anchor_px": [
+      175.4,
+      295
+     ],
+     "w_vb": 140.0,
+     "h_vb": 118.0,
+     "dx_vb": -0.15,
+     "src": {
+      "job": "ART-20261113-r308-home-bld-a-b20",
+      "var": "b",
+      "cell": "barracks",
+      "round": 308,
+      "src_w": 960
+     }
+    },
+    "train_20": {
+     "r": [
+      1388,
+      0,
+      375,
+      291
+     ],
+     "anchor_px": [
+      192.4,
+      291
+     ],
+     "w_vb": 150.0,
+     "h_vb": 116.4,
+     "dx_vb": -1.96,
+     "src": {
+      "job": "ART-20261113-r308-home-bld-a-b20",
+      "var": "b",
+      "cell": "train",
+      "round": 308,
+      "src_w": 995
+     }
+    },
+    "mint_20": {
+     "r": [
+      0,
+      413,
+      295,
+      281
+     ],
+     "anchor_px": [
+      113.8,
+      281
+     ],
+     "w_vb": 118.0,
+     "h_vb": 112.4,
+     "dx_vb": 13.47,
+     "src": {
+      "job": "ART-20261113-r309-home-bld-b-b20",
+      "var": "b",
+      "cell": "mint",
+      "round": 309,
+      "src_w": 784
+     }
+    },
+    "house_20": {
+     "r": [
+      297,
+      413,
+      320,
+      280
+     ],
+     "anchor_px": [
+      99.0,
+      280
+     ],
+     "w_vb": 128.0,
+     "h_vb": 112.0,
+     "dx_vb": 24.38,
+     "src": {
+      "job": "ART-20261113-r309-home-bld-b-b20",
+      "var": "a",
+      "cell": "house",
+      "round": 309,
+      "src_w": 1000
+     }
+    },
+    "mc_10": {
+     "r": [
+      619,
+      413,
+      330,
+      271
+     ],
+     "anchor_px": [
+      207.1,
+      271
+     ],
+     "w_vb": 132.0,
+     "h_vb": 108.4,
+     "dx_vb": -16.83,
+     "src": {
+      "job": "ART-20261113-r316-home-bld-redo-a",
+      "var": "a",
+      "cell": "0",
+      "round": 316,
+      "src_w": 1000
+     }
+    },
+    "mc_1": {
+     "r": [
+      951,
+      413,
+      242,
+      231
+     ],
+     "anchor_px": [
+      146.7,
+      231
+     ],
+     "w_vb": 96.8,
+     "h_vb": 92.4,
+     "dx_vb": -10.29,
+     "src": {
+      "job": "ART-20261113-r313-home-bld-a-b1",
+      "var": "a",
+      "cell": "mc",
+      "round": 313,
+      "src_w": 851
+     }
+    },
+    "market_20": {
+     "r": [
+      1195,
+      413,
+      295,
+      212
+     ],
+     "anchor_px": [
+      143.8,
+      212
+     ],
+     "w_vb": 118.0,
+     "h_vb": 84.8,
+     "dx_vb": 1.46,
+     "src": {
+      "job": "ART-20261113-r309-home-bld-b-b20",
+      "var": "b",
+      "cell": "market",
+      "round": 309,
+      "src_w": 848
+     }
+    },
+    "barracks_10": {
+     "r": [
+      1492,
+      413,
+      262,
+      206
+     ],
+     "anchor_px": [
+      155.8,
+      206
+     ],
+     "w_vb": 104.8,
+     "h_vb": 82.4,
+     "dx_vb": -9.9,
+     "src": {
+      "job": "ART-20261113-r311-home-bld-a-b10",
+      "var": "a",
+      "cell": "barracks",
+      "round": 311,
+      "src_w": 979
+     }
+    },
+    "tech_10": {
+     "r": [
+      1756,
+      413,
+      221,
+      202
+     ],
+     "anchor_px": [
+      99.5,
+      202
+     ],
+     "w_vb": 88.4,
+     "h_vb": 80.8,
+     "dx_vb": 4.42,
+     "src": {
+      "job": "ART-20261113-r311-home-bld-a-b10",
+      "var": "b",
+      "cell": "tech",
+      "round": 311,
+      "src_w": 677
+     }
+    },
+    "acct_10": {
+     "r": [
+      0,
+      696,
+      221,
+      196
+     ],
+     "anchor_px": [
+      125.4,
+      196
+     ],
+     "w_vb": 88.4,
+     "h_vb": 78.4,
+     "dx_vb": -5.94,
+     "src": {
+      "job": "ART-20261113-r312-home-bld-b-b10",
+      "var": "b",
+      "cell": "acct",
+      "round": 312,
+      "src_w": 945
+     }
+    },
+    "mint_10": {
+     "r": [
+      223,
+      696,
+      221,
+      191
+     ],
+     "anchor_px": [
+      84.2,
+      191
+     ],
+     "w_vb": 88.4,
+     "h_vb": 76.4,
+     "dx_vb": 10.53,
+     "src": {
+      "job": "ART-20261113-r312-home-bld-b-b10",
+      "var": "b",
+      "cell": "mint",
+      "round": 312,
+      "src_w": 793
+     }
+    },
+    "vault": {
+     "r": [
+      446,
+      696,
+      200,
+      183
+     ],
+     "anchor_px": [
+      96.6,
+      183
+     ],
+     "w_vb": 80.0,
+     "h_vb": 73.2,
+     "dx_vb": 1.37,
+     "src": {
+      "job": "ART-20261113-r310-home-outposts",
+      "var": "a",
+      "cell": "vault",
+      "round": 310,
+      "src_w": 935
+     }
+    },
+    "farm_2": {
+     "r": [
+      648,
+      696,
+      200,
+      175
+     ],
+     "anchor_px": [
+      103.3,
+      175
+     ],
+     "w_vb": 80.0,
+     "h_vb": 70.0,
+     "dx_vb": -1.32,
+     "src": {
+      "job": "ART-20261113-r321-home-farm-outposts",
+      "var": "a",
+      "cell": "2",
+      "round": 321,
+      "src_w": 906
+     }
+    },
+    "market_10": {
+     "r": [
+      850,
+      696,
+      221,
+      173
+     ],
+     "anchor_px": [
+      93.2,
+      173
+     ],
+     "w_vb": 88.4,
+     "h_vb": 69.2,
+     "dx_vb": 6.92,
+     "src": {
+      "job": "ART-20261113-r312-home-bld-b-b10",
+      "var": "b",
+      "cell": "market",
+      "round": 312,
+      "src_w": 837
+     }
+    },
+    "farm_3": {
+     "r": [
+      1073,
+      696,
+      200,
+      171
+     ],
+     "anchor_px": [
+      105.0,
+      171
+     ],
+     "w_vb": 80.0,
+     "h_vb": 68.4,
+     "dx_vb": -2.0,
+     "src": {
+      "job": "ART-20261113-r321-home-farm-outposts",
+      "var": "a",
+      "cell": "3",
+      "round": 321,
+      "src_w": 1000
+     }
+    },
+    "mine": {
+     "r": [
+      1275,
+      696,
+      200,
+      171
+     ],
+     "anchor_px": [
+      107.0,
+      171
+     ],
+     "w_vb": 80.0,
+     "h_vb": 68.4,
+     "dx_vb": -2.8,
+     "src": {
+      "job": "ART-20261113-r310-home-outposts",
+      "var": "a",
+      "cell": "mine",
+      "round": 310,
+      "src_w": 985
+     }
+    },
+    "acct_1": {
+     "r": [
+      1477,
+      696,
+      162,
+      157
+     ],
+     "anchor_px": [
+      108.8,
+      157
+     ],
+     "w_vb": 64.8,
+     "h_vb": 62.8,
+     "dx_vb": -11.14,
+     "src": {
+      "job": "ART-20261113-r314-home-bld-b-b1",
+      "var": "a",
+      "cell": "acct",
+      "round": 314,
+      "src_w": 838
+     }
+    },
+    "farm": {
+     "r": [
+      1641,
+      696,
+      200,
+      156
+     ],
+     "anchor_px": [
+      92.3,
+      156
+     ],
+     "w_vb": 80.0,
+     "h_vb": 62.4,
+     "dx_vb": 3.08,
+     "src": {
+      "job": "ART-20261113-r310-home-outposts",
+      "var": "a",
+      "cell": "farm",
+      "round": 310,
+      "src_w": 741
+     }
+    },
+    "house_10": {
+     "r": [
+      0,
+      894,
+      240,
+      147
+     ],
+     "anchor_px": [
+      181.9,
+      147
+     ],
+     "w_vb": 96.0,
+     "h_vb": 58.8,
+     "dx_vb": -24.74,
+     "src": {
+      "job": "ART-20261113-r322-home-house-redo",
+      "var": "a",
+      "cell": "0",
+      "round": 322,
+      "src_w": 999
+     }
+    },
+    "mint_1": {
+     "r": [
+      242,
+      894,
+      162,
+      143
+     ],
+     "anchor_px": [
+      52.6,
+      143
+     ],
+     "w_vb": 64.8,
+     "h_vb": 57.2,
+     "dx_vb": 11.36,
+     "src": {
+      "job": "ART-20261113-r314-home-bld-b-b1",
+      "var": "a",
+      "cell": "mint",
+      "round": 314,
+      "src_w": 807
+     }
+    },
+    "train_1": {
+     "r": [
+      406,
+      894,
+      206,
+      142
+     ],
+     "anchor_px": [
+      104.8,
+      142
+     ],
+     "w_vb": 82.4,
+     "h_vb": 56.8,
+     "dx_vb": -0.71,
+     "src": {
+      "job": "ART-20261113-r313-home-bld-a-b1",
+      "var": "a",
+      "cell": "train",
+      "round": 313,
+      "src_w": 982
+     }
+    },
+    "tech_1": {
+     "r": [
+      614,
+      894,
+      162,
+      140
+     ],
+     "anchor_px": [
+      82.6,
+      140
+     ],
+     "w_vb": 64.8,
+     "h_vb": 56.0,
+     "dx_vb": -0.65,
+     "src": {
+      "job": "ART-20261113-r316-home-bld-redo-a",
+      "var": "b",
+      "cell": "1",
+      "round": 316,
+      "src_w": 1000
+     }
+    },
+    "dojo": {
+     "r": [
+      778,
+      894,
+      200,
+      139
+     ],
+     "anchor_px": [
+      134.1,
+      139
+     ],
+     "w_vb": 80.0,
+     "h_vb": 55.6,
+     "dx_vb": -13.64,
+     "src": {
+      "job": "ART-20261113-r310-home-outposts",
+      "var": "a",
+      "cell": "dojo",
+      "round": 310,
+      "src_w": 915
+     }
+    },
+    "train_10": {
+     "r": [
+      980,
+      894,
+      281,
+      138
+     ],
+     "anchor_px": [
+      132.2,
+      138
+     ],
+     "w_vb": 112.4,
+     "h_vb": 55.2,
+     "dx_vb": 3.33,
+     "src": {
+      "job": "ART-20261113-r311-home-bld-a-b10",
+      "var": "b",
+      "cell": "train",
+      "round": 311,
+      "src_w": 945
+     }
+    },
+    "farm_1": {
+     "r": [
+      1263,
+      894,
+      200,
+      137
+     ],
+     "anchor_px": [
+      117.1,
+      137
+     ],
+     "w_vb": 80.0,
+     "h_vb": 54.8,
+     "dx_vb": -6.83,
+     "src": {
+      "job": "ART-20261113-r321-home-farm-outposts",
+      "var": "b",
+      "cell": "1",
+      "round": 321,
+      "src_w": 908
+     }
+    },
+    "barracks_1": {
+     "r": [
+      1465,
+      894,
+      192,
+      132
+     ],
+     "anchor_px": [
+      77.1,
+      132
+     ],
+     "w_vb": 76.8,
+     "h_vb": 52.8,
+     "dx_vb": 7.54,
+     "src": {
+      "job": "ART-20261113-r313-home-bld-a-b1",
+      "var": "b",
+      "cell": "barracks",
+      "round": 313,
+      "src_w": 850
+     }
+    },
+    "house_1": {
+     "r": [
+      1659,
+      894,
+      224,
+      114
+     ],
+     "anchor_px": [
+      153.7,
+      114
+     ],
+     "w_vb": 89.6,
+     "h_vb": 45.6,
+     "dx_vb": -16.69,
+     "src": {
+      "job": "ART-20261113-r322-home-house-redo",
+      "var": "a",
+      "cell": "1",
+      "round": 322,
+      "src_w": 993
+     }
+    },
+    "market_1": {
+     "r": [
+      0,
+      1043,
+      162,
+      110
+     ],
+     "anchor_px": [
+      111.8,
+      110
+     ],
+     "w_vb": 64.8,
+     "h_vb": 44.0,
+     "dx_vb": -12.3,
+     "src": {
+      "job": "ART-20261113-r314-home-bld-b-b1",
+      "var": "b",
+      "cell": "market",
+      "round": 314,
+      "src_w": 964
+     }
+    },
+    "farm_0": {
+     "r": [
+      1641,
+      696,
+      200,
+      156
+     ],
+     "anchor_px": [
+      92.3,
+      156
+     ],
+     "w_vb": 80.0,
+     "h_vb": 62.4,
+     "dx_vb": 3.08,
+     "src": {
+      "job": "ART-20261113-r310-home-outposts",
+      "var": "a",
+      "cell": "farm",
+      "round": 310,
+      "src_w": 741
+     }
+    }
+   },
+   "pending": {},
+   "note": "BN-359t: 25 approved tiles (art picks, BN-359r). Keys <id>_<band> for town (Lv 1/10/20 = band 1/10/20) and farm/mine/dojo/vault for the lower plots (drawn at 80 vb). Rect r = [x, y, w, h] px in this file. Draw each rect with its bottom edge on foot_vb and its centre at x + dx_vb (vb), so the base centre sits on x. Draw width = w_vb (vb); the rect is already scaled to it. No contact shadow in the file (the code draws it)."
+  }
  }
 }
