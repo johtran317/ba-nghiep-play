@@ -5,10 +5,10 @@
  "file": "art/heroes/fig_thuc.webp",
  "size": [
   3400,
-  3549
+  3583
  ],
- "bytes": 1799800,
- "note": "BN-ON1t2: stage cut-out figures, one per chibi card (grabCut + 1 px erode, 540x810 card px, trimmed). r = [x,y,w,h] in the atlas, cell = [left, top, card w, card h]: draw at (stageX - (cell.x + r.w/2)... i.e. the figure keeps its card scale; stand the bottom edge (r.h) on the dais. Lord is in fig_thuc. NOT approved yet: art must pass each figure from the sheets; until then show the card in the hero frame. V301 BN-ON1t5: 21 FIX figures re-cut (seed boxes of review_figs.md \u00a73, hole fill <= 300 px^2, drop islands); PASS and FAIL-Spark figures keep their pixels and rects. V301 BN-ON1t6: 3 Spark stage figures (BN-ON1r6 r211-r236, pick a) keyed, despilled, 1 px eroded and packed on the t5 atlas; other figures keep their rects. V301 BN-ON1t7: 4 FIX-again figures (BN-ON1r7 \u00a74) hand-fixed by restore/erase boxes from the BN-ON1t2 alpha; the other figures keep their rects. V301 BN-ON1t7b: despill on zhugeliang, zhonghui, huanggai, sunshangxiang (BN-ON1r8 \u00a72, violet/pink spill removed inside the boxes); \"pass\": true on the 60 figures of review_figs_r8.md \u00a73. V301 BN-ON1t8: 10 Spark stage figures (BN-ON1r10 r250-r277, picks as review_figs_r10.md \u00a71) keyed, despilled (card-non-violet only), 1 px eroded and packed on the t7b atlas; other figures keep their rects; no pass flag set. V301 BN-ON1t9: \"pass\": true on 33 figures (BN-ON1r9 \u00a71 6 + BN-ON1r11 \u00a71 27, 93 flagged in all); hand fixes zhangfei (thuc, polygon alpha), caopi and xiahoudun (nguy, box erase / hue) from BN-ON1r9 \u00a73 and BN-ON1r11 \u00a72, rects and cells unchanged; these 3 are not flagged until art passes them; the 5 Spark stage figures stay unflagged.",
+ "bytes": 2059462,
+ "note": "BN-ON1t2: stage cut-out figures, one per chibi card (grabCut + 1 px erode, 540x810 card px, trimmed). r = [x,y,w,h] in the atlas, cell = [left, top, card w, card h]: draw at (stageX - (cell.x + r.w/2)... i.e. the figure keeps its card scale; stand the bottom edge (r.h) on the dais. Lord is in fig_thuc. NOT approved yet: art must pass each figure from the sheets; until then show the card in the hero frame. V301 BN-ON1t5: 21 FIX figures re-cut (seed boxes of review_figs.md §3, hole fill <= 300 px^2, drop islands); PASS and FAIL-Spark figures keep their pixels and rects. V301 BN-ON1t6: 3 Spark stage figures (BN-ON1r6 r211-r236, pick a) keyed, despilled, 1 px eroded and packed on the t5 atlas; other figures keep their rects. V301 BN-ON1t7: 4 FIX-again figures (BN-ON1r7 §4) hand-fixed by restore/erase boxes from the BN-ON1t2 alpha; the other figures keep their rects. V301 BN-ON1t7b: despill on zhugeliang, zhonghui, huanggai, sunshangxiang (BN-ON1r8 §2, violet/pink spill removed inside the boxes); \"pass\": true on the 60 figures of review_figs_r8.md §3. V301 BN-ON1t8: 10 Spark stage figures (BN-ON1r10 r250-r277, picks as review_figs_r10.md §1) keyed, despilled (card-non-violet only), 1 px eroded and packed on the t7b atlas; other figures keep their rects; no pass flag set. V301 BN-ON1t9: \"pass\": true on 33 figures (BN-ON1r9 §1 6 + BN-ON1r11 §1 27, 93 flagged in all); hand fixes zhangfei (thuc, polygon alpha), caopi and xiahoudun (nguy, box erase / hue) from BN-ON1r9 §3 and BN-ON1r11 §2, rects and cells unchanged; these 3 are not flagged until art passes them; the 5 Spark stage figures stay unflagged. V301 CUT-361: pangtong re-cut from r363 a (key_magenta hue key + despill + 1 px erode, 540x810 card scale, trimmed); CUT-361b: two trapped magenta pockets (ear, chain link) keyed to alpha 0, magenta scan 0, pass true; other figures keep their rects.",
  "figs": {
   "lord": {
    "r": [
@@ -395,16 +395,16 @@
    "r": [
     0,
     2895,
-    484,
-    654
+    449,
+    688
    ],
    "cell": [
-    25,
-    93,
+    71,
+    54,
     540,
     810
    ],
-   "feet": 654,
+   "feet": 688,
    "pass": true
   }
  }

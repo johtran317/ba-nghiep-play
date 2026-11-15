@@ -1,0 +1,52 @@
+{
+ "artmeta": 1,
+ "id": "bursts_r351",
+ "build": "V301",
+ "job": "BN-363t: r351 a result bursts",
+ "atlas": {
+  "file": "art/ui/kit/bursts.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "cell": [
+   600,
+   600
+  ],
+  "note": "NOT keyed: black is true 0; draw with globalCompositeOperation lighter (or CSS mix-blend-mode screen). Cell = 200 css at 3x; ring hole ~35% of the cell. Centre on the tile; 100 css result tile at 100% opacity, 108 css item-popup tile at ~30% opacity.",
+  "pieces": {
+   "lam": {
+    "r": [
+     0,
+     0,
+     600,
+     600
+    ]
+   },
+   "vang": {
+    "r": [
+     600,
+     0,
+     600,
+     600
+    ]
+   },
+   "do": {
+    "r": [
+     0,
+     600,
+     600,
+     600
+    ]
+   },
+   "tim": {
+    "r": [
+     600,
+     600,
+     600,
+     600
+    ]
+   }
+  }
+ }
+}

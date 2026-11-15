@@ -5,11 +5,11 @@
  "file": "art/fx/kit_bt.webp",
  "size": [
   2048,
-  1280
+  1536
  ],
  "cell": 256,
- "bytes": 473220,
- "note": "BN-ON1t: r151 b (8 troop impacts, peak frame), r152 a (4 types x 3 frame flipbook + ground mark), r153 a (11 compact steel pieces). Every piece is a 256 x 256 cell at HALF of the 512 master cell; the piece centre = the cell centre (flip frames of one row share it, they must not jump). r = the cell rect [x,y,w,h], content = tight bbox of the opaque pixels, atlas px. Pieces are painted at 65-70 % of the cell: scale so content (not the cell) meets the squad cap (r151 0.55 x squad width, r153 0.7 x). Hit flipbook timing: hit_<type>_1 40 ms, _2 80 ms, _3 120 ms, then mark_<type> stays 600 ms (ground-flat ellipse, tint by branch in code). Colours neutral (steel, bone, earth) except r151 branch accents.",
+ "bytes": 551220,
+ "note": "BN-ON1t: r151 b (8 troop impacts, peak frame), r152 a (4 types x 3 frame flipbook + ground mark), r153 a (11 compact steel pieces). Every piece is a 256 x 256 cell at HALF of the 512 master cell; the piece centre = the cell centre (flip frames of one row share it, they must not jump). r = the cell rect [x,y,w,h], content = tight bbox of the opaque pixels, atlas px. Pieces are painted at 65-70 % of the cell: scale so content (not the cell) meets the squad cap (r151 0.55 x squad width, r153 0.7 x). Hit flipbook timing: hit_<type>_1 40 ms, _2 80 ms, _3 120 ms, then mark_<type> stays 600 ms (ground-flat ellipse, tint by branch in code). Colours neutral (steel, bone, earth) except r151 branch accents. | CUT-384 r400 (row y=1280): status marks st_drain_thread (256x~75 strip, trimmed 2 px per end, tile it end to end along the line), st_drain_bead (cluster of 6) + st_drain_bead1 (one bead, 128 slot), st_drain_land, st_morale_up, st_morale_down, st_buff_ring (2:1 ground ellipse), st_heal_burst, st_dazed. Black masters clamped to 0 and alpha-keyed with a filled content mask: safe under normal and additive ('lighter') blend. Pieces at 0.72 of the 344x384 master cell, content centred in the 256 slot. | CUT-400b: st_drain_thread recentred in its 128 strip, periodic (12 px wrap blend), content width 244: tile it end to end at 244 px steps.",
  "pieces": {
   "imp_bash": {
    "r": [
@@ -499,6 +499,132 @@
     1047,
     189,
     195
+   ]
+  },
+  "st_drain_land": {
+   "r": [
+    0,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    39,
+    1335,
+    178,
+    145
+   ]
+  },
+  "st_drain_bead": {
+   "r": [
+    256,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    305,
+    1325,
+    157,
+    166
+   ]
+  },
+  "st_morale_up": {
+   "r": [
+    512,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    561,
+    1318,
+    158,
+    179
+   ]
+  },
+  "st_morale_down": {
+   "r": [
+    768,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    841,
+    1300,
+    109,
+    216
+   ]
+  },
+  "st_buff_ring": {
+   "r": [
+    1024,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    1050,
+    1319,
+    203,
+    178
+   ]
+  },
+  "st_heal_burst": {
+   "r": [
+    1280,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    1312,
+    1311,
+    191,
+    193
+   ]
+  },
+  "st_dazed": {
+   "r": [
+    1536,
+    1280,
+    256,
+    256
+   ],
+   "content": [
+    1568,
+    1349,
+    192,
+    117
+   ]
+  },
+  "st_drain_thread": {
+   "r": [
+    1792,
+    1280,
+    256,
+    128
+   ],
+   "content": [
+    1792,
+    1301,
+    244,
+    86
+   ]
+  },
+  "st_drain_bead1": {
+   "r": [
+    1792,
+    1408,
+    128,
+    128
+   ],
+   "content": [
+    1828,
+    1444,
+    55,
+    55
    ]
   }
  }

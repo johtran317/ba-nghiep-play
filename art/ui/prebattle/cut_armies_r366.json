@@ -1,0 +1,348 @@
+{
+ "_note": "r366 b Hoang Can re-cut, same 16 cells and format as cut_armies.json armies.hoangcan: atlas px = 0.68 x the 1440 sheet; 4 px halo + enemy tint (0.86,0.84,0.92) baked; front view; foot inside rect. NEW file, the old cut_armies.* is untouched. Ships only if the build's enemy boxes reach 0.90x m4.",
+ "scale_of_master": 0.68,
+ "atlas": "cut_armies_r366.webp",
+ "atlas_size": [
+  1400,
+  432
+ ],
+ "armies": {
+  "hoangcan": {
+   "name": "Hoàng Cân",
+   "types": {
+    "shield": {
+     "painted_count": 4,
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        1101,
+        0,
+        175,
+        213
+       ],
+       "foot": [
+        103.3,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        167,
+        205
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        0,
+        217,
+        175,
+        213
+       ],
+       "foot": [
+        102.9,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        167,
+        205
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        177,
+        217,
+        151,
+        213
+       ],
+       "foot": [
+        89.7,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        143,
+        205
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        330,
+        217,
+        157,
+        213
+       ],
+       "foot": [
+        99.2,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        149,
+        205
+       ]
+      }
+     ]
+    },
+    "pike": {
+     "painted_count": 4,
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        0,
+        0,
+        141,
+        215
+       ],
+       "foot": [
+        80.2,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        133,
+        207
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        489,
+        217,
+        145,
+        213
+       ],
+       "foot": [
+        84.2,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        137,
+        205
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        636,
+        217,
+        165,
+        213
+       ],
+       "foot": [
+        105.3,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        157,
+        205
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        803,
+        217,
+        156,
+        213
+       ],
+       "foot": [
+        95.8,
+        204.6
+       ],
+       "body": [
+        4,
+        4,
+        148,
+        205
+       ]
+      }
+     ]
+    },
+    "archer": {
+     "painted_count": 2,
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        961,
+        217,
+        161,
+        213
+       ],
+       "foot": [
+        82.9,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        153,
+        205
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        1124,
+        217,
+        162,
+        213
+       ],
+       "foot": [
+        76.4,
+        203.9
+       ],
+       "body": [
+        4,
+        4,
+        154,
+        205
+       ]
+      }
+     ]
+    },
+    "strategist": {
+     "painted_count": 2,
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        143,
+        0,
+        151,
+        215
+       ],
+       "foot": [
+        79.1,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        143,
+        207
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        296,
+        0,
+        153,
+        215
+       ],
+       "foot": [
+        80.5,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        145,
+        207
+       ]
+      }
+     ],
+     "note": "r366 b strategist: both painted cells cut (the old hoangcan cut kept one + mirror); use both or one + mirror"
+    },
+    "lightcav": {
+     "painted_count": 4,
+     "cells": [
+      {
+       "id": "fig0",
+       "rect": [
+        776,
+        0,
+        161,
+        214
+       ],
+       "foot": [
+        68.3,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        153,
+        206
+       ]
+      },
+      {
+       "id": "fig1",
+       "rect": [
+        451,
+        0,
+        161,
+        215
+       ],
+       "foot": [
+        63.2,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        153,
+        207
+       ]
+      },
+      {
+       "id": "fig2",
+       "rect": [
+        939,
+        0,
+        160,
+        214
+       ],
+       "foot": [
+        82.9,
+        205.3
+       ],
+       "body": [
+        4,
+        4,
+        152,
+        206
+       ]
+      },
+      {
+       "id": "fig3",
+       "rect": [
+        614,
+        0,
+        160,
+        215
+       ],
+       "foot": [
+        81.5,
+        206.0
+       ],
+       "body": [
+        4,
+        4,
+        152,
+        207
+       ]
+      }
+     ],
+     "mirror_fill": 2,
+     "target_count_229A": 6
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "file": "troops/looks/lightcav_t5v2.webp",
+ "size": [
+  1024,
+  256
+ ],
+ "bytes": 65872,
+ "scale": 0.2044,
+ "pink_px": 0,
+ "cells": {
+  "back_stand": {
+   "slot": 0,
+   "x": 0,
+   "y": 0,
+   "w": 256,
+   "h": 256,
+   "foot_x": 128,
+   "foot_y": 240,
+   "fig_h": 212,
+   "fig_w": 174,
+   "bbox_in_cell": [
+    49,
+    30,
+    223,
+    242
+   ],
+   "edge_touch": 0,
+   "lum": 70.4,
+   "src_wh_ratio": 0.82
+  },
+  "front_stand": {
+   "slot": 2,
+   "x": 512,
+   "y": 0,
+   "w": 256,
+   "h": 256,
+   "foot_x": 128,
+   "foot_y": 240,
+   "fig_h": 214,
+   "fig_w": 172,
+   "bbox_in_cell": [
+    62,
+    28,
+    234,
+    242
+   ],
+   "edge_touch": 0,
+   "lum": 66.8,
+   "src_wh_ratio": 0.8
+  },
+  "back_strike": {
+   "slot": 1,
+   "x": 256,
+   "y": 0,
+   "w": 256,
+   "h": 256,
+   "foot_x": 128,
+   "foot_y": 240,
+   "fig_h": 206,
+   "fig_w": 201,
+   "bbox_in_cell": [
+    33,
+    36,
+    234,
+    242
+   ],
+   "edge_touch": 0,
+   "lum": 64.7,
+   "src_wh_ratio": 0.97
+  },
+  "front_strike": {
+   "slot": 3,
+   "x": 768,
+   "y": 0,
+   "w": 256,
+   "h": 256,
+   "foot_x": 128,
+   "foot_y": 240,
+   "fig_h": 210,
+   "fig_w": 200,
+   "bbox_in_cell": [
+    20,
+    32,
+    220,
+    242
+   ],
+   "edge_touch": 0,
+   "lum": 68.4,
+   "src_wh_ratio": 0.95
+  }
+ },
+ "note": "4 cells of 256: back_stand, back_strike, front_stand, front_strike (same format as heavycav_t5v2); feet anchor (128,240), no value grade."
+}

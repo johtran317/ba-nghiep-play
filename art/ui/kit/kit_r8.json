@@ -1,0 +1,55 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r8",
+ "build": "V301",
+ "job": "BN-363t2: r356 b hero panel inlay + well lip",
+ "kit": {
+  "file": "art/ui/kit/kit_r8.webp",
+  "size": [
+   480,
+   240
+  ],
+  "bytes": 7860,
+  "note": "r = [x,y,w,h] px at 3x (css = px/3). panel_inlay: 9-slice 60 px all sides WITH fill, draw corners 16-20 css (stat tiles, troop slots). panel_lip: 9-slice 32 px all sides, NO fill (centre transparent), draw corner 12-14 css over the portrait well.",
+  "pieces": {
+   "panel_inlay": {
+    "r": [
+     0,
+     0,
+     240,
+     240
+    ],
+    "slice": [
+     60,
+     60,
+     60,
+     60
+    ],
+    "fill": true,
+    "corner_css": [
+     16,
+     20
+    ]
+   },
+   "panel_lip": {
+    "r": [
+     240,
+     0,
+     240,
+     240
+    ],
+    "slice": [
+     32,
+     32,
+     32,
+     32
+    ],
+    "fill": false,
+    "corner_css": [
+     12,
+     14
+    ]
+   }
+  }
+ }
+}

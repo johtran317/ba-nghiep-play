@@ -1,0 +1,131 @@
+{
+ "_note": "r367 a crew (back view, ours) re-cut: 3 stand + 3 strike cells = strategist crew of cut_table_ours. NEW file, cut_table_ours.webp untouched. Atlas px = 0.68 x the 1080 sheet; 4 px halo + ours tint x0.96 baked; robe graded (HLS hue 80-110 deg mask) to L .40 S .23 on the tinted pixels, hue kept. Same cell format as cut_table.json. T5 crew uses the same cells.",
+ "scale_of_master": 0.68,
+ "atlas": "cut_table_ours_crew_r367.webp",
+ "atlas_size": [
+  1400,
+  247
+ ],
+ "types": {
+  "crew": {
+   "painted_count": 6,
+   "cells": [
+    {
+     "id": "stand1",
+     "rect": [
+      511,
+      0,
+      152,
+      231
+     ],
+     "foot": [
+      71.7,
+      222.3
+     ],
+     "body": [
+      4,
+      4,
+      144,
+      223
+     ]
+    },
+    {
+     "id": "stand2",
+     "rect": [
+      665,
+      0,
+      115,
+      231
+     ],
+     "foot": [
+      51.9,
+      222.3
+     ],
+     "body": [
+      4,
+      4,
+      107,
+      223
+     ]
+    },
+    {
+     "id": "stand3",
+     "rect": [
+      782,
+      0,
+      107,
+      231
+     ],
+     "foot": [
+      54.0,
+      222.3
+     ],
+     "body": [
+      4,
+      4,
+      99,
+      223
+     ]
+    },
+    {
+     "id": "strike1",
+     "rect": [
+      0,
+      0,
+      163,
+      245
+     ],
+     "foot": [
+      80.8,
+      235.9
+     ],
+     "body": [
+      4,
+      4,
+      155,
+      237
+     ]
+    },
+    {
+     "id": "strike2",
+     "rect": [
+      165,
+      0,
+      173,
+      235
+     ],
+     "foot": [
+      81.5,
+      226.4
+     ],
+     "body": [
+      4,
+      4,
+      165,
+      227
+     ]
+    },
+    {
+     "id": "strike3",
+     "rect": [
+      340,
+      0,
+      169,
+      234
+     ],
+     "foot": [
+      83.9,
+      225.7
+     ],
+     "body": [
+      4,
+      4,
+      161,
+      226
+     ]
+    }
+   ],
+   "order": "fig0-2 stand, fig3-5 strike (ids stand1..3, strike1..3)"
+  }
+ }
+}

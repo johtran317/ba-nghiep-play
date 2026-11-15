@@ -1,0 +1,266 @@
+{
+ "file": "troops/looks/captains_r370.webp",
+ "size": [
+  1400,
+  2221
+ ],
+ "bytes": 422340,
+ "pink_px": 1,
+ "front_view": true,
+ "lift": "HSV V x1.04 (V>=0.20 only) on ngo + qun cells",
+ "armies": {
+  "hoangcan": {
+   "stand": {
+    "id": "hoangcan_stand",
+    "src_cell": "c1",
+    "rect": [
+     0,
+     0,
+     493,
+     452
+    ],
+    "foot": [
+     239.2,
+     444.6
+    ],
+    "body_top_bottom_y": [
+     82.5,
+     444.6
+    ],
+    "scale_of_master": 0.6608,
+    "lum": 116.2
+   },
+   "strike": {
+    "id": "hoangcan_strike",
+    "src_cell": "c2",
+    "rect": [
+     495,
+     0,
+     456,
+     450
+    ],
+    "foot": [
+     210.0,
+     447.6
+    ],
+    "body_top_bottom_y": [
+     83.5,
+     445.6
+    ],
+    "scale_of_master": 0.6608,
+    "lum": 114.2
+   }
+  },
+  "taylu": {
+   "stand": {
+    "id": "taylu_stand",
+    "src_cell": "c3",
+    "rect": [
+     953,
+     0,
+     407,
+     432
+    ],
+    "foot": [
+     266.6,
+     426.5
+    ],
+    "body_top_bottom_y": [
+     64.3,
+     426.5
+    ],
+    "scale_of_master": 0.6322,
+    "lum": 91.7
+   },
+   "strike": {
+    "id": "taylu_strike",
+    "src_cell": "c4",
+    "rect": [
+     0,
+     454,
+     536,
+     444
+    ],
+    "foot": [
+     101.3,
+     438.7
+    ],
+    "body_top_bottom_y": [
+     80.3,
+     442.5
+    ],
+    "scale_of_master": 0.6322,
+    "lum": 85.7
+   }
+  },
+  "nguy": {
+   "stand": {
+    "id": "nguy_stand",
+    "src_cell": "c5",
+    "rect": [
+     538,
+     454,
+     400,
+     414
+    ],
+    "foot": [
+     261.3,
+     406.8
+    ],
+    "body_top_bottom_y": [
+     44.5,
+     406.8
+    ],
+    "scale_of_master": 0.5929,
+    "lum": 91.7
+   },
+   "strike": {
+    "id": "nguy_strike",
+    "src_cell": "c6",
+    "rect": [
+     0,
+     900,
+     494,
+     407
+    ],
+    "foot": [
+     203.6,
+     404.6
+    ],
+    "body_top_bottom_y": [
+     40.5,
+     402.8
+    ],
+    "scale_of_master": 0.5929,
+    "lum": 90.0
+   }
+  },
+  "ngo": {
+   "stand": {
+    "id": "ngo_stand",
+    "src_cell": "c7",
+    "rect": [
+     496,
+     900,
+     523,
+     444
+    ],
+    "foot": [
+     249.0,
+     432.5
+    ],
+    "body_top_bottom_y": [
+     70.2,
+     432.5
+    ],
+    "scale_of_master": 0.64,
+    "lum": 82.5
+   },
+   "strike": {
+    "id": "ngo_strike",
+    "src_cell": "c8",
+    "rect": [
+     0,
+     1346,
+     522,
+     440
+    ],
+    "foot": [
+     181.6,
+     437.8
+    ],
+    "body_top_bottom_y": [
+     76.2,
+     438.5
+    ],
+    "scale_of_master": 0.64,
+    "lum": 77.9
+   }
+  },
+  "thuc": {
+   "stand": {
+    "id": "thuc_stand",
+    "src_cell": "c9",
+    "rect": [
+     524,
+     1346,
+     400,
+     428
+    ],
+    "foot": [
+     254.4,
+     416.7
+    ],
+    "body_top_bottom_y": [
+     54.4,
+     416.7
+    ],
+    "scale_of_master": 0.615,
+    "lum": 88.8
+   },
+   "strike": {
+    "id": "thuc_strike",
+    "src_cell": "c10",
+    "rect": [
+     926,
+     1346,
+     448,
+     424
+    ],
+    "foot": [
+     206.5,
+     422.0
+    ],
+    "body_top_bottom_y": [
+     55.4,
+     417.7
+    ],
+    "scale_of_master": 0.615,
+    "lum": 77.1
+   }
+  },
+  "qun": {
+   "stand": {
+    "id": "qun_stand",
+    "src_cell": "c11",
+    "rect": [
+     0,
+     1788,
+     533,
+     433
+    ],
+    "foot": [
+     258.1,
+     422.5
+    ],
+    "body_top_bottom_y": [
+     60.2,
+     422.5
+    ],
+    "scale_of_master": 0.6235,
+    "lum": 77.7
+   },
+   "strike": {
+    "id": "qun_strike",
+    "src_cell": "c12",
+    "rect": [
+     535,
+     1788,
+     532,
+     429
+    ],
+    "foot": [
+     212.4,
+     427.2
+    ],
+    "body_top_bottom_y": [
+     61.2,
+     423.5
+    ],
+    "scale_of_master": 0.6235,
+    "lum": 76.5
+   }
+  }
+ },
+ "note": "foot = [x,y] inside rect (feet midpoint, bottom of boots); body height = 1.75 x mean soldier body height of cut_armies.json; banner and weapon overhang"
+}

@@ -1,0 +1,52 @@
+{
+ "file": "ui/kit/forge_plate.webp",
+ "size_px": [
+  1020,
+  768
+ ],
+ "css_size": [
+  340,
+  256
+ ],
+ "px_per_css": 3,
+ "bytes": 53876,
+ "note": "baked plate, draw at 340x256 css (scale freely, aspect fixed). Openings are dark, put the tiles on top. Result socket is the largest (100 css).",
+ "inputs": [
+  {
+   "x": 26,
+   "y": 20,
+   "w": 76,
+   "h": 76
+  },
+  {
+   "x": 132,
+   "y": 20,
+   "w": 76,
+   "h": 76
+  },
+  {
+   "x": 238,
+   "y": 20,
+   "w": 76,
+   "h": 76
+  }
+ ],
+ "result": {
+  "x": 32,
+  "y": 123,
+  "w": 100,
+  "h": 100
+ },
+ "text_inset": {
+  "x": 150,
+  "y": 125,
+  "w": 166,
+  "h": 104
+ },
+ "text_inset_padding_css": 6,
+ "socket_outer_css": {
+  "input_rim": 6.0,
+  "result_rim": 13.0
+ },
+ "pink_px": 0
+}

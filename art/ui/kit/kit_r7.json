@@ -1,0 +1,198 @@
+{
+ "artmeta": 1,
+ "id": "uikit_r7",
+ "build": "V301",
+ "job": "BN-363t: r352 b pips/rail/bar + r353 b item action icons",
+ "kit": {
+  "file": "art/ui/kit/kit_r7.webp",
+  "size": [
+   1024,
+   212
+  ],
+  "bytes": 35454,
+  "note": "r = [x,y,w,h] px in the atlas, at 3x (css = px/3). Pips: 16 css minimum (48 px). Rail: cap_l + rail_line (stretch/tile on x) + cap_r. Bar: bar_frame 9-slice, bar_fill clipped into frame.channel. Icons: 120 px cells = 40 css, contain.",
+  "pieces": {
+   "pip_on": {
+    "r": [
+     0,
+     0,
+     47,
+     48
+    ],
+    "css": [
+     16,
+     16
+    ],
+    "master_bbox": [
+     875,
+     71,
+     1204,
+     407
+    ],
+    "scale_of_master": 0.1429
+   },
+   "pip_off": {
+    "r": [
+     51,
+     0,
+     47,
+     48
+    ],
+    "css": [
+     16,
+     16
+    ],
+    "master_bbox": [
+     1356,
+     71,
+     1685,
+     406
+    ],
+    "scale_of_master": 0.1429
+   },
+   "rail_cap_l": {
+    "r": [
+     102,
+     0,
+     84,
+     72
+    ],
+    "master_bbox": [
+     129,
+     497,
+     441,
+     766
+    ],
+    "scale_of_master": 0.2677
+   },
+   "rail_cap_r": {
+    "r": [
+     190,
+     0,
+     56,
+     40
+    ],
+    "master_bbox": [
+     2222,
+     557,
+     2432,
+     706
+    ],
+    "scale_of_master": 0.2677
+   },
+   "ico_reforge": {
+    "r": [
+     250,
+     0,
+     120,
+     120
+    ],
+    "css": [
+     40,
+     40
+    ],
+    "scale_of_master": 0.2673
+   },
+   "ico_troopswap": {
+    "r": [
+     374,
+     0,
+     120,
+     120
+    ],
+    "css": [
+     40,
+     40
+    ],
+    "scale_of_master": 0.2673
+   },
+   "ico_itemswap": {
+    "r": [
+     498,
+     0,
+     120,
+     120
+    ],
+    "css": [
+     40,
+     40
+    ],
+    "scale_of_master": 0.2563
+   },
+   "ico_unequip": {
+    "r": [
+     622,
+     0,
+     120,
+     120
+    ],
+    "css": [
+     40,
+     40
+    ],
+    "scale_of_master": 0.2725
+   },
+   "rail_line": {
+    "r": [
+     0,
+     124,
+     435,
+     29
+    ],
+    "stretch": "x",
+    "master_bbox": [
+     519,
+     582,
+     2143,
+     689
+    ],
+    "scale_of_master": 0.2677
+   },
+   "bar_frame": {
+    "r": [
+     439,
+     124,
+     500,
+     48
+    ],
+    "master_bbox": [
+     113,
+     886,
+     2447,
+     1110
+    ],
+    "scale_of_master": 0.2143,
+    "channel": [
+     31,
+     9,
+     469,
+     38
+    ],
+    "channel_note": "dark channel rect [x0,y0,x1,y1] px inside the frame piece; draw bar_fill clipped to it, x from x0, height = channel height",
+    "slice": {
+     "left": 35,
+     "right": 35,
+     "top": 0,
+     "bottom": 0,
+     "note": "9-slice insets (px at 3x): the ends hold the jade gem caps; stretch the middle on x only; keep height 48 px (16 css)"
+    }
+   },
+   "bar_fill": {
+    "r": [
+     0,
+     176,
+     440,
+     36
+    ],
+    "stretch": "x",
+    "master_bbox": [
+     254,
+     1157,
+     2306,
+     1325
+    ],
+    "scale_of_master": 0.2143
+   }
+  }
+ }
+}
