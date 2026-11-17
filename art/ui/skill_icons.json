@@ -1,0 +1,601 @@
+{
+ "v": 1,
+ "coin": {
+  "px": 128,
+  "cols": 13,
+  "src": "skill_coins.webp"
+ },
+ "hex": {
+  "px": 96,
+  "cols": 6,
+  "src": "skill_hex.webp"
+ },
+ "skills": {
+  "Nhân Đức Chi Lực": [
+   0,
+   0
+  ],
+  "Không Thành Diệu Kế": [
+   1,
+   0
+  ],
+  "Thanh Long Yển Nguyệt": [
+   2,
+   0
+  ],
+  "Thất Tiến Thất Xuất": [
+   3,
+   0
+  ],
+  "Thiên Hạ Quy Tâm": [
+   4,
+   0
+  ],
+  "Hỏa Thiêu Xích Bích": [
+   5,
+   0
+  ],
+  "Thiên Hạ Vô Song": [
+   6,
+   0
+  ],
+  "Tọa Đoạn Đông Nam": [
+   7,
+   0
+  ],
+  "Ưng Thị Lang Cố": [
+   8,
+   0
+  ],
+  "Tây Lương Thiết Kỵ": [
+   9,
+   0
+  ],
+  "Bách Bộ Xuyên Dương": [
+   10,
+   0
+  ],
+  "Liên Hoàn Kế": [
+   11,
+   0
+  ],
+  "Cửu Phạt Trung Nguyên": [
+   12,
+   0
+  ],
+  "Tý Ngọ Kỳ Mưu": [
+   0,
+   1
+  ],
+  "Mộc Ngưu Lưu Mã": [
+   1,
+   1
+  ],
+  "Định Quân Sơn Kế": [
+   2,
+   1
+  ],
+  "Phá Bát Môn Trận": [
+   3,
+   1
+  ],
+  "Báo Phụ Cừu": [
+   4,
+   1
+  ],
+  "Thuyết Khách": [
+   5,
+   1
+  ],
+  "Du Thuyết": [
+   6,
+   1
+  ],
+  "Hiến Gia Tài": [
+   7,
+   1
+  ],
+  "Trảm Phản Tướng": [
+   8,
+   1
+  ],
+  "Vô Đương Phi Quân": [
+   9,
+   1
+  ],
+  "Hộ Ấn": [
+   10,
+   1
+  ],
+  "Xà Mâu Đột": [
+   11,
+   1
+  ],
+  "Lão Tướng Ba Quận": [
+   12,
+   1
+  ],
+  "Thập Thắng Thập Bại": [
+   0,
+   2
+  ],
+  "Uy Chấn Tiêu Dao": [
+   1,
+   2
+  ],
+  "Song Kích Hộ Chủ": [
+   2,
+   2
+  ],
+  "Bạt Thỉ Đạm Tình": [
+   3,
+   2
+  ],
+  "Tam Nhật Ngũ Bách": [
+   4,
+   2
+  ],
+  "Lõa Y Đấu Mã Siêu": [
+   5,
+   2
+  ],
+  "Bát Môn Kim Tỏa": [
+   6,
+   2
+  ],
+  "Vương Tá Chi Tài": [
+   7,
+   2
+  ],
+  "Xảo Biến Chiến Pháp": [
+   8,
+   2
+  ],
+  "Trường Khu Phá Vây": [
+   9,
+   2
+  ],
+  "Âm Bình Kỳ Tập": [
+   10,
+   2
+  ],
+  "Phản Gián Kế": [
+   11,
+   2
+  ],
+  "Trầm Ổn": [
+   12,
+   2
+  ],
+  "Tiên Đăng": [
+   0,
+   3
+  ],
+  "Hộ Giá": [
+   1,
+   3
+  ],
+  "Nghiêm Quân": [
+   2,
+   3
+  ],
+  "Thủy Quân Tiễn": [
+   3,
+   3
+  ],
+  "Thủ Giang Hạ": [
+   4,
+   3
+  ],
+  "Tuyệt Lương Kế": [
+   5,
+   3
+  ],
+  "Soán Hán": [
+   6,
+   3
+  ],
+  "Khiêng Quan Quyết Tử": [
+   7,
+   3
+  ],
+  "Tử Thủ Phàn Thành": [
+   8,
+   3
+  ],
+  "Giang Đông Bá Nghiệp": [
+   9,
+   3
+  ],
+  "Hỏa Thiêu Liên Doanh": [
+   10,
+   3
+  ],
+  "Thần Xạ Đoạt Kỳ": [
+   11,
+   3
+  ],
+  "Bách Kỵ Kiếp Doanh": [
+   12,
+   3
+  ],
+  "Bạch Y Độ Giang": [
+   0,
+   4
+  ],
+  "Khổ Nhục Kế": [
+   1,
+   4
+  ],
+  "Bất Khuất Hộ Chủ": [
+   2,
+   4
+  ],
+  "Kiêu Cơ Liên Xạ": [
+   3,
+   4
+  ],
+  "Liên Lưu Kháng Tào": [
+   4,
+   4
+  ],
+  "Quốc Sắc Thiên Hương": [
+   5,
+   4
+  ],
+  "Lão Tướng Giang Đông": [
+   6,
+   4
+  ],
+  "Cố Thủ": [
+   7,
+   4
+  ],
+  "Đổi Khăn Dụ Địch": [
+   8,
+   4
+  ],
+  "Phá Trận": [
+   9,
+   4
+  ],
+  "Nghi Thành": [
+   10,
+   4
+  ],
+  "Tuyết Trung Đoản Binh": [
+   11,
+   4
+  ],
+  "Lăng Ba Tiễn": [
+   12,
+   4
+  ],
+  "Phục Kích Mạch Thành": [
+   0,
+   5
+  ],
+  "Hòa Nghị": [
+   1,
+   5
+  ],
+  "Thiên Hương": [
+   2,
+   5
+  ],
+  "Hỏa Công Di Lăng": [
+   3,
+   5
+  ],
+  "Bế Nguyệt Liên Hoàn": [
+   4,
+   5
+  ],
+  "Thanh Nang Thư": [
+   5,
+   5
+  ],
+  "Ô Giác Biến Hóa": [
+   6,
+   5
+  ],
+  "Tứ Thế Tam Công": [
+   7,
+   5
+  ],
+  "Bạch Mã Nghĩa Tòng": [
+   8,
+   5
+  ],
+  "Thất Cầm Bất Phục": [
+   9,
+   5
+  ],
+  "Phi Đao Hỏa Thần": [
+   10,
+   5
+  ],
+  "Tây Lương Hùng Phong": [
+   11,
+   5
+  ],
+  "Hãm Trận Doanh": [
+   12,
+   5
+  ],
+  "Kế Hạ Bì": [
+   0,
+   6
+  ],
+  "Địa Công Ảo Thuật": [
+   1,
+   6
+  ],
+  "Mãnh Tướng Hoàng Cân": [
+   2,
+   6
+  ],
+  "Cướp Phá Trường An": [
+   3,
+   6
+  ],
+  "Loạn Kỵ": [
+   4,
+   6
+  ],
+  "Hà Bắc Danh Tướng": [
+   5,
+   6
+  ],
+  "Hùng Phong": [
+   6,
+   6
+  ],
+  "Độc Kế": [
+   7,
+   6
+  ],
+  "Ngụy Đế Xưng Tôn": [
+   8,
+   6
+  ],
+  "Thủ Kinh Châu": [
+   9,
+   6
+  ],
+  "Ngũ Đấu Mễ Đạo": [
+   10,
+   6
+  ],
+  "Cửu Khúc Hoàng Hà": [
+   11,
+   6
+  ],
+  "Đằng Giáp Binh": [
+   12,
+   6
+  ],
+  "Thái Bình Thanh Lĩnh": [
+   0,
+   7
+  ],
+  "Đại Tướng Quân": [
+   1,
+   7
+  ],
+  "Trường Bản Hống": [
+   2,
+   7
+  ]
+ },
+ "pat": {
+  "single": [
+   3,
+   7
+  ],
+  "row": [
+   4,
+   7
+  ],
+  "lane": [
+   5,
+   7
+  ],
+  "all": [
+   6,
+   7
+  ],
+  "rear": [
+   7,
+   7
+  ],
+  "heal": [
+   8,
+   7
+  ],
+  "cross": [
+   9,
+   7
+  ]
+ },
+ "themes": {
+  "guard": [
+   0,
+   0
+  ],
+  "crit": [
+   1,
+   0
+  ],
+  "dodge": [
+   2,
+   0
+  ],
+  "heal": [
+   3,
+   0
+  ],
+  "rage": [
+   4,
+   0
+  ],
+  "first": [
+   5,
+   0
+  ],
+  "dmg": [
+   0,
+   1
+  ],
+  "lowhp": [
+   1,
+   1
+  ],
+  "aura": [
+   2,
+   1
+  ],
+  "fullhp": [
+   3,
+   1
+  ],
+  "counter": [
+   4,
+   1
+  ]
+ },
+ "talents": {
+  "guanyu": "crit",
+  "zhangfei": "lowhp",
+  "zhaoyun": "dodge",
+  "machao": "first",
+  "huangzhong": "crit",
+  "pangtong": "dmg",
+  "jiangwei": "rage",
+  "weiyan": "fullhp",
+  "huangyueying": "aura",
+  "fazheng": "counter",
+  "xushu": "dmg",
+  "guanxing": "lowhp",
+  "caocao": "aura",
+  "simayi": "guard",
+  "guojia": "dmg",
+  "zhangliao": "first",
+  "dianwei": "guard",
+  "xiahoudun": "lowhp",
+  "xiahouyuan": "first",
+  "xuchu": "dmg",
+  "caoren": "guard",
+  "xunyu": "rage",
+  "zhanghe": "dodge",
+  "xuhuang": "counter",
+  "dengai": "first",
+  "zhonghui": "dmg",
+  "sunce": "first",
+  "zhouyu": "dmg",
+  "luxun": "dmg",
+  "sunquan": "aura",
+  "taishici": "crit",
+  "ganning": "first",
+  "lumeng": "first",
+  "huanggai": "lowhp",
+  "zhoutai": "guard",
+  "sunshangxiang": "crit",
+  "lusu": "aura",
+  "daqiao": "rage",
+  "lubu": "first",
+  "diaochan": "dodge",
+  "huatuo": "heal",
+  "zuoci": "dodge",
+  "yuanshao": "aura",
+  "gongsunzan": "first",
+  "menghuo": "heal",
+  "zhurong": "crit",
+  "mateng": "counter",
+  "gaoshun": "guard",
+  "chengong": "dmg",
+  "wutugu": "guard",
+  "chuthuong": "guard",
+  "lieuhoa": "counter",
+  "huaxiong": "first",
+  "dongzhuo": "rage",
+  "liubei": "aura",
+  "zhugeliang": "aura",
+  "sunjian": "fullhp",
+  "zhangjiao": "heal",
+  "liubei:hro9": "aura",
+  "zhugeliang:hro9": "dmg",
+  "sunjian:hro9": "dmg",
+  "zhangjiao:hro9": "aura",
+  "dongzhuo:hro9": "dmg",
+  "huaxiong:hro9": "crit"
+ },
+ "talent_names": {
+  "Võ Thánh": "crit",
+  "Vạn Nhân Địch": "lowhp",
+  "Đảm Lượng": "dodge",
+  "Cẩm Mã Siêu": "first",
+  "Lão Đương Ích Tráng": "crit",
+  "Phượng Sồ": "dmg",
+  "Kỳ Lân Nhi": "rage",
+  "Phản Cốt": "fullhp",
+  "Kỳ Công": "aura",
+  "Mưu Chủ": "counter",
+  "Đơn Phúc": "dmg",
+  "Hổ Tử": "lowhp",
+  "Gian Hùng": "aura",
+  "Ẩn Nhẫn": "guard",
+  "Quỷ Tài": "dmg",
+  "Tiêu Dao Tân": "first",
+  "Cổ Chi Ác Lai": "guard",
+  "Cương Liệt": "lowhp",
+  "Thần Tốc": "first",
+  "Hổ Si": "dmg",
+  "Thiết Bích": "guard",
+  "Vương Tá": "rage",
+  "Xảo Biến": "dodge",
+  "Chu Á Phu": "counter",
+  "Kỳ Tập": "first",
+  "Dã Tâm": "dmg",
+  "Tiểu Bá Vương": "first",
+  "Mỹ Chu Lang": "dmg",
+  "Thư Sinh Bái Tướng": "dmg",
+  "Bích Nhãn Nhi": "aura",
+  "Thần Xạ": "crit",
+  "Cẩm Phàm Tặc": "first",
+  "Ngô Hạ A Mông": "first",
+  "Khổ Nhục": "lowhp",
+  "Bất Khuất": "guard",
+  "Cung Yêu Cơ": "crit",
+  "Đại Cục": "aura",
+  "Khuynh Quốc": "rage",
+  "Phi Tướng": "first",
+  "Ly Gián": "dodge",
+  "Thần Y": "heal",
+  "Độn Giáp": "dodge",
+  "Minh Chủ": "aura",
+  "Bạch Mã": "first",
+  "Nam Man Vương": "heal",
+  "Hỏa Thần Hậu Duệ": "crit",
+  "Phục Ba Hậu Duệ": "counter",
+  "Hãm Trận": "guard",
+  "Trung Mưu": "dmg",
+  "Giáp Mây": "guard",
+  "Trung Dũng": "guard",
+  "Lão Tướng Chặn Ngựa": "counter",
+  "Kiêu Dũng": "first",
+  "Tàn Bạo": "rage",
+  "Nhân Đức": "aura",
+  "Bát Trận Đồ": "aura",
+  "Mãnh Hổ": "fullhp",
+  "Hoàng Thiên Đương Lập": "heal",
+  "Nhân Đức Che Quân": "aura",
+  "Tính Kế Như Thần": "dmg",
+  "Mãnh Hổ Giang Đông": "dmg",
+  "Hoàng Thiên Hiệu Triệu": "aura",
+  "Uy Bạo Tây Lương": "dmg",
+  "Khai Trận Đao": "crit"
+ },
+ "default_theme": "guard",
+ "unmatched": []
+}

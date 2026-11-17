@@ -1,0 +1,201 @@
+{
+ "atlas": "ui/kit_r9.webp",
+ "css_scale": 2,
+ "sprites": {
+  "arc": {
+   "x": 0,
+   "y": 0,
+   "w": 716,
+   "h": 111,
+   "css_w": 358.0,
+   "css_h": 55.5
+  },
+  "pedestal": {
+   "x": 0,
+   "y": 148,
+   "w": 300,
+   "h": 197,
+   "css_w": 150.0,
+   "css_h": 98.5,
+   "anchor_css": [
+    75.0,
+    49.2
+   ],
+   "note": "anchor = approx centre of the top surface; stand the figure feet there"
+  },
+  "pile_silver": {
+   "x": 304,
+   "y": 148,
+   "w": 148,
+   "h": 144,
+   "css_w": 74.0,
+   "css_h": 72.0
+  },
+  "pile_grain": {
+   "x": 500,
+   "y": 148,
+   "w": 147,
+   "h": 144,
+   "css_w": 73.5,
+   "css_h": 72.0
+  },
+  "pile_medals": {
+   "x": 696,
+   "y": 148,
+   "w": 177,
+   "h": 144,
+   "css_w": 88.5,
+   "css_h": 72.0
+  },
+  "star_chest_closed": {
+   "x": 0,
+   "y": 348,
+   "w": 440,
+   "h": 400,
+   "css_w": 220.0,
+   "css_h": 200.0,
+   "foot_px": [
+    163,
+    398
+   ],
+   "foot_css": [
+    81.5,
+    199.0
+   ]
+  },
+  "star_chest_open": {
+   "x": 448,
+   "y": 348,
+   "w": 440,
+   "h": 400,
+   "css_w": 220.0,
+   "css_h": 200.0,
+   "foot_px": [
+    163,
+    398
+   ],
+   "foot_css": [
+    81.5,
+    199.0
+   ]
+  }
+ },
+ "arc": {
+  "css_size": [
+   358.0,
+   55.5
+  ],
+  "groove_path_css": "M45.25 24.25 L78.66 20.36 L112.08 16.74 L145.49 14.84 L178.91 14.39 L212.32 15.29 L245.74 17.38 L279.16 21.09 L312.57 24.25",
+  "groove_width_css": 12.31,
+  "groove_points_css": [
+   [
+    45.25,
+    24.25
+   ],
+   [
+    78.66,
+    20.36
+   ],
+   [
+    112.08,
+    16.74
+   ],
+   [
+    145.49,
+    14.84
+   ],
+   [
+    178.91,
+    14.39
+   ],
+   [
+    212.32,
+    15.29
+   ],
+   [
+    245.74,
+    17.38
+   ],
+   [
+    279.16,
+    21.09
+   ],
+   [
+    312.57,
+    24.25
+   ]
+  ],
+  "groove_x_range_css": [
+   45.25,
+   312.57
+  ],
+  "hooks_css": [
+   [
+    74.31,
+    54.12
+   ],
+   [
+    178.91,
+    46.15
+   ],
+   [
+    289.12,
+    55.56
+   ]
+  ],
+  "hooks_fraction_of_groove": [
+   0.109,
+   0.5,
+   0.912
+  ],
+  "note": "hooks_css = ring centre x and ring bottom y (cords hang from there). Path is a polyline in arc-local css coords; fill with pathLength 0..1 left to right."
+ },
+ "chest_note": "Both halves share one 440x400 box and foot point (pedestal bottom centre): swap closed/open by changing the sprite x only; css box 220x200.",
+ "atlas_size": [
+  896,
+  748
+ ],
+ "scenes": {
+  "patrol_scene.webp": {
+   "px": [
+    780,
+    780
+   ],
+   "css": [
+    390,
+    390
+   ],
+   "note": "opaque; object-fit cover, anchor bottom-centre"
+  },
+  "elite_camp.webp": {
+   "px": [
+    716,
+    400
+   ],
+   "css": [
+    358,
+    200
+   ]
+  },
+  "elite_pass.webp": {
+   "px": [
+    716,
+    400
+   ],
+   "css": [
+    358,
+    200
+   ]
+  },
+  "elite_gate.webp": {
+   "px": [
+    716,
+    400
+   ],
+   "css": [
+    358,
+    200
+   ]
+  }
+ }
+}
