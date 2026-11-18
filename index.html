@@ -1267,9 +1267,9 @@ var SKIT={
  caocao:{wp:{n:'Ỷ Thiên Kiếm',pas:{crt:.025,dmg:.03}},hr:{n:'Tuyệt Ảnh',pas:{first:.1}}},
  diaochan:{wp:{n:'Song Nguyệt Liên Hoàn',pas:{dmg:.03}},hr:{n:'Thất Bảo Hương Xa',pas:{dr:.03}}}};
 /* SPIN1: event.js */
-var SPIN1=60;
+var SPIN1=100; /* V301 BAL-367A: matches pace264 override (was 60) */
 /* SPIN10: event.js */
-var SPIN10=540;
+var SPIN10=1000; /* was 540; pace264 override = 1000 */
 /* SICOST: skins.js */
 var SICOST=[30,12,16,20,25];
 /* SKCOST: skins.js */
@@ -1309,7 +1309,7 @@ var FMMT=[10,30,60,100];
 var BOND2=[
  ['daovien','Đào Viên Kết Nghĩa',['liubei','guanyu','zhangfei'],3,{dmg:.1,dr:.08}],
  ['nguho','Ngũ Hổ Tướng',['guanyu','zhangfei','zhaoyun','machao','huangzhong'],3,{dmg:.1}],
- ['longphuong','Ngọa Long Phượng Sồ',['zhugeliang','pangtong'],2,{mo:30,dmg:.08}],
+ ['longphuong','Long Phượng Hội Tụ',['zhugeliang','pangtong'],2,{mo:30,dmg:.08}],
  ['quangia','Quan Gia Hổ Tử',['guanyu','guanping','guanxing'],2,{dmg:.08}],
  ['truonggia','Trương Gia Phụ Tử',['zhangfei','zhangbao_s'],2,{dmg:.08}],
  ['maga','Mã Gia Tây Lương',['machao','madai'],2,{crt:.08}],
@@ -2080,7 +2080,7 @@ var SKIN2={   /* V203 numbers (coding balance review 2026-11-03, user 19:55 Bát
  sunquan_a:{n:'Bạch Lộc Trấn Giang',pat:'heal',hs:'frow',heal:.3125,noHit:1,shield:.10,shDec:1,shT:2,shScope:'hs',ardr:.10,ardrT:2,mo:25}};   /* Decision 307 A: shield .20 -> .10, shDec = the shield weakens per cast like the heal (engine.js, tester engine only); 308: zhouyu_a c 1.2 -> 1.05 */
 /* SKL: skins.js */
 var SKL={
- zhugeliang_a:{g:'zhugeliang',n:'Ngọa Long Tiên Sư',path:'Khống chế diện rộng',c1:'#6ff0ff',c2:'#2a7ad0',c3:'#062033',fx:'sigil',
+ zhugeliang_a:{g:'zhugeliang',n:'Bát Quái Tiên Sư',path:'Khống chế diện rộng',c1:'#6ff0ff',c2:'#2a7ad0',c3:'#062033',fx:'sigil',
   t:{n:'Bát Trận Thiên Cơ',pat:'all',type:'strategy',c:.95,chaos:.35,stun:.12,moE:20}},
  zhugeliang_b:{g:'zhugeliang',n:'Thất Tinh Đàn Tế',path:'Sát thương diện rộng',c1:'#9a8aff',c2:'#ffe9a0',c3:'#140a33',fx:'lightning',
   t:{n:'Thất Tinh Mượn Gió Đông',pat:'all',type:'strategy',c:1.1,burn:1,burnP:.5}},
@@ -10453,7 +10453,7 @@ function wheelSheet(){var w=whS(),k=w.t,K=SKL[k],g=K.g,free=whFree(),I=SKIT[g];
  h+='<div class="sm" style="text-align:center;margin:4px 0">Mảnh rơi cho: <b style="color:'+K.c1+'">'+GENS[g].n+' · '+K.n+'</b> <span class="skpath" style="--k1:'+K.c1+'">'+K.path+'</span></div>';
  h+='<div class="whbox">'+wheelSvg(w)+'</div>';
  h+='<div class="whbtns"><button class="btn" data-a="whspin" data-v="1"'+(free||S.res.gold>=SPIN1?'':' disabled')+'>'+(free?'Quay miễn phí':'Quay ×1 · '+ic('gold')+SPIN1)+'</button><button class="btn" data-a="whspin" data-v="10"'+(S.res.gold>=SPIN10?'':' disabled')+'>Quay ×10 · '+ic('gold')+SPIN10+'</button></div>';
- h+='<div class="sm mute" style="text-align:center">Cứ 10 lượt chắc chắn ra ít nhất 3 mảnh ngoại trang · mốc tuần 10/30/60/100/150 lượt tặng thêm mảnh · cần 60 mảnh để mở ngoại trang ★1. Mẹo: để dành vàng rồi quay ×10 (rẻ hơn 10%). Vàng hiện có '+ic('gold')+fmt(S.res.gold)+'</div>';
+ h+='<div class="sm mute" style="text-align:center">Cứ 10 lượt chắc chắn ra ít nhất 3 mảnh ngoại trang · mốc tuần 10/30/60/100/150 lượt tặng thêm mảnh · cần 60 mảnh để mở ngoại trang ★1. Vàng hiện có '+ic('gold')+fmt(S.res.gold)+'</div>';
  if(w.last&&w.showLast)h+='<div class="whres"><span class="whrt">Nhận được</span> '+outTxt(w.last,w.lastT||k)+'</div>';
  h+=secH('Mốc tuần · '+w.ws+' lượt')+'<div class="whms">'+WMS.map(function(m,i){var reach=w.ws>=m[0],got=w.got[i];
   return'<button class="whm'+(got?' got':reach?' ok':'')+'" data-a="whms" data-v="'+i+'"'+(reach&&!got?'':' disabled')+'><b>'+m[0]+'</b><span>'+outTxt(m[1],k)+'</span></button>'}).join('')+'</div>';
@@ -10764,6 +10764,7 @@ A_=function(a,v,w,el){var k;
   S.res.silver-=c.s;S.res.merit-=c.m;k.lv[v]=lv+1;toast(KE[v].n+' lên Lv'+(lv+1));save();renderTop();openSheet(keSheet,true);return}
  case'keok':if(KEBACK)openSheet(KEBACK);else closeSheet();KEBACK=null;return;
  case'stchest':{var f=v.split('|'),mi=+f[0],i=+f[1],key=mi+'-'+i;stS();if(S.camp.stc[key]||chStars(mi)<STT[i])return;S.camp.stc[key]=1;var rw=stRw(mi,i);giveRw(rw);toast('Nhận rương '+STT[i]+'★');save();refresh();
+  if(window.chestSheet301){openSheet(function(){return window.chestSheet301(mi,i)});return}
   openSheet(function(){return'<h3 class="ok">Rương '+STT[i]+' sao</h3><div class="card sm">'+rewardTxt(rw)+'</div><button class="btn wide" style="margin-top:10px" data-a="close">Đóng</button>'});return}
  }
  return _AST(a,v,w,el)};
@@ -25033,7 +25034,7 @@ tavernSheet=function(){try{if(!u3hOn())return _tv301.apply(this,arguments);
  var h=_tv301.apply(this,arguments);
  try{if(!u3hOn())return h;var n2=S.nation,pk=n2==='shu'||n2==='wei'||n2==='wu',ok2=pk?[n2,'qun']:['qun'],NM={shu:'Thục',wei:'Ngụy',wu:'Ngô',qun:'Quần Hùng'};
   var pills='<div class="pills tvtabs">'+ok2.map(function(t){return'<button class="pill u3b'+(tvTab===t?' on':'')+'" data-a="tvtab" data-v="'+t+'">'+(u3FacB({fac:t},24)||'')+' '+NM[t]+'</button>'}).join('')+'</div>'+
-   (pk?'':'<div class="u3lkr">🔒 Tướng các phe: mở khi chọn phe (cuối Màn 2)</div>');
+   (pk?'':'<div class="u3lkr">🔒 Tướng các phe: mở khi chọn phe (cuối Màn 2)</div>');
   return h.replace(/<div class="pills tvtabs">[\s\S]*?<\/div>/,pills)}catch(e){return h}};
 /* ---------- H5 Cửa hàng mảnh tuần ---------- */
 function h9ShopSheet(seg){seg=seg==='ngoc'?'ngoc':'frag';U3H.seg=seg;
@@ -35503,7 +35504,7 @@ var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
   if(a==='tbx'){if(e.target===t||e.target.closest('.c12tbw')===t&&!e.target.closest('.cp-tb')||e.target.closest('[data-a]'))R.v.querySelector('.c12tbw').classList.remove('sh');return}
   if(a==='chest'){var i=+t.getAttribute('data-v'),got=chStars(d.mi);stS();
    if(got>=STT[i]&&!S.camp.stc[d.mi+'-'+i]){A_('stchest',d.mi+'|'+i);return}
-   sn('ui_tap');var rw=stRw(d.mi,i);openSheet(function(){return'<h3>Rương '+STT[i]+' sao</h3><div class="card sm">'+rewardTxt(rw)+'</div><button class="btn wide" style="margin-top:10px" data-a="close">'+STR.close+'</button>'})}}
+   sn('ui_tap');if(window.chestSheet301){openSheet(function(){return window.chestSheet301(d.mi,i)});return}var rw=stRw(d.mi,i);openSheet(function(){return'<h3>Rương '+STT[i]+' sao</h3><div class="card sm">'+rewardTxt(rw)+'</div><button class="btn wide" style="margin-top:10px" data-a="close">'+STR.close+'</button>'})}}
  /* ---------------- scenes ---------------- */
  function bolt(){if(LITE||!R)return;var b=R.v.querySelector('.c12bv'),f=D.createElement('i');f.style.cssText='position:absolute;inset:0;background:rgba(255,255,255,.5)';b.appendChild(f);setTimeout(function(){f.remove()},170);vib(15)}
  function endReveal(){if(!REV)return;var r=REV;REV=0;try{H.classList.remove("c12hold")}catch(e){}try{r.tw&&r.tw.cancel();clearTimeout(r.to)}catch(e){}
@@ -36804,6 +36805,7 @@ function lfrPill(n){try{return lfrOn()&&!(BT.meta&&BT.meta.rl&&BT.meta.rl.n)&&n>
    '<div class="r2rw n'+tiles.length+'">'+tiles.map(function(t){return tl(t,dn)}).join('')+'</div>'+
    (dn?'<button class="r2bt" disabled><span>✓ Đã nhận</span></button>':rd?'<button class="r2bt" data-a="stchest" data-v="'+mi+'|'+i+'"><i class="cx"></i><span>Nhận thưởng</span></button>':'<button class="r2bt" disabled><i class="lk"></i><span>Cần '+T+' sao</span></button>')+
    '<div class="r2ft"><button class="r2sc2" data-r2go="1">Đi đánh</button></div></div>';return h}
+ window.chestSheet301=chestSheet;/* U4-STARCHEST: every Rương N sao sheet delegates here */
  D.addEventListener('click',function(e){try{var t=e.target.closest&&e.target.closest('[data-r2c]');
   if(t&&RD1){var i=+t.getAttribute('data-r2c');e.stopPropagation();try{sn('ui_tap')}catch(x){}openSheet(function(){return chestSheet(mapSel,i)});return}
   var g=e.target.closest&&e.target.closest('[data-r2go]');if(g){e.stopPropagation();closeSheet();setTimeout(function(){var p=D.querySelector('.c12P');if(p)p.click()},60);return}
@@ -38150,7 +38152,7 @@ var U3B=(function(){
   M+' .c3ubar{position:relative;height:17px;margin-top:5px;border-radius:9px;background:#0e0a06;border:1px solid rgba(190,140,66,.55);overflow:hidden}',
   M+' .c3ubar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(180deg,#f3d27a,#c98f2c);border-radius:8px}',
   M+' .c3ubar.g i{background:linear-gradient(180deg,#8fe0a0,#3f9a58)}',
-  M+' .c3ubar span{position:relative;display:block;text-align:center;font:700 12px/15px '+BF+';color:#fff3d0;text-shadow:0 1px 2px #000,0 0 3px #000}',
+  M+' .c3ubar span{position:relative;display:block;text-align:center;font:700 12px/15px '+BF+';color:#fff3d0;text-shadow:0 1px 2px #000,0 0 3px #000,0 0 5px #000}',
   M+' .c3ug{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 9px 2px 6px;border-radius:10px;background:#0f0a06;border:1px solid rgba(226,178,90,.45);font:700 12px/16px '+BF+';color:#f2cf7c}',
   M+' .c3ug .ic{width:15px;height:15px}',
   M+' .c3uc .u3bc .c3ui{width:30px;height:30px}',
@@ -38300,7 +38302,7 @@ var U3B=(function(){
   M+' .c3ucl .spc.lock::before,'+M+' .c3ucl .spc.lock.c3m::before{left:4px;top:50%;margin-top:-9px;width:16px;height:18px}'+M+' .c3ucl .spc.lock .c3sx,'+M+' .c3ucl .spc.lock.c3m .c3sx{padding-left:22px}',
   M+' .c3ucl .spc.c3m .c3sx{display:grid;grid-template-columns:repeat(2,auto);justify-content:space-evenly;align-items:center;gap:2px}'+M+' .c3ucl .spc.c3m .c3sx:has(.c3sp){grid-template-columns:repeat(3,auto)}',
   M+' .c3ucl .c3spb{display:none}'+M+' .c3ucl .spc.c3m .c3sc{font-size:12px;gap:2px}'+M+' .c3ucl .spc.c3m .c3sc .c3ui,'+M+' .c3ucl .spc.c3m .c3sc .c3oi{width:18px!important;height:18px!important}',
-  /* U3-C4 (qa S4): at <=380 px the single-chip text drops 13 -> 12 px so the longest book chip ("TRỐNG ×6", tier 24) clears the cell frame */ '@media(max-width:380px){'+M+' .c3ucl .spc:not(.c3m) .c3sc{font-size:12px}}',
+  /* U3-C4 (qa S4): at <=380 px the single-chip text drops 13 -> 12 px so the longest book chip ("TRỐNG ×6", tier 24) clears the cell frame */ '@media(max-width:380px){'+M+' .c3ucl .spc:not(.c3m) .c3sc{font-size:12px}'+M+' .c3ucl .spc.lock.c3m .c3sx{padding-left:17px}}',
   M+' .c3ucl .c3cta .c3cp,'+M+' .c3ucl .c3cta .c3cp.no{color:#3a2408}'+M+' .c3ucl .u3br .u3bx>b{white-space:nowrap}',
   '@media(max-width:380px){'+M+' .u3br.c3w>.u3bx>b,'+M+' .u3br.c3wb>.u3bx>b,'+M+' .u3br.c3wd>.u3bx>b{font-size:12px}'+M+' .u3br.c3w,'+M+' .u3br.c3wb,'+M+' .u3br.c3wd{column-gap:6px}'+M+' .u3br.c3w>.u3bc,'+M+' .u3br.c3wb>.u3bc,'+M+' .u3br.c3wd>.u3bc{width:36px;height:36px}'+
    M+' .u3br.c3w .t3S.sm,'+M+' .u3br.c3w .t3P.sm,'+M+' .u3br.c3wb .t3S.sm,'+M+' .u3br.c3wb .t3P.sm,'+M+' .u3br.c3wd .t3S.sm,'+M+' .u3br.c3wd .t3P.sm{min-width:76px;font-size:12px}'+
@@ -38817,13 +38819,13 @@ var U3A=(function(){
  var css=[
   /* U3-A3 (art §13b 1+2): the chip takes the grey label's place under the medallion (chip OR label, never both), never over the icon or the lock */
   R+'[data-u3a]{color:transparent!important;text-shadow:none!important}',
-  R+'::before{'+CH+';top:47px}',
+  R+'[data-u3a]::before{'+CH+';top:47px}',
   'html body.ui354 #main .u354sb{transform:translateY(10px)}',
   'html body.ui354 #main .ptbtn{transform:translateY(-4px)}',
   'html body.ui354 #main .wxchip{min-height:44px!important;height:44px!important;display:inline-flex;align-items:center}',
   'html body.ui354 #top .cup[data-a="vip"]{position:relative}html body.ui354 #top .cup[data-a="vip"]::after{content:"";position:absolute;inset:-9px}',
   'html body.ui354 #main .u354sb .u354bd,html body.ui354 #main .hubrail .qbtn>i{font-size:12px!important}',
-  S2+'::before{'+CH+';top:53px}',
+  S2+'[data-u3a]::before{'+CH+';top:53px}',
   S2+'[data-u3a]>span[data-dsm]{visibility:hidden}',
   /* U3-A3 (§13b 3): dock labels clear the icons by 4 px (icon 2 px up, label 3 px down) */
   'html body.ui354 #nav button .ni{margin-top:-2px!important;margin-bottom:2px!important}',
@@ -38836,14 +38838,21 @@ var U3A=(function(){
  ].join('\n');
  var st=document.createElement('style');st.id='u3a-css-home';st.textContent=css;document.head.appendChild(st);
  /* the chip text comes from the same body classes that lock the slot (no new state): set once per render, cheap */
+ /* FIX1: bn3l-* body classes arrive on a 700 ms timer (bn340b2); derive the lock from the same BN3U rules so hints show from the buttons' first paint */
+ /* FIX2 (qa48 R2): for a key BN3U knows, the rule decides (same test as bn340b2 run(): done flag or rule, a throwing rule = open); the class lags 0-700 ms after an unlock, so it is only the fallback for unknown keys / no state yet */
+ function lk(cl,k){try{if(typeof BN3U!=='undefined'&&typeof S!=='undefined'&&S&&S.camp){var n=k.slice(5);for(var i=0;i<BN3U.length;i++)if(BN3U[i][0]===n){var u=BN3U[i],on=false;try{on=!!gdN().done['bn3.ul.'+n]||!!u[2]()}catch(e){on=true}return!on}}}catch(e){}return cl.contains(k)}
  function mark(){try{if(!U3A.on()){st.disabled=true;return}st.disabled=false;var m=document.getElementById('main'),cl=document.body.classList;if(!m)return;
   m.querySelectorAll('.hubrail .qbtn[data-a]').forEach(function(b){var a=b.getAttribute('data-a'),v=b.getAttribute('data-v')||'',t='';
-   for(var k in MAP){if(cl.contains(k)&&MAP[k][0]===a&&MAP[k][1]===v)t=MAP[k][2]}
+   for(var k in MAP){if(lk(cl,k)&&MAP[k][0]===a&&MAP[k][1]===v)t=MAP[k][2]}
    if(t){if(b.getAttribute('data-u3a')!==t)b.setAttribute('data-u3a',t)}else if(b.hasAttribute('data-u3a'))b.removeAttribute('data-u3a')});
-  m.querySelectorAll('.u354sb').forEach(function(b){var t=cl.contains('bn3l-guild')&&b.classList.contains('g')?'Qua Màn 1':cl.contains('bn3l-ev')&&b.classList.contains('e')?'Qua ải 1-5':'';
+  m.querySelectorAll('.u354sb').forEach(function(b){var t=lk(cl,'bn3l-guild')&&b.classList.contains('g')?'Qua Màn 1':lk(cl,'bn3l-ev')&&b.classList.contains('e')?'Qua ải 1-5':'';
    if(t){if(b.getAttribute('data-u3a')!==t)b.setAttribute('data-u3a',t)}else if(b.hasAttribute('data-u3a'))b.removeAttribute('data-u3a')})}catch(e){}}
  if(typeof renderMain==='function'){var _rmU=renderMain;renderMain=function(){var r=_rmU.apply(this,arguments);mark();return r}}
+ mark();/* U3-POLISH2 (qa46 R3): run now so the unlock hints are set before first paint */
+ try{requestAnimationFrame(mark)}catch(e){}
  setTimeout(mark,1200);
+ /* FIX2: re-mark when the bn3l-* set on body changes (the 700 ms timer), so hint and lock class agree even with no re-render */
+ try{var bsig='';new MutationObserver(function(){var s=(document.body.className.match(/(^|\s)bn3l-\w+/g)||[]).join(' ');if(s!==bsig){bsig=s;mark()}}).observe(document.body,{attributes:true,attributeFilter:['class']})}catch(e){}
 }catch(e){try{console.warn('u3_a home',e)}catch(x){}}})();
 /* ---------- F: "Tính năng mới" popup copy (64): 16 px, centred, on the shipped window; button stays the gold primary ---------- */
 (function(){try{
@@ -39462,9 +39471,9 @@ var U3F={t:0,fill:0,hall:'art/ui/tavern_hall.webp'};
   var ord=h9?['shu','wei','wu','qun']:list,cls='u3ftabs n'+ord.length;
   var h='<div class="'+cls+'">'+ord.map(function(t){
     /* U3-F3 (qa S3): a tap on a locked tab says why (toast from data-u3fm, see the click hook below) */
-    if(list.indexOf(t)<0){var why=NM[t]+': '+(pk?'không thuộc phe của bạn':'mở khi chọn phe (cuối Màn 2)');return'<span class="u3ft lk" role="button" tabindex="0" aria-disabled="true" data-u3fm="'+why+'" aria-label="'+why+'">'+badge(t,20)+'<span>'+NM[t]+'</span><i class="u3flk2"></i></span>'}
+    if(list.indexOf(t)<0){var why=NM[t]+': '+(pk?'không thuộc phe của bạn':'mở khi chọn phe (cuối Màn 2)');return'<span class="u3ft lk" role="button" tabindex="0" aria-disabled="true" data-u3fm="'+why+'" aria-label="'+why+'">'+badge(t,20)+'<span>'+NM[t]+'</span><i class="u3flk2"></i></span>'}
     return'<button class="u3ft'+(tvTab===t?' on':'')+'" data-a="tvtab" data-v="'+t+'">'+(t!=='all'?badge(t,20):'')+'<span>'+NM[t]+'</span></button>'}).join('')+'</div>';
-  if(h9&&!pk)h+='<div class="u3flkr"><i class="u3flk2"></i>Tướng các phe: mở khi chọn phe (cuối Màn 2)</div>';
+  if(h9&&!pk)h+='<div class="u3flkr"><i class="u3flk2"></i>Tướng các phe: mở khi chọn phe (cuối Màn 2)</div>';
   return h}
  function sheet(inner){
   var hros=Object.keys(HROS),own=hros.filter(function(i){return S.gens[i]}).length;
@@ -39549,7 +39558,7 @@ var U3F={t:0,fill:0,hall:'art/ui/tavern_hall.webp'};
   /* parchment tag (shipped tag_parch.webp) */
   B+'.u3ftag{display:inline-flex!important;flex-direction:row!important;flex-wrap:nowrap;align-items:center;gap:7px;width:auto!important;height:32px!important;padding:0 14px 0 16px;box-sizing:border-box;background:url(art/ui/tag_parch.webp) center/100% 100% no-repeat;color:#2a1a0c;font:700 15px/1 var(--fh,"Philosopher",Georgia,serif);white-space:nowrap;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}'+
   B+'.u3ftag i{display:inline-block!important;position:static!important;font:800 12px/1 var(--fb,system-ui,sans-serif);font-style:normal;color:#f6e7c4;background:#5a3416;border-radius:9px;padding:3px 7px}'+
-  B+'.u3fbtg{position:absolute;left:3%;bottom:7%;z-index:2}'+
+  B+'.u3fbtg{position:absolute;left:3%;bottom:7%;z-index:2;max-width:50%;padding:0 10px 0 12px;white-space:nowrap}'+
   B+'.u3fsec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(242,207,124,.55),rgba(242,207,124,0))}'+
 
   /* card */
@@ -39724,6 +39733,7 @@ var U3G=(function(){
   M+' .u3gar>.u3gtg{grid-column:2;grid-row:3;display:flex;flex-wrap:nowrap;gap:3px;margin:0;min-width:0;overflow:hidden}',
   M+' .u3gar>.u3gst{grid-column:2/4;grid-row:4;display:flex;flex-wrap:nowrap;gap:10px;font:500 12px/1.25 '+BF+';color:#b9a98a;white-space:nowrap}'+M+' .u3gst b{color:#e8d9b4}'+M+' .u3gst em{font:700 12px/1 '+BF+';font-style:normal;background:none!important;padding:0!important;border:0!important;box-shadow:none!important}'+M+' .u3gst em.bad{color:#ff8a76}'+M+' .u3gst em.ok{color:#8fe07a}'+M+' .u3gst em.eq,'+M+' .u3gst em.mid,'+M+' .u3gst em.gold{color:#f2cf7c}',
   M+' .u3gar>.u3bv{grid-column:3;grid-row:2/4;max-width:none;align-self:center}',
+  M+' .t3P.sm>span{position:relative;top:2px;padding:0 4px;box-sizing:border-box}',
   M+' .u3gar .t3P.sm.u3gdn{width:78px;min-width:0!important;height:44px;margin:-3px 0 -2px;font-size:15px}',
   M+' .u3gar .u3gtg i{flex:none;display:inline-flex;align-items:baseline;gap:0;font:700 11px/1 '+BF+';letter-spacing:-.4px;font-style:normal;padding:2px 3px;border-radius:5px;white-space:nowrap;border:1px solid var(--bc,rgba(226,178,90,.5));color:var(--bt,#f2cf7c);background:rgba(10,7,4,.55);box-shadow:inset 0 0 0 20px var(--bf,rgba(226,178,90,.12))}'+M+' .u3gtg i small{font:700 9.5px/1 '+BF+';letter-spacing:0;margin-left:1px;color:inherit;opacity:.9}',
   M+' .u3gtg i.b-inf{--bc:#d8483a;--bt:#ff8f80;--bf:rgba(216,72,58,.16)}'+M+' .u3gtg i.b-cav{--bc:#3f86e0;--bt:#93c2ff;--bf:rgba(63,134,224,.16)}'+M+' .u3gtg i.b-arc{--bc:#3fae5a;--bt:#8bde9c;--bf:rgba(63,174,90,.16)}',
@@ -39811,6 +39821,7 @@ var U3G=(function(){
   var out='';
   swapEmb(hd);
   /* U3-G3 (§15b 3): Bổng hôm nay pills in one nowrap group, so at 360 the label sits above and no pill is left alone on a line */
+  var hrl=q(hd,'.ld4hr');if(hrl&&/^[ 	]*—/.test(hrl.textContent))hrl.remove();/* U3-POLISH2 art 15c g1: unranked header drops the lone dash / 1.000 line */
   var pay=q(hd,'.ld4pay');if(pay&&pay.children.length>1){var gp=document.createElement('span');gp.className='u3gpy';[].slice.call(pay.children,1).forEach(function(c){gp.appendChild(c)});pay.appendChild(gp)}
   [].slice.call(d.childNodes).forEach(function(n){if(n.nodeType!==1||n===hd){return}
    if(n.classList.contains('ld4sec')){var b=q(n,'b'),seg=q(n,'.ld4seg'),sp=q(n,'span');out+=U.plate(U.esc(tx(b)),sp?U.esc(tx(sp)):'');
@@ -40616,4 +40627,672 @@ var LGT={start1:'Bắt đầu chinh chiến',start2:'Tiếp tục',srv:'Máy ch�
    setTimeout(function(){try{stage.remove()}catch(x){}try{sp.remove()}catch(x){}try{document.removeEventListener('visibilitychange',vis)}catch(x){}},700)}catch(e){try{sp.remove()}catch(x){}try{lgFlush(0)}catch(x){}}};
  var bt=document.getElementById('lgbtn');if(bt)bt.addEventListener('click',function(){LGC.go()});
 }catch(e){try{if(LGC.wait&&LGC.flush)LGC.flush(0);else{LGC.wait=0;if(typeof ART301!=='undefined'&&ART301.hold)ART301.hold(0)}}catch(x){}try{LGC.err++;LGC.on=0;var s=document.getElementById('splash');if(s)s.classList.remove('lgon')}catch(x){}}})();
+/* ===== V301 TH-P0 (coder-senior, Decisions 336-343 A, 347 A): Thiên Hạ Phase 0 text. Spec docs/design/thienha/phase0.md §1-§3.
+   All Thiên Hạ Phase 0 strings live here (text owner: designer) so a later text pass touches one file. Read only by th0core/th0ui/th0onb, at run time.
+   {x} placeholders are filled by thTx(). Never says "bot" on screen (shadow lords = "Bóng tướng"). */
+var THTX={
+ tab:'Thiên Hạ',
+ pills:{scout:'Do thám',def:'Giữ trại',log:'Chiến báo'},
+ band:['Dễ','Ngang sức','Khó'],
+ tries:'Lượt {n}/{cap}',triesFull:'đã đầy',triesNext:'+1 sau',
+ triesTip:'Mỗi 4 giờ hồi 1 lượt tập kích, tối đa {cap}. Tập kích không tốn Quân lệnh.',
+ wagon:'Xe thuế',wagonTip:'Bạc thuế chưa thu hôm nay. Thu thuế sớm để giặc không cướp được.',
+ shield:'Miễn chiến',
+ raid:'Tập kích',raided:'Đã đánh hôm nay',noTries:'Hết lượt',noTeam:'Đội hình chưa đủ quân',
+ weak:'Chỉ được ảnh hưởng',power:'Sức {p}',
+ refresh:'Đổi mục tiêu',refreshCd:'Đổi mục tiêu sau {t}',
+ buy:'Mua thêm 1 lượt · {g} vàng',buyLeft:'còn {n}/{max} lượt mua hôm nay',needGold:'Cần {g} vàng',bought:'+1 lượt tập kích · −{g} vàng',
+ firstOnly:'Trại đầu tiên đang chờ. Hai trại khác sẽ hiện sau trận này.',
+ /* raid result */
+ resWin:'Tập kích thành công',resLoss:'Bị đánh lui',resTitle:'Tập kích · {nm}',
+ resLoot:'Chiến lợi phẩm',resNoLoot:'Đã đủ {n} trận có chiến lợi phẩm hôm nay: chỉ nhận ảnh hưởng.',resWeakLoot:'Trại quá yếu: không có chiến lợi phẩm, chỉ nhận ảnh hưởng.',
+ resInf:'{city}: {fac} +{n} ảnh hưởng',resLossTxt:'Trại vẫn còn đó. +{m} quân công. Còn {n} lượt.',resLossNote:'Trại vẫn còn đó · Còn {n} lượt',mapHint:'Kéo để di chuyển · + / − để phóng to',
+ resR1Retry:'Quân ta chưa quen địa hình. Lượt này được hoàn lại, hãy thử lại.',resR1More:'Còn hai trại khác đang chờ.',
+ again:'Về Thiên Hạ',resDet:'Chi tiết',
+ /* defence */
+ defOn:'Đang giữ: Đội {n}',defFollow:'Đang dùng: Đội {n} ({t})',defLock:'Tường trại đang xây · mở ở Màn {m}',
+ defTeam:'Đội {n}',defPow:'Sức thủ {p}',defLast:'Lần gần nhất: {r}',defHeld:'Giữ được trại',defEmpty:'Trống',defLost:'Mất xe thuế',defNone:'Chưa có trận giữ trại',
+ defArena:'theo đội phòng thủ Lôi Đài',defAct:'theo đội đang xuất chinh',
+ /* report */
+ logEmpty:'Chưa có chiến báo',
+ logAttW:'Tập kích {nm}: thắng',logAttL:'Tập kích {nm}: thua',logDefW:'Giữ được trại trước {nm}',logDefL:'{nm} cướp xe thuế',logDefE:'{nm} đánh úp, xe thuế trống, giặc về tay không',
+ logRevW:'Phục thù {nm}: thắng',logRevL:'Phục thù {nm}: thua',logCome:'Trở lại sau {d} ngày: Miễn chiến bài 24 giờ',
+ ago:'{t} trước',replay:'Xem lại',revenge:'Phục thù',revFree:'miễn phí',
+ revDone:'đã phục thù',revFail:'phục thù thất bại',
+ replayOld:'Chiến báo này không còn xem lại được',
+ revTitle:'Phục thù · {nm}',revWin:'Phục thù thành công',revLoss:'Phục thù thất bại',revBack:'Lấy lại {s} bạc',revOnce:'Chỉ được phục thù một lần cho mỗi trận.',
+ /* onboarding cards (spec §3) */
+ c1t:'Thám mã báo tin',c1q:'Ngoài thành Kinh Châu có một trại của {nm} ({fac}). Quân ít, kho đầy. Chúa công có muốn đánh úp?',c1go:'Xuất chinh',c1later:'Để sau',
+ c2t:'Đêm qua trại bị đánh úp',c2q:'{nm} cướp {x} bạc từ xe thuế rồi rút về {city}.',c2qE:'{nm} đánh úp trại nhưng xe thuế trống, giặc rút về {city} tay không.',c2rev:'Phục thù',c2see:'Xem lại',
+ c3t:'Tường trại đã xong',c3q:'Từ nay giặc sẽ dò đến trại. Chọn một đội giữ trại.',c3go:'Chọn đội giữ trại',
+ /* toasts */
+ tDone:'Trại này đã bị đánh hôm nay',tNoTries:'Hết lượt tập kích',tCd:'Chưa thể đổi mục tiêu',tDef:'Đội {n} giữ trại'
+};
+function thTx(k,o){var s=THTX[k];if(s==null)return'';s=String(s);if(o)s=s.replace(/\{(\w+)\}/g,function(m,x){return o[x]!=null?o[x]:m});return s}
+/* ===== V301 TH-P0 core (coder-senior, Decisions 336 A-343 A, 341 A+, 347 A; Huy go 2026-11-17). Spec docs/design/thienha/phase0.md §1, §3, §4; numbers BN_TH (docs/balance/TH-P0.md).
+   Switch THON: OFF by default. ON with ?th=1 (localStorage 'bn-th'='1'), OFF with ?th=0. OFF = no wrapper is installed and S.th is never created:
+   the game behaves exactly as before (the only always-on things are the THTX table, the THON flag and these function definitions).
+   Rules (all against bot "shadow lords", no server):
+   - targets: 3 a list (Dễ / Ngang sức / Khó = BN_TH.band of your arnPower), seed hashS('th|day|slot|ref'), stored at draw time so reloads show the same list;
+     1 free refresh then BN_TH.refresh.cdH cooldown; each target once a day; the list is redrawn at the daily reset.
+   - tries: own pool (cap 5, +1 / 4 h, no Quân lệnh); up to 3 extra tries a day for gold (BN_TH.extra.gold, only when the pool is empty; never refunded).
+   - raid = runSpecial (normal visible battle) with a stored seed (battle wrapper, only for the THB.D array) so Chiến báo can replay it.
+   - win: loot minted (silver/grain by Chính Sảnh lv^e × band mult, Danh vọng), stops after dayWins wins/day; > weakCut weaker = influence only;
+     influence +inf.win (Khó × hardMult) into S.world.inv[city] (feeds the existing 3-cities tax bonus, 347 A). Loss: merit only.
+   - defence: incoming attempts simulated at tab open / sync for the last simMaxH hours, perDay seeded times a day, after defence unlock + newbieH;
+     lost = ≤ takeP of today's wagon (tax taps left × taxVal − debt), ≤ dayCapP of the day's taps, as debt taken off the next tax taps; shield shieldH;
+     the vault (S.res.*) is never touched by a lost defence. Away ≥ comebackD days → no loss + comebackShieldH shield. Held: +inc.hold Danh vọng.
+   - Phục thù: free, once, within rev.hours, for a lost defence; win returns rev.back × what was taken (minted) + win influence. Shields are never sold (340 A).
+   Save (Decision 342 A, additive; migration note docs/handoffs/TH-P0-coder-senior.md): S.th, created lazily by thS() only while THON:
+     {v:1, tries, tryT, ex:{day,n}, ref, refT, seedDay, list:[target], done:{slot:1}, wins:{day,n}, def:null|0-2, sh, chk, inc:{day,n},
+      wag:{day,lost,debt}, log:[report ≤ BN_TH.log], seq, unread, onb:{r1,hit,def,r1T,r1Day,dT}, st:{used,won,days,lastDay}}
+     Missing S.th = not started; missing keys get defaults; nothing else in S changes except: S.res.silver/grain/prestige/merit/gold (rewards, extra-try price),
+     S.world.inv[city] (influence) and the tax tap payout (wagon debt).
+   Actions are in th0ui.js / th0onb.js. Globals: THON, THB, THM, thS, thOpen, thDefOpen, thSync, thList, thTeam, thFresh, thRaid, thRev, thReplay, thIncoming, thWagon, thBuy, thRefresh, thSetDef. */
+var THON=0;
+(function(){try{
+ var q=(location.search||'')+(location.hash||'');
+ if(/[?#&]th=1(\D|$)/.test(q)){THON=1;try{localStorage.setItem('bn-th','1')}catch(e){}}
+ else if(/[?#&]th=0(\D|$)/.test(q)){THON=0;try{localStorage.removeItem('bn-th')}catch(e){}}
+ else{try{THON=localStorage.getItem('bn-th')==='1'?1:0}catch(e){}}
+}catch(e){}})();
+var THB=null;            /* armed battle: {D:<defender array>, seed, cap} (seed override + attacker snapshot for the replay) */
+var THM={pill:'scout',boot:1,last:null};   /* session memory, never saved */
+var THH=3600000,THD=86400000;
+function thC(){try{return BN_TH}catch(e){return null}}
+function thOpen(){try{var C=thC();return!!(THON&&C&&S&&S.camp&&S.camp.mapDone&&S.camp.mapDone[C.open-1])}catch(e){return false}}
+function thDefOpen(){try{var C=thC();return!!(THON&&C&&S&&S.camp&&S.camp.mapDone&&S.camp.mapDone[C.defOpen-1])}catch(e){return false}}
+/* accessor + additive migration: null when OFF or no save */
+function thS(){if(!THON)return null;try{if(!S||!S.camp||!thC())return null;
+ var C=thC(),T=S.th;if(!T||typeof T!=='object')T=S.th={v:1};
+ var d=function(k,v){if(T[k]==null||typeof T[k]!==typeof v)T[k]=v};
+ d('v',1);d('tries',C.tries.cap);d('tryT',S.clock);d('ref',0);d('refT',0);d('done',{});d('sh',0);d('chk',S.clock);d('seq',1);d('unread',0);
+ if(!T.ex||typeof T.ex!=='object')T.ex={day:null,n:0};if(!T.wins||typeof T.wins!=='object')T.wins={day:null,n:0};
+ if(!T.inc||typeof T.inc!=='object')T.inc={day:null,n:0};if(!T.wag||typeof T.wag!=='object')T.wag={day:null,lost:0,debt:0};
+ if(!Array.isArray(T.log))T.log=[];if(!Array.isArray(T.list))T.list=null;
+ if(!T.onb||typeof T.onb!=='object')T.onb={r1:0,hit:0,def:0};if(!T.st||typeof T.st!=='object')T.st={used:0,won:0,days:0};
+ if(T.def!=null&&!(T.def>=0&&T.def<=2))T.def=null;
+ return T}catch(e){return null}}
+/* daily roll + tries refill; call before reading tries / list / wagon */
+function thRoll(){var T=thS();if(!T)return null;var C=thC();
+ if(T.seedDay!==S.day){T.seedDay=S.day;T.ref=0;T.refT=0;T.done={};T.list=null}
+ if(T.ex.day!==S.day)T.ex={day:S.day,n:0};if(T.wins.day!==S.day)T.wins={day:S.day,n:0};if(T.inc.day!==S.day)T.inc={day:S.day,n:0};
+ if(T.wag.day!==S.day)T.wag={day:S.day,lost:0,debt:0};
+ var per=C.tries.refillH*THH;
+ if(T.tries<C.tries.cap&&S.clock>=T.tryT+per){var k=Math.floor((S.clock-T.tryT)/per);T.tries=Math.min(C.tries.cap,T.tries+k);T.tryT=T.tries>=C.tries.cap?S.clock:T.tryT+k*per}
+ if(T.tries>=C.tries.cap)T.tryT=S.clock;
+ return T}
+function thNextTry(){var T=thS();if(!T)return 0;var C=thC();return T.tries>=C.tries.cap?0:T.tryT+C.tries.refillH*THH}
+function thMyPw(){try{return Math.max(1,arnPower(playerUnits(true)))}catch(e){return 1}}
+function thFoes(){return['shu','wei','wu'].filter(function(n){return n!==S.nation})}
+function thCity(id){for(var i=0;i<CITIES.length;i++)if(CITIES[i].id===id)return CITIES[i];return CITIES[0]}
+function thName(r){return ARN_SUR[Math.floor(r()*ARN_SUR.length)]+' '+ARN_GIV[Math.floor(r()*ARN_GIV.length)]}
+/* one stored target / shadow: {s:slot, seed, P (shown power), b:band 0-2, city, fac, nm, bu:bust 0-1 in its faction column, scr:1 scripted} */
+function thMk(slot,seed,P,b){var r=hrng(seed),F=thFoes();return{s:slot,seed:seed,P:Math.max(1,Math.round(P)),b:b,city:CITIES[Math.floor(r()*CITIES.length)].id,fac:F[Math.floor(r()*F.length)],nm:thName(r),bu:Math.floor(r()*2)}}
+function thList(){var T=thRoll();if(!T)return[];var C=thC();
+ if(T.onb.r1<2){   /* moment 1: one scripted camp beside Kinh Châu at onb.r1Pow of your power */
+  var l=T.list&&T.list[0];if(!l||!l.scr){var mp=thMyPw(),o=thMk('r1',hashS('th|r1|'+S.day),mp*C.onb.r1Pow,0);o.city='jin';o.scr=1;T.list=[o]}return T.list}
+ if(!T.list||!T.list.length||T.list[0].scr){var p=thMyPw(),B=[C.band.easy,C.band.even,C.band.hard];
+  T.list=[0,1,2].map(function(i){var b=Math.max(-C.band.max,Math.min(C.band.max,B[i]));return thMk(i,hashS('th|'+S.day+'|'+i+'|'+T.ref),p*(1+b),i)})}
+ return T.list}
+/* shadow team = ar2Team re-targeted to a shown power (balancer's thGen, sim/th_patch.js), cached */
+var THTC={};
+function thTeam(P,seed){var key=P+'|'+seed;if(THTC[key])return THTC[key];var C=thC();
+ var x=Math.max(0,Math.min(1,Math.log(P/AR2PHI)/Math.log(AR2PLO/AR2PHI)));
+ var rng=mulberry32(seed),lv=Math.round(20*Math.pow(270/20,1-x)),tier=lv<35?1:lv<55?2:lv<75?3:4;
+ var fid=FORM_ORDER[Math.floor(rng()*FORM_ORDER.length)],F=FORM[fid],cells=F.cells.slice().sort(function(a,b){return a.charAt(0)-b.charAt(0)}).slice(0,5);if(cells.indexOf(F.main)<0)cells[cells.length-1]=F.main;
+ var pool=Object.keys(GENS).filter(function(g){var G=GENS[g];return G&&G.br&&BR[G.br]&&g!=='lord'&&G.rar}),used={},us=[];
+ var rows=[['inf','cav','inf'],['arc','cav','str','inf'],['str','sup','arc','mac','sup']];
+ cells.forEach(function(c,i){var r=+c.charAt(0),l=+c.charAt(2),br=rows[Math.min(2,r)][Math.floor(rng()*rows[Math.min(2,r)].length)];
+  var ro=rng(),want=ro<.12+.6*(1-x)?'SSR':ro<.55+.3*(1-x)?'SR':'R',cand=pool.filter(function(g){return!used[g]&&GENS[g].br===br&&GENS[g].rar===want});
+  if(!cand.length)cand=pool.filter(function(g){return!used[g]&&GENS[g].br===br});if(!cand.length)cand=pool.filter(function(g){return!used[g]});
+  var gid=cand[Math.floor(rng()*cand.length)],G=GENS[gid];used[gid]=1;
+  var path=tier>=4?'abcde'.charAt(Math.floor(rng()*5)):tier>=2?(rng()<.5?'A':'B'):null;
+  var u=makeUnit({id:'D'+i,side:'D',name:G.n,br:G.br,path:path,tier:tier,lv:lv,tong:G.tong,dung:G.dung,tri:G.tri,tact:G.tact,pas:G.pas,fac:G.fac,cell:[r,l],fid:fid,fl:1+Math.min(9,Math.floor(lv/30)),main:c===F.main,look:gid,isBoss:false});
+  u.pvp=1;us.push(u)});
+ var pw=arnPower(us),kf=AR2K*(1.82-.7*x)*((C.gen&&C.gen.cal)||1),k=Math.max(.05,P*kf/Math.max(1,pw));
+ us.forEach(function(u){u.A*=k;u.D=u.D.map(function(d){return d*k});u.max=Math.max(1,Math.round(u.max*k));u.troops=u.max});
+ return(THTC[key]={units:us,lv:lv,fid:fid})}
+function thFresh(Tm){return Tm.units.map(function(u){var c=Object.assign({},u);c.D=u.D.slice();c.st={stun:0,burn:0,chaos:0,shield:0,taunt:0,lock:0};c.troops=c.max;c.morale=u.main?50:0;return c})}
+/* compact attacker snapshot for the replay (null when it cannot be stored small) */
+function thSpec(us){try{var j=JSON.stringify(us);return j.length<16000?JSON.parse(j):null}catch(e){return null}}
+function thUnspec(sp){return sp.map(function(u){var c=JSON.parse(JSON.stringify(u));c.st={stun:0,burn:0,chaos:0,shield:0,taunt:0,lock:0};return c})}
+/* defence team: S.th.def, else the Lôi Đài defence, else the active formation (spec §1.3.1) */
+function thDefIdx(){var T=thS();if(T&&T.def!=null)return T.def;try{if(S.ar2&&S.ar2.def!=null)return S.ar2.def}catch(e){}return S.fm.act}
+function thDefUnits(i){var act=S.fm.act,o=[];try{S.fm.act=i==null?thDefIdx():i;o=playerUnits(true)}catch(e){}S.fm.act=act;return o}
+function thTeamOk(){try{var A=playerUnits(false);return A.length>0&&(S.auto||A.some(function(u){return u.troops>0}))}catch(e){return false}}
+/* wagon: silver still waiting in today's tax taps, minus the debt a raider took */
+function thWagon(){var T=thRoll();var n=0;try{n=Math.max(0,(taxMax()-S.taxUsed)*taxVal())}catch(e){}return Math.max(0,n-(T?T.wag.debt:0))}
+function thDayWagon(){try{return taxMax()*taxVal()}catch(e){return 0}}
+function thLoot(t){var C=thC(),L=C.loot,lv=Math.max(1,S.b.mc|0),m=L.mult[t.b]||1;
+ return{s:Math.round(L.s*Math.pow(lv,L.e)*m),g:Math.round(L.g*Math.pow(lv,L.e)*m),dv:Math.round(L.dv*m)}}
+function thInfAmt(t){var C=thC();return Math.round(C.inf.win*(t.b===2?C.inf.hardMult:1))}
+function thWeak(t){var C=thC();return t.P<thMyPw()*(1-C.loot.weakCut)}
+function thInf(city,n){try{if(!S.world.inv)S.world.inv={};S.world.inv[city]=(S.world.inv[city]||0)+n}catch(e){}}
+function thLog(o){var T=thS(),C=thC();o.id=T.seq++;o.t=o.t||S.clock;T.log.unshift(o);if(T.log.length>C.log)T.log.length=C.log;T.unread++;return o}
+function thStat(){var T=thS();T.st.used++;if(T.st.lastDay!==S.day){T.st.lastDay=S.day;T.st.days++}}
+/* ---- raid ---- */
+function thArm(D,seed){THB={D:D,seed:seed>>>0,cap:null}}
+function thRaid(slot){var T=thRoll(),C=thC();if(!T||!thOpen()||(typeof fighting!=='undefined'&&fighting))return;
+ var L=thList(),t=null;L.forEach(function(x){if(String(x.s)===String(slot))t=x});if(!t)return;
+ if(T.done[t.s]){toast(thTx('tDone'));return}if(T.tries<=0){toast(thTx('tNoTries'));return}if(!thTeamOk()){toast(thTx('noTeam'));return}
+ var D=thFresh(thTeam(t.P,t.seed)),bs=hashS('thb|'+t.seed+'|'+S.clock);thArm(D,bs);var nm=t.nm,ci=thCity(t.city);
+ return runSpecial(D,{title:thTx('resTitle',{nm:nm}),info:'Thiên Hạ · '+ci.n,foeCol:FAC[t.fac]?FAC[t.fac].c:'#8a6a9a',foeFac:t.fac},null,function(res,out,A){
+  var cap=THB&&THB.D===D?THB.cap:null;THB=null;var win=!out.retreat&&res.win==='att',R={win:win,title:thTx('resTitle',{nm:nm}),rounds:res.rounds,lf:res.lf,lfS:res.lfS,again:'thgo',againT:thTx('again'),lines:[],th:1};
+  var foe={nm:t.nm,fac:t.fac,city:t.city,P:t.P,s:t.seed,bu:t.bu,b:t.b};
+  if(t.scr&&!win){R.head=thTx('resLoss');R.lines=[thTx('resR1Retry')];R.thN=R.lines.slice();return R}   /* moment 1 is a guaranteed win: a loss refunds the try (spec §3.1) */
+  T.tries--;if(T.tries===C.tries.cap-1)T.tryT=S.clock;T.done[t.s]=1;thStat();
+  var lg={k:'att',seed:bs,foe:foe,won:win?1:0,A:cap};
+  if(win){T.st.won++;var inf=thInfAmt(t),lo=null;
+   R.thN=[];if(!t.scr&&thWeak(t)){R.lines.push(thTx('resWeakLoot'));R.thN.push(thTx('resWeakLoot'))}
+   else if(T.wins.n>=C.loot.dayWins){R.lines.push(thTx('resNoLoot',{n:C.loot.dayWins}));R.thN.push(thTx('resNoLoot',{n:C.loot.dayWins}))}
+   else{lo=thLoot(t);T.wins.n++;S.res.silver+=lo.s;S.res.grain+=lo.g;S.res.prestige+=lo.dv}
+   thInf(t.city,inf);lg.loot=lo;lg.inf=inf;
+   R.head=thTx('resWin');R.thLoot=lo;R.thLo=lo;R.thInf={city:t.city,n:inf};
+   if(lo)R.lines.push('<b>'+thTx('resLoot')+'</b> · '+ic('silver')+fmt(lo.s)+' · '+ic('grain')+fmt(lo.g)+' · '+ic('prestige')+lo.dv+' Danh vọng');
+   R.lines.push(thTx('resInf',{city:thCity(t.city).n,fac:FAC[S.nation]?FAC[S.nation].n:'',n:fmt(inf)}));
+   if(t.scr){T.onb.r1=2;T.onb.r1T=S.clock;T.onb.r1Day=S.day;T.list=null;R.lines.push('<b class="gold">'+thTx('resR1More')+'</b>');R.thN.push('<b class="gold">'+thTx('resR1More')+'</b>')}}
+  else{var m=Math.round(C.loot.lossMerit*thLoot(t).s);S.res.merit+=m;lg.m=m;R.head=thTx('resLoss');R.lines.push(thTx('resLossTxt',{m:fmt(m),n:T.tries}));R.thM=m;R.thN=[thTx('resLossNote',{n:T.tries})]}
+  lg.t=S.clock;thLog(lg);T.unread=Math.max(0,T.unread-1);   /* your own raid is not "unread" */
+  try{mastGain(A,thTeam(t.P,t.seed).lv,win?1:0)}catch(e){}
+  return R})}
+/* ---- Phục thù (free, once, within rev.hours) ---- */
+function thRevOk(r){var C=thC();return!!(r&&r.k==='def'&&!r.won&&!r.rev&&S.clock-r.t<C.rev.hours*THH)}
+function thRev(id){var T=thRoll(),C=thC();if(!T||(typeof fighting!=='undefined'&&fighting))return;var r=null;T.log.forEach(function(x){if(x.id===+id)r=x});if(!thRevOk(r))return;if(!thTeamOk()){toast(thTx('noTeam'));return}
+ var f=r.foe,P=r.scr?Math.round(thMyPw()*C.onb.revPow):f.P,D=thFresh(thTeam(P,f.s)),bs=hashS('thr|'+r.id+'|'+S.clock);thArm(D,bs);
+ return runSpecial(D,{title:thTx('revTitle',{nm:f.nm}),info:'Thiên Hạ · '+thCity(f.city).n,foeCol:FAC[f.fac]?FAC[f.fac].c:'#8a6a9a',foeFac:f.fac},null,function(res,out,A){
+  var cap=THB&&THB.D===D?THB.cap:null;THB=null;var win=!out.retreat&&res.win==='att',R={win:win,title:thTx('revTitle',{nm:f.nm}),rounds:res.rounds,lf:res.lf,lfS:res.lfS,again:'thgo',againT:thTx('again'),lines:[],th:1};
+  if(r.scr&&!win){R.head=thTx('revLoss');R.lines=[thTx('resR1Retry')];R.thN=R.lines.slice();return R}   /* the scripted revenge cannot end as a loss */
+  r.rev=win?1:2;var lg={k:'rev',seed:bs,foe:{nm:f.nm,fac:f.fac,city:f.city,P:P,s:f.s,bu:f.bu,b:f.b},won:win?1:0,A:cap,of:r.id};
+  if(win){var back=Math.round((r.lost||0)*(r.scr?2:C.rev.back)),inf=C.inf.win;S.res.silver+=back;thInf(f.city,inf);r.back=back;lg.back=back;lg.inf=inf;
+   R.head=thTx('revWin');R.thInf={city:f.city,n:inf};R.thBack=back;if(back)R.lines.push(ic('silver')+' '+thTx('revBack',{s:fmt(back)}));R.lines.push(thTx('resInf',{city:thCity(f.city).n,fac:FAC[S.nation]?FAC[S.nation].n:'',n:fmt(inf)}));
+   if(r.scr){T.onb.hit=3;THM.pill='log'}}
+  else{R.head=thTx('revLoss');R.lines.push(thTx('revOnce'));R.thN=[thTx('revOnce')]}
+  thLog(lg);T.unread=Math.max(0,T.unread-1);try{mastGain(A,thTeam(P,f.s).lv,win?1:0)}catch(e){}return R})}
+/* ---- replay from the stored seed + both team specs ---- */
+async function thReplay(id){var T=thS();if(!T||(typeof fighting!=='undefined'&&fighting))return;var r=null;T.log.forEach(function(x){if(x.id===+id)r=x});
+ if(!r||r.seed==null||!r.foe){toast(thTx('replayOld'));return}
+ var A=r.A?thUnspec(r.A):(r.k==='def'?thDefUnits():playerUnits(false)),D=thFresh(thTeam(r.foe.P,r.foe.s));if(!A.length){toast(thTx('replayOld'));return}
+ var back=sheetFn,s0=snapUnits(A.concat(D)),res=battle(A,D,r.seed);closeSheet();fighting=true;
+ try{await btPlay(A,D,res,s0,{replay:1,title:THTX.pills.log+' · '+r.foe.nm,info:'Thiên Hạ · '+thCity(r.foe.city).n,canSkip:true,speed:S.bspd||1,col:FAC[S.nation].c,fac:S.nation,foeCol:FAC[r.foe.fac]?FAC[r.foe.fac].c:'#8a6a9a',foeFac:r.foe.fac})}catch(e){}finally{fighting=false}
+ try{renderMain()}catch(e){}if(back)openSheet(back)}
+/* ---- incoming raids (spec §1.3, §1.7) ---- */
+function thDayStart(d){var off=0;try{off=new Date(S.clock).getTimezoneOffset()*60000}catch(e){}return d*THD+18000000+off}
+function thHit(t,foe,P,seed,spec,won){var T=thS(),C=thC();
+ if(won){S.res.prestige+=C.inc.hold;return thLog({k:'def',t:t,seed:seed,foe:foe,won:1,dv:C.inc.hold,A:spec})}
+ var cap=Math.round(C.inc.dayCapP*thDayWagon()),left=Math.max(0,cap-T.wag.lost),lost=Math.max(0,Math.min(Math.round(C.inc.takeP*thWagon()),left));
+ T.wag.lost+=lost;T.wag.debt+=lost;T.sh=Math.max(T.sh,t+C.inc.shieldH*THH);
+ return thLog({k:'def',t:t,seed:seed,foe:foe,won:0,lost:lost,rev:0,A:spec})}
+function thIncoming(){var T=thRoll(),C=thC();if(!T)return 0;var now=S.clock,n=0;
+ if(typeof fighting!=='undefined'&&fighting)return 0;
+ if(!thDefOpen()||!T.onb.dT){T.chk=now;return 0}
+ if(now-T.chk>=C.inc.comebackD*THD){T.sh=Math.max(T.sh,now+C.inc.comebackShieldH*THH);thLog({k:'cb',d:Math.floor((now-T.chk)/THD)});T.chk=now;return 0}
+ var from=Math.max(T.chk,now-C.inc.simMaxH*THH,T.onb.dT+C.inc.newbieH*THH);if(from>=now){T.chk=now;return 0}
+ var d0=dayIdxAt(from),d1=S.day;
+ for(var d=d0;d<=d1;d++)for(var i=0;i<C.inc.perDay;i++){var r=hrng(hashS('thinc|'+d+'|'+i)),t=thDayStart(d)+Math.floor(r()*THD);
+  if(t<=from||t>now||T.sh>t)continue;
+  var def=thDefUnits(),dp=Math.max(1,arnPower(def)),P=Math.round(dp*(C.inc.pow[0]+r()*(C.inc.pow[1]-C.inc.pow[0]))),ss=hashS('thsh|'+d+'|'+i),bs=hashS('thib|'+d+'|'+i);
+  var F=thFoes(),foe={nm:thName(r),fac:F[Math.floor(r()*F.length)],city:CITIES[Math.floor(r()*CITIES.length)].id,P:P,s:ss,bu:Math.floor(r()*2)};
+  var spec=thSpec(def),res=null;try{res=battle(def,thFresh(thTeam(P,ss)),bs)}catch(e){continue}
+  thHit(t,foe,P,bs,spec,res.win==='att');n++}
+ T.chk=now;return n}
+function dayIdxAt(clk){var off=0;try{off=new Date(clk).getTimezoneOffset()*60000}catch(e){}return Math.floor((clk-off-18000000)/THD)}
+/* ---- refresh, extra tries, defence ---- */
+function thRefOk(){var T=thRoll();return!!T&&T.onb.r1>=2&&S.clock>=T.refT}
+function thRefresh(){var T=thRoll(),C=thC();if(!T||!thRefOk()){toast(thTx('tCd'));return false}T.ref++;T.refT=S.clock+C.refresh.cdH*THH;T.done={};T.list=null;thList();return true}
+function thBuyCost(){var T=thRoll(),C=thC();if(!T||!C.extra||T.ex.n>=C.extra.max)return 0;return C.extra.gold[T.ex.n]||0}
+function thBuy(){var T=thRoll(),C=thC();if(!T||!C.extra||T.tries>0||T.ex.n>=C.extra.max)return false;var g=thBuyCost();if(!g)return false;
+ if(S.res.gold<g){toast(thTx('needGold',{g:g}));return false}S.res.gold-=g;T.ex.n++;T.tries++;toast(thTx('bought',{g:g}));return true}
+function thSetDef(i){var T=thS();if(!T||!(i>=0&&i<=2))return;T.def=i;if(thDefOpen()){if(!T.onb.dT)T.onb.dT=S.clock;if(T.onb.def<2)T.onb.def=2}}   /* no toast: the gold rim + "Đang giữ: Đội n" caption show it (art fix 5) */
+/* one call for tab open / timers: roll, refill, simulate incoming */
+function thSync(){try{if(!thOpen())return;thRoll();thIncoming()}catch(e){}}
+/* ---- wiring: everything below runs only with THON ---- */
+(function(){try{
+ if(!THON)return;
+ /* seed override + attacker snapshot, only for the array a Thiên Hạ fight armed */
+ var _btTH=battle;battle=function(att,def,seed,opt){if(THB&&THB.D===def){seed=THB.seed;THB.cap=thSpec(att)}return _btTH.call(this,att,def,seed,opt)};
+ /* wagon debt: a lost defence is taken off the next tax taps (never below 0) */
+ var _ATH=A_;A_=function(a,v,w,el){
+  if(a==='tax'){var T=null;try{T=thS();if(T)thRoll()}catch(e){}
+   if(T&&T.wag.debt>0){var s0=S.res.silver,u0=S.taxUsed,r=_ATH.apply(this,arguments);try{if(S.taxUsed>u0){var got=S.res.silver-s0,tk=Math.max(0,Math.min(T.wag.debt,got));S.res.silver-=tk;T.wag.debt-=tk;if(tk)toast(thTx('wagon')+': −'+fmt(tk)+' bạc')}}catch(e){}return r}}
+  return _ATH.apply(this,arguments)};
+ /* cloud progress counters (master plan §6 measurement) */
+ if(typeof progress==='function'){var _prTH=progress;progress=function(){var p=_prTH.apply(this,arguments);try{if(S&&S.th&&S.th.st)p.th={u:S.th.st.used,w:S.th.st.won,d:S.th.st.days}}catch(e){}return p}}
+}catch(e){}})();
+/* ===== V301 TH-P0 screens (coder-senior). Look = art's pick (TH1=b ink road + numbered camps + strip, a's banner-pole gauges; TH2=a difficulty by rim + raided seal;
+   TH3 Giữ trại + Chiến báo on dark-bronze rows). Direction docs/art/thienha-p0-art.md §2/§6 + the final-review fix list (TH-P0-FIX1); art web/art/thienha/ (TA-TH-CUT.json rects below).
+   Only with THON and after Màn 8 (thOpen): the Thiên hạ tab gets camps + road + banner poles on the map, the status strip, the pill rail and one panel.
+   OFF = nothing here is wired. Draw code never throws (every builder is try/catch with the old html returned).
+   Wall panel: TH_WALL.src = th4_wall (built), TH_WALL.lock = th7_wall (scaffold, techart cut of art's th7 b), both in full colour.
+   Raid result: the campaign result window (rs9 + it363 hanging banner + resbar), built here for R.th; falls back to the old sheet when IT363 is off.
+   Actions (grepped unused): thp (pill), thf (raid slot), thref (refresh list), thbuy (extra gold try), thd (defence team), thrv (Phục thù id),
+   thrp (replay id), thtip (tries tip), thwag (wagon → city tab tax), thgo (result "Về Thiên Hạ"). */
+var TH_WALL={src:'art/thienha/th4_wall.webp',lock:'art/thienha/th7_wall.webp'};
+var THPC={W:800,H:600,src:'art/thienha/th_pieces.webp',p:{shield:[5,4,189,192],wagon_full:[204,36,192,128],wagon_raided:[404,23,192,153],stamp_won:[604,4,191,192],stamp_held:[5,204,189,192],stamp_lost:[205,204,190,192],
+ camp_enemy:[404,205,192,190],camp_own:[604,204,192,191],badge_easy:[5,404,190,192],badge_even:[205,404,190,192],badge_hard:[405,404,189,192],banner_pole:[665,404,69,192]}};
+var THLD={src:'art/thienha/th_lords.webp',W:768,H:512,col:{shu:0,wei:1,wu:2}};
+function thPcH(n,w,cls){var p=THPC.p[n];if(!p)return'';var s=w/p[2];return'<i class="thpc'+(cls?' '+cls:'')+'" style="width:'+Math.round(w)+'px;height:'+Math.round(p[3]*s)+'px;background:url('+THPC.src+') '+(-p[0]*s).toFixed(1)+'px '+(-p[1]*s).toFixed(1)+'px/'+(THPC.W*s).toFixed(1)+'px '+(THPC.H*s).toFixed(1)+'px no-repeat"></i>'}
+function thPcS(n,x,y,w,flt){var p=THPC.p[n];if(!p)return'';var h=p[3]*w/p[2];return'<svg x="'+Math.round(x-w/2)+'" y="'+Math.round(y-h/2)+'" width="'+Math.round(w)+'" height="'+Math.round(h)+'" viewBox="'+p.join(' ')+'" pointer-events="none"><image href="'+THPC.src+'" width="'+THPC.W+'" height="'+THPC.H+'"'+(flt?' filter="url(#'+flt+')"':'')+'/></svg>'}
+function thBust(f,bu,sz){var c=THLD.col[f.fac];if(c==null)c=0;var s=sz/256;return'<i class="thbu" style="width:'+sz+'px;height:'+sz+'px;background:url('+THLD.src+') '+(-c*256*s)+'px '+(-(bu?1:0)*256*s)+'px/'+(THLD.W*s)+'px '+(THLD.H*s)+'px no-repeat"></i>'}
+function thHex(c){var m=/#([0-9a-f]{6})/i.exec(String(c||''));if(m){var v=parseInt(m[1],16);return[(v>>16&255)/255,(v>>8&255)/255,(v&255)/255]}m=/rgb\((\d+),\s*(\d+),\s*(\d+)/.exec(String(c||''));return m?[m[1]/255,m[2]/255,m[3]/255]:[.8,.8,.8]}
+/* "n phút / n giờ / n ngày trước" (a day from 24 h on, art fix 7) */
+function thAgo(t){var d=Math.max(0,S.clock-t),h=Math.floor(d/THH),m=Math.floor(d%THH/60000);return thTx('ago',{t:h>=24?Math.floor(h/24)+' ngày':h?h+' giờ':Math.max(1,m)+' phút'})}
+/* power vs yours: the stored target power against your power now; shown within ±99 % (a team change mid-day must not print "+854601 %") */
+function thPct(P,mp){var x=Math.round((P/Math.max(1,mp)-1)*100);return isFinite(x)?x:0}
+function thPctTx(pct){return pct>99?'▲ > +99 %':pct>1?'▲ +'+pct+' %':pct<-1?'▼ '+Math.max(-99,pct)+' %':'= 0 %'}
+function thLite(){try{return!!(S&&S.smooth250)||matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){return false}}
+function thTy(u){try{var g=S.gens[u.gid]||{};if(window.bvTyOf){var t=bvTyOf({ty:g.ty,br:u.br});if(t)return t}}catch(e){}return{inf:'shield',cav:'heavycav',arc:'archer',mac:'siege',str:'strategist',sup:'drum'}[u.br]||'shield'}
+/* ---- map layer (inside the wmap svg, viewBox 1232 x 667) ---- */
+var THRD=[['che','han'],['han','xu'],['han','jin'],['che','jin'],['jin','cai'],['cai','jia'],['jin','jia'],['xu','jia']];
+var THCO=[[-150,14],[150,14],[112,-92]];   /* camp offset from its city centre, by slot */
+var THZ0=1;                                /* framing zoom index (WZ gets 110 % at index 1 while TH is on: all six cities + camps in view, centred on x 650) */
+function thMapDefs(){var o='<defs>';NAT.forEach(function(n){var c=thHex(WCOL[n]);o+='<filter id="tht_'+n+'" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="'+(c[0]*1.15).toFixed(3)+' 0 0 0 0 0 '+(c[1]*1.15).toFixed(3)+' 0 0 0 0 0 '+(c[2]*1.15).toFixed(3)+' 0 0 0 0 0 1 0"/></filter>'});
+ return o+'<filter id="thdim" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values=".45"/></filter></defs>'}
+function thRoad(){var o='<g class="throad" pointer-events="none">';THRD.forEach(function(e,i){var a=WPX[e[0]].c,b=WPX[e[1]].c,mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy)||1,k=(i%2?1:-1)*.16*L;
+ var d='M'+a[0]+' '+a[1]+'Q'+Math.round(mx-dy/L*k)+' '+Math.round(my+dx/L*k)+' '+b[0]+' '+b[1];
+ o+='<path d="'+d+'" fill="none" stroke="#1b120b" stroke-opacity=".55" stroke-width="15" stroke-linecap="round"/><path d="'+d+'" fill="none" stroke="#d6a548" stroke-opacity=".9" stroke-width="5.5" stroke-linecap="round"/>'});return o+'</g>'}
+/* banner pole (piece 12) tinted by the owner, with the three faction shares stacked in the banner's gauge slot (piece px 27.5-37.5 x 43.5-127) */
+function thPole(c){var w=WPX[c.id],ow=ownerNat(c),tot=0,sh={};NAT.forEach(function(n){sh[n]=shareOf(c,n);tot+=sh[n]});tot=tot||1;
+ var Wp=54,s=Wp/69,Hp=192*s,L=w.pole[0]-8,T=w.pole[1]-40,gx=L+26*s,gw=13*s,gy=T+43*s,gh=84.5*s,o='<g class="thpole" pointer-events="none">'+thPcS('banner_pole',L+Wp/2,T+Hp/2,Wp,'tht_'+ow);
+ o+='<rect x="'+gx.toFixed(1)+'" y="'+gy.toFixed(1)+'" width="'+gw.toFixed(1)+'" height="'+gh.toFixed(1)+'" rx="2" fill="#1b120b" stroke="#e8cf95" stroke-width="1.6"/>';
+ var yy=gy+gh-1.5,ih=gh-3;NAT.forEach(function(n){var h=ih*sh[n]/tot;yy-=h;o+='<rect x="'+(gx+1.5).toFixed(1)+'" y="'+yy.toFixed(1)+'" width="'+(gw-3).toFixed(1)+'" height="'+Math.max(0,h).toFixed(1)+'" fill="'+WCOL[n]+'"/>'});
+ return o+'</g>'}
+/* camp spots: first free spot on a ring around its city (left, right, the diagonals, then a wider ring), clear of city art, name plates,
+   banner poles, the own camp and the camps already placed; stays inside the map. Deterministic (same list = same spots). */
+function thOv(a,L,k){var t=0;for(var i=0;i<L.length;i++){var b=L[i],w=Math.min(a[2],b[2])-Math.max(a[0],b[0]),h=Math.min(a[3],b[3])-Math.max(a[1],b[1]);if(w>0&&h>0)t+=w*h*(b[4]||k||1)}return t}
+function thObst(){var o=[];CITIES.forEach(function(c){var w=WPX[c.id],pw=(Math.max(68,c.n.length*7.4+16)+30)*1.25;o.push([w.c[0]-66,w.c[1]-66,w.c[0]+66,w.c[1]+36]);o.push([w.lab[0]-pw,w.lab[1]-44,w.lab[0]+pw,w.lab[1]+44,2]);o.push([w.pole[0]-10,w.pole[1]-42,w.pole[0]+48,w.pole[1]+120])});
+ try{var cp=wCap();o.push([cp[0]-136-62,cp[1]-78-84,cp[0]-136+62,cp[1]-78+58,3])}catch(e){}return o}
+function thCampSpots(L){var O=thObst(),out=[],A=[180,0,150,30,210,330,120,60,240,300,90,270];
+ L.forEach(function(t){var w=WPX[t.city]||WPX.jin,best=null,bs=1e18;
+  for(var r=150;r<=265;r+=50)for(var i=0;i<A.length;i++){var a=A[i]*Math.PI/180,x=Math.round(w.c[0]+r*Math.cos(a)),y=Math.round(w.c[1]-r*.62*Math.sin(a)),b=[x-70,y-68,x+70,y+58];
+   if(b[0]<0||b[2]>1232||b[1]<0||b[3]>667)continue;var sc=thOv(b,O)+r*4+i;if(sc<bs){bs=sc;best=[x,y,b]}}
+  if(!best){var of=THCO[(typeof t.s==='number'?t.s:0)%3],x2=Math.max(70,Math.min(1162,w.c[0]+of[0])),y2=Math.max(70,Math.min(600,w.c[1]+of[1]));best=[x2,y2,[x2-70,y2-68,x2+70,y2+58]]}
+  O.push(best[2].concat([4]));out.push([best[0],best[1]])});return out}
+function thDisc(x,y,n){return'<g class="thdn" data-x="'+x+'" data-y="'+y+'" transform="translate('+x+' '+y+')"><circle r="21.25" fill="#2a1a0e" stroke="#d4a24c" stroke-width="4.5"/><circle r="15" fill="none" stroke="#6e4e22" stroke-width="1.5"/>'+
+ '<text y="8.5" text-anchor="middle" font-size="25" font-weight="800" fill="#f6e3b0" style="font-family:Philosopher,Georgia,serif">'+n+'</text></g>'}
+/* screen-size map text (art round 2 fix 1): city names and camp numbers stay >= 12.5 css at every zoom; plates sized from the text, kept inside
+   the visible frame (4 css margin), one overlap pass (the lower plate moves down; camp discs never move). Runs after every render, on font load and resize. */
+function thFit(){try{var sv=document.querySelector('.thmap svg');if(!sv)return;var sr=sv.getBoundingClientRect();if(!(sr.width>10))return;var k=sr.width/1232;
+ var X0=0,X1=1232,Y0=0,Y1=667,el=document.getElementById('wsc');
+ if(el&&typeof WZ!=='undefined'&&WZ[WZI]===110){var wr=el.getBoundingClientRect(),sl=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,650/1232*el.scrollWidth-el.clientWidth/2)),ox=sr.left+el.scrollLeft-sl,oy=sr.top+el.scrollTop;
+  X0=Math.max(0,(wr.left+el.clientLeft-ox)/k);X1=Math.min(1232,(wr.left+el.clientLeft+el.clientWidth-ox)/k);Y0=Math.max(0,(wr.top+el.clientTop-oy)/k);Y1=Math.min(667,(wr.top+el.clientTop+el.clientHeight-oy)/k)}
+ var m=4/k,gap=2/k,ob=[],pl=[];
+ [].forEach.call(document.querySelectorAll('.thmap .thdn'),function(d){var x=+d.getAttribute('data-x'),y=+d.getAttribute('data-y'),f=Math.max(1,12.5/(25*k)),r=21.25*f+2.25*f;
+  d.setAttribute('transform','translate('+x+' '+y+') scale('+f.toFixed(3)+')');ob.push([x-r,y-r,x+r,y+r])});
+ [].forEach.call(document.querySelectorAll('.thmap g[data-a="wcity"] .wplq'),function(q){var P=q.parentNode,b=P.getAttribute('data-b'),t=q.querySelector('text'),im=q.querySelector('image'),rc=q.querySelector('rect');if(!t||!im)return;
+  if(!b){var mm=/translate\(\s*([-\d.]+)[ ,]+([-\d.]+)\s*\)\s*scale\(\s*([\d.]+)/.exec(P.getAttribute('transform')||'');if(!mm)return;b=mm[1]+' '+mm[2]+' '+mm[3];P.setAttribute('data-b',b)}
+  b=b.split(' ').map(Number);var s2=b[2]||1,ks=k*s2,fs=Math.max(13.5,12.5/ks);t.setAttribute('font-size',fs.toFixed(2));t.setAttribute('y',(fs*.37).toFixed(2));
+  var tw=0;try{tw=t.getComputedTextLength()}catch(e){}if(!(tw>0))tw=t.textContent.length*fs*.56;
+  var w=tw+2*(8/ks)+fs*1.2,h=30*fs/13.5;im.setAttribute('x',(-w/2).toFixed(1));im.setAttribute('y',(-h/2).toFixed(1));im.setAttribute('width',w.toFixed(1));im.setAttribute('height',h.toFixed(1));
+  if(rc){rc.setAttribute('x',(-w/2+15).toFixed(1));rc.setAttribute('width',Math.max(1,w-30).toFixed(1))}
+  pl.push({P:P,s:s2,x:b[0],y:b[1],w:w*s2,h:h*s2})});
+ /* soft obstacles: camp art (enemy + own) and the banner poles; hard: camp discs and plates already placed */
+ var so=[];[].forEach.call(document.querySelectorAll('.thmap .thcamp>svg,.thmap .thpole>svg'),function(e){try{var q={x:+e.getAttribute('x'),y:+e.getAttribute('y'),width:+e.getAttribute('width'),height:+e.getAttribute('height')};so.push([q.x,q.y,q.x+q.width,q.y+q.height])}catch(x){}});
+ var oa=function(r,o){var w=Math.min(r[2],o[2])-Math.max(r[0],o[0]),h=Math.min(r[3],o[3])-Math.max(r[1],o[1]);return w>0&&h>0?w*h:0};
+ pl.sort(function(a,b){return a.y-b.y});
+ pl.forEach(function(a,i){var hard=ob.concat(pl.slice(0,i).map(function(c){return[c.x-c.w/2-gap,c.y-c.h/2-gap,c.x+c.w/2+gap,c.y+c.h/2+gap]})),best=null,bc=1e18,A=a.w*a.h;
+  for(var R=1;R<=3&&!best;R++)for(var dx=-36*R;dx<=36*R;dx+=6)for(var dy=-48*R;dy<=48*R;dy+=2){var x=a.x+dx/k,y=a.y+dy/k;
+   x=Math.max(X0+m+a.w/2,Math.min(X1-m-a.w/2,x));y=Math.max(Y0+m+a.h/2,Math.min(Y1-m-a.h/2,y));var r=[x-a.w/2,y-a.h/2,x+a.w/2,y+a.h/2],ok=true;
+   for(var j=0;j<hard.length;j++)if(oa(r,hard[j])>0){ok=false;break}if(!ok)continue;
+   var sp=0;for(j=0;j<so.length;j++)sp+=oa(r,so[j]);var ex=(x-a.x)*k,ey=(y-a.y)*k,c=Math.abs(ey)*(ey<0?1.3:1)+Math.abs(ex)*1.5+sp/A*90;if(c<bc){bc=c;best=[x,y]}}
+  if(best){a.x=best[0];a.y=best[1]}else{a.x=Math.max(X0+m+a.w/2,Math.min(X1-m-a.w/2,a.x));a.y=Math.max(Y0+m+a.h/2,Math.min(Y1-m-a.h/2,a.y))}
+  a.P.setAttribute('transform','translate('+a.x.toFixed(1)+' '+a.y.toFixed(1)+') scale('+a.s+')')})
+}catch(e){}}
+function thMapLayer(){var T=thRoll();if(!T||T.onb.r1<1)return'';var o='',L=thList();
+ var SP=thCampSpots(L);L.forEach(function(t,ix){var xy=SP[ix],x=xy[0],y=xy[1],dn=!!T.done[t.s],n=typeof t.s==='number'?t.s+1:1;
+  o+='<g class="thcamp" data-a="thp" data-v="scout" role="button" aria-label="'+esc(t.nm)+'">'+
+   (t.scr&&!dn?'<circle cx="'+x+'" cy="'+y+'" r="62" fill="none" stroke="#f2d684" stroke-width="5" class="thpu"/><circle cx="'+x+'" cy="'+y+'" r="62" fill="none" stroke="#f2d684" stroke-width="4" class="thpu thpu2"/>':'')+
+   thPcS('camp_enemy',x,y,112,dn?'thdim':'tht_'+t.fac)+thPcS(['badge_easy','badge_even','badge_hard'][t.b]||'badge_even',x+46,y-44,50,dn?'thdim':null)+thDisc(x-46,y-42,n)+
+   (dn?thPcS('stamp_won',x,y+4,72,null):'')+'</g>'});
+ var cap=wCap(),sh=T.sh>S.clock,rv=T.log.some(thRevOk),ox2=cap[0]-136,oy2=cap[1]-78;
+ o+='<g class="thcamp" data-a="thp" data-v="'+(rv?'log':'def')+'" role="button" aria-label="'+esc(THTX.pills.def)+'">'+thPcS('camp_own',ox2,oy2,110,null)+
+  (sh?'<circle cx="'+(ox2+50)+'" cy="'+(oy2-46)+'" r="32" fill="rgba(10,30,20,.5)" stroke="#5fd0a0" stroke-width="5"/>'+thPcS('shield',ox2+50,oy2-46,54,null):'')+
+  (rv?'<circle cx="'+(ox2-46)+'" cy="'+(oy2-38)+'" r="19" fill="none" stroke="#e0402a" stroke-width="4" class="thpu"/><circle cx="'+(ox2-46)+'" cy="'+(oy2-38)+'" r="10" fill="#d8402c" stroke="#2a0e08" stroke-width="2.5"/>':'')+'</g>';
+ return o}
+/* field nodes: the three-stroke glyph read as a pause button (art fix 4) → the grain object on the TH map */
+function thFields(){var o='';try{WNODES.forEach(function(n){if(n.t!=='field')return;o+='<svg x="'+(n.x-30)+'" y="'+(n.y-30)+'" width="60" height="60" viewBox="256 0 256 256" pointer-events="none"><image href="art/icons/obj.webp" width="2304" height="256"/></svg>'})}catch(e){}return o}
+/* ---- status strip, pills, panels ---- */
+function thStrip(){var T=thRoll(),C=thC(),nx=thNextTry(),pip='';for(var i=0;i<C.tries.cap;i++)pip+='<i class="'+(i<T.tries?'on':'')+'"></i>';
+ var wg=thWagon(),sh=T.sh>S.clock;
+ return'<div class="thst"><button class="thch" data-a="thtip"><span class="thpip">'+pip+'</span><span class="thcv"><b>'+thTx('tries',{n:T.tries,cap:C.tries.cap})+'</b><small>'+(nx?thTx('triesNext')+' <b data-tm="'+nx+'">'+fmtT(nx-S.clock)+'</b>':thTx('triesFull'))+'</small></span></button>'+
+  '<button class="thch'+(T.wag.lost>0?' thhit':'')+'" data-a="thwag">'+thPcH(T.wag.lost>0?'wagon_raided':'wagon_full',36)+'<span class="thcv"><b>'+fmt(wg)+'</b><small>'+thTx('wagon')+'</small></span></button>'+
+  (sh?'<div class="thch thsh">'+thPcH('shield',24)+'<span class="thcv"><b data-tm="'+T.sh+'">'+fmtT(T.sh-S.clock)+'</b><small>'+thTx('shield')+'</small></span></div>':'')+'</div>'}
+function thRail(){var T=thS(),dot=T.unread>0||T.log.some(thRevOk);
+ return'<div class="thrail">'+['scout','def','log'].map(function(k){return'<button class="thpl'+(THM.pill===k?' on':'')+'" data-a="thp" data-v="'+k+'">'+THTX.pills[k]+(k==='log'&&dot?'<i class="thdot"></i>':'')+'</button>'}).join('')+'</div>'}
+function thCard(t,mp,T){var dn=!!T.done[t.s],pct=thPct(t.P,mp),ci=thCity(t.city),weak=!t.scr&&thWeak(t),lo=thLoot(t),ok=thTeamOk();
+ var dis=dn||T.tries<=0||!ok,why=dn?thTx('raided'):T.tries<=0?thTx('noTries'):!ok?thTx('noTeam'):'';
+ return'<div class="thcd b'+t.b+(dn?' dn':'')+'"><span class="thbw"><i class="thpen" style="--pc:'+(WCOL[t.fac]||'#8a6a9a')+'"></i>'+thBust(t,t.bu,52)+(dn?thPcH('stamp_won',40,'thseal'):'')+'</span>'+
+  '<div class="sp"><b class="thnm">'+esc(t.nm).replace(/ (\S+)$/,'\u00a0$1')+'</b><div class="thsub"><span style="color:'+facText(t.fac)+'">'+(FAC[t.fac]?FAC[t.fac].n:'')+'</span> · '+ci.n+'</div>'+
+  '<div class="thpw '+(pct>1?'up':pct<-1?'dn':'eq')+'">'+thPctTx(pct)+' · '+thTx('power',{p:fmt(t.P)})+'</div></div>'+
+  '<div class="thR"><span class="thbg">'+thPcH(['badge_easy','badge_even','badge_hard'][t.b],26)+'<small>'+THTX.band[t.b]+'</small></span>'+
+  (dn?'<span class="thwhy">'+why+'</span>':'<button class="btn thb1" data-a="thf" data-v="'+t.s+'"'+(dis?' disabled':'')+'>'+thTx('raid')+'</button>'+(dis?'<span class="thwhy">'+why+'</span>':''))+
+  '<span class="thlo">'+(weak?thTx('weak'):ic('silver')+fmt(lo.s)+' '+ic('grain')+fmt(lo.g))+'</span></div></div>'}
+/* hourglass in a ring that empties as the refresh cooldown runs out */
+function thHour(T){var C=thC(),cd=T.refT>S.clock,f=cd?Math.max(0,Math.min(1,(T.refT-S.clock)/(C.refresh.cdH*THH))):0;
+ return'<span class="thhg'+(cd?' cd':'')+'" style="--f:'+(f*100).toFixed(1)+'%">'+objH('hour')+'</span>'}
+function thScout(){var T=thRoll(),C=thC(),L=thList(),mp=thMyPw(),h='';
+ if(T.onb.r1<2)h+='<div class="thnote">'+thTx('firstOnly')+'</div>';
+ h+='<div class="thlist">'+L.map(function(t){return thCard(t,mp,T)}).join('')+'</div>';
+ if(T.onb.r1>=2){var cd=T.refT>S.clock;h+='<div class="thfoot"><button class="thb2" data-a="thref"'+(cd?' disabled':'')+'>'+thHour(T)+'<span>'+(cd?thTx('refreshCd',{t:'<b data-tm="'+T.refT+'">'+fmtT(T.refT-S.clock)+'</b>'}):thTx('refresh'))+'</span></button>';
+  var g=thBuyCost();if(T.tries<=0&&g)h+='<button class="thb2" data-a="thbuy"><span>'+thTx('buy',{g:'<i class="thgi">'+(u3ic('gold',18)||ic('gold'))+'</i>'+g})+'</span></button><div class="thsm">'+thTx('buyLeft',{n:C.extra.max-T.ex.n,max:C.extra.max})+'</div>';
+  h+='</div>'}
+ return h}
+/* shield token with a ring timer (piece 1 + code arc) */
+function thShTok(T,sz){var C=thC(),left=Math.max(0,T.sh-S.clock),base=(left>C.inc.shieldH*THH?(C.inc.comebackShieldH||C.inc.shieldH):C.inc.shieldH)*THH,f=Math.max(0,Math.min(1,left/base)),r=sz/2-3,L=2*Math.PI*r;
+ return'<span class="thtok" style="width:'+sz+'px;height:'+sz+'px"><svg width="'+sz+'" height="'+sz+'" viewBox="0 0 '+sz+' '+sz+'"><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="rgba(10,30,20,.72)" stroke="rgba(95,208,160,.25)" stroke-width="4"/>'+
+  '<circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="#5fd0a0" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+(L*f).toFixed(1)+' '+L.toFixed(1)+'" transform="rotate(-90 '+sz/2+' '+sz/2+')"/></svg>'+thPcH('shield',Math.round(sz*.72))+'</span>'}
+function thDefPanel(){var T=thRoll(),C=thC(),op=thDefOpen(),cur=thDefIdx(),sh=T.sh>S.clock,raided=T.wag.lost>0,h='';
+ h+='<div class="thwall'+(op?'':' lock')+'"><img src="'+(op?TH_WALL.src:TH_WALL.lock)+'" alt=""><span class="thwg">'+thPcH(raided?'wagon_raided':'wagon_full',62)+'<b class="'+(raided?'bad':'')+'">'+(raided?'−'+fmt(T.wag.lost):fmt(thWagon()))+'</b></span>'+
+  (sh?'<span class="thws">'+thShTok(T,52)+'<b data-tm="'+T.sh+'">'+fmtT(T.sh-S.clock)+'</b></span>':'')+(op?'':'<span class="thwl">'+thTx('defLock',{m:C.defOpen})+'</span>')+'</div>';
+ h+='<div class="thfm">'+[0,1,2].map(function(i){var u=thDefUnits(i),p=u.length?arnPower(u):0,on=op&&T.def!=null?T.def===i:cur===i,emp=!u.length;
+  var tr=u.slice(0,3).map(function(x){return troopIco(thTy(x),24)}).join('');
+  return'<button class="thfc'+(on&&!emp?' on':'')+(emp?' emp':'')+'" data-a="thd" data-v="'+i+'"'+(op&&!emp?'':' disabled')+'><b>'+thTx('defTeam',{n:i+1})+'</b>'+
+   (emp?'<span class="thtr0">'+thTx('defEmpty')+'</span>':'<span class="thtr">'+(tr||'<span class="thtr0">'+u.length+'</span>')+'</span><span class="thpp">'+fmt(p)+'</span>')+(on&&!emp?'<i class="thtw">'+thPcH('camp_own',30)+'</i>':'')+'</button>'}).join('')+'</div>';
+ h+='<div class="thcap">'+(op&&T.def!=null?thTx('defOn',{n:T.def+1}):thTx('defFollow',{n:cur+1,t:(S.ar2&&S.ar2.def!=null?thTx('defArena'):thTx('defAct'))}))+'</div>';
+ var last=null;T.log.forEach(function(r){if(!last&&r.k==='def')last=r});
+ h+='<div class="thlast">'+(last?thPcH(last.won?'stamp_held':'stamp_lost',30):'')+'<span>'+thTx('defLast',{r:last?(last.won?thTx('defHeld'):thTx('defLost')):thTx('defNone')})+'</span></div>';
+ return h}
+function thRow(r){var f=r.foe||{},nm=esc(f.nm||''),tx='',sub='',won=!!r.won,btn='',seal,sk;
+ if(r.k==='cb')return'<div class="thrw w"><i class="thedge"></i>'+thPcH('shield',36)+'<div class="sp"><b>'+thTx('logCome',{d:r.d})+'</b><div class="thsub">'+thAgo(r.t)+'</div></div>'+thPcH('stamp_held',24,'thrs')+'</div>';
+ if(r.k==='att'){tx=won?thTx('logAttW',{nm:nm}):thTx('logAttL',{nm:nm});sub=r.loot?ic('silver')+fmt(r.loot.s)+' '+ic('grain')+fmt(r.loot.g)+' · ':r.m?ic('merit')+fmt(r.m)+' · ':''}
+ else if(r.k==='rev'){tx=won?thTx('logRevW',{nm:nm}):thTx('logRevL',{nm:nm});sub=r.back?'<span class="ok">+'+fmt(r.back)+' bạc</span> · ':''}
+ else{tx=won?thTx('logDefW',{nm:nm}):r.lost?thTx('logDefL',{nm:nm}):thTx('logDefE',{nm:nm});sub=won?ic('prestige')+'+'+(r.dv||0)+' · ':r.lost?'<span class="bad">−'+fmt(r.lost)+' bạc</span> · ':'';
+  if(r.rev===1)sub+='<span class="ok">'+thTx('revDone')+'</span> · ';else if(r.rev===2)sub+=thTx('revFail')+' · '}
+ sk=won?(r.k==='def'?'stamp_held':'stamp_won'):'stamp_lost';
+ if(r.seed!=null&&r.foe)btn+='<button class="thb2 thrp" data-a="thrp" data-v="'+r.id+'" aria-label="'+thTx('replay')+'"><span>▶</span></button>';
+ if(thRevOk(r)){var end=r.t+thC().rev.hours*THH;btn+='<button class="thrv" data-a="thrv" data-v="'+r.id+'">⚔ '+thTx('revenge')+'<small data-tm="'+end+'">'+fmtT(end-S.clock)+'</small></button>'}
+ seal=btn?'':thPcH(sk,24,'thrs');
+ return'<div class="thrw '+(won?'w':'l')+'"><i class="thedge"></i><span class="thbw">'+thBust(f,f.bu,40)+(btn?thPcH(sk,24,'thseal'):'')+'</span><div class="sp"><b>'+tx+'</b><div class="thsub">'+sub+thAgo(r.t)+'</div></div>'+(btn?'<span class="thbt">'+btn+'</span>':seal)+'</div>'}
+function thLogPanel(){var T=thS();T.unread=0;if(!T.log.length)return'<div class="thempty"><img src="'+TH_WALL.src+'" alt=""><span>'+thTx('logEmpty')+'</span></div>';
+ return'<div class="thlog">'+T.log.map(thRow).join('')+'</div>'}
+function thBlock(){var T=thS();if(!T||!thOpen()||T.onb.r1<1)return'';
+ var p=THM.pill;if(p!=='def'&&p!=='log')p=THM.pill='scout';
+ THM.last=T.tries+'|'+(T.list?T.list.length:0)+'|'+T.log.length;
+ return'<div class="thp" id="thp">'+thStrip()+thRail()+'<div class="thpn">'+(p==='def'?thDefPanel():p==='log'?thLogPanel():thScout())+'</div></div>'}
+/* ---- raid / revenge result = the campaign result window (rs9 + hanging banner + resbar). R.thLo loot, R.thInf, R.thM merit, R.thBack, R.thN notes ---- */
+function thInfRow(inf){var c=thCity(inf.city),tot=0,sh={},g='';NAT.forEach(function(n){sh[n]=shareOf(c,n);tot+=sh[n]});tot=tot||1;
+ NAT.forEach(function(n){g+='<i style="width:'+(sh[n]/tot*100).toFixed(1)+'%;background:'+WCOL[n]+'"></i>'});
+ return'<div class="thinf">'+thPcH('banner_pole',22,'thinp')+'<div class="sp"><b>'+thTx('resInf',{city:c.n,fac:FAC[S.nation]?FAC[S.nation].n:'',n:fmt(inf.n)}).replace(/ (\S+)$/,'\u00a0$1')+'</b><span class="thgau">'+g+'</span></div></div>'}
+function thResHtml(R){var win=!!R.win,t9=function(icn,val,lab){return'<div class="rs9t"><span class="rs9i">'+icn+'</span><b>'+val+'</b><small'+(lab.length>8?' class="w2"':'')+'>'+lab+'</small></div>'},tl='',x;
+ if(R.thLo){tl+=t9(objH('silver'),'+'+fmt(R.thLo.s),'Bạc')+t9(objH('grain'),'+'+fmt(R.thLo.g),'Lương')+t9(ic('prestige','thdv'),'+'+R.thLo.dv,'Danh vọng')}
+ if(R.thBack)tl+=t9(objH('silver'),'+'+fmt(R.thBack),'Bạc');
+ if(R.thM)tl+=t9(objH('merit'),'+'+fmt(R.thM),'Quân công');
+ x='<div class="rs9 thres'+(win?'':' thlw')+'"><div class="g45d"><div class="g45bn'+(win?'':' lose')+'"><button class="g45x" data-a="t3x" aria-label="Đóng">✕</button><h3 class="thh3">'+esc(R.head)+'</h3><div class="tt">'+esc(R.head)+'</div>'+
+  (win?'<div class="thstamp">'+thPcH('stamp_won',74)+'</div>':'')+'</div><div class="g45sub">'+esc(R.title)+' · '+lfrSub(R)+'</div></div>';
+ var N=(R.thN||[]).map(function(s){return'<div>'+s+'</div>'}).join('');
+ if(!win&&N)x+='<div class="rs9note thln">'+N+'</div>';
+ if(tl)x+='<div class="rs9sec g45pl '+(win?'win':'lose')+'"><div class="rs9h">'+(win?thTx('resLoot'):'Phần thưởng')+'</div><div class="rs9rw">'+tl+'</div></div>';
+ if(R.thInf)x+=thInfRow(R.thInf);
+ if(win&&N)x+='<div class="rs9note thnt">'+N+'</div>';
+ x+='</div>';
+ /* Chi tiết = the battle report panel (rs234 floating window), with Xem lại and the why-tips on a loss */
+ try{var rep=typeof reportHtml==='function'?reportHtml():'',why='';try{if(!win&&LASTB&&LASTB.res)why=whyTips(LASTB.res).join('<br>')}catch(e){}
+  RS9={rep:'<h4>'+thTx('resDet')+'</h4>'+(why?'<div class="rs9why">'+why+'</div>':'')+'<div class="rs2 rs9rep">'+rep+'</div><div class="rs9pb"><button class="btn alt" data-a="replay">Xem lại trận đấu</button></div>'}}catch(e){}
+ return x+'<div class="row resbar"><button class="btn sp u9b" data-a="thgo"><span class="u9l">'+esc(R.againT||thTx('again'))+'</span></button><button class="btn alt u9b" data-a="rs9" data-v="rep"><span class="u9l">'+thTx('resDet')+'</span></button></div>'}
+/* ---- css (built once) ---- */
+function thCss(){if(document.getElementById('th0css'))return;var F='"Philosopher","Be Vietnam Pro",Times New Roman,Georgia,serif',B='"Be Vietnam Pro",system-ui,sans-serif',CP='border-style:solid;border-color:transparent;border-width:0 15.3px;border-image:var(--k5-chip_price) 0 46 0 46 fill / 0 15.3px stretch;background:none;box-shadow:none;border-radius:0',
+  RW='border-style:solid!important;border-color:transparent!important;border-width:0 30px!important;border-image:var(--k5-row_shop) 0 106 fill / 0 30px stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important',st=document.createElement('style');st.id='th0css';st.textContent=
+ '.thp{margin:0 0 12px;color:#f1e3c2;font:13px/1.3 '+B+'}.thpc{display:inline-block;flex:none;vertical-align:middle}.thbu{position:relative;z-index:1;display:inline-block;flex:none;border-radius:50%;box-shadow:0 0 0 2px #b88a43,0 0 0 4px #2a1a10,0 2px 6px rgba(0,0,0,.6)}'+
+ '.thst{display:flex;gap:6px;margin:0 0 8px}.thch{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:6px;min-height:46px;padding:4px 8px;border-radius:23px;border:1px solid #9c7438;background:linear-gradient(#3a2817,#1f150c);color:#f1e3c2;box-shadow:inset 0 1px 0 rgba(255,220,150,.18),0 2px 4px rgba(0,0,0,.5);text-align:left;font:inherit}'+
+ 'html.u5 .thch{'+CP+';padding:4px 2px}'+
+ '.thch.thhit .thcv b{color:#ff9a80}.thcv{display:flex;flex-direction:column;min-width:0;line-height:1.15}.thcv b{font:700 13px '+F+';white-space:nowrap}.thcv small{font-size:12px;color:#cdb68a;white-space:nowrap}'+
+ '.thpip{display:flex;flex-direction:row;flex-wrap:wrap;width:20px;gap:2px}.thpip i{width:5px;height:5px;border-radius:50%;background:#3a2d20;box-shadow:inset 0 0 0 1px #7a5c34}.thpip i.on{background:#f0c860;box-shadow:0 0 3px #f0c860}'+
+ '.thrail{display:flex;gap:4px;padding:5px;margin:0 0 8px;border-radius:10px;background:linear-gradient(#6e1a12,#4a0f0a);box-shadow:inset 0 0 0 1px #c08a3e,0 2px 6px rgba(0,0,0,.55)}'+
+ '.thpl{position:relative;flex:1 1 0;min-height:44px;border-radius:8px;border:1px solid #6a4a26;background:linear-gradient(#3b2414,#24160c);color:#d9c39a;font:700 14px '+F+'}.thpl.on{border:2px solid #f0c860;color:#ffe9a8;background:linear-gradient(#7a3a16,#4a200c);box-shadow:0 0 8px rgba(240,200,96,.45)}'+
+ '.thdot{position:absolute;right:6px;top:5px;width:10px;height:10px;border-radius:50%;background:#e0402a;box-shadow:0 0 0 2px #2a0e08}'+
+ /* first-visit tip on the dark row plate (no yellow bar) */
+ '.thnote{display:flex;align-items:center;min-height:48px;font:600 13px/1.3 '+B+';color:#f1e3c2;margin:0 0 8px;padding:6px 4px;border-radius:10px;background:linear-gradient(#33251a,#1d140b);border:1px solid #7a5a32}html.u5 .thnote{'+RW+'}'+
+ '.thlist{display:flex;flex-direction:column;gap:8px}.thcd{position:relative;display:flex;align-items:center;gap:10px;min-height:84px;padding:8px 8px 8px 12px;border-radius:10px;background:linear-gradient(#3a2a1a,#21170e);border:2px solid #8a6a3a;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),0 3px 8px rgba(0,0,0,.55)}'+
+ '.thcd.b0{border-color:#4fae7c;box-shadow:inset 0 0 14px rgba(79,174,124,.25),0 3px 8px rgba(0,0,0,.55)}.thcd.b1{border-color:#b88a43}.thcd.b2{border-color:#d0452b;box-shadow:inset 0 0 16px rgba(208,69,43,.35),0 0 8px rgba(255,110,40,.35),0 3px 8px rgba(0,0,0,.55)}'+
+ /* ember on the hard rim (code): warm glow + a few sparks at the lower right, breathing slowly (off in LITE) */
+ '.thcd.b2::after{content:"";position:absolute;inset:-2px;border-radius:10px;pointer-events:none;box-shadow:0 0 12px 2px rgba(255,110,40,.4),inset 0 -10px 18px -8px rgba(255,120,40,.45);'+
+  'background:radial-gradient(circle at 93% 86%,rgba(255,190,90,.95) 0 1.6px,transparent 2.6px),radial-gradient(circle at 88% 95%,rgba(255,140,50,.9) 0 1.3px,transparent 2.3px),radial-gradient(circle at 97% 70%,rgba(255,170,70,.85) 0 1.2px,transparent 2.2px),radial-gradient(circle at 80% 99%,rgba(255,120,40,.8) 0 1.1px,transparent 2px);animation:thEm 2.6s ease-in-out infinite alternate}'+
+ '@keyframes thEm{0%{opacity:.55}100%{opacity:1}}html.thlt .thcd.b2::after,html.thlt .thpu{animation:none}'+
+ '.thcd.dn{filter:saturate(.45) brightness(.8)}.thcd.dn::after{animation:none;opacity:.3}.thbw{position:relative;flex:none}.thseal{position:absolute;z-index:2;right:-12px;bottom:-10px;transform:rotate(-12deg);filter:drop-shadow(0 1px 2px rgba(0,0,0,.7))}'+
+ '.thcd.dn .thseal{filter:saturate(2.2) brightness(1.25) drop-shadow(0 1px 2px rgba(0,0,0,.7))}'+
+ /* faction pennant behind the bust */
+ '.thpen{position:absolute;z-index:0;left:-12px;top:-12px;width:26px;height:46px;background:var(--pc);border-left:3px solid #c99a4a;clip-path:polygon(0 0,100% 0,100% 100%,55% 80%,0 100%);opacity:.95}'+
+ '.thcd .sp{min-width:0;flex:1 1 auto}.thnm{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font:700 15px/1.15 '+F+';color:#fbe9bf;overflow-wrap:normal;word-break:keep-all;text-wrap:balance}.thsub{font-size:12px;color:#cdb68a;margin-top:1px}'+
+ '.thpw{font-size:13px;margin-top:2px;color:#d8c8a8}.thpw.up{color:#ff8a6a}.thpw.dn{color:#7fd69a}'+
+ '.thR{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:3px;width:118px}.thbg{display:flex;align-items:center;gap:3px;font-size:12px;color:#e2cc9a;white-space:nowrap}.thbg small{font-size:12px}'+
+ '.thb1{min-width:112px;min-height:44px;white-space:nowrap!important;font:700 14px '+F+'!important}.thwhy{font-size:12px;color:#cdb68a;text-align:right}.thlo{font-size:12px;color:#e8d8b0;display:flex;align-items:center;gap:2px;white-space:nowrap}.thlo .ic{width:14px;height:14px}'+
+ 'html.u5 .thb1:not(:disabled){border-style:solid;border-color:transparent;border-width:18.7px 26px 20px 26px;border-image:var(--k5-btn_primary_normal) 56 78 60 78 fill / 18.7px 26px 20px 26px stretch;background:none;box-shadow:none;border-radius:0;padding:0;color:#fff6d8;text-shadow:0 1px 2px #000;min-height:46px}'+
+ 'html.u5 .thb1:disabled{border-style:solid;border-color:transparent;border-width:18.7px 26px 20px 26px;border-image:var(--k5-btn_primary_disabled) 56 78 60 78 fill / 18.7px 26px 20px 26px stretch;background:none;box-shadow:none;border-radius:0;padding:0;min-height:46px}'+
+ /* 360: the kit button rule (html.k299 … :not(#k2):not(#k3), !important) keeps 26 px caps + 26 px padding, which clipped the label to "Tập kíc"; same plate for enabled and disabled: 18 px caps, 13 px label (art r2 fix 2) */
+ '@media(max-width:370px){html body #main .thR .btn.thb1:not(#thx1):not(#thx2):not(#thx3){padding:0 18px!important;border-image-width:18.7px 18px 20px 18px!important;font-size:13px!important;overflow:visible}}'+
+ '.thwhy{white-space:nowrap}'+
+'@media(max-width:370px){.thR{width:98px}.thb1{min-width:98px;width:98px;font-size:13px!important;white-space:nowrap!important}html.u5 .thb1:not(:disabled),html.u5 .thb1:disabled{border-width:18.7px 10px 20px 10px}.thbg .thpc{zoom:.85}}'+
+ /* B2 chips: chip_price plate (Đổi mục tiêu, Mua thêm, Xem lại) */
+ '.thfoot{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-top:10px}'+
+ '.thb2{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid #9c7438;background:linear-gradient(#3a2817,#1f150c);color:#f6e7c4;font:700 14px/1.1 '+B+';text-shadow:0 1px 2px #000;white-space:nowrap}'+
+ 'html.u5 .thb2{'+CP+';padding:0 4px}.thb2:disabled{opacity:.8;color:#cdb68a}.thb2 b{color:#f0c860}.thgi{display:inline-flex;vertical-align:-4px;margin-right:2px}.thgi img,.thgi svg{width:18px;height:18px}'+
+ '.thhg{position:relative;flex:none;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:radial-gradient(#1b120b 58%,transparent 60%),conic-gradient(#6e5030 0 100%)}'+
+ '.thhg.cd{background:radial-gradient(#1b120b 58%,transparent 60%),conic-gradient(#f0c860 0 var(--f),#4a3820 var(--f) 100%)}.thhg .objx{width:20px!important;height:20px!important;min-width:0!important;max-width:20px!important;margin:0!important}'+
+ '.thsm{width:100%;text-align:center;font-size:12px;color:#cdb68a}'+
+ /* defence */
+ '.thwall{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:780/340;border:2px solid #8a6a3a;box-shadow:0 3px 8px rgba(0,0,0,.6)}.thwall img{width:100%;height:100%;object-fit:cover;display:block}'+
+ '.thwg{position:absolute;left:8px;bottom:6px;display:flex;align-items:flex-end;gap:2px;max-width:60%}.thwg .thpc{filter:drop-shadow(0 2px 3px rgba(0,0,0,.7))}.thwg b{font:700 13px '+F+';padding:2px 8px;border-radius:10px;background:rgba(20,12,6,.88);border:1px solid #c99a4a;color:#f6e3b0;margin-bottom:2px}.thwg b.bad{color:#ff8a70;border-color:#c0392b}'+
+ '.thws{position:absolute;right:8px;top:6px;display:flex;flex-direction:column;align-items:center;gap:2px}.thws b{font:700 12px '+F+';padding:1px 6px;border-radius:8px;background:rgba(10,30,20,.88);color:#bff0d6}'+
+ '.thtok{position:relative;display:inline-flex;align-items:center;justify-content:center}.thtok svg{position:absolute;left:0;top:0}.thtok .thpc{position:relative}'+
+ '.thwl{position:absolute;left:50%;top:10px;transform:translateX(-50%);padding:6px 12px;border-radius:8px;background:rgba(20,12,6,.88);border:1px solid #c99a4a;font:700 13px '+F+';color:#f6e3b0;white-space:nowrap}'+
+ '.thfm{display:flex;gap:8px;justify-content:space-between;margin:12px 0 4px}'+
+ '.thfc{position:relative;flex:1 1 0;min-width:0;min-height:112px;border-radius:50% 50% 14px 14px / 34% 34% 14px 14px;border:2px solid #7a5a32;background:radial-gradient(circle at 50% 30%,#4a3420,#1d140b);color:#f1e3c2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:inherit;padding:14px 4px 8px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.5),0 3px 8px rgba(0,0,0,.55)}'+
+ '.thfc b{font:700 14px '+F+'}.thtr{display:flex;gap:2px;justify-content:center;min-height:24px}.thtr img{width:24px;height:24px}.thtr0{font-size:13px;color:#a89878;min-height:24px;display:flex;align-items:center}'+
+ '.thpp{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:26px;padding:0 8px;border-radius:13px;background:linear-gradient(#2a1d10,#140d07);border:1px solid #9c7438;font:700 13px '+F+';color:#f6e3b0}'+
+ 'html.u5 .thpp{border-style:solid;border-color:transparent;border-width:0 12px;border-image:var(--k5-chip_price) 0 46 0 46 fill / 0 12px stretch;background:none;border-radius:0;padding:0 2px}'+
+ '.thfc.on{border-color:#f0c860;box-shadow:inset 0 0 0 2px rgba(240,200,96,.35),0 0 12px rgba(240,200,96,.55)}.thfc.emp{opacity:.5}.thfc:disabled:not(.emp){opacity:.6}'+
+ '.thtw{position:absolute;top:-12px;left:50%;transform:translateX(-50%);filter:drop-shadow(0 2px 2px rgba(0,0,0,.7))}'+
+ '.thcap{text-align:center;font-size:12.5px;color:#e8cf95;margin:4px 0 8px}.thlast{display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 10px;border-radius:8px;background:linear-gradient(#33251a,#1d140b);border:1px solid #7a5a32;font-size:13px}html.u5 .thlast{'+RW+';padding:6px 0}'+
+ /* report rows */
+ '.thlog{display:flex;flex-direction:column;gap:6px}.thrw{position:relative;display:flex;align-items:center;gap:8px;min-height:64px;padding:6px 6px 6px 12px;border-radius:8px;background:linear-gradient(#352619,#1e150c);border:1px solid #6e5030;box-shadow:0 2px 5px rgba(0,0,0,.5)}'+
+ '.thedge{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:8px 0 0 8px;background:#3fae7c}.thrw.l .thedge{background:#c7402a}.thrw .sp{min-width:0;flex:1 1 auto}.thrw .sp>b{display:block;font:700 13.5px/1.2 '+F+';color:#fbe9bf}.thrw .thsub .ic{width:13px;height:13px}'+
+ '.thrw .thseal{right:-8px;bottom:-8px}.thrs{flex:none;margin-right:2px}.thbt{flex:none;display:flex;align-items:center;gap:4px}'+
+ /* Xem lại: B2 small chip 40 x 32 with a 44 css hit area */
+ '.thrp{position:relative;min-height:32px;height:32px;min-width:40px;width:40px;padding:0;font-size:13px}html.u5 .thrp{border-width:0 12px;border-image:var(--k5-chip_price) 0 46 0 46 fill / 0 12px stretch;padding:0}.thrp::before{content:"";position:absolute;inset:-6px -2px}'+
+ '.thrv{flex:none;min-height:44px;min-width:74px;padding:2px 8px;border-radius:10px;font:700 13px '+F+';background:linear-gradient(#b8301e,#6a120c);border:2px solid #e9b25a;box-shadow:inset 0 1px 0 rgba(255,200,150,.35),0 2px 6px rgba(0,0,0,.6);color:#ffeccc;text-shadow:0 1px 2px #000;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;white-space:nowrap}.thrv:active{transform:scale(.97)}.thrv small{font-size:12px;font-weight:400}'+
+ '@media(max-width:370px){.thrw .sp>b{font-size:13px}.thrw .thbu{width:34px!important;height:34px!important;background-size:102px 68px!important}}'+
+ '.thempty{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:780/340}.thempty img{width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(.6)}.thempty span{position:absolute;left:0;right:0;top:45%;text-align:center;font-size:13px;color:#e8d8b0}'+
+ /* map (only inside .thmap, i.e. only while the TH layer is drawn) */
+ '.thpu{transform-box:fill-box;transform-origin:center;animation:thPu 1.8s ease-out infinite}.thpu2{animation-delay:.9s}@keyframes thPu{0%{transform:scale(.7);opacity:.95}100%{transform:scale(1.25);opacity:0}}'+
+ '.thmap g[data-a="wcity"]>ellipse{opacity:0}.thmap g[data-a="wcity"]>g[pointer-events="none"]{display:none}'+
+ 'html.thon .wtool .wleg{min-width:0;font-size:13.5px!important;gap:2px 6px!important}@media(max-width:370px){html.thon .wtool .wleg{font-size:12.5px!important;gap:2px 4px!important;padding-left:0!important;padding-right:0!important}html.thon .wtool .wleg .fseal{width:16px!important;height:16px!important}html.thon .wtool .wzb button{width:36px!important;height:36px!important}}'+
+ /* legacy Thành trì / Mỏ & ruộng lists under the TH block: dark-bronze row kit, "Đầu tư" / "Chiếm" as B2 chips */
+ 'html.thon.u5 #main .wpan .wrow{'+RW+';border-width:0 16px!important;border-image-width:0 16px!important;min-height:72px;margin:0 0 6px;padding:12px 0!important;gap:6px}html.thon #main .wpan .wrow .u5cw{margin-right:2px}html.thon #main .wpan .wrow>span.sm:last-child{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:68px;min-height:38px;padding:0 4px;font:700 13px/1 '+B+';color:#f6e7c4!important;text-shadow:0 1px 2px #000}'+
+ 'html.thon.u5 #main .wpan .wrow>span.sm:last-child{border-style:solid;border-color:transparent;border-width:0 13px;border-image:var(--k5-chip_price) 0 46 0 46 fill / 0 13px stretch}html.thon #main .wpan .wrow>span.sm.mute:last-child{color:#cdb68a!important}'+
+ /* result */
+ 'html body .thres .g45bn .tt{font-size:26px;white-space:nowrap}@media(max-width:370px){html body .thres .g45bn .tt{font-size:22px}}.thres .g45bn .thstamp{position:absolute;left:0;right:0;top:100px;display:flex;justify-content:center;pointer-events:none;z-index:3}.thh3{display:none!important}'+
+ '.thstamp .thpc{transform:rotate(-8deg);filter:drop-shadow(0 3px 4px rgba(0,0,0,.6));animation:thSt .36s ease-out both}@keyframes thSt{0%{transform:scale(1.4) rotate(-8deg);opacity:0}61%{transform:scale(1) rotate(-8deg);opacity:1}72%{transform:translateX(-3px) rotate(-8deg)}84%{transform:translateX(3px) rotate(-8deg)}100%{transform:rotate(-8deg);opacity:1}}html.thlt .thstamp .thpc{animation:none}'+
+ /* art r2 fix 4: the B1 plate's paper curl (art px 193-215) sat in the stretched middle slice and smeared after "Hạ"; on the TH result bar the right cap takes 104 px of art */
+ 'html.u354k9 #modal#modal #sheet#sheet#sheet#sheet#sheet#sheet .resbar .btn.u9b[data-a="thgo"]:not(.alt):not(.u9d){border-width:18.67px 34.67px 20px 26px!important;border-image-slice:56 104 60 78 fill!important;border-image-width:18.67px 34.67px 20px 26px!important;padding:0 2px 3px 10.67px!important}'+
+ /* art r2 fix 3: loss merit band sized to its one tile (no half-empty box) */
+ '.rs9.thres .rs9sec.g45pl.lose{align-self:center;width:max-content;max-width:100%;margin-left:auto;margin-right:auto;padding:6px 10px}.rs9.thres .rs9sec.g45pl.lose .rs9t{width:72px}'+
+ /* art r3 fix 1: the loss window fits its content (no win-sheet scroll room), 16 css between blocks, slim centred info plate */
+ 'html body #modal.rs9fl>#sheet .rs9.thres.thlw{gap:16px;padding-bottom:0}.rs9.thres .rs9note.thln{text-align:center;padding:10px 12px}'+
+ '.thres .rs9i .thdv{width:40px;height:40px}.thres .rs9note div+div{margin-top:4px}.thres .rs9note.thnt{margin-top:10px}'+
+ '.thinf{display:flex;align-items:center;gap:10px;margin:10px 0 0;padding:8px 12px;border-radius:10px;background:linear-gradient(#33251a,#1d140b);border:1px solid #7a5a32}.thinf .sp{flex:1;min-width:0}.thinf b{display:block;text-wrap:balance;font:700 13.5px/1.25 '+B+';color:#f6ecd6}'+
+ '.thgau{display:flex;height:8px;margin-top:6px;border-radius:4px;overflow:hidden;background:#1b120b;box-shadow:0 0 0 1px #c99a4a}.thgau i{display:block;height:100%}'+
+ /* event cards (inside the it363 red-lacquer window) */
+ '.thevw .t3hd .t3ttl{margin:0}.thevs{position:relative;margin:2px 0 0;border:14px solid transparent;border-image:var(--t3-card_frame) 48 fill/14px stretch}.thevs img{display:block;width:100%;aspect-ratio:716/448;object-fit:cover;border-radius:4px}'+
+ '.thevq{margin:10px 6px 14px;font:500 14.5px/1.45 '+B+';color:#f6ecd6;text-align:center}.thevb{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:0 4px 6px}.thevb .thrv{min-height:50px;font-size:16px;flex-direction:row;gap:6px}'+
+ '.thb3{min-height:44px;background:none;border:0;font:600 14px/1 '+B+';color:#f2cf7c;text-shadow:0 1px 2px #000}.thb3::after{content:" ›"}'+
+ /* old-style fallback when the it363 kit is off */
+ '#sheet:not(.t3) .thevw .t3rb{display:none}#sheet:not(.t3) .thevw .t3hd{margin:0 0 8px}';
+ document.head.appendChild(st)}
+/* ---- wiring ---- */
+(function(){try{
+ if(!THON)return;
+ thCss();try{document.documentElement.classList.add('thon')}catch(e){}
+ /* framing zoom (art fix 4): one extra 110 % step so the six cities and the three camps fit the frame on the first visit */
+ try{if(typeof WZ!=='undefined'&&WZ.indexOf(110)<0){WZ.splice(1,0,110);if(WZI>=1)WZI++}}catch(e){}
+ var _wmTH=wmap;wmap=function(){
+  try{if(thOpen()){var T0=thS();if(T0&&T0.onb.r1>=1&&!THM.fr){THM.fr=1;WZI=THZ0;WSC.z=null;WSC.x=null;setTimeout(function(){try{var el=document.getElementById('wsc');if(!el)return;el.scrollLeft=650/1232*el.scrollWidth-el.clientWidth/2;el.scrollTop=0;WSC.x=el.scrollLeft;WSC.y=el.scrollTop;WSC.z=WZI}catch(e){}},0)}}}catch(e){}
+  var h=_wmTH.apply(this,arguments);try{if(!thOpen())return h;var T=thS();if(!T||T.onb.r1<1)return h;
+  h=h.replace('class="mapbox wmapbox"','class="mapbox wmapbox thmap"');
+  var i=h.indexOf('<image href="art/maps/world.webp"'),j=i>=0?h.indexOf('/>',i)+2:-1;if(j>1)h=h.slice(0,j)+thMapDefs()+thRoad()+h.slice(j);
+  var g=thFields(),pg='';CITIES.forEach(function(c){pg+=thPole(c)});g+=thMapLayer();
+  /* poles go under the city name plates (screen-size plates may reach a pole; the name stays on top) */
+  var q=h.indexOf('<g class="bd" data-a="wcity"');if(q>0)h=h.slice(0,q)+pg+h.slice(q);else g=pg+g;var k=h.lastIndexOf('</svg>');if(k>0)h=h.slice(0,k)+g+h.slice(k)}catch(e){}return h};
+ var _vwTH=viewWorld;viewWorld=function(){var h=_vwTH.apply(this,arguments);try{if(!thOpen())return h;thSync();var b=thBlock();if(!b)return h;
+  h=h.replace('Kéo hoặc vuốt để di chuyển bản đồ · dùng + / − để phóng to</div>','<span style="white-space:nowrap">'+thTx('mapHint')+'</span></div>');var i=h.indexOf('<div class="wpan">');return i>=0?h.slice(0,i)+b+h.slice(i):h+b}catch(e){return h}};
+ /* one plate style for every city on the TH map (owner shown by the pennant / pole, art rule 2): the dark plaque for all */
+ function plates(){try{var gs=document.querySelectorAll('.thmap g[data-a="wcity"]');if(!gs.length)return;var u=(typeof K299!=='undefined'&&K299.part&&K299.part.plaque_dark)||'art/ui/k_plq_dark.webp';
+  for(var i=0;i<gs.length;i++){var im=gs[i].querySelector('image');if(im&&im.nextElementSibling&&im.nextElementSibling.getAttribute('data-p')&&im.getAttribute('href')!==u)im.setAttribute('href',u)}}catch(e){}}
+ var _rmTH=renderMain;renderMain=function(){var r=_rmTH.apply(this,arguments);try{document.documentElement.classList.toggle('thlt',thLite());plates();thFit();thFitW()}catch(e){}return r};
+ /* refit when the map box changes size after the render (scrollbar, late CSS, fonts) */
+ var thRO=null,thRT=0;function thFitW(){try{clearTimeout(thRT);thRT=setTimeout(thFit,250);var el=document.getElementById('wsc');if(!el||!document.querySelector('.thmap')||typeof ResizeObserver==='undefined')return;if(!thRO)thRO=new ResizeObserver(function(){clearTimeout(thRT);thRT=setTimeout(thFit,60)});thRO.disconnect();thRO.observe(el)}catch(e){}}
+ try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){thFit()});var rzT=0;window.addEventListener('resize',function(){clearTimeout(rzT);rzT=setTimeout(thFit,120)})}catch(e){}
+ var _srTH=specialResult;specialResult=function(R){var h=_srTH.apply(this,arguments);try{if(R&&R.th){if(typeof IT363!=='undefined'&&IT363)return thResHtml(R);
+   if(R.win){var i=h.indexOf('</h3>');if(i>0)h=h.slice(0,i+5)+'<div class="thstamp">'+thPcH('stamp_won',84)+'</div>'+h.slice(i+5)}}}catch(e){}return h};
+ function rr(){try{if(typeof tab!=='undefined'&&tab==='world')renderMain()}catch(e){}}
+ var _AT=A_;A_=function(a,v,w,el){try{
+  if(a==='thp'){if(v==='def'||v==='log'||v==='scout')THM.pill=v;rr();var p=document.getElementById('thp');if(p&&p.scrollIntoView)p.scrollIntoView({block:'start',behavior:'smooth'});return}
+  if(a==='thf'){thRaid(v);return}
+  if(a==='thref'){if(thRefresh()){save();rr()}return}
+  if(a==='thbuy'){if(thBuy()){save();refresh()}return}
+  if(a==='thd'){thSetDef(+v);save();rr();return}
+  if(a==='thrv'){thRev(v);return}
+  if(a==='thrp'){thReplay(v);return}
+  if(a==='thtip'){toast(thTx('triesTip',{cap:thC().tries.cap}));return}
+  if(a==='thwag'){toast(thTx('wagonTip'));try{closeSheet()}catch(e){}return _AT.call(this,'tab','city')}
+  if(a==='thgo'){try{closeSheet()}catch(e){}if(typeof tab!=='undefined'&&tab==='world'){rr();return}return _AT.call(this,'tab','world')}
+ }catch(e){}return _AT.apply(this,arguments)};
+ /* live refresh of the panel when a try comes back / incoming raids land while the tab is open (never while fighting or a sheet is up) */
+ setInterval(function(){try{if(typeof tab==='undefined'||tab!=='world'||!thOpen()||(typeof fighting!=='undefined'&&fighting))return;var m=document.getElementById('modal');if(m&&!m.hidden)return;
+  var T=thS();if(!T)return;var t0=T.tries,l0=T.log.length;thSync();if(T.tries!==t0||T.log.length!==l0||!document.getElementById('thp')&&T.onb.r1>=1)renderMain()}catch(e){}},4000);
+}catch(e){}})();
+/* ===== V301 TH-P0 onboarding (coder-senior; spec docs/design/thienha/phase0.md §3; art th4 scenes). No guide, no arrows: three event cards (the
+   "Thương nhân dâng lễ" kind) queued through flQ (one unlock at a time; waits behind Bậc 3 and other moments, p 4), plus week-1 slots 9 and 15.
+   1 "Thám mã báo tin": Màn 8 cleared, S.th.onb.r1 0 → card on the campaign or Thiên hạ tab (old saves: first visit). Xuất chinh / Để sau → r1 1;
+     the tab then shows the one scripted camp (th0core thList, onb.r1Pow of your power); the win sets r1 2 (a loss refunds the try).
+   2 "Đêm qua trại bị đánh úp": r1 2, hit 0, at a login (page load, or back after ≥ 10 min hidden) ≥ onb.hitAfterH after the first raid or on a later day.
+     Takes onb.hitTaps × taxVal from the wagon (waived when empty) as debt, logs a lost defence with Phục thù (onb.revPow, cannot end as a loss, returns ×2).
+   3 "Tường trại đã xong": Màn 10 cleared and moment 2 shown, on a Thiên hạ visit → onb.def 1, onb.dT = now (incoming raids start dT + newbieH);
+     "Chọn đội giữ trại" opens Giữ trại; setting a team → onb.def 2.
+   Week-1 (w1c301 W1G): thx1 open = Thiên Hạ open, done = first raid won; thx2 open = defence open, done = a defence team set. Only with THON.
+   Action (grepped unused): thev (card buttons, v '1go' | '1later' | '2rev' | '2see' | '3go'). */
+/* event card = the it363 red-lacquer window (hud_title ribbon, round bronze ✕), scene in the kit card frame, B1 / red-lacquer B2 / B3 text (art fix 2).
+   A hidden <h3> keeps the sheet title (the header code moves the first h3 into the nav bar); the ribbon shows it. ✕ on card 1 = "Để sau" (otherwise the card would come straight back). Old look when IT363 is off. */
+function thEvCard(t,img,q,btns,x){var kit=typeof IT363!=='undefined'&&IT363;
+ if(!kit)return'<h3>'+t+'</h3><div class="thev"><img src="art/thienha/'+img+'.webp" alt=""><p>'+q+'</p><div class="row" style="gap:8px">'+btns.replace(/class="t3P"/g,'class="btn sp"').replace(/class="thb3"/g,'class="btn alt sp"')+'</div></div>';
+ return'<h3 class="thh3">'+t+'</h3><div class="t3r thevw"><div class="t3hd"><span class="t3ttl">'+t+'</span><button class="t3rb r" data-a="'+(x?'thev':'t3x')+'"'+(x?' data-v="'+x+'"':'')+' aria-label="Đóng">✕</button></div>'+
+  '<div class="thevs"><img src="art/thienha/'+img+'.webp" alt=""></div><p class="thevq">'+q+'</p><div class="thevb">'+btns+'</div></div>'}
+function thCard1(){var t=thList()[0]||{nm:'',fac:'wei'};return thEvCard(thTx('c1t'),'th4_scout',thTx('c1q',{nm:esc(t.nm),fac:FAC[t.fac]?FAC[t.fac].n:''}),
+ '<button class="t3P" data-a="thev" data-v="1go"><span>'+thTx('c1go')+'</span></button><button class="thb3" data-a="thev" data-v="1later">'+thTx('c1later')+'</button>','1later')}
+function thHitRep(){var T=thS();if(!T)return null;for(var i=0;i<T.log.length;i++)if(T.log[i].scr)return T.log[i];return null}
+function thCard2(){var r=thHitRep();if(!r)return'';var f=r.foe,ci=thCity(f.city).n;
+ return thEvCard(thTx('c2t'),'th4_raided',r.lost?thTx('c2q',{nm:esc(f.nm),x:fmt(r.lost),city:ci}):thTx('c2qE',{nm:esc(f.nm),city:ci}),
+  (thRevOk(r)?'<button class="thrv" data-a="thev" data-v="2rev">⚔ '+thTx('c2rev')+'</button>':'')+(r.seed!=null?'<button class="thb3" data-a="thev" data-v="2see">'+thTx('c2see')+'</button>':''))}
+function thCard3(){return thEvCard(thTx('c3t'),'th4_wall',thTx('c3q'),'<button class="t3P" data-a="thev" data-v="3go"><span>'+thTx('c3go')+'</span></button>')}
+/* moment 2: the one scripted incoming raid (the only one before defence unlock + newbieH) */
+function thDoHit(){var T=thS(),C=thC();if(!T||T.onb.hit)return null;
+ var def=thDefUnits(),dp=Math.max(1,arnPower(def)),P=Math.round(dp*1.1),ss=hashS('thhit|'+S.day),r=hrng(ss),F=thFoes();
+ var foe={nm:thName(r),fac:F[Math.floor(r()*F.length)],city:CITIES[Math.floor(r()*CITIES.length)].id,P:P,s:ss,bu:Math.floor(r()*2)},seed=null,spec=thSpec(def);
+ for(var k=0;k<12&&seed==null;k++){var bs=hashS('thhitb|'+k+'|'+ss);try{var A=thUnspec(spec||[]);if(!A.length)break;var res=battle(A,thFresh(thTeam(P,ss)),bs);if(res.win!=='att')seed=bs}catch(e){break}}
+ var x=0;try{x=Math.max(0,Math.min(Math.round(C.onb.hitTaps*taxVal()),thWagon()))}catch(e){}
+ T.wag.lost+=x;T.wag.debt+=x;T.onb.hit=2;
+ return thLog({k:'def',scr:1,seed:seed,foe:foe,won:0,lost:x,rev:0,A:seed!=null?spec:null})}
+function thM1(){var T=thS();return!!(T&&thOpen()&&!T.onb.r1&&(tab==='camp'||tab==='world'))}
+function thM2(){var T=thS(),C=thC();return!!(T&&thOpen()&&THM.login&&T.onb.r1===2&&!T.onb.hit&&(S.clock>=(T.onb.r1T||0)+C.onb.hitAfterH*THH||S.day>(T.onb.r1Day==null?S.day:T.onb.r1Day)))}
+function thM3(){var T=thS();return!!(T&&thDefOpen()&&T.onb.hit>=2&&!T.onb.def&&tab==='world')}
+(function(){try{
+ if(!THON)return;
+ var _AO=A_;A_=function(a,v,w,el){try{
+  if(a==='thev'){var T=thS();if(!T)return;
+   if(v==='1go'||v==='1later'){if(!T.onb.r1)T.onb.r1=1;THM.pill='scout';save();try{closeSheet()}catch(e){}if(v==='1go')return _AO.call(this,'tab','world');renderMain();return}
+   if(v==='2rev'){var r=thHitRep();if(r)thRev(r.id);return}
+   if(v==='2see'){var r2=thHitRep();if(r2)thReplay(r2.id);return}
+   if(v==='3go'){THM.pill='def';save();try{closeSheet()}catch(e){}if(typeof tab!=='undefined'&&tab==='world'){renderMain();return}return _AO.call(this,'tab','world')}
+   return}
+ }catch(e){}return _AO.apply(this,arguments)};
+ /* week-1 slots 9 / 15 (spine rule 3: a goal whose system is closed when its set opens is swapped) */
+ try{if(typeof W1G!=='undefined'&&W1G){
+  if(W1G.thx1){W1G.thx1.sys=function(){return thOpen()};W1G.thx1.ok=function(){var T=thS();return!!(T&&T.onb.r1>=2)}}
+  if(W1G.thx2){W1G.thx2.sys=function(){return thDefOpen()};W1G.thx2.ok=function(){var T=thS();return!!(T&&T.onb.def>=2)}}}}catch(e){}
+ /* a toast that is not the answer to a tap (the tick's "Quà ra mắt", Lôi Đài gold) waits while an event card is open and shows when it closes (art fix 2; same rule as U3-F4) */
+ var lastTap=0,held=[],heldT=0;document.addEventListener('pointerdown',function(){lastTap=Date.now()},true);
+ function cardOpen(){try{var m=document.getElementById('modal');if(!m||m.hidden)return false;var e=document.querySelector('#sheet .thevw,#sheet .thev');return!!(e&&e.getClientRects().length)}catch(e){return false}}
+ function flush(){heldT=0;try{if(!held.length)return;if(cardOpen()){heldT=setTimeout(flush,600);return}var m=held.shift();toast(m);if(held.length)heldT=setTimeout(flush,2300)}catch(e){}}
+ var _osTH=openSheet;openSheet=function(){var r=_osTH.apply(this,arguments);try{if(cardOpen()){var t=document.getElementById('toast');if(t&&!t.hidden&&t.textContent){held.push(t.textContent);t.hidden=true;if(!heldT)heldT=setTimeout(flush,600)}}}catch(e){}return r};
+ var _toTH=toast;toast=function(m){try{if(cardOpen()&&Date.now()-lastTap>600){if(held.length<4)held.push(m);if(!heldT)heldT=setTimeout(flush,600);return}}catch(e){}return _toTH.apply(this,arguments)};
+ /* "login" = page load, or back after ≥ 10 minutes hidden */
+ THM.login=1;var hid=0;document.addEventListener('visibilitychange',function(){try{if(document.hidden)hid=Date.now();else if(hid&&Date.now()-hid>600000)THM.login=1}catch(e){}});
+ function idle(){try{return typeof flIdle==='function'?flIdle():!(typeof fighting!=='undefined'&&fighting)&&document.getElementById('modal').hidden}catch(e){return false}}
+ function q(k,ok,fn){try{if(typeof flQ==='function')flQ(k,function(){try{if(ok())fn()}catch(e){}},4);else if(idle()&&ok())fn()}catch(e){}}
+ setInterval(function(){try{if(!S||!S.camp||!thOpen())return;var T=thS();if(!T)return;
+  if(thM1())q('th1',thM1,function(){openSheet(thCard1)});
+  else if(thM2())q('th2',thM2,function(){if(thDoHit()){save();try{renderMain()}catch(e){}openSheet(thCard2)}THM.login=0});
+  else if(thM3())q('th3',thM3,function(){T.onb.def=1;if(!T.onb.dT)T.onb.dT=S.clock;save();openSheet(thCard3)});
+  if(THM.login&&!thM2())THM.login=0;
+  if(thDefOpen()&&T.onb.def>=1&&!T.onb.dT)T.onb.dT=S.clock}catch(e){}},1000);
+}catch(e){}})();
+/* ===== V301 TH-PREP (coder-junior): Thiên Hạ Phase 0 small pieces, spec docs/design/thienha/phase0.md §1.6 + §2 (red dot) + §4.3 row 6.
+   Only with THON (?th=1); OFF = nothing here runs and nothing is wrapped.
+   - 2 DAILY rows after the first raid: thraid "Tập kích Thiên Hạ 3 lần" (BN_TH.daily.raid3.g gold), thhard "Thắng 1 trận Tập kích loại Khó" (hardWin.g gold);
+     the day the Khó camp was already raided and not won, the second row becomes thinv "Đầu tư 1 thành" (same gold). Progress counters thraid/thhard/thinv live in S.daily.p (already saved, resets daily).
+   - session-end line: an item "Thiên Hạ: còn n lượt" in w1NoOrdItems() when tries > 0 (max 3 items kept).
+   - red dot on the Thiên Hạ nav tab: FLD.th, in FLDN.world (a try is back while at cap / an unread report / an open Phục thù / the first camp not raided yet).
+   Actions added: none new; u185go (daily "Đi tới") is handled for the 3 keys. Globals: thDRows, thDSync, thDot. */
+function thDRows(){var C=thC(),g=C&&C.daily||{};return{raid:{k:'thraid',n:THTX.dRaid,t:3,g:(g.raid3&&g.raid3.g)||3},hard:{k:'thhard',n:THTX.dHard,t:1,g:(g.hardWin&&g.hardWin.g)||4},inv:{k:'thinv',n:THTX.dInv,t:1,g:(g.hardWin&&g.hardWin.g)||4}}}
+var THDR=null,THDB=0;
+/* idempotent: DAILY holds exactly the rows that apply now (never throws, never calls dget) */
+function thDSync(){if(!THON||THDB||typeof DAILY==='undefined')return;THDB=1;try{
+ var T=S&&S.th&&typeof S.th==='object'?S.th:null,on=!!(T&&T.onb&&T.onb.r1>=2);if(!THDR)THDR=thDRows();
+ var p=(S.daily&&S.daily.day===S.day&&S.daily.p)||{},fb=!!(T&&T.seedDay===S.day&&T.done&&T.done[2]&&!(p.thhard>0));
+ var want=on?[THDR.raid,fb?THDR.inv:THDR.hard]:[];
+ var all=[THDR.raid,THDR.hard,THDR.inv];
+ for(var i=0;i<all.length;i++){var r=all[i],j=DAILY.indexOf(r),w=want.indexOf(r)>=0;if(!w&&j>=0)DAILY.splice(j,1);else if(w&&j<0)DAILY.push(r)}
+ }catch(e){}THDB=0}
+function thDot(){try{if(!thOpen())return 0;var T=thRoll();if(!T)return 0;var C=thC();
+ return(T.onb.r1<2||T.tries>=C.tries.cap||T.unread>0||T.log.some(thRevOk))?1:0}catch(e){return 0}}
+(function(){try{
+ if(!THON)return;
+ THTX.dRaid='Tập kích Thiên Hạ 3 lần';THTX.dHard='Thắng 1 trận Tập kích loại Khó';THTX.dInv='Đầu tư 1 thành';THTX.endLine='Thiên Hạ: còn {n} lượt';
+ /* rows follow the save: every reader of the daily state goes through dget */
+ if(typeof dget==='function'){var _dgTH=dget;dget=function(){thDSync();return _dgTH.apply(this,arguments)}}
+ /* progress: a logged raid of yours (not a defence / Phục thù / the refunded scripted loss) */
+ var _lgTH=thLog;thLog=function(o){var r=_lgTH.apply(this,arguments);try{if(o&&o.k==='att'){dp('thraid');if(o.won&&o.foe&&o.foe.b===2)dp('thhard')}}catch(e){}return r};
+ var _ATD=A_;A_=function(a,v,w,el){
+  if(a==='winv'){var n0=0;try{n0=S.world.inv[v]||0}catch(e){}var r=_ATD.apply(this,arguments);try{if((S.world.inv[v]||0)>n0)dp('thinv')}catch(e){}return r}
+  if(a==='u185go'&&(v==='thraid'||v==='thhard'||v==='thinv')){try{closeSheet()}catch(e){}return _ATD.call(this,'tab','world')}
+  return _ATD.apply(this,arguments)};
+ try{if(typeof U185GO!=='undefined'){U185GO.thraid=1;U185GO.thhard=1;U185GO.thinv=1}}catch(e){}
+ /* session-end line (week-1 box): one Thiên Hạ item, replaces the 3rd item when the box is full */
+ if(typeof w1NoOrdItems==='function'){var _w1TH=w1NoOrdItems;w1NoOrdItems=function(){var it=_w1TH.apply(this,arguments);
+  try{var T=thOpen()?thRoll():null;if(T&&T.tries>0&&T.onb.r1>=2){var x={t:thTx('endLine',{n:T.tries}),a:'tab',v:'world'};if(it.length>=3)it[2]=x;else it.push(x)}}catch(e){}return it}}
+ /* red dot on the Thiên Hạ nav tab */
+ try{if(typeof FLD!=='undefined'&&typeof FLDN!=='undefined'){FLD.th=thDot;if(FLDN.world.indexOf('th')<0)FLDN.world.push('th')}}catch(e){}
+ /* V301 FIX2: the 3 TH daily rows get the Thiên hạ nav scroll icon in the .u354ti slot (40 css + 8 margin) so title/bar line up with the other rows */
+ try{var _thI=0;function thDIco(){_thI=0;try{var sh=document.getElementById('sheet');if(!sh||typeof kitIcoH!=='function')return;
+   [].forEach.call(sh.querySelectorAll('.dslist>.card.row'),function(r){if(r.querySelector('.u354ti'))return;var b=r.querySelector('button[data-v]'),v=b&&b.getAttribute('data-v');
+    if(v!=='thraid'&&v!=='thhard'&&v!=='thinv')return;var h=kitIcoH('nav_world',28);if(!h)return;
+    var s=document.createElement('span');s.className='u354ti';s.style.cssText='flex:none;display:flex;align-items:center;justify-content:center;width:40px;margin-right:8px';s.innerHTML='<i class="thdfr" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:radial-gradient(#4a3420,#1d140b);box-shadow:0 0 0 2px #b88a43,0 0 0 4px #2a1a10,0 2px 6px rgba(0,0,0,.6)">'+h+'</i>';r.insertBefore(s,r.firstChild)})}catch(e){}}
+  /* V301 TH-POLISH-FIX1: u3 daily layout (.u3br rows): the TH rows' round bronze coin gets the scroll icon */
+  function thDIco3(){try{var sh=document.getElementById('sheet');if(!sh||typeof kitIcoH!=='function')return;
+   [].forEach.call(sh.querySelectorAll('.u3br'),function(r){var c=r.querySelector('.u3bc');if(!c||c.classList.contains('thdfr'))return;var b=r.querySelector('button[data-v]'),v=b&&b.getAttribute('data-v');
+    if(v!=='thraid'&&v!=='thhard'&&v!=='thinv')return;var h=kitIcoH('nav_world',28);if(!h)return;c.classList.add('thdfr');c.innerHTML=h})}catch(e){}}
+  /* V301 TH-POLISH: no lone words at 360/390 (nbsp joins) in the world tab and the daily sheet */
+  var _thNR=[[/ (giờ)/g,'\u00a0$1'],[/ (\d+%)/g,'\u00a0$1'],[/(\S) (chơi)/g,'$1\u00a0$2'],[/(chinh) (chiến)/g,'$1\u00a0$2'],[/(Thiên) (Tháp)/g,'$1\u00a0$2']];
+  function thNb(){try{[].forEach.call(document.querySelectorAll('.wrow .sm,.wrow b,.thp,.thrw .sm,.dslist .sp b,.dslist .sp .sm,.u3bx b,.u3bx .sm'),function(e){var w=document.createTreeWalker(e,4),n;while((n=w.nextNode())){var v=n.nodeValue,o=v;_thNR.forEach(function(r){v=v.replace(r[0],r[1])});if(v!==o)n.nodeValue=v}})}catch(e){}}
+  var _thM=new MutationObserver(function(){if(!_thI){_thI=1;requestAnimationFrame(function(){thDIco();thDIco3();thNb()})}});
+  var _thT=document.body;if(_thT)_thM.observe(_thT,{childList:true,subtree:true});else document.addEventListener('DOMContentLoaded',function(){try{var t=document.body;if(t)_thM.observe(t,{childList:true,subtree:true})}catch(e){}})}catch(e){}
+ try{thDSync()}catch(e){}
+}catch(e){}})();
+/* ===== u3p301.js (V302 U3-POLISH): post-ship polish from art's u3-grade notes. CSS only, no state, no actions.
+   1. fresh daily "Mục tiêu tân binh" card: 10 px top margin under the ribbon (art58 §19 note 1)
+   2. hero reveal: 4 px between the name line and the class line; stronger halo behind "Chạm để tiếp tục" (U3-J polish)
+   (the home lock-chip fix lives in u3_a.js: the empty ::before chip now exists only with [data-u3a]) ===== */
+(function(){try{
+ var st=document.createElement('style');st.id='u3p-css';
+ st.textContent=[
+  'html body #modal #sheet .c3uc:has(>.bn3ng:first-child){padding-top:10px}',
+  'html body #hrev .hr277pl i{margin-top:4px}',
+  'html body #hrev .hr277t.u3jt{text-shadow:0 1px 3px #000,0 0 8px #000,0 0 14px rgba(0,0,0,.8);opacity:.9}',
+  /* U3-POLISH2: defeat hero strip centred; empty 0 percent bars under the faces hidden */
+  'html body #sheet .rs9:has(.rs9note.lose) .rs9gs .rs9fs{justify-content:center}',
+  'html body #sheet .rs9:has(.rs9note.lose) .rs9f .rs9fb:has(>i[style*="width:0.0%"]),html body #sheet .rs9:has(.rs9note.lose) .rs9f .rs9fb:has(>i[style*="width: 0.0%"]){display:none}',
+  /* U3-POLISH2 (art 17c P2): donate cost line one size/weight; Tài khoản Tên line one size */
+  'html body #sheet .u3br.c3wd .u3bs .cost{font:inherit;font-weight:inherit}',
+  'html body #sheet .card .sm[style*="margin:4px 0"]>b{font-size:inherit}'
+ ].join('\n');document.head.appendChild(st);
+}catch(e){try{console.warn('u3p301',e)}catch(x){}}})();
 </script>
