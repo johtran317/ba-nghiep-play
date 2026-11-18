@@ -1,0 +1,64 @@
+{
+ "artmeta": 1,
+ "id": "u3_empty_states",
+ "build": "V301",
+ "file": "art/ui/u3_empty_states.webp",
+ "size": [
+  480,
+  320
+ ],
+ "bytes": 45758,
+ "cell": 160,
+ "scale_from_master": 0.1298,
+ "note": "r626 empty states, 3x2 cells of 160 px: chest, mailbox, lantern+banner / rack, notice board, shelf. Ground shadow kept.",
+ "rows": {
+  "empty_chest": {
+   "r": [
+    0,
+    0,
+    160,
+    160
+   ]
+  },
+  "empty_mail": {
+   "r": [
+    160,
+    0,
+    160,
+    160
+   ]
+  },
+  "empty_event": {
+   "r": [
+    320,
+    0,
+    160,
+    160
+   ]
+  },
+  "empty_build": {
+   "r": [
+    0,
+    160,
+    160,
+    160
+   ]
+  },
+  "empty_board": {
+   "r": [
+    160,
+    160,
+    160,
+    160
+   ]
+  },
+  "empty_shelf": {
+   "r": [
+    320,
+    160,
+    160,
+    160
+   ]
+  }
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "img": "th_pieces.webp",
+ "w": 959,
+ "h": 244,
+ "src": "ART-20261116-th5-pieces/approved/th5_pieces.png",
+ "pieces": {
+  "shield_won": {
+   "cell": 1,
+   "x": 544,
+   "y": 0,
+   "w": 95,
+   "h": 96
+  },
+  "wagon_full": {
+   "cell": 2,
+   "x": 0,
+   "y": 162,
+   "w": 120,
+   "h": 80
+  },
+  "wagon_raided": {
+   "cell": 3,
+   "x": 837,
+   "y": 0,
+   "w": 120,
+   "h": 95
+  },
+  "stamp_won": {
+   "cell": 4,
+   "x": 382,
+   "y": 0,
+   "w": 160,
+   "h": 152
+  },
+  "stamp_held": {
+   "cell": 5,
+   "x": 0,
+   "y": 0,
+   "w": 158,
+   "h": 160
+  },
+  "stamp_lost": {
+   "cell": 6,
+   "x": 160,
+   "y": 0,
+   "w": 157,
+   "h": 160
+  },
+  "camp_enemy": {
+   "cell": 7,
+   "x": 641,
+   "y": 0,
+   "w": 96,
+   "h": 96
+  },
+  "camp_own": {
+   "cell": 8,
+   "x": 739,
+   "y": 0,
+   "w": 96,
+   "h": 96
+  },
+  "badge_easy": {
+   "cell": 9,
+   "x": 122,
+   "y": 162,
+   "w": 48,
+   "h": 48
+  },
+  "badge_even": {
+   "cell": 10,
+   "x": 172,
+   "y": 162,
+   "w": 48,
+   "h": 48
+  },
+  "badge_hard": {
+   "cell": 11,
+   "x": 222,
+   "y": 162,
+   "w": 47,
+   "h": 48
+  },
+  "banner_pole": {
+   "cell": 12,
+   "x": 319,
+   "y": 0,
+   "w": 61,
+   "h": 160
+  }
+ },
+ "tint": [
+  "camp_enemy",
+  "banner_pole"
+ ]
+}

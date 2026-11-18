@@ -1,0 +1,64 @@
+{
+ "artmeta": 1,
+ "id": "u3_rank_emblems_64",
+ "build": "V301",
+ "file": "art/ui/u3_rank_emblems_64.webp",
+ "size": [
+  192,
+  128
+ ],
+ "bytes": 12636,
+ "cell": 64,
+ "scale_from_master": 0.0546,
+ "note": "r624 rank emblems, same order, 3x2 cells of 64 px (list rows).",
+ "rows": {
+  "rank_1": {
+   "r": [
+    0,
+    0,
+    64,
+    64
+   ]
+  },
+  "rank_2": {
+   "r": [
+    64,
+    0,
+    64,
+    64
+   ]
+  },
+  "rank_3": {
+   "r": [
+    128,
+    0,
+    64,
+    64
+   ]
+  },
+  "rank_4": {
+   "r": [
+    0,
+    64,
+    64,
+    64
+   ]
+  },
+  "rank_5": {
+   "r": [
+    64,
+    64,
+    64,
+    64
+   ]
+  },
+  "rank_6": {
+   "r": [
+    128,
+    64,
+    64,
+    64
+   ]
+  }
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "artmeta": 1,
+ "id": "u3_ke_icons",
+ "build": "V301",
+ "file": "art/ui/u3_ke_icons.webp",
+ "size": [
+  384,
+  288
+ ],
+ "bytes": 42592,
+ "cell": 96,
+ "scale_from_master": 0.0942,
+ "note": "r625 Ke icons, 4x2 cells of 96 px. Row 1: fire+tools, turtle shell, banners+ghost, roaring helm; row 2: supply cart, reeds, chain links, shield+arrow. Names are positions until designer maps Ke ids. Row 3 (V301 r630): ke_cokevu war-drum coin at col 1.",
+ "rows": {
+  "ke_r1c1": {
+   "r": [
+    0,
+    0,
+    96,
+    96
+   ]
+  },
+  "ke_r1c2": {
+   "r": [
+    96,
+    0,
+    96,
+    96
+   ]
+  },
+  "ke_r1c3": {
+   "r": [
+    192,
+    0,
+    96,
+    96
+   ]
+  },
+  "ke_r1c4": {
+   "r": [
+    288,
+    0,
+    96,
+    96
+   ]
+  },
+  "ke_r2c1": {
+   "r": [
+    0,
+    96,
+    96,
+    96
+   ]
+  },
+  "ke_r2c2": {
+   "r": [
+    96,
+    96,
+    96,
+    96
+   ]
+  },
+  "ke_r2c3": {
+   "r": [
+    192,
+    96,
+    96,
+    96
+   ]
+  },
+  "ke_r2c4": {
+   "r": [
+    288,
+    96,
+    96,
+    96
+   ]
+  },
+  "ke_cokevu": {
+   "r": [
+    0,
+    192,
+    96,
+    96
+   ]
+  }
+ }
+}

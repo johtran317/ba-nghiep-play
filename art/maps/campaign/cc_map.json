@@ -1,0 +1,306 @@
+{
+ "atlases": {
+  "cc_nodes.webp": {
+   "w": 1024,
+   "h": 362
+  },
+  "cc_props.webp": {
+   "w": 1024,
+   "h": 194
+  },
+  "cc_ink.webp": {
+   "w": 1024,
+   "h": 185
+  }
+ },
+ "pieces": {
+  "chapter_stamp": {
+   "atlas": "cc_nodes.webp",
+   "x": 0,
+   "y": 0,
+   "w": 357,
+   "h": 360,
+   "src": "r613_boss_clear (1).png c2"
+  },
+  "boss_node": {
+   "atlas": "cc_nodes.webp",
+   "x": 359,
+   "y": 0,
+   "w": 134,
+   "h": 144,
+   "src": "r613_boss_clear (1).png c1"
+  },
+  "node_elite": {
+   "atlas": "cc_nodes.webp",
+   "x": 495,
+   "y": 0,
+   "w": 109,
+   "h": 112,
+   "src": "r611_node_tokens (1).png c8"
+  },
+  "node_locked": {
+   "atlas": "cc_nodes.webp",
+   "x": 606,
+   "y": 0,
+   "w": 93,
+   "h": 96,
+   "src": "r611_node_tokens (1).png c1"
+  },
+  "node_open": {
+   "atlas": "cc_nodes.webp",
+   "x": 701,
+   "y": 0,
+   "w": 91,
+   "h": 96,
+   "src": "r611_node_tokens (1).png c2"
+  },
+  "node_current": {
+   "atlas": "cc_nodes.webp",
+   "x": 794,
+   "y": 0,
+   "w": 95,
+   "h": 96,
+   "src": "r611_node_tokens (1).png c3"
+  },
+  "node_cleared": {
+   "atlas": "cc_nodes.webp",
+   "x": 891,
+   "y": 0,
+   "w": 90,
+   "h": 96,
+   "src": "r611_node_tokens (1).png c4"
+  },
+  "fog_wisp": {
+   "atlas": "cc_props.webp",
+   "x": 0,
+   "y": 0,
+   "w": 160,
+   "h": 140,
+   "src": "r612_trail_props.png c15"
+  },
+  "ink_flourish": {
+   "atlas": "cc_props.webp",
+   "x": 162,
+   "y": 0,
+   "w": 93,
+   "h": 96,
+   "src": "r612_trail_props.png c18"
+  },
+  "flag_gold": {
+   "atlas": "cc_props.webp",
+   "x": 257,
+   "y": 0,
+   "w": 39,
+   "h": 72,
+   "src": "r612_trail_props.png c8"
+  },
+  "flag_red": {
+   "atlas": "cc_props.webp",
+   "x": 298,
+   "y": 0,
+   "w": 36,
+   "h": 72,
+   "src": "r612_trail_props.png c9"
+  },
+  "pennant_white": {
+   "atlas": "cc_props.webp",
+   "x": 336,
+   "y": 0,
+   "w": 46,
+   "h": 72,
+   "src": "r612_trail_props.png c10"
+  },
+  "flag_green_1": {
+   "atlas": "cc_props.webp",
+   "x": 384,
+   "y": 0,
+   "w": 39,
+   "h": 72,
+   "src": "r615_hoof_redo.png c7"
+  },
+  "flag_green_2": {
+   "atlas": "cc_props.webp",
+   "x": 425,
+   "y": 0,
+   "w": 58,
+   "h": 72,
+   "src": "r615_hoof_redo.png c8"
+  },
+  "flag_green_3": {
+   "atlas": "cc_props.webp",
+   "x": 485,
+   "y": 0,
+   "w": 59,
+   "h": 72,
+   "src": "r615_hoof_redo.png c9"
+  },
+  "flag_gold_1": {
+   "atlas": "cc_props.webp",
+   "x": 546,
+   "y": 0,
+   "w": 39,
+   "h": 72,
+   "src": "r615_hoof_redo.png c10"
+  },
+  "flag_gold_2": {
+   "atlas": "cc_props.webp",
+   "x": 587,
+   "y": 0,
+   "w": 58,
+   "h": 72,
+   "src": "r615_hoof_redo.png c11"
+  },
+  "flag_gold_3": {
+   "atlas": "cc_props.webp",
+   "x": 647,
+   "y": 0,
+   "w": 59,
+   "h": 72,
+   "src": "r615_hoof_redo.png c12"
+  },
+  "lantern_pole": {
+   "atlas": "cc_props.webp",
+   "x": 708,
+   "y": 0,
+   "w": 41,
+   "h": 64,
+   "src": "r612_trail_props.png c11"
+  },
+  "cairn": {
+   "atlas": "cc_props.webp",
+   "x": 751,
+   "y": 0,
+   "w": 58,
+   "h": 64,
+   "src": "r612_trail_props.png c12"
+  },
+  "crow_perch": {
+   "atlas": "cc_props.webp",
+   "x": 811,
+   "y": 0,
+   "w": 56,
+   "h": 64,
+   "src": "r612_trail_props.png c13"
+  },
+  "crow_fly": {
+   "atlas": "cc_props.webp",
+   "x": 869,
+   "y": 0,
+   "w": 61,
+   "h": 64,
+   "src": "r612_trail_props.png c14"
+  },
+  "paper_lantern": {
+   "atlas": "cc_props.webp",
+   "x": 932,
+   "y": 0,
+   "w": 56,
+   "h": 64,
+   "src": "r612_trail_props.png c17"
+  },
+  "campfire": {
+   "atlas": "cc_props.webp",
+   "x": 0,
+   "y": 142,
+   "w": 64,
+   "h": 50,
+   "src": "r612_trail_props.png c16"
+  },
+  "hoof_lit_3": {
+   "atlas": "cc_props.webp",
+   "x": 66,
+   "y": 142,
+   "w": 23,
+   "h": 24,
+   "src": "r615_hoof_redo.png c3"
+  },
+  "hoof_dim_3": {
+   "atlas": "cc_props.webp",
+   "x": 91,
+   "y": 142,
+   "w": 23,
+   "h": 24,
+   "src": "r615_hoof_redo.png c6"
+  },
+  "hoof_lit_1": {
+   "atlas": "cc_props.webp",
+   "x": 116,
+   "y": 142,
+   "w": 24,
+   "h": 22,
+   "src": "r615_hoof_redo.png c1"
+  },
+  "hoof_dim_1": {
+   "atlas": "cc_props.webp",
+   "x": 142,
+   "y": 142,
+   "w": 24,
+   "h": 22,
+   "src": "r615_hoof_redo.png c4"
+  },
+  "hoof_dim_2": {
+   "atlas": "cc_props.webp",
+   "x": 168,
+   "y": 142,
+   "w": 24,
+   "h": 22,
+   "src": "r615_hoof_redo.png c5"
+  },
+  "hoof_lit_2": {
+   "atlas": "cc_props.webp",
+   "x": 194,
+   "y": 142,
+   "w": 24,
+   "h": 20,
+   "src": "r615_hoof_redo.png c2"
+  },
+  "ink_gold": {
+   "atlas": "cc_ink.webp",
+   "x": 0,
+   "y": 0,
+   "w": 368,
+   "h": 64,
+   "src": "r614_ink_strokes.png c1"
+  },
+  "ink_gold_dry": {
+   "atlas": "cc_ink.webp",
+   "x": 370,
+   "y": 0,
+   "w": 488,
+   "h": 64,
+   "src": "r614_ink_strokes.png c2"
+  },
+  "ink_red": {
+   "atlas": "cc_ink.webp",
+   "x": 0,
+   "y": 66,
+   "w": 395,
+   "h": 64,
+   "src": "r614_ink_strokes.png c5"
+  },
+  "ink_gold_arrow": {
+   "atlas": "cc_ink.webp",
+   "x": 397,
+   "y": 66,
+   "w": 395,
+   "h": 64,
+   "src": "r614_ink_strokes.png c6"
+  },
+  "ink_pale": {
+   "atlas": "cc_ink.webp",
+   "x": 0,
+   "y": 132,
+   "w": 512,
+   "h": 51,
+   "src": "r614_ink_strokes (1).png c4"
+  }
+ },
+ "standalone": {
+  "cutin_gongsunzan": {
+   "file": "skins/cutin_gongsunzan.webp",
+   "w": 1024,
+   "h": 384,
+   "src": "cutin_gongsunzan_b.png 2048x768"
+  }
+ }
+}

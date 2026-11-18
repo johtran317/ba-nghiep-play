@@ -1,0 +1,64 @@
+{
+ "artmeta": 1,
+ "id": "u3_rank_emblems",
+ "build": "V301",
+ "file": "art/ui/u3_rank_emblems.webp",
+ "size": [
+  384,
+  256
+ ],
+ "bytes": 35590,
+ "cell": 128,
+ "scale_from_master": 0.1092,
+ "note": "r624 rank emblems, 3x2 cells of 128 px (order = rank 1..6, grey to red-gold). Use the 64 atlas in list rows.",
+ "rows": {
+  "rank_1": {
+   "r": [
+    0,
+    0,
+    128,
+    128
+   ]
+  },
+  "rank_2": {
+   "r": [
+    128,
+    0,
+    128,
+    128
+   ]
+  },
+  "rank_3": {
+   "r": [
+    256,
+    0,
+    128,
+    128
+   ]
+  },
+  "rank_4": {
+   "r": [
+    0,
+    128,
+    128,
+    128
+   ]
+  },
+  "rank_5": {
+   "r": [
+    128,
+    128,
+    128,
+    128
+   ]
+  },
+  "rank_6": {
+   "r": [
+    256,
+    128,
+    128,
+    128
+   ]
+  }
+ }
+}
