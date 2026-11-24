@@ -1428,12 +1428,27 @@ var REFILLK=[0,1,1.25,1.5,2,2.5];
    gen.cal scales the Lôi Đài rival curve (ar2Team: power × AR2K × (1.82 − .7x)) for shadow targets; x from the shown power as in thX (sim/th_patch.js).
    extra = the 3 gold tries a day (price = gold[n-1], resets at the daily reset); never refunded, no power (paid-ledger §14). */
 var BN_TH={open:8, defOpen:10, tries:{cap:5, refillH:4}, extra:{max:3, gold:[20,40,60]},
- band:{easy:-.08, even:0, hard:.08, max:.15}, gen:{cal:.82}, refresh:{free:1, cdH:2},
+ band:{easy:-.08, even:0, hard:.04 /* hard .08->.04: BAL-TH-REDESIGN P3.1 */, max:.15}, gen:{cal:.82}, refresh:{free:1, cdH:2},
  loot:{s:3900, g:2600, e:.5, mult:[.8,1,1.3], dv:3, weakCut:.20, dayWins:6, lossMerit:.033},
  inf:{win:250, hardMult:1.5},
  inc:{perDay:2, pow:[.95,1.10], takeP:.10, dayCapP:.20, shieldH:4, newbieH:48, simMaxH:24, comebackD:3, comebackShieldH:24, hold:2},
  rev:{hours:24, back:1.5}, onb:{r1Pow:.5, hitTaps:1, revPow:.7, hitAfterH:6},
  daily:{raid3:{g:3}, hardWin:{g:4}}, log:12};
+/* BN_TH Step 1 block (redesign-v1.md v1.4 §8.4, BAL-TH-REDESIGN). Data only; Thiên Hạ is off behind ?th=1. */
+// §8.4 map (BAL-TH P1)
+BN_TH.map={trPlots:12, side:6, onScreen:8, ringP:[.4,.4,.2], trPerRing:4, realPerSide:5, newServerAt:.85,
+ ruinD:7, freeD:14, ruinLootP:.5, moveCdH:72, moveFree:1, moveBand:1, moveHeld:3, seasonD:28};
+// §8.4 march; exact seconds per plot pair still open (read from techart road JSON, open item 5)
+BN_TH.march={near:[60,150], far:[300,480], onb:15, lair:0, backP:.5, speedP:.5, speedGoldPerS:120, dao:2, dao3Man:20};
+// §8.4 shadow camp pairs (P3.1/P3.2 A); badge centres and gen.cal stay at BN_TH.band / BN_TH.gen (Phase 0 paths, see above)
+BN_TH.shadow={easy:[-.095,-.065], even:[-.015,.015], hard:[.025,.055], ally:[.75,1.25], lvJit:2};
+// §8.4 pvp, Step 3 only; realBadge preliminary (P2.1), re-measure on real snapshots
+BN_TH.pvp={gate:40, gateDays:7, gateFacMin:8, newbieD:7, incPerDay:3, lossPerDay:2, shadowFill:2, realBadge:[1.03,1.10]};
+// §8.4 skin (631 C, 633 A, P4.1, P4.3); capWatchRelease: Main asks Huy before that release is sold (§7.3.1)
+BN_TH.skin={pow:.02, stack:1, fromDay:1, band:false, seasonRoom:[2,2,5,5,7,4,7], window:28, cadence:56,
+ rerunAfter:112, rerunPerWindow:1, weakCutShown:true, weakCutReal:.30, laurel:[2,4], capWatchRelease:5};
+// §8.4 fort stages (P4.2, check 9); fallback [50,100,150,200]
+BN_TH.fort={stageLv:[50,90,135,180]};
 // Pure data, loaded first (BN-005). Declared literals copied exactly from the file named on each comment line; nothing tuned.
 // Thong Thien Thap numbers. Patches that reshape a table stay in the logic file named in docs/code/DATA_SPLIT.md.
 /* TWK: tower300.js */
@@ -6607,32 +6622,32 @@ function tick(dt){
 /* V300 BN-155 (decision #4/#8/#12, spec docs/design/troops/spec.md §10): troop-system switch TRP8 (8 types, one account tier). OFF by default; ON with ?trp8=1 (stored in
    localStorage 'bn-trp8'), OFF with ?trp8=0. With it on the save target is 3: MIG step to:3 = the same one-time tester reset as step 2 (old save backed up first, nothing paid
    carried over, welcome and faction pick replay) plus the S.trp defaults. Parsed here because the boot load() runs before any later file. TRP8H = hooks object, set by trp8_300.js. */
-var TRP8=0,TRP8H=null;
+var TRP8=1,TRP8H=null;
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]trp8=1(\D|$)/.test(q)){TRP8=1;try{localStorage.setItem('bn-trp8','1')}catch(e){}}
- else if(/[?#&]trp8=0(\D|$)/.test(q)){TRP8=0;try{localStorage.removeItem('bn-trp8')}catch(e){}}
- else{try{TRP8=localStorage.getItem('bn-trp8')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]trp8=0(\D|$)/.test(q)){TRP8=0;try{localStorage.setItem('bn-trp8','0')}catch(e){}}
+ else{try{TRP8=localStorage.getItem('bn-trp8')==='0'?0:1}catch(e){}}}catch(e){}})();
 /* V301 BN-066: hero-system switch HRO9 (spec docs/design/heroes/spec.md). OFF by default; ON with ?hro9=1 (localStorage 'bn-hro9'), OFF with ?hro9=0. It rides the SAME one-time tester reset
    as TRP8 (step to:3): either switch on makes the save target 3; the step runs once. */
-var HRO9=0;
+var HRO9=1;
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]hro9=1(\D|$)/.test(q)){HRO9=1;try{localStorage.setItem('bn-hro9','1')}catch(e){}}
- else if(/[?#&]hro9=0(\D|$)/.test(q)){HRO9=0;try{localStorage.removeItem('bn-hro9')}catch(e){}}
- else{try{HRO9=localStorage.getItem('bn-hro9')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]hro9=0(\D|$)/.test(q)){HRO9=0;try{localStorage.setItem('bn-hro9','0')}catch(e){}}
+ else{try{HRO9=localStorage.getItem('bn-hro9')==='0'?0:1}catch(e){}}}catch(e){}})();
 /* V301 BN-024: item-system switch ITM9 (spec docs/design/items/spec.md v3.2). OFF by default; ON with ?itm9=1 (localStorage 'bn-itm9'), OFF with ?itm9=0. It rides the SAME one-time tester reset
    (step to:3): any of TRP8, HRO9, ITM9 on makes the save target 3. A save already at sv 3 (reset by TRP8/HRO9) gets the non-reset item migration in items9_301.js instead (S.itemV). */
-var ITM9=0,I9H=null;   /* I9H = battle hooks object, set by items9_301.js when ITM9 is on (engine.js calls it behind `if(I9H)`) */
+var ITM9=1,I9H=null;   /* I9H = battle hooks object, set by items9_301.js when ITM9 is on (engine.js calls it behind `if(I9H)`) */
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]itm9=1(\D|$)/.test(q)){ITM9=1;try{localStorage.setItem('bn-itm9','1')}catch(e){}}
- else if(/[?#&]itm9=0(\D|$)/.test(q)){ITM9=0;try{localStorage.removeItem('bn-itm9')}catch(e){}}
- else{try{ITM9=localStorage.getItem('bn-itm9')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]itm9=0(\D|$)/.test(q)){ITM9=0;try{localStorage.setItem('bn-itm9','0')}catch(e){}}
+ else{try{ITM9=localStorage.getItem('bn-itm9')==='0'?0:1}catch(e){}}}catch(e){}})();
 /* V301 LFR (Decision 304 A): long-fight-rule switch LFRON. OFF by default; ON with ?lfr=1 (localStorage 'bn-lfr'), OFF with ?lfr=0. The rule (numbers in LFR, data/balance_combat.js)
    acts only when TRP8, HRO9 and ITM9 are also on (engine.js battle()); no save field, no migration. */
-var LFRON=0;
+var LFRON=1;
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]lfr=1(\D|$)/.test(q)){LFRON=1;try{localStorage.setItem('bn-lfr','1')}catch(e){}}
- else if(/[?#&]lfr=0(\D|$)/.test(q)){LFRON=0;try{localStorage.removeItem('bn-lfr')}catch(e){}}
- else{try{LFRON=localStorage.getItem('bn-lfr')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]lfr=0(\D|$)/.test(q)){LFRON=0;try{localStorage.setItem('bn-lfr','0')}catch(e){}}
+ else{try{LFRON=localStorage.getItem('bn-lfr')==='0'?0:1}catch(e){}}}catch(e){}})();
 function trp8Def(day){return{v:1,tier:1,res:null,bt:0,bp:0,tmp:0,drill:0,sw:{day:day||0,n:0},shop:{wk:0,bp:0,tmp:0},earn:{bp:0,tmp:0},cu:null}}
 var SVRESET=0,SVK='ckt-save-bak-',SVC='ckt-save-corrupt-',SVPRE='ckt-save-pre-reset',SVWF=0;
 function svResetOn(){if(SVRESET)return true;try{return localStorage.getItem('bn-sv-reset')==='1'}catch(e){return false}}
@@ -16190,7 +16205,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V302';
+var BUILD='V303';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -24571,7 +24586,7 @@ H300J.lvo={"mc":{"dx":{"1":15.5},"dy":{"1":5.0}}};/* V301 BN-297: home.json slot
    needs no code change); HV358J below is the BN-359t / BN-358u snapshot used when the fetch fails (BN-358s3: regenerated from
    home.json after techart 9ce571e3 / 1c8da5e8, so the BN-359f slot swap lives only in the json). Young Ruộng Lúa: valley.field_young drawn over the
    ground at band 1 / locked (BN-359t3). No save change, no new actions. */
-var HV358=0;try{if(/[?#&]hv=1(?![0-9])/.test(location.href))HV358=1}catch(e){}
+var HV358=0;try{if(!/[?#&]hv=0(?![0-9])/.test(location.href))HV358=1}catch(e){}
 var HV358J={"file":"art/maps/home_valley.webp","vb":[474,924],"lamps":[[195,268],[232,323],[272,305],[141,388],[211,408],[259,440],[216,493],[166,548],[220,606],[281,596],[234,680]],"slots":{"mc":{"x":318,"foot_vb":247,"w":176,"tap":[230.0,82.6,176,164.4],"h":{"1":92.4,"10":108.4,"20":164.4},"plaque":{"x":318,"y":255,"max_w":134},"unlock_level":1,"dx_lv_vb":{"1":-10.29,"10":-16.83,"20":6.43},"foot_dy_lv_vb":{}},"mint":{"x":135,"foot_vb":268,"w":118,"tap":[76.0,155.6,118,112.4],"h":{"1":57.2,"10":76.4,"20":112.4},"plaque":{"x":135,"y":276,"max_w":124},"unlock_level":35,"dx_lv_vb":{"1":11.36,"10":10.53,"20":13.47},"foot_dy_lv_vb":{}},"tech":{"x":96,"foot_vb":400,"w":118,"tap":[37.0,275.6,118,124.4],"h":{"1":56.0,"10":80.8,"20":124.4},"plaque":{"x":96,"y":408,"max_w":134},"unlock_level":11,"dx_lv_vb":{"1":-0.65,"10":4.42,"20":14.45},"foot_dy_lv_vb":{}},"barracks":{"x":382,"foot_vb":420,"w":140,"tap":[312.0,302.0,140,118.0],"h":{"1":52.8,"10":82.4,"20":118.0},"plaque":{"x":382,"y":428,"max_w":134},"unlock_level":15,"dx_lv_vb":{"1":7.54,"10":-9.9,"20":-0.15},"foot_dy_lv_vb":{}},"train":{"x":118,"foot_vb":537,"w":150,"tap":[43.0,420.6,150,116.4],"h":{"1":56.8,"10":55.2,"20":116.4},"plaque":{"x":118,"y":545,"max_w":124},"unlock_level":15,"dx_lv_vb":{"1":-0.71,"10":3.33,"20":-1.96},"foot_dy_lv_vb":{}},"market":{"x":348,"foot_vb":525,"w":118,"tap":[289.0,440.2,118,84.8],"h":{"1":44.0,"10":69.2,"20":84.8},"plaque":{"x":348,"y":533,"max_w":134},"unlock_level":12,"dx_lv_vb":{"1":-12.3,"10":6.92,"20":1.46},"foot_dy_lv_vb":{}},"field":{"x":409,"foot_vb":790,"w":130,"tap":[344,670,130,120],"h":{"1":120,"10":120,"20":120},"plaque":{"x":409,"y":798,"max_w":134},"unlock_level":10,"dx_lv_vb":{"1":0.0,"10":0.0,"20":0.0},"foot_dy_lv_vb":{},"no_tile":true},"house":{"x":96,"foot_vb":692,"w":128,"tap":[32.0,580.0,128,112.0],"h":{"1":45.6,"10":58.8,"20":112.0},"plaque":{"x":96,"y":700,"max_w":134},"unlock_level":1,"dx_lv_vb":{"1":-16.69,"10":-24.74,"20":24.38},"foot_dy_lv_vb":{}},"acct":{"x":378,"foot_vb":640,"w":118,"tap":[319,546,118,94],"h":{"1":62.8,"10":78.4,"20":123.2},"plaque":{"x":378,"y":648,"max_w":134},"unlock_level":25,"dx_lv_vb":{"1":-11.14,"10":-5.94,"20":-5.37},"foot_dy_lv_vb":{}}},"atlas":{"file":"art/buildings/bld_v.webp","size":[2048,1153],"px_per_vb":2.5,"lit":null,"parts":{"mc_20":{"r":[0,0,440,411],"w_vb":176.0,"h_vb":164.4,"dx_vb":6.43},"tech_20":{"r":[442,0,295,311],"w_vb":118.0,"h_vb":124.4,"dx_vb":14.45},"acct_20":{"r":[739,0,295,308],"w_vb":118.0,"h_vb":123.2,"dx_vb":-5.37},"barracks_20":{"r":[1036,0,350,295],"w_vb":140.0,"h_vb":118.0,"dx_vb":-0.15},"train_20":{"r":[1388,0,375,291],"w_vb":150.0,"h_vb":116.4,"dx_vb":-1.96},"mint_20":{"r":[0,413,295,281],"w_vb":118.0,"h_vb":112.4,"dx_vb":13.47},"house_20":{"r":[297,413,320,280],"w_vb":128.0,"h_vb":112.0,"dx_vb":24.38},"mc_10":{"r":[619,413,330,271],"w_vb":132.0,"h_vb":108.4,"dx_vb":-16.83},"mc_1":{"r":[951,413,242,231],"w_vb":96.8,"h_vb":92.4,"dx_vb":-10.29},"market_20":{"r":[1195,413,295,212],"w_vb":118.0,"h_vb":84.8,"dx_vb":1.46},"barracks_10":{"r":[1492,413,262,206],"w_vb":104.8,"h_vb":82.4,"dx_vb":-9.9},"tech_10":{"r":[1756,413,221,202],"w_vb":88.4,"h_vb":80.8,"dx_vb":4.42},"acct_10":{"r":[0,696,221,196],"w_vb":88.4,"h_vb":78.4,"dx_vb":-5.94},"mint_10":{"r":[223,696,221,191],"w_vb":88.4,"h_vb":76.4,"dx_vb":10.53},"vault":{"r":[446,696,200,183],"w_vb":80.0,"h_vb":73.2,"dx_vb":1.37},"farm_2":{"r":[648,696,200,175],"w_vb":80.0,"h_vb":70.0,"dx_vb":-1.32},"market_10":{"r":[850,696,221,173],"w_vb":88.4,"h_vb":69.2,"dx_vb":6.92},"farm_3":{"r":[1073,696,200,171],"w_vb":80.0,"h_vb":68.4,"dx_vb":-2.0},"mine":{"r":[1275,696,200,171],"w_vb":80.0,"h_vb":68.4,"dx_vb":-2.8},"acct_1":{"r":[1477,696,162,157],"w_vb":64.8,"h_vb":62.8,"dx_vb":-11.14},"farm":{"r":[1641,696,200,156],"w_vb":80.0,"h_vb":62.4,"dx_vb":3.08},"house_10":{"r":[0,894,240,147],"w_vb":96.0,"h_vb":58.8,"dx_vb":-24.74},"mint_1":{"r":[242,894,162,143],"w_vb":64.8,"h_vb":57.2,"dx_vb":11.36},"train_1":{"r":[406,894,206,142],"w_vb":82.4,"h_vb":56.8,"dx_vb":-0.71},"tech_1":{"r":[614,894,162,140],"w_vb":64.8,"h_vb":56.0,"dx_vb":-0.65},"dojo":{"r":[778,894,200,139],"w_vb":80.0,"h_vb":55.6,"dx_vb":-13.64},"train_10":{"r":[980,894,281,138],"w_vb":112.4,"h_vb":55.2,"dx_vb":3.33},"farm_1":{"r":[1263,894,200,137],"w_vb":80.0,"h_vb":54.8,"dx_vb":-6.83},"barracks_1":{"r":[1465,894,192,132],"w_vb":76.8,"h_vb":52.8,"dx_vb":7.54},"house_1":{"r":[1659,894,224,114],"w_vb":89.6,"h_vb":45.6,"dx_vb":-16.69},"market_1":{"r":[0,1043,162,110],"w_vb":64.8,"h_vb":44.0,"dx_vb":-12.3},"farm_0":{"r":[1641,696,200,156],"w_vb":80.0,"h_vb":62.4,"dx_vb":3.08}},"pending":{}},"lower":{"file":"art/maps/home_lower.webp","size":[948,1686],"vb":[474,843],"top_vb":866,"vb_per_css":1.215385,"overlap_vb":58,"road_patch":{"file":"art/maps/home_valley.webp","band_vb":[795,924],"stub_cx":242.0,"lower_cx":240.0,"width_vb":[30.0,32.0],"feather_vb":6.0},"zones":{"farm":{"n":"Ruộng Lương","unlock":[1,5,10,16],"plaque":{"x":115.5,"y":1109.1}},"mine":{"n":"Mỏ Bạc","unlock":[1,6,12,18],"plaque":{"x":111.8,"y":1332.7}},"dojo":{"n":"Võ Đường","unlock":[8,14,20,26],"plaque":{"x":364.6,"y":1342.4}},"vault":{"n":"Kim Khố","unlock":[20,28,36,44],"plaque":{"x":121.5,"y":1587.9}}},"slots":[{"id":"farm_0","zone":"farm","i":0,"unlock":1,"x":54.7,"foot_vb":1077.5,"w_vb":80.0,"tap":[14.7,1009.5,80,68]},{"id":"farm_1","zone":"farm","i":1,"unlock":5,"x":155.6,"foot_vb":1077.5,"w_vb":80.0,"tap":[115.6,1009.5,80,68]},{"id":"farm_2","zone":"farm","i":2,"unlock":10,"x":322.1,"foot_vb":1077.5,"w_vb":80.0,"tap":[282.1,1009.5,80,68]},{"id":"farm_3","zone":"farm","i":3,"unlock":16,"x":419.3,"foot_vb":1077.5,"w_vb":80.0,"tap":[379.3,1009.5,80,68]},{"id":"mine_0","zone":"mine","i":0,"unlock":1,"x":75.4,"foot_vb":1218.5,"w_vb":80.0,"tap":[35.4,1150.5,80,68]},{"id":"mine_1","zone":"mine","i":1,"unlock":6,"x":160.4,"foot_vb":1225.8,"w_vb":80.0,"tap":[120.4,1157.8,80,68]},{"id":"mine_2","zone":"mine","i":2,"unlock":12,"x":75.4,"foot_vb":1293.8,"w_vb":80.0,"tap":[35.4,1225.8,80,68]},{"id":"mine_3","zone":"mine","i":3,"unlock":18,"x":165.3,"foot_vb":1298.7,"w_vb":80.0,"tap":[125.3,1230.7,80,68]},{"id":"dojo_0","zone":"dojo","i":0,"unlock":8,"x":323.3,"foot_vb":1235.5,"w_vb":80.0,"tap":[283.3,1167.5,80,68]},{"id":"dojo_1","zone":"dojo","i":1,"unlock":14,"x":405.9,"foot_vb":1235.5,"w_vb":80.0,"tap":[365.9,1167.5,80,68]},{"id":"dojo_2","zone":"dojo","i":2,"unlock":20,"x":323.3,"foot_vb":1303.5,"w_vb":80.0,"tap":[283.3,1235.5,80,68]},{"id":"dojo_3","zone":"dojo","i":3,"unlock":26,"x":405.9,"foot_vb":1303.5,"w_vb":80.0,"tap":[365.9,1235.5,80,68]},{"id":"vault_0","zone":"vault","i":0,"unlock":20,"x":87.5,"foot_vb":1553.9,"w_vb":80.0,"tap":[47.5,1485.9,80,68]},{"id":"vault_1","zone":"vault","i":1,"unlock":28,"x":172.6,"foot_vb":1553.9,"w_vb":80.0,"tap":[132.6,1485.9,80,68]},{"id":"vault_2","zone":"vault","i":2,"unlock":36,"x":311.1,"foot_vb":1553.9,"w_vb":80.0,"tap":[271.1,1485.9,80,68]},{"id":"vault_3","zone":"vault","i":3,"unlock":44,"x":401.1,"foot_vb":1553.9,"w_vb":80.0,"tap":[361.1,1485.9,80,68]}],"lamps":[[210.3,892.7],[227.3,892.7],[210.3,969.3],[227.3,969.3],[249.2,1011.8],[266.2,1011.8],[210.3,1129.7],[227.3,1129.7],[249.2,1252.5],[266.2,1252.5],[210.3,1419.0],[227.3,1419.0],[249.2,1543.0],[266.2,1543.0]],"tap":{"size_vb":[80,68],"rule":"box centred on the pad (x, foot_vb - 34); no overlaps (checked)","overlaps":[]},"hint_stake":{"part":"hint_stake","x":"pad x - 0.32 * 80 vb","foot":"pad foot_vb - 22 css","w_css":40},"atlas":"valley.atlas (keys farm, mine, dojo, vault)"},"field_young":{"file":"art/maps/field_young.webp","size_px":[302,361],"vb":[323,633,151,180.5],"px_per_vb":2},"hint_parts":{"hint_stake":{"r":[0,272,122,157],"w_vb":48.6,"h_vb":62.8},"hint_mint":{"r":[126,272,158,131],"w_vb":63.2,"h_vb":52.4},"hint_tech":{"r":[288,272,158,137],"w_vb":63.2,"h_vb":54.8},"hint_barracks":{"r":[450,272,158,161],"w_vb":63.2,"h_vb":64.4},"hint_train":{"r":[612,272,158,215],"w_vb":63.2,"h_vb":86.0},"hint_market":{"r":[774,272,158,120],"w_vb":63.2,"h_vb":48.0},"hint_acct":{"r":[0,491,158,212],"w_vb":63.2,"h_vb":84.8},"hint_field":{"r":[162,491,158,157],"w_vb":63.2,"h_vb":62.8}}};
 /* home.json -> the valley data the draw uses (same shape as HV358J); null when a needed block is missing */
 function hv358From(j){var v=j&&j.valley;if(!v||!v.slots||!v.atlas||!v.atlas.parts||!v.lower||!v.lower.slots)return null;var hp={},pp=(j.props&&j.props.parts)||{};for(var k in pp)if(/^hint_/.test(k))hp[k]=pp[k];
@@ -28819,7 +28834,7 @@ function s11TwK(f){var K=TWT11,k=K[K.length-1][1];if(f<=K[0][0])return K[0][1];f
  function EN(){return typeof LANG!=='undefined'&&LANG==='en'}
  function on(){return!!(TRP8&&HRO9&&ITM9&&typeof PZ1!=='undefined'&&PZ1&&typeof GA165!=='undefined'&&GA165)}
  function card(){try{var o=on();return'<div class="card row" id="tsw301"><div class="sp"><b>'+(EN()?'Tester mode':'Tính năng đang thử')+'</b><div class="sm mute">'+(EN()?(o?'On: 8 troop types, Tiers, hero stars, new gear, puzzle stages.':'Turns on 8 troop types, hero stars, new gear, puzzle stages.'):(o?'Đang bật: 8 binh chủng, Bậc, sao tướng, đồ mới, ải cơ chế.':'Bật 8 binh chủng, sao tướng, đồ mới, ải cơ chế.'))+'</div></div><button class="btn '+(o?'':'alt ')+'sm" data-a="tsw301">'+(o?(EN()?'Off':'Tắt'):(EN()?'On':'Bật'))+'</button></div>'}catch(e){return''}}
- function flip(){try{var o=on();KS.forEach(function(k){try{if(o)localStorage.removeItem(k);else localStorage.setItem(k,'1')}catch(e){}});try{save()}catch(e){}setTimeout(function(){try{location.reload()}catch(e){}},120)}catch(e){}}
+ function flip(){try{var o=on();KS.forEach(function(k){try{if(o){if(/^bn-(trp8|hro9|itm9)$/.test(k))localStorage.setItem(k,'0');else localStorage.removeItem(k)}else localStorage.setItem(k,'1')}catch(e){}});try{save()}catch(e){}setTimeout(function(){try{location.reload()}catch(e){}},120)}catch(e){}}
  try{gdCard('tsw301',card)}catch(e){}
  var _A=A_;A_=function(a,v,w,el){if(a==='tsw301'){var o=on();
    flConfirm(o?((typeof LANG!=='undefined'&&LANG==='en')?'Turn tester mode off? The game goes back to today\'s rules, but does NOT bring back your progress from before the reset: the old save is only a backup. The page will reload.':'Tắt chế độ thử nghiệm? Trò chơi trở về cách chơi hiện tại, nhưng KHÔNG lấy lại tiến trình trước khi đặt lại: bản lưu cũ chỉ là bản sao lưu. Trang sẽ tải lại.'):(EN()?'Turn tester mode on? The first time, your test progress is reset once (the old save is backed up first). The page will reload.':'Bật chế độ thử nghiệm? Lần đầu bật sẽ đặt lại tiến trình thử nghiệm một lần (bản lưu cũ được sao lưu trước). Trang sẽ tải lại.'),flip,o?(EN()?'Turn off and reload':'Tắt và tải lại'):(EN()?'Turn on and reload':'Bật và tải lại'));return}
@@ -30205,7 +30220,7 @@ var PB331ST={on:0,mi:0,si:0,kind:'stage',free:0,sel:null,aim:null,panel:null,sub
   document.head.appendChild(st)}
  /* BN-366 (behind ?cc362=1 only, same switch and text as ui354c12.js): one 12 px gold line in the top strip, left of the X (this screen has no stage title).
     Red-flag stage (hero not owned, not the boss) = "Thắng để chiêu mộ {tên}" (bn362-chinhchien-text-2.md §3.1); boss stage = the boss tip (ui354c12 STR.tip). Plain stage, elite, free mode, switch OFF = nothing. */
- function cc362On(){try{var q=(location.search||'')+(location.hash||'');if(/[?#&]cc362=1(\D|$)/.test(q))return true;if(/[?#&]cc362=0(\D|$)/.test(q))return false;return localStorage.getItem('bn-cc362')==='1'}catch(e){return false}}
+ function cc362On(){try{var q=(location.search||'')+(location.hash||'');if(/[?#&]cc362=1(\D|$)/.test(q))return true;if(/[?#&]cc362=0(\D|$)/.test(q))return false;return localStorage.getItem('bn-cc362')!=='0'}catch(e){return true}}
  function cc362Text(){try{if(PB.free||PB.kind!=='stage'||!MAPS[PB.mi]||!cc362On())return'';var M=MAPS[PB.mi],n=M.st.length,si=PB.si,fl=M.flags&&M.flags[si];
    if(si===n-1)return PB.mi===0?'Giữ vững hàng đầu, hoặc hạ hắn trước hiệp 3.':'Xem Tình báo địch để tìm cách phá thế.';
    if(fl&&!S.gens[fl]){var nm0=(GENS[fl]&&GENS[fl].n)||'';return nm0?'Thắng để chiêu mộ '+nm0:'Cờ đỏ: thắng để chiêu mộ'}}catch(e){}return''}
@@ -31437,7 +31452,7 @@ window.bt336On=function(){return false};
 var BT336={sw:0,err:0,dirty:0,cfg:null};
 (function(){try{
  var Q='';try{Q=location.search||''}catch(e){}
- if(!/[?&]bt336=1(\D|$)/.test(Q))return;
+ if(/[?&]bt336=0(\D|$)/.test(Q))return;
  BT336.sw=1;
  var R2A3=!/[?&]r2a3=0(\D|$)/.test(Q);   /* R2-A3-1 (art r2a3.md items 1-4, 6, 7 + the soft cast band): rarity plate rims, SSR 22 px pop, enemy plate below its squad, plate holds to 900 ms, no table dim on R/SR, target light capped on >= 3 targets; ?r2a3=0 = the old look */
  BT336.r2a3=R2A3;
@@ -32340,7 +32355,7 @@ var EDG={e:{t:63,h:85,b:318,w0:155,w1:169.7},o:{t:354,h:94,b:636,w0:176,w1:199}}
 var BT362={sw:0,err:0,last:'',cfg:null,lite:0,auto:0,ft:0,cost:0,dc:0,dcMax:0};
 (function(){try{
  var Q='';try{Q=location.search||''}catch(e){}
- if(!/[?&]bt362=1(\D|$)/.test(Q))return;
+ if(/[?&]bt362=0(\D|$)/.test(Q))return;
  if(typeof BT336==='undefined'||!BT336.sw||!BT336.X)return;
  BT362.sw=1;
  var X=BT336.X,A=X.A,I=X.I,TR='art/troops/',HR='art/heroes/',PI2=Math.PI*2;
@@ -36999,11 +37014,11 @@ function skTagOf(a,ev,el){try{var u=a&&a.u||{},nm=String(ev&&ev.name||''),k=SKTA
    Switch UI354: OFF by default. ON with ?ui354=1 (localStorage 'bn-ui354'='1'), OFF with ?ui354=0. Off = nothing below runs (body has no .ui354 class), the game stays as before.
    Specs: docs/design/ui/bn354-day1-and-icon-rows.md, docs/art/bn354-dock-spec.md, Decisions 256 B, 257 B, 258 A. Art pieces from kit_r2 (nav plate, sockets, badge, lock).
    Hooks for later art: U354ART (side-button medallions, goal-chip art) — set U354ART.side.guild / .ev to an image url when Spark ships it. */
-var UI354=0,U354ART={side:{guild:'',ev:''}};
+var UI354=1,U354ART={side:{guild:'',ev:''}};
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]ui354=1(\D|$)/.test(q)){UI354=1;try{localStorage.setItem('bn-ui354','1')}catch(e){}}
- else if(/[?#&]ui354=0(\D|$)/.test(q)){UI354=0;try{localStorage.removeItem('bn-ui354')}catch(e){}}
- else{try{UI354=localStorage.getItem('bn-ui354')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]ui354=0(\D|$)/.test(q)){UI354=0;try{localStorage.setItem('bn-ui354','0')}catch(e){}}
+ else{try{UI354=localStorage.getItem('bn-ui354')==='0'?0:1}catch(e){}}}catch(e){}})();
 
 /* ---- 1. locked cells (day-1 rule) : body class -> cell. Locked = body.bn3lX (bn340b2.js BN3U) or, for Thiên hạ, body.bn-tl ---- */
 var U354LK=[
@@ -38614,7 +38629,7 @@ function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div cl
 var AUD=0;
 window.snd=function(){};
 var AUD301={on:0,log:[],err:0};
-(function(){try{var Q='';try{Q=location.search||''}catch(e){}if(/[?&]aud=1(\D|$)/.test(Q))AUD=1}catch(e){}})();
+(function(){try{var Q='';try{Q=location.search||''}catch(e){}if(!/[?&]aud=0(\D|$)/.test(Q))AUD=1}catch(e){}})();
 (function(){try{
  if(!AUD)return;
  AUD301.on=1;
@@ -38973,13 +38988,13 @@ var AUD301={on:0,log:[],err:0};
    B7 home wakes (once), B8 faction standards + visible title + "Theo {phe}" stamp, R1 reset edict (CSS on .u3wc).
    Every overlay has a timeout and removes itself; Bỏ qua works in B0-B3; lite mode (reduced motion, hardwareConcurrency<=4, deviceMemory<=2, or ?wclite=1; ?wclite=0 forces full) = crossfades only.
    Missing art -> today's flow. Code at load never throws. */
-var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
+var WC360=1;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
 (function(){try{var q='';try{q=location.search+location.hash}catch(e){}
  if(/[?#&]wc360=1(\D|$)/.test(q)){WC360=1;try{localStorage.setItem('bn-wc360','1')}catch(e){}}
- else if(/[?#&]wc360=0(\D|$)/.test(q)){WC360=0;try{localStorage.removeItem('bn-wc360')}catch(e){}}
- else{try{WC360=localStorage.getItem('bn-wc360')==='1'?1:0}catch(e){}}
+ else if(/[?#&]wc360=0(\D|$)/.test(q)){WC360=0;try{localStorage.setItem('bn-wc360','0')}catch(e){}}
+ else{try{WC360=localStorage.getItem('bn-wc360')==='0'?0:1}catch(e){}}
  /* LOGIN-FIX1 (designer login-text.md §2 rule 6): the new title (login301.js, ?lg=1 / 'bn-lgc') and this cinematic welcome both own the title; never both. The title wins. */
- try{var lg=/[?#&]lg=1(\D|$)/.test(q)||(!/[?#&]lg=0(\D|$)/.test(q)&&localStorage.getItem('bn-lgc')==='1');if(lg)WC360=0}catch(e){}}catch(e){}})();
+ try{var lg=/[?#&]lg=1(\D|$)/.test(q)||(!/[?#&]lg=0(\D|$)/.test(q)&&localStorage.getItem('bn-lgc')!=='0');if(lg)WC360=0}catch(e){}}catch(e){}})();
 (function(){try{
  if(!WC360)return;
  var W=WC360I,AB='art/ui/welcome/',now=function(){return Date.now()};
@@ -39618,12 +39633,12 @@ var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
    Strings: docs/design/ui/bn361-chinhchien-text.md and bn362-chinhchien-text-2.md (STR table). Must stay LAST in FILES. ===== */
 (function(){try{
  if(typeof UI354==='undefined'||!UI354||typeof renderMain!=='function')return;
- var Q0=location.search+location.hash,CC=0;
+ var Q0=location.search+location.hash,CC=1;
  if(/[?#&]cc362=1(\D|$)/.test(Q0)){CC=1;try{localStorage.setItem('bn-cc362','1')}catch(e){}}
- else if(/[?#&]cc362=0(\D|$)/.test(Q0)){try{localStorage.removeItem('bn-cc362')}catch(e){}}
- else{try{CC=localStorage.getItem('bn-cc362')==='1'?1:0}catch(e){}}
+ else if(/[?#&]cc362=0(\D|$)/.test(Q0)){try{localStorage.setItem('bn-cc362','0')}catch(e){}}
+ else{try{CC=localStorage.getItem('bn-cc362')==='0'?0:1}catch(e){}}
  if(!CC)return;
- var RDK=0;try{var rq0=(location.search||'')+(location.hash||'');RDK=/[?#&]rd1=1(\D|$)/.test(rq0)||(!/[?#&]rd1=0(\D|$)/.test(rq0)&&localStorage.getItem('bn-rd1')==='1')?1:0}catch(e){}
+ var RDK=0;try{var rq0=(location.search||'')+(location.hash||'');RDK=/[?#&]rd1=1(\D|$)/.test(rq0)||(!/[?#&]rd1=0(\D|$)/.test(rq0)&&localStorage.getItem('bn-rd1')!=='0')?1:0}catch(e){}
  var D=document,H=D.documentElement,SKY=208+(RDK?128:0),R=null,TO=0,LITE=0,SCR={},LAST={},ANI=[],SCENE=0,REV=0,CUT=null,CUTLD=0,RETRY=0,TYC={},NC={},CC_={},MON=0,LTV=0;
  /* RD1-S2: read-only hooks for rd1s2_301.js (chest track stays hidden during scenes; elite squads baked from the same cut-outs) */
  window.C12RD1={busy:function(){return!!(SCENE||REV)},rev:function(){return!!REV},hold:function(){return!!(REV&&REV.hold)},bake:function(side,tys,seed,rk){try{return bakeCamp(side,tys,seed,'rdn',0,false,rk||3)}catch(e){return null}},cutReady:function(){return!!(CUT&&ATL.enemy)},load:function(){try{loadCut()}catch(e){}}};
@@ -40493,11 +40508,11 @@ var WC360=0;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
    - genSheet (heroui.js + wrappers)     -> post-processes the final hero sheet html: one painted back, portrait well with per-hero offset, rails, inlays, P/S buttons.
    Pieces are cut at boot from the shipped atlases (kit, kit_r2, kit_r4, kit_r4b, kit_r5, kit_r7, kit_r8, forge_plate.json, bursts, panel_back_*) into blob urls kept in CSS vars --t3-<piece>.
    Actions added: t3d (soft-disabled tap -> toast / route), t3sl (opens Thiếu Bạc from the item popup with action "Cường hóa"). grep'd unused 2026-11-14. */
-var IT363=0;
+var IT363=1;
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]it363=1(\D|$)/.test(q)){IT363=1;try{localStorage.setItem('bn-it363','1')}catch(e){}}
- else if(/[?#&]it363=0(\D|$)/.test(q)){IT363=0;try{localStorage.removeItem('bn-it363')}catch(e){}}
- else{try{IT363=localStorage.getItem('bn-it363')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]it363=0(\D|$)/.test(q)){IT363=0;try{localStorage.setItem('bn-it363','0')}catch(e){}}
+ else{try{IT363=localStorage.getItem('bn-it363')==='0'?0:1}catch(e){}}}catch(e){}})();
 (function(){try{
  if(!IT363)return;
  var D=document,HT=D.documentElement,K={},ACT=null;
@@ -41104,11 +41119,11 @@ function skHL(str,win){var s=String(str==null?'':str),esc=function(t){return t.r
   R.forEach(function(r){if(r[0]<i)return;o+=esc(s.slice(i,r[0]));var t=esc(s.slice(r[0],r[1]));
    o+=r[2]==='t'?'<span class="hbkt">'+t+'</span>':r[2]==='n'?'<span class="hbkn">'+t+'</span>':'<span class="hbke" style="--hc:'+r[3]+'">'+(r[4]||'')+t+'</span>';i=r[1]});
   return o+esc(s.slice(i))}catch(e){return esc(s)}}
-var HHUB=0;
+var HHUB=1;
 (function(){try{var q=(location.search||'')+(location.hash||'');
  if(/[?#&]hub=1(\D|$)/.test(q)){HHUB=1;try{localStorage.setItem('bn-hub','1')}catch(e){}}
- else if(/[?#&]hub=0(\D|$)/.test(q)){HHUB=0;try{localStorage.removeItem('bn-hub')}catch(e){}}
- else{try{HHUB=localStorage.getItem('bn-hub')==='1'?1:0}catch(e){}}}catch(e){}})();
+ else if(/[?#&]hub=0(\D|$)/.test(q)){HHUB=0;try{localStorage.setItem('bn-hub','0')}catch(e){}}
+ else{try{HHUB=localStorage.getItem('bn-hub')==='0'?0:1}catch(e){}}}catch(e){}})();
 var hhubSheet=null;
 (function(){try{
  if(!HHUB||typeof IT363==='undefined'||!IT363)return;
@@ -41468,12 +41483,12 @@ function emptyGear(gid){var x=window.T3X,sl='';
    Money rules (03, 04): no price, pack, amount, odds, perk, timer or offer is changed or invented. Every price/button/text of the old markup is kept (the old nodes are moved and
    restyled, never rebuilt from other data); the VIP perks are the old rows (VIPP data) in the same markup, only re-ordered ascending. Art = shipped art only (vip_track atlas, kit pieces --k4-*).
    Spec: docs/art/rd1-concepts-review.md §2 03/04/06. Chain: this file is last in FILES; it wraps vipHtml and adds a DOM pass for the open Gói Nạp Đầu sheet. */
-var RD1=0;
+var RD1=1;
 (function(){try{
  var q=(location.search||'')+(location.hash||'');
  if(/[?#&]rd1=1(\D|$)/.test(q)){RD1=1;try{localStorage.setItem('bn-rd1','1')}catch(e){}}
- else if(/[?#&]rd1=0(\D|$)/.test(q)){RD1=0;try{localStorage.removeItem('bn-rd1')}catch(e){}}
- else{try{RD1=localStorage.getItem('bn-rd1')==='1'?1:0}catch(e){}}
+ else if(/[?#&]rd1=0(\D|$)/.test(q)){RD1=0;try{localStorage.setItem('bn-rd1','0')}catch(e){}}
+ else{try{RD1=localStorage.getItem('bn-rd1')==='0'?0:1}catch(e){}}
 }catch(e){}})();
 (function(){try{
  if(!RD1)return;
@@ -42110,7 +42125,7 @@ function lfrPill(n){try{return lfrOn()&&!(BT.meta&&BT.meta.rl&&BT.meta.rl.n)&&n>
 var GH301={err:0,bakes:0,log:[]};
 (function(){try{
  var Q='';try{Q=location.search||''}catch(e){}
- var ON=/[?&]ghost=1(\D|$)/.test(Q);
+ var ON=!/[?&]ghost=0(\D|$)/.test(Q);
  var SP=function(){return Math.max(1,(typeof BT!=='undefined'&&BT.speed)||1)};
  function cl(x,a,b){return x<a?a:x>b?b:x}
  function eo(p){return 1-(1-p)*(1-p)}
@@ -42290,12 +42305,12 @@ var GH301={err:0,bakes:0,log:[]};
    New text is only what the spec names: O1, O2 (np206Vip of the next rung, the same calc np206Give grants), "Lực chiến" + his power (fmPow path, hidden on error),
    "Gói sau: bộ Bạch Mã". Art: shipped files only (pack_keyart_gongsunzan.webp, ftu_rays.webp, kit pieces cropped from kit.webp / kit_r2 / kit_r7, fb_thep_bo frames).
    Last in FILES: wraps np206Sheet. No save field, no action name. Every step try/catch; any failure returns the old html. */
-var FTU2=0;
+var FTU2=1;
 (function(){try{
  var q=(location.search||'')+(location.hash||'');
  if(/[?#&]ftu2=1(\D|$)/.test(q)){FTU2=1;try{localStorage.setItem('bn-ftu2','1')}catch(e){}}
- else if(/[?#&]ftu2=0(\D|$)/.test(q)){FTU2=0;try{localStorage.removeItem('bn-ftu2')}catch(e){}}
- else{try{FTU2=localStorage.getItem('bn-ftu2')==='1'?1:0}catch(e){}}
+ else if(/[?#&]ftu2=0(\D|$)/.test(q)){FTU2=0;try{localStorage.setItem('bn-ftu2','0')}catch(e){}}
+ else{try{FTU2=localStorage.getItem('bn-ftu2')==='0'?0:1}catch(e){}}
 }catch(e){}})();
 (function(){try{
  if(!FTU2||typeof np206Sheet!=='function')return;
@@ -45079,12 +45094,12 @@ var U3HX=(function(){
      w1NoOrdItems() -> the §4 list [{t, a, v}] (first 3 open no-lệnh items), the same the session-end box shows
    Actions (grepped unused): w1g (card go / claim, v "d|slot", w "go"|"claim"), w1cap (capstone claim), w1e (session-end item, v index), w1x (session-end "Để sau").
    Bot / sim hook: window.W1BOT = {step(), claimAll()} (the sim's own chain model sim/w1_patch.js must not run together with ?w1=1: both use S.w1). */
-var W1ON=0;
+var W1ON=1;
 (function(){try{
  var q=(location.search||'')+(location.hash||'');
  if(/[?#&]w1=1(\D|$)/.test(q)){W1ON=1;try{localStorage.setItem('bn-w1','1')}catch(e){}}
- else if(/[?#&]w1=0(\D|$)/.test(q)){W1ON=0;try{localStorage.removeItem('bn-w1')}catch(e){}}
- else{try{W1ON=localStorage.getItem('bn-w1')==='1'?1:0}catch(e){}}
+ else if(/[?#&]w1=0(\D|$)/.test(q)){W1ON=0;try{localStorage.setItem('bn-w1','0')}catch(e){}}
+ else{try{W1ON=localStorage.getItem('bn-w1')==='0'?0:1}catch(e){}}
 }catch(e){}})();
 /* Uy Danh key for giveRw: the Lôi Đài currency (S.ar2.ud), the same place ar2Give pays it */
 (function(){try{var _grW1=giveRw;giveRw=function(rw){var r=_grW1.apply(this,arguments);try{if(rw&&rw.ud>0&&typeof ar2==='function')ar2().ud+=rw.ud}catch(e){}return r}}catch(e){}})();
@@ -45364,10 +45379,10 @@ var LGT={start1:'Bắt đầu chinh chiến',start2:'Tiếp tục',srv:'Máy ch�
  story:'Loạn Hoàng Cân nổi dậy. Hãy đặt danh xưng, tên sẽ vang khắp chiến trường Tam Quốc.',nms0:'Tên sẽ vang khắp chiến trường Tam Quốc.'};   /* LOGIN-FIX1: strings per docs/design/ui/login-text.md (legal kept for later, hidden until publisher links it) */
 (function(){try{
  var q='';try{q=location.search+location.hash}catch(e){}
- var on=0;
+ var on=1;
  if(/[?#&]lg=1(\D|$)/.test(q)){on=1;try{localStorage.setItem('bn-lgc','1')}catch(e){}}
- else if(/[?#&]lg=0(\D|$)/.test(q)){on=0;try{localStorage.removeItem('bn-lgc')}catch(e){}}
- else{try{on=localStorage.getItem('bn-lgc')==='1'?1:0}catch(e){}}
+ else if(/[?#&]lg=0(\D|$)/.test(q)){on=0;try{localStorage.setItem('bn-lgc','0')}catch(e){}}
+ else{try{on=localStorage.getItem('bn-lgc')==='0'?0:1}catch(e){}}
  if(!on)return;
  var sp=document.getElementById('splash');if(!sp)return;
  var q0='';try{q0=location.search||''}catch(e){}
