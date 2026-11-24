@@ -1,0 +1,686 @@
+{
+"artmeta": 1,
+"id": "urw2_move",
+"build": "V303-staged",
+"file": "art/fx/urw2_move.webp",
+"size": [
+2048,
+1648
+],
+"bytes": 509172,
+"note": "UR wave 2 moves (r932-r937 approved production sheets), pieces that STAY only. Keys <gid>.<piece>; r = atlas rect, pv = pivot px in the piece, css_per_px = css size of one atlas px (never resampled, 1.76 atlas px per css px as ssg_urmove), straight alpha. NOT packed: r932 ox convoy + stride, sweep bands (r933 jade, r934 wave, r937 wave), steam flower / satchel steam (r935), flying pages / ink wisp (r936): round C flipbooks r942-r947 replace them. Remaps at cut (pink mask empty after): r932 sack_burst+ruts to sand, r933 specks_ring to jade/white, r934 ring_b to foam white, r935 herb_ring to grey-green, r936 ink pieces to navy.",
+"pieces": {
+"huangyueying.sack_burst": {
+"hero": "huangyueying",
+"r": [
+1573,
+480,
+273,
+256
+],
+"pv": [
+136,
+218
+],
+"css_per_px": 0.5669,
+"css": [
+154.8,
+145.1
+],
+"mode": "normal",
+"src": "r932 approved",
+"draw": "grain sack bursting (per-squad accent); burst tips remapped to sand"
+},
+"huangyueying.barricade": {
+"hero": "huangyueying",
+"r": [
+434,
+889,
+348,
+234
+],
+"pv": [
+174,
+211
+],
+"css_per_px": 0.5669,
+"css": [
+197.3,
+132.7
+],
+"mode": "normal",
+"src": "r932 approved",
+"draw": "wooden barricade, still focal piece that stays (529 OK), in/out >= 150 ms"
+},
+"huangyueying.ruts": {
+"hero": "huangyueying",
+"r": [
+658,
+1338,
+342,
+161
+],
+"pv": [
+171,
+80
+],
+"css_per_px": 0.5669,
+"css": [
+193.9,
+91.3
+],
+"mode": "normal",
+"src": "r932 approved",
+"draw": "ruts + grain streak decal, ground pivot; pink tips remapped to sand"
+},
+"huangyueying.sack_fall": {
+"hero": "huangyueying",
+"r": [
+1211,
+889,
+142,
+221
+],
+"pv": [
+71,
+122
+],
+"css_per_px": 0.5669,
+"css": [
+80.5,
+125.3
+],
+"mode": "normal",
+"src": "r932 approved",
+"draw": "falling grain sack (rigid prop, code arc/spin)"
+},
+"xunyu.board_scene": {
+"hero": "xunyu",
+"r": [
+1042,
+0,
+773,
+411
+],
+"pv": [
+271,
+378
+],
+"css_per_px": 0.5669,
+"css": [
+438.2,
+233.0
+],
+"mode": "normal",
+"src": "r933 approved",
+"draw": "open memorial board + brush + painted jade curl (scene, stays in place); the jade sweep band beside it is NOT packed (r943)"
+},
+"xunyu.board_closed": {
+"hero": "xunyu",
+"r": [
+784,
+889,
+425,
+226
+],
+"pv": [
+212,
+113
+],
+"css_per_px": 0.5669,
+"css": [
+240.9,
+128.1
+],
+"mode": "normal",
+"src": "r933 approved",
+"draw": "closed board + brush (rigid prop travel: arc, spin, squash, trail)"
+},
+"xunyu.cleanse_ring": {
+"hero": "xunyu",
+"r": [
+468,
+1136,
+361,
+191
+],
+"pv": [
+180,
+96
+],
+"css_per_px": 0.5669,
+"css": [
+204.7,
+108.3
+],
+"mode": "normal",
+"src": "r933 approved",
+"draw": "jade splash ring decal (per-squad)"
+},
+"xunyu.specks_ring": {
+"hero": "xunyu",
+"r": [
+1680,
+1338,
+303,
+151
+],
+"pv": [
+152,
+76
+],
+"css_per_px": 0.5669,
+"css": [
+171.8,
+85.6
+],
+"mode": "normal",
+"src": "r933 approved",
+"draw": "cleanse-specks ring (per-squad); pink remapped to jade/white"
+},
+"xunyu.jade_spots": {
+"hero": "xunyu",
+"r": [
+298,
+1338,
+358,
+165
+],
+"pv": [
+179,
+82
+],
+"css_per_px": 0.5669,
+"css": [
+203.0,
+93.5
+],
+"mode": "normal",
+"src": "r933 approved",
+"draw": "jade spot decal under the knees (note 7)"
+},
+"xunyu.drop": {
+"hero": "xunyu",
+"r": [
+318,
+1136,
+148,
+198
+],
+"pv": [
+74,
+178
+],
+"css_per_px": 0.5669,
+"css": [
+83.9,
+112.2
+],
+"mode": "normal",
+"src": "r933 approved",
+"draw": "drop + soak (note 7: <= 14 % of squad height)"
+},
+"lusu.tally_scene": {
+"hero": "lusu",
+"r": [
+761,
+480,
+810,
+376
+],
+"pv": [
+364,
+338
+],
+"css_per_px": 0.5669,
+"css": [
+459.2,
+213.2
+],
+"mode": "normal",
+"src": "r934 approved",
+"draw": "locked tallies + river curl scene (stays in place; 7.3 focal)"
+},
+"lusu.tally_half": {
+"hero": "lusu",
+"r": [
+1355,
+889,
+391,
+211
+],
+"pv": [
+196,
+106
+],
+"css_per_px": 0.5669,
+"css": [
+221.7,
+119.6
+],
+"mode": "normal",
+"src": "r934 approved",
+"draw": "half-tally with spray (rigid prop travel); spray bits included"
+},
+"lusu.ring_a": {
+"hero": "lusu",
+"r": [
+647,
+1508,
+279,
+123
+],
+"pv": [
+140,
+62
+],
+"css_per_px": 0.5669,
+"css": [
+158.2,
+69.7
+],
+"mode": "normal",
+"src": "r934 approved",
+"draw": "low wave lip ring (per-squad ground, N7.1 low)"
+},
+"lusu.ring_b": {
+"hero": "lusu",
+"r": [
+928,
+1508,
+316,
+123
+],
+"pv": [
+158,
+62
+],
+"css_per_px": 0.5669,
+"css": [
+179.1,
+69.7
+],
+"mode": "normal",
+"src": "r934 approved",
+"draw": "morale ring with tally cord; centre remapped to foam white"
+},
+"lusu.mud_decal": {
+"hero": "lusu",
+"r": [
+1456,
+1508,
+281,
+98
+],
+"pv": [
+140,
+49
+],
+"css_per_px": 0.5669,
+"css": [
+159.3,
+55.6
+],
+"mode": "normal",
+"src": "r934 approved",
+"draw": "dark wet mud decal"
+},
+"lusu.splash_crown": {
+"hero": "lusu",
+"r": [
+1246,
+1508,
+208,
+112
+],
+"pv": [
+104,
+84
+],
+"css_per_px": 0.5669,
+"css": [
+117.9,
+63.5
+],
+"mode": "normal",
+"src": "r934 approved",
+"draw": "small splash crown (reaction)"
+},
+"huatuo.pot_scene": {
+"hero": "huatuo",
+"r": [
+646,
+0,
+394,
+455
+],
+"pv": [
+197,
+410
+],
+"css_per_px": 0.5669,
+"css": [
+223.4,
+257.9
+],
+"mode": "normal",
+"src": "r935 approved",
+"draw": "great herb pot + painted steam flower: the pot is the revive prop (code restricts it to the revived tile); the steam is replaced by the r945 flipbook"
+},
+"huatuo.satchel": {
+"hero": "huatuo",
+"r": [
+1476,
+1338,
+202,
+155
+],
+"pv": [
+101,
+78
+],
+"css_per_px": 0.5669,
+"css": [
+114.5,
+87.9
+],
+"mode": "normal",
+"src": "r935 approved",
+"draw": "satchel in flight (rigid prop, arc/spin/squash)"
+},
+"huatuo.pot_flight": {
+"hero": "huatuo",
+"r": [
+291,
+889,
+141,
+241
+],
+"pv": [
+70,
+120
+],
+"css_per_px": 0.5669,
+"css": [
+79.9,
+136.6
+],
+"mode": "normal",
+"src": "r935 approved",
+"draw": "pot in flight with a wisp (rigid prop)"
+},
+"huatuo.dust_puff": {
+"hero": "huatuo",
+"r": [
+1150,
+1338,
+324,
+156
+],
+"pv": [
+162,
+94
+],
+"css_per_px": 0.5669,
+"css": [
+183.7,
+88.4
+],
+"mode": "normal",
+"src": "r935 approved",
+"draw": "flat dust puff, ground reaction"
+},
+"huatuo.herb_ring": {
+"hero": "huatuo",
+"r": [
+344,
+1508,
+207,
+137
+],
+"pv": [
+104,
+68
+],
+"css_per_px": 0.5669,
+"css": [
+117.3,
+77.7
+],
+"mode": "normal",
+"src": "r935 approved",
+"draw": "herb-mark ring decal; pink remapped to grey-green"
+},
+"huatuo.herb_bundle": {
+"hero": "huatuo",
+"r": [
+1002,
+1338,
+146,
+159
+],
+"pv": [
+73,
+87
+],
+"css_per_px": 0.5669,
+"css": [
+82.8,
+90.1
+],
+"mode": "normal",
+"src": "r935 approved",
+"draw": "herb bundle"
+},
+"zuoci.book_scene": {
+"hero": "zuoci",
+"r": [
+0,
+480,
+759,
+407
+],
+"pv": [
+380,
+374
+],
+"css_per_px": 0.5669,
+"css": [
+430.3,
+230.7
+],
+"mode": "normal",
+"src": "r936 approved",
+"draw": "giant open blank book + ink cup (scene, at the HUD edge 520e); ink edge fringe remapped to navy; flying pages replaced by r946"
+},
+"zuoci.ink_crown": {
+"hero": "zuoci",
+"r": [
+0,
+889,
+289,
+245
+],
+"pv": [
+144,
+172
+],
+"css_per_px": 0.5669,
+"css": [
+163.8,
+138.9
+],
+"mode": "normal",
+"src": "r936 approved",
+"draw": "ink crown splash with page (per-squad)"
+},
+"zuoci.ink_pool": {
+"hero": "zuoci",
+"r": [
+0,
+1338,
+296,
+168
+],
+"pv": [
+148,
+84
+],
+"css_per_px": 0.5669,
+"css": [
+167.8,
+95.2
+],
+"mode": "normal",
+"src": "r936 approved",
+"draw": "ink pool with page (per-squad ground)"
+},
+"zuoci.ink_cup_pool": {
+"hero": "zuoci",
+"r": [
+831,
+1136,
+314,
+189
+],
+"pv": [
+157,
+104
+],
+"css_per_px": 0.5669,
+"css": [
+178.0,
+107.1
+],
+"mode": "normal",
+"src": "r936 approved",
+"draw": "ink pool with tipped cup (per-squad ground)"
+},
+"liubei.tree_scene": {
+"hero": "liubei",
+"r": [
+0,
+0,
+644,
+478
+],
+"pv": [
+322,
+430
+],
+"css_per_px": 0.5669,
+"css": [
+365.1,
+271.0
+],
+"mode": "normal",
+"src": "r937 approved",
+"draw": "peach tree + crossed swords (still focal piece, 529 OK)"
+},
+"liubei.swords_travel": {
+"hero": "liubei",
+"r": [
+1437,
+1136,
+314,
+182
+],
+"pv": [
+157,
+91
+],
+"css_per_px": 0.5669,
+"css": [
+178.0,
+103.2
+],
+"mode": "normal",
+"src": "r937 approved",
+"draw": "crossed swords with petal wake (rigid prop: arc + spin + squash, painted trail)"
+},
+"liubei.dome": {
+"hero": "liubei",
+"r": [
+1147,
+1136,
+288,
+186
+],
+"pv": [
+144,
+164
+],
+"css_per_px": 0.5669,
+"css": [
+163.3,
+105.4
+],
+"mode": "normal",
+"src": "r937 approved",
+"draw": "aqua dome on a living squad (520c)"
+},
+"liubei.stakes": {
+"hero": "liubei",
+"r": [
+0,
+1136,
+316,
+200
+],
+"pv": [
+158,
+120
+],
+"css_per_px": 0.5669,
+"css": [
+179.1,
+113.4
+],
+"mode": "normal",
+"src": "r937 approved",
+"draw": "peach-stake ring on exactly the 2 weakest"
+},
+"liubei.wet_mark": {
+"hero": "liubei",
+"r": [
+0,
+1508,
+342,
+138
+],
+"pv": [
+171,
+69
+],
+"css_per_px": 0.5669,
+"css": [
+193.9,
+78.2
+],
+"mode": "normal",
+"src": "r937 approved",
+"draw": "wet mark with peach (per-squad ground)"
+},
+"liubei.petals": {
+"hero": "liubei",
+"r": [
+553,
+1508,
+92,
+128
+],
+"pv": [
+46,
+64
+],
+"css_per_px": 0.5669,
+"css": [
+52.2,
+72.6
+],
+"mode": "normal",
+"src": "r937 approved",
+"draw": "petal unit (trail particle)"
+}
+}
+}

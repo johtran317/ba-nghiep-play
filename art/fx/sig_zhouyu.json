@@ -1,0 +1,1155 @@
+{
+ "artmeta": 1,
+ "id": "sig_zhouyu",
+ "file": "art/fx/sig_zhouyu.webp",
+ "size": [
+  1024,
+  692
+ ],
+ "source": "r824 b on the empty plate 1376x768 (f4 colour-matched to f3), placed per art193 s35 + R1/R2 baked; f3/f4 painting split into 9 per-pad pieces",
+ "css_per_px_x": 1.1337,
+ "css_per_px_y": 1.099,
+ "frame": "placements are in the 344x768 FRAME the composites were built in (frame-local px), stretched to the 390x844 screen: css = px x (1.1337, 1.0990). tl = top-left of the piece, draw size = css [w,h], opacity as listed. anchor_css = the reference point of that placement in the composite (target column centre / pad centre); offset_css = tl_css - anchor_css: to retarget, tl = live anchor + offset_css. Draw order = order within a layer; under_squads = ground under squads, over_squads = above them. R1 gap fade (nothing below y 410 frame px) and R2 top fade are baked into the alpha.",
+ "timing_s": [
+  0.3,
+  0.4,
+  0.4,
+  0.7
+ ],
+ "groups": {
+  "zhouyu.zhouyu_f1": [
+   "zhouyu.zy_wind",
+   "zhouyu.zy_ships"
+  ],
+  "zhouyu.zhouyu_f2": [
+   "zhouyu.zy_wall"
+  ],
+  "zhouyu.zhouyu_f3": [
+   "zhouyu.zy_f3_r1c1",
+   "zhouyu.zy_f3_r1c2",
+   "zhouyu.zy_f3_r1c3",
+   "zhouyu.zy_f3_r2c1",
+   "zhouyu.zy_f3_r2c2",
+   "zhouyu.zy_f3_r2c3",
+   "zhouyu.zy_f3_r3c1",
+   "zhouyu.zy_f3_r3c2",
+   "zhouyu.zy_f3_r3c3"
+  ],
+  "zhouyu.zhouyu_f4": [
+   "zhouyu.zy_f4_r1c1",
+   "zhouyu.zy_f4_r1c2",
+   "zhouyu.zy_f4_r1c3",
+   "zhouyu.zy_f4_r2c1",
+   "zhouyu.zy_f4_r2c2",
+   "zhouyu.zy_f4_r2c3",
+   "zhouyu.zy_f4_r3c1",
+   "zhouyu.zy_f4_r3c2",
+   "zhouyu.zy_f4_r3c3"
+  ]
+ },
+ "placements": {
+  "f1": [
+   {
+    "id": "zhouyu.zy_wind",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     120
+    ],
+    "tl_css": [
+     0.0,
+     131.9
+    ],
+    "tl_pct": [
+     0.0,
+     15.6
+    ],
+    "centre_pct": [
+     50.0,
+     30.3
+    ],
+    "size_css": [
+     390.0,
+     247.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -126.4
+    ],
+    "anchor_kind": "board_centre"
+   },
+   {
+    "id": "zhouyu.zy_ships",
+    "layer": "under_squads",
+    "tl_frame": [
+     180,
+     85
+    ],
+    "tl_css": [
+     204.1,
+     93.4
+    ],
+    "tl_pct": [
+     52.3,
+     11.1
+    ],
+    "centre_pct": [
+     76.2,
+     18.6
+    ],
+    "size_css": [
+     185.9,
+     126.4
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     9.1,
+     -164.8
+    ],
+    "anchor_kind": "board_centre"
+   }
+  ],
+  "f2": [
+   {
+    "id": "zhouyu.zy_wall",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     76
+    ],
+    "tl_css": [
+     0.0,
+     83.5
+    ],
+    "tl_pct": [
+     0.0,
+     9.9
+    ],
+    "centre_pct": [
+     50.0,
+     31.8
+    ],
+    "size_css": [
+     390.0,
+     369.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -174.7
+    ],
+    "anchor_kind": "board_centre"
+   }
+  ],
+  "f3": [
+   {
+    "id": "zhouyu.zy_f3_r1c1",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     114
+    ],
+    "tl_css": [
+     0.0,
+     125.3
+    ],
+    "tl_pct": [
+     0.0,
+     14.8
+    ],
+    "centre_pct": [
+     18.9,
+     20.8
+    ],
+    "size_css": [
+     147.4,
+     101.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     164.8
+    ],
+    "offset_css": [
+     -70.3,
+     -39.6
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r1c2",
+    "layer": "under_squads",
+    "tl_frame": [
+     105,
+     108
+    ],
+    "tl_css": [
+     119.0,
+     118.7
+    ],
+    "tl_pct": [
+     30.5,
+     14.1
+    ],
+    "centre_pct": [
+     50.4,
+     20.4
+    ],
+    "size_css": [
+     155.3,
+     107.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     164.8
+    ],
+    "offset_css": [
+     -76.0,
+     -46.2
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r1c3",
+    "layer": "under_squads",
+    "tl_frame": [
+     216,
+     115
+    ],
+    "tl_css": [
+     244.9,
+     126.4
+    ],
+    "tl_pct": [
+     62.8,
+     15.0
+    ],
+    "centre_pct": [
+     81.4,
+     20.9
+    ],
+    "size_css": [
+     145.1,
+     100.0
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     164.8
+    ],
+    "offset_css": [
+     -78.2,
+     -38.5
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r2c1",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     180
+    ],
+    "tl_css": [
+     0.0,
+     197.8
+    ],
+    "tl_pct": [
+     0.0,
+     23.4
+    ],
+    "centre_pct": [
+     18.9,
+     31.0
+    ],
+    "size_css": [
+     147.4,
+     127.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     258.3
+    ],
+    "offset_css": [
+     -70.3,
+     -60.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r2c2",
+    "layer": "under_squads",
+    "tl_frame": [
+     105,
+     180
+    ],
+    "tl_css": [
+     119.0,
+     197.8
+    ],
+    "tl_pct": [
+     30.5,
+     23.4
+    ],
+    "centre_pct": [
+     50.4,
+     31.0
+    ],
+    "size_css": [
+     155.3,
+     127.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -76.0,
+     -60.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r2c3",
+    "layer": "under_squads",
+    "tl_frame": [
+     216,
+     180
+    ],
+    "tl_css": [
+     244.9,
+     197.8
+    ],
+    "tl_pct": [
+     62.8,
+     23.4
+    ],
+    "centre_pct": [
+     81.4,
+     31.0
+    ],
+    "size_css": [
+     145.1,
+     127.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     258.3
+    ],
+    "offset_css": [
+     -78.2,
+     -60.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r3c1",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     270
+    ],
+    "tl_css": [
+     0.0,
+     296.7
+    ],
+    "tl_pct": [
+     0.0,
+     35.2
+    ],
+    "centre_pct": [
+     18.9,
+     44.5
+    ],
+    "size_css": [
+     147.4,
+     157.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     362.7
+    ],
+    "offset_css": [
+     -70.3,
+     -65.9
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r3c2",
+    "layer": "under_squads",
+    "tl_frame": [
+     105,
+     270
+    ],
+    "tl_css": [
+     119.0,
+     296.7
+    ],
+    "tl_pct": [
+     30.5,
+     35.2
+    ],
+    "centre_pct": [
+     50.4,
+     44.4
+    ],
+    "size_css": [
+     155.3,
+     156.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -76.0,
+     -65.9
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f3_r3c3",
+    "layer": "under_squads",
+    "tl_frame": [
+     216,
+     270
+    ],
+    "tl_css": [
+     244.9,
+     296.7
+    ],
+    "tl_pct": [
+     62.8,
+     35.2
+    ],
+    "centre_pct": [
+     81.4,
+     44.4
+    ],
+    "size_css": [
+     145.1,
+     156.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     362.7
+    ],
+    "offset_css": [
+     -78.2,
+     -65.9
+    ],
+    "anchor_kind": "pad"
+   }
+  ],
+  "f4": [
+   {
+    "id": "zhouyu.zy_f4_r1c1",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     120
+    ],
+    "tl_css": [
+     0.0,
+     131.9
+    ],
+    "tl_pct": [
+     0.0,
+     15.6
+    ],
+    "centre_pct": [
+     18.9,
+     21.2
+    ],
+    "size_css": [
+     147.4,
+     94.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     164.8
+    ],
+    "offset_css": [
+     -70.3,
+     -33.0
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r1c2",
+    "layer": "under_squads",
+    "tl_frame": [
+     105,
+     110
+    ],
+    "tl_css": [
+     119.0,
+     120.9
+    ],
+    "tl_pct": [
+     30.5,
+     14.3
+    ],
+    "centre_pct": [
+     50.4,
+     20.6
+    ],
+    "size_css": [
+     155.3,
+     105.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     164.8
+    ],
+    "offset_css": [
+     -76.0,
+     -44.0
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r1c3",
+    "layer": "under_squads",
+    "tl_frame": [
+     217,
+     120
+    ],
+    "tl_css": [
+     246.0,
+     131.9
+    ],
+    "tl_pct": [
+     63.1,
+     15.6
+    ],
+    "centre_pct": [
+     78.2,
+     21.2
+    ],
+    "size_css": [
+     117.9,
+     94.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     164.8
+    ],
+    "offset_css": [
+     -77.1,
+     -33.0
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r2c1",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     180
+    ],
+    "tl_css": [
+     0.0,
+     197.8
+    ],
+    "tl_pct": [
+     0.0,
+     23.4
+    ],
+    "centre_pct": [
+     18.9,
+     31.0
+    ],
+    "size_css": [
+     147.4,
+     127.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     258.3
+    ],
+    "offset_css": [
+     -70.3,
+     -60.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r2c2",
+    "layer": "under_squads",
+    "tl_frame": [
+     105,
+     180
+    ],
+    "tl_css": [
+     119.0,
+     197.8
+    ],
+    "tl_pct": [
+     30.5,
+     23.4
+    ],
+    "centre_pct": [
+     50.4,
+     31.0
+    ],
+    "size_css": [
+     155.3,
+     127.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -76.0,
+     -60.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r2c3",
+    "layer": "under_squads",
+    "tl_frame": [
+     216,
+     180
+    ],
+    "tl_css": [
+     244.9,
+     197.8
+    ],
+    "tl_pct": [
+     62.8,
+     23.4
+    ],
+    "centre_pct": [
+     81.4,
+     30.9
+    ],
+    "size_css": [
+     145.1,
+     125.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     258.3
+    ],
+    "offset_css": [
+     -78.2,
+     -60.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r3c1",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     270
+    ],
+    "tl_css": [
+     0.0,
+     296.7
+    ],
+    "tl_pct": [
+     0.0,
+     35.2
+    ],
+    "centre_pct": [
+     18.9,
+     44.5
+    ],
+    "size_css": [
+     147.4,
+     157.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     362.7
+    ],
+    "offset_css": [
+     -70.3,
+     -65.9
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r3c2",
+    "layer": "under_squads",
+    "tl_frame": [
+     105,
+     270
+    ],
+    "tl_css": [
+     119.0,
+     296.7
+    ],
+    "tl_pct": [
+     30.5,
+     35.2
+    ],
+    "centre_pct": [
+     50.4,
+     43.6
+    ],
+    "size_css": [
+     155.3,
+     142.9
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -76.0,
+     -65.9
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhouyu.zy_f4_r3c3",
+    "layer": "under_squads",
+    "tl_frame": [
+     216,
+     270
+    ],
+    "tl_css": [
+     244.9,
+     296.7
+    ],
+    "tl_pct": [
+     62.8,
+     35.2
+    ],
+    "centre_pct": [
+     81.4,
+     44.4
+    ],
+    "size_css": [
+     145.1,
+     156.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     362.7
+    ],
+    "offset_css": [
+     -78.2,
+     -65.9
+    ],
+    "anchor_kind": "pad"
+   }
+  ]
+ },
+ "pieces": {
+  "zhouyu.zy_wind": {
+   "hero": "zhouyu",
+   "r": [
+    346,
+    0,
+    344,
+    225
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    247.3
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_ships": {
+   "hero": "zhouyu",
+   "r": [
+    271,
+    482,
+    164,
+    115
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    185.9,
+    126.4
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_wall": {
+   "hero": "zhouyu",
+   "r": [
+    0,
+    0,
+    344,
+    336
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    369.2
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r1c1": {
+   "hero": "zhouyu",
+   "r": [
+    845,
+    482,
+    130,
+    92
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    147.4,
+    101.1
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r1c2": {
+   "hero": "zhouyu",
+   "r": [
+    567,
+    482,
+    137,
+    98
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    107.7
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r1c3": {
+   "hero": "zhouyu",
+   "r": [
+    0,
+    600,
+    128,
+    91
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    145.1,
+    100.0
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r2c1": {
+   "hero": "zhouyu",
+   "r": [
+    538,
+    338,
+    130,
+    116
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    147.4,
+    127.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r2c2": {
+   "hero": "zhouyu",
+   "r": [
+    670,
+    338,
+    137,
+    116
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    127.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r2c3": {
+   "hero": "zhouyu",
+   "r": [
+    809,
+    338,
+    128,
+    116
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    145.1,
+    127.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r3c1": {
+   "hero": "zhouyu",
+   "r": [
+    692,
+    0,
+    130,
+    143
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    147.4,
+    157.2
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r3c2": {
+   "hero": "zhouyu",
+   "r": [
+    0,
+    338,
+    137,
+    142
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    156.1
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f3_r3c3": {
+   "hero": "zhouyu",
+   "r": [
+    139,
+    338,
+    128,
+    142
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    145.1,
+    156.1
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r1c1": {
+   "hero": "zhouyu",
+   "r": [
+    130,
+    600,
+    130,
+    86
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    147.4,
+    94.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r1c2": {
+   "hero": "zhouyu",
+   "r": [
+    706,
+    482,
+    137,
+    96
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    105.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r1c3": {
+   "hero": "zhouyu",
+   "r": [
+    262,
+    600,
+    104,
+    86
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    117.9,
+    94.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r2c1": {
+   "hero": "zhouyu",
+   "r": [
+    0,
+    482,
+    130,
+    116
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    147.4,
+    127.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r2c2": {
+   "hero": "zhouyu",
+   "r": [
+    132,
+    482,
+    137,
+    116
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    127.5
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r2c3": {
+   "hero": "zhouyu",
+   "r": [
+    437,
+    482,
+    128,
+    114
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    145.1,
+    125.3
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r3c1": {
+   "hero": "zhouyu",
+   "r": [
+    824,
+    0,
+    130,
+    143
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    147.4,
+    157.2
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r3c2": {
+   "hero": "zhouyu",
+   "r": [
+    399,
+    338,
+    137,
+    130
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    142.9
+   ],
+   "mode": "normal"
+  },
+  "zhouyu.zy_f4_r3c3": {
+   "hero": "zhouyu",
+   "r": [
+    269,
+    338,
+    128,
+    142
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    145.1,
+    156.1
+   ],
+   "mode": "normal"
+  }
+ },
+ "notes": "Skill hits ALL enemy squads. f1 zy_wind (under) east-wind streaks + zy_ships (under) 2 crewless fire-ships on the far edge; f2 zy_wall (under) one flame wall over the whole board (left edge broken into tongues); f3 zy_f3_r<row>c<col> (under) fire burst + planks + smoke per enemy pad; f4 zy_f4_r<row>c<col> (under) scorch decal + ember cracks + charred planks per pad. r1 = back row, r3 = front row; c1 = left. anchor_css of per-pad pieces = that pad centre (frame 62/172/285 x 150/235/330); code draws the cells of live enemy pads at the live pad centre + offset_css. Weights sum to 1 across cells, so all 9 together equal the approved frame."
+}

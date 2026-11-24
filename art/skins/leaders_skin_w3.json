@@ -1,0 +1,1040 @@
+{
+ "note": "URW3-B-CUT: W3 skin leaders (r969 zhangliao_a, r970 dianwei_a FRONT ROW 3 ONLY, r971 luxun_a, r972 sunce_a; urw3-round-b.md s5). Same schema as leaders_skin.json but back_file == front_file (one atlas). skins[skin].hero = plain hero to fall back on; back/front[pose row.col] = {r:[x,y,w,h], fx (foot x), lift}; a missing key = use the plain hero cell (dianwei_a rows 1-2 = r996 a (V303 URW3-C-CUT; holds share rects, key hold_of)). Remaps: zhangliao_a 2.2 <- r1c2; luxun_a 1.3 <- r2c2, 1.5 <- r1c1.",
+ "back_file": "skins/leaders_skin_w3.webp",
+ "front_file": "skins/leaders_skin_w3.webp",
+ "size": [
+  1024,
+  768
+ ],
+ "bytes": 561648,
+ "skins": {
+  "luxun_a": {
+   "hero": "luxun",
+   "scale": 0.465,
+   "back": {
+    "2.4": {
+     "r": [
+      86,
+      0,
+      107,
+      116
+     ],
+     "fx": 45,
+     "lift": 0
+    },
+    "2.5": {
+     "r": [
+      682,
+      0,
+      79,
+      110
+     ],
+     "fx": 25,
+     "lift": 0
+    },
+    "1.1": {
+     "r": [
+      872,
+      0,
+      95,
+      109
+     ],
+     "fx": 49,
+     "lift": 0
+    },
+    "1.5": {
+     "r": [
+      0,
+      132,
+      95,
+      109
+     ],
+     "fx": 49,
+     "lift": 0
+    },
+    "2.1": {
+     "r": [
+      97,
+      132,
+      127,
+      108
+     ],
+     "fx": 45,
+     "lift": 0
+    },
+    "1.3": {
+     "r": [
+      308,
+      132,
+      83,
+      107
+     ],
+     "fx": 45,
+     "lift": 6
+    },
+    "2.2": {
+     "r": [
+      393,
+      132,
+      83,
+      107
+     ],
+     "fx": 45,
+     "lift": 0
+    },
+    "1.2": {
+     "r": [
+      552,
+      132,
+      86,
+      106
+     ],
+     "fx": 39,
+     "lift": 0
+    },
+    "2.3": {
+     "r": [
+      640,
+      132,
+      126,
+      106
+     ],
+     "fx": 59,
+     "lift": 0
+    },
+    "1.4": {
+     "r": [
+      83,
+      243,
+      125,
+      104
+     ],
+     "fx": 35,
+     "lift": 0
+    }
+   },
+   "front": {
+    "3.3": {
+     "r": [
+      0,
+      0,
+      84,
+      130
+     ],
+     "fx": 36,
+     "lift": 0
+    },
+    "3.1": {
+     "r": [
+      302,
+      0,
+      72,
+      114
+     ],
+     "fx": 40,
+     "lift": 0
+    },
+    "3.2": {
+     "r": [
+      376,
+      0,
+      104,
+      114
+     ],
+     "fx": 63,
+     "lift": 0
+    },
+    "3.5": {
+     "r": [
+      482,
+      0,
+      68,
+      114
+     ],
+     "fx": 36,
+     "lift": 0
+    },
+    "3.4": {
+     "r": [
+      552,
+      0,
+      128,
+      112
+     ],
+     "fx": 33,
+     "lift": 0
+    }
+   },
+   "fallback": {
+    "back": [],
+    "front": []
+   },
+   "meta": {
+    "hero": "luxun",
+    "round": "r971",
+    "scale": 0.465,
+    "plain_stand_h": 99,
+    "skin_stand_h": 109,
+    "shoulder_w_plain": 60,
+    "shoulder_w_skin": 60,
+    "poses": {
+     "1.1": {
+      "foot_x": 49,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.2": {
+      "foot_x": 39,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.3": {
+      "foot_x": 45,
+      "lift": 6,
+      "blobs": 1,
+      "from": "2.2"
+     },
+     "1.4": {
+      "foot_x": 35,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.5": {
+      "foot_x": 49,
+      "lift": 0,
+      "blobs": 1,
+      "from": "1.1"
+     },
+     "2.1": {
+      "foot_x": 45,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.2": {
+      "foot_x": 45,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.3": {
+      "foot_x": 59,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.4": {
+      "foot_x": 45,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.5": {
+      "foot_x": 25,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.1": {
+      "foot_x": 40,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.2": {
+      "foot_x": 63,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.3": {
+      "foot_x": 36,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.4": {
+      "foot_x": 33,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.5": {
+      "foot_x": 36,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     }
+    }
+   }
+  },
+  "dianwei_a": {
+   "hero": "dianwei",
+   "scale": 0.45,
+   "back": {
+    "1.1": {
+     "r": [
+      99,
+      645,
+      94,
+      98
+     ],
+     "fx": 43,
+     "lift": 0,
+     "hold_of": "1.5"
+    },
+    "1.2": {
+     "r": [
+      323,
+      645,
+      128,
+      96
+     ],
+     "fx": 55,
+     "lift": 0
+    },
+    "1.3": {
+     "r": [
+      0,
+      645,
+      97,
+      123
+     ],
+     "fx": 48,
+     "lift": 0,
+     "hold_of": "2.1"
+    },
+    "1.4": {
+     "r": [
+      323,
+      645,
+      128,
+      96
+     ],
+     "fx": 55,
+     "lift": 0,
+     "hold_of": "1.2"
+    },
+    "1.5": {
+     "r": [
+      99,
+      645,
+      94,
+      98
+     ],
+     "fx": 43,
+     "lift": 0
+    },
+    "2.1": {
+     "r": [
+      0,
+      645,
+      97,
+      123
+     ],
+     "fx": 48,
+     "lift": 0
+    },
+    "2.2": {
+     "r": [
+      545,
+      645,
+      97,
+      94
+     ],
+     "fx": 48,
+     "lift": 0
+    },
+    "2.3": {
+     "r": [
+      323,
+      645,
+      128,
+      96
+     ],
+     "fx": 55,
+     "lift": 0,
+     "hold_of": "1.2"
+    },
+    "2.4": {
+     "r": [
+      195,
+      645,
+      126,
+      97
+     ],
+     "fx": 62,
+     "lift": 0
+    },
+    "2.5": {
+     "r": [
+      453,
+      645,
+      90,
+      96
+     ],
+     "fx": 44,
+     "lift": 0
+    }
+   },
+   "front": {
+    "3.3": {
+     "r": [
+      195,
+      0,
+      105,
+      115
+     ],
+     "fx": 52,
+     "lift": 0
+    },
+    "3.1": {
+     "r": [
+      754,
+      350,
+      108,
+      99
+     ],
+     "fx": 53,
+     "lift": 0
+    },
+    "3.5": {
+     "r": [
+      864,
+      350,
+      125,
+      99
+     ],
+     "fx": 60,
+     "lift": 0
+    },
+    "3.4": {
+     "r": [
+      341,
+      452,
+      150,
+      96
+     ],
+     "fx": 63,
+     "lift": 0
+    },
+    "3.2": {
+     "r": [
+      579,
+      452,
+      129,
+      95
+     ],
+     "fx": 54,
+     "lift": 0
+    }
+   },
+   "fallback": {
+    "back": [],
+    "front": []
+   },
+   "meta": {
+    "hero": "dianwei",
+    "round": "r970",
+    "scale": 0.45,
+    "plain_stand_h": 98,
+    "skin_stand_h": 98,
+    "shoulder_w_plain": 62,
+    "shoulder_w_skin": 62,
+    "poses": {
+     "3.1": {
+      "foot_x": 53,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.2": {
+      "foot_x": 54,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.3": {
+      "foot_x": 52,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.4": {
+      "foot_x": 63,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.5": {
+      "foot_x": 60,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     }
+    },
+    "back": {
+     "round": "r996 a",
+     "scale": 0.395,
+     "rule": "head-top-to-feet of the settle body = 98 px = the plain Dien Vi stand (same as the r970 fronts, art s11.2 item 5)",
+     "slam_trim": {
+      "shaft_angle_deg": 17.4,
+      "removed_px_native": 29.0,
+      "s_hand": -48,
+      "s_base": -16,
+      "kept_gap_px": 3
+     },
+     "captions_dropped": 61,
+     "violet_px_fixed": {
+      "1.3": 0,
+      "1.1": 29,
+      "1.2": 0,
+      "2.1": 158,
+      "2.3": 0,
+      "2.4": 1,
+      "2.5": 0,
+      "2.2": 6,
+      "1.4": 26,
+      "1.5": 1
+     }
+    }
+   },
+   "back_scale": 0.395,
+   "holds": {
+    "1.1": "1.5",
+    "1.3": "2.1",
+    "1.4": "1.2",
+    "2.3": "1.2"
+   }
+  },
+  "zhangliao_a": {
+   "hero": "zhangliao",
+   "scale": 0.442,
+   "back": {
+    "1.3": {
+     "r": [
+      763,
+      0,
+      107,
+      109
+     ],
+     "fx": 48,
+     "lift": 0
+    },
+    "2.3": {
+     "r": [
+      478,
+      132,
+      72,
+      106
+     ],
+     "fx": 37,
+     "lift": 0
+    },
+    "1.1": {
+     "r": [
+      568,
+      243,
+      80,
+      101
+     ],
+     "fx": 45,
+     "lift": 0
+    },
+    "2.1": {
+     "r": [
+      650,
+      243,
+      113,
+      101
+     ],
+     "fx": 47,
+     "lift": 0
+    },
+    "2.5": {
+     "r": [
+      765,
+      243,
+      102,
+      101
+     ],
+     "fx": 47,
+     "lift": 0
+    },
+    "1.5": {
+     "r": [
+      869,
+      243,
+      99,
+      100
+     ],
+     "fx": 60,
+     "lift": 0
+    },
+    "1.2": {
+     "r": [
+      228,
+      350,
+      116,
+      99
+     ],
+     "fx": 76,
+     "lift": 0
+    },
+    "2.2": {
+     "r": [
+      346,
+      350,
+      116,
+      99
+     ],
+     "fx": 76,
+     "lift": 0
+    },
+    "2.4": {
+     "r": [
+      0,
+      452,
+      123,
+      98
+     ],
+     "fx": 74,
+     "lift": 0
+    },
+    "1.4": {
+     "r": [
+      210,
+      452,
+      129,
+      96
+     ],
+     "fx": 43,
+     "lift": 0
+    }
+   },
+   "front": {
+    "3.1": {
+     "r": [
+      210,
+      243,
+      83,
+      104
+     ],
+     "fx": 36,
+     "lift": 0
+    },
+    "3.5": {
+     "r": [
+      295,
+      243,
+      72,
+      104
+     ],
+     "fx": 35,
+     "lift": 0
+    },
+    "3.3": {
+     "r": [
+      369,
+      243,
+      122,
+      103
+     ],
+     "fx": 52,
+     "lift": 0
+    },
+    "3.2": {
+     "r": [
+      99,
+      350,
+      127,
+      100
+     ],
+     "fx": 84,
+     "lift": 0
+    },
+    "3.4": {
+     "r": [
+      627,
+      350,
+      125,
+      99
+     ],
+     "fx": 37,
+     "lift": 0
+    }
+   },
+   "fallback": {
+    "back": [],
+    "front": []
+   },
+   "meta": {
+    "hero": "zhangliao",
+    "round": "r969",
+    "scale": 0.442,
+    "plain_stand_h": 111,
+    "skin_stand_h": 101,
+    "shoulder_w_plain": 54,
+    "shoulder_w_skin": 54,
+    "poses": {
+     "1.1": {
+      "foot_x": 45,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.2": {
+      "foot_x": 76,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.3": {
+      "foot_x": 48,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.4": {
+      "foot_x": 43,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.5": {
+      "foot_x": 60,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.1": {
+      "foot_x": 47,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.2": {
+      "foot_x": 76,
+      "lift": 0,
+      "blobs": 1,
+      "from": "1.2"
+     },
+     "2.3": {
+      "foot_x": 37,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.4": {
+      "foot_x": 74,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.5": {
+      "foot_x": 47,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.1": {
+      "foot_x": 36,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.2": {
+      "foot_x": 84,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.3": {
+      "foot_x": 52,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.4": {
+      "foot_x": 37,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.5": {
+      "foot_x": 35,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     }
+    }
+   }
+  },
+  "sunce_a": {
+   "hero": "sunce",
+   "scale": 0.421,
+   "back": {
+    "2.3": {
+     "r": [
+      226,
+      132,
+      80,
+      108
+     ],
+     "fx": 31,
+     "lift": 0
+    },
+    "2.5": {
+     "r": [
+      768,
+      132,
+      84,
+      106
+     ],
+     "fx": 42,
+     "lift": 0
+    },
+    "1.3": {
+     "r": [
+      0,
+      243,
+      81,
+      105
+     ],
+     "fx": 44,
+     "lift": 0
+    },
+    "2.1": {
+     "r": [
+      493,
+      243,
+      73,
+      102
+     ],
+     "fx": 38,
+     "lift": 0
+    },
+    "1.2": {
+     "r": [
+      0,
+      350,
+      97,
+      100
+     ],
+     "fx": 41,
+     "lift": 0
+    },
+    "1.1": {
+     "r": [
+      464,
+      350,
+      78,
+      99
+     ],
+     "fx": 37,
+     "lift": 0
+    },
+    "1.5": {
+     "r": [
+      544,
+      350,
+      81,
+      99
+     ],
+     "fx": 25,
+     "lift": 0
+    },
+    "1.4": {
+     "r": [
+      809,
+      452,
+      136,
+      92
+     ],
+     "fx": 49,
+     "lift": 0
+    },
+    "2.4": {
+     "r": [
+      115,
+      552,
+      77,
+      90
+     ],
+     "fx": 50,
+     "lift": 0
+    },
+    "2.2": {
+     "r": [
+      194,
+      552,
+      104,
+      86
+     ],
+     "fx": 48,
+     "lift": 0
+    }
+   },
+   "front": {
+    "3.3": {
+     "r": [
+      854,
+      132,
+      98,
+      106
+     ],
+     "fx": 47,
+     "lift": 0
+    },
+    "3.1": {
+     "r": [
+      125,
+      452,
+      83,
+      97
+     ],
+     "fx": 44,
+     "lift": 0
+    },
+    "3.5": {
+     "r": [
+      493,
+      452,
+      84,
+      96
+     ],
+     "fx": 37,
+     "lift": 0
+    },
+    "3.2": {
+     "r": [
+      710,
+      452,
+      97,
+      93
+     ],
+     "fx": 40,
+     "lift": 0
+    },
+    "3.4": {
+     "r": [
+      0,
+      552,
+      113,
+      91
+     ],
+     "fx": 56,
+     "lift": 0
+    }
+   },
+   "fallback": {
+    "back": [],
+    "front": []
+   },
+   "meta": {
+    "hero": "sunce",
+    "round": "r972",
+    "scale": 0.421,
+    "plain_stand_h": 104,
+    "skin_stand_h": 99,
+    "shoulder_w_plain": 70,
+    "shoulder_w_skin": 69,
+    "poses": {
+     "1.1": {
+      "foot_x": 37,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.2": {
+      "foot_x": 41,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.3": {
+      "foot_x": 44,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.4": {
+      "foot_x": 49,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "1.5": {
+      "foot_x": 25,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.1": {
+      "foot_x": 38,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.2": {
+      "foot_x": 48,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.3": {
+      "foot_x": 31,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.4": {
+      "foot_x": 50,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "2.5": {
+      "foot_x": 42,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.1": {
+      "foot_x": 44,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.2": {
+      "foot_x": 40,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.3": {
+      "foot_x": 47,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.4": {
+      "foot_x": 56,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     },
+     "3.5": {
+      "foot_x": 37,
+      "lift": 0,
+      "blobs": 1,
+      "from": null
+     }
+    }
+   }
+  }
+ }
+}

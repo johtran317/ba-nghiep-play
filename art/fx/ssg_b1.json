@@ -1,0 +1,685 @@
+{
+ "artmeta": 1,
+ "id": "ssg_b1",
+ "build": "V302-staged",
+ "file": "art/fx/ssg_b1.webp",
+ "size": [
+  2048,
+  1641
+ ],
+ "bytes_webp": 759122,
+ "note": "SSR signature atlas: pilot Truong Giac (r871 a) + batch 1 Hoang Trung r881 a, Ma Sieu r882 b, Luu Bi r883 b, Ton Kien r884 a. rows[\"<gid>.SIG\"].frames[0..3] = F1 form, F2 full, F3 act, F4 break/settle; extras decal (r2c1), accent (r2c2), travel (r2c3), spare (r2c4, present only when painted). Frame: r=[x,y,w,h] in atlas, o=[ox,oy] draw offset from the pivot = the target feet line (draw top-left at pivot.x+ox, pivot.y+oy), pv = pivot inside the piece, k = css per atlas px (1 S = 480 sheet px = 95 css = 172 atlas px... atlas px are native sheet px, 1.76 per css), h = solid height above the pivot (atlas px). Mirror left-right allowed, never vertical. Straight alpha. Same timing as skill_paint SSR t2 slot (ssr-signature-bar.md s1.1).",
+ "rows": {
+  "zhangjiao.SIG": {
+   "hero": "zhangjiao",
+   "k": 0.5669,
+   "pivot_cell": [
+    172,
+    277
+   ],
+   "frames": [
+    {
+     "r": [
+      0,
+      0,
+      305,
+      363
+     ],
+     "o": [
+      -137,
+      -252
+     ],
+     "pv": [
+      137,
+      252
+     ],
+     "h": 248
+    },
+    {
+     "r": [
+      1666,
+      0,
+      291,
+      341
+     ],
+     "o": [
+      -145,
+      -236
+     ],
+     "pv": [
+      145,
+      236
+     ],
+     "h": 232
+    },
+    {
+     "r": [
+      447,
+      367,
+      354,
+      332
+     ],
+     "o": [
+      -157,
+      -251
+     ],
+     "pv": [
+      157,
+      251
+     ],
+     "h": 246
+    },
+    {
+     "r": [
+      1551,
+      367,
+      293,
+      311
+     ],
+     "o": [
+      -144,
+      -195
+     ],
+     "pv": [
+      144,
+      195
+     ],
+     "h": 190
+    }
+   ],
+   "decal": {
+    "r": [
+     0,
+     1026,
+     417,
+     256
+    ],
+    "o": [
+     -149,
+     -204
+    ],
+    "pv": [
+     208,
+     128
+    ]
+   },
+   "accent": {
+    "r": [
+     1058,
+     712,
+     202,
+     275
+    ],
+    "o": [
+     -11,
+     -225
+    ],
+    "pv": [
+     19,
+     264
+    ]
+   },
+   "travel": {
+    "r": [
+     270,
+     1491,
+     193,
+     131
+    ],
+    "o": [
+     -70,
+     -111
+    ],
+    "pv": [
+     96,
+     65
+    ]
+   },
+   "note": "staff strike -> talisman whirl -> burst, papers ignite -> smoke collapse; decal scorch crater; accent diving talisman (pv = flame tip, point it at the squad); travel (r2c3) = one loose talisman, particle unit"
+  },
+  "huangzhong.SIG": {
+   "hero": "huangzhong",
+   "k": 0.5669,
+   "pivot_cell": [
+    172,
+    277
+   ],
+   "frames": [
+    {
+     "r": [
+      889,
+      712,
+      165,
+      288
+     ],
+     "o": [
+      -70,
+      -224
+     ],
+     "pv": [
+      70,
+      224
+     ],
+     "h": 220
+    },
+    {
+     "r": [
+      1115,
+      367,
+      432,
+      319
+     ],
+     "o": [
+      -284,
+      -260
+     ],
+     "pv": [
+      284,
+      260
+     ],
+     "h": 255
+    },
+    {
+     "r": [
+      309,
+      0,
+      336,
+      359
+     ],
+     "o": [
+      -163,
+      -260
+     ],
+     "pv": [
+      163,
+      260
+     ],
+     "h": 256
+    },
+    {
+     "r": [
+      805,
+      367,
+      306,
+      328
+     ],
+     "o": [
+      -154,
+      -235
+     ],
+     "pv": [
+      154,
+      235
+     ],
+     "h": 231
+    }
+   ],
+   "decal": {
+    "r": [
+     1144,
+     1026,
+     324,
+     213
+    ],
+    "o": [
+     -149,
+     -175
+    ],
+    "pv": [
+     162,
+     106
+    ]
+   },
+   "accent": {
+    "r": [
+     1472,
+     1026,
+     238,
+     211
+    ],
+    "o": [
+     -115,
+     -191
+    ],
+    "pv": [
+     119,
+     105
+    ]
+   },
+   "travel": {
+    "r": [
+     467,
+     1491,
+     359,
+     110
+    ],
+    "o": [
+     -184,
+     -129
+    ],
+    "pv": [
+     354,
+     53
+    ]
+   },
+   "spare": {
+    "r": [
+     1583,
+     1286,
+     211,
+     168
+    ],
+    "o": [
+     -106,
+     -158
+    ],
+    "pv": [
+     105,
+     84
+    ]
+   },
+   "note": "leaf -> arrow arrives -> pierces leaf into the ground -> leaf splits; decal crater + shaft; accent split leaf; travel = arrow flying right (pv = head, rotate for the lane, mirror for the enemy); spare = loose leaf (particle unit)"
+  },
+  "machao.SIG": {
+   "hero": "machao",
+   "k": 0.5669,
+   "pivot_cell": [
+    172,
+    277
+   ],
+   "frames": [
+    {
+     "r": [
+      0,
+      367,
+      236,
+      341
+     ],
+     "o": [
+      -93,
+      -254
+     ],
+     "pv": [
+      93,
+      254
+     ],
+     "h": 250
+    },
+    {
+     "r": [
+      989,
+      0,
+      341,
+      348
+     ],
+     "o": [
+      -158,
+      -253
+     ],
+     "pv": [
+      158,
+      253
+     ],
+     "h": 249
+    },
+    {
+     "r": [
+      578,
+      712,
+      307,
+      289
+     ],
+     "o": [
+      -145,
+      -208
+     ],
+     "pv": [
+      145,
+      208
+     ],
+     "h": 203
+    },
+    {
+     "r": [
+      1264,
+      712,
+      322,
+      272
+     ],
+     "o": [
+      -166,
+      -189
+     ],
+     "pv": [
+      166,
+      189
+     ],
+     "h": 184
+    }
+   ],
+   "decal": {
+    "r": [
+     652,
+     1286,
+     350,
+     198
+    ],
+    "o": [
+     -157,
+     -157
+    ],
+    "pv": [
+     175,
+     99
+    ]
+   },
+   "accent": {
+    "r": [
+     421,
+     1026,
+     213,
+     255
+    ],
+    "o": [
+     -88,
+     -210
+    ],
+    "pv": [
+     107,
+     199
+    ]
+   },
+   "travel": {
+    "r": [
+     240,
+     367,
+     203,
+     337
+    ],
+    "o": [
+     -103,
+     -254
+    ],
+    "pv": [
+     103,
+     328
+    ]
+   },
+   "note": "one-headed spear + dust wedge over hoofprints -> hit -> settle; decal hoofprints + tassel; accent spear stab (pv = base); travel = wedge pointing up (pv = tail, code rotates)"
+  },
+  "liubei.SIG": {
+   "hero": "liubei",
+   "k": 0.5669,
+   "pivot_cell": [
+    172,
+    277
+   ],
+   "frames": [
+    {
+     "r": [
+      1714,
+      1026,
+      209,
+      203
+     ],
+     "o": [
+      -92,
+      -133
+     ],
+     "pv": [
+      92,
+      133
+     ],
+     "h": 129,
+     "scaled": 0.62
+    },
+    {
+     "r": [
+      969,
+      1026,
+      171,
+      219
+     ],
+     "o": [
+      -79,
+      -155
+     ],
+     "pv": [
+      79,
+      155
+     ],
+     "h": 153,
+     "scaled": 0.62
+    },
+    {
+     "r": [
+      1006,
+      1286,
+      224,
+      198
+     ],
+     "o": [
+      -106,
+      -133
+     ],
+     "pv": [
+      106,
+      133
+     ],
+     "h": 130,
+     "scaled": 0.62
+    },
+    {
+     "r": [
+      1412,
+      1286,
+      167,
+      187
+     ],
+     "o": [
+      -87,
+      -133
+     ],
+     "pv": [
+      87,
+      133
+     ],
+     "h": 130,
+     "scaled": 0.62
+    }
+   ],
+   "decal": {
+    "r": [
+     0,
+     1286,
+     390,
+     201
+    ],
+    "o": [
+     -139,
+     -148
+    ],
+    "pv": [
+     195,
+     100
+    ]
+   },
+   "accent": {
+    "r": [
+     0,
+     1491,
+     266,
+     150
+    ],
+    "o": [
+     -77,
+     -138
+    ],
+    "pv": [
+     133,
+     132
+    ]
+   },
+   "travel": {
+    "r": [
+     1234,
+     1286,
+     174,
+     188
+    ],
+    "o": [
+     -67,
+     -168
+    ],
+    "pv": [
+     87,
+     94
+    ]
+   },
+   "spare": {
+    "r": [
+     830,
+     1491,
+     333,
+     81
+    ],
+    "o": [
+     -179,
+     -92
+    ],
+    "pv": [
+     166,
+     40
+    ]
+   },
+   "note": "crossed swords -> peach branch + spring -> streams run out -> settle; row 1 scaled .62 about the ground point (one scale for all 4 states; own-side 40 % rule); decal wet stream + leaves; accent spring (pv = base); travel = loose peach; spare = stream segment (tile along x)"
+  },
+  "sunjian.SIG": {
+   "hero": "sunjian",
+   "k": 0.5669,
+   "pivot_cell": [
+    172,
+    277
+   ],
+   "frames": [
+    {
+     "r": [
+      311,
+      712,
+      263,
+      296
+     ],
+     "o": [
+      -121,
+      -214
+     ],
+     "pv": [
+      121,
+      214
+     ],
+     "h": 211
+    },
+    {
+     "r": [
+      1334,
+      0,
+      328,
+      344
+     ],
+     "o": [
+      -160,
+      -242
+     ],
+     "pv": [
+      160,
+      242
+     ],
+     "h": 239
+    },
+    {
+     "r": [
+      649,
+      0,
+      336,
+      355
+     ],
+     "o": [
+      -161,
+      -249
+     ],
+     "pv": [
+      161,
+      249
+     ],
+     "h": 245
+    },
+    {
+     "r": [
+      0,
+      712,
+      307,
+      310
+     ],
+     "o": [
+      -145,
+      -215
+     ],
+     "pv": [
+      145,
+      215
+     ],
+     "h": 211
+    }
+   ],
+   "decal": {
+    "r": [
+     638,
+     1026,
+     327,
+     234
+    ],
+    "o": [
+     -152,
+     -191
+    ],
+    "pv": [
+     163,
+     117
+    ]
+   },
+   "accent": {
+    "r": [
+     1590,
+     712,
+     228,
+     257
+    ],
+    "o": [
+     -98,
+     -208
+    ],
+    "pv": [
+     114,
+     128
+    ]
+   },
+   "travel": {
+    "r": [
+     394,
+     1286,
+     254,
+     201
+    ],
+    "o": [
+     -117,
+     -163
+    ],
+    "pv": [
+     127,
+     100
+    ]
+   },
+   "note": "scarf on a broken stake -> four claw furrows -> burst -> settle; c3/c4 right edge feathered 16 px; decal four furrows + scarf; accent single gash; travel = loose scarf"
+  }
+ }
+}

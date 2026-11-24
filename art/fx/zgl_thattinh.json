@@ -1,0 +1,646 @@
+{
+ "artmeta": 1,
+ "id": "zgl_thattinh",
+ "file": "art/fx/zgl_thattinh.webp",
+ "size": [
+  1024,
+  408
+ ],
+ "source": "r819 b v6 on the empty plate 1376x768, cut by ta_zgl_placed.py (Decision 399: placed r819 b)",
+ "css_per_px_x": 1.1337,
+ "css_per_px_y": 1.099,
+ "frame": "placements are in the 344x768 FRAME the composites were built in (frame-local px), stretched to the 390x844 screen: css = px x (1.1337, 1.0990). tl = top-left of the piece rect, draw size = css [w,h], opacity as listed. Draw order = order within a layer; layer under_squads = on the ground under our/enemy squads, over_squads = above them.",
+ "pads_css": {
+  "ours_P1_P5": [
+   [
+    198.4,
+    500.0
+   ],
+   [
+    331.0,
+    500.0
+   ],
+   [
+    331.0,
+    598.9
+   ],
+   [
+    195.0,
+    701.1
+   ],
+   [
+    337.8,
+    701.1
+   ]
+  ],
+  "note": "our 5 pad centres (frame px P1 175,455 P2 292,455 P3 292,545 P4 172,638 P5 298,638); enemy middle-middle squad ~ (172,235) frame px = css (195,258)"
+ },
+ "groups": {
+  "zhugeliang.thattinh_f1": [
+   "zhugeliang.tt_sky_f1",
+   "zhugeliang.tt_circle",
+   "zhugeliang.tt_hero_f1"
+  ],
+  "zhugeliang.thattinh_f2": [
+   "zhugeliang.tt_sky_f2",
+   "zhugeliang.tt_bolts",
+   "zhugeliang.tt_burst",
+   "zhugeliang.tt_hero_f2"
+  ],
+  "zhugeliang.thattinh_f3": [
+   "zhugeliang.tt_sky_f3",
+   "zhugeliang.tt_ring",
+   "zhugeliang.tt_stars_f3"
+  ],
+  "zhugeliang.thattinh_f4": [
+   "zhugeliang.tt_sky_f4",
+   "zhugeliang.tt_scorch",
+   "zhugeliang.tt_stars_f4"
+  ]
+ },
+ "placements": {
+  "f1": [
+   {
+    "id": "zhugeliang.tt_sky_f1",
+    "layer": "under_squads",
+    "tl_frame": [
+     33,
+     23
+    ],
+    "tl_css": [
+     37.4,
+     25.3
+    ],
+    "tl_pct": [
+     9.6,
+     3.0
+    ],
+    "centre_pct": [
+     47.8,
+     11.2
+    ],
+    "size_css": [
+     298.2,
+     138.5
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_circle",
+    "layer": "under_squads",
+    "tl_frame": [
+     112,
+     190
+    ],
+    "tl_css": [
+     127.0,
+     208.8
+    ],
+    "tl_pct": [
+     32.6,
+     24.7
+    ],
+    "centre_pct": [
+     49.7,
+     30.1
+    ],
+    "size_css": [
+     133.8,
+     90.1
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_hero_f1",
+    "layer": "under_squads",
+    "tl_frame": [
+     5,
+     458
+    ],
+    "tl_css": [
+     5.7,
+     503.3
+    ],
+    "tl_pct": [
+     1.5,
+     59.6
+    ],
+    "centre_pct": [
+     19.9,
+     66.5
+    ],
+    "size_css": [
+     144.0,
+     116.5
+    ],
+    "opacity": 1.0
+   }
+  ],
+  "f2": [
+   {
+    "id": "zhugeliang.tt_sky_f2",
+    "layer": "under_squads",
+    "tl_frame": [
+     18,
+     12
+    ],
+    "tl_css": [
+     20.4,
+     13.2
+    ],
+    "tl_pct": [
+     5.2,
+     1.6
+    ],
+    "centre_pct": [
+     48.3,
+     10.5
+    ],
+    "size_css": [
+     335.6,
+     151.7
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_bolts",
+    "layer": "over_squads",
+    "tl_frame": [
+     26,
+     140
+    ],
+    "tl_css": [
+     29.5,
+     153.9
+    ],
+    "tl_pct": [
+     7.6,
+     18.2
+    ],
+    "centre_pct": [
+     51.7,
+     24.7
+    ],
+    "size_css": [
+     344.7,
+     109.9
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_burst",
+    "layer": "over_squads",
+    "tl_frame": [
+     70,
+     162
+    ],
+    "tl_css": [
+     79.4,
+     178.0
+    ],
+    "tl_pct": [
+     20.3,
+     21.1
+    ],
+    "centre_pct": [
+     52.3,
+     29.3
+    ],
+    "size_css": [
+     249.4,
+     138.5
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_hero_f2",
+    "layer": "under_squads",
+    "tl_frame": [
+     5,
+     458
+    ],
+    "tl_css": [
+     5.7,
+     503.3
+    ],
+    "tl_pct": [
+     1.5,
+     59.6
+    ],
+    "centre_pct": [
+     19.9,
+     66.5
+    ],
+    "size_css": [
+     144.0,
+     116.5
+    ],
+    "opacity": 1.0
+   }
+  ],
+  "f3": [
+   {
+    "id": "zhugeliang.tt_sky_f3",
+    "layer": "under_squads",
+    "tl_frame": [
+     36,
+     27
+    ],
+    "tl_css": [
+     40.8,
+     29.7
+    ],
+    "tl_pct": [
+     10.5,
+     3.5
+    ],
+    "centre_pct": [
+     47.4,
+     11.5
+    ],
+    "size_css": [
+     288.0,
+     134.1
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_ring",
+    "layer": "under_squads",
+    "tl_frame": [
+     20,
+     152
+    ],
+    "tl_css": [
+     22.7,
+     167.0
+    ],
+    "tl_pct": [
+     5.8,
+     19.8
+    ],
+    "centre_pct": [
+     50.9,
+     31.1
+    ],
+    "size_css": [
+     351.5,
+     190.1
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_stars_f3",
+    "layer": "over_squads",
+    "tl_frame": [
+     112,
+     195
+    ],
+    "tl_css": [
+     127.0,
+     214.3
+    ],
+    "tl_pct": [
+     32.6,
+     25.4
+    ],
+    "centre_pct": [
+     49.7,
+     29.3
+    ],
+    "size_css": [
+     133.8,
+     65.9
+    ],
+    "opacity": 1.0
+   }
+  ],
+  "f4": [
+   {
+    "id": "zhugeliang.tt_sky_f4",
+    "layer": "under_squads",
+    "tl_frame": [
+     40,
+     30
+    ],
+    "tl_css": [
+     45.3,
+     33.0
+    ],
+    "tl_pct": [
+     11.6,
+     3.9
+    ],
+    "centre_pct": [
+     47.7,
+     10.7
+    ],
+    "size_css": [
+     281.2,
+     114.3
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_scorch",
+    "layer": "under_squads",
+    "tl_frame": [
+     113,
+     155
+    ],
+    "tl_css": [
+     128.1,
+     170.3
+    ],
+    "tl_pct": [
+     32.8,
+     20.2
+    ],
+    "centre_pct": [
+     52.6,
+     27.2
+    ],
+    "size_css": [
+     154.2,
+     118.7
+    ],
+    "opacity": 1.0
+   },
+   {
+    "id": "zhugeliang.tt_stars_f4",
+    "layer": "over_squads",
+    "tl_frame": [
+     113,
+     195
+    ],
+    "tl_css": [
+     128.1,
+     214.3
+    ],
+    "tl_pct": [
+     32.8,
+     25.4
+    ],
+    "centre_pct": [
+     49.9,
+     29.3
+    ],
+    "size_css": [
+     132.6,
+     65.9
+    ],
+    "opacity": 1.0
+   }
+  ]
+ },
+ "pieces": {
+  "zhugeliang.tt_sky_f1": {
+   "hero": "zhugeliang",
+   "r": [
+    610,
+    0,
+    263,
+    126
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    298.2,
+    138.5
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_sky_f2": {
+   "hero": "zhugeliang",
+   "r": [
+    312,
+    0,
+    296,
+    138
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    335.6,
+    151.7
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_sky_f3": {
+   "hero": "zhugeliang",
+   "r": [
+    222,
+    175,
+    254,
+    122
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    288.0,
+    134.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_sky_f4": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    303,
+    248,
+    104
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    281.2,
+    114.3
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_circle": {
+   "hero": "zhugeliang",
+   "r": [
+    556,
+    303,
+    118,
+    82
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    133.8,
+    90.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_hero_f1": {
+   "hero": "zhugeliang",
+   "r": [
+    616,
+    175,
+    127,
+    106
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    144.0,
+    116.5
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_bolts": {
+   "hero": "zhugeliang",
+   "r": [
+    250,
+    303,
+    304,
+    100
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    344.7,
+    109.9
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_burst": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    175,
+    220,
+    126
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    249.4,
+    138.5
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_hero_f2": {
+   "hero": "zhugeliang",
+   "r": [
+    745,
+    175,
+    127,
+    106
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    144.0,
+    116.5
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_ring": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    0,
+    310,
+    173
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    351.5,
+    190.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_stars_f3": {
+   "hero": "zhugeliang",
+   "r": [
+    676,
+    303,
+    118,
+    60
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    133.8,
+    65.9
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_scorch": {
+   "hero": "zhugeliang",
+   "r": [
+    478,
+    175,
+    136,
+    108
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    154.2,
+    118.7
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  },
+  "zhugeliang.tt_stars_f4": {
+   "hero": "zhugeliang",
+   "r": [
+    796,
+    303,
+    117,
+    60
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    132.6,
+    65.9
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.88
+  }
+ },
+ "notes": "Strike group (tt_circle f1, tt_bolts+tt_burst f2, tt_ring f3, tt_scorch f4) is placed on the enemy middle-middle squad; draw the scorch UNDER the target squad. Constellation tt_sky_f1..f4 in the sky band. Stun stars tt_stars_f3/f4 over the same squad. Hero cut-in f1-f2 only."
+}

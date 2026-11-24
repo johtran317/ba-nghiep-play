@@ -1,0 +1,1851 @@
+{
+"artmeta": 1,
+"id": "urw2_flip",
+"build": "V303-staged",
+"file": "art/fx/urw2_flip.webp",
+"size": [
+2048,
+1872
+],
+"bytes": 500672,
+"note": "UR wave 2 round C flipbooks (r943 b, r944 a, r945 a, r946 a, r947 b, r942 a row 2 dust). Keys <gid>.<flip>.<n> (n = frame order, 1-based); pv = pivot: huatuo steam flipbooks use the shared ground-line centre of the row union box (pot stays put); every travelling/ground flipbook uses each frame's OWN bottom-centre (painted cell positions wander +-150 px and would flicker); pv_union = the row-union ground-line centre for all (frames keep the painted x/y wander; pv_own = the frame's own bottom-centre if the code prefers to re-centre) (bottom-centre of the row union box), css_per_px = css size of one atlas px, straight alpha. seq.<gid>.<flip> = frame keys in order, ms per frame (83 = 12 fps; 10-12 fps fine), loop or one-shot + fade_ms. Ox run r948 b: huangyueying.ox.1-4 + huangyueying.ox_wheel.1 (see meta.ox). Remaps at cut: r945 pot glow to cream F3E3B0 / gold D9B25A, r946 wisp fringe to navy; residual edge fringe to the neighbouring outline colour. | r950 grain fountain (huangyueying.grain.1-5 + grain_drop.1-8) appended below, see seq.huangyueying.grain.",
+"pieces": {
+"xunyu.sweep.1": {
+"hero": "xunyu",
+"r": [
+889,
+1214,
+308,
+109
+],
+"pv": [
+154,
+109
+],
+"pv_union": [
+661,
+125
+],
+"css_per_px": 0.5669,
+"css": [
+174.6,
+61.8
+],
+"pv_own": [
+154,
+109
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.sweep.2": {
+"hero": "xunyu",
+"r": [
+738,
+569,
+317,
+184
+],
+"pv": [
+158,
+184
+],
+"pv_union": [
+327,
+198
+],
+"css_per_px": 0.5669,
+"css": [
+179.7,
+104.3
+],
+"pv_own": [
+158,
+184
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.sweep.3": {
+"hero": "xunyu",
+"r": [
+849,
+350,
+319,
+205
+],
+"pv": [
+160,
+205
+],
+"pv_union": [
+-13,
+219
+],
+"css_per_px": 0.5669,
+"css": [
+180.8,
+116.2
+],
+"pv_own": [
+160,
+205
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.sweep.4": {
+"hero": "xunyu",
+"r": [
+1057,
+569,
+303,
+183
+],
+"pv": [
+152,
+183
+],
+"pv_union": [
+-358,
+183
+],
+"css_per_px": 0.5669,
+"css": [
+171.8,
+103.7
+],
+"pv_own": [
+152,
+183
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.splash.1": {
+"hero": "xunyu",
+"r": [
+1671,
+569,
+130,
+171
+],
+"pv": [
+65,
+171
+],
+"pv_union": [
+610,
+213
+],
+"css_per_px": 0.5669,
+"css": [
+73.7,
+96.9
+],
+"pv_own": [
+65,
+171
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.splash.2": {
+"hero": "xunyu",
+"r": [
+1198,
+927,
+252,
+136
+],
+"pv": [
+126,
+136
+],
+"pv_union": [
+332,
+171
+],
+"css_per_px": 0.5669,
+"css": [
+142.9,
+77.1
+],
+"pv_own": [
+126,
+136
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.splash.3": {
+"hero": "xunyu",
+"r": [
+596,
+927,
+306,
+140
+],
+"pv": [
+153,
+140
+],
+"pv_union": [
+20,
+140
+],
+"css_per_px": 0.5669,
+"css": [
+173.5,
+79.4
+],
+"pv_own": [
+153,
+140
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"xunyu.splash.4": {
+"hero": "xunyu",
+"r": [
+1199,
+1214,
+272,
+109
+],
+"pv": [
+136,
+109
+],
+"pv_union": [
+-338,
+119
+],
+"css_per_px": 0.5669,
+"css": [
+154.2,
+61.8
+],
+"pv_own": [
+136,
+109
+],
+"mode": "normal",
+"src": "r943 approved"
+},
+"lusu.sweep.1": {
+"hero": "lusu",
+"r": [
+300,
+1214,
+304,
+112
+],
+"pv": [
+152,
+112
+],
+"pv_union": [
+656,
+112
+],
+"css_per_px": 0.5669,
+"css": [
+172.3,
+63.5
+],
+"pv_own": [
+152,
+112
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"lusu.sweep.2": {
+"hero": "lusu",
+"r": [
+0,
+758,
+306,
+167
+],
+"pv": [
+153,
+167
+],
+"pv_union": [
+320,
+167
+],
+"css_per_px": 0.5669,
+"css": [
+173.5,
+94.7
+],
+"pv_own": [
+153,
+167
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"lusu.sweep.3": {
+"hero": "lusu",
+"r": [
+0,
+569,
+311,
+187
+],
+"pv": [
+156,
+187
+],
+"pv_union": [
+-18,
+187
+],
+"css_per_px": 0.5669,
+"css": [
+176.3,
+106.0
+],
+"pv_own": [
+156,
+187
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"lusu.sweep.4": {
+"hero": "lusu",
+"r": [
+0,
+1334,
+300,
+93
+],
+"pv": [
+150,
+93
+],
+"pv_union": [
+-356,
+93
+],
+"css_per_px": 0.5669,
+"css": [
+170.1,
+52.7
+],
+"pv_own": [
+150,
+93
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"lusu.splash.1": {
+"hero": "lusu",
+"r": [
+302,
+1334,
+289,
+75
+],
+"pv": [
+144,
+75
+],
+"pv_union": [
+470,
+80
+],
+"css_per_px": 0.5669,
+"css": [
+163.8,
+42.5
+],
+"pv_own": [
+144,
+75
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"lusu.splash.2": {
+"hero": "lusu",
+"r": [
+1452,
+927,
+328,
+135
+],
+"pv": [
+164,
+135
+],
+"pv_union": [
+158,
+140
+],
+"css_per_px": 0.5669,
+"css": [
+185.9,
+76.5
+],
+"pv_own": [
+164,
+135
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"lusu.splash.3": {
+"hero": "lusu",
+"r": [
+1471,
+1078,
+295,
+118
+],
+"pv": [
+148,
+118
+],
+"pv_union": [
+-175,
+118
+],
+"css_per_px": 0.5669,
+"css": [
+167.2,
+66.9
+],
+"pv_own": [
+148,
+118
+],
+"mode": "normal",
+"src": "r944 approved"
+},
+"huatuo.steam_pot.1": {
+"hero": "huatuo",
+"r": [
+583,
+350,
+264,
+209
+],
+"pv": [
+129,
+146
+],
+"pv_union": [
+129,
+146
+],
+"css_per_px": 0.5669,
+"css": [
+149.7,
+118.5
+],
+"pv_own": [
+132,
+209
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_pot.2": {
+"hero": "huatuo",
+"r": [
+276,
+0,
+161,
+347
+],
+"pv": [
+82,
+292
+],
+"pv_union": [
+82,
+292
+],
+"css_per_px": 0.5669,
+"css": [
+91.3,
+196.7
+],
+"pv_own": [
+80,
+347
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_pot.3": {
+"hero": "huatuo",
+"r": [
+439,
+0,
+292,
+339
+],
+"pv": [
+142,
+277
+],
+"pv_union": [
+142,
+277
+],
+"css_per_px": 0.5669,
+"css": [
+165.5,
+192.2
+],
+"pv_own": [
+146,
+339
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_pot.4": {
+"hero": "huatuo",
+"r": [
+0,
+0,
+274,
+348
+],
+"pv": [
+123,
+293
+],
+"pv_union": [
+123,
+293
+],
+"css_per_px": 0.5669,
+"css": [
+155.3,
+197.3
+],
+"pv_own": [
+137,
+348
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_satchel.1": {
+"hero": "huatuo",
+"r": [
+313,
+569,
+140,
+186
+],
+"pv": [
+74,
+186
+],
+"pv_union": [
+74,
+186
+],
+"css_per_px": 0.5669,
+"css": [
+79.4,
+105.4
+],
+"pv_own": [
+70,
+186
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_satchel.2": {
+"hero": "huatuo",
+"r": [
+1225,
+0,
+249,
+282
+],
+"pv": [
+132,
+281
+],
+"pv_union": [
+132,
+281
+],
+"css_per_px": 0.5669,
+"css": [
+141.2,
+159.9
+],
+"pv_own": [
+124,
+282
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_satchel.3": {
+"hero": "huatuo",
+"r": [
+931,
+0,
+292,
+305
+],
+"pv": [
+142,
+305
+],
+"pv_union": [
+142,
+305
+],
+"css_per_px": 0.5669,
+"css": [
+165.5,
+172.9
+],
+"pv_own": [
+146,
+305
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"huatuo.steam_satchel.4": {
+"hero": "huatuo",
+"r": [
+733,
+0,
+196,
+323
+],
+"pv": [
+106,
+320
+],
+"pv_union": [
+106,
+320
+],
+"css_per_px": 0.5669,
+"css": [
+111.1,
+183.1
+],
+"pv_own": [
+98,
+323
+],
+"mode": "normal",
+"src": "r945 approved"
+},
+"zuoci.page.1": {
+"hero": "zuoci",
+"r": [
+0,
+1214,
+298,
+118
+],
+"pv": [
+149,
+118
+],
+"pv_union": [
+654,
+141
+],
+"css_per_px": 0.5669,
+"css": [
+168.9,
+66.9
+],
+"pv_own": [
+149,
+118
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.page.2": {
+"hero": "zuoci",
+"r": [
+308,
+758,
+283,
+158
+],
+"pv": [
+142,
+158
+],
+"pv_union": [
+308,
+158
+],
+"css_per_px": 0.5669,
+"css": [
+160.4,
+89.6
+],
+"pv_own": [
+142,
+158
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.page.3": {
+"hero": "zuoci",
+"r": [
+1224,
+758,
+300,
+150
+],
+"pv": [
+150,
+150
+],
+"pv_union": [
+-28,
+154
+],
+"css_per_px": 0.5669,
+"css": [
+170.1,
+85.0
+],
+"pv_own": [
+150,
+150
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.page.4": {
+"hero": "zuoci",
+"r": [
+942,
+758,
+280,
+151
+],
+"pv": [
+140,
+151
+],
+"pv_union": [
+-374,
+154
+],
+"css_per_px": 0.5669,
+"css": [
+158.7,
+85.6
+],
+"pv_own": [
+140,
+151
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.wisp.1": {
+"hero": "zuoci",
+"r": [
+307,
+1078,
+284,
+129
+],
+"pv": [
+142,
+129
+],
+"pv_union": [
+652,
+166
+],
+"css_per_px": 0.5669,
+"css": [
+161.0,
+73.1
+],
+"pv_own": [
+142,
+129
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.wisp.2": {
+"hero": "zuoci",
+"r": [
+292,
+927,
+302,
+143
+],
+"pv": [
+151,
+143
+],
+"pv_union": [
+324,
+171
+],
+"css_per_px": 0.5669,
+"css": [
+171.2,
+81.1
+],
+"pv_own": [
+151,
+143
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.wisp.3": {
+"hero": "zuoci",
+"r": [
+1526,
+758,
+280,
+149
+],
+"pv": [
+140,
+149
+],
+"pv_union": [
+-38,
+149
+],
+"css_per_px": 0.5669,
+"css": [
+158.7,
+84.5
+],
+"pv_own": [
+140,
+149
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"zuoci.wisp.4": {
+"hero": "zuoci",
+"r": [
+0,
+927,
+290,
+149
+],
+"pv": [
+145,
+149
+],
+"pv_union": [
+-362,
+173
+],
+"css_per_px": 0.5669,
+"css": [
+164.4,
+84.5
+],
+"pv_own": [
+145,
+149
+],
+"mode": "normal",
+"src": "r946 approved"
+},
+"liubei.sweep.1": {
+"hero": "liubei",
+"r": [
+0,
+1078,
+305,
+134
+],
+"pv": [
+152,
+134
+],
+"pv_union": [
+660,
+134
+],
+"css_per_px": 0.5669,
+"css": [
+172.9,
+76.0
+],
+"pv_own": [
+152,
+134
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.sweep.2": {
+"hero": "liubei",
+"r": [
+1362,
+569,
+307,
+179
+],
+"pv": [
+154,
+179
+],
+"pv_union": [
+316,
+203
+],
+"css_per_px": 0.5669,
+"css": [
+174.0,
+101.5
+],
+"pv_own": [
+154,
+179
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.sweep.3": {
+"hero": "liubei",
+"r": [
+1170,
+350,
+294,
+205
+],
+"pv": [
+147,
+205
+],
+"pv_union": [
+-22,
+241
+],
+"css_per_px": 0.5669,
+"css": [
+166.7,
+116.2
+],
+"pv_own": [
+147,
+205
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.sweep.4": {
+"hero": "liubei",
+"r": [
+1648,
+1214,
+302,
+95
+],
+"pv": [
+151,
+95
+],
+"pv_union": [
+-358,
+153
+],
+"css_per_px": 0.5669,
+"css": [
+171.2,
+53.9
+],
+"pv_own": [
+151,
+95
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.splash.1": {
+"hero": "liubei",
+"r": [
+1466,
+350,
+289,
+199
+],
+"pv": [
+144,
+199
+],
+"pv_union": [
+647,
+213
+],
+"css_per_px": 0.5669,
+"css": [
+163.8,
+112.8
+],
+"pv_own": [
+144,
+199
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.splash.2": {
+"hero": "liubei",
+"r": [
+593,
+758,
+347,
+158
+],
+"pv": [
+174,
+158
+],
+"pv_union": [
+347,
+165
+],
+"css_per_px": 0.5669,
+"css": [
+196.7,
+89.6
+],
+"pv_own": [
+174,
+158
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.splash.3": {
+"hero": "liubei",
+"r": [
+1476,
+0,
+323,
+260
+],
+"pv": [
+162,
+260
+],
+"pv_union": [
+4,
+260
+],
+"css_per_px": 0.5669,
+"css": [
+183.1,
+147.4
+],
+"pv_own": [
+162,
+260
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"liubei.splash.4": {
+"hero": "liubei",
+"r": [
+606,
+1214,
+281,
+111
+],
+"pv": [
+140,
+111
+],
+"pv_union": [
+-366,
+120
+],
+"css_per_px": 0.5669,
+"css": [
+159.3,
+62.9
+],
+"pv_own": [
+140,
+111
+],
+"mode": "normal",
+"src": "r947 approved"
+},
+"huangyueying.dust.1": {
+"hero": "huangyueying",
+"r": [
+1473,
+1214,
+173,
+102
+],
+"pv": [
+86,
+102
+],
+"pv_union": [
+606,
+102
+],
+"css_per_px": 0.5669,
+"css": [
+98.1,
+57.8
+],
+"pv_own": [
+86,
+102
+],
+"mode": "normal",
+"src": "r942 approved"
+},
+"huangyueying.dust.2": {
+"hero": "huangyueying",
+"r": [
+455,
+569,
+281,
+185
+],
+"pv": [
+140,
+185
+],
+"pv_union": [
+342,
+189
+],
+"css_per_px": 0.5669,
+"css": [
+159.3,
+104.9
+],
+"pv_own": [
+140,
+185
+],
+"mode": "normal",
+"src": "r942 approved"
+},
+"huangyueying.dust.3": {
+"hero": "huangyueying",
+"r": [
+0,
+350,
+313,
+217
+],
+"pv": [
+156,
+217
+],
+"pv_union": [
+13,
+220
+],
+"css_per_px": 0.5669,
+"css": [
+177.4,
+123.0
+],
+"pv_own": [
+156,
+217
+],
+"mode": "normal",
+"src": "r942 approved"
+},
+"huangyueying.dust.4": {
+"hero": "huangyueying",
+"r": [
+315,
+350,
+266,
+217
+],
+"pv": [
+133,
+217
+],
+"pv_union": [
+-340,
+219
+],
+"css_per_px": 0.5669,
+"css": [
+150.8,
+123.0
+],
+"pv_own": [
+133,
+217
+],
+"mode": "normal",
+"src": "r942 approved"
+},
+"huangyueying.ox.1": {
+"hero": "huangyueying",
+"r": [
+886,
+1078,
+296,
+126
+],
+"pv": [
+47,
+124
+],
+"pv_union": [
+47,
+124
+],
+"css_per_px": 1.1338,
+"css": [
+335.6,
+142.9
+],
+"pv_own": [
+148,
+126
+],
+"mode": "normal",
+"src": "r948 approved"
+},
+"huangyueying.ox.2": {
+"hero": "huangyueying",
+"r": [
+593,
+1078,
+291,
+127
+],
+"pv": [
+49,
+126
+],
+"pv_union": [
+49,
+126
+],
+"css_per_px": 1.1338,
+"css": [
+329.9,
+144.0
+],
+"pv_own": [
+146,
+127
+],
+"mode": "normal",
+"src": "r948 approved"
+},
+"huangyueying.ox.3": {
+"hero": "huangyueying",
+"r": [
+1184,
+1078,
+285,
+123
+],
+"pv": [
+50,
+122
+],
+"pv_union": [
+50,
+122
+],
+"css_per_px": 1.1338,
+"css": [
+323.1,
+139.5
+],
+"pv_own": [
+142,
+123
+],
+"mode": "normal",
+"src": "r948 approved"
+},
+"huangyueying.ox.4": {
+"hero": "huangyueying",
+"r": [
+904,
+927,
+292,
+138
+],
+"pv": [
+49,
+138
+],
+"pv_union": [
+49,
+138
+],
+"css_per_px": 1.1338,
+"css": [
+331.1,
+156.5
+],
+"pv_own": [
+146,
+138
+],
+"mode": "normal",
+"src": "r948 approved"
+},
+"huangyueying.ox_wheel.1": {
+"hero": "huangyueying",
+"r": [
+593,
+1334,
+52,
+52
+],
+"pv": [
+26,
+26
+],
+"pv_union": [
+26,
+26
+],
+"css_per_px": 1.1338,
+"css": [
+59.0,
+59.0
+],
+"pv_own": [
+26,
+26
+],
+"mode": "normal",
+"src": "r948 approved"
+},
+"huangyueying.grain.1": {
+"hero": "huangyueying",
+"r": [
+813,
+1431,
+171,
+171
+],
+"pv": [
+85,
+152
+],
+"css_per_px": 0.5669,
+"css": [
+96.9,
+96.9
+],
+"mode": "normal",
+"src": "r950 a approved",
+"stage": "kick"
+},
+"huangyueying.grain.2": {
+"hero": "huangyueying",
+"r": [
+614,
+1431,
+197,
+207
+],
+"pv": [
+93,
+187
+],
+"css_per_px": 0.5669,
+"css": [
+111.7,
+117.3
+],
+"mode": "normal",
+"src": "r950 a approved",
+"stage": "burst"
+},
+"huangyueying.grain.3": {
+"hero": "huangyueying",
+"r": [
+0,
+1431,
+203,
+439
+],
+"pv": [
+100,
+419
+],
+"css_per_px": 0.5669,
+"css": [
+115.1,
+248.9
+],
+"mode": "normal",
+"src": "r950 a approved",
+"stage": "column"
+},
+"huangyueying.grain.4": {
+"hero": "huangyueying",
+"r": [
+205,
+1431,
+211,
+435
+],
+"pv": [
+110,
+415
+],
+"css_per_px": 0.5669,
+"css": [
+119.6,
+246.6
+],
+"mode": "normal",
+"src": "r950 a approved",
+"stage": "crown"
+},
+"huangyueying.grain.5": {
+"hero": "huangyueying",
+"r": [
+418,
+1431,
+194,
+417
+],
+"pv": [
+96,
+401
+],
+"css_per_px": 0.5669,
+"css": [
+110.0,
+236.4
+],
+"mode": "normal",
+"src": "r950 a approved",
+"stage": "shower"
+},
+"huangyueying.grain_drop.1": {
+"hero": "huangyueying",
+"r": [
+1006,
+1431,
+49,
+46
+],
+"pv": [
+24,
+23
+],
+"css_per_px": 0.5669,
+"css": [
+27.8,
+26.1
+],
+"mode": "normal",
+"src": "r950 a approved",
+"kind": "grain",
+"from": "shower",
+"pv_note": "centre"
+},
+"huangyueying.grain_drop.2": {
+"hero": "huangyueying",
+"r": [
+1057,
+1431,
+44,
+39
+],
+"pv": [
+22,
+19
+],
+"css_per_px": 0.5669,
+"css": [
+24.9,
+22.1
+],
+"mode": "normal",
+"src": "r950 a approved",
+"kind": "grain",
+"from": "shower",
+"pv_note": "centre"
+},
+"huangyueying.grain_drop.3": {
+"hero": "huangyueying",
+"r": [
+1103,
+1431,
+12,
+13
+],
+"pv": [
+6,
+7
+],
+"css_per_px": 0.5669,
+"css": [
+6.8,
+7.4
+],
+"mode": "normal",
+"src": "r950 a approved",
+"kind": "grain",
+"from": "shower",
+"pv_note": "centre"
+},
+"huangyueying.grain_drop.4": {
+"hero": "huangyueying",
+"r": [
+986,
+1431,
+18,
+48
+],
+"pv": [
+9,
+24
+],
+"css_per_px": 0.5669,
+"css": [
+10.2,
+27.2
+],
+"mode": "normal",
+"src": "r950 a approved",
+"kind": "ear",
+"from": "shower",
+"pv_note": "centre"
+},
+"huangyueying.grain_drop.5": {
+"hero": "huangyueying",
+"r": [
+1117,
+1431,
+7,
+13
+],
+"pv": [
+3,
+7
+],
+"css_per_px": 0.5669,
+"css": [
+4.0,
+7.4
+],
+"mode": "normal",
+"src": "r950 a approved",
+"kind": "ear",
+"from": "shower",
+"pv_note": "centre"
+},
+"huangyueying.grain_drop.6": {
+"hero": "huangyueying",
+"r": [
+1126,
+1431,
+6,
+13
+],
+"pv": [
+3,
+7
+],
+"css_per_px": 0.5669,
+"css": [
+3.4,
+7.4
+],
+"mode": "normal",
+"src": "r950 a approved",
+"kind": "ear",
+"from": "shower",
+"pv_note": "centre"
+}
+},
+"seq": {
+"xunyu.sweep": {
+"frames": [
+"xunyu.sweep.1",
+"xunyu.sweep.2",
+"xunyu.sweep.3",
+"xunyu.sweep.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true
+},
+"xunyu.splash": {
+"frames": [
+"xunyu.splash.1",
+"xunyu.splash.2",
+"xunyu.splash.3",
+"xunyu.splash.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": false,
+"fade_ms": 400
+},
+"lusu.sweep": {
+"frames": [
+"lusu.sweep.1",
+"lusu.sweep.2",
+"lusu.sweep.3",
+"lusu.sweep.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true
+},
+"lusu.splash": {
+"frames": [
+"lusu.splash.1",
+"lusu.splash.2",
+"lusu.splash.3"
+],
+"ms": [
+83,
+83,
+83
+],
+"loop": false,
+"fade_ms": 250,
+"note": "plays c1-c3, c3 alpha fades out over 250 ms; puddle frame dropped"
+},
+"huatuo.steam_pot": {
+"frames": [
+"huatuo.steam_pot.1",
+"huatuo.steam_pot.2",
+"huatuo.steam_pot.3",
+"huatuo.steam_pot.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true,
+"note": "pv = body base-centre (pot/satchel stays fixed, only the steam moves) - CUT-FIX-86"
+},
+"huatuo.steam_satchel": {
+"frames": [
+"huatuo.steam_satchel.1",
+"huatuo.steam_satchel.2",
+"huatuo.steam_satchel.3",
+"huatuo.steam_satchel.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true,
+"note": "pv = body base-centre (pot/satchel stays fixed, only the steam moves) - CUT-FIX-86"
+},
+"zuoci.page": {
+"frames": [
+"zuoci.page.1",
+"zuoci.page.2",
+"zuoci.page.3",
+"zuoci.page.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true
+},
+"zuoci.wisp": {
+"frames": [
+"zuoci.wisp.1",
+"zuoci.wisp.2",
+"zuoci.wisp.3",
+"zuoci.wisp.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true
+},
+"liubei.sweep": {
+"frames": [
+"liubei.sweep.1",
+"liubei.sweep.2",
+"liubei.sweep.3",
+"liubei.sweep.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": true
+},
+"liubei.splash": {
+"frames": [
+"liubei.splash.1",
+"liubei.splash.2",
+"liubei.splash.3",
+"liubei.splash.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": false,
+"fade_ms": 400
+},
+"huangyueying.dust": {
+"frames": [
+"huangyueying.dust.1",
+"huangyueying.dust.2",
+"huangyueying.dust.3",
+"huangyueying.dust.4"
+],
+"ms": [
+83,
+83,
+83,
+83
+],
+"loop": false,
+"note": "spawn behind hooves every 2nd step, drift left"
+},
+"huangyueying.ox": {
+"frames": [
+"huangyueying.ox.1",
+"huangyueying.ox.2",
+"huangyueying.ox.3",
+"huangyueying.ox.4"
+],
+"ms": [
+91,
+91,
+91,
+91
+],
+"loop": true,
+"note": "r948 b ox run, 11 fps (10-12 ok). Faces right (ours), enemy = code flip. 3 carts out of phase."
+},
+"huangyueying.grain": {
+"frames": [
+"huangyueying.grain.1",
+"huangyueying.grain.2",
+"huangyueying.grain.3",
+"huangyueying.grain.4",
+"huangyueying.grain.5"
+],
+"ms": [
+100,
+100,
+100,
+100,
+100
+],
+"loop": false,
+"hold_last_ms": 250,
+"fade_ms": 250,
+"note": "grain fountain, r950 a (Decision 536): F1 kick, F2 burst, F3 column, F4 crown, F5 shower. ONE scale for all 5: css_per_px 0.5669 x the atlas px scale already applied = column sack-base-to-top 660 src px = 237.6 css = 3.4 squad heights (sh = 70 css); the pieces css [w,h] are already at that size. Cap: keep the top >= 8 css inside the field rect, shrink the shared scale to fit, never below 2.8 sh (x0.82), never clip. Kick is already x0.89 so its sack matches (124 src px). pv = sack bottom-centre, same ground line in all 5 (draw at the ground point of the middle front squad). grain_drop.1-4 = single grains, 5-8 = short wheat ears, pv = centre: drop from the crown top onto each LIVING front squad, >= 80 ms apart in travel order, none on an empty tile. F5/F1 pink spill remapped to gold at cut."
+}
+},
+"ox": {
+"src": "r948 b approved",
+"scale": "one shared scale 0.5 atlas px per source px for all 4 frames and the wheel layer; css_per_px 1.1338 on these pieces (= 0.5669 / 0.5) is the natural size like the other flipbooks, coder multiplies by one uniform factor so cart+ox length = about 1.6 squad widths",
+"pv": "every ox frame: pivot = wheel ground contact (hub x, rim bottom y), identical on the ground in all 4 frames; hooves lift above it",
+"wheel_layer": "huangyueying.ox_wheel.1 = spokes + hub only (rim stays in the frame), pivot pv = hub centre. Draw ON TOP of the frame at pv_ox + hub[k] (hub is relative to the frame pivot, atlas px), rotate about its own hub: angle = rot[k] (deg, screen clockwise, the painted phase of that frame) + spin. 8 spokes, so any spin of 45 deg repeats. Never rotate the whole sprite.",
+"hub": [
+[
+0.0,
+-31.2
+],
+[
+0.0,
+-33.2
+],
+[
+0.0,
+-31.8
+],
+[
+0.0,
+-30.8
+]
+],
+"rot": [
+-0.0,
+6.0,
+11.0,
+-6.5
+],
+"rim_bottom_src_px": [
+249,
+252,
+245,
+275
+],
+"spoke_px_removed": [
+5035,
+5112,
+5105,
+5197
+]
+}
+}

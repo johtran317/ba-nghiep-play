@@ -1,0 +1,464 @@
+{
+ "artmeta": 1,
+ "id": "ssg_urmove",
+ "build": "V302-staged",
+ "file": "art/fx/ssg_urmove.webp",
+ "size": [
+  2048,
+  2092
+ ],
+ "note": "UR moves Gia Cat Luong (r877 a + r878 b) and Chu Du (r879 a + r880 a), cut from the approved production sheets, keys <gid>.<piece>, same format as ur_prod.json. r = atlas rect, pv = pivot px in the piece (bc = bottom centre / c = centre), css_per_px = css size of one atlas px (never resampled: 1.76 atlas px per css px). Straight alpha. Fixes in the cut: r878 ring sparks gold; r879 wind streaks off-white; r877 scar despilled in the outer 4 px only.",
+ "bytes": 736226,
+ "pieces": {
+  "zhugeliang.stone_rise": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    0,
+    291,
+    667
+   ],
+   "pv": [
+    145,
+    666
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    165.0,
+    378.1
+   ],
+   "mode": "normal",
+   "src": "r877 a approved/ur_prod_zhugeliang_stones.png",
+   "draw": "tall stone rising (c1): stands at a ring pad edge, gold rim; 1 pad of dust/rubble at its base"
+  },
+  "zhugeliang.stone_slam": {
+   "hero": "zhugeliang",
+   "r": [
+    295,
+    0,
+    497,
+    667
+   ],
+   "pv": [
+    248,
+    666
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    281.7,
+    378.1
+   ],
+   "mode": "normal",
+   "src": "r877 a approved/ur_prod_zhugeliang_stones.png",
+   "draw": "stone slammed (c2) with the GOLD IMPACT FLASH, the money beat: flash first 0-90 ms, hit-stop 110"
+  },
+  "zhugeliang.stone_sink": {
+   "hero": "zhugeliang",
+   "r": [
+    902,
+    1365,
+    307,
+    306
+   ],
+   "pv": [
+    153,
+    305
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    174.0,
+    173.5
+   ],
+   "mode": "normal",
+   "src": "r877 a approved/ur_prod_zhugeliang_stones.png",
+   "draw": "stone sinking / tilting (r1c3): aftermath variant, draw after the slam"
+  },
+  "zhugeliang.maze_wall": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    1687,
+    325,
+    281
+   ],
+   "pv": [
+    162,
+    280
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    184.2,
+    159.3
+   ],
+   "mode": "normal",
+   "src": "r877 a approved/ur_prod_zhugeliang_stones.png",
+   "draw": "maze wall burst (r1c4): wall piece between pads, dust burst, brief"
+  },
+  "zhugeliang.scar": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    671,
+    470,
+    355
+   ],
+   "pv": [
+    235,
+    177
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    266.4,
+    201.2
+   ],
+   "mode": "normal",
+   "src": "r877 a approved/ur_prod_zhugeliang_stones.png",
+   "draw": "octagon scar decal (r2c3-c4): 8 stumps, violet ink stains, flat on the enemy board; residue .35 after the move"
+  },
+  "zhugeliang.gate_closed": {
+   "hero": "zhugeliang",
+   "r": [
+    680,
+    1030,
+    676,
+    330
+   ],
+   "pv": [
+    338,
+    329
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    383.2,
+    187.1
+   ],
+   "mode": "normal",
+   "src": "r878 b",
+   "draw": "ink wall + gate closed, FULL WIDTH 390 css at the enemy front edge; base flat (ink splash along it)"
+  },
+  "zhugeliang.gate_open": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    1030,
+    676,
+    331
+   ],
+   "pv": [
+    338,
+    330
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    383.2,
+    187.6
+   ],
+   "mode": "normal",
+   "src": "r878 b",
+   "draw": "gate open, gold light in the gateway (money); swap from gate_closed at the same anchor"
+  },
+  "zhugeliang.whirl_form": {
+   "hero": "zhugeliang",
+   "r": [
+    1086,
+    1687,
+    315,
+    190
+   ],
+   "pv": [
+    157,
+    95
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    178.6,
+    107.7
+   ],
+   "mode": "normal",
+   "src": "r878 b",
+   "draw": "VIOLET chaos whirl forming (flat, on the pad); violet is the whirl colour only"
+  },
+  "zhugeliang.whirl_full": {
+   "hero": "zhugeliang",
+   "r": [
+    1213,
+    1365,
+    276,
+    302
+   ],
+   "pv": [
+    138,
+    301
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    156.5,
+    171.2
+   ],
+   "mode": "normal",
+   "src": "r878 b",
+   "draw": "VIOLET chaos whirl full, pivot = its foot (ground ring centre)"
+  },
+  "zhugeliang.blunt_ring": {
+   "hero": "zhugeliang",
+   "r": [
+    870,
+    1687,
+    212,
+    210
+   ],
+   "pv": [
+    106,
+    105
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    120.2,
+    119.0
+   ],
+   "mode": "normal",
+   "src": "r878 b (sparks recoloured gold)",
+   "draw": "cracked-bronze blunt mark on a target (no symbol); sparks are gold since the cut"
+  },
+  "zhugeliang.thread": {
+   "hero": "zhugeliang",
+   "r": [
+    673,
+    1972,
+    316,
+    61
+   ],
+   "pv": [
+    158,
+    30
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    179.1,
+    34.6
+   ],
+   "mode": "normal",
+   "src": "r878 b",
+   "draw": "gold-and-ink thread segment, tile along x (see tile_period_px), links stone to stone",
+   "tile_period_px": 31,
+   "period_err": 0.0623,
+   "tile": true
+  },
+  "zhouyu.fleet": {
+   "hero": "zhouyu",
+   "r": [
+    0,
+    1365,
+    898,
+    318
+   ],
+   "pv": [
+    449,
+    317
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    509.0,
+    180.3
+   ],
+   "mode": "normal",
+   "src": "r879 a",
+   "draw": "chained fleet of 5 whole ships with light sails, WIDE (about 1.6 screens wide at 1.0: crop to the enemy row, slide); wind streaks off-white"
+  },
+  "zhouyu.fleet_burn": {
+   "hero": "zhouyu",
+   "r": [
+    474,
+    671,
+    954,
+    350
+   ],
+   "pv": [
+    477,
+    349
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    540.8,
+    198.4
+   ],
+   "mode": "normal",
+   "src": "r879 a",
+   "draw": "same fleet ablaze, crossfade from fleet; smoke top feathered 26 px (sheet cut it flat); darken the board while it burns"
+  },
+  "zhouyu.hulk": {
+   "hero": "zhouyu",
+   "r": [
+    1445,
+    0,
+    356,
+    362
+   ],
+   "pv": [
+    178,
+    361
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    201.8,
+    205.2
+   ],
+   "mode": "normal",
+   "src": "r879 a",
+   "draw": "ramming burning hulk (r1c4), rams the back row, splinter burst at the bow"
+  },
+  "zhouyu.chain": {
+   "hero": "zhouyu",
+   "r": [
+    329,
+    1972,
+    340,
+    88
+   ],
+   "pv": [
+    170,
+    44
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    192.7,
+    49.9
+   ],
+   "mode": "normal",
+   "src": "r879 a",
+   "draw": "iron chain segment, tile along x (see tile_period_px)",
+   "tile_period_px": 87,
+   "period_err": 0.0874,
+   "tile": true
+  },
+  "zhouyu.wall_rise": {
+   "hero": "zhouyu",
+   "r": [
+    329,
+    1687,
+    537,
+    254
+   ],
+   "pv": [
+    268,
+    253
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    304.4,
+    144.0
+   ],
+   "mode": "normal",
+   "src": "r880 a",
+   "draw": "fire wall rising (r1c1-c2), wind-bent to the right"
+  },
+  "zhouyu.wall_full": {
+   "hero": "zhouyu",
+   "r": [
+    796,
+    0,
+    645,
+    389
+   ],
+   "pv": [
+    322,
+    388
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    365.6,
+    220.5
+   ],
+   "mode": "normal",
+   "src": "r880 a",
+   "draw": "fire wall FULL with the gold-white core (the money beat), over the enemy board; smoke top/right feathered where the sheet cut it"
+  },
+  "zhouyu.pad_burst": {
+   "hero": "zhouyu",
+   "r": [
+    1493,
+    1365,
+    300,
+    283
+   ],
+   "pv": [
+    150,
+    282
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    170.1,
+    160.4
+   ],
+   "mode": "normal",
+   "src": "r880 a",
+   "draw": "fire burst on one pad (r2c1); pivot = pad centre/foot"
+  },
+  "zhouyu.chain_spread": {
+   "hero": "zhouyu",
+   "r": [
+    0,
+    1972,
+    325,
+    120
+   ],
+   "pv": [
+    162,
+    60
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    184.2,
+    68.0
+   ],
+   "mode": "normal",
+   "src": "r880 a",
+   "draw": "burning chain spread, neighbour to neighbour (never an X), tile along x (see tile_period_px)",
+   "tile_period_px": 112,
+   "period_err": 0.0751,
+   "tile": true
+  },
+  "zhouyu.scorch": {
+   "hero": "zhouyu",
+   "r": [
+    1529,
+    1687,
+    334,
+    169
+   ],
+   "pv": [
+    167,
+    84
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    189.3,
+    95.8
+   ],
+   "mode": "normal",
+   "src": "r880 a",
+   "draw": "scorch + chain decal (r2c3), the residue under a dead pad"
+  },
+  "zhouyu.flame": {
+   "hero": "zhouyu",
+   "r": [
+    1405,
+    1687,
+    120,
+    176
+   ],
+   "pv": [
+    60,
+    175
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    68.0,
+    99.8
+   ],
+   "mode": "normal",
+   "src": "r880 a",
+   "draw": "lingering flame (r2c4), small, pivot = foot of the flame"
+  }
+ }
+}

@@ -613,6 +613,27 @@
     2,
     1,
     0
+   ],
+   "d1-drumwave_1": [
+    18070,
+    400,
+    2,
+    1,
+    0
+   ],
+   "d2-drumthump_1": [
+    18570,
+    500,
+    2,
+    1,
+    0
+   ],
+   "d3-drumroll_1": [
+    19180,
+    1150,
+    2,
+    2,
+    0
    ]
   },
   "sfx_skill.m4a": {
@@ -776,6 +797,9 @@
   "gacha_R": "s4-gachaR",
   "gacha_SR": "s5-gachaSR",
   "gacha_SSR": "s6-gachaSSR",
-  "gacha_UR": "s6-gachaSSR"
+  "gacha_UR": "s6-gachaSSR",
+  "drum_wave": "d1-drumwave",
+  "drum_thump": "d2-drumthump",
+  "drum_roll": "d3-drumroll"
  }
 }

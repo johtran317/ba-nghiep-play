@@ -1,0 +1,347 @@
+{
+ "artmeta": 1,
+ "id": "zgl_khongthanh",
+ "file": "art/fx/zgl_khongthanh.webp",
+ "size": [
+  1024,
+  533
+ ],
+ "source": "r810 a concept board 1376x768 (4 screens x 331 px, content y 8-692); 1 atlas px = 1 native px = 1.178 css at the s15 scale (screen = 390 css wide)",
+ "css_per_px": 1.1782,
+ "native_px_per_css": 0.849,
+ "placeholders": [],
+ "groups": {
+  "zhugeliang.khongthanh_f1": [
+   "zhugeliang.wall",
+   "zhugeliang.rings"
+  ],
+  "zhugeliang.khongthanh_f2": [
+   "zhugeliang.wall_glow",
+   "zhugeliang.whirlpool",
+   "zhugeliang.strings"
+  ],
+  "zhugeliang.khongthanh_f3": [
+   "zhugeliang.crowns9",
+   "zhugeliang.swirl"
+  ],
+  "zhugeliang.khongthanh_f4": [
+   "zhugeliang.wall_pale",
+   "zhugeliang.stain",
+   "zhugeliang.swirl"
+  ]
+ },
+ "pieces": {
+  "zhugeliang.whirlpool": {
+   "hero": "zhugeliang",
+   "r": [
+    326,
+    0,
+    347,
+    185
+   ],
+   "pv": [
+    173,
+    92
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    409,
+    218
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    -9.4,
+    358.2
+   ],
+   "src": "r810 a frame 2",
+   "draw": "ink whirlpool ellipse (frame 2): centre on the CENTRE enemy tile, rim just outside the 3x3 board (~ board width), lies flat; spin it (rotate about its centre) 650 ms; never below the gap line"
+  },
+  "zhugeliang.rings": {
+   "hero": "zhugeliang",
+   "r": [
+    318,
+    417,
+    232,
+    55
+   ],
+   "pv": [
+    116,
+    27
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    273,
+    65
+   ],
+   "mode": "additive",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    58.9,
+    165.0
+   ],
+   "src": "r810 a frame 1",
+   "draw": "three violet sound rings (frame 1): centre on the gate foot (top-centre of the enemy board), expand + fade over 600 ms, draw lighter; ellipses ~ 2.4:1"
+  },
+  "zhugeliang.strings": {
+   "hero": "zhugeliang",
+   "r": [
+    666,
+    269,
+    333,
+    131
+   ],
+   "pv": [
+    166,
+    65
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    392,
+    154
+   ],
+   "mode": "additive",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    -1.2,
+    225.0
+   ],
+   "src": "r810 a frame 2",
+   "draw": "seven violet-white string lines lashed across the enemy board (frame 2), one piece, 331 px wide; draw across the board centre, vibrate (shift y +-3 css) then SNAP out at the frame 3 start; draw lighter"
+  },
+  "zhugeliang.wall": {
+   "hero": "zhugeliang",
+   "r": [
+    675,
+    0,
+    331,
+    146
+   ],
+   "pv": [
+    165,
+    0
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    390,
+    172
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    0.0,
+    0.0
+   ],
+   "src": "r810 a frame 1",
+   "draw": "ink-wash city wall + open gate + sky, OPAQUE band 331x146 px (390x172 css) pinned to the TOP of the enemy board area (y of the board far edge); Zhuge Liang at the zither is baked in (calm pose); plaque painted blank; frames 1 and 3"
+  },
+  "zhugeliang.wall_glow": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    269,
+    331,
+    146
+   ],
+   "pv": [
+    165,
+    0
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    390,
+    172
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    0.0,
+    0.0
+   ],
+   "src": "r810 a frame 2",
+   "draw": "frame 2 swap for zhugeliang.wall: same size and place, violet glow, strike pose (fan raised) baked in; crossfade 150 ms"
+  },
+  "zhugeliang.wall_pale": {
+   "hero": "zhugeliang",
+   "r": [
+    333,
+    269,
+    331,
+    146
+   ],
+   "pv": [
+    165,
+    0
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    390,
+    172
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    0.0,
+    0.0
+   ],
+   "src": "r810 a frame 4",
+   "draw": "frame 4: pale ink outline wall, gate CLOSED, no figure, no plaque; same size and place; crossfade from wall over 400 ms"
+  },
+  "zhugeliang.crowns9": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    0,
+    324,
+    267
+   ],
+   "pv": [
+    162,
+    133
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    382,
+    315
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    4.7,
+    154.4
+   ],
+   "src": "r810 a frame 3",
+   "draw": "ALL NINE ink crowns of frame 3 as one 3x3 set (331 px wide): they overlap, so this is the safe piece; place it over the enemy board exactly like the painting (centre on the centre tile); soldiers have holes where they stood (draw the squads over it, or draw the squads at 70% so ink shows through)"
+  },
+  "zhugeliang.crown": {
+   "hero": "zhugeliang",
+   "r": [
+    0,
+    417,
+    104,
+    114
+   ],
+   "pv": [
+    52,
+    114
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    123,
+    134
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    132.0,
+    165.0
+   ],
+   "src": "r810 a frame 3",
+   "draw": "one ink crown (top-middle of frame 3): bottom-centre on a squad, grows 0 -> full height in 180 ms; its sides are trimmed where the neighbours touched, so for a clean 9 use crowns9 and treat this as a spare/test; mirror left-right freely"
+  },
+  "zhugeliang.stain": {
+   "hero": "zhugeliang",
+   "r": [
+    552,
+    417,
+    95,
+    53
+   ],
+   "pv": [
+    47,
+    26
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    112,
+    62
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    251.0,
+    328.7
+   ],
+   "src": "r810 a frame 4",
+   "draw": "spiral ink stain decal (frame 4): one under each enemy squad (9), centre on the squad centre, ~0.9 tile wide (~110 css); fades in 300 ms after the crowns; rotate 0/90/180/270 per squad so they differ; the squad hides the middle; flat grey ink colour, alpha carries the strokes"
+  },
+  "zhugeliang.swirl": {
+   "hero": "zhugeliang",
+   "r": [
+    649,
+    417,
+    16,
+    12
+   ],
+   "pv": [
+    8,
+    6
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    19,
+    14
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    42.4,
+    209.7
+   ],
+   "src": "r810 a frame 4",
+   "draw": "violet dizzy swirl (frames 3-4): tiny native piece (about 14 css); spin it, 1-2 above each squad head; if too soft, draw a code spiral in the same violet instead"
+  },
+  "zhugeliang.figure_play": {
+   "hero": "zhugeliang",
+   "r": [
+    106,
+    417,
+    104,
+    68
+   ],
+   "pv": [
+    52,
+    34
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    123,
+    80
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    150.8,
+    33.0
+   ],
+   "src": "r810 a frame 1",
+   "draw": "Zhuge Liang at the zither in the tower window, feathered 104x68 patch: lay it on zhugeliang.wall at the same offset only if you swap the pose; baked into wall already"
+  },
+  "zhugeliang.figure_strike": {
+   "hero": "zhugeliang",
+   "r": [
+    212,
+    417,
+    104,
+    68
+   ],
+   "pv": [
+    52,
+    34
+   ],
+   "css_per_px": 1.1782,
+   "css": [
+    123,
+    80
+   ],
+   "mode": "normal",
+   "native_px_per_css": 0.85,
+   "painted_at_css": [
+    150.8,
+    33.0
+   ],
+   "src": "r810 a frame 2",
+   "draw": "strike pose, fan raised, violet glow: baked into wall_glow already; patch given for a separate pop at 250-400 ms"
+  }
+ }
+}

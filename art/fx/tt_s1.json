@@ -1,0 +1,688 @@
+{
+ "artmeta": 1,
+ "id": "tt_s1",
+ "build": "V303-move",
+ "file": "art/fx/tt_s1.webp",
+ "size": [
+  2048,
+  715
+ ],
+ "note": "Thien Tuong S1 (huangfusong) painted move + icons. r = atlas rect [x,y,w,h]; pv = pivot px inside the piece (bottom-centre, ground contact); css_per_px = css size of one atlas px; straight alpha. Burst/scorch/tuft cells are separate and placed by code on living enemy squads only (Huy 513). Wave cells carry a 20 px baked feather at both ends: scale-x by n, overlap 2 crests 25 %.",
+ "pieces": {
+  "wave_full": {
+   "r": [
+    0,
+    0,
+    624,
+    354
+   ],
+   "pv": [
+    312,
+    354
+   ],
+   "css_per_px": 0.45,
+   "css": [
+    280.8,
+    159.3
+   ]
+  },
+  "wave_brk": {
+   "r": [
+    626,
+    0,
+    639,
+    349
+   ],
+   "pv": [
+    319,
+    349
+   ],
+   "css_per_px": 0.45,
+   "css": [
+    287.6,
+    157.1
+   ]
+  },
+  "wave_ign": {
+   "r": [
+    1267,
+    0,
+    582,
+    276
+   ],
+   "pv": [
+    291,
+    276
+   ],
+   "css_per_px": 0.45,
+   "css": [
+    261.9,
+    124.2
+   ]
+  },
+  "m_burst_1": {
+   "r": [
+    0,
+    356,
+    201,
+    194
+   ],
+   "pv": [
+    100,
+    194
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    100.5,
+    97.0
+   ]
+  },
+  "m_burst_0": {
+   "r": [
+    203,
+    356,
+    175,
+    178
+   ],
+   "pv": [
+    87,
+    178
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    87.5,
+    89.0
+   ]
+  },
+  "m_burst_2": {
+   "r": [
+    380,
+    356,
+    170,
+    172
+   ],
+   "pv": [
+    85,
+    172
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    85.0,
+    86.0
+   ]
+  },
+  "wind": {
+   "r": [
+    552,
+    356,
+    598,
+    158
+   ],
+   "pv": [
+    299,
+    158
+   ],
+   "css_per_px": 0.45,
+   "css": [
+    269.1,
+    71.1
+   ]
+  },
+  "comet": {
+   "r": [
+    1152,
+    356,
+    602,
+    141
+   ],
+   "pv": [
+    301,
+    141
+   ],
+   "css_per_px": 0.45,
+   "css": [
+    270.9,
+    63.5
+   ]
+  },
+  "i_burst": {
+   "r": [
+    1756,
+    356,
+    126,
+    128
+   ],
+   "pv": [
+    63,
+    128
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    63.0,
+    64.0
+   ]
+  },
+  "m_brand": {
+   "r": [
+    0,
+    552,
+    243,
+    121
+   ],
+   "pv": [
+    121,
+    121
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    121.5,
+    60.5
+   ]
+  },
+  "i_plate": {
+   "r": [
+    245,
+    552,
+    300,
+    115
+   ],
+   "pv": [
+    150,
+    115
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    150.0,
+    57.5
+   ]
+  },
+  "m_tuft_2": {
+   "r": [
+    547,
+    552,
+    69,
+    104
+   ],
+   "pv": [
+    34,
+    104
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    34.5,
+    52.0
+   ]
+  },
+  "m_residue": {
+   "r": [
+    618,
+    552,
+    213,
+    102
+   ],
+   "pv": [
+    106,
+    102
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    106.5,
+    51.0
+   ]
+  },
+  "m_tuft_3": {
+   "r": [
+    833,
+    552,
+    63,
+    100
+   ],
+   "pv": [
+    31,
+    100
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    31.5,
+    50.0
+   ]
+  },
+  "i_chip": {
+   "r": [
+    898,
+    552,
+    240,
+    97
+   ],
+   "pv": [
+    120,
+    97
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    120.0,
+    48.5
+   ]
+  },
+  "i_guard_48": {
+   "r": [
+    1140,
+    552,
+    93,
+    96
+   ],
+   "pv": [
+    46,
+    96
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    46.5,
+    48.0
+   ]
+  },
+  "i_burn_48": {
+   "r": [
+    1235,
+    552,
+    68,
+    96
+   ],
+   "pv": [
+    34,
+    96
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    34.0,
+    48.0
+   ]
+  },
+  "i_emblem_48": {
+   "r": [
+    1305,
+    552,
+    94,
+    96
+   ],
+   "pv": [
+    47,
+    96
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    47.0,
+    48.0
+   ]
+  },
+  "m_tuft_1": {
+   "r": [
+    1401,
+    552,
+    63,
+    94
+   ],
+   "pv": [
+    31,
+    94
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    31.5,
+    47.0
+   ]
+  },
+  "m_tuft_0": {
+   "r": [
+    1466,
+    552,
+    57,
+    75
+   ],
+   "pv": [
+    28,
+    75
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    28.5,
+    37.5
+   ]
+  },
+  "m_puff": {
+   "r": [
+    1525,
+    552,
+    133,
+    73
+   ],
+   "pv": [
+    66,
+    73
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    66.5,
+    36.5
+   ]
+  },
+  "i_guard_32": {
+   "r": [
+    1660,
+    552,
+    62,
+    64
+   ],
+   "pv": [
+    31,
+    64
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    31.0,
+    32.0
+   ]
+  },
+  "i_burn_32": {
+   "r": [
+    1724,
+    552,
+    46,
+    64
+   ],
+   "pv": [
+    23,
+    64
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    23.0,
+    32.0
+   ]
+  },
+  "i_emblem_32": {
+   "r": [
+    1772,
+    552,
+    63,
+    64
+   ],
+   "pv": [
+    31,
+    64
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    31.5,
+    32.0
+   ]
+  },
+  "i_guard_28": {
+   "r": [
+    1837,
+    552,
+    54,
+    56
+   ],
+   "pv": [
+    27,
+    56
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    27.0,
+    28.0
+   ]
+  },
+  "i_burn_28": {
+   "r": [
+    1893,
+    552,
+    40,
+    56
+   ],
+   "pv": [
+    20,
+    56
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    20.0,
+    28.0
+   ]
+  },
+  "i_emblem_28": {
+   "r": [
+    1935,
+    552,
+    55,
+    56
+   ],
+   "pv": [
+    27,
+    56
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    27.5,
+    28.0
+   ]
+  },
+  "i_guardc_24": {
+   "r": [
+    1992,
+    552,
+    54,
+    48
+   ],
+   "pv": [
+    27,
+    48
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    27.0,
+    24.0
+   ]
+  },
+  "i_guardc_20": {
+   "r": [
+    0,
+    675,
+    45,
+    40
+   ],
+   "pv": [
+    22,
+    40
+   ],
+   "css_per_px": 0.5,
+   "css": [
+    22.5,
+    20.0
+   ]
+  }
+ },
+ "wave": {
+  "cells": [
+   "wave_ign",
+   "wave_full",
+   "wave_brk"
+  ],
+  "feather_px": 20,
+  "overlap": 0.25,
+  "crests": 2,
+  "width_frac_of_board": "n/5 clamped [0.45,1], centred on the living squads' x span",
+  "stretch": "scale-x only (never y), base width = piece css width at css_per_px"
+ },
+ "icons_css": {
+  "guard": [
+   28,
+   32,
+   48
+  ],
+  "guardc": [
+   20,
+   24
+  ],
+  "burn": [
+   28,
+   32,
+   48
+  ],
+  "emblem": [
+   28,
+   32,
+   48
+  ],
+  "note": "icon cells are 2x (retina) atlas px; css_per_px .5"
+ },
+ "frame": {
+  "file": "art/ui/tt_frame.webp",
+  "size": [
+   600,
+   914
+  ],
+  "window": [
+   91,
+   134,
+   509,
+   738
+  ],
+  "window_frac": [
+   0.1517,
+   0.1466,
+   0.6967,
+   0.6608
+  ],
+  "note": "keyed (transparent outside the frame and inside the window); window = inner opening [x0,y0,x1,y1] in file px; card art goes under it; the tassel hangs below the window"
+ },
+ "face": {
+  "head": [
+   0.354,
+   0.237,
+   0.283,
+   0.23
+  ],
+  "brow": [
+   0.442,
+   0.336,
+   0.171,
+   0.127
+  ],
+  "note": "fractions of the card (portrait.webp 687x1024); head = helm top to chin = avatar box"
+ },
+ "move": {
+  "note": "TT-S1-MOVE-CUT. Cells unchanged (already in tt_s1.webp). k_* = multiply the cell css size (pieces.*.css); one k per piece family, use the SAME k for burst_0/1/2. Sized so the whole uncut cell stays inside its own tile column and never reaches an empty neighbour tile (520/520c): burst width <= .9 tile w, height <= 1.1 tile h (top clears the tile behind); brand <= .95 tile w; residue <= .9 tile w; no clipping anywhere.",
+  "rows": {
+   "enemy0": {
+    "tile_w": 94,
+    "tile_h": 60,
+    "cy": 116,
+    "feet": 129,
+    "k_burst": 0.68,
+    "k_brand": 0.735,
+    "k_residue": 0.794,
+    "k_puff": 1
+   },
+   "enemy1": {
+    "tile_w": 97,
+    "tile_h": 60,
+    "cy": 201,
+    "feet": 214,
+    "k_burst": 0.68,
+    "k_brand": 0.758,
+    "k_residue": 0.82,
+    "k_puff": 1
+   },
+   "enemy2": {
+    "tile_w": 100,
+    "tile_h": 60,
+    "cy": 286,
+    "feet": 299,
+    "k_burst": 0.68,
+    "k_brand": 0.782,
+    "k_residue": 0.845,
+    "k_puff": 1
+   },
+   "ours0": {
+    "tile_w": 108,
+    "tile_h": 66,
+    "cy": 412,
+    "feet": 427,
+    "k_burst": 0.748,
+    "k_brand": 0.844,
+    "k_residue": 0.913,
+    "k_puff": 1
+   },
+   "ours1": {
+    "tile_w": 112,
+    "tile_h": 66,
+    "cy": 506,
+    "feet": 521,
+    "k_burst": 0.748,
+    "k_brand": 0.876,
+    "k_residue": 0.946,
+    "k_puff": 1
+   },
+   "ours2": {
+    "tile_w": 117,
+    "tile_h": 66,
+    "cy": 600,
+    "feet": 615,
+    "k_burst": 0.748,
+    "k_brand": 0.915,
+    "k_residue": 0.989,
+    "k_puff": 1
+   }
+  },
+  "wave": "TRAVEL piece (520b), not a ground mark: wave_ign at our side/caster edge -> wave_full travels up the enemy half -> wave_brk at the far edge; width = board*clamp(n/5,.45,1). May pass over heads (520). Per-squad ground pieces below fire when the wave front reaches that squad (near row first).",
+  "per_squad": {
+   "burst": [
+    "m_burst_0",
+    "m_burst_1",
+    "m_burst_2"
+   ],
+   "anchor_burst": "pv (bottom-centre) at the squad feet x,feet_y (rows[].feet)",
+   "puff": "m_puff, pv at feet",
+   "brand": "m_brand centred on tile cx,cy: pv.y at cy+brand_h/2, ground layer g",
+   "residue": "m_residue same anchor as brand",
+   "tuft": "m_tuft_0..3 pv at front-rank feet, burn squads only"
+  },
+  "timing_ms_1x": {
+   "comet": [
+    600,
+    850
+   ],
+   "wave_ign": [
+    800,
+    950
+   ],
+   "wave_full": [
+    900,
+    1200
+   ],
+   "burst_each": [
+    80,
+    "rise,full,collapse, starts when the wave reaches the squad, within 1000-1250"
+   ],
+   "wave_brk": [
+    1200,
+    1400
+   ],
+   "tuft": [
+    1250,
+    2400,
+    "120 ms loop"
+   ],
+   "brand": [
+    1300,
+    2400,
+    "then residue .35 to battle end"
+   ],
+   "first_damage_number": 1000,
+   "total": 2400,
+   "x3_speed": 0.45
+  }
+ }
+}

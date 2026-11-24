@@ -1,0 +1,142 @@
+{
+ "artmeta": 1,
+ "id": "tt_wall",
+ "build": "V303-r949",
+ "file": "art/fx/tt_wall.webp",
+ "size": [
+  980,
+  1642
+ ],
+ "bytes": 494302,
+ "note": "r949 take b one flame wall: keyed, mauve/pink remapped to #5b2a18, painted dust erased in F1-F6 (kept in F7/F8), left taper feathered 16 px F1-F6. pv = ground-line centre (x = middle of bottom 10 % rows, y = lowest opaque row). aspect = native w/h.",
+ "pieces": {
+  "r949.f1": {
+   "r": [
+    4,
+    4,
+    947,
+    149
+   ],
+   "pv": [
+    473,
+    148
+   ],
+   "aspect": 6.356
+  },
+  "r949.f2": {
+   "r": [
+    4,
+    157,
+    952,
+    206
+   ],
+   "pv": [
+    476,
+    205
+   ],
+   "aspect": 4.621
+  },
+  "r949.f3": {
+   "r": [
+    4,
+    367,
+    949,
+    242
+   ],
+   "pv": [
+    474,
+    241
+   ],
+   "aspect": 3.921
+  },
+  "r949.f4": {
+   "r": [
+    4,
+    613,
+    949,
+    233
+   ],
+   "pv": [
+    474,
+    232
+   ],
+   "aspect": 4.073
+  },
+  "r949.f5": {
+   "r": [
+    4,
+    850,
+    949,
+    231
+   ],
+   "pv": [
+    474,
+    230
+   ],
+   "aspect": 4.108
+  },
+  "r949.f6": {
+   "r": [
+    4,
+    1085,
+    949,
+    205
+   ],
+   "pv": [
+    474,
+    204
+   ],
+   "aspect": 4.629
+  },
+  "r949.f7": {
+   "r": [
+    4,
+    1294,
+    972,
+    187
+   ],
+   "pv": [
+    488,
+    186
+   ],
+   "aspect": 5.198
+  },
+  "r949.f8": {
+   "r": [
+    4,
+    1485,
+    950,
+    153
+   ],
+   "pv": [
+    474,
+    152
+   ],
+   "aspect": 6.209
+  }
+ },
+ "seq": {
+  "entry": [
+   "r949.f1"
+  ],
+  "entry_ms": 70,
+  "loop": [
+   "r949.f2",
+   "r949.f3",
+   "r949.f4",
+   "r949.f5",
+   "r949.f6"
+  ],
+  "loop_ms": 70,
+  "loop_note": "F6->F2 matches; never show F1 again; at 3x play the loop in order, never step 2",
+  "break_ms": [
+   100,
+   150
+  ],
+  "stretch": "scaleX/scaleY in [0.9,1.15], stretch along x only; width = struck half field width minus side gaps; height from native aspect",
+  "break": [
+   "r949.f7",
+   "r949.f8"
+  ]
+ }
+}

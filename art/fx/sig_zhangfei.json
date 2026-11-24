@@ -1,0 +1,976 @@
+{
+ "artmeta": 1,
+ "id": "sig_zhangfei",
+ "file": "art/fx/sig_zhangfei.webp",
+ "size": [
+  1024,
+  900
+ ],
+ "source": "r828 a (Truong Ban Hong v2) on the empty plate 1376x768, as painted + art196 reset (faded to BOARD_PLATE_EMPTY below y 440 = no extra pad on our left); no R1/R2 move",
+ "css_per_px_x": 1.1337,
+ "css_per_px_y": 1.099,
+ "frame": "placements are in the 344x768 FRAME the composites were built in (frame-local px), stretched to the 390x844 screen: css = px x (1.1337, 1.0990). tl = top-left of the piece, draw size = css [w,h], opacity as listed. anchor_css = the reference point of that placement in the composite (target column centre / pad centre); offset_css = tl_css - anchor_css: to retarget, tl = live anchor + offset_css. Draw order = order within a layer; under_squads = ground under squads, over_squads = above them. R1 gap fade (nothing below y 410 frame px) and R2 top fade are baked into the alpha.",
+ "timing_s": [
+  0.3,
+  0.4,
+  0.4,
+  0.7
+ ],
+ "groups": {
+  "zhangfei.zhangfei_f1": [
+   "zhangfei.tp_burst"
+  ],
+  "zhangfei.zhangfei_f2": [
+   "zhangfei.tp_ring1",
+   "zhangfei.tp_ring2",
+   "zhangfei.tp_ring3",
+   "zhangfei.tp_dust_f2"
+  ],
+  "zhangfei.zhangfei_f3": [
+   "zhangfei.tp_smoke_c1",
+   "zhangfei.tp_smoke_c2",
+   "zhangfei.tp_smoke_c3",
+   "zhangfei.tp_stars_f3_c1",
+   "zhangfei.tp_stars_f3_c2",
+   "zhangfei.tp_stars_f3_c3",
+   "zhangfei.tp_dust_f3",
+   "zhangfei.tp_trench_f3"
+  ],
+  "zhangfei.zhangfei_f4": [
+   "zhangfei.tp_stars_f4_c1",
+   "zhangfei.tp_stars_f4_c2",
+   "zhangfei.tp_stars_f4_c3",
+   "zhangfei.tp_trench_f4"
+  ]
+ },
+ "placements": {
+  "f1": [
+   {
+    "id": "zhangfei.tp_burst",
+    "layer": "over_squads",
+    "tl_frame": [
+     0,
+     120
+    ],
+    "tl_css": [
+     0.0,
+     131.9
+    ],
+    "tl_pct": [
+     0.0,
+     15.6
+    ],
+    "centre_pct": [
+     50.0,
+     32.9
+    ],
+    "size_css": [
+     390.0,
+     291.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -195.0,
+     -230.8
+    ],
+    "anchor_kind": "target_row_centre"
+   }
+  ],
+  "f2": [
+   {
+    "id": "zhangfei.tp_ring1",
+    "layer": "under_squads",
+    "tl_frame": [
+     77,
+     283
+    ],
+    "tl_css": [
+     87.3,
+     311.0
+    ],
+    "tl_pct": [
+     22.4,
+     36.8
+    ],
+    "centre_pct": [
+     49.9,
+     43.9
+    ],
+    "size_css": [
+     214.3,
+     119.8
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -107.7,
+     -51.7
+    ],
+    "anchor_kind": "target_row_centre"
+   },
+   {
+    "id": "zhangfei.tp_ring2",
+    "layer": "under_squads",
+    "tl_frame": [
+     36,
+     257
+    ],
+    "tl_css": [
+     40.8,
+     282.4
+    ],
+    "tl_pct": [
+     10.5,
+     33.5
+    ],
+    "centre_pct": [
+     49.7,
+     43.9
+    ],
+    "size_css": [
+     306.1,
+     176.9
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -154.2,
+     -80.2
+    ],
+    "anchor_kind": "target_row_centre"
+   },
+   {
+    "id": "zhangfei.tp_ring3",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     229
+    ],
+    "tl_css": [
+     0.0,
+     251.7
+    ],
+    "tl_pct": [
+     0.0,
+     29.8
+    ],
+    "centre_pct": [
+     50.0,
+     43.8
+    ],
+    "size_css": [
+     390.0,
+     235.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -195.0,
+     -111.0
+    ],
+    "anchor_kind": "target_row_centre"
+   },
+   {
+    "id": "zhangfei.tp_dust_f2",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     150
+    ],
+    "tl_css": [
+     0.0,
+     164.8
+    ],
+    "tl_pct": [
+     0.0,
+     19.5
+    ],
+    "centre_pct": [
+     50.0,
+     38.7
+    ],
+    "size_css": [
+     390.0,
+     324.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -195.0,
+     -197.8
+    ],
+    "anchor_kind": "target_row_centre"
+   }
+  ],
+  "f3": [
+   {
+    "id": "zhangfei.tp_smoke_c1",
+    "layer": "over_squads",
+    "tl_frame": [
+     0,
+     172
+    ],
+    "tl_css": [
+     0.0,
+     189.0
+    ],
+    "tl_pct": [
+     0.0,
+     22.4
+    ],
+    "centre_pct": [
+     13.8,
+     29.6
+    ],
+    "size_css": [
+     107.7,
+     122.0
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     362.7
+    ],
+    "offset_css": [
+     -70.3,
+     -173.6
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_smoke_c2",
+    "layer": "over_squads",
+    "tl_frame": [
+     135,
+     176
+    ],
+    "tl_css": [
+     153.1,
+     193.4
+    ],
+    "tl_pct": [
+     39.2,
+     22.9
+    ],
+    "centre_pct": [
+     49.4,
+     28.6
+    ],
+    "size_css": [
+     79.4,
+     95.6
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -41.9,
+     -169.2
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_smoke_c3",
+    "layer": "over_squads",
+    "tl_frame": [
+     238,
+     171
+    ],
+    "tl_css": [
+     269.8,
+     187.9
+    ],
+    "tl_pct": [
+     69.2,
+     22.3
+    ],
+    "centre_pct": [
+     81.1,
+     29.3
+    ],
+    "size_css": [
+     93.0,
+     118.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     362.7
+    ],
+    "offset_css": [
+     -53.3,
+     -174.7
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_stars_f3_c1",
+    "layer": "over_squads",
+    "tl_frame": [
+     4,
+     246
+    ],
+    "tl_css": [
+     4.5,
+     270.3
+    ],
+    "tl_pct": [
+     1.2,
+     32.0
+    ],
+    "centre_pct": [
+     19.5,
+     39.8
+    ],
+    "size_css": [
+     142.8,
+     130.8
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     362.7
+    ],
+    "offset_css": [
+     -65.8,
+     -92.3
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_stars_f3_c2",
+    "layer": "over_squads",
+    "tl_frame": [
+     105,
+     245
+    ],
+    "tl_css": [
+     119.0,
+     269.2
+    ],
+    "tl_pct": [
+     30.5,
+     31.9
+    ],
+    "centre_pct": [
+     50.4,
+     39.8
+    ],
+    "size_css": [
+     155.3,
+     134.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -76.0,
+     -93.4
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_stars_f3_c3",
+    "layer": "over_squads",
+    "tl_frame": [
+     216,
+     242
+    ],
+    "tl_css": [
+     244.9,
+     265.9
+    ],
+    "tl_pct": [
+     62.8,
+     31.5
+    ],
+    "centre_pct": [
+     81.2,
+     36.3
+    ],
+    "size_css": [
+     144.0,
+     81.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     362.7
+    ],
+    "offset_css": [
+     -78.2,
+     -96.7
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_dust_f3",
+    "layer": "over_squads",
+    "tl_frame": [
+     0,
+     170
+    ],
+    "tl_css": [
+     0.0,
+     186.8
+    ],
+    "tl_pct": [
+     0.0,
+     22.1
+    ],
+    "centre_pct": [
+     50.0,
+     35.0
+    ],
+    "size_css": [
+     390.0,
+     217.6
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -195.0,
+     -175.8
+    ],
+    "anchor_kind": "target_row_centre"
+   },
+   {
+    "id": "zhangfei.tp_trench_f3",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     347
+    ],
+    "tl_css": [
+     0.0,
+     381.3
+    ],
+    "tl_pct": [
+     0.0,
+     45.2
+    ],
+    "centre_pct": [
+     50.0,
+     51.6
+    ],
+    "size_css": [
+     390.0,
+     107.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -195.0,
+     18.7
+    ],
+    "anchor_kind": "target_row_centre"
+   }
+  ],
+  "f4": [
+   {
+    "id": "zhangfei.tp_stars_f4_c1",
+    "layer": "over_squads",
+    "tl_frame": [
+     7,
+     252
+    ],
+    "tl_css": [
+     7.9,
+     276.9
+    ],
+    "tl_pct": [
+     2.0,
+     32.8
+    ],
+    "centre_pct": [
+     19.9,
+     39.6
+    ],
+    "size_css": [
+     139.4,
+     114.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     70.3,
+     362.7
+    ],
+    "offset_css": [
+     -62.4,
+     -85.7
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_stars_f4_c2",
+    "layer": "over_squads",
+    "tl_frame": [
+     105,
+     252
+    ],
+    "tl_css": [
+     119.0,
+     276.9
+    ],
+    "tl_pct": [
+     30.5,
+     32.8
+    ],
+    "centre_pct": [
+     50.4,
+     39.5
+    ],
+    "size_css": [
+     155.3,
+     113.2
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -76.0,
+     -85.7
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_stars_f4_c3",
+    "layer": "over_squads",
+    "tl_frame": [
+     216,
+     256
+    ],
+    "tl_css": [
+     244.9,
+     281.3
+    ],
+    "tl_pct": [
+     62.8,
+     33.3
+    ],
+    "centre_pct": [
+     79.5,
+     37.6
+    ],
+    "size_css": [
+     130.4,
+     71.4
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     323.1,
+     362.7
+    ],
+    "offset_css": [
+     -78.2,
+     -81.3
+    ],
+    "anchor_kind": "pad"
+   },
+   {
+    "id": "zhangfei.tp_trench_f4",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     240
+    ],
+    "tl_css": [
+     0.0,
+     263.8
+    ],
+    "tl_pct": [
+     0.0,
+     31.2
+    ],
+    "centre_pct": [
+     50.0,
+     44.6
+    ],
+    "size_css": [
+     390.0,
+     225.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     362.7
+    ],
+    "offset_css": [
+     -195.0,
+     -98.9
+    ],
+    "anchor_kind": "target_row_centre"
+   }
+  ]
+ },
+ "pieces": {
+  "zhangfei.tp_burst": {
+   "hero": "zhangfei",
+   "r": [
+    346,
+    0,
+    344,
+    265
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    291.2
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_ring1": {
+   "hero": "zhangfei",
+   "r": [
+    0,
+    713,
+    189,
+    109
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    214.3,
+    119.8
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_ring2": {
+   "hero": "zhangfei",
+   "r": [
+    346,
+    513,
+    270,
+    161
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    306.1,
+    176.9
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_ring3": {
+   "hero": "zhangfei",
+   "r": [
+    0,
+    297,
+    344,
+    214
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    235.2
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_dust_f2": {
+   "hero": "zhangfei",
+   "r": [
+    0,
+    0,
+    344,
+    295
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    324.2
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_smoke_c1": {
+   "hero": "zhangfei",
+   "r": [
+    885,
+    513,
+    95,
+    111
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    107.7,
+    122.0
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_smoke_c2": {
+   "hero": "zhangfei",
+   "r": [
+    885,
+    713,
+    70,
+    87
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    79.4,
+    95.6
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_smoke_c3": {
+   "hero": "zhangfei",
+   "r": [
+    191,
+    713,
+    82,
+    108
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    93.0,
+    118.7
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_stars_f3_c1": {
+   "hero": "zhangfei",
+   "r": [
+    757,
+    513,
+    126,
+    119
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    142.8,
+    130.8
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_stars_f3_c2": {
+   "hero": "zhangfei",
+   "r": [
+    618,
+    513,
+    137,
+    122
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    134.1
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_stars_f3_c3": {
+   "hero": "zhangfei",
+   "r": [
+    0,
+    824,
+    127,
+    74
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    144.0,
+    81.3
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_dust_f3": {
+   "hero": "zhangfei",
+   "r": [
+    0,
+    513,
+    344,
+    198
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    217.6
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_trench_f3": {
+   "hero": "zhangfei",
+   "r": [
+    539,
+    713,
+    344,
+    98
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    107.7
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_stars_f4_c1": {
+   "hero": "zhangfei",
+   "r": [
+    275,
+    713,
+    123,
+    104
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    139.4,
+    114.3
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_stars_f4_c2": {
+   "hero": "zhangfei",
+   "r": [
+    400,
+    713,
+    137,
+    103
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    155.3,
+    113.2
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_stars_f4_c3": {
+   "hero": "zhangfei",
+   "r": [
+    129,
+    824,
+    115,
+    65
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    130.4,
+    71.4
+   ],
+   "mode": "normal"
+  },
+  "zhangfei.tp_trench_f4": {
+   "hero": "zhangfei",
+   "r": [
+    346,
+    297,
+    344,
+    205
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    225.3
+   ],
+   "mode": "normal"
+  }
+ },
+ "notes": "Skill hits ONE ROW (3 squads side by side); the code places it on whichever row is hit. anchor_css = row centre (frame 172,330 -> css 195,363); per-pad pieces anchor on their pad centre (css 70/195/323, 363). tl = live row centre (or live pad centre) + offset_css (x AND y), so back/middle/front rows all work. f1 tp_burst (over): roar knot + starburst + side dust, centred ~90 css above the row anchor (the painting's burst sits above the squads); f2 tp_dust_f2 (under) dust wall behind the row, tp_ring1..3 (under, as in the approved composite) three open rings (scale out in order 1,2,3); f3 tp_smoke_c1..3 + tp_stars_f3_c1..3 (over, per pad), tp_dust_f3 (over, in front of the squads' feet) white dust burst + snapped bridge planks, tp_trench_f3 (under) trench + cracks; f4 tp_trench_f4 (under) trench stays, tp_stars_f4_c1..3 (over, per pad). Stun stars are tiny in the painting: code draws 3 bigger stars per pad (~28 css); the cut stars are optional.",
+ "row_centre_frame": [
+  172,
+  330
+ ],
+ "row_centre_css": [
+  195.0,
+  362.7
+ ],
+ "pads_css": [
+  [
+   70.3,
+   362.7
+  ],
+  [
+   195.0,
+   362.7
+  ],
+  [
+   323.1,
+   362.7
+  ]
+ ],
+ "rings": {
+  "centre_frame": [
+   171.0,
+   337.0
+  ],
+  "half_axes_frame": [
+   158.0,
+   92.0
+  ],
+  "note": "ring1 inner .. ring3 outer, concentric ellipses; scale each out from the centre"
+ }
+}

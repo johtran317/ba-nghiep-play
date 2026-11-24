@@ -1,0 +1,1033 @@
+{
+ "file": "ui/battle/badgeA.webp",
+ "scale": 3,
+ "atlas": [
+  512,
+  651
+ ],
+ "tablet": {
+  "w": 69,
+  "h": 79,
+  "css": [
+   23.0,
+   26.33
+  ],
+  "pad": [
+   10,
+   18,
+   10,
+   8
+  ],
+  "halo_pad": 8,
+  "sprite_css": [
+   28.33,
+   31.67
+  ],
+  "body_off_note": "tablet, morale.m1-m5 and READY: body top-left is at sprite (body_off); place the sprite so body_off lands on the tablet top-left and the pivot on the tablet centre",
+  "ready_pad_note": "morale.READY canvas has pad; its pivot is the tablet centre"
+ },
+ "crest": {
+  "css_h": {
+   "T1": 3.0,
+   "T2": 3.67,
+   "T3": 4.0,
+   "T4": 4.67,
+   "T5": 5.0
+  },
+  "outline_px": 1,
+  "attach": "pivot = crest bottom-centre (3 px above the bottom = 1 css overlap); place the pivot at the tablet body top-centre (body top = sprite y + body_off y)"
+ },
+ "sprites": {
+  "tab.ours.shield": {
+   "x": 90,
+   "y": 0,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "shield",
+   "morale": 0
+  },
+  "tab.enemy.shield": {
+   "x": 176,
+   "y": 0,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "shield",
+   "morale": 0
+  },
+  "tab.ours.pike": {
+   "x": 262,
+   "y": 0,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "pike",
+   "morale": 0
+  },
+  "tab.enemy.pike": {
+   "x": 348,
+   "y": 0,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "pike",
+   "morale": 0
+  },
+  "tab.ours.archer": {
+   "x": 0,
+   "y": 106,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "archer",
+   "morale": 0
+  },
+  "tab.enemy.archer": {
+   "x": 86,
+   "y": 106,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "archer",
+   "morale": 0
+  },
+  "tab.ours.heavycav": {
+   "x": 172,
+   "y": 106,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "heavycav",
+   "morale": 0
+  },
+  "tab.enemy.heavycav": {
+   "x": 258,
+   "y": 106,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "heavycav",
+   "morale": 0
+  },
+  "tab.ours.lightcav": {
+   "x": 344,
+   "y": 106,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "lightcav",
+   "morale": 0
+  },
+  "tab.enemy.lightcav": {
+   "x": 0,
+   "y": 202,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "lightcav",
+   "morale": 0
+  },
+  "tab.ours.siege": {
+   "x": 86,
+   "y": 202,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "siege",
+   "morale": 0
+  },
+  "tab.enemy.siege": {
+   "x": 172,
+   "y": 202,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "siege",
+   "morale": 0
+  },
+  "tab.ours.strategist": {
+   "x": 258,
+   "y": 202,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "strategist",
+   "morale": 0
+  },
+  "tab.enemy.strategist": {
+   "x": 344,
+   "y": 202,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "strategist",
+   "morale": 0
+  },
+  "tab.ours.drum": {
+   "x": 0,
+   "y": 298,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "ours",
+   "type": "drum",
+   "morale": 0
+  },
+  "tab.enemy.drum": {
+   "x": 86,
+   "y": 298,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "tablet",
+   "side": "enemy",
+   "type": "drum",
+   "morale": 0
+  },
+  "morale.m1": {
+   "x": 172,
+   "y": 298,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "morale",
+   "morale": 1
+  },
+  "morale.m2": {
+   "x": 258,
+   "y": 298,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "morale",
+   "morale": 2
+  },
+  "morale.m3": {
+   "x": 344,
+   "y": 298,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "morale",
+   "morale": 3
+  },
+  "morale.m4": {
+   "x": 0,
+   "y": 394,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "morale",
+   "morale": 4
+  },
+  "morale.m5": {
+   "x": 86,
+   "y": 394,
+   "w": 85,
+   "h": 95,
+   "css": [
+    28.33,
+    31.67
+   ],
+   "pivot": [
+    42.5,
+    47.5
+   ],
+   "body_off": [
+    8,
+    8
+   ],
+   "kind": "morale",
+   "morale": 5
+  },
+  "morale.READY": {
+   "x": 0,
+   "y": 0,
+   "w": 89,
+   "h": 105,
+   "css": [
+    29.67,
+    35.0
+   ],
+   "pivot": [
+    44.5,
+    57.5
+   ],
+   "body_off": [
+    10,
+    18
+   ],
+   "kind": "morale",
+   "morale": "READY"
+  },
+  "crest.T1": {
+   "x": 19,
+   "y": 530,
+   "w": 9,
+   "h": 9,
+   "css": [
+    3.0,
+    3.0
+   ],
+   "pivot": [
+    4.5,
+    6
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "crest",
+   "tier": 1
+  },
+  "crest.T2": {
+   "x": 11,
+   "y": 530,
+   "w": 7,
+   "h": 11,
+   "css": [
+    2.33,
+    3.67
+   ],
+   "pivot": [
+    3.5,
+    8
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "crest",
+   "tier": 2
+  },
+  "crest.T3": {
+   "x": 0,
+   "y": 530,
+   "w": 10,
+   "h": 12,
+   "css": [
+    3.33,
+    4.0
+   ],
+   "pivot": [
+    5.0,
+    9
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "crest",
+   "tier": 3
+  },
+  "crest.T4": {
+   "x": 500,
+   "y": 490,
+   "w": 12,
+   "h": 14,
+   "css": [
+    4.0,
+    4.67
+   ],
+   "pivot": [
+    6.0,
+    11
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "crest",
+   "tier": 4
+  },
+  "crest.T5": {
+   "x": 480,
+   "y": 490,
+   "w": 19,
+   "h": 15,
+   "css": [
+    6.33,
+    5.0
+   ],
+   "pivot": [
+    9.5,
+    12
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "crest",
+   "tier": 5
+  },
+  "status.stun": {
+   "x": 172,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "stun"
+  },
+  "status.burn": {
+   "x": 212,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "burn"
+  },
+  "status.chaos": {
+   "x": 252,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "chaos"
+  },
+  "status.taunt": {
+   "x": 292,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "taunt"
+  },
+  "status.shield": {
+   "x": 332,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "shield"
+  },
+  "status.chill": {
+   "x": 372,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "chill"
+  },
+  "status.weak": {
+   "x": 412,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "weak"
+  },
+  "status.ddown": {
+   "x": 452,
+   "y": 394,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "ddown"
+  },
+  "status.last": {
+   "x": 0,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "last"
+  },
+  "status.regen": {
+   "x": 40,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "regen"
+  },
+  "status.sil": {
+   "x": 80,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "sil"
+  },
+  "status.poi": {
+   "x": 120,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "poi"
+  },
+  "status.lock": {
+   "x": 160,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "lock"
+  },
+  "status.rdr": {
+   "x": 200,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "rdr"
+  },
+  "status.rimm": {
+   "x": 240,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "rimm"
+  },
+  "status.critUp": {
+   "x": 280,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "critUp"
+  },
+  "status.thorn": {
+   "x": 320,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "status",
+   "status": "thorn"
+  },
+  "coin.empty_harm": {
+   "x": 360,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "coin",
+   "status": null
+  },
+  "coin.empty_help": {
+   "x": 400,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "coin",
+   "status": null
+  },
+  "coin.overflow": {
+   "x": 440,
+   "y": 490,
+   "w": 39,
+   "h": 39,
+   "css": [
+    13.0,
+    13.0
+   ],
+   "pivot": [
+    19.5,
+    19.5
+   ],
+   "body_off": [
+    0,
+    0
+   ],
+   "kind": "coin",
+   "status": null
+  },
+  "rglow": {
+   "x": 0,
+   "y": 542,
+   "w": 99,
+   "h": 109,
+   "css": [
+    33.0,
+    36.33
+   ],
+   "pivot": [
+    49.5,
+    54.5
+   ],
+   "body_off": [
+    15,
+    15
+   ],
+   "kind": "glow"
+  }
+ }
+}

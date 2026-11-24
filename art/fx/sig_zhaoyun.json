@@ -1,0 +1,872 @@
+{
+ "artmeta": 1,
+ "id": "sig_zhaoyun",
+ "file": "art/fx/sig_zhaoyun.webp",
+ "size": [
+  1024,
+  692
+ ],
+ "source": "r825 b on the empty plate 1376x768, placed per art193 s35 (ta_sig_batch2_placed.py, bullseye erased) + R1/R2 baked; f2 trails split into knot + 7 trails",
+ "css_per_px_x": 1.1337,
+ "css_per_px_y": 1.099,
+ "frame": "placements are in the 344x768 FRAME the composites were built in (frame-local px), stretched to the 390x844 screen: css = px x (1.1337, 1.0990). tl = top-left of the piece, draw size = css [w,h], opacity as listed. anchor_css = the reference point of that placement in the composite (target column centre / pad centre); offset_css = tl_css - anchor_css: to retarget, tl = live anchor + offset_css. Draw order = order within a layer; under_squads = ground under squads, over_squads = above them. R1 gap fade (nothing below y 410 frame px) and R2 top fade are baked into the alpha.",
+ "timing_s": [
+  0.3,
+  0.4,
+  0.4,
+  0.7
+ ],
+ "groups": {
+  "zhaoyun.zhaoyun_f1": [
+   "zhaoyun.zv_swirl",
+   "zhaoyun.zv_spears"
+  ],
+  "zhaoyun.zhaoyun_f2": [
+   "zhaoyun.zv_trail1",
+   "zhaoyun.zv_trail2",
+   "zhaoyun.zv_trail3",
+   "zhaoyun.zv_trail4",
+   "zhaoyun.zv_trail5",
+   "zhaoyun.zv_trail6",
+   "zhaoyun.zv_trail7",
+   "zhaoyun.zv_knot"
+  ],
+  "zhaoyun.zhaoyun_f3": [
+   "zhaoyun.zv_crater",
+   "zhaoyun.zv_dragon"
+  ],
+  "zhaoyun.zhaoyun_f4": [
+   "zhaoyun.zv_star"
+  ]
+ },
+ "placements": {
+  "f1": [
+   {
+    "id": "zhaoyun.zv_swirl",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     130
+    ],
+    "tl_css": [
+     0.0,
+     142.9
+    ],
+    "tl_pct": [
+     0.0,
+     16.9
+    ],
+    "centre_pct": [
+     50.0,
+     31.2
+    ],
+    "size_css": [
+     390.0,
+     241.8
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -115.4
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_spears",
+    "layer": "over_squads",
+    "tl_frame": [
+     7,
+     130
+    ],
+    "tl_css": [
+     7.9,
+     142.9
+    ],
+    "tl_pct": [
+     2.0,
+     16.9
+    ],
+    "centre_pct": [
+     51.0,
+     31.2
+    ],
+    "size_css": [
+     382.1,
+     241.8
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -187.1,
+     -115.4
+    ],
+    "anchor_kind": "target_squad_centre"
+   }
+  ],
+  "f2": [
+   {
+    "id": "zhaoyun.zv_trail1",
+    "layer": "over_squads",
+    "tl_frame": [
+     166,
+     162
+    ],
+    "tl_css": [
+     188.2,
+     178.0
+    ],
+    "tl_pct": [
+     48.3,
+     21.1
+    ],
+    "centre_pct": [
+     74.1,
+     37.0
+    ],
+    "size_css": [
+     201.8,
+     268.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -6.8,
+     -80.2
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_trail2",
+    "layer": "over_squads",
+    "tl_frame": [
+     127,
+     245
+    ],
+    "tl_css": [
+     144.0,
+     269.2
+    ],
+    "tl_pct": [
+     36.9,
+     31.9
+    ],
+    "centre_pct": [
+     68.5,
+     42.8
+    ],
+    "size_css": [
+     246.0,
+     183.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -51.0,
+     11.0
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_trail3",
+    "layer": "over_squads",
+    "tl_frame": [
+     0,
+     245
+    ],
+    "tl_css": [
+     0.0,
+     269.2
+    ],
+    "tl_pct": [
+     0.0,
+     31.9
+    ],
+    "centre_pct": [
+     24.0,
+     43.3
+    ],
+    "size_css": [
+     187.1,
+     192.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     11.0
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_trail4",
+    "layer": "over_squads",
+    "tl_frame": [
+     0,
+     211
+    ],
+    "tl_css": [
+     0.0,
+     231.9
+    ],
+    "tl_pct": [
+     0.0,
+     27.5
+    ],
+    "centre_pct": [
+     24.0,
+     40.7
+    ],
+    "size_css": [
+     187.1,
+     223.1
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -26.4
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_trail5",
+    "layer": "over_squads",
+    "tl_frame": [
+     0,
+     108
+    ],
+    "tl_css": [
+     0.0,
+     118.7
+    ],
+    "tl_pct": [
+     0.0,
+     14.1
+    ],
+    "centre_pct": [
+     24.0,
+     23.2
+    ],
+    "size_css": [
+     187.1,
+     155.0
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -139.6
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_trail6",
+    "layer": "over_squads",
+    "tl_frame": [
+     38,
+     84
+    ],
+    "tl_css": [
+     43.1,
+     92.3
+    ],
+    "tl_pct": [
+     11.0,
+     10.9
+    ],
+    "centre_pct": [
+     29.5,
+     21.4
+    ],
+    "size_css": [
+     144.0,
+     175.8
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -151.9,
+     -165.9
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_trail7",
+    "layer": "over_squads",
+    "tl_frame": [
+     133,
+     86
+    ],
+    "tl_css": [
+     150.8,
+     94.5
+    ],
+    "tl_pct": [
+     38.7,
+     11.2
+    ],
+    "centre_pct": [
+     69.3,
+     21.5
+    ],
+    "size_css": [
+     239.2,
+     174.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -44.2,
+     -163.7
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_knot",
+    "layer": "over_squads",
+    "tl_frame": [
+     96,
+     176
+    ],
+    "tl_css": [
+     108.8,
+     193.4
+    ],
+    "tl_pct": [
+     27.9,
+     22.9
+    ],
+    "centre_pct": [
+     48.0,
+     31.9
+    ],
+    "size_css": [
+     156.5,
+     151.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -86.2,
+     -64.8
+    ],
+    "anchor_kind": "target_squad_centre"
+   }
+  ],
+  "f3": [
+   {
+    "id": "zhaoyun.zv_crater",
+    "layer": "under_squads",
+    "tl_frame": [
+     43,
+     180
+    ],
+    "tl_css": [
+     48.8,
+     197.8
+    ],
+    "tl_pct": [
+     12.5,
+     23.4
+    ],
+    "centre_pct": [
+     50.0,
+     34.6
+    ],
+    "size_css": [
+     292.5,
+     189.0
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -146.2,
+     -60.4
+    ],
+    "anchor_kind": "target_squad_centre"
+   },
+   {
+    "id": "zhaoyun.zv_dragon",
+    "layer": "over_squads",
+    "tl_frame": [
+     114,
+     106
+    ],
+    "tl_css": [
+     129.2,
+     116.5
+    ],
+    "tl_pct": [
+     33.1,
+     13.8
+    ],
+    "centre_pct": [
+     52.8,
+     24.0
+    ],
+    "size_css": [
+     153.1,
+     171.4
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -65.8,
+     -141.8
+    ],
+    "anchor_kind": "target_squad_centre"
+   }
+  ],
+  "f4": [
+   {
+    "id": "zhaoyun.zv_star",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     100
+    ],
+    "tl_css": [
+     0.0,
+     109.9
+    ],
+    "tl_pct": [
+     0.0,
+     13.0
+    ],
+    "centre_pct": [
+     50.0,
+     32.6
+    ],
+    "size_css": [
+     390.0,
+     329.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -148.4
+    ],
+    "anchor_kind": "target_squad_centre"
+   }
+  ]
+ },
+ "pieces": {
+  "zhaoyun.zv_swirl": {
+   "hero": "zhaoyun",
+   "r": [
+    526,
+    0,
+    344,
+    220
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    241.8
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_spears": {
+   "hero": "zhaoyun",
+   "r": [
+    0,
+    302,
+    337,
+    220
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    382.1,
+    241.8
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail1": {
+   "hero": "zhaoyun",
+   "r": [
+    346,
+    0,
+    178,
+    244
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    201.8,
+    268.1
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail2": {
+   "hero": "zhaoyun",
+   "r": [
+    0,
+    524,
+    217,
+    167
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    246.0,
+    183.5
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail3": {
+   "hero": "zhaoyun",
+   "r": [
+    506,
+    302,
+    165,
+    175
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    187.1,
+    192.3
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail4": {
+   "hero": "zhaoyun",
+   "r": [
+    339,
+    302,
+    165,
+    203
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    187.1,
+    223.1
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail5": {
+   "hero": "zhaoyun",
+   "r": [
+    698,
+    524,
+    165,
+    141
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    187.1,
+    155.0
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail6": {
+   "hero": "zhaoyun",
+   "r": [
+    219,
+    524,
+    127,
+    160
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    144.0,
+    175.8
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_trail7": {
+   "hero": "zhaoyun",
+   "r": [
+    348,
+    524,
+    211,
+    159
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    239.2,
+    174.7
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_knot": {
+   "hero": "zhaoyun",
+   "r": [
+    865,
+    524,
+    138,
+    138
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    156.5,
+    151.7
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_crater": {
+   "hero": "zhaoyun",
+   "r": [
+    673,
+    302,
+    258,
+    172
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    292.5,
+    189.0
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_dragon": {
+   "hero": "zhaoyun",
+   "r": [
+    561,
+    524,
+    135,
+    156
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    153.1,
+    171.4
+   ],
+   "mode": "normal"
+  },
+  "zhaoyun.zv_star": {
+   "hero": "zhaoyun",
+   "r": [
+    0,
+    0,
+    344,
+    300
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    329.7
+   ],
+   "mode": "normal"
+  }
+ },
+ "notes": "Skill hits ONE enemy squad (single target, 4 hits). EVERY piece is anchored on the squad ACTUALLY HIT: anchor_css = that squad's centre (frame 172,235 -> css 195,258 in the composite); code: tl = live target centre + offset_css, any row/column. f1 zv_swirl (under) dust swirl + zv_spears (over) ring of 7 spearheads pointing in; f2 zv_trail1..7 (over) seven thrust trails + zv_knot (over) the knot where they cross (draw trails outward from the knot, one after another, then the knot); f3 zv_crater (under) crater + dust ring + cracks, zv_dragon (over) jade dragon head of spear light; f4 zv_star (under) 7-gouge star + dust + streaks (draw a touch darker than painted, art194). Trails: see 'trails' (angle of the outer end from the knot, length). The coder lands the 4 damage numbers on 4 of the 7 trails.",
+ "knot_centre_frame": [
+  164.9,
+  244.3
+ ],
+ "knot_centre_css": [
+  187.0,
+  268.5
+ ],
+ "knot_offset_css": [
+  -8.0,
+  10.2
+ ],
+ "trails": [
+  {
+   "id": "zhaoyun.zv_trail1",
+   "angle_deg": 20,
+   "dir": [
+    0.94,
+    0.342
+   ],
+   "bbox_css": [
+    188.2,
+    178.0,
+    201.8,
+    268.1
+   ],
+   "offset_css": [
+    -6.8,
+    -80.2
+   ]
+  },
+  {
+   "id": "zhaoyun.zv_trail2",
+   "angle_deg": 50,
+   "dir": [
+    0.643,
+    0.766
+   ],
+   "bbox_css": [
+    144.0,
+    269.2,
+    246.0,
+    183.5
+   ],
+   "offset_css": [
+    -51.0,
+    11.0
+   ]
+  },
+  {
+   "id": "zhaoyun.zv_trail3",
+   "angle_deg": 125,
+   "dir": [
+    -0.574,
+    0.819
+   ],
+   "bbox_css": [
+    0.0,
+    269.2,
+    187.1,
+    192.3
+   ],
+   "offset_css": [
+    -195.0,
+    11.0
+   ]
+  },
+  {
+   "id": "zhaoyun.zv_trail4",
+   "angle_deg": 157,
+   "dir": [
+    -0.921,
+    0.391
+   ],
+   "bbox_css": [
+    0.0,
+    231.9,
+    187.1,
+    223.1
+   ],
+   "offset_css": [
+    -195.0,
+    -26.4
+   ]
+  },
+  {
+   "id": "zhaoyun.zv_trail5",
+   "angle_deg": 210,
+   "dir": [
+    -0.866,
+    -0.5
+   ],
+   "bbox_css": [
+    0.0,
+    118.7,
+    187.1,
+    155.0
+   ],
+   "offset_css": [
+    -195.0,
+    -139.6
+   ]
+  },
+  {
+   "id": "zhaoyun.zv_trail6",
+   "angle_deg": 245,
+   "dir": [
+    -0.423,
+    -0.906
+   ],
+   "bbox_css": [
+    43.1,
+    92.3,
+    144.0,
+    175.8
+   ],
+   "offset_css": [
+    -151.9,
+    -165.9
+   ]
+  },
+  {
+   "id": "zhaoyun.zv_trail7",
+   "angle_deg": 290,
+   "dir": [
+    0.342,
+    -0.94
+   ],
+   "bbox_css": [
+    150.8,
+    94.5,
+    239.2,
+    174.7
+   ],
+   "offset_css": [
+    -44.2,
+    -163.7
+   ]
+  }
+ ],
+ "trails_note": "7 trails = angular sectors around knot_centre (angle_deg: direction of the outer end on screen, y down, 0 = right, 90 = down; trail 7 also holds the faint 315 deg ray). Each piece is the sector of the f2 frame (full length incl. the centre, soft sector edges); draw them FIRST, then zv_knot over them (the knot is the same painting faded out beyond ~60 css, so trail+knot = the approved frame).  Suggested timing in f2 (0.4 s): trails reveal outward from the knot in order 1..7 (~40 ms apart), knot flashes last; 4 hits on e.g. trails 2,4,5,7."
+}

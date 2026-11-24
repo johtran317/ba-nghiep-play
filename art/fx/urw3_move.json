@@ -1,0 +1,991 @@
+{
+"artmeta": 1,
+"id": "urw3_move",
+"build": "V303",
+"file": "art/fx/urw3_move.webp",
+"size": [
+2048,
+724
+],
+"bytes": 809672,
+"S_atlas_px": 190.0,
+"css_per_px": 0.5669,
+"note": "URW3 round B move pieces (urw3-round-b.md s5). Keys <gid>.<piece>; r = atlas rect, pv = pivot px inside the piece (draw top-left = anchor - pv), S = size in squad cell widths (S = 190 atlas px = 108 css), css_per_px = css size of one atlas px (never resampled), straight alpha. pv_<name> = extra anchors (spear foot, halberd butt/tip). Painted facing as in the sheet; weapon props rotate by code about pv.",
+"pieces": {
+"dianwei.gate": {
+"hero": "dianwei",
+"r": [
+678,
+0,
+286,
+219
+],
+"pv": [
+140.8,
+209.7
+],
+"css_per_px": 0.5669,
+"css": [
+162.1,
+124.1
+],
+"S": [
+1.51,
+1.15
+],
+"k": 0.5327,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "foot",
+"draw": "iron gate scene, CLEAN of impact dust (F7): two crossed halberds, pole + flag, tassels, 4 planted axes, crack lines + low dust mound. pv = foot line = guarded tile front edge. Dust is dianwei.gatedust.",
+"pink_px": 0,
+"pv_butt1": [
+92,
+168
+],
+"pv_butt2": [
+183,
+168
+],
+"pv_pole": [
+140,
+168
+],
+"pv_pole_top": [
+122,
+8
+]
+},
+"dianwei.groundmark": {
+"hero": "dianwei",
+"r": [
+911,
+242,
+172,
+131
+],
+"pv": [
+86.3,
+65.2
+],
+"css_per_px": 0.5669,
+"css": [
+97.5,
+74.3
+],
+"S": [
+0.91,
+0.69
+],
+"k": 0.5213,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "bboxc",
+"draw": "ground mark under living row squads only",
+"pink_px": 0
+},
+"dianwei.halberd_big": {
+"hero": "dianwei",
+"r": [
+1490,
+0,
+141,
+169
+],
+"pv": [
+22.9,
+163.7
+],
+"css_per_px": 0.5669,
+"css": [
+79.9,
+95.8
+],
+"S": [
+0.74,
+0.89
+],
+"k": 0.4411,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "end:bottom",
+"draw": "big gate halberd prop (swings down about the butt): pv = butt, ex.tip = point; length about 1.1 S",
+"pink_px": 0,
+"pv_tip": [
+132.3,
+4.8
+]
+},
+"dianwei.halberd_throw": {
+"hero": "dianwei",
+"r": [
+1655,
+395,
+106,
+38
+],
+"pv": [
+52.7,
+19.5
+],
+"css_per_px": 0.5669,
+"css": [
+60.1,
+21.5
+],
+"S": [
+0.56,
+0.2
+],
+"k": 0.3447,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "bboxc",
+"draw": "throwing halberd prop: pv = centre (it tumbles end over end)",
+"pink_px": 0,
+"pv_tip": [
+102.4,
+16.7
+],
+"pv_butt": [
+2.6,
+16.4
+]
+},
+"dianwei.rowhit": {
+"hero": "dianwei",
+"r": [
+587,
+242,
+145,
+140
+],
+"pv": [
+68.0,
+132.9
+],
+"css_per_px": 0.5669,
+"css": [
+82.2,
+79.4
+],
+"S": [
+0.76,
+0.74
+],
+"k": 0.5089,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "foot",
+"draw": "row hit on the feet of each living squad of the row; spark rims white-gold",
+"pink_px": 0
+},
+"dianwei.sparks": {
+"hero": "dianwei",
+"r": [
+1087,
+242,
+152,
+126
+],
+"pv": [
+75.5,
+59.4
+],
+"css_per_px": 0.5669,
+"css": [
+86.2,
+71.4
+],
+"S": [
+0.8,
+0.66
+],
+"k": 0.4795,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "bright",
+"draw": "intercept sparks on the gate centre; rims white-gold",
+"pink_px": 0
+},
+"dianwei.vortex": {
+"hero": "dianwei",
+"r": [
+1829,
+0,
+190,
+150
+],
+"pv": [
+95.0,
+74.7
+],
+"css_per_px": 0.5669,
+"css": [
+107.7,
+85.0
+],
+"S": [
+1.0,
+0.79
+],
+"k": 0.6149,
+"mode": "normal",
+"src": "r975 b approved",
+"pv_rule": "bboxc",
+"draw": "taunt vortex under each living row squad (turns 90 deg/s, fades in 300 ms)",
+"pink_px": 0
+},
+"luxun.ash": {
+"hero": "luxun",
+"r": [
+565,
+395,
+172,
+82
+],
+"pv": [
+87.6,
+40.9
+],
+"css_per_px": 0.5669,
+"css": [
+97.5,
+46.5
+],
+"S": [
+0.91,
+0.43
+],
+"k": 0.4622,
+"mode": "normal",
+"src": "r976 b approved",
+"pv_rule": "bboxc",
+"draw": "ash mark after the burn, feet",
+"pink_px": 0
+},
+"luxun.burnlinger": {
+"hero": "luxun",
+"r": [
+271,
+395,
+191,
+103
+],
+"pv": [
+95.0,
+51.6
+],
+"css_per_px": 0.5669,
+"css": [
+108.3,
+58.4
+],
+"S": [
+1.01,
+0.54
+],
+"k": 0.607,
+"mode": "normal",
+"src": "r976 a approved",
+"pv_rule": "bboxc",
+"draw": "burn linger on the feet of each burning squad (flicker 0.85-1 at 6 Hz); baked caption BURN LINGER left out",
+"pink_px": 0
+},
+"luxun.camp": {
+"hero": "luxun",
+"r": [
+736,
+242,
+171,
+139
+],
+"pv": [
+87.8,
+118.9
+],
+"css_per_px": 0.5669,
+"css": [
+96.9,
+78.8
+],
+"S": [
+0.9,
+0.73
+],
+"k": 0.6602,
+"mode": "normal",
+"src": "r976 b approved",
+"pv_rule": "groundring",
+"draw": "camp prop (tent + stake ring + rope): pv = ground centre of the stake ring on each living back-row squad",
+"pink_px": 0
+},
+"luxun.curl": {
+"hero": "luxun",
+"r": [
+526,
+242,
+57,
+141
+],
+"pv": [
+29.6,
+61.3
+],
+"css_per_px": 0.5669,
+"css": [
+32.3,
+79.9
+],
+"S": [
+0.3,
+0.74
+],
+"k": 0.7125,
+"mode": "normal",
+"src": "r976 b approved",
+"pv_rule": "centroid",
+"draw": "weaken curl on the head line of each weakened squad (sinks)",
+"pink_px": 0
+},
+"sunce.drum": {
+"hero": "sunce",
+"r": [
+1338,
+0,
+148,
+171
+],
+"pv": [
+77.0,
+163.3
+],
+"css_per_px": 0.5669,
+"css": [
+83.9,
+96.9
+],
+"S": [
+0.78,
+0.9
+],
+"k": 0.4724,
+"mode": "normal",
+"src": "r977 b approved",
+"pv_rule": "drum frame feet (shared sheet point)",
+"draw": "drum layer (drum + frame + 2 sticks, cut on its dark outline): pv = frame feet on the MIDDLE sand band at the lane x; drum height 0.9 S; squash 0.92/1.08 on each beat",
+"pink_px": 0
+},
+"sunce.drumdust": {
+"hero": "sunce",
+"r": [
+968,
+0,
+366,
+213
+],
+"pv": [
+189.4,
+165.6
+],
+"css_per_px": 0.5669,
+"css": [
+207.5,
+120.7
+],
+"S": [
+1.93,
+1.12
+],
+"k": 0.4724,
+"mode": "normal",
+"src": "r977 b approved",
+"pv_rule": "drum frame feet (shared sheet point)",
+"draw": "dust layer (scene minus the drum layer): SAME pv point and scale as the drum, drawn UNDER it; the hole behind the drum is never shown",
+"pink_px": 0
+},
+"sunce.heave": {
+"hero": "sunce",
+"r": [
+1438,
+242,
+171,
+118
+],
+"pv": [
+84.6,
+112.3
+],
+"css_per_px": 0.5669,
+"css": [
+96.9,
+66.9
+],
+"S": [
+0.9,
+0.62
+],
+"k": 0.5876,
+"mode": "normal",
+"src": "r977 b approved",
+"pv_rule": "foot",
+"draw": "heave on the feet of each living lane squad (height about 1.05 S)",
+"pink_px": 0
+},
+"sunce.pebbles": {
+"hero": "sunce",
+"r": [
+1212,
+395,
+95,
+62
+],
+"pv": [
+47.5,
+31.1
+],
+"css_per_px": 0.5669,
+"css": [
+53.9,
+35.1
+],
+"S": [
+0.5,
+0.33
+],
+"k": 0.3815,
+"mode": "normal",
+"src": "r977 b approved",
+"pv_rule": "bboxc",
+"draw": "stun pebbles on the head line",
+"pink_px": 0
+},
+"sunce.rings2": {
+"hero": "sunce",
+"r": [
+0,
+395,
+267,
+106
+],
+"pv": [
+133.0,
+53.2
+],
+"css_per_px": 0.5669,
+"css": [
+151.4,
+60.1
+],
+"S": [
+1.41,
+0.56
+],
+"k": 0.6115,
+"mode": "normal",
+"src": "r977 b approved",
+"pv_rule": "bboxc",
+"draw": "second-beat rings (big one), pivot = drum feet",
+"pink_px": 0
+},
+"sunce.ripplemark": {
+"hero": "sunce",
+"r": [
+1036,
+395,
+172,
+76
+],
+"pv": [
+86.0,
+38.1
+],
+"css_per_px": 0.5669,
+"css": [
+97.5,
+43.1
+],
+"S": [
+0.91,
+0.4
+],
+"k": 0.5481,
+"mode": "normal",
+"src": "r977 b approved",
+"pv_rule": "bboxc",
+"draw": "ripple mark under the lane squads",
+"pink_px": 0
+},
+"zhangliao.ford": {
+"hero": "zhangliao",
+"r": [
+408,
+0,
+266,
+219
+],
+"pv": [
+134.7,
+210.4
+],
+"css_per_px": 0.5669,
+"css": [
+150.8,
+124.1
+],
+"S": [
+1.4,
+1.15
+],
+"k": 0.4339,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "foot",
+"draw": "UR ford scene: halberd planted blade first (never flipped); pv = halberd foot on the MIDDLE sand band at the lane x, never on a tile; sand-rim fringe remapped sand",
+"pink_px": 0
+},
+"zhangliao.halberd": {
+"hero": "zhangliao",
+"r": [
+1311,
+395,
+165,
+29
+],
+"pv": [
+160.4,
+14.5
+],
+"css_per_px": 0.5669,
+"css": [
+93.5,
+16.4
+],
+"S": [
+0.87,
+0.15
+],
+"k": 0.2661,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "end:right",
+"draw": "thrown halberd prop, tip-to-butt = the planted ford halberd (165 atlas px, 0.87 S, same scale: no size jump at the swap); pv = blade tip (flight, blade leading); ex.butt = shaft end",
+"pink_px": 0,
+"pv_butt": [
+3.7,
+14.5
+],
+"prop_scale_vs_first_cut": 0.6134
+},
+"zhangliao.laneburst.1": {
+"hero": "zhangliao",
+"r": [
+351,
+242,
+171,
+144
+],
+"pv": [
+86.0,
+137.7
+],
+"css_per_px": 0.5669,
+"css": [
+96.9,
+81.6
+],
+"S": [
+0.9,
+0.76
+],
+"k": 0.5516,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "foot",
+"draw": "lane burst variant 1 on each living lane squad feet (alternate 1 / 2)",
+"pink_px": 0
+},
+"zhangliao.laneburst.2": {
+"hero": "zhangliao",
+"r": [
+0,
+242,
+171,
+149
+],
+"pv": [
+86.0,
+142.9
+],
+"css_per_px": 0.5669,
+"css": [
+96.9,
+84.5
+],
+"S": [
+0.9,
+0.78
+],
+"k": 0.5552,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "foot",
+"draw": "lane burst variant 2",
+"pink_px": 0
+},
+"zhangliao.ripple": {
+"hero": "zhangliao",
+"r": [
+1584,
+395,
+67,
+48
+],
+"pv": [
+33.4,
+23.9
+],
+"css_per_px": 0.5669,
+"css": [
+38.0,
+27.2
+],
+"S": [
+0.35,
+0.25
+],
+"k": 0.2866,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "bboxc",
+"draw": "morale ripple under each living enemy squad",
+"pink_px": 0
+},
+"zhangliao.stunring": {
+"hero": "zhangliao",
+"r": [
+466,
+395,
+95,
+87
+],
+"pv": [
+47.5,
+42.0
+],
+"css_per_px": 0.5669,
+"css": [
+53.9,
+49.3
+],
+"S": [
+0.5,
+0.46
+],
+"k": 0.4822,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "bboxc",
+"draw": "stun ring on the head line; lilac drops remapped white-blue 9CCBE4 / FFFFFF",
+"pink_px": 0
+},
+"zhangliao.surgecrash": {
+"hero": "zhangliao",
+"r": [
+1613,
+242,
+190,
+107
+],
+"pv": [
+87.4,
+101.9
+],
+"css_per_px": 0.5669,
+"css": [
+107.7,
+60.7
+],
+"S": [
+1.0,
+0.56
+],
+"k": 0.574,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "foot",
+"draw": "surge crash on each living back-row squad feet",
+"pink_px": 0
+},
+"zhangliao.wetmark": {
+"hero": "zhangliao",
+"r": [
+741,
+395,
+173,
+79
+],
+"pv": [
+87.0,
+37.7
+],
+"css_per_px": 0.5669,
+"css": [
+98.1,
+44.8
+],
+"S": [
+0.91,
+0.42
+],
+"k": 0.4928,
+"mode": "normal",
+"src": "r974 a approved",
+"pv_rule": "bboxc",
+"draw": "wet mark under living lane squads only",
+"pink_px": 0
+},
+"zhaoyun.crater": {
+"hero": "zhaoyun",
+"r": [
+1243,
+242,
+191,
+124
+],
+"pv": [
+94.5,
+58.7
+],
+"css_per_px": 0.5669,
+"css": [
+108.3,
+70.3
+],
+"S": [
+1.01,
+0.65
+],
+"k": 0.546,
+"mode": "normal",
+"src": "r973 a approved",
+"pv_rule": "bboxc",
+"draw": "crater under the struck squad (feet); pink rim fringe remapped dust cream EADBB2",
+"pink_px": 0
+},
+"zhaoyun.flash": {
+"hero": "zhaoyun",
+"r": [
+918,
+395,
+114,
+77
+],
+"pv": [
+59.7,
+40.7
+],
+"css_per_px": 0.5669,
+"css": [
+64.6,
+43.7
+],
+"S": [
+0.6,
+0.41
+],
+"k": 0.3972,
+"mode": "normal",
+"src": "r973 a approved",
+"pv_rule": "bright",
+"draw": "intercept flash on the guard coil centre each time the guard takes a hit",
+"pink_px": 0
+},
+"zhaoyun.hover": {
+"hero": "zhaoyun",
+"r": [
+1635,
+0,
+190,
+165
+],
+"pv": [
+95.0,
+164.8
+],
+"css_per_px": 0.5669,
+"css": [
+107.7,
+93.5
+],
+"S": [
+1.0,
+0.87
+],
+"k": 0.4668,
+"mode": "normal",
+"src": "r973 a approved",
+"pv_rule": "bottomc",
+"draw": "dragon hover ring: pivot = bottom of the ring on the struck squad head line (bob +-3 px)",
+"pink_px": 0
+},
+"zhaoyun.scar": {
+"hero": "zhaoyun",
+"r": [
+175,
+242,
+172,
+145
+],
+"pv": [
+87.9,
+72.6
+],
+"css_per_px": 0.5669,
+"css": [
+97.5,
+82.2
+],
+"S": [
+0.91,
+0.76
+],
+"k": 0.6813,
+"mode": "normal",
+"src": "r973 a approved",
+"pv_rule": "bboxc",
+"draw": "star scar, stays under the struck squad (feet); 0.79 S high at cut, inside the tile",
+"pink_px": 0
+},
+"zhaoyun.spear": {
+"hero": "zhaoyun",
+"r": [
+308,
+0,
+96,
+230
+],
+"pv": [
+90.7,
+5.9
+],
+"css_per_px": 0.5669,
+"css": [
+54.4,
+130.4
+],
+"S": [
+0.51,
+1.21
+],
+"k": 0.5065,
+"mode": "normal",
+"src": "r973 a approved",
+"pv_rule": "end:top",
+"draw": "spear prop: pv = leading point (flight, point first); ex.foot = butt (planted, tilt 10 deg); length = one X blade at the X scale (about 1.3 S); red tassel kept (crimson)",
+"pink_px": 0,
+"pv_foot": [
+4.0,
+223.6
+]
+},
+"zhaoyun.xthrust": {
+"hero": "zhaoyun",
+"r": [
+0,
+0,
+304,
+227
+],
+"pv": [
+150.7,
+109.5
+],
+"css_per_px": 0.5669,
+"css": [
+172.3,
+128.7
+],
+"S": [
+1.6,
+1.19
+],
+"k": 0.478,
+"mode": "normal",
+"src": "r973 a approved",
+"pv_rule": "bright",
+"draw": "X-thrust scene: 4 same-length blades + star; star centre on the struck squad body anchor; dust curls = passing wake (fade <= 350 ms off an empty tile); rose specks in the star remapped gold-white; RE-CUT: detached blob + specks (< 400 px) removed",
+"pink_px": 0
+},
+"zhaoyun.dragon": {
+"hero": "zhaoyun",
+"r": [
+0,
+505,
+366,
+45
+],
+"pv": [
+182.7,
+19.0
+],
+"css_per_px": 0.5669,
+"css": [
+207.5,
+25.5
+],
+"S": [
+1.93,
+0.24
+],
+"k": 0.3,
+"mode": "normal",
+"src": "r997 b row 4 (r997_urflip_zhaoyun_dragon_v2_b.png, out/ folder: Decision 574 A, art ROUNDC-GRADE s11.3)",
+"pv_rule": "body centre between snout tip and tail tip",
+"draw": "ONE clean full-length dragon, snout right / tail left, cut as a single piece for the code slice-bend (574 A): vertical slices, a wave from head to tail (head steady, tail swings most), flies the eased arc turned to the path; pv = body centre; pv_head = snout tip, pv_tail = tail mane tip (specks below 300 px never set an anchor)",
+"pink_px": 0,
+"r_round": "C",
+"pv_head": [
+365.4,
+20.2
+],
+"pv_tail": [
+0.0,
+17.7
+],
+"native": [
+1219,
+149
+],
+"remapped_px": 4
+},
+"dianwei.gatedust": {
+"hero": "dianwei",
+"r": [
+372,
+505,
+286,
+219
+],
+"pv": [
+140.8,
+209.7
+],
+"css_per_px": 0.5669,
+"css": [
+162.1,
+124.1
+],
+"S": [
+1.51,
+1.15
+],
+"k": 0.5327,
+"mode": "normal",
+"src": "r975 b approved (F7 split)",
+"pv_rule": "foot",
+"draw": "gate impact dust (cream cloud, streaks, chips), split from the gate (F7): SAME pv and scale as dianwei.gate, drawn UNDER it. Plays once at the slam (scale 0.9 to 1.05 in 300 ms, fade alpha 1 to 0 between +300 and +700 ms). The lowest 35 percent of the cloud stays in the gate layer as a low mound.",
+"pink_px": 0
+}
+}
+}

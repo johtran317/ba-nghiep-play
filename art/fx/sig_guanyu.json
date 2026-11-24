@@ -1,0 +1,360 @@
+{
+ "artmeta": 1,
+ "id": "sig_guanyu",
+ "file": "art/fx/sig_guanyu.webp",
+ "size": [
+  1024,
+  612
+ ],
+ "source": "r823 b on the empty plate 1376x768, placed per art193 s35 (ta_sig_batch2_placed.py) + R1/R2 baked",
+ "css_per_px_x": 1.1337,
+ "css_per_px_y": 1.099,
+ "frame": "placements are in the 344x768 FRAME the composites were built in (frame-local px), stretched to the 390x844 screen: css = px x (1.1337, 1.0990). tl = top-left of the piece, draw size = css [w,h], opacity as listed. anchor_css = the reference point of that placement in the composite (target column centre / pad centre); offset_css = tl_css - anchor_css: to retarget, tl = live anchor + offset_css. Draw order = order within a layer; under_squads = ground under squads, over_squads = above them. R1 gap fade (nothing below y 410 frame px) and R2 top fade are baked into the alpha.",
+ "timing_s": [
+  0.3,
+  0.4,
+  0.4,
+  0.7
+ ],
+ "groups": {
+  "guanyu.guanyu_f1": [
+   "guanyu.gy_glaive"
+  ],
+  "guanyu.guanyu_f2": [
+   "guanyu.gy_arc",
+   "guanyu.gy_hole"
+  ],
+  "guanyu.guanyu_f3": [
+   "guanyu.gy_f3_ground",
+   "guanyu.gy_f3_burst"
+  ],
+  "guanyu.guanyu_f4": [
+   "guanyu.gy_scar"
+  ]
+ },
+ "placements": {
+  "f1": [
+   {
+    "id": "guanyu.gy_glaive",
+    "layer": "over_squads",
+    "tl_frame": [
+     70,
+     130
+    ],
+    "tl_css": [
+     79.4,
+     142.9
+    ],
+    "tl_pct": [
+     20.3,
+     16.9
+    ],
+    "centre_pct": [
+     55.2,
+     32.7
+    ],
+    "size_css": [
+     272.1,
+     265.9
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -115.6,
+     -115.4
+    ],
+    "anchor_kind": "target_column_centre"
+   }
+  ],
+  "f2": [
+   {
+    "id": "guanyu.gy_arc",
+    "layer": "over_squads",
+    "tl_frame": [
+     129,
+     101
+    ],
+    "tl_css": [
+     146.2,
+     111.0
+    ],
+    "tl_pct": [
+     37.5,
+     13.2
+    ],
+    "centre_pct": [
+     61.0,
+     31.1
+    ],
+    "size_css": [
+     183.7,
+     303.3
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -48.8,
+     -147.3
+    ],
+    "anchor_kind": "target_column_centre"
+   },
+   {
+    "id": "guanyu.gy_hole",
+    "layer": "under_squads",
+    "tl_frame": [
+     111,
+     271
+    ],
+    "tl_css": [
+     125.8,
+     297.8
+    ],
+    "tl_pct": [
+     32.3,
+     35.3
+    ],
+    "centre_pct": [
+     51.6,
+     43.6
+    ],
+    "size_css": [
+     150.8,
+     140.7
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -69.2,
+     39.6
+    ],
+    "anchor_kind": "target_column_centre"
+   }
+  ],
+  "f3": [
+   {
+    "id": "guanyu.gy_f3_ground",
+    "layer": "under_squads",
+    "tl_frame": [
+     0,
+     87
+    ],
+    "tl_css": [
+     0.0,
+     95.6
+    ],
+    "tl_pct": [
+     0.0,
+     11.3
+    ],
+    "centre_pct": [
+     50.0,
+     32.9
+    ],
+    "size_css": [
+     390.0,
+     364.9
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -195.0,
+     -162.6
+    ],
+    "anchor_kind": "target_column_centre"
+   },
+   {
+    "id": "guanyu.gy_f3_burst",
+    "layer": "over_squads",
+    "tl_frame": [
+     2,
+     90
+    ],
+    "tl_css": [
+     2.3,
+     98.9
+    ],
+    "tl_pct": [
+     0.6,
+     11.7
+    ],
+    "centre_pct": [
+     50.3,
+     33.1
+    ],
+    "size_css": [
+     387.7,
+     360.5
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -192.7,
+     -159.3
+    ],
+    "anchor_kind": "target_column_centre"
+   }
+  ],
+  "f4": [
+   {
+    "id": "guanyu.gy_scar",
+    "layer": "under_squads",
+    "tl_frame": [
+     60,
+     91
+    ],
+    "tl_css": [
+     68.0,
+     100.0
+    ],
+    "tl_pct": [
+     17.4,
+     11.8
+    ],
+    "centre_pct": [
+     52.3,
+     30.9
+    ],
+    "size_css": [
+     272.1,
+     320.9
+    ],
+    "opacity": 1.0,
+    "anchor_css": [
+     195.0,
+     258.3
+    ],
+    "offset_css": [
+     -127.0,
+     -158.2
+    ],
+    "anchor_kind": "target_column_centre"
+   }
+  ]
+ },
+ "pieces": {
+  "guanyu.gy_glaive": {
+   "hero": "guanyu",
+   "r": [
+    164,
+    334,
+    240,
+    242
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    272.1,
+    265.9
+   ],
+   "mode": "normal"
+  },
+  "guanyu.gy_arc": {
+   "hero": "guanyu",
+   "r": [
+    0,
+    334,
+    162,
+    276
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    183.7,
+    303.3
+   ],
+   "mode": "normal"
+  },
+  "guanyu.gy_hole": {
+   "hero": "guanyu",
+   "r": [
+    406,
+    334,
+    133,
+    128
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    150.8,
+    140.7
+   ],
+   "mode": "normal"
+  },
+  "guanyu.gy_f3_ground": {
+   "hero": "guanyu",
+   "r": [
+    0,
+    0,
+    344,
+    332
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    390.0,
+    364.9
+   ],
+   "mode": "normal"
+  },
+  "guanyu.gy_f3_burst": {
+   "hero": "guanyu",
+   "r": [
+    346,
+    0,
+    342,
+    328
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    387.7,
+    360.5
+   ],
+   "mode": "normal"
+  },
+  "guanyu.gy_scar": {
+   "hero": "guanyu",
+   "r": [
+    690,
+    0,
+    240,
+    292
+   ],
+   "pv": [
+    0,
+    0
+   ],
+   "css": [
+    272.1,
+    320.9
+   ],
+   "mode": "normal"
+  }
+ },
+ "notes": "Skill hits ONE enemy column; anchor_css = column centre x (frame 172 -> css 195.0) at the middle row y (235 -> css 258). Code: tl = live column centre + offset_css (x only moves). f1 gy_glaive (over) glaive + jade dragon coil across the front pad; f2 gy_arc (over) crescent arc + dragon, gy_hole (under) crack hole on the front pad; f3 gy_f3_ground (under) jade crack + stones + leaves + rubble, gy_f3_burst (over) bolts/leaves; f4 gy_scar (under) scar with jade glow down the column."
+}

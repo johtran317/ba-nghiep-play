@@ -1,0 +1,1487 @@
+{
+ "artmeta": 1,
+ "id": "urw3_flip",
+ "build": "V303",
+ "file": "art/fx/urw3_flip.webp",
+ "size": [
+  2048,
+  743
+ ],
+ "bytes": 920162,
+ "S_atlas_px": 190.0,
+ "css_per_px": 0.5669,
+ "note": "URW3 round B flipbooks (urw3-round-b.md s5). Keys <gid>.<flip>.<n>; seq.<gid>.<flip> lists frames, ms per frame, loop or one-shot. pv = pivot rule of the brief (see pv_rule); pv_own = frame own bottom-centre. One shared scale per set (k), r981 camp F5 matched to the stake ring of F1-F4.",
+ "pieces": {
+  "dianwei.dust.1": {
+   "hero": "dianwei",
+   "r": [
+    879,
+    411,
+    163,
+    107
+   ],
+   "pv": [
+    81.6,
+    102.3
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    92.4,
+    60.7
+   ],
+   "S": [
+    0.86,
+    0.56
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r980 b approved (row 2)",
+   "pv_rule": "foot",
+   "draw": "slam dust: burst, puffs, ring, wisps; pv = burst ground point; F4 pink wisp edges remapped sand shade B89868",
+   "pink_px": 0,
+   "pv_own": [
+    81.6,
+    106.5
+   ]
+  },
+  "dianwei.dust.2": {
+   "hero": "dianwei",
+   "r": [
+    178,
+    531,
+    166,
+    85
+   ],
+   "pv": [
+    85.5,
+    81.4
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    94.1,
+    48.2
+   ],
+   "S": [
+    0.87,
+    0.45
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r980 b approved (row 2)",
+   "pv_rule": "foot",
+   "draw": "slam dust: burst, puffs, ring, wisps; pv = burst ground point; F4 pink wisp edges remapped sand shade B89868",
+   "pink_px": 0,
+   "pv_own": [
+    82.9,
+    84.8
+   ]
+  },
+  "dianwei.dust.3": {
+   "hero": "dianwei",
+   "r": [
+    783,
+    531,
+    166,
+    75
+   ],
+   "pv": [
+    82.9,
+    37.4
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    94.1,
+    42.5
+   ],
+   "S": [
+    0.87,
+    0.39
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r980 b approved (row 2)",
+   "pv_rule": "bboxc",
+   "draw": "slam dust: burst, puffs, ring, wisps; pv = burst ground point; F4 pink wisp edges remapped sand shade B89868",
+   "pink_px": 0,
+   "pv_own": [
+    82.9,
+    74.2
+   ]
+  },
+  "dianwei.dust.4": {
+   "hero": "dianwei",
+   "r": [
+    1192,
+    531,
+    156,
+    57
+   ],
+   "pv": [
+    78.4,
+    28.6
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    88.4,
+    32.3
+   ],
+   "S": [
+    0.82,
+    0.3
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r980 b approved (row 2)",
+   "pv_rule": "bboxc",
+   "draw": "slam dust: burst, puffs, ring, wisps; pv = burst ground point; F4 pink wisp edges remapped sand shade B89868",
+   "pink_px": 0,
+   "pv_own": [
+    78.4,
+    56.7
+   ]
+  },
+  "dianwei.pennant.1": {
+   "hero": "dianwei",
+   "r": [
+    1652,
+    0,
+    166,
+    181
+   ],
+   "pv": [
+    8.6,
+    180.0
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    94.1,
+    102.6
+   ],
+   "S": [
+    0.87,
+    0.95
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r980 b approved (row 1)",
+   "pv_rule": "bottomrows",
+   "draw": "taunt pennant loop: pv = pole foot (pole fixed, cloth moves)",
+   "pink_px": 0,
+   "pv_own": [
+    83.1,
+    180.0
+   ]
+  },
+  "dianwei.pennant.2": {
+   "hero": "dianwei",
+   "r": [
+    1822,
+    0,
+    161,
+    181
+   ],
+   "pv": [
+    8.9,
+    180.0
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    91.3,
+    102.6
+   ],
+   "S": [
+    0.85,
+    0.95
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r980 b approved (row 1)",
+   "pv_rule": "bottomrows",
+   "draw": "taunt pennant loop: pv = pole foot (pole fixed, cloth moves)",
+   "pink_px": 0,
+   "pv_own": [
+    80.4,
+    180.0
+   ]
+  },
+  "dianwei.pennant.3": {
+   "hero": "dianwei",
+   "r": [
+    0,
+    226,
+    160,
+    181
+   ],
+   "pv": [
+    8.9,
+    180.0
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    90.7,
+    102.6
+   ],
+   "S": [
+    0.84,
+    0.95
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r980 b approved (row 1)",
+   "pv_rule": "bottomrows",
+   "draw": "taunt pennant loop: pv = pole foot (pole fixed, cloth moves)",
+   "pink_px": 0,
+   "pv_own": [
+    79.8,
+    180.0
+   ]
+  },
+  "dianwei.pennant.4": {
+   "hero": "dianwei",
+   "r": [
+    164,
+    226,
+    155,
+    181
+   ],
+   "pv": [
+    8.9,
+    180.0
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    87.9,
+    102.6
+   ],
+   "S": [
+    0.82,
+    0.95
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r980 b approved (row 1)",
+   "pv_rule": "bottomrows",
+   "draw": "taunt pennant loop: pv = pole foot (pole fixed, cloth moves)",
+   "pink_px": 0,
+   "pv_own": [
+    78.0,
+    180.0
+   ]
+  },
+  "luxun.camp.1": {
+   "hero": "luxun",
+   "r": [
+    1235,
+    226,
+    172,
+    126
+   ],
+   "pv": [
+    89.8,
+    107.2
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    97.5,
+    71.4
+   ],
+   "S": [
+    0.91,
+    0.66
+   ],
+   "k": 0.6287,
+   "mode": "normal",
+   "src": "r981 a (camp row) approved",
+   "pv_rule": "groundring",
+   "draw": "camp fire F1",
+   "pink_px": 0,
+   "pv_own": [
+    86.4,
+    124.5
+   ]
+  },
+  "luxun.camp.2": {
+   "hero": "luxun",
+   "r": [
+    1481,
+    0,
+    167,
+    182
+   ],
+   "pv": [
+    88.4,
+    156.5
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    94.7,
+    103.2
+   ],
+   "S": [
+    0.88,
+    0.96
+   ],
+   "k": 0.6287,
+   "mode": "normal",
+   "src": "r981 a (camp row) approved",
+   "pv_rule": "groundring",
+   "draw": "camp fire F2",
+   "pink_px": 0,
+   "pv_own": [
+    83.6,
+    181.7
+   ]
+  },
+  "luxun.camp.3": {
+   "hero": "luxun",
+   "r": [
+    1287,
+    0,
+    190,
+    185
+   ],
+   "pv": [
+    89.4,
+    159.0
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    107.7,
+    104.9
+   ],
+   "S": [
+    1.0,
+    0.97
+   ],
+   "k": 0.6287,
+   "mode": "normal",
+   "src": "r981 a (camp row) approved",
+   "pv_rule": "groundring",
+   "draw": "camp fire F3",
+   "pink_px": 0,
+   "pv_own": [
+    93.4,
+    184.8
+   ]
+  },
+  "luxun.camp.4": {
+   "hero": "luxun",
+   "r": [
+    854,
+    0,
+    168,
+    204
+   ],
+   "pv": [
+    88.5,
+    175.3
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    95.2,
+    115.6
+   ],
+   "S": [
+    0.88,
+    1.07
+   ],
+   "k": 0.6287,
+   "mode": "normal",
+   "src": "r981 a (camp row) approved",
+   "pv_rule": "groundring",
+   "draw": "camp fire F4",
+   "pink_px": 0,
+   "pv_own": [
+    84.2,
+    203.7
+   ]
+  },
+  "luxun.camp.5": {
+   "hero": "luxun",
+   "r": [
+    242,
+    0,
+    168,
+    209
+   ],
+   "pv": [
+    87.3,
+    179.4
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    95.2,
+    118.5
+   ],
+   "S": [
+    0.88,
+    1.1
+   ],
+   "k": 0.6311,
+   "mode": "normal",
+   "src": "r981 b (F4 collapse) approved",
+   "pv_rule": "groundring",
+   "draw": "camp fire F5",
+   "pink_px": 0,
+   "pv_own": [
+    83.9,
+    208.2
+   ]
+  },
+  "luxun.rope.1": {
+   "hero": "luxun",
+   "r": [
+    587,
+    531,
+    192,
+    77
+   ],
+   "pv": [
+    5.0,
+    66.6
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    108.8,
+    43.7
+   ],
+   "S": [
+    1.01,
+    0.41
+   ],
+   "k": 0.7,
+   "mode": "normal",
+   "src": "r981 b approved (row 1)",
+   "pv_rule": "end:left",
+   "draw": "rope fire: the fire runs left to right (90 ms per frame); F2 pink-violet smoke remapped grey-brown 7A6E66, F4 thread 3E342E; pv = rope start (knot)",
+   "pink_px": 0,
+   "pv_own": [
+    96.2,
+    75.6
+   ]
+  },
+  "luxun.rope.2": {
+   "hero": "luxun",
+   "r": [
+    683,
+    411,
+    192,
+    108
+   ],
+   "pv": [
+    4.5,
+    98.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    108.8,
+    61.2
+   ],
+   "S": [
+    1.01,
+    0.57
+   ],
+   "k": 0.7,
+   "mode": "normal",
+   "src": "r981 b approved (row 1)",
+   "pv_rule": "end:left",
+   "draw": "rope fire: the fire runs left to right (90 ms per frame); F2 pink-violet smoke remapped grey-brown 7A6E66, F4 thread 3E342E; pv = rope start (knot)",
+   "pink_px": 0,
+   "pv_own": [
+    95.9,
+    107.8
+   ]
+  },
+  "luxun.rope.3": {
+   "hero": "luxun",
+   "r": [
+    692,
+    226,
+    212,
+    144
+   ],
+   "pv": [
+    5.7,
+    133.9
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    120.2,
+    81.6
+   ],
+   "S": [
+    1.12,
+    0.76
+   ],
+   "k": 0.7,
+   "mode": "normal",
+   "src": "r981 b approved (row 1)",
+   "pv_rule": "end:left",
+   "draw": "rope fire: the fire runs left to right (90 ms per frame); F2 pink-violet smoke remapped grey-brown 7A6E66, F4 thread 3E342E; pv = rope start (knot)",
+   "pink_px": 0,
+   "pv_own": [
+    106.4,
+    142.8
+   ]
+  },
+  "luxun.rope.4": {
+   "hero": "luxun",
+   "r": [
+    478,
+    411,
+    201,
+    111
+   ],
+   "pv": [
+    4.7,
+    101.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    113.9,
+    62.9
+   ],
+   "S": [
+    1.06,
+    0.58
+   ],
+   "k": 0.7,
+   "mode": "normal",
+   "src": "r981 b approved (row 1)",
+   "pv_rule": "end:left",
+   "draw": "rope fire: the fire runs left to right (90 ms per frame); F2 pink-violet smoke remapped grey-brown 7A6E66, F4 thread 3E342E; pv = rope start (knot)",
+   "pink_px": 0,
+   "pv_own": [
+    99.8,
+    110.6
+   ]
+  },
+  "sunce.burst.1": {
+   "hero": "sunce",
+   "r": [
+    1103,
+    226,
+    128,
+    134
+   ],
+   "pv": [
+    63.9,
+    67.2
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    72.6,
+    76.0
+   ],
+   "S": [
+    0.67,
+    0.71
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r982 b approved (row 2)",
+   "pv_rule": "bboxc",
+   "draw": "drum-head burst on the hide; F2 ochre crown remapped bone-grey D8D4C8 dust + bronze A8743A clods (r953 remap), F4 pink wisps bone-grey",
+   "pink_px": 0,
+   "pv_own": [
+    63.9,
+    133.2
+   ]
+  },
+  "sunce.burst.2": {
+   "hero": "sunce",
+   "r": [
+    323,
+    226,
+    189,
+    170
+   ],
+   "pv": [
+    94.5,
+    84.9
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    107.1,
+    96.4
+   ],
+   "S": [
+    0.99,
+    0.89
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r982 b approved (row 2)",
+   "pv_rule": "bboxc",
+   "draw": "drum-head burst on the hide; F2 ochre crown remapped bone-grey D8D4C8 dust + bronze A8743A clods (r953 remap), F4 pink wisps bone-grey",
+   "pink_px": 0,
+   "pv_own": [
+    94.5,
+    169.2
+   ]
+  },
+  "sunce.burst.3": {
+   "hero": "sunce",
+   "r": [
+    908,
+    226,
+    191,
+    142
+   ],
+   "pv": [
+    94.8,
+    70.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    108.3,
+    80.5
+   ],
+   "S": [
+    1.01,
+    0.75
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r982 b approved (row 2)",
+   "pv_rule": "bboxc",
+   "draw": "drum-head burst on the hide; F2 ochre crown remapped bone-grey D8D4C8 dust + bronze A8743A clods (r953 remap), F4 pink wisps bone-grey",
+   "pink_px": 0,
+   "pv_own": [
+    94.8,
+    141.0
+   ]
+  },
+  "sunce.burst.4": {
+   "hero": "sunce",
+   "r": [
+    1411,
+    226,
+    186,
+    125
+   ],
+   "pv": [
+    93.0,
+    62.7
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    105.4,
+    70.9
+   ],
+   "S": [
+    0.98,
+    0.66
+   ],
+   "k": 0.6,
+   "mode": "normal",
+   "src": "r982 b approved (row 2)",
+   "pv_rule": "bboxc",
+   "draw": "drum-head burst on the hide; F2 ochre crown remapped bone-grey D8D4C8 dust + bronze A8743A clods (r953 remap), F4 pink wisps bone-grey",
+   "pink_px": 0,
+   "pv_own": [
+    93.0,
+    124.8
+   ]
+  },
+  "zhangliao.crack.1": {
+   "hero": "zhangliao",
+   "r": [
+    0,
+    531,
+    174,
+    88
+   ],
+   "pv": [
+    92.2,
+    48.5
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    98.6,
+    49.9
+   ],
+   "S": [
+    0.92,
+    0.46
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r979 a approved (row 3)",
+   "pv_rule": "plate centre",
+   "draw": "crack burst, plays F1-F4 ONCE per lane squad, upright (never rotated), y-scale 0.7; RE-CUT 2: no tan plate; soft wet-earth stain #2F2A20 (38 % on the crack lines, blurred, follows the crack shape) under the cracks + spray; works on grass, snow, sand; pv = plate centre",
+   "pink_px": 0,
+   "pv_own": [
+    86.4,
+    83.2
+   ]
+  },
+  "zhangliao.crack.2": {
+   "hero": "zhangliao",
+   "r": [
+    1601,
+    226,
+    169,
+    124
+   ],
+   "pv": [
+    92.0,
+    87.2
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    95.8,
+    70.3
+   ],
+   "S": [
+    0.89,
+    0.65
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r979 a approved (row 3)",
+   "pv_rule": "plate centre",
+   "draw": "crack burst, plays F1-F4 ONCE per lane squad, upright (never rotated), y-scale 0.7; RE-CUT 2: no tan plate; soft wet-earth stain #2F2A20 (38 % on the crack lines, blurred, follows the crack shape) under the cracks + spray; works on grass, snow, sand; pv = plate centre",
+   "pink_px": 0,
+   "pv_own": [
+    84.3,
+    119.2
+   ]
+  },
+  "zhangliao.crack.3": {
+   "hero": "zhangliao",
+   "r": [
+    516,
+    226,
+    172,
+    155
+   ],
+   "pv": [
+    91.7,
+    117.9
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    97.5,
+    87.9
+   ],
+   "S": [
+    0.91,
+    0.82
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r979 a approved (row 3)",
+   "pv_rule": "plate centre",
+   "draw": "crack burst, plays F1-F4 ONCE per lane squad, upright (never rotated), y-scale 0.7; RE-CUT 2: no tan plate; soft wet-earth stain #2F2A20 (38 % on the crack lines, blurred, follows the crack shape) under the cracks + spray; works on grass, snow, sand; pv = plate centre",
+   "pink_px": 0,
+   "pv_own": [
+    88.2,
+    150.5
+   ]
+  },
+  "zhangliao.crack.4": {
+   "hero": "zhangliao",
+   "r": [
+    1774,
+    226,
+    172,
+    118
+   ],
+   "pv": [
+    92.0,
+    78.4
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    97.5,
+    66.9
+   ],
+   "S": [
+    0.91,
+    0.62
+   ],
+   "k": 0.53,
+   "mode": "normal",
+   "src": "r979 a approved (row 3)",
+   "pv_rule": "plate centre",
+   "draw": "crack burst, plays F1-F4 ONCE per lane squad, upright (never rotated), y-scale 0.7; RE-CUT 2: no tan plate; soft wet-earth stain #2F2A20 (38 % on the crack lines, blurred, follows the crack shape) under the cracks + spray; works on grass, snow, sand; pv = plate centre",
+   "pink_px": 0,
+   "pv_own": [
+    81.9,
+    113.4
+   ]
+  },
+  "zhangliao.surgeA.1": {
+   "hero": "zhangliao",
+   "r": [
+    953,
+    531,
+    235,
+    73
+   ],
+   "pv": [
+    117.4,
+    71.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    133.2,
+    41.4
+   ],
+   "S": [
+    1.24,
+    0.38
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 1)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant A (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.4,
+    71.8
+   ]
+  },
+  "zhangliao.surgeA.2": {
+   "hero": "zhangliao",
+   "r": [
+    1046,
+    411,
+    235,
+    105
+   ],
+   "pv": [
+    117.4,
+    104.5
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    133.2,
+    59.5
+   ],
+   "S": [
+    1.24,
+    0.55
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 1)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant A (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.4,
+    104.5
+   ]
+  },
+  "zhangliao.surgeA.3": {
+   "hero": "zhangliao",
+   "r": [
+    239,
+    411,
+    235,
+    114
+   ],
+   "pv": [
+    117.4,
+    113.1
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    133.2,
+    64.6
+   ],
+   "S": [
+    1.24,
+    0.6
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 1)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant A (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.4,
+    113.1
+   ]
+  },
+  "zhangliao.surgeA.4": {
+   "hero": "zhangliao",
+   "r": [
+    1523,
+    411,
+    234,
+    103
+   ],
+   "pv": [
+    117.0,
+    102.2
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    132.7,
+    58.4
+   ],
+   "S": [
+    1.23,
+    0.54
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 1)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant A (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.0,
+    102.2
+   ]
+  },
+  "zhangliao.surgeB.1": {
+   "hero": "zhangliao",
+   "r": [
+    348,
+    531,
+    235,
+    80
+   ],
+   "pv": [
+    117.4,
+    79.6
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    133.2,
+    45.4
+   ],
+   "S": [
+    1.24,
+    0.42
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 2)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant B (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.4,
+    79.6
+   ]
+  },
+  "zhangliao.surgeB.2": {
+   "hero": "zhangliao",
+   "r": [
+    1285,
+    411,
+    234,
+    105
+   ],
+   "pv": [
+    117.0,
+    103.7
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    132.7,
+    59.5
+   ],
+   "S": [
+    1.23,
+    0.55
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 2)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant B (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.0,
+    103.7
+   ]
+  },
+  "zhangliao.surgeB.3": {
+   "hero": "zhangliao",
+   "r": [
+    0,
+    411,
+    235,
+    116
+   ],
+   "pv": [
+    117.4,
+    115.4
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    133.2,
+    65.8
+   ],
+   "S": [
+    1.24,
+    0.61
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 2)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant B (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.4,
+    115.4
+   ]
+  },
+  "zhangliao.surgeB.4": {
+   "hero": "zhangliao",
+   "r": [
+    1761,
+    411,
+    234,
+    97
+   ],
+   "pv": [
+    117.0,
+    95.9
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    132.7,
+    55.0
+   ],
+   "S": [
+    1.23,
+    0.51
+   ],
+   "k": 0.78,
+   "mode": "normal",
+   "src": "r979 a approved (row 2)",
+   "pv_rule": "bottomc",
+   "draw": "water surge variant B (4 frames), pivot bottom-centre; straight left/right ends feathered to 0 over 12 % of the width; crest at F3 = 0.6 S high at this scale",
+   "pink_px": 0,
+   "pv_own": [
+    117.0,
+    95.9
+   ]
+  },
+  "zhaoyun.land.1": {
+   "hero": "zhaoyun",
+   "r": [
+    0,
+    0,
+    238,
+    222
+   ],
+   "pv": [
+    119.7,
+    157.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    134.9,
+    125.9
+   ],
+   "S": [
+    1.25,
+    1.17
+   ],
+   "k": 0.7776,
+   "mode": "normal",
+   "src": "r978 a approved (row 2 landing only)",
+   "pv_rule": "ground",
+   "draw": "landing: dive, curl, coil, guard coil. ONE ground point for all 4 frames: pv = ground line (content bottom - 62.2 px) so the ground sits at the same y every frame (RE-CUT); F4 is the guard coil (hold, breathing scale-y 1.00-1.02 at 0.5 Hz); F2/F3 dust remapped cream EADBB2/B89868",
+   "pink_px": 0,
+   "pv_own": [
+    119.7,
+    220.8
+   ],
+   "ground_off": 62.2,
+   "content_bottom": 220
+  },
+  "zhaoyun.land.2": {
+   "hero": "zhaoyun",
+   "r": [
+    414,
+    0,
+    214,
+    205
+   ],
+   "pv": [
+    106.9,
+    140.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    121.3,
+    116.2
+   ],
+   "S": [
+    1.13,
+    1.08
+   ],
+   "k": 0.7776,
+   "mode": "normal",
+   "src": "r978 a approved (row 2 landing only)",
+   "pv_rule": "ground",
+   "draw": "landing: dive, curl, coil, guard coil. ONE ground point for all 4 frames: pv = ground line (content bottom - 62.2 px) so the ground sits at the same y every frame (RE-CUT); F4 is the guard coil (hold, breathing scale-y 1.00-1.02 at 0.5 Hz); F2/F3 dust remapped cream EADBB2/B89868",
+   "pink_px": 0,
+   "pv_own": [
+    106.9,
+    204.5
+   ],
+   "ground_off": 62.2,
+   "content_bottom": 203
+  },
+  "zhaoyun.land.3": {
+   "hero": "zhaoyun",
+   "r": [
+    1026,
+    0,
+    257,
+    190
+   ],
+   "pv": [
+    135.4,
+    126.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    145.7,
+    107.7
+   ],
+   "S": [
+    1.35,
+    1.0
+   ],
+   "k": 0.7776,
+   "mode": "normal",
+   "src": "r978 a approved (row 2 landing only)",
+   "pv_rule": "ground",
+   "draw": "landing: dive, curl, coil, guard coil. ONE ground point for all 4 frames: pv = ground line (content bottom - 62.2 px) so the ground sits at the same y every frame (RE-CUT); F4 is the guard coil (hold, breathing scale-y 1.00-1.02 at 0.5 Hz); F2/F3 dust remapped cream EADBB2/B89868",
+   "pink_px": 0,
+   "pv_own": [
+    128.7,
+    189.0
+   ],
+   "ground_off": 62.2,
+   "content_bottom": 189
+  },
+  "zhaoyun.land.4": {
+   "hero": "zhaoyun",
+   "r": [
+    632,
+    0,
+    218,
+    205
+   ],
+   "pv": [
+    100.2,
+    135.8
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    123.6,
+    116.2
+   ],
+   "S": [
+    1.15,
+    1.08
+   ],
+   "k": 0.7776,
+   "mode": "normal",
+   "src": "r978 a approved (row 2 landing only)",
+   "pv_rule": "ground",
+   "draw": "landing: dive, curl, coil, guard coil. ONE ground point for all 4 frames: pv = ground line (content bottom - 62.2 px) so the ground sits at the same y every frame (RE-CUT); F4 is the guard coil (hold, breathing scale-y 1.00-1.02 at 0.5 Hz); F2/F3 dust remapped cream EADBB2/B89868",
+   "pink_px": 0,
+   "pv_own": [
+    109.2,
+    198.3
+   ],
+   "ground_off": 62.2,
+   "content_bottom": 198
+  },
+  "sunce.front.3": {
+   "hero": "sunce",
+   "r": [
+    0,
+    623,
+    236,
+    120
+   ],
+   "pv": [
+    112.8,
+    119.4
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    133.8,
+    68.0
+   ],
+   "S": [
+    1.24,
+    0.63
+   ],
+   "k": 0.4266,
+   "mode": "normal",
+   "src": "r998 b approved (sunce_shockfront.png)",
+   "pv_rule": "ground line midpoint of the two horn tips",
+   "draw": "low shock front frame 3: cut UNSQUASHED, code draws every frame at y-scale 0.65 (art s11.4); pv = midpoint of the line through the two horn tips (ground line); F4 = 1.3 S wide, all frames one scale k",
+   "pink_px": 0,
+   "r_round": "C",
+   "pv_tipL": [
+    61.4,
+    119.4
+   ],
+   "pv_tipR": [
+    164.2,
+    119.4
+   ],
+   "native": [
+    554,
+    281
+   ],
+   "remapped_px": 0
+  },
+  "sunce.front.2": {
+   "hero": "sunce",
+   "r": [
+    240,
+    623,
+    246,
+    118
+   ],
+   "pv": [
+    123.1,
+    117.3
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    139.5,
+    66.9
+   ],
+   "S": [
+    1.29,
+    0.62
+   ],
+   "k": 0.4266,
+   "mode": "normal",
+   "src": "r998 b approved (sunce_shockfront.png)",
+   "pv_rule": "ground line midpoint of the two horn tips",
+   "draw": "low shock front frame 2: cut UNSQUASHED, code draws every frame at y-scale 0.65 (art s11.4); pv = midpoint of the line through the two horn tips (ground line); F4 = 1.3 S wide, all frames one scale k",
+   "pink_px": 0,
+   "r_round": "C",
+   "pv_tipL": [
+    70.0,
+    117.3
+   ],
+   "pv_tipR": [
+    176.2,
+    117.3
+   ],
+   "native": [
+    577,
+    277
+   ],
+   "remapped_px": 0
+  },
+  "sunce.front.4": {
+   "hero": "sunce",
+   "r": [
+    490,
+    623,
+    247,
+    87
+   ],
+   "pv": [
+    113.3,
+    85.5
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    140.0,
+    49.3
+   ],
+   "S": [
+    1.3,
+    0.46
+   ],
+   "k": 0.4266,
+   "mode": "normal",
+   "src": "r998 b approved (sunce_shockfront.png)",
+   "pv_rule": "ground line midpoint of the two horn tips",
+   "draw": "low shock front frame 4: cut UNSQUASHED, code draws every frame at y-scale 0.65 (art s11.4); pv = midpoint of the line through the two horn tips (ground line); F4 = 1.3 S wide, all frames one scale k",
+   "pink_px": 0,
+   "r_round": "C",
+   "pv_tipL": [
+    83.6,
+    84.9
+   ],
+   "pv_tipR": [
+    142.9,
+    86.2
+   ],
+   "native": [
+    579,
+    203
+   ],
+   "remapped_px": 0
+  },
+  "sunce.front.1": {
+   "hero": "sunce",
+   "r": [
+    741,
+    623,
+    217,
+    70
+   ],
+   "pv": [
+    107.9,
+    68.3
+   ],
+   "css_per_px": 0.5669,
+   "css": [
+    123.0,
+    39.7
+   ],
+   "S": [
+    1.14,
+    0.37
+   ],
+   "k": 0.4266,
+   "mode": "normal",
+   "src": "r998 b approved (sunce_shockfront.png)",
+   "pv_rule": "ground line midpoint of the two horn tips",
+   "draw": "low shock front frame 1: cut UNSQUASHED, code draws every frame at y-scale 0.65 (art s11.4); pv = midpoint of the line through the two horn tips (ground line); F4 = 1.3 S wide, all frames one scale k",
+   "pink_px": 0,
+   "r_round": "C",
+   "pv_tipL": [
+    62.3,
+    69.5
+   ],
+   "pv_tipR": [
+    153.6,
+    67.0
+   ],
+   "native": [
+    509,
+    164
+   ],
+   "remapped_px": 0
+  }
+ },
+ "seq": {
+  "zhaoyun.land": {
+   "frames": [
+    "zhaoyun.land.1",
+    "zhaoyun.land.2",
+    "zhaoyun.land.3",
+    "zhaoyun.land.4"
+   ],
+   "ms": 90,
+   "loop": false,
+   "hold_last": true
+  },
+  "zhangliao.surgeA": {
+   "frames": [
+    "zhangliao.surgeA.1",
+    "zhangliao.surgeA.2",
+    "zhangliao.surgeA.3",
+    "zhangliao.surgeA.4"
+   ],
+   "ms": 83,
+   "loop": true
+  },
+  "zhangliao.surgeB": {
+   "frames": [
+    "zhangliao.surgeB.1",
+    "zhangliao.surgeB.2",
+    "zhangliao.surgeB.3",
+    "zhangliao.surgeB.4"
+   ],
+   "ms": 83,
+   "loop": true
+  },
+  "zhangliao.crack": {
+   "frames": [
+    "zhangliao.crack.1",
+    "zhangliao.crack.2",
+    "zhangliao.crack.3",
+    "zhangliao.crack.4"
+   ],
+   "ms": 70,
+   "loop": false
+  },
+  "dianwei.pennant": {
+   "frames": [
+    "dianwei.pennant.1",
+    "dianwei.pennant.2",
+    "dianwei.pennant.3",
+    "dianwei.pennant.4"
+   ],
+   "ms": 120,
+   "loop": true
+  },
+  "dianwei.dust": {
+   "frames": [
+    "dianwei.dust.1",
+    "dianwei.dust.2",
+    "dianwei.dust.3",
+    "dianwei.dust.4"
+   ],
+   "ms": 83,
+   "loop": false
+  },
+  "luxun.rope": {
+   "frames": [
+    "luxun.rope.1",
+    "luxun.rope.2",
+    "luxun.rope.3",
+    "luxun.rope.4"
+   ],
+   "ms": 90,
+   "loop": false
+  },
+  "luxun.camp": {
+   "frames": [
+    "luxun.camp.1",
+    "luxun.camp.2",
+    "luxun.camp.3",
+    "luxun.camp.4",
+    "luxun.camp.5"
+   ],
+   "ms": 90,
+   "loop": false,
+   "note": "camp F1 once, F2-F4 ping-pong while burning (>= 600 ms), F5 collapse then crossfade 200 ms to the burn linger; F5 (b F4) is scaled so its stake ring matches a (k 0.631 vs 0.629)"
+  },
+  "sunce.burst": {
+   "frames": [
+    "sunce.burst.1",
+    "sunce.burst.2",
+    "sunce.burst.3",
+    "sunce.burst.4"
+   ],
+   "ms": 83,
+   "loop": false
+  },
+  "sunce.front": {
+   "frames": [
+    "sunce.front.1",
+    "sunce.front.2",
+    "sunce.front.3",
+    "sunce.front.4"
+   ],
+   "ms": [
+    100,
+    111,
+    111,
+    150
+   ],
+   "loop": false,
+   "note": "F1 100 ms at the lane head (scale-in 0.8 to 1.0), loop F2 <-> F3 at 9 fps while the front rolls up the lane (width 1.2 S to 1.4 S), F4 150 ms + fade 200 ms at the last squad; y-scale 0.65 on every frame (cut unsquashed); never mirrored; k 0.4266"
+  }
+ }
+}

@@ -1,0 +1,695 @@
+{
+ "artmeta": 1,
+ "id": "ur_guanyu",
+ "build": "V302-staged-r2b",
+ "file": "art/fx/ur_guanyu.webp",
+ "size": [
+  1536,
+  628
+ ],
+ "bytes": 152318,
+ "note": "Quan Vu UR round 2 (ur-spectacle 49.6). STAGED r2b: r876 b pieces (items 1-3, 5, 7, with the 49.7 fixes) + r885 a coil1/coil2 back/front (axis_x, collar_top_y, head_w_px in each; the pole passes between back and front; scale 1, height 0.65 L baked), slab1-3 and chip1-8 (scale 0.5). Format = ur_prod.json: r = atlas rect, pv = pivot px in the piece, css_per_px, native px (never resampled, ~1.97 px/css); straight alpha; cut by difference to BOARD_PLATE_EMPTY.",
+ "pieces": {
+  "guanyu.glaive": {
+   "hero": "guanyu",
+   "r": [
+    0,
+    0,
+    70,
+    448
+   ],
+   "pv": [
+    10.8,
+    223.5
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    35.6,
+    227.6
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f1 (colour mask: steel + brown pole + collar; the dragon behind is not taken)",
+   "draw": "THE glaive: upright, blade up, never scaled or swapped during the cast; pivot = pole midpoint",
+   "tip": [
+    6.5,
+    3.0
+   ],
+   "butt": [
+    15.0,
+    444.0
+   ],
+   "length_px": 441.1
+  },
+  "guanyu.arc": {
+   "hero": "guanyu",
+   "r": [
+    328,
+    0,
+    191,
+    362
+   ],
+   "pv": [
+    228.5,
+    214.8
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    97.0,
+    183.9
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f2 crescent: small dragon + short glaive excluded, tail cropped above y 385 (30 px taper), 12 px neck feather",
+   "draw": "white-jade crescent with gold edge; centre on the glaive pivot, outer edge = blade-tip path; angular wipe",
+   "cx": 228.5,
+   "cy": 214.8,
+   "r_o": 225.1,
+   "r_i": 151.0,
+   "a0": -104.1,
+   "a1": 138.6,
+   "fit_note": "circle fit on the outer edge of this cut; a0 = head end, a1 = tail end (deg, y down)"
+  },
+  "guanyu.head": {
+   "hero": "guanyu",
+   "r": [
+    424,
+    452,
+    115,
+    103
+   ],
+   "pv": [
+    7.0,
+    48.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    58.4,
+    52.3
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f2 head + neck, 12 px feather at the neck",
+   "draw": "dragon head riding the glaive tip; flip (never rotate upside down) when moving left",
+   "head_w_px": 104,
+   "facing": "right",
+   "neck_end": [
+    7.0,
+    48.0
+   ]
+  },
+  "guanyu.dustL": {
+   "hero": "guanyu",
+   "r": [
+    194,
+    0,
+    130,
+    370
+   ],
+   "pv": [
+    65.0,
+    369.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    66.0,
+    188.0
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f3",
+   "draw": "left dust wall; base y_f + 0.3 T, rises by translate under the clip"
+  },
+  "guanyu.dustR": {
+   "hero": "guanyu",
+   "r": [
+    74,
+    0,
+    116,
+    409
+   ],
+   "pv": [
+    58.0,
+    408.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    58.9,
+    207.8
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f3",
+   "draw": "right dust wall (its outer edge is the sheet edge: draw it past the column edge)"
+  },
+  "guanyu.burst": {
+   "hero": "guanyu",
+   "r": [
+    0,
+    452,
+    164,
+    176
+   ],
+   "pv": [
+    82.0,
+    94.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    83.3,
+    89.4
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f3 gold execute burst",
+   "draw": "gold burst 1.3 T on each executed squad at its hit time, 250 ms"
+  },
+  "guanyu.crack": {
+   "hero": "guanyu",
+   "r": [
+    1397,
+    0,
+    71,
+    204
+   ],
+   "pv": [
+    35.0,
+    216.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    36.1,
+    103.6
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f3 jade crack streak",
+   "draw": "streak along the column y_b - 0.4 T .. y_f + 0.3 T, uniform scale"
+  },
+  "guanyu.debris": {
+   "hero": "guanyu",
+   "r": [
+    523,
+    0,
+    164,
+    347
+   ],
+   "pv": [
+    85.0,
+    179.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    83.3,
+    176.3
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f3 leaves + chunky stones (arrowhead shard removed)",
+   "draw": "debris over the crack; code may split it into <= 30 particles"
+  },
+  "guanyu.scar": {
+   "hero": "guanyu",
+   "r": [
+    973,
+    0,
+    182,
+    279
+   ],
+   "pv": [
+    97.0,
+    275.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    92.5,
+    141.7
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f4 scar decal (dark mask on the plate difference; pads and banners excluded)",
+   "draw": "scar decal along the column, residue .35 to the battle end"
+  },
+  "guanyu.wisp": {
+   "hero": "guanyu",
+   "r": [
+    168,
+    452,
+    252,
+    152
+   ],
+   "pv": [
+    120.0,
+    127.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    128.0,
+    77.2
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r876 b f4 dissolve wisp + leaves",
+   "draw": "wisp + leaves above the back row, drifting up, gone by 2300"
+  },
+  "guanyu.coil1_back": {
+   "hero": "guanyu",
+   "r": [
+    691,
+    0,
+    137,
+    287
+   ],
+   "pv": [
+    62.5,
+    29
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    69.6,
+    145.8
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a c1 (back layer: pole passes between back and front)",
+   "draw": "draw order coil_back -> arc -> glaive -> coil_front -> head; same canvas, same pivot for back and front; top of the coil at the collar (tip + 0.3 L), scale 1 (height 0.65 L already baked)",
+   "axis_x": 62.5,
+   "collar_top_y": 29,
+   "head_w_px": 95,
+   "loops": [
+    [
+     62.1,
+     166.3
+    ]
+   ],
+   "axis_runs": [
+    [
+     18,
+     155
+    ],
+    [
+     179,
+     237
+    ],
+    [
+     269,
+     282
+    ]
+   ],
+   "height_px": 287,
+   "layer": "back"
+  },
+  "guanyu.coil1_front": {
+   "hero": "guanyu",
+   "r": [
+    832,
+    0,
+    137,
+    287
+   ],
+   "pv": [
+    62.5,
+    29
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    69.6,
+    145.8
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a c1 (front layer: pole passes between back and front)",
+   "draw": "draw order coil_back -> arc -> glaive -> coil_front -> head; same canvas, same pivot for back and front; top of the coil at the collar (tip + 0.3 L), scale 1 (height 0.65 L already baked)",
+   "axis_x": 62.5,
+   "collar_top_y": 29,
+   "head_w_px": 95,
+   "loops": [
+    [
+     62.1,
+     166.3
+    ]
+   ],
+   "axis_runs": [
+    [
+     18,
+     155
+    ],
+    [
+     179,
+     237
+    ],
+    [
+     269,
+     282
+    ]
+   ],
+   "height_px": 287,
+   "layer": "front"
+  },
+  "guanyu.coil2_back": {
+   "hero": "guanyu",
+   "r": [
+    1159,
+    0,
+    115,
+    275
+   ],
+   "pv": [
+    56.0,
+    65
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    58.4,
+    139.7
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a c2 (back layer: pole passes between back and front)",
+   "draw": "draw order coil_back -> arc -> glaive -> coil_front -> head; same canvas, same pivot for back and front; top of the coil at the collar (tip + 0.3 L), scale 1 (height 0.65 L already baked)",
+   "axis_x": 56.0,
+   "collar_top_y": 65,
+   "head_w_px": 107,
+   "loops": [
+    [
+     55.6,
+     159.5
+    ]
+   ],
+   "axis_runs": [
+    [
+     15,
+     63
+    ],
+    [
+     88,
+     139
+    ],
+    [
+     183,
+     209
+    ],
+    [
+     243,
+     272
+    ]
+   ],
+   "height_px": 275,
+   "layer": "back"
+  },
+  "guanyu.coil2_front": {
+   "hero": "guanyu",
+   "r": [
+    1278,
+    0,
+    115,
+    275
+   ],
+   "pv": [
+    56.0,
+    65
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    58.4,
+    139.7
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a c2 (front layer: pole passes between back and front)",
+   "draw": "draw order coil_back -> arc -> glaive -> coil_front -> head; same canvas, same pivot for back and front; top of the coil at the collar (tip + 0.3 L), scale 1 (height 0.65 L already baked)",
+   "axis_x": 56.0,
+   "collar_top_y": 65,
+   "head_w_px": 107,
+   "loops": [
+    [
+     55.6,
+     159.5
+    ]
+   ],
+   "axis_runs": [
+    [
+     15,
+     63
+    ],
+    [
+     88,
+     139
+    ],
+    [
+     183,
+     209
+    ],
+    [
+     243,
+     272
+    ]
+   ],
+   "height_px": 275,
+   "layer": "front"
+  },
+  "guanyu.slab1": {
+   "hero": "guanyu",
+   "r": [
+    543,
+    452,
+    115,
+    96
+   ],
+   "pv": [
+    57.5,
+    48.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    58.4,
+    48.8
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "chunky stone slab, launch from the crack 0.8 T up and fall; same size on launch and fall"
+  },
+  "guanyu.slab2": {
+   "hero": "guanyu",
+   "r": [
+    662,
+    452,
+    118,
+    93
+   ],
+   "pv": [
+    59.0,
+    46.5
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    59.9,
+    47.2
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "chunky stone slab, launch from the crack 0.8 T up and fall; same size on launch and fall"
+  },
+  "guanyu.slab3": {
+   "hero": "guanyu",
+   "r": [
+    784,
+    452,
+    110,
+    82
+   ],
+   "pv": [
+    55.0,
+    41.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    55.9,
+    41.7
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "chunky stone slab, launch from the crack 0.8 T up and fall; same size on launch and fall"
+  },
+  "guanyu.chip1": {
+   "hero": "guanyu",
+   "r": [
+    913,
+    452,
+    14,
+    10
+   ],
+   "pv": [
+    7.0,
+    5.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    7.1,
+    5.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip2": {
+   "hero": "guanyu",
+   "r": [
+    898,
+    452,
+    11,
+    12
+   ],
+   "pv": [
+    5.5,
+    6.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    5.6,
+    6.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip3": {
+   "hero": "guanyu",
+   "r": [
+    931,
+    452,
+    8,
+    10
+   ],
+   "pv": [
+    4.0,
+    5.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    4.1,
+    5.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip4": {
+   "hero": "guanyu",
+   "r": [
+    956,
+    452,
+    8,
+    8
+   ],
+   "pv": [
+    4.0,
+    4.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    4.1,
+    4.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip5": {
+   "hero": "guanyu",
+   "r": [
+    968,
+    452,
+    12,
+    8
+   ],
+   "pv": [
+    6.0,
+    4.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    6.1,
+    4.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip6": {
+   "hero": "guanyu",
+   "r": [
+    943,
+    452,
+    9,
+    10
+   ],
+   "pv": [
+    4.5,
+    5.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    4.6,
+    5.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip7": {
+   "hero": "guanyu",
+   "r": [
+    984,
+    452,
+    7,
+    8
+   ],
+   "pv": [
+    3.5,
+    4.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    3.6,
+    4.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  },
+  "guanyu.chip8": {
+   "hero": "guanyu",
+   "r": [
+    995,
+    452,
+    6,
+    8
+   ],
+   "pv": [
+    3.0,
+    4.0
+   ],
+   "css_per_px": 0.508,
+   "css": [
+    3.0,
+    4.1
+   ],
+   "mode": "normal",
+   "native_px_per_css": 1.97,
+   "src": "r885 a r2c3 (violet halo dropped, rim eroded 2 px, feather 3; scale 0.5)",
+   "draw": "rubble chip for the debris burst"
+  }
+ },
+ "pending": []
+}
