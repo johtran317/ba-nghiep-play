@@ -17114,10 +17114,11 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
 
  try{var _wh0=wheelSheet;
   wheelSheet=function(){try{var w=whS(),k=w.t,K=SKL[k],g=K.g,I=SKIT[g],HS=heroes(),ks=skinsOf(g);
+   var KIT_D=false;try{KIT_D=typeof U3B!=='undefined'&&U3B.on()}catch(e){}
    var h='<h3>Vòng Quay Thiên Mệnh</h3><div class="dssub">Sự kiện giới hạn · ngoại trang, binh khí và tọa kỵ của danh tướng chỉ có ở đây.</div>';
    /* hero picker */
-   h+='<div class="dswp" role="tablist">'+HS.map(function(id){var on=id===g,K0=SKL[skinsOf(id)[0]];
-     return'<button class="dswpi'+(on?' on':'')+'" role="tab" aria-selected="'+on+'" data-a="whhero" data-v="'+id+'" style="--k1:'+K0.c1+'"><span class="dswpa">'+heroArt(id,'card')+'</span><span class="dswpn">'+GENS[id].n+'</span></button>'}).join('')+'</div>';
+   h+='<div class="dswpw"><div class="dswp" role="tablist" onscroll="this.parentNode.classList.toggle(&quot;end&quot;,this.scrollLeft+this.clientWidth>=this.scrollWidth-6)">'+HS.map(function(id){var on=id===g,K0=SKL[skinsOf(id)[0]];
+     return'<button class="dswpi'+(on?' on':'')+'" role="tab" aria-selected="'+on+'" data-a="whhero" data-v="'+id+'" style="--k1:'+K0.c1+'"><span class="dswpa">'+heroArt(id,'card')+'</span><span class="dswpn">'+GENS[id].n+'</span></button>'}).join('')+'</div><span class="dswch" aria-hidden="true">›</span></div>';
    /* target card */
    h+='<div class="dswtg" style="--k1:'+K.c1+'"><span class="dswta">'+art(k)+'</span><div class="dswtb"><span class="dswtl">Mảnh rơi cho</span><b>'+K.n+'</b><span class="dswtp">'+K.path+'</span>'+
      (ks.length>1?'<div class="dsseg">'+ks.map(function(x){return'<button class="'+(x===k?'on':'')+'" data-a="whtarget" data-v="'+x+'">'+SKL[x].n+'</button>'}).join('')+'</div>':'')+'</div></div>';
@@ -17143,10 +17144,12 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
    /* result panel */
    if(w.showLast&&w.last){var L=w.lastList||[],KT=SKL[w.lastT||k]||K;
      var tiles=L.map(function(si){var s=WSEG[si],kk=s.k==='res'?'s':s.k,n=s.k==='res'?'30K':s.k==='v'?s.n:'×'+s.n;
-       return'<div class="dswt'+(si===0?' jp':si<=1?' hi':'')+'">'+(kk==='sk'?'<span class="dswg2"><svg viewBox="0 0 24 24" width="34" height="34">'+gem(KT.c1,24)+'</svg></span>':tileIco(kk,KT))+'<b>'+n+'</b></div>'}).join('');
-     h+='<div class="dswres" role="dialog" aria-label="Kết quả quay"><div class="dswrc"><div class="dswrh">Nhận được'+(L.length>1?' · '+L.length+' lượt':'')+'</div>'+
+       var ic0=(kk==='sk'?'<span class="dswg2"><svg viewBox="0 0 24 24" width="34" height="34">'+gem(KT.c1,24)+'</svg></span>':tileIco(kk,KT));
+       return'<div class="dswt'+(si===0?' jp':si<=1?' hi':'')+'">'+(KIT_D?'<span class="dswfr">'+ic0+'</span>':ic0)+'<b>'+n+'</b></div>'}).join('');
+     /* UI batch D row 94: kit window (ribbon "Nhận được", r_tile coins, ×N 12 px, gold primary); "· N lượt" moves to a line under the ribbon */
+     h+='<div class="dswres" role="dialog" aria-label="Kết quả quay"><div class="dswrc'+(KIT_D?' dswk':'')+'">'+(KIT_D?'<div class="t3hd"><span class="t3ttl">Nhận được</span></div>'+(L.length>1?'<div class="dswrh">'+L.length+' lượt</div>':''):'<div class="dswrh">Nhận được'+(L.length>1?' · '+L.length+' lượt':'')+'</div>')+
        (tiles?'<div class="dswtg2'+(L.length>1?' ten':'')+'">'+tiles+'</div>':'')+
-       '<div class="dswsum">'+outTxt(w.last,w.lastT||k)+'</div><button class="btn dsbt pri" data-a="whok">Tiếp tục</button></div></div>'}
+       '<div class="dswsum">'+outTxt(w.last,w.lastT||k)+'</div>'+(KIT_D?U3B.btn('Tiếp tục','whok','','',{kind:'p',wide:1}):'<button class="btn dsbt pri" data-a="whok">Tiếp tục</button>')+'</div></div>'}
    return h}catch(e){if(window.console)console.warn(e);return _wh0()}}}catch(e){}
 
  var S_='html body #sheet ';
@@ -17199,6 +17202,17 @@ function wkLoop(now){WK.raf=0;try{var bt=(typeof BT!=='undefined'&&BT.on),svg=!b
  S_+'.dswt b{font:700 15px/1 var(--ds-fn);color:var(--ds-t)}'+
  S_+'.dswt.hi{border-color:rgba(180,124,240,.7);background:rgba(122,74,184,.22)}'+S_+'.dswt.jp{border-color:#f2cf7c;background:linear-gradient(180deg,rgba(244,211,132,.35),#2d2117);box-shadow:0 0 14px rgba(242,207,124,.45)}'+
  S_+'.dswsum{font-size:12.5px;line-height:1.5;color:#e6d8bf;text-align:center}'+
+ /* UI batch D rows 94 / 65: kit result window, hero strip chevron */
+ S_+'.dswres{background:rgba(8,5,3,.8)}'+S_+'.dswrc.dswk{background:#1e160f;gap:10px;padding:10px 14px 14px;position:relative;z-index:1}'+S_+'.dswrc.dswk .t3hd{position:relative;top:0;margin:0 -4px 0}'+S_+'.dswrc.dswk .t3hd::before,'+S_+'.dswrc.dswk .t3hd::after{display:none}'+
+ S_+'.dswrc.dswk .dswrh{font:600 13px var(--ds-fb);color:#c4b394;margin-top:-4px}'+
+ S_+'.dswrc.dswk .dswtg2{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px}'+S_+'.dswrc.dswk .dswt{flex:0 0 calc((100% - 24px)/5);min-width:0}'+S_+'.dswrc.dswk .dswtg2:not(.ten) .dswt{flex:0 0 72px}'+
+ S_+'.dswrc.dswk .dswt{aspect-ratio:auto;border:0;background:none;box-shadow:none;border-radius:0;justify-content:flex-start;gap:3px}'+
+ S_+'.dswrc.dswk .dswfr{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1;box-sizing:border-box;border:11px solid transparent;border-image:url(art/ui/r_tile_r.webp) 84 fill/11px stretch}'+
+ S_+'.dswrc.dswk .dswt.hi .dswfr{border-image-source:url(art/ui/r_tile_sr.webp)}'+S_+'.dswrc.dswk .dswt.jp .dswfr{border-image-source:url(art/ui/r_tile_ssr.webp)}'+
+ S_+'.dswrc.dswk .dswt .dswx,'+S_+'.dswrc.dswk .dswt .dswg2{width:100%;height:100%;max-width:36px;max-height:36px}'+S_+'.dswrc.dswk .dswtg2:not(.ten) .dswt .dswx,'+S_+'.dswrc.dswk .dswtg2:not(.ten) .dswt .dswg2{max-width:44px;max-height:44px}'+
+ S_+'.dswrc.dswk .dswt b{font:700 12px/1 var(--ds-fb);color:#f6e7c4}'+
+ S_+'.dswrc.dswk .t3P{height:44px;margin:2px 0 0}'+
+ S_+'.dswpw{position:relative}'+S_+'.dswch{position:absolute;right:0;top:2px;width:48px;height:56px;display:flex;align-items:center;justify-content:flex-end;padding-right:5px;background:linear-gradient(90deg,rgba(24,17,11,0),rgba(24,17,11,.92) 55%,rgba(24,17,11,.97));pointer-events:none;font:700 22px/1 var(--ds-fb);color:#e8c35a;text-shadow:0 1px 3px #000}'+S_+'.dswpw.end .dswch{display:none}'+
  S_+'.dswrc .dsbt.pri{width:100%!important;height:52px!important;min-height:52px!important;margin:0!important;border-radius:14px!important;background:linear-gradient(180deg,var(--ds-g1),var(--ds-g2))!important;border:1px solid #f6dc99!important;color:#2a1a0c!important;font:700 17px var(--ds-fd)!important}'+
  '@media (prefers-reduced-motion:reduce){html body #sheet .dswt,html body #sheet .dswres{animation:none}}';
  function addCss(){try{var s=document.getElementById('ds197bcss');if(!s){s=document.createElement('style');s.id='ds197bcss';s.textContent=CSS}document.head.appendChild(s)}catch(e){}}
@@ -18872,7 +18886,7 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
 (function(){try{
  var box=null;
  function body(){var gid=ROTGID,g=S.gens[gid],G=GENS[gid];if(!g||!G)return'';var bs=hBrs(gid),busy=brBusy(gid),c=sw211Cost(),left=Math.max(0,SW211F-sw211().n);
-  var h='<div class="rt226h"><button class="rt226c" data-a="rt226x" aria-label="Quay lại"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b>Đổi binh chủng · '+esc(gid==='lord'&&S.pname?S.pname:G.n)+'</b></div>'+
+  var h='<div class="rt226h"><button class="rt226c" data-a="rt226x" aria-label="Quay lại"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b class="t3ttl">Đổi binh chủng · '+esc(gid==='lord'&&S.pname?S.pname:G.n)+'</b></div>'+
    '<div class="rt226t">Chạm vào hình binh chủng để chọn ô xuất chiến. Hôm nay còn <b>'+left+'</b> lần đổi miễn phí'+(left?'':' · lần này '+c+' vàng')+'.</div>';
   bs.forEach(function(b,i){var on=b===G.br;
    var foot='<div class="sw211 rt244f"><button class="btn alt sm rt244b" data-a="rt244r" data-v="'+i+'">Đổi</button><span class="sm mute">ngẫu nhiên sang binh chủng khác</span>'+
@@ -18882,9 +18896,11 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
    if(!on)card=card.replace('<div class="rth">','<div class="rth rt226p'+(busy?' busy':'')+'" data-a="'+(busy?'rt226b':'setbr')+'" data-v="'+gid+'" data-w="'+b+'" role="button" aria-label="Xuất chiến ô '+(i+1)+'">');
    h+='<div class="rtslot"><div class="rowlbl">Ô '+(i+1)+'</div>'+card+'</div>'});
   return h}
+ /* UI batch B: the plain disc seal (ts300, read as an empty circle) is replaced by the kit tier emblem; no seal when the tier is unknown */
+ function sealFix(p){if(typeof U3B==='undefined'||!U3B.on())return;var g=S.gens[ROTGID],tier=g&&g.tier|0;[].forEach.call(p.querySelectorAll('.rth .sm.mute'),function(m){if(m.querySelector('.u3bts'))return;var sl=U3B.tseal(tier,24);if(sl)m.insertAdjacentHTML('afterbegin',sl)})}
  function render(){if(!box)return;var p=box.querySelector('.rt226in'),t=p?p.scrollTop:0;var h=body();if(!h){close();return}
   if(!p){box.innerHTML='<div class="rt226bg" data-a="rt226x"></div><div class="rt226in" role="dialog" aria-modal="true"></div>';p=box.querySelector('.rt226in')}
-  p.innerHTML=h;p.scrollTop=t}
+  p.innerHTML=h;p.scrollTop=t;try{sealFix(p)}catch(e){}}
  function open(gid){ROTGID=gid;if(!box){box=document.createElement('div');box.id='rt226';document.body.appendChild(box)}render();requestAnimationFrame(function(){if(box)box.classList.add('in')})}
  function close(){if(box){box.remove();box=null}}
  window.rt226Open=open;window.rt226Close=close;
@@ -18910,8 +18926,9 @@ function gdBook(){var G=gdN();return'<h3>Sổ tay chiến trận</h3><div class=
    'background:linear-gradient(180deg,rgba(40,29,20,.97),rgba(24,17,12,.97));border:1px solid rgba(226,178,90,.55);box-shadow:0 18px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,230,170,.12);'+
    'color:var(--ds-t,#f3e6c8);transform:translateY(14px) scale(.97);opacity:0;transition:transform .22s cubic-bezier(.2,.9,.3,1.2),opacity .18s}'+
   '#rt226.in .rt226bg{opacity:1}#rt226.in .rt226in{transform:none;opacity:1}'+
-  '#rt226 .rt226h{display:flex;align-items:center;gap:10px;margin:0 0 4px}#rt226 .rt226h b{flex:1;min-width:0;font:700 19px/1.2 var(--ds-fd,Philosopher,Times New Roman,Georgia,serif);color:#fff2cf;text-wrap:balance}'+
-  '#rt226 .rt226c{flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:10px;border:1px solid rgba(226,178,90,.45);background:rgba(0,0,0,.25);color:#f6dfa6;font-size:16px;cursor:pointer}'+
+  '#rt226 .rt226h{position:relative;display:flex;align-items:center;justify-content:center;height:46px;margin:0 0 8px}#rt226 .rt226h .t3ttl{min-width:0;max-width:calc(100% - 100px);border-width:0 22px;border-image-width:0 22px;box-sizing:border-box;font-size:19px}'+
+    '#rt226 .rth .ts300,#rt226 .rth canvas.rt245+.sp .ts300{display:none!important}#rt226 .rth .u3bts{display:inline-block;vertical-align:middle;margin-right:4px}'+
+  '#rt226 .rt226c{position:absolute;left:4px;top:2px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:0;background:var(--t3-round_bronze_normal) center/contain no-repeat;color:#f3dfb0;cursor:pointer}'+
   '#rt226 .rt226t{font-size:12.5px;line-height:1.45;color:var(--ds-mu,#b9a98a);margin:0 0 6px}#rt226 .rt226t b{color:#fff}'+
   '#rt226 .rtslot{margin-top:8px}#rt226 .rowlbl{text-align:center;font-size:12px;color:var(--ds-mu,#b9a98a);margin-bottom:4px}'+
   '#rt226 .rt226p{cursor:pointer;border-radius:12px;margin:-4px;padding:4px;transition:background .15s}'+
@@ -28668,18 +28685,31 @@ function w4Apply(){try{var m=$('#modal'),sh=$('#sheet');if(!m||!sh||m.hidden)ret
  W4.kind=k;W4.locked=w4IsLocked(k,t,sh)?1:0;m.classList.toggle('w4lk',!!W4.locked);
  /* S with its own buttons has no ✕ (art: two buttons, Hủy + B1) */
  var own=k==='S'&&sh.querySelector('.sbar button,.row button,.btn:not(.snb)');sh.classList.toggle('w4own',!!own);
+ /* UI batch A (A3): a sheet still on the old header (no U3B / t3 root of its own) gets the U3B shell look: ribbon plaque title, round bronze ‹ / ✕ (css below, class w4shell) */
+ var sk=0;try{sk=!!(WIN284&&typeof U3B!=='undefined'&&U3B.on()&&!sh.querySelector('.t3r,.t3hpr,.t3ia,.t3hd,.ftu2w,.rs9,.wcbox,.nm221,button.hero')&&sh.querySelector(':scope>.snav'))}catch(e){}
+ sh.classList.toggle('w4shell',!!sk);if(sk){w4Fit(sh);[100,350].forEach(function(ms){setTimeout(function(){w4Fit($('#sheet'))},ms)})}
  W4.log[t]=k||'full'}catch(e){}}
+/* the ribbon title never clips: step the font down until it fits (it363 does the same for .t3ttl) */
+function w4Fit(sh){try{var t=sh.querySelector(':scope>.snav>h3');if(!t)return;var z=[19,18,17,16,15,14,13,12],i;for(i=0;i<z.length;i++){t.style.setProperty('font-size',z[i]+'px','important');if(t.scrollWidth<=t.clientWidth)break}}catch(e){}}
+/* the header is rebuilt by later hooks (ds194 moves the title in, shPost redraws): refit after any change in the sheet header, once per frame */
+try{var w4fq=0,w4mo=new MutationObserver(function(){if(w4fq)return;w4fq=1;requestAnimationFrame(function(){w4fq=0;try{var sh=document.getElementById('sheet'),h=sh&&sh.classList.contains('w4shell')&&sh.querySelector(':scope>.snav>h3');if(h&&!h.style.fontSize)w4Fit(sh)}catch(e){}})});
+ var w4m=document.getElementById('modal');if(w4m)w4mo.observe(w4m,{childList:true,subtree:true})}catch(e){}
 /* ---- 2. the header: one exit control ---- */
-shNav=function(){var p=SHSTK.length?SHSTK[SHSTK.length-1]:null,o=SHSTK.length>=2?SHSTK[0]:null;
- /* task B deep link (flow301n FL.deep): one B3 'Về {tab}' that closes the stack on the tab it started on; else A's 'Về {first sheet}' from depth 3 */
- var tn=null;try{tn=(p&&FL.deep&&FL.origin)?({city:'Thành',gen:'Tướng',camp:'Chinh chiến',world:'Thiên hạ',boss:'Thảo Phạt'})[FL.origin]:null}catch(e){}
+shNav=function(){var p=SHSTK.length?SHSTK[SHSTK.length-1]:null,d=Math.min(SHSTK.length,2);
+ /* UI batch A (art ui-audit-grade §2 A1): the header holds only ‹ (left), title (centre), ✕ (right); the old "Về {sheet}" pill (.w4org) is gone, it sat on the title.
+    Depth: d0 = root (✕ only), d1 = pushed (‹ only), d2 = third window or deeper (‹ and ✕ that closes all). The shell fallback CSS (w4shell) reads these classes. */
  if(!WIN284)return'<div class="snav"><button class="snb" data-a="'+(p?'sback':'close')+'"><span>‹</span><b>Trở về</b>'+(p?'<em>'+esc(p.key).slice(0,22)+'</em>':'')+'</button>'+(p?'<button class="snh" data-a="close">Đóng tất cả</button>':'<span></span>')+'</div>';
- return'<div class="snav"><button class="snb" data-a="'+(p?'sback':'close')+'" aria-label="Trở về"><span>‹</span><b>Trở về</b>'+(p?'<em>'+esc(p.key).slice(0,22)+'</em>':'')+'</button>'+
-  (tn?'<button class="w4org" data-b="B3" data-a="florig">Về '+tn+'</button>':o?'<button class="w4org" data-b="B3" data-a="w4org">Về '+esc(o.key.length>22?o.key.slice(0,21)+'…':o.key)+'</button>':'')+
-  '<button class="w4x'+(p?' pushed':'')+'" data-b="B5" data-a="'+(p?'sback':'close')+'" aria-label="Đóng">✕</button></div>'}
+ return'<div class="snav w4d'+d+'"><button class="snb" data-a="'+(p?'sback':'close')+'" aria-label="Trở về"><span>‹</span><b>Trở về</b>'+(p?'<em>'+esc(p.key).slice(0,22)+'</em>':'')+'</button>'+
+  '<button class="w4x'+(p?' pushed':'')+'" data-b="B5" data-a="'+(d>=2?'close':(p?'sback':'close'))+'" aria-label="Đóng">✕</button></div>'}
 /* ---- 3. open / close hooks ---- */
 var _w4Open=openSheet;
-openSheet=function(fn,keep){var m=$('#modal');if(m)m.classList.remove('w4out');var r=_w4Open.apply(this,arguments);w4Apply();w4Tag();return r};
+var W4POP={'Tính năng mới':1,'Xác nhận':1,'Thiếu quân':1};
+openSheet=function(fn,keep){var m=$('#modal');if(m)m.classList.remove('w4out');
+ var pk=null;try{if(m&&!m.hidden&&SHCUR)pk=SHCUR.key}catch(e){}
+ var r=_w4Open.apply(this,arguments);
+ /* UI batch A (A2): a popup (Tính năng mới, Xác nhận, Thiếu quân) is never kept on the back stack: a sheet opened from it starts from the stack it had before the popup */
+ try{if(pk&&W4POP[pk]&&SHSTK.length&&SHSTK[SHSTK.length-1].key===pk)SHSTK.pop();if(SHSTK.length&&W4POP[SHSTK[SHSTK.length-1].key])SHSTK.pop()}catch(e){}
+ w4Apply();w4Tag();return r};
 var _w4Ref=refresh;
 refresh=function(){var r=_w4Ref.apply(this,arguments);try{w4Apply();w4Tag()}catch(e){}return r};
 function w4Ghost(){try{var m=$('#modal');if(!WIN284||!m||m.hidden||!m.classList.contains('w4')||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
@@ -28763,6 +28793,25 @@ var _w4Main=renderMain;renderMain=function(){var r=_w4Main.apply(this,arguments)
  'html body #modal:not(.w4)>#sheet>.snav:has(.w4x:not(.pushed)) .snb{display:none!important}'+
  'html body #sheet>.snav .w4org{flex:none;margin-left:auto;background:none!important;border:0!important;box-shadow:none!important;color:#f2cf7c!important;font:600 13px var(--fb)!important;height:32px!important;padding:0 8px!important;min-height:0!important}'+
  'html body #sheet>.snav .snh{display:none!important}'+
+ /* UI batch A (A3) shell fallback: old-header sheets look like the U3B shell. ribbon = .t3ttl, round bronze coin = .t3rb (art vars --t3-hud_title / --t3-round_bronze_normal) */
+ 'html body #sheet#sheet#sheet.w4shell>.snav{position:relative!important;display:flex!important;justify-content:center!important;align-items:center!important;min-height:50px!important;padding:4px 46px!important;gap:0!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav>h3{flex:0 1 auto!important;min-width:190px;max-width:100%!important;height:42px!important;margin:0!important;padding:0 4px!important;box-sizing:border-box!important;display:block!important;border:0 solid transparent!important;border-width:0 16px!important;border-image:var(--t3-hud_title) 0 51 fill/0 16px!important;border-radius:0!important;background:none!important;'+
+  'font:700 19px/42px "Philosopher",Times New Roman,Georgia,serif!important;color:#fff3d0!important;text-align:center!important;text-shadow:0 2px 2px #3a0a00,0 0 8px rgba(0,0,0,.4)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;letter-spacing:0!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .snb,html body #sheet#sheet#sheet.w4shell>.snav .w4x{position:absolute!important;top:3px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;margin:0!important;padding:0!important;border:0!important;border-image:none!important;border-radius:0!important;box-shadow:none!important;'+
+  'background:var(--t3-round_bronze_normal) center/contain no-repeat!important;color:transparent!important;font-size:0!important;text-shadow:none!important;align-items:center;justify-content:center;cursor:pointer}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .snb{left:2px!important;right:auto!important}html body #sheet#sheet#sheet.w4shell>.snav .w4x{right:2px!important;left:auto!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .snb *{display:none!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .snb::after,html body #sheet#sheet#sheet.w4shell>.snav .w4x::after{content:"‹";position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important;display:flex;align-items:center;justify-content:center;font:700 26px/1 var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif)!important;color:#f3dfb0;text-shadow:0 1px 2px #000;padding-bottom:3px;box-sizing:border-box}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .w4x::after{content:"✕";font-size:18px!important;padding-bottom:0}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .snb::before,html body #sheet#sheet#sheet.w4shell>.snav .w4x::before{display:none!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav.w4d0 .snb{display:none!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav.w4d1 .w4x{display:none!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav.w4d1 .snb,html body #sheet#sheet#sheet.w4shell>.snav.w4d2 .snb,html body #sheet#sheet#sheet.w4shell>.snav.w4d2 .w4x{display:flex!important}'+
+ 'html body #sheet#sheet#sheet.w4shell.w4own>.snav .snb,html body #sheet#sheet#sheet.w4shell.w4own>.snav .w4x{display:none!important}'+
+ 'html body #sheet#sheet#sheet.w4shell>.snav .snh{display:none!important}'+
+ 'html body #modal.w4S #sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet .sbar:has(>.btn:nth-child(2)){grid-template-columns:minmax(0,1fr) minmax(0,2fr)!important}'+
+ /* A4 confirm buttons: equal width, label wraps to 2 lines instead of being cut */
+ 'html body #modal.w4S>#sheet .sbar .btn,html body #modal.w4S>#sheet .sbar .btn.alt{flex:1 1 0!important;min-width:0!important;min-height:44px!important;height:auto!important;white-space:normal!important;overflow-wrap:anywhere;line-height:1.15!important;padding-top:4px!important;padding-bottom:4px!important}'+
  /* S window: one B1 and one B2 side by side, no sticky fade */
  'html body #modal.w4>#sheet .sbar{bottom:-12px!important;margin-bottom:-12px!important;padding-bottom:12px!important}'+
  'html body #modal.w4S>#sheet .sbar{position:static!important;margin-top:12px!important;padding:0!important;background:none!important;display:flex;gap:8px}'+
@@ -29326,8 +29375,8 @@ function pzMaskFog(h,mi,si,row){var fg=pzFogInfo(row);try{var en=buildEnemy(mi,s
   S_+'.tdi .btn.tdb:not([disabled])'+X+'{box-sizing:border-box!important;width:100%!important;margin:0!important;min-height:44px!important;background:linear-gradient(180deg,#f6dc99,#c9993f)!important;border:1px solid #f6dc99!important;border-image:none!important;border-radius:12px!important;box-shadow:0 0 0 1px rgba(0,0,0,.35)!important;color:#3a2208!important;text-shadow:none!important;font-weight:700!important}',
   S_+'.tdi .btn.tdb:not([disabled]) *'+X+'{color:#3a2208!important;text-shadow:none!important}',
   /* x10 ribbon */
-  S_+'.dswbt'+X+'{position:relative;overflow:visible}',
-  S_+'.r291'+X+'{position:absolute;right:25%;top:-11px;transform:translateX(50%);z-index:2;pointer-events:none;white-space:nowrap;padding:2px 10px;border-radius:10px;background:#2d2117;border:1px solid #e2b25a;color:#ffe9b8;font:700 12px/16px var(--fb,Barlow,sans-serif);box-shadow:0 2px 6px rgba(0,0,0,.5)}'
+  S_+'.dswbt'+X+'{position:relative;overflow:visible;margin-top:30px!important}',   /* UI batch D row 65 S3: the tag clears the Quay x10 rim by >= 4 px */
+  S_+'.r291'+X+'{position:absolute;right:25%;top:-26px;transform:translateX(50%);z-index:2;pointer-events:none;white-space:nowrap;padding:2px 10px;border-radius:10px;background:#2d2117;border:1px solid #e2b25a;color:#ffe9b8;font:700 12px/16px var(--fb,Barlow,sans-serif);box-shadow:0 2px 6px rgba(0,0,0,.5)}'
  ].join('\n');document.head.appendChild(st);
 
  if(typeof wheelSheet==='function'){var _w=wheelSheet;wheelSheet=function(){var h=_w.apply(this,arguments);try{
@@ -38022,8 +38071,8 @@ function u354Card(h,i){var m=h.match(/<div class="card"[\s\S]*?<\/div>(?=<div cl
   /* generic popup: card_frame + banner title + btn_primary_* */
   c+=P+'.u6pop{}'+'html.u354k6 body #modal #sheet#sheet#sheet#sheet.u6pop{'+bix('card_frame',1)+'}'+
    'html.u354k6 body #modal #sheet#sheet#sheet#sheet.u6pop .snav h3{'+bix('banner',1)+';border-width:0 '+(K.banner&&K.banner.slice?(K.banner.slice[0]/3*52/(K.banner.r[3]/3)).toFixed(2):18)+'px!important;border-image-width:0 '+(K.banner&&K.banner.slice?(K.banner.slice[0]/3*52/(K.banner.r[3]/3)).toFixed(2):18)+'px!important;height:52px!important;min-height:52px!important;line-height:1.1!important;padding:0 6px 6px!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;color:#fff1cf!important;text-shadow:0 1px 2px #000,0 0 5px rgba(0,0,0,.8)!important;white-space:nowrap;align-self:center}'+
-   P+'.u6pb:not(.alt){'+bix('btn_primary_normal',1)+';min-height:46px!important;color:#3a1c06!important;text-shadow:0 1px 0 rgba(255,240,200,.6)!important;font-weight:800!important;font-size:14px!important;line-height:1.2!important;white-space:nowrap!important;letter-spacing:0!important}'+
-   P+'.u6pb.alt{font-size:13px!important;white-space:nowrap!important;padding-left:8px!important;padding-right:8px!important}'+
+   P+'.u6pb:not(.alt){'+bix('btn_primary_normal',1)+';min-height:46px!important;color:#3a1c06!important;text-shadow:0 1px 0 rgba(255,240,200,.6)!important;font-weight:800!important;font-size:14px!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere!important;letter-spacing:0!important}'+
+   P+'.u6pb.alt{font-size:13px!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.15!important;padding-left:8px!important;padding-right:8px!important}'+
    P+'.u6pb:not(.alt):active{'+bix('btn_primary_pressed',1)+';min-height:46px!important}'+
    P+'.u6pb:not(.alt)[disabled]{'+bix('btn_primary_disabled',1)+';min-height:46px!important;color:#5d5248!important}';
   if(!st2){st2=D.createElement('style');st2.id='u354c6css2';D.head.appendChild(st2)}st2.textContent=c}
@@ -40810,13 +40859,15 @@ var IT363=1;
  function g45Ord(o){var s=D.createElement('div');s.innerHTML=o;
   var cs=s.querySelectorAll('.dsg>div'),rule=(s.querySelector('.dsinf .sm.mute')||{}).textContent||'',cap=(s.querySelector('.dsl')||{}).textContent||'',bt=s.querySelector('.sbar .btn'),sec=(s.querySelector('.sec')||{}).textContent||'',rows=s.querySelectorAll('.ord215l .card');
   if(!cs.length||!bt||!rows.length||!G45.g45_hq)return o;
-  var h='<div class="t3r t3-ord g45o"><button class="t3rb r" data-a="t3x" aria-label="Đóng">✕</button><div class="g45bn"><h3>Mua Quân lệnh</h3><div class="g45t" aria-hidden="true">Mua Quân lệnh</div></div>';
+  var k=false;try{k=typeof U3B!=='undefined'&&U3B.on()}catch(e){}   /* UI batch D row 55: ribbon plaque + round coin from the kit shell; the painted banner stays under it, its caption is dropped (the ribbon says it) */
+  var h=k?'<div class="g45bn"></div>':'<div class="t3r t3-ord g45o"><button class="t3rb r" data-a="t3x" aria-label="Đóng">✕</button><div class="g45bn"><h3>Mua Quân lệnh</h3><div class="g45t" aria-hidden="true">Mua Quân lệnh</div></div>';
   h+='<div class="g45st" role="group" aria-label="'+E(cap)+'">'+[].map.call(cs,function(d,i){return(i?'<i class="dv"></i>':'')+'<div><span>'+d.querySelector('span').innerHTML+'</span><b>'+d.querySelector('b').innerHTML+'</b></div>'}).join('')+'</div>';
   h+='<p class="g45rl">'+E(rule)+'</p><div class="g45h">'+E(sec)+'</div><div class="g45lad">'+[].map.call(rows,function(c){var nx=c.querySelector('.ok');
    return'<div class="g45r'+(nx?' on':'')+'"><span>'+E(c.querySelector('b').textContent)+(nx?'<small>'+E(nx.textContent.trim())+'</small>':'')+'</span><span class="g45c">'+c.querySelector('.ord215p').innerHTML+'</span></div>'}).join('')+'</div>';
   var dis=bt.disabled;
-  h+='<div class="g45bar"><button class="'+(dis?'t3D':'t3P')+'" data-a="ord215b"'+(dis?' disabled aria-disabled="true"':'')+'><span>'+E(bt.textContent)+'</span></button></div></div>';
-  return h}
+  h+='<div class="g45bar"><button class="'+(dis?'t3D':'t3P')+'" data-a="ord215b"'+(dis?' disabled aria-disabled="true"':'')+'><span>'+E(bt.textContent)+'</span></button></div>';
+  if(k)return U3B.shell('Mua Quân lệnh',h).replace('class="t3r u3b"','class="t3r u3b t3-ord g45o"');
+  return h+'</div>'}
  /* result: swaps the .rs9hd header for the hanging banner (stars in the V), puts the rewards on the gold / the advice on the silver plate. Markup only; every data-a and text is kept. */
  function g45Res(h){if(!G45.g45_bv||!G45.g45_bd||!G45.g45_pv||!G45.g45_pd||typeof h!=='string')return h;
   var box=D.createElement('div');box.innerHTML=h;var rs=box.querySelector('.rs9');if(!rs||/\bsw254\b/.test(rs.className))return h;
@@ -41037,7 +41088,7 @@ var IT363=1;
  var G=function(n){return'var(--t3-'+n+')'},GB='html body #modal.rs9fl>#sheet.sheet:has(.g45bn)';
  var ST2=D.createElement('style');ST2.id='it363g45css';ST2.textContent=[
  /* Mua Quân lệnh */
- '.g45o .g45bn{position:relative;height:98px;margin:0 0 10px;border-radius:8px;background:'+G('g45_hq')+' center/100% 100% no-repeat}',
+ '.g45o .g45bn{position:relative;height:98px;margin:0 0 10px;border-radius:8px;background:'+G('g45_hq')+' right center/auto 175% no-repeat}',
  '.g45o .g45bn .g45t{position:absolute;left:5%;top:0;bottom:0;width:36%;margin:0;padding:0;display:flex;align-items:center;justify-content:center;text-align:center;font:700 18px/1.15 '+FD+';color:#fff3d0;text-shadow:0 2px 2px #3a0a00,0 0 8px rgba(0,0,0,.5)}',
  'html body #modal.t3m #sheet.t3 .g45o>.t3rb.r,html body #modal.t3m #sheet.t3 .t3r.g45o>.t3rb.r{position:absolute;top:-4px;right:-4px;z-index:5}',
  '.g45st{display:grid;grid-template-columns:1fr 8px 1fr 8px 1fr;align-items:center;padding:10px 8px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(226,178,90,.25)}',
@@ -41187,6 +41238,8 @@ var hhubSheet=null;
   var ss='';for(var i=0;i<5;i++)ss+=i===hs&&!q.max?'<span class="hbnx">'+x.star(0,44)+'<span class="hbhf">'+x.star(1,44)+'</span><i>▲</i></span>':x.star(i<hs,44);
   var row=s.querySelector('.t3strw'),go=row&&row.querySelector('[data-a="h9_star"],[data-a="h9awc"]'),src=row&&row.querySelector('[data-a="h9src"]');if(row)row.remove();
   var o='<div class="hbss">'+ss+'</div>'+s.innerHTML,a1='',a2='';
+  /* UI batch B (row 74): the awakened state is no longer one bare line: plate + the two unlocked effects as rows */
+  try{if(hs>=5&&S.gens[gid]&&S.gens[gid].aw&&typeof U3B!=='undefined'&&U3B.on())o+=U3B.plate('Đã Thức Tỉnh')+U3B.list(U3B.row({icon:U3B.ico('form','#e8c35a'),title:'Nội tại thứ hai',sub:'Đã mở khóa',right:U3B.pill('Đang dùng','ok')})+U3B.row({icon:U3B.ico('power','#e8c35a'),title:'Mạnh kỹ năng',sub:'Đã tăng sức mạnh kỹ năng',right:U3B.pill('Đang dùng','ok')}))}catch(e){}
   if(go&&go.classList.contains('t3P')){a1=go.outerHTML;a2=src?src.outerHTML:''}
   else{var why=tx(go);try{if(!q.ok&&q.why==='Thiếu mảnh'&&q.frag)why='Thiếu '+fmt(q.frag-(q.have|0))+' mảnh';else if(!q.ok&&q.why&&!q.max)why=q.why}catch(e){}
    a1=go?'<button class="t3D" disabled aria-disabled="true" data-a="'+go.getAttribute('data-a')+'" data-v="'+E(gid)+'"><span>'+E(why)+'</span></button>':'';
@@ -41198,7 +41251,7 @@ var hhubSheet=null;
   var hx=c.querySelector('.t3hex');if(hx){var hw=D.createElement('span');hw.className='hbhx';hx.parentNode.insertBefore(hw,hx);hw.appendChild(hx)}
   var p=c.querySelector('.t3skx p');if(p){var m=/^[^(]*?\(\s*(\d+)\s*sĩ khí\s*\)\s*/i.exec(p.textContent);if(m){p.textContent=p.textContent.slice(m[0].length);var h=c.querySelector('.t3skh');if(h)h.insertAdjacentHTML('afterend','<span class="hbmo">'+x.ic('troop_drum',16)+m[1]+' sĩ khí</span>')}}
   if(p&&!p.children.length)p.innerHTML=skHL(p.textContent,1);
-  return'<div class="t3ia hbsw">'+c.outerHTML+'</div><div class="hbhint">Chạm ‹ để quay lại</div>'}
+  return'<div class="t3ia hbsw">'+c.outerHTML+'</div><div class="hbhint"></div>'}
  function wTroop(gid,Sx){var x=X(),s=Sx.troop;if(!s)return'';var ti=s.querySelector('img.ti300'),b=s.querySelector('[data-a="t8pn"]');if(ti){ti=ti.cloneNode(true);ti.setAttribute('width','72');ti.setAttribute('height','72')}
   var o='<div class="hbtr"><span class="hbtc">'+(ti?oh(ti):tIco(gid,72))+'</span><b class="hbtn">'+E(tx(s.querySelector('.t3gn')))+'</b><span class="hbm">'+E(tx(s.querySelector('.t3tx .t3m')))+'</span>'+(b?'<span class="hbm s">Bậc dùng chung cho cả hai ô</span>':'')+'</div>';
   return o+(b?'<div class="hbact">'+x.P('t8pn',E(b.getAttribute('data-v')||gid),null,x.k('ico_troopswap',24)+'Đổi binh chủng')+'</div>':'')}
@@ -41216,7 +41269,7 @@ var hhubSheet=null;
   return m?{fx:m[1],pre:m[2].charAt(0).toUpperCase()+m[2].slice(1)}:{fx:fx,pre:''}}
  function boiBtn(r,gid){var b=r.btn;if(!b)return'';var a=b.getAttribute('data-a')||'',v=b.getAttribute('data-v'),dis=b.disabled||b.getAttribute('aria-disabled')==='true'||b.classList.contains('t3dz'),lb=tx(b);
   if(/^Khao quân/.test(r.t)){if(a==='feast'&&!dis)return'<button class="t3P sm hbrb" data-a="feast" data-v="'+E(v||gid)+'"><span>'+E(lb||'Khao')+'</span></button>';
-   var why=b.getAttribute('data-w')||lb;return'<button class="t3S dim hbrb hbwhy" data-a="t3d" data-v="txt" data-w="'+E(why)+'" aria-disabled="true"><span>'+E(why)+'</span></button>'}
+   var why=b.getAttribute('data-w')||lb;if(/chạm trần/i.test(lb)&&typeof U3B!=='undefined'&&U3B.on())return U3B.pill(E(lb),'off');return'<button class="t3S dim hbrb hbwhy" data-a="t3d" data-v="txt" data-w="'+E(why)+'" aria-disabled="true"><span>'+E(why)+'</span></button>'}
   if(a==='t3d')return'<button class="t3S dim hbrb" data-a="t3d" data-v="txt" data-w="'+E(b.getAttribute('data-w')||lb)+'" aria-disabled="true"><span>'+E(lb)+'</span></button>';
   if(dis)return'<button class="t3S dim hbrb" data-a="t3d" data-v="txt" data-w="'+E(r.fx||lb)+'" aria-disabled="true"><span>'+E(lb)+'</span></button>';
   return'<button class="t3S hbrb" data-a="'+E(a)+'"'+(v!=null?' data-v="'+E(v)+'"':'')+'><span>'+E(lb)+'</span></button>'}
@@ -41226,8 +41279,11 @@ var hhubSheet=null;
   var o=main.map(function(r){var f=boiFx(r.fx),off=!r.btn||r.btn.disabled||r.btn.classList.contains('t3dz');
    var meta=(f.pre?'<span class="hbpre">'+E(f.pre)+'</span>':'')+(r.cost?'<span class="hbcs">'+r.cost+'</span>':'');
    return'<div class="hbrw'+(off&&!/^Khao quân/.test(r.t)?' off':'')+'"><span class="hbri">'+boiIco(r.t)+'</span><div class="hbrx"><b>'+E(r.t)+'</b>'+(f.fx?'<span class="hbfx">'+E(f.fx)+'</span>':'')+(meta?'<span class="hbmeta">'+meta+'</span>':'')+'</div><span class="hbrc">'+boiBtn(r,gid)+'</span></div>'}).join('');
-  if(more.length)o+='<div class="hbmore"><span class="hbmh">Thêm</span>'+more.map(function(r){var b=r.btn,on=b&&!b.disabled,a=b&&b.getAttribute('data-a'),v=b&&b.getAttribute('data-v');
-   return'<div class="hbmr'+(on?'':' off')+'"><span class="hbmt"><b>'+E(r.t)+'</b>'+(on?'':(r.fx?'<span> · '+E(r.fx)+'</span>':''))+'</span>'+(on?'<button class="hbtl" data-a="'+E(a)+'"'+(v!=null?' data-v="'+E(v)+'"':'')+'>'+E(tx(b))+' ›</button>':'')+'</div>'}).join('')+'</div>';
+  if(more.length){var kit=typeof U3B!=='undefined'&&U3B.on();
+   if(kit)o+=U3B.plate('Thêm')+U3B.list(more.map(function(r){var bt=r.btn,on=bt&&!bt.disabled,a=bt&&bt.getAttribute('data-a'),v=bt&&bt.getAttribute('data-v');
+    return U3B.row({icon:U3B.coin(boiIco(r.t),'#c8a45a'),title:E(r.t),sub:on?(r.fx?E(r.fx):''):(r.fx?E(r.fx):''),state:on?'':'lk',right:on?U3B.btn(E(tx(bt))+' ›',a,v):''})}).join(''));
+   else o+='<div class="hbmore"><span class="hbmh">Thêm</span>'+more.map(function(r){var b=r.btn,on=b&&!b.disabled,a=b&&b.getAttribute('data-a'),v=b&&b.getAttribute('data-v');
+   return'<div class="hbmr'+(on?'':' off')+'"><span class="hbmt"><b>'+E(r.t)+'</b>'+(on?'':(r.fx?'<span> · '+E(r.fx)+'</span>':''))+'</span>'+(on?'<button class="hbtl" data-a="'+E(a)+'"'+(v!=null?' data-v="'+E(v)+'"':'')+'>'+E(tx(b))+' ›</button>':'')+'</div>'}).join('')+'</div>'}
   return'<div class="hbbo">'+o+'</div>'}
  /* row icons the kit already has (art can swap them): Luyện tập drum, Chuyển sinh hourglass, Tẩy luyện shield, Truyền công bamboo scroll */
  function boiIco(t){var x=X();return /^Khao quân/.test(t)?x.ic('grain',34):/^Rèn lại/.test(t)?x.k('ico_reforge',36,36):/^Luyện tập/.test(t)?x.ic('troop_drum',34):/^Chuyển sinh/.test(t)?x.ic('hourglass',34):/Tẩy luyện/.test(t)?x.ic('troop_shield',34):/^Truyền công/.test(t)?x.ic('bamboo_bundle',34):''}
@@ -41248,9 +41304,9 @@ var hhubSheet=null;
   return'<div class="hbdy">'+o+'</div>'}
  function win(id,gid,Sx,A){var b=id==='star'?wStar(gid,Sx):id==='skill'?wSkill(gid,Sx,A):id==='troop'?wTroop(gid,Sx):id==='gear'?wGear(gid,Sx):id==='boi'?wBoi(gid,Sx):id==='duyen'?wDuyen(gid):'';
   if(!b){try{b=emptyState({title:'Chưa có gì ở đây',line:'Mục này mở khi tướng tiến bộ thêm.'})}catch(e){}}
-  var t=TT[id]||'';if(id==='star'){try{var st=Sx.star&&tx(Sx.star.querySelector('.t3lb'));if(st&&st!=='Sao')t=st}catch(e){}}
+  var t=TT[id]||'';if(id==='star'){try{var st=Sx.star&&tx(Sx.star.querySelector('.t3lb'));if(st&&st!=='Sao')t=st;if(h9Hs(gid)>=5)t='Thức Tỉnh'}catch(e){}}
   var an=HW.anim;HW.anim=0;
-  return'<div class="hbw'+(an?' in':'')+'" data-hbw="'+id+'"><div class="hbbg" data-a="hubb" aria-hidden="true"></div><div class="hbwin" role="dialog" aria-modal="true" aria-label="'+E(t)+'"><div class="hbwh"><button class="hbbk" data-a="hubb" aria-label="Quay lại">‹</button><span class="hbwt">'+E(t)+'</span></div><div class="hbwb hb-'+id+'">'+b+'</div></div></div>'}
+  return'<div class="hbw'+(an?' in':'')+'" data-hbw="'+id+'"><div class="hbbg" data-a="hubb" aria-hidden="true"></div><div class="hbwin" role="dialog" aria-modal="true" aria-label="'+E(t)+'"><div class="hbwh"><button class="hbbk" data-a="hubb" aria-label="Quay lại">‹</button><span class="hbwt t3ttl">'+E(t)+'</span></div><div class="hbwb hb-'+id+'">'+b+'</div></div></div>'}
  hhubSheet=function(h,gid){var x=X();if(!x||!S.gens[gid])return x?x.hero(h,gid):h;
   if(HW.gid!==gid){HW.gid=gid;HW.w=null;HW.res=''}
   var r=build(h,gid);if(!r)return x.hero(h,gid);
@@ -41323,9 +41379,10 @@ var hhubSheet=null;
   '.hbw.in .hbwin{animation:hbIn .16s ease-out}.hbw.in .hbbg{animation:hbFd .16s ease-out}',
   '@keyframes hbIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes hbFd{from{opacity:0}to{opacity:1}}',
   '@media (prefers-reduced-motion:reduce){.hbw.in .hbwin,.hbw.in .hbbg{animation:none}}',
-  '.hbwh{position:relative;display:flex;align-items:center;justify-content:center;min-height:44px;margin:0 0 10px;padding:0 48px;border-bottom:1px solid rgba(226,178,90,.22)}',
-  M+' .hbwh .hbbk{position:absolute;left:-4px;top:0;width:42px;height:42px;min-height:0;padding:0;border-radius:50%;border:2px solid '+BR+';background:#3a2a18;color:#f3dfb0;font:700 24px/1 '+BF+';box-shadow:0 2px 6px rgba(0,0,0,.6);cursor:pointer}',
-  '.hbwt{font:700 19px/1.2 '+BF+';color:#f6e7c4;text-align:center}',
+  '.hbwh{position:relative;display:flex;align-items:center;justify-content:center;height:46px;margin:0 0 10px;padding:0}',
+  M+' .hbwh .hbbk{position:absolute;left:0;top:2px;width:42px;height:42px;min-height:0;padding:0;border:0;border-radius:0;background:var(--t3-round_bronze_normal) center/contain no-repeat;color:#f3dfb0;font:700 24px/1 '+BF+';text-shadow:0 1px 2px #000;box-shadow:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding-bottom:3px;box-sizing:border-box}',
+  /* UI batch B: the window title is the kit ribbon plaque; its tips stay >= 6 px from the ‹ coin (42 px coin + 6 px gap on each side), the font steps down to 12 px in uib303.js */
+  '.hbwh .hbwt.t3ttl{min-width:0;max-width:calc(100% - 100px);border-width:0 22px;border-image-width:0 22px;box-sizing:border-box}',
   '.hbwb{font:500 14px/1.4 '+BF+';color:#e9dfc8}.hbm{font:500 14px/1.35 '+BF+';color:#c4b394}.hbm.s{font-size:13px}',
   M+' .hbact{display:flex;justify-content:center;gap:8px;margin:16px 0 0}'+M+' .hbact.b{margin-top:10px}',
   M+' .hbact .t3P,'+M+' .hbact .t3D{flex:none;width:min(260px,100%)}'+M+' .hbact.b .t3S{flex:none;min-width:150px}',
@@ -41338,9 +41395,9 @@ var hhubSheet=null;
   M+' .hb-skill .t3coin{width:64px;height:64px}'+M+' .hb-skill .t3skr{gap:14px}'+M+' .hb-skill .hsk{font-size:14px;line-height:1.5}',
   '.hbmo{display:inline-flex;align-items:center;gap:4px;margin:6px 0 2px;height:24px;padding:0 9px;border-radius:12px;background:#3a2a18;border:1px solid '+BR+';font:600 13px/1 '+BF+';color:#f3dfb0}',
   '.hbsw .t3skx{display:flex;flex-direction:column;align-items:flex-start}.hbsw .t3skx p{margin-top:6px}.hbsw .t3skh b{font-size:18px}.hbsw .t3tfr{display:flex;gap:12px;align-items:flex-start}.hbsw .t3tfr .t3hex{flex:none}',
-  '.hbhint{margin:16px 0 0;text-align:center;font:500 13px/1.3 '+BF+';color:#8f8470}',
+  '.hbhint{display:none}',
   /* Binh chủng */
-  '.hbtr{display:flex;flex-direction:column;align-items:center;gap:6px;margin:6px 0 0;text-align:center}.hbtc{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(#3a2a18 55%,#2a1d12);box-shadow:inset 0 0 0 3px '+BR+',0 2px 6px rgba(0,0,0,.6)}',
+  '.hbtr{display:flex;flex-direction:column;align-items:center;gap:6px;margin:6px 0 0;text-align:center}.hbtc{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(#3a2a18 55%,#2a1d12);box-shadow:inset 0 0 0 3px '+BR+',0 2px 6px rgba(0,0,0,.6)}',
   '.hbtn{font:700 20px/1.2 '+BF+';color:#f6e7c4}',
   /* Trang bị */
   M+' .hb-gear .t3inl.gear{margin-top:4px}'+M+' .hbun .t3ul,'+M+' .hbun [data-a="i9_undo"]{background:none;border:0;color:#e2b25a;font:600 14px '+BF+';text-decoration:underline;min-height:44px}',
@@ -42508,7 +42565,7 @@ var FTU2=1;
  c+=X+'details.ftu2mo>summary{list-style:none;display:flex!important;align-items:center;justify-content:center;width:'+L(280,300)+';max-width:100%;height:44px;min-height:44px!important;margin:0 auto!important;padding:0!important;box-sizing:border-box;border-radius:22px!important;background:linear-gradient(180deg,#2e2014,#1a120b)!important;border:1.5px solid rgba(201,161,79,.55)!important;color:#f2cf7c!important;font:700 14px/1 var(--fb,system-ui,sans-serif)!important;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.5)}';
  c+=X+'details.ftu2mo>summary::-webkit-details-marker{display:none}';
  c+=X+'details.ftu2mo>.stack{margin-top:8px}'+X+'.ftu2ru{font-size:12px!important;line-height:16px!important;color:#CDBB95!important;text-align:center!important;margin:6px 4px 0!important;padding:0!important;background:none!important;border:0!important}';
- c+=X+'.ftu2ft{margin:'+L(8,12)+' 0 0!important;font:500 12px/17px var(--fb,system-ui,sans-serif)!important;text-align:center}';
+ c+=X+'.ftu2ft{margin:'+L(8,12)+' 0 24px!important;font:500 12px/17px var(--fb,system-ui,sans-serif)!important;text-align:center}';
  c+='@media (prefers-reduced-motion:reduce){'+X+'.ftu2ray,'+X+'.ftu2b::after,'+X+'.ftu2bu{animation:none!important}'+X+'.ftu2cr{display:none!important}}';
  var st=D.createElement('style');st.id='ftu2css';st.textContent=c;D.head.appendChild(st);
  kit();
@@ -44068,7 +44125,7 @@ function eBk2(s){var RM={'LAM':'sr','ĐỎ':'ur','TÍM':'ssr'};s.querySelectorAl
  /* 54 order chips */
  C+='#sheet .g45lad{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important}'+
   '#sheet .g45r{height:auto!important;min-height:58px;flex-direction:column;align-items:flex-start!important;justify-content:center!important;gap:6px;padding:8px 10px!important;border-radius:12px!important;position:relative}'+
-  '#sheet .g45r>span:first-child{display:flex;align-items:center;gap:6px;font:700 14px/1.2 var(--fb)}'+
+  '#sheet .g45r>span:first-child{display:flex;align-items:center;gap:6px;font:700 14px/1.2 var(--fb);white-space:nowrap}'+
   '#sheet .g45r .u3io{width:18px;height:18px;color:#e2b25a;fill:currentColor;flex:none}'+
   '#sheet .g45r small{display:block;margin:0 0 0 2px!important;font-size:12px!important}'+
   '#sheet .g45r .g45c{align-self:flex-end;margin-top:-2px}';
@@ -44972,14 +45029,15 @@ var U3HX=(function(){
   M+' .u3he{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:6px 8px 12px;border:1px solid rgba(226,178,90,.3);border-radius:14px;background:rgba(0,0,0,.28)}'+M+' .u3hev{display:block;width:160px;height:160px;max-width:55vw;max-height:55vw;background-size:480px 320px}'+M+' .u3he>b{font:700 15px/1.25 '+BF+';color:#f6e7c4}'+M+' .u3he .u3bs{max-width:300px}'+M+' .u3heb{margin-top:8px;width:100%;max-width:240px}',
   M+' .u3hcard{border-radius:12px;border-left:4px solid var(--kc,#c8a45a);background:linear-gradient(180deg,#1d150d,#120c07);border-top:1.5px solid rgba(190,140,66,.5);border-right:1.5px solid rgba(190,140,66,.5);border-bottom:1.5px solid rgba(190,140,66,.5);padding:2px 0 8px}'+M+' .u3hcard .u3br{border:0;background:none;box-shadow:none;align-items:flex-start}'+M+' .u3hcard .u3bk{margin:0 8px}'+M+' .u3hcard.lk{opacity:.55}'+M+' .u3hcard .u3bx>b{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--kc,#f6e7c4)}',
   M+' .u3hch{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}'+M+' .u3hch button{min-height:44px;padding:0 12px;border-radius:12px;border:2px solid rgba(190,140,66,.5);background:rgba(0,0,0,.35);color:#d8c9a6;font:600 13px/1.2 '+BF+';cursor:pointer}'+M+' .u3hch button.on{background:linear-gradient(180deg,#6b4a22,#3e2a14);border-color:#e8c35a;color:#fff3d0}',
-  M+' .u3hbt{flex:none;display:flex;align-items:center;justify-content:center;width:68px;height:60px;border-radius:10px;background:radial-gradient(circle at 50% 30%,#2e4a58,#16242b);border:2px solid #c8a45a;overflow:hidden;box-sizing:border-box}'+M+' .u3hbt .u354bo,'+M+' .u3hbt svg{display:block;max-width:100%}'+M+' .u3hbt .u354bo{width:100%;min-height:0;padding:0;margin:0;border:0;justify-content:center}'+M+' .u3hbt .u354pc{transform:scale(.95)}'+M+' .u3hbt svg{width:52px;height:30px}',
+  M+' .u3br:has(.u3hbt){gap:6px;padding:8px 4px 8px 6px}'+M+' .u3br:has(.u3hbt) .t3S.sm{min-width:0;padding:0;border-width:0 4px;font-size:12px}'+M+' .u3bl:has(.u3hbt){padding:6px 2px}'+M+' .u3br:has(.u3hbt) .t3S.sm .ic{width:13px;height:13px}'+M+' .u3br:has(.u3hbt) .u3bv{max-width:none}'+
+  M+' .u3hbt{flex:none;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:10px;background:radial-gradient(circle at 50% 30%,#2e4a58,#16242b);border:2px solid #c8a45a;overflow:hidden;box-sizing:border-box}'+M+' .u3hbt .u354bo,'+M+' .u3hbt svg{display:block;max-width:100%}'+M+' .u3hbt .u354bo{width:100%;min-height:0;padding:0;margin:0;border:0;justify-content:center}'+M+' .u3hbt .u354pc{transform:scale(.95)}'+M+' .u3hbt svg{width:52px;height:30px}',
   M+' .u3hfx{display:flex;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap}',
   M+' .u3hwx{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 6px}'+M+' .u3hwx.four{grid-template-columns:repeat(5,1fr)}',
   M+' .u3hrs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 6px}',
   M+' .u3hcnt{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:92px;padding:6px 10px;border-radius:12px;background:linear-gradient(180deg,#1d150d,#120c07);border:1.5px solid rgba(190,140,66,.5)}'+M+' .u3hcnt small{font:500 12px/1.2 '+BF+';color:#b9a98a}'+M+' .u3hcnt b{font:800 20px/1.1 '+BF+';color:#f6e7c4}',
   M+' .u3hhd{margin-top:12px!important;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 8px}'+M+' .u3hhd .u3bi{margin:0;text-align:left;flex:1}',
   M+' .r2s .r2pc,'+M+' .u3hpt .r2pc{display:none}',
-  '@media(max-width:380px){'+M+' .u3hti small{font-size:12px}'+M+' .u3hbt{width:64px}'+M+' .u3hti b{font-size:16px}}'
+  '@media(max-width:380px){'+M+' .u3hti small{font-size:12px}'+M+' .u3hbt{width:48px}'+M+' .u3hti b{font-size:16px}}'
  ].join('\n')}
  function hoistQ(){try{var s=document.getElementById('sheet'),q=s&&s.querySelector('.u3b .u354qs'),b=s&&s.querySelector('.u3b>.u3bbn');if(!q){var q2=s&&s.querySelector(':scope>.u354qs');if(q2&&b)b.parentNode.insertBefore(q2,b.nextSibling);return}if(b&&q.previousElementSibling!==b)b.parentNode.insertBefore(q,b.nextSibling)}catch(e){}}
  try{new MutationObserver(function(){hoistQ()}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
@@ -49434,6 +49492,8 @@ function ttNum(n){n=Math.round(+n||0);return String(n).replace(/\B(?=(\d{3})+(?!
   M+'.tt-bar>u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--tt-jade2);text-decoration:none}',
   M+'.tt-bar>u.e span{left:auto;right:-6px;transform:none}',
   M+'.tt-bar>u span{position:absolute;top:19px;left:50%;transform:translateX(-50%);font:500 12px/1 '+F+';color:#cbbd96;white-space:nowrap}',
+  /* UI batch D row 86: ended state = shipped chest prop 96 px + one 14 px line (the new hint line waits for the designer) */
+  M+'.tt-end{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 8px 14px}'+M+'.tt-endv{display:block;width:96px;height:96px;background:url(art/ui/u3_empty_states.webp) 0 0/288px 192px no-repeat}'+M+'.tt-end>b{font:700 14px/1.25 '+F+';color:#f6e7c4}'+
   M+'.tt-note{margin:0 4px 8px;font:500 12px/1.35 '+F+';color:#b9ad90}',
   M+'.tt-med{flex:none;width:46px;height:46px;border-radius:50%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--tt-lac);border:2px solid var(--tt-jade);box-shadow:0 0 0 1px var(--tt-gold);font:700 12px/1.1 '+F+';color:var(--tt-gold2)}',
   M+'.tt-tr{display:grid!important;grid-template-columns:46px 1fr auto;grid-template-areas:"m t b" "r r r";column-gap:10px;row-gap:6px;align-items:center}',
@@ -49448,7 +49508,7 @@ function ttNum(n){n=Math.round(+n||0);return String(n).replace(/\B(?=(\d{3})+(?!
   /* FIX2 F: kit small secondary button <= 104 css so the tiles (3 x 44 + 2 x 6) and the button share row 2 at 360 */
   M2+'.tt-top.g .bt .t3S.sm,'+M2+'.tt-tr .bt .t3S.sm{width:104px;min-width:0;font-size:12px;padding:0;white-space:nowrap}',
   /* confirm sheet: compact rows, [Hủy] [Mua] pinned under the tick */
-  M+'.tt-cf .tt-top{padding:6px 10px}'+M+'.tt-cf .u3br{min-height:0!important;padding:4px 10px 4px 8px!important;gap:10px}'+M+'.tt-cf .u3br .u3bc{width:32px!important;height:32px!important;margin:0}'+M+'.tt-cf .u3br .u3bc img,'+M+'.tt-cf .u3br .u3bc svg{max-width:100%;max-height:100%}'+M+'.tt-cf .u3bk{position:sticky;bottom:0;z-index:4;margin:6px -4px 0;padding:8px 4px 4px;background:linear-gradient(rgba(26,20,16,0),#1a1410 22%)}'+M+'#modal.t3m #sheet.t3 .tt-cf .u3bk .t3P,'+M+'#modal.t3m #sheet.t3 .tt-cf .u3bk .t3S{flex:1;width:auto;min-width:0;height:48px}',
+  M+'.tt-cf .tt-top{padding:6px 10px}'+M2+'.tt-cf .u3bk .t3D[disabled]{opacity:1!important;filter:none!important;color:#0e0903!important;text-shadow:none!important}'+M+'.tt-cf .u3br{min-height:0!important;padding:4px 10px 4px 8px!important;gap:10px}'+M+'.tt-cf .u3br .u3bc{width:32px!important;height:32px!important;margin:0}'+M+'.tt-cf .u3br .u3bc img,'+M+'.tt-cf .u3br .u3bc svg{max-width:100%;max-height:100%}'+M+'.tt-cf .u3bk{position:sticky;bottom:0;z-index:4;margin:6px -4px 0;padding:8px 4px 4px;background:linear-gradient(rgba(26,20,16,0),#1a1410 22%)}'+M+'#modal.t3m #sheet.t3 .tt-cf .u3bk .t3P,'+M+'#modal.t3m #sheet.t3 .tt-cf .u3bk .t3D,'+M+'#modal.t3m #sheet.t3 .tt-cf .u3bk .t3S{flex:2 1 0;width:auto;min-width:0;height:44px}'+M+'#modal.t3m #sheet.t3 .tt-cf .u3bk .t3S{flex:1 1 0}',
   M+'.tt-top .tx b{display:block;font:700 14px/1.25 '+F+';color:var(--tt-gold2)}',
   M+'.tt-top .tx .tt-pill{margin-top:4px;text-align:left}',
   M+'.tt-top .bt{flex:none;display:flex;flex-direction:column;gap:6px;align-items:flex-end}',
@@ -49543,7 +49603,7 @@ function ttPackConfirm(){var st=ttPackState(),P=TT_PACK,u=ttU();
   [u?U3B.ico('clock','#c8a45a'):'',ttT('tt.cf.i4',{n:P.speedBuildH})],[u?U3B.ico('clock','#c8a45a'):'',ttT('tt.cf.i5',{n:P.speedResearchH})]];
  var tick='<label class="tt-line" style="margin-top:4px;gap:10px;min-height:44px"><input type="checkbox" data-a="ttpkack"'+(TTACK?' checked':'')+' style="width:22px;height:22px;flex:none;accent-color:#e7d192"> <span>'+ttE(ttT('tt.cf.ack'))+'</span></label>';
  var nore='<div class="tt-line mute" style="margin-top:6px">'+ttE(ttT('tt.cf.norefund'))+'</div>';
- var ok=TTACK&&(st.st==='avail'||st.st==='owned'),btns=u?'<div class="u3bk">'+U3B.btn(ttE(ttT('tt.cf.btn.no')),'ttpkno')+U3B.btn(ttE(ttT('tt.cf.btn.ok')),'ttpkok','','',{kind:'p',off:!ok})+'</div>':
+ var ok=TTACK&&(st.st==='avail'||st.st==='owned'),btns=u?'<div class="u3bk">'+U3B.btn(ttE(ttT('tt.cf.btn.no')),'ttpkno')+(ok?U3B.btn(ttE(ttT('tt.cf.btn.ok')),'ttpkok','','',{kind:'p'}):'<button class="t3D sm" data-b="B4" data-a="ttpkok" disabled aria-disabled="true"><span>'+ttE(ttT('tt.cf.btn.ok'))+'</span></button>')+'</div>':
   '<div class="row" style="margin-top:10px"><button class="btn alt sp" data-a="ttpkno">'+ttE(ttT('tt.cf.btn.no'))+'</button><button class="btn sp" data-a="ttpkok"'+(ok?'':' disabled')+'>'+ttE(ttT('tt.cf.btn.ok'))+'</button></div>';
  var head='<div class="tt-top" style="margin-top:2px">'+ttFrame(TTP+'portrait_small.webp',44)+'<div class="tx"><b>'+ttE(ttT('tt.pk.title'))+'</b><span style="font:700 15px/1.3 var(--ds-fb,system-ui);color:#f6e7c4">'+ttE(ttT('tt.pk.price'))+'</span></div></div>';
  var list=u?U3B.list(rows.map(function(r){return U3B.row({icon:r[0],title:ttE(r[1])})}).join('')):rows.map(function(r){return'<div class="tt-line">'+ttE(r[1])+'</div>'}).join('');
@@ -49575,7 +49635,7 @@ function ttRwTiles(t){var o=[],tile=function(icn,txt,n){return'<span class="tt-r
 function ttNapRw(t){var o=[];if(t.silver)o.push(ttT('tt.cf.i3',{n:ttNum(t.silver)}));if(t.speedBuildH)o.push(ttT('tt.cf.i4',{n:t.speedBuildH}));if(t.speedResearchH)o.push(ttT('tt.cf.i5',{n:t.speedResearchH}));return o.join(' + ')}
 function ttNapLine(t,i){return t.hero?ttT('tt.np.row.top',{n:ttNum(t.at),rw:ttNapRw(t)}):ttT('tt.np.row.t'+(i+1),{n:ttNum(t.at),rw:ttNapRw(t)})}
 function ttNapSheet(){try{ttNapTick()}catch(e){}try{ttSvSync(false)}catch(e){}   /* TT-S1-WIRE-2: server count, throttled 60 s, async (refreshes when it changes the save) */
-var w=ttNapState(),u=ttU();if(!w||w.idx<0)return u?U3B.shell(ttT('tt.np.short'),'<div class="tt-note">'+ttE(ttT('tt.np.timer.end'))+'</div>'):'<h3>'+ttE(ttT('tt.np.short'))+'</h3>';
+var w=ttNapState(),u=ttU();if(!w||w.idx<0)return u?U3B.shell(ttT('tt.np.short'),'<div class="tt-end"><span class="tt-endv" aria-hidden="true"></span><b>'+ttE(ttT('tt.np.timer.end'))+'</b></div>'):'<h3>'+ttE(ttT('tt.np.short'))+'</h3>';
  var tiers=(ttNtlTab(w.season)||NTL_TT1).tiers,fill=0,n=0;tiers.forEach(function(t,i){if(w.gb>=t.at)n=i+1});
  if(n>=tiers.length)fill=100;else{var prev=n?tiers[n-1].at:0,nx=tiers[n].at;fill=(n+(w.gb-prev)/(nx-prev))/tiers.length*100}
  var h='<div class="tt-np">'+ttBanner({title:ttT('tt.np.title'),sub:ttT('tt.bn.sub'),nocta:1});
@@ -49947,4 +50007,100 @@ var TTMV={on:1,v:2,err:0,n:0,hit:0,ready:0,dg:0,ig:0,hs:0,kick:0,pk:0,log:[],st:
  if(typeof btPlay==='function'){var _bpT=btPlay;btPlay=function(){try{CUR=null;RES={};if(live())load()}catch(e){}return _bpT.apply(this,arguments)}}
  try{if(live())load()}catch(e){}
 }catch(e){try{TTMV.err++;console.warn('ttmove',e)}catch(x){}}})();
+/* ===== V303 UI batch B (coder-junior6): hero-hub family windows to the U3B kit =====
+   Rows 38 39 40 41 43 73 74 75 76 77 (art docs/art/ui-audit-grade.md batch B). Display only: no number, price, save field or new action.
+   Last in FILES. Everything wraps the FINAL builders (ui301t t8PanelSheet, ui301h h9SrcSheet, late40 tcSheet) and re-draws their markup with U3B
+   (row/plate/pill/shell), keeping every old data-a / data-v / data-w and the classes the tutorial reads (.u3tc .u3tcb .sbar). Any throw returns the old html.
+   - Đổi binh chủng (t8pn): ribbon, one close control, ⓘ inside its card, tier emblem (never an empty disc), Đang dùng pill, free-swap pill above the primary.
+   - Nguồn mảnh (h9src): hero plate with the shard bar + one U3B.row per source with a "Đi tới ›" button (existing actions boss / tower / evs).
+   - Truyền công (tcpick): intro, hero rows with a "Chọn" button (tcong, two-tap confirm kept), empty state with a hero silhouette coin.
+   - These three titles open as floating M windows (w4Kind wrap); the ribbon never touches the ‹/✕ coins (>= 6 px) and shrinks to 12 px before it ellipsises. */
+(function(){try{
+ var U=(typeof U3B!=='undefined')?U3B:null;if(!U)return;
+ function on(){try{return U.on()}catch(e){return 0}}
+ function E(s){try{return esc(s)}catch(e){return String(s==null?'':s)}}
+ var FAM=/^(Đổi binh chủng|Nguồn mảnh|Truyền công) · /;
+ function fam(h){return String(h).replace('class="t3r u3b"','class="t3r u3b u3bfam"')}
+ var DOT=" · ";
+ function nw(x){return'<span style="white-space:nowrap">'+x+'</span>'}
+ function txt(n){return n?String(n.textContent).replace(/\s+/g,' ').trim():''}
+
+ /* ---------- row 41: Đổi binh chủng ---------- */
+ if(typeof t8PanelSheet==='function'){var _t8=t8PanelSheet;t8PanelSheet=function(gid){var h=_t8.apply(this,arguments);try{
+  if(!on()||!S.gens||!S.gens[gid])return h;
+  var d=U.dom(h),h3=d.querySelector('h3'),cards=d.querySelectorAll('.u3tc'),fr=d.querySelector('.u3fr'),sb=d.querySelector('.sbar');
+  if(!h3||cards.length!==2||!sb)return h;
+  var g=S.gens[gid],tier=0;try{tier=trp8Tier()}catch(e){}
+  var plate=U.list(U.row({icon:U.hero(gid),title:E(GENS[gid].n),sub:nw('Lv '+(g.lv||1))+(tier?DOT+nw('Bậc '+tier)+DOT+nw('cả hai cùng Bậc'):''),right:tier?U.tseal(tier,32):''}));
+  var cg='';[].forEach.call(cards,function(c){var on1=c.classList.contains('on'),b=c.querySelector('.u3tcb'),i=c.querySelector('.u3i');if(!b)return;
+   var sm=b.querySelectorAll('.sm');if(on1&&sm[0])sm[0].outerHTML='<span class="u3bq ok u3bdu">Đang dùng</span>';
+   cg+='<div class="u3tc u3bcd'+(on1?' on':'')+'">'+b.outerHTML+(i?i.outerHTML:'')+'</div>'});
+  var ft=txt(fr),pill=ft?'<div class="u3bfr"><span class="u3bq '+(/^Đổi miễn phí/.test(ft)?'ok':'warn')+'">'+E(ft)+'</span></div>':'';
+  return fam(U.shell(txt(h3),plate+'<div class="u3tcg">'+cg+'</div>'+pill+sb.outerHTML))}catch(e){return h}}}
+
+ /* ---------- row 40: Nguồn mảnh ---------- */
+ if(typeof h9SrcSheet==='function'){var _s40=h9SrcSheet;h9SrcSheet=function(gid){var h=_s40.apply(this,arguments);try{
+  if(!on()||!GENS[gid])return h;
+  var d=U.dom(h),h3=d.querySelector('h3'),lis=[].map.call(d.querySelectorAll('li'),txt),shop=d.querySelector('[data-a="h9shop"]');
+  if(!h3||!lis.length)return h;
+  var have=0,need=0,max=0;try{have=h9Fr()[gid]||0;var q=h9StarCost(gid);max=!!q.max;need=q.frag||0}catch(e){}
+  var top=U.list(U.row({icon:U.hero(gid),title:E(GENS[gid].n),sub:max?'Đã đủ 5 sao':'Mảnh '+have+(need?'/'+need:''),bar:need&&!max?Math.round(100*Math.min(have,need)/need):null,right:''}));
+  var IC={'Thảo Phạt':['boss','boss'],'Thông Thiên Tháp':['tower','tower'],'Sự kiện':['quest','evs']},rows='';
+  lis.forEach(function(t){var m=/^Tinh Anh Màn (\d+)/.exec(t),k=IC[t],right='',icn=k?k[0]:'camp';
+   if(k)right=U.btn('Đi tới ›',k[1],'','',{});
+   rows+=U.row({icon:U.ico(icn,'#c8a45a'),title:E(t),sub:m?'Mảnh rơi ở Màn '+m[1]:'',right:right})});
+  return fam(U.shell(txt(h3),U.plate('Nơi nhận mảnh')+top.replace('</div></div>','</div></div>')+U.plate('Nguồn')+U.list(rows)+(shop?'<div class="u3bwd0">'+U.btn('Cửa hàng mảnh tuần ›','h9shop','frag','',{kind:'p',wide:1})+'</div>':'')))}catch(e){return h}}}
+
+ /* ---------- rows 43 / 77: Truyền công ---------- */
+ if(typeof tcSheet==='function'){var _tc=tcSheet;tcSheet=function(tg){var h=_tc.apply(this,arguments);try{
+  if(!on()||!S.gens||!S.gens[tg])return h;
+  var d=U.dom(h),h2=d.querySelector('h2,h3'),intro=d.querySelector(':scope>.sm'),cs=d.querySelectorAll('.card.row'),body='';
+  if(!h2)return h;
+  body+=U.intro(E(txt(intro)));
+  var btns=d.querySelectorAll('button[data-a="tcong"]');
+  if(!btns.length){body+=U.list(U.row({icon:U.coin((function(){try{return pt(tg)}catch(e){return''}})(),'#8a6a38',{dim:1,pt:1}),title:'Chưa có tướng truyền được',sub:'Cần một tướng cao hơn '+E(GENS[tg].n)+' từ 5 cấp.'}))}
+  else{var rows='';[].forEach.call(cs,function(c){var b=c.querySelector('button[data-a="tcong"]');if(!b)return;var w=b.getAttribute('data-w'),nm=txt(c.querySelector('b')),lv=txt(c.querySelector('.sp .sm.mute')),cost=c.querySelector('.sp>.sm:not(.mute)'),arm=/xác nhận/i.test(txt(b));
+    rows+=U.row({icon:U.hero(w),title:E(nm),sub:nw(E(lv))+(cost?DOT+nw(cost.innerHTML):''),right:U.btn(arm?'Chạm để xác nhận':'Chọn','tcong',b.getAttribute('data-v'),w,{kind:arm?'p':'s',off:b.hasAttribute('disabled')})})});
+   body+=U.list(rows)}
+  return fam(U.shell(txt(h2),body))}catch(e){return h}}}
+
+ /* ---------- floating M windows for the two sheets ---------- */
+ if(typeof w4Kind==='function'){var _k=w4Kind;w4Kind=function(t){try{if(on()&&/^(Nguồn mảnh|Truyền công) · /.test(t||''))return'M'}catch(e){}return _k.apply(this,arguments)}}
+
+ /* ---------- one close control, ribbon gap, ribbon fit ---------- */
+ function hdr(){try{var sh=document.getElementById('sheet'),k=sh&&sh.querySelector('.u3bkey');if(!k||!FAM.test(k.textContent.trim()))return;
+  var hd=sh.querySelector('.t3r>.t3hd');if(!hd)return;var l=hd.querySelector('.t3rb.l'),r=hd.querySelector('.t3rb.r'),back=0;try{back=SHSTK.length>0}catch(e){}
+  if(back&&!l){hd.insertAdjacentHTML('afterbegin','<button class="t3rb l" data-a="sback" aria-label="Quay lại">‹</button>');l=hd.querySelector('.t3rb.l')}
+  if(l&&r)r.remove()}catch(e){}}
+ function tw(t){try{var r=document.createRange();r.selectNodeContents(t);return r.getBoundingClientRect().width}catch(e){return 0}}
+ function fit(){try{[].forEach.call(document.querySelectorAll('#sheet .t3hd .t3ttl,#sheet .hbwh .t3ttl,#rt226 .t3ttl'),function(t){
+      for(var f=19;f>=12;f--){t.style.setProperty('font-size',f+'px','important');var cs=getComputedStyle(t),pd=(parseFloat(cs.paddingLeft)||0)+(parseFloat(cs.paddingRight)||0);if(tw(t)<=t.clientWidth-pd+0.5&&t.scrollWidth<=t.clientWidth)break}})}catch(e){}}
+ var q=0;function run(){if(q)return;q=1;requestAnimationFrame(function(){q=0;hdr();fit();setTimeout(fit,160);setTimeout(fit,500)})}
+ try{var m=document.getElementById('modal');if(m)new MutationObserver(run).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ try{var _os=openSheet;openSheet=function(){var r=_os.apply(this,arguments);hdr();run();return r}}catch(e){}
+
+ var M='html body #modal.t3m #sheet.t3',BF='var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif)';
+ var st=document.createElement('style');st.id='uib303css';st.textContent=[
+  /* ribbon tips >= 6 px from the coins: 42 px coin + 6 px gap on each side */
+  M+' .t3hd:has(.t3rb)>.t3ttl{min-width:0;max-width:calc(100% - 100px);border-width:0 20px;border-image-width:0 20px;box-sizing:border-box}',
+  'html body #sheet#sheet#sheet.w4shell>.snav{padding-left:52px!important;padding-right:52px!important}',
+  /* Đổi binh chủng cards */
+  M+' .u3tcg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}',
+  M+' .u3bfam>.t3hd{margin-left:-10px;margin-right:-10px}'+M+' .u3bfam>.t3hd>.t3ttl{border-width:0 12px;border-image-width:0 12px;padding:0 2px}',
+  M+' .u3bcd{position:relative}',
+  M+' .u3bcd .u3tcb{width:100%;min-height:132px;box-sizing:border-box;border-radius:12px;background:linear-gradient(180deg,#1d150d,#120c07);border:1.5px solid rgba(190,140,66,.5);box-shadow:inset 0 1px 0 rgba(255,225,160,.08),0 1px 3px rgba(0,0,0,.4);color:#f6e7c4;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px 10px;opacity:1}',
+  M+' .u3bcd.on .u3tcb{border:2px solid #e8c35a;box-shadow:inset 0 0 0 1px rgba(232,195,90,.35),0 1px 3px rgba(0,0,0,.4)}',
+  M+' .u3bcd .u3tcb:disabled{opacity:1!important;color:#f6e7c4}',
+  M+' .u3bcd .u3tcb b{font:700 15px/1.2 '+BF+';color:#f6e7c4}',
+  M+' .u3bcd .u3tcb .sm{font:500 12px/1.3 '+BF+';color:#d8c9a6}'+M+' .u3bcd .u3tcb .sm.mute{color:#bfae8a}',
+  M+' .u3bcd .u3bdu{height:24px;font-size:12px;opacity:1}',
+  /* ⓘ: a 24 px coin in the card's top-right corner, 44 px tap area */
+  M+' .u3bcd>.u3i{position:absolute!important;top:6px;right:6px;left:auto;width:24px;height:24px;min-height:0!important;min-width:0;padding:0;border-radius:50%;border:1.5px solid #c8a45a;background:radial-gradient(circle at 50% 30%,#4d3622,#21160d);color:#f2cf7c;font:700 14px/1 '+BF+';display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px rgba(0,0,0,.6);z-index:2}',
+  M+' .u3bcd>.u3i::after{content:"";position:absolute;inset:-10px}',
+  M+' .u3bfr{display:flex;justify-content:center;margin:12px 0 8px}'+M+' .u3bfr .u3bq{height:28px;font-size:13px}',
+  M+' .u3bwd0{margin:12px 0 0}',
+  /* rotation panel (row 76): the free-swap chip is a 13 px pill; box-sizing so the 46 px ribbon row keeps its height under tw279's sticky padding */
+  'html body #rt226 .rt226in.tw9>.tw9s .tw9x{font-size:13px;padding:4px 11px;color:#d7f5d6;background:#2c5a37;border:1.5px solid #5fc77a}html body #rt226 .rt226in.tw9>.tw9s .tw9x em{color:#fff}html body #rt226 .rt226in.tw9>.rt226h{box-sizing:content-box;height:46px}'
+ ].join('\n');(document.head||document.documentElement).appendChild(st);
+}catch(e){try{console.warn('uib303',e)}catch(x){}}})();
 </script>
