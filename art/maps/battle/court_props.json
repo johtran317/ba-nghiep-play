@@ -1,0 +1,323 @@
+{
+ "name": "court_props",
+ "decision": "661 A (court animation) + 662 A (no clean plate)",
+ "painting": "maps/battle/battle_court.webp, unchanged (painted flags stay in it)",
+ "painting_px": [
+  768,
+  1376
+ ],
+ "units": "painting px. Draw each layer at paint_xy with the painting's sx = W_css/768, sy = H_css/1376 (390 css wide: sx 0.5078, sy 0.6131).",
+ "atlas": {
+  "file": "court_props.webp",
+  "w": 606,
+  "h": 194,
+  "format": "lossless webp RGBA, straight alpha"
+ },
+ "cloth": [
+  {
+   "id": "F1",
+   "kind": "red",
+   "rect": [
+    0,
+    0,
+    94,
+    71
+   ],
+   "paint_xy": [
+    11,
+    190
+   ],
+   "box": [
+    13,
+    104,
+    192,
+    272
+   ],
+   "pivot": [
+    17,
+    196
+   ],
+   "fixed_edge": "left",
+   "pole_to_tip_dir": [
+    0.776,
+    0.63
+   ],
+   "length_px": 91.4,
+   "rgb": "exact painted pixels (layer colour = painting pixel)",
+   "mask": "rect alpha: 255 inside cloth (holes filled), 128 = 1 px soft edge, 0 outside; poles never in mask"
+  },
+  {
+   "id": "F2",
+   "kind": "red",
+   "rect": [
+    96,
+    0,
+    99,
+    69
+   ],
+   "paint_xy": [
+    657,
+    193
+   ],
+   "box": [
+    660,
+    752,
+    196,
+    272
+   ],
+   "pivot": [
+    749,
+    198
+   ],
+   "fixed_edge": "right",
+   "pole_to_tip_dir": [
+    -0.856,
+    0.516
+   ],
+   "length_px": 97.4,
+   "rgb": "exact painted pixels (layer colour = painting pixel)",
+   "mask": "rect alpha: 255 inside cloth (holes filled), 128 = 1 px soft edge, 0 outside; poles never in mask"
+  },
+  {
+   "id": "F3",
+   "kind": "green",
+   "rect": [
+    197,
+    0,
+    86,
+    81
+   ],
+   "paint_xy": [
+    5,
+    653
+   ],
+   "box": [
+    4,
+    88,
+    652,
+    742
+   ],
+   "pivot": [
+    9,
+    656
+   ],
+   "fixed_edge": "left",
+   "pole_to_tip_dir": [
+    0.684,
+    0.73
+   ],
+   "length_px": 101.3,
+   "rgb": "exact painted pixels (layer colour = painting pixel)",
+   "mask": "rect alpha: 255 inside cloth (holes filled), 128 = 1 px soft edge, 0 outside; poles never in mask"
+  },
+  {
+   "id": "F4",
+   "kind": "green",
+   "rect": [
+    285,
+    0,
+    88,
+    86
+   ],
+   "paint_xy": [
+    667,
+    647
+   ],
+   "box": [
+    668,
+    752,
+    650,
+    735
+   ],
+   "pivot": [
+    748,
+    653
+   ],
+   "fixed_edge": "right",
+   "pole_to_tip_dir": [
+    -0.659,
+    0.752
+   ],
+   "length_px": 102.6,
+   "rgb": "exact painted pixels (layer colour = painting pixel)",
+   "mask": "rect alpha: 255 inside cloth (holes filled), 128 = 1 px soft edge, 0 outside; poles never in mask"
+  },
+  {
+   "id": "F5",
+   "kind": "green",
+   "rect": [
+    375,
+    0,
+    36,
+    75
+   ],
+   "paint_xy": [
+    16,
+    1068
+   ],
+   "box": [
+    17,
+    54,
+    1064,
+    1145
+   ],
+   "pivot": [
+    53,
+    1066
+   ],
+   "fixed_edge": "right",
+   "pole_to_tip_dir": [
+    -0.351,
+    0.936
+   ],
+   "length_px": 80.5,
+   "rgb": "exact painted pixels (layer colour = painting pixel)",
+   "mask": "rect alpha: 255 inside cloth (holes filled), 128 = 1 px soft edge, 0 outside; poles never in mask"
+  },
+  {
+   "id": "F6",
+   "kind": "green",
+   "rect": [
+    413,
+    0,
+    42,
+    80
+   ],
+   "paint_xy": [
+    714,
+    1059
+   ],
+   "box": [
+    716,
+    753,
+    1062,
+    1145
+   ],
+   "pivot": [
+    716,
+    1064
+   ],
+   "fixed_edge": "left",
+   "pole_to_tip_dir": [
+    0.364,
+    0.931
+   ],
+   "length_px": 78.7,
+   "rgb": "exact painted pixels (layer colour = painting pixel)",
+   "mask": "rect alpha: 255 inside cloth (holes filled), 128 = 1 px soft edge, 0 outside; poles never in mask"
+  }
+ ],
+ "fire": {
+  "take": "r1006 take A (art354 pick 8.0/10)",
+  "file": "court_props.webp",
+  "cells": [
+   [
+    0,
+    88,
+    74,
+    106
+   ],
+   [
+    76,
+    88,
+    74,
+    106
+   ],
+   [
+    152,
+    88,
+    74,
+    106
+   ],
+   [
+    228,
+    88,
+    74,
+    106
+   ],
+   [
+    304,
+    88,
+    74,
+    106
+   ],
+   [
+    380,
+    88,
+    74,
+    106
+   ],
+   [
+    456,
+    88,
+    74,
+    106
+   ],
+   [
+    532,
+    88,
+    74,
+    106
+   ]
+  ],
+  "cell_px": [
+   74,
+   106
+  ],
+  "frames": 8,
+  "order": "grid order A1..A8 (top row L->R, then bottom row)",
+  "fps": 10,
+  "loop_s": 0.8,
+  "start_frame": {
+   "B1": 0,
+   "B2": 3,
+   "B3": 5,
+   "B4": 6
+  },
+  "anchors": {
+   "B1": [
+    65,
+    426
+   ],
+   "B2": [
+    707,
+    426
+   ],
+   "B3": [
+    59,
+    629
+   ],
+   "B4": [
+    711,
+    629
+   ]
+  },
+  "mouth_px": {
+   "B1": 42,
+   "B2": 42,
+   "B3": 38,
+   "B4": 40
+  },
+  "base_centre_px": [
+   36.66,
+   105
+  ],
+  "draw_w_css_at_390": {
+   "B1": 24.53,
+   "B2": 24.53,
+   "B3": 22.19,
+   "B4": 23.36
+  },
+  "draw_h_css_at_390": {
+   "B1": 35.13,
+   "B2": 35.13,
+   "B3": 31.79,
+   "B4": 33.46
+  },
+  "placement": "draw the cell so base_centre_px sits on the anchor x, its bottom row 1 painting px below the anchor y (anchor + 1 px * sy)",
+  "composite": "lighter",
+  "alpha_max": 0.9,
+  "alpha": "straight RGBA: a = keyed brightness; canvas 'lighter' reproduces the black-keyed look, no premultiply needed",
+  "dpr3_note": "B1 cell width 74 px = 24.5 css at 390 = 1 atlas px per device px at DPR 3"
+ }
+}

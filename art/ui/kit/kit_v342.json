@@ -1,0 +1,331 @@
+{
+ "artmeta": 1,
+ "id": "uikit_v342",
+ "build": "V303",
+ "job": "UI-KIT: Decision 649 A (art344 picks, techart344 fix + pack)",
+ "atlas": {
+  "file": "art/ui/kit/kit_v342.webp",
+  "size": [
+   2048,
+   1900
+  ],
+  "note": "r = [x,y,w,h] px at 1x. Draw at css = px for 1x art, 2x for hi-dpi. 9-slice = [left, top, right, bottom] source px; 0 = that side does not stretch."
+ },
+ "parts": {
+  "tab_selected_D": {
+   "r": [
+    1154,
+    1581,
+    286,
+    126
+   ],
+   "note": "F0",
+   "slice": [
+    44,
+    24,
+    44,
+    24
+   ]
+  },
+  "tab_normal_D": {
+   "r": [
+    1442,
+    1581,
+    280,
+    126
+   ],
+   "note": "F0+halo",
+   "slice": [
+    40,
+    24,
+    40,
+    24
+   ]
+  },
+  "stat_tile_G": {
+   "r": [
+    1152,
+    1087,
+    366,
+    170
+   ],
+   "note": "F0",
+   "slice": [
+    28,
+    28,
+    28,
+    28
+   ]
+  },
+  "plank_row_H": {
+   "r": [
+    0,
+    1087,
+    1150,
+    180
+   ],
+   "note": "F0+specks, left inset 176",
+   "slice": [
+    176,
+    30,
+    90,
+    30
+   ]
+  },
+  "btn_gold_claim_K": {
+   "r": [
+    0,
+    1581,
+    1152,
+    136
+   ],
+   "note": "F0+notch",
+   "slice": [
+    90,
+    40,
+    90,
+    40
+   ]
+  },
+  "divider_jewel_M": {
+   "r": [
+    556,
+    1719,
+    148,
+    98
+   ],
+   "note": "F0+line"
+  },
+  "divider_jewel_M_right": {
+   "r": [
+    706,
+    1719,
+    148,
+    98
+   ],
+   "note": "F0+line"
+  },
+  "sheet_header_C": {
+   "r": [
+    484,
+    838,
+    1200,
+    184
+   ],
+   "note": "F0+rule",
+   "slice": [
+    300,
+    0,
+    300,
+    0
+   ]
+  },
+  "sheet_bottom_P": {
+   "r": [
+    0,
+    1830,
+    1200,
+    68
+   ],
+   "note": "PASS",
+   "slice": [
+    120,
+    0,
+    120,
+    0
+   ]
+  },
+  "bg_wood_O": {
+   "r": [
+    0,
+    0,
+    512,
+    512
+   ],
+   "note": "tile 512"
+  },
+  "ribbon_battle": {
+   "r": [
+    744,
+    514,
+    1050,
+    280
+   ],
+   "note": "FIX",
+   "slice": [
+    95,
+    70,
+    95,
+    60
+   ]
+  },
+  "panel_battle": {
+   "r": [
+    514,
+    0,
+    1438,
+    481
+   ],
+   "note": "FIX",
+   "slice": [
+    60,
+    110,
+    60,
+    30
+   ]
+  },
+  "x_button": {
+   "r": [
+    1520,
+    1087,
+    168,
+    168
+   ],
+   "note": "FIX T4"
+  },
+  "btn_pause_round": {
+   "r": [
+    770,
+    1433,
+    144,
+    144
+   ],
+   "note": "PASS"
+  },
+  "btn_speed_round": {
+   "r": [
+    916,
+    1433,
+    144,
+    144
+   ],
+   "note": "PASS"
+  },
+  "navbar_B": {
+   "r": [
+    0,
+    1433,
+    768,
+    146
+   ],
+   "note": "r1005 magenta key",
+   "slice": [
+    110,
+    0,
+    110,
+    0
+   ]
+  },
+  "nav_ring_normal": {
+   "r": [
+    1796,
+    514,
+    240,
+    247
+   ],
+   "note": "r1005 magenta key"
+  },
+  "nav_ring_selected": {
+   "r": [
+    0,
+    838,
+    240,
+    247
+   ],
+   "note": "r1005 magenta key"
+  },
+  "hub_medallion_E": {
+   "r": [
+    242,
+    838,
+    240,
+    247
+   ],
+   "note": "r1005 magenta key"
+  },
+  "title_ribbon_C": {
+   "r": [
+    0,
+    1269,
+    659,
+    162
+   ],
+   "note": "r1005 magenta key",
+   "slice": [
+    95,
+    0,
+    95,
+    0
+   ]
+  },
+  "bottom_panel_L": {
+   "r": [
+    0,
+    514,
+    742,
+    322
+   ],
+   "note": "r1005 magenta key",
+   "slice": [
+    60,
+    62,
+    60,
+    40
+   ]
+  },
+  "btn_jade_J": {
+   "r": [
+    1062,
+    1433,
+    726,
+    143
+   ],
+   "note": "r1005 magenta key",
+   "slice": [
+    80,
+    0,
+    80,
+    0
+   ]
+  },
+  "btn_bronze": {
+   "r": [
+    661,
+    1269,
+    693,
+    152
+   ],
+   "note": "r1005 magenta key",
+   "slice": [
+    70,
+    0,
+    70,
+    0
+   ]
+  },
+  "map_cartouche_N": {
+   "r": [
+    0,
+    1719,
+    452,
+    109
+   ],
+   "note": "r1005 magenta key",
+   "slice": [
+    50,
+    0,
+    50,
+    0
+   ]
+  },
+  "number_socket_N": {
+   "r": [
+    454,
+    1719,
+    100,
+    101
+   ],
+   "note": "r1005 magenta key"
+  }
+ }
+}
