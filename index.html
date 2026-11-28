@@ -7004,7 +7004,7 @@ function ptU(u,meta){var look=(u.look&&LOOKS[u.look])?LOOKS[u.look]:genericLook(
  return'<div class="pw '+(u.isBoss?'gS':'')+'">'+portraitSvg(look,fac,'e'+(u.look||u.br)+fac)+'<span class="tag">'+TAGS[u.br]+'</span><span class="lv">Lv'+u.lv+'</span></div>'}
 function openSheet(fn,keep){sheetFn=fn;var sh=$('#sheet'),t=keep?sh.scrollTop:0;sh.innerHTML=fn();$('#modal').hidden=false;sh.scrollTop=t}
 function closeSheet(){sheetFn=null;$('#modal').hidden=true}
-function refresh(){renderTop();renderStrip();renderMain();if(sheetFn){var sh=$('#sheet'),t=sh.scrollTop;sh.innerHTML=sheetFn();sh.scrollTop=t}}
+function refresh(){renderTop();renderStrip();renderMain();if(sheetFn){var sb=false;try{sb=window.svBusy&&window.svBusy()}catch(e){}if(sb){dirty=true;return}var sh=$('#sheet'),t=sh.scrollTop;sh.innerHTML=sheetFn();sh.scrollTop=t}}
 function costH(c){var o='';
  if(c.s)o+='<span class="cost'+(S.res.silver<c.s?' no':'')+'">'+fmt(c.s)+' bạc</span>';
  if(c.g)o+='<span class="cost'+(S.res.grain<c.g?' no':'')+'">'+fmt(c.g)+' lương</span>';
@@ -16234,7 +16234,7 @@ function u185Hero(){var sh=document.querySelector('#modal:not([hidden]) #sheet')
      | admin_edit (the owner changed the save: the phone adopts it, then acks) | banned (sync stops).
    - Player name: asked once (S.pname), stored in the save and in profiles.display_name so the owner can find players.
    - Every call is wrapped: no network, CSP or server error can stop the game (house rule: load/draw code never throws). */
-var BUILD='V303';
+var BUILD='V304';
 (function(){
 var SB='https://vsgncllldrzyppdwsjbq.supabase.co',PK='sb_publishable_ldlnj7mtPajOvvBMy4l4vg_8_yWgvHC',CK='bn-cloud-v1';
 var C=null,busy=false,lastTry=0,asked=false;
@@ -19482,7 +19482,7 @@ try{var _ud=updDyn;updDyn=function(){if(busy()){pend.dyn=1;return}return _ud.app
    Bậc 5 (beast stones) and a running training keep their own blocks (no card). The duplicate Thăng tinh row in Tinh luyện is removed
    when the card shows it. New action bd256go (scroll to the Bậc 4 forms; checked unused). */
 (function(){try{
- function tile(icon,lab,have,need,f){var ok=have>=need,F=f||function(x){return x>=10000?(Math.floor(x/100)/10).toString().replace(/\.0$/,'').replace('.',',')+'K':fmt(x)};
+ function tile(icon,lab,have,need,f){var ok=have>=need,F=f||function(x){try{return fmtHud(x)}catch(e){return fmt(x)}};  /* FU-NUM: same formatter as the top bar (K up to 1M, then M/B) */
   return'<div class="bd6t'+(ok?' ok':' no')+'"><span class="bd6i">'+icon+'</span><small>'+lab+'</small><b><em>'+F(have)+'</em> / '+F(need)+'</b>'+(ok?'<i class="bd6k">✓</i>':'')+'</div>'}
  function timeT(h){return'<div class="bd6t tm"><span class="bd6i">'+objH('hour')+'</span><small>Thời gian</small><b>'+h+' giờ</b></div>'}
  function heroI(gid){try{var a=GART[gid];if(a&&a.sm)return'<img src="'+a.sm+'" alt="" style="object-position:'+(a.pos||'50% 18%')+'">'}catch(e){}return objH('chest')}
@@ -24155,7 +24155,7 @@ try{setTimeout(pop,2500)}catch(e){}
    File format: {bn:'hegemony-save', build, sv, t, sum, data:S}; sum = djb2 of JSON.stringify(data). A bare S object (admin
    panel export) is accepted too. Actions svexp / svdl / svimp / svchk / svdo (checked unused). Everything wrapped. */
 (function(){
-var PEND=null,TXT='',MSG='',ARM=0;   /* kept here: sheets re-render after every action, which would wipe the textarea and message */
+var PEND=null,TXT='',MSG='',ARM=0,PICK=0;   /* kept here: sheets re-render after every action, which would wipe the textarea and message */
 function sum(str){var h=5381;for(var i=0;i<str.length;i++)h=((h<<5)+h+str.charCodeAt(i))|0;return(h>>>0).toString(16)}
 function pack(){var d=JSON.stringify(S);return JSON.stringify({bn:'hegemony-save',build:typeof BUILD!=='undefined'?BUILD:'',sv:S.sv||0,t:Date.now(),sum:sum(d),data:JSON.parse(d)})}
 function day(){var d=new Date();return''+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2)}
@@ -24186,8 +24186,14 @@ function doDl(){var code=pack();try{var b=new Blob([code],{type:'application/jso
   document.body.appendChild(a);a.click();setTimeout(function(){try{document.body.removeChild(a);URL.revokeObjectURL(u)}catch(e){}},1500);toast('Đã tải tệp sao lưu')}
  catch(e){openSheet(function(){return codeSheet(code,'Trang này không tải tệp được.')})}}
 function msg(h){MSG=h;var m=document.getElementById('svmsg');if(m)m.innerHTML=h}
+/* FU-SAVEFOCUS: the game tick skips re-rendering #sheet while the save textarea is focused or the second-tap confirm is armed */
+window.svBusy=function(){try{var x=document.getElementById('svtxt');return !!(PICK||(x&&(document.activeElement===x||ARM)))}catch(e){return false}};
 try{document.addEventListener('input',function(e){try{if(e.target&&e.target.id==='svtxt')TXT=e.target.value}catch(x){}})}catch(e){}
-try{document.addEventListener('change',function(e){try{var t=e.target;if(!t||t.id!=='svfile'||!t.files||!t.files[0])return;var f=t.files[0];
+/* FU-SAVEPICK: busy from the click on the file input until change, cancel event, or window focus back with no file; also cleared on closeSheet */
+try{document.addEventListener('click',function(e){try{if(e.target&&e.target.id==='svfile'){PICK=1;var back=function(){window.removeEventListener('focus',back);setTimeout(function(){try{var f=document.getElementById('svfile');if(!f||!f.files||!f.files[0])PICK=0}catch(x){PICK=0}},900)};window.addEventListener('focus',back)}}catch(x){}},true)}catch(e){}
+try{document.addEventListener('cancel',function(e){try{if(e.target&&e.target.id==='svfile')PICK=0}catch(x){}},true)}catch(e){}
+try{if(typeof closeSheet==='function'){var _CSV=closeSheet;closeSheet=function(){PICK=0;ARM=0;return _CSV.apply(this,arguments)}}}catch(e){}
+try{document.addEventListener('change',function(e){try{var t=e.target;if(t&&t.id==='svfile')PICK=0;if(!t||t.id!=='svfile'||!t.files||!t.files[0])return;var f=t.files[0];
  if(f.size>8e6){msg('<div class="sm" style="margin-top:8px;color:var(--cinnabar-l,#e0524b)">Tệp quá lớn.</div>');return}
  var r=new FileReader();r.onload=function(){try{TXT=String(r.result||'');var x=document.getElementById('svtxt');if(x)x.value=TXT;A_('svchk')}catch(e){}};r.readAsText(f)}catch(x){}})}catch(e){}
 try{gdCard('saveio',card)}catch(e){}/* V292 BN-041: was a viewMore wrapper */
@@ -31088,7 +31094,7 @@ var BN3U=[['daily','Nhiệm vụ',function(){return!!S.camp.stage['0-0']}],['tav
    return'Cấp '+L+' · tướng tối đa Lv '+L+'<br>Quân lệnh tối đa '+(10+L)+'<br><span class="mute">'+l2+'</span>'}catch(e){return h}}}
  /* ---- A9: g4.2 guide text = T8 ring ---- */
  try{var st=document.createElement('style');st.id='bn340c2css';st.textContent=
-  '.c2f{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg,rgba(80,60,20,.55),rgba(30,22,12,.6));border:1px solid rgba(240,200,100,.6)}.c2f .sp b{color:#fff2cf;font-size:15px}.c2f .btn{flex:none;min-height:40px}.c2fi{flex:none;width:44px;height:44px}'+
+  '.c2f{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg,rgba(80,60,20,.55),rgba(30,22,12,.6));border:1px solid rgba(240,200,100,.6)}.c2f .sp b{color:#fff2cf;font-size:15px}.c2f .btn{flex:none;min-height:40px}.c2fi{flex:none;width:44px;height:44px}html.kw1 .c2f .btn{min-height:44px;min-width:44px}html.kw1 body :is(#sheet,#main,.hb4in) .c2f [data-b="B4"]{min-height:44px!important}'+
   '.c2d{border-radius:14px;background:rgba(0,0,0,.18);border:1px solid rgba(226,178,90,.28)}.c2d>summary,.c2hf>summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:center;padding:0 14px;font:600 14px var(--ds-fb,sans-serif);color:#e2b25a}'+
   '.c2d>summary::-webkit-details-marker,.c2hf>summary::-webkit-details-marker{display:none}.c2db{display:flex;flex-direction:column;gap:12px;padding:0 10px 12px}'+
   '.c2hf{margin-top:6px;border-top:1px solid rgba(226,178,90,.15)}.c2hf>summary{justify-content:flex-start;padding:0;color:#c9a35a;font-weight:500}'+
@@ -39857,9 +39863,9 @@ var WC360=1;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
    P+'.c12sc::-webkit-scrollbar{display:none}'+
    P+'.c12in{position:relative;width:100%;overflow:hidden}'+
    P+'.c12in>*{position:absolute}'+
-   P+'.c12ld{left:0;width:100%;overflow:hidden}.c12ld>*{position:absolute;left:0;top:0;width:100%;height:100%}'+
+   P+'.c12ld{left:0;width:100%;overflow:hidden;pointer-events:none}.c12ld>*{position:absolute;left:0;top:0;width:100%;height:100%}'+
    P+'.c12ld .nt{-webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(var(--e) - 38px),transparent calc(var(--e) + 38px));mask-image:linear-gradient(180deg,#000 0,#000 calc(var(--e) - 38px),transparent calc(var(--e) + 38px))}'+
-   P+'.c12ld .wm{background:rgba(255,176,72,.12);-webkit-mask-image:linear-gradient(180deg,transparent calc(var(--e) - 38px),#000 calc(var(--e) + 38px));mask-image:linear-gradient(180deg,transparent calc(var(--e) - 38px),#000 calc(var(--e) + 38px))}'+
+   P+'.c12ld .wm{pointer-events:none;background:rgba(255,176,72,.12);-webkit-mask-image:linear-gradient(180deg,transparent calc(var(--e) - 38px),#000 calc(var(--e) + 38px));mask-image:linear-gradient(180deg,transparent calc(var(--e) - 38px),#000 calc(var(--e) + 38px))}'+
    P+'.c12ld .pool{background:radial-gradient(closest-side,rgba(255,196,96,.42),rgba(255,176,72,.14) 60%,rgba(255,176,72,0));width:230px;height:200px;left:var(--px);top:var(--py);margin:-100px 0 0 -115px}'+
    P+'.c12ld .rv{width:15px;height:2.5px;border-radius:2px;background:rgba(255,246,214,.9);opacity:0;animation:c12rv 1.6s ease-in-out infinite;height:2.5px}'+
    P+'.c12mr{left:0;top:0;width:100%;height:'+SKY+'px;filter:blur(2.5px) brightness(.8)}'+
@@ -40313,7 +40319,7 @@ var WC360=1;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
  function build(m,d){
   var u=U(),mi=d.mi,M=d.M,n=d.n,st=d.state,cur=d.cur,k,W,MH,AH,PAD=150;
   /* a reveal or scene of the old root must not drive the new one (chapter switch) */
-  if(R&&R.d.mi!==mi){if(REV){try{REV.tw&&REV.tw.cancel();clearTimeout(REV.to)}catch(e){}REV=0}
+  if(R&&R.d.mi!==mi){if(REV){try{REV.tw&&REV.tw.cancel();clearTimeout(REV.to)}catch(e){}try{H.classList.remove("c12hold")}catch(e){}REV=0}
    if(SCENE&&R.skip){try{R.skip()}catch(e){}}}
   if(R&&R.el.parentNode)R.el.parentNode.removeChild(R.el);
   var el=D.createElement('div');el.className='c12'+(CM?' ccm':'');
@@ -40369,7 +40375,7 @@ var WC360=1;var WC360I={fresh:0,lite:0,phase:'',err:0,log:[]};
   }else if(bid&&figStyle(bid,bh)){
    h+='<div class="c12bs '+bst+'" style="left:'+px(bossLeft)+';top:'+px(SKY-bh+40)+';width:'+px(bw)+';height:'+px(bh)+'"><i style="'+figStyle(bid,bh)+'"></i></div>';
   }else{
-   h+='<div class="c12bs '+bst+'" style="left:'+px(bossLeft)+';top:'+px(SKY-bh+40)+';width:176px;height:'+px(bh)+'"><i style="background:url(art/enemies/boss_'+esc(bid)+'.webp) center bottom/contain no-repeat;-webkit-mask-image:radial-gradient(ellipse at 50% 48%,#000 42%,transparent 74%);mask-image:radial-gradient(ellipse at 50% 48%,#000 42%,transparent 74%)"></i></div>'}
+   h+='<div class="c12bs '+bst+'" style="left:'+px(bossLeft)+';top:'+px(SKY-bh+40)+';width:176px;height:'+px(bh)+'"><i style="'+(bid?'background:url(art/enemies/boss_'+esc(bid)+'.webp) center bottom/contain no-repeat;':'')+'-webkit-mask-image:radial-gradient(ellipse at 50% 48%,#000 42%,transparent 74%);mask-image:radial-gradient(ellipse at 50% 48%,#000 42%,transparent 74%)"></i></div>'}
   if(st==='locked'){[96,118,142,168].slice(0,LITE?2:4).forEach(function(yy,q){h+=fogE(q,(q%2?-.45:.0)*W,yy,W*1.7,'lk',.9,84)});if(!LITE)h+=fogE(4,-.55*W,20,.8*W,'lk',.9,110)+fogE(5,.75*W,36,.8*W,'lk',.9,110)}
   var tw=st==='locked'?W-24:Math.min(W*.5,200);
   var tag,ttl,l1='';
@@ -41856,7 +41862,9 @@ function lfrPill(n){try{return lfrOn()&&!(BT.meta&&BT.meta.rl&&BT.meta.rl.n)&&n>
  function trkOpen(sc,rdy){try{var sn=(typeof S!=='undefined'&&S)?(S.seen||(S.seen={})):null;if(!sn)return;if(sn.rd1trk&&(!rdy||trkSess))return;
   var n=0,iv=setInterval(function(){try{n++;if(!sc.isConnected||n>20){clearInterval(iv);return}if(window.C12RD1&&C12RD1.rev()){clearInterval(iv);sn.rd1trk=1;trkSess=1;return}if(window.C12RD1&&C12RD1.busy())return;clearInterval(iv);
    var t0=sc.scrollTop;sn.rd1trk=1;trkSess=1;if(t0<=40)return;sc.scrollTop=0;trackSet();
-   setTimeout(function(){try{if(sc.isConnected&&sc.scrollTop<=8&&!(window.C12RD1&&C12RD1.busy()))sc.scrollTo({top:t0,behavior:'smooth'})}catch(e){}},1200)}catch(e){clearInterval(iv)}},250)}catch(e){}}
+   /* FU-MAPOPEN: the glide back is a script tween; any wheel / touchstart / pointerdown (before or during it) cancels it and the user's scroll stands */
+   var us=0,uf=function(){us=1};['wheel','touchstart','pointerdown'].forEach(function(t){sc.addEventListener(t,uf,{passive:true,once:true})});
+   setTimeout(function(){try{if(us||!sc.isConnected||sc.scrollTop>8||(window.C12RD1&&C12RD1.busy()))return;var a=sc.scrollTop,s0=performance.now(),d=450;(function f(n){if(us||!sc.isConnected)return;var k=Math.min(1,Math.max(0,(n-s0)/d));sc.scrollTop=a+(t0-a)*(1-(1-k)*(1-k));if(k<1)requestAnimationFrame(f)})(s0)}catch(e){}},1200)}catch(e){clearInterval(iv)}},250)}catch(e){}}
  function trackSet(){try{var sc=D.querySelector('.c12sc'),tk=D.querySelector('.c12v>.r2tk');if(!sc||!tk)return;var t=sc.scrollTop,busy=window.C12RD1&&C12RD1.busy()&&!C12RD1.hold(),on=tk.classList.contains('on');
   if(busy||t>32){if(on)tk.classList.remove('on')}else if(t<=8){if(!on)tk.classList.add('on')}
   var cue=D.querySelector('.c12v>.r2cue');if(cue)cue.classList.toggle('sh',cue.getAttribute('data-any')==='1'&&!tk.classList.contains('on')&&!busy)}catch(e){}}
@@ -45366,7 +45374,7 @@ function w1Go(g){try{var df=w1Def(g.id);if(df&&df.go)df.go()}catch(e){}}
 /* ---- rewards ---- */
 function w1Br(n){var br=['inf','cav','arc','str','mac','sup'],c={};try{w1Team().forEach(function(g){var b=GENS[g]&&GENS[g].br;if(b)c[b]=(c[b]||0)+1})}catch(e){}
  var L=Object.keys(c).sort(function(a,b){return c[b]-c[a]||br.indexOf(a)-br.indexOf(b)});br.forEach(function(b){if(L.indexOf(b)<0)L.push(b)});return L.slice(0,n)}
-function w1RwTxt(rw){var o=[];try{if(rw.s)o.push(fmt(rw.s)+' bạc');if(rw.ud)o.push(rw.ud+' Uy Danh');if(rw.ord)o.push(rw.ord+' Quân lệnh');if(rw.phu)o.push(rw.phu+' Binh Phù');
+function w1RwTxt(rw){var o=[];try{if(rw.s)o.push(fmt(rw.s)+' bạc');if(rw.ud)o.push(rw.ud+' Uy Danh');if(rw.ord)o.push(rw.ord+' Quân lệnh');if(rw.phu)o.push(rw.phu+' Binh Phù');
  if(rw.bk)o.push('Binh Thư ×'+rw.bk+(rw.bkn>1?' cho '+rw.bkn+' nhánh':''));if(rw.gear)o.push('1 trang bị '+(rw.gq>=3?'Vàng':'Lam'))}catch(e){}return o.join(' · ')}
 function w1Give(rw0){var rw=JSON.parse(JSON.stringify(rw0||{})),T=w1Trp();
  if(rw.bk){var n=rw.bk,k=rw.bkn||1;delete rw.bk;delete rw.bkn;if(T)trp8Give('bt',n*k);else{rw.b={};w1Br(k).forEach(function(b){rw.b[b]=n})}}
@@ -51160,6 +51168,19 @@ var TTMV={on:1,v:2,err:0,n:0,hit:0,ready:0,dg:0,ig:0,hs:0,kick:0,pk:0,log:[],st:
   '#top .tbhp::after{content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%)}'+
   '#top .tbp-ordp{margin-left:2px}'+
   '#top .tbpi .tbhp{margin-left:2px;margin-right:calc(-6px*var(--tp,1))}'+
+  /* FU-TOP: tap targets >= 44 css, real boxes grow, sprites keep their place (everything under html.kw1, so ?kw1=0 = dev) */
+  'html.kw1 body #top .tbr1{top:17.6px;height:44px}html.kw1 body #top .tbr2{top:61.63px;height:44px}'+
+  'html.kw1 body #top .tbpl>.tbs,html.kw1 body #top .tbpi>.tbs{margin-top:8.8px}html.kw1 body #top .tbpi>.tbs{margin-top:9.17px}'+
+  'html.kw1 body #top .tbpl .tbc{height:29.33px;margin-top:8.8px}html.kw1 body #top .tbpi .tbc{height:25.67px;margin-top:9.17px}'+
+  /* the "+" buttons: 21 x 20 sprite, real box 45 x 44 (12 px padding, sprite kept), taken out of the flex flow so the chips keep their widths; the room it used is added as padding */
+  'html.kw1 body #top .tbhp{position:absolute!important;margin:0!important;box-sizing:content-box!important;padding:12px!important;background-origin:content-box;background-clip:content-box;top:calc(50% - 22.17px)}'+
+  'html.kw1 body #top .tbhp::after{display:none}'+
+  'html.kw1 body #top .tbpi .tbhp{right:calc(2px*var(--tp,1) - 12px)}html.kw1 body #top .tbpl .tbhp{right:calc(14px*var(--tp,1) - 9px + var(--tbox,0px))}'+
+  /* round 2: both "+" boxes above the chips (nothing covers their 44 x 44), ord "+" 3 px inward so its box ends inside the viewport */
+  'html.kw1 body #top .tbhp{z-index:6}'+
+  /* round 3: the vip "+" box (row 2) starts 1.7 px lower so it no longer overlaps the ord "+" box (row 1); sprite moves 1.7 px down */
+  'html.kw1 body #top .tbp-vip{top:calc(50% - 19.47px)}'+
+  'html.kw1 body #top .tbpi .tbc:has(>.tbhp:not([style*="none"])){padding-right:calc(14px*var(--tp,1) + 20.5px)}html.kw1 body #top .tbpl .tbc:has(>.tbhp:not([style*="none"])){padding-right:calc(14px*var(--tp,1) + 23.33px)}'+
   /* gates mirrored from bn340b2 / ui354c1 */
   'body.bn3l-ord #top .tbp-fl{visibility:hidden!important}body.bn3l-guild #top .tbp-ss{visibility:hidden!important}'+
   'html body.ui354.bn3l-gold #top .tbc-go{filter:grayscale(1);opacity:.55}body.bn3l-gold #top .tbc-go .tbt b{visibility:hidden;position:relative}body.bn3l-gold #top .tbc-go .tbt b::after{content:"0";visibility:visible;position:absolute;left:0;top:0;color:#cfc4ae}body.bn3l-gold #top .tbc-go .tbhp{display:none!important}'+
@@ -51190,6 +51211,9 @@ var TTMV={on:1,v:2,err:0,n:0,hit:0,ready:0,dg:0,ig:0,hs:0,kick:0,pk:0,log:[],st:
   if(i>=FITS.length)i=FITS.length-1;
   while(cut()&&gi<gs.length){fl.style.flexGrow=gs[gi++];fit2()}
   FIT=Math.min(i,FITS.length-1)}
+ /* FU-TOP r2: the ord "+" 44 x 44 must end inside the viewport whatever the chip widths (kw1 only): measure, push in by the overflow */
+ function adj(){try{if(!TB||!document.documentElement.classList.contains('kw1'))return;var fp=TB.querySelector('.tbp-ordp');if(!fp||fp.style.display==='none')return;
+  TB.style.setProperty('--tbox','0px');var rr=fp.getBoundingClientRect(),ov=rr.right-0.65-document.documentElement.clientWidth;TB.style.setProperty('--tbox',(ov>0?Math.ceil(ov*10)/10+0.2:0)+'px')}catch(e){}}
  function sync(){
   var top=document.getElementById('top');if(!top||!RDY)return;
   var old=top.querySelector('.hud1'),res=top.querySelector('.res');
@@ -51206,7 +51230,7 @@ var TTMV={on:1,v:2,err:0,n:0,hit:0,ready:0,dg:0,ig:0,hs:0,kick:0,pk:0,log:[],st:
    fl:cap?tx(cap).replace(/[+＋]\s*$/,'').trim():'',flp:(pl&&oc&&!/\bfull\b/.test(oc.className))?'ord215':'',tip:oc?(oc.getAttribute('data-hftip')||''):'',
    si:tx(cu.silver&&cu.silver.querySelector('b')),gr:tx(cu.grain&&cu.grain.querySelector('b')),go:tx(cu.gold&&cu.gold.querySelector('b')),me:tx(cu.merit&&cu.merit.querySelector('b')),
    gop:vp?(vp.getAttribute('data-a')||'vip'):'',W:top.clientWidth};
-  var key=JSON.stringify(D)+aKey;if(key===LAST&&TB.parentNode===top)return;
+  var key=JSON.stringify(D)+aKey;if(key===LAST&&TB.parentNode===top){adj();return}
   var avKey=aKey;
   if(TB.getAttribute('data-av')!==avKey&&img){var av=TB.querySelector('#tbav');av.innerHTML='<div class="pw">'+img.innerHTML+'</div>';[].forEach.call(av.querySelectorAll('img'),function(i){i.removeAttribute('style');i.style.objectPosition='50% 38%'});TB.setAttribute('data-av',avKey)}
   var nm=TB.querySelector('#tbname');if(nm.textContent!==D.name)nm.textContent=D.name;
@@ -51216,7 +51240,9 @@ var TTMV={on:1,v:2,err:0,n:0,hit:0,ready:0,dg:0,ig:0,hs:0,kick:0,pk:0,log:[],st:
   var gpl=TB.querySelector('.tbc-go');if(D.gop)gpl.setAttribute('data-a',D.gop);else gpl.removeAttribute('data-a');
   var gp=TB.querySelector('.tbp-vip');gp.style.display=D.gop?'':'none';gp.setAttribute('data-a',D.gop||'vip');gp.setAttribute('aria-label','Nạp · VIP');
   var plF=TB.querySelector('.tbp-fl');if(D.tip)plF.setAttribute('data-hftip',D.tip);else plF.removeAttribute('data-hftip');
-  fit();LAST=key}
+  fit();
+  adj();
+  LAST=key}
  /* wrap renderTop: the old chain writes #top.innerHTML (wiping children), so lift the bar out first and put it back after */
  if(typeof renderTop==='function'){var _rtH=renderTop;renderTop=function(){var top=document.getElementById('top'),keep=null;
   try{if(TB&&top&&TB.parentNode===top){keep=TB;top.removeChild(TB)}}catch(e){}
@@ -51900,6 +51926,1002 @@ var KW1=(function(){
       c2+=gp(JL,gu[0])+gp(BL,gu[1])+gp(KL,gu[2])}
      var s2=D.getElementById('kw1swcss2');if(!s2){s2=D.createElement('style');s2.id='kw1swcss2'}s2.textContent=c2;D.head.appendChild(s2)})
    }).catch(function(){});
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S1 (Tướng), text for sec303_1.js. Empty until its lane fills it.
+var TX_SEC303_1={};
+// V303 SEC step 0: section S2 (Bày trận), text for sec303_2.js. Empty until its lane fills it.
+var TX_SEC303_2={};
+// V303 SEC step 0: section S3 (Thành), text for sec303_3.js. Empty until its lane fills it.
+var TX_SEC303_3={};
+// V303 SEC step 0: section S4 (Cửa hàng & Nạp), text for sec303_4.js. Empty until its lane fills it.
+var TX_SEC303_4={};
+// V303 SEC step 0: section S5 (Kho đồ), text for sec303_5.js.
+// SEC-5 round 2: ribbon title of the Quân Đoàn tab page (atlas n74; the final shows a titled window, the page had none).
+var TX_SEC303_5={t74:"Quân Đoàn"};
+// V303 SEC step 0: section S6 (Nhiệm vụ & Sự kiện), text for sec303_6.js. Empty until its lane fills it.
+var TX_SEC303_6={};
+// V303 SEC step 0: section S7 (Thử thách), text for sec303_7.js. Empty until its lane fills it.
+var TX_SEC303_7={};
+// V303 SEC step 0: section S8 (Chinh chiến + Lần đầu + Bang hội & Cài đặt), text for sec303_8.js. Empty until its lane fills it.
+var TX_SEC303_8={};
+// V303 SEC-1a round 3 (coder-junior339; r2 coder-junior317): section S1 Tướng, atlas n 20-34. CSS only, under html.kw1 (so ?kw1=0 / atlas failure = old look). CSS root class .s3031.
+// Round 2: every title = the 658 red ribbon (title_ribbon_C, called like kit303sw.js), 658 bevel buttons (jade J / bronze), carved-wood dragon frame on every pop-up and on the n22 faction sheet.
+// Parts come from the KW1 API (K.part / K.url). The frame composite + plain plank are the sweep's blob urls (kit303sw builds them async inside <style id=kw1swcss2>): read once they exist;
+// if they never appear, or the sweep's CSS shape changed, a console warning says so (no silent skip). R2: the scroll sheets get an inner body (display only, same nodes) and bdSrcSheet is re-drawn with the kit rows (same texts); no action, no state, no save field.
+(function(){try{
+ var D=document,st=D.createElement("style");st.id="sec303_1css";st.textContent="/* .s3031: section S1 */";(D.head||D.documentElement).appendChild(st);
+ if(typeof KW1==="undefined"||!KW1||!KW1.on)return;
+ KW1.on(function(){try{
+  var K=KW1,CREAM=K.CREAM||"#F6E7C8",GD=K.GOLD||"#E8C068",OUT=K.OUT||"none";
+  function px(v){return(Math.round(v*100)/100)+"px"}
+  var HP=K.part("sheet_header_C"),BP=K.part("sheet_bottom_P");if(!HP||!BP)return;
+  var HT=HP.r[3],BH=BP.r[3]-19,KP=0.27,KF=0.34;
+  var BFF='var(--ds-fb,"Be Vietnam Pro",system-ui,sans-serif)',FD='var(--ds-fd,Philosopher,Georgia,serif)';
+  var X="html.kw1 body #modal#modal #sheet#sheet#sheet";
+  /* border-image from a kit part at scale k (same helper as kit303sw.js bi()) */
+  function bi(n,k){var p=K.part(n),u=K.url(n);if(!p||!u)return"";var s=p.slice||[0,0,0,0];
+   return"border-style:solid!important;border-color:transparent!important;border-image-source:url("+u+")!important;border-image-slice:"+s[1]+" "+s[2]+" "+s[3]+" "+s[0]+" fill!important;"+
+    "border-image-width:"+px(s[1]*k)+" "+px(s[2]*k)+" "+px(s[3]*k)+" "+px(s[0]*k)+"!important;border-image-repeat:stretch!important;border-image-outset:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;"}
+  function img(n,size){var u=K.url(n);return u?"background:url("+u+") center/"+size+" no-repeat!important;":""}
+  var c="";
+  /* ---- 1: title = red ribbon C, 42 css high, 20 px serif cream (as the sweep's U3B titles) ---- */
+  var rb=K.part("title_ribbon_C"),rk=42/(rb?rb.r[3]:162),FW="html.kw1 body #modal#modal #sheet#sheet#sheet:has(>.wcbox)";
+  var RT="html.kw1 body #rt226#rt226#rt226 .rt226in",TT=X+" .hbwh .hbwt,"+FW+" .wc3t,"+RT+" .rt226h .t3ttl";
+  if(rb&&K.url("title_ribbon_C")){
+   c+=TT+"{"+bi("title_ribbon_C",rk)+"border-width:0 26px!important;height:42px!important;min-height:42px!important;width:auto!important;min-width:0!important;box-sizing:border-box!important;padding:0 4px!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;font:700 20px/1.1 "+FD+"!important;color:"+CREAM+"!important;text-shadow:"+OUT+"!important;letter-spacing:0!important;filter:none!important}";
+   c+=TT.split(",").map(function(s){return s+"::before,"+s+"::after"}).join(",")+"{display:none!important;content:none!important}";
+   c+="@media (max-width:374px){"+TT+"{font-size:18px!important}}";
+  }else console.warn("sec303_1: title_ribbon_C missing in the kit");
+  /* ---- 2: buttons = 658 bevel (jade J main, bronze secondary), >= 44 tall, one style per screen; disabled = grey filter, label >= 3:1 ---- */
+  var BJ=X+" .hbwin button.t3P",BB=X+" .hbwin button.t3S,"+X+" .hbwin button.t3D",DIS=X+" .hbwin button.t3D,"+X+" .hbwin button.t3S.dim,"+X+" .hbwin button.t3S[disabled]";
+  var okB=K.url("btn_jade_J")&&K.url("btn_bronze");
+  if(okB){
+   c+=BJ+"{"+bi("btn_jade_J",0.27)+"}"+BB+"{"+bi("btn_bronze",0.26)+"}";
+   c+=BJ+","+BB+"{color:"+CREAM+"!important;text-shadow:"+OUT+"!important;font:700 14px/1 "+BFF+"!important;min-height:44px!important;min-width:112px!important;white-space:nowrap!important;padding-left:12px!important;padding-right:12px!important;display:flex!important;align-items:center!important;justify-content:center!important;-webkit-text-stroke:0!important}";
+   c+=BJ+" *,"+BB+" *{color:inherit!important;text-shadow:inherit!important;font:inherit!important}";
+   c+=DIS+"{opacity:1!important;filter:grayscale(1) brightness(1.25)!important;color:#120C06!important;text-shadow:0 1px 0 rgba(255,255,255,.28)!important;font-weight:800!important}";
+  }else console.warn("sec303_1: btn_jade_J / btn_bronze missing in the kit");
+  /* n34 rotation pop-up (#rt226): Đổi = jade J, back = round F */
+  if(okB)c+=RT+" button.rt244b{"+bi("btn_jade_J",0.27)+"color:"+CREAM+"!important;text-shadow:"+OUT+"!important;font:700 15px/1 "+BFF+"!important;min-height:44px!important;min-width:64px!important;height:44px!important;padding:0 14px!important;display:flex!important;align-items:center!important;justify-content:center!important}";
+  if(K.url("btn_pause_round"))c+=RT+" .rt226c{"+img("btn_pause_round","40px 40px")+"width:44px!important;height:44px!important;border:0!important;border-radius:50%!important;color:"+CREAM+"!important;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))!important;top:0!important;left:0!important}";
+  c+=RT+" .rt226h{min-height:44px!important}";
+  /* back button = round F (btn_pause_round) with our glyph, as the sweep's .t3rb.l */
+  if(K.url("btn_pause_round"))c+=X+" .hbwh .hbbk{"+img("btn_pause_round","40px 40px")+"width:44px!important;height:44px!important;min-width:44px!important;border:0!important;border-radius:50%!important;box-shadow:none!important;color:"+CREAM+"!important;font:700 22px/1 "+BFF+"!important;text-shadow:"+OUT+"!important;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))!important;top:0!important}";
+  /* ---- taps >= 44, one family ---- */
+  c+=X+" .hbwin a[data-a],"+X+" .hbwin button.u3lk,"+X+" .hbwin .hbtl{min-height:44px!important;display:inline-flex!important;align-items:center!important}";
+  c+="html.kw1 body #main#main#main#main#main#main#main .gtr1>button{height:44px!important;min-height:44px!important}";
+  c+=X+" .hbwin{font-family:"+BFF+"!important;color:"+CREAM+"!important}";
+  c+=X+" .hbwin .hbwb{color:"+CREAM+"}";
+  c+=X+" .hbw .hbbg{background:rgba(0,0,0,.6)!important}";
+  c+=X+" .hbwh{margin:0 0 8px!important;display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;min-height:44px!important}";
+  /* ---- skin sheets (24, 25): Nguyên bản card = inset card I, worn = gold rim; skin buttons >= 44 ---- */
+  var SK="html.kw1 body #modal#modal #sheet#sheet#sheet#sheet.u3esk";
+  c+=SK+" .skcard.base{background:linear-gradient(180deg,rgba(20,12,7,.72),rgba(14,8,5,.78))!important;border:1px solid rgba(176,122,62,.7)!important;border-radius:8px!important;box-shadow:inset 0 1px 0 rgba(232,192,104,.12),inset 0 0 12px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.5)!important}";
+  c+=SK+" .skcard.base.worn{border-color:"+GD+"!important;box-shadow:inset 0 0 0 1px rgba(232,192,104,.45),inset 0 0 12px rgba(0,0,0,.45),0 0 8px rgba(232,192,104,.25)!important}";
+  c+=SK+" .skcard.base .dschip.ok{background:linear-gradient(180deg,#3f9a5c,#256b3d)!important;color:#F3F8E8!important;border:1px solid #9fe0a8!important;font-size:13px!important;font-weight:700!important}";
+  c+=SK+" .skcard .dsbt,"+SK+" .skcard button.btn{min-height:44px!important}";
+  /* ---- faction sheet (22): carved-wood frame on the sheet, cards on planks, ribbon title ---- */
+  /* r3: the box grew taller than the sheet and the centred, overflow:hidden .wcbox cropped its top at 360 (ribbon off screen): top-aligned, auto height, nothing cropped */
+  c+=FW+" .wcbox{box-sizing:border-box!important;margin:6px 8px!important;padding:6px 8px 14px!important;height:auto!important;min-height:0!important;align-items:flex-start!important;overflow:visible!important;background:none!important;backdrop-filter:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}";
+  c+=FW+" .wcbox::before,"+FW+" .wcbox::after{display:none!important;background:none!important}";
+  c+=FW+" .wclogo,"+FW+" .wctag{color:"+GD+"!important;text-shadow:"+OUT+"!important}";
+  c+=FW+" .wcstory{color:"+CREAM+"!important;font-size:14px!important}";
+  c+=FW+" .wcpick{color:"+CREAM+"!important;font-size:15px!important}";
+  c+=FW+" .wcfoot{font-size:13px!important;color:"+CREAM+"!important}";
+  c+=FW+" .wcf{min-height:44px!important}";
+  /* ---- SEC-1b (S1b Tướng n35-48): popups/sheets tagged by title (data-s31b on #sheet; display only) ---- */
+  var B1="html.kw1 body #modal#modal #sheet#sheet#sheet#sheet",SB=function(k){return B1+'[data-s31b="'+k+'"]'};
+  /* short sheets fit their content (frame hugs the card instead of a full-height empty panel) */
+  c+=SB("shop")+","+SB("bdsrc")+","+SB("tree")+"{height:auto!important;min-height:0!important;align-self:center!important}";
+  c+=SB("shop")+" .u4rl .u3bg button,"+SB("shop")+" .u4ch.gd,"+SB("shop")+" button.u3bwd,"+SB("tree")+" button.bd6go{min-height:44px!important}"+SB("shop")+" .u4rl .u3bg button{height:44px!important}";
+  /* R2 scroll sheets (n35 n45 n47, tall n46): the scroll lives on an inner body (.s31body, made by the watcher below) that starts under the title band; the header stays outside the scroller,
+     so nothing scrolls beside the ribbon or between the dragons. Bottom: mask fade while more is below (.s31m), top soft edge once scrolled (.s31t), end padding + wood strip before the frame's rail. */
+  var SC3=SB("tc")+","+SB("pick")+","+SB("tree");
+  c+=SC3+"{display:flex!important;flex-direction:column!important;overflow:hidden!important;padding-bottom:14px!important}";
+  c+=SC3.split(",").map(function(x){return x+">.snav"}).join(",")+"{flex:none!important}";
+  /* the kit's sticky dragon overlay (#sheet::before, 6 ids) must not take a flex slot once the sheet is a flex column: pin it to the top of the padding box (12 ids beat the kit) */
+  c+=SC3.split(",").map(function(x){return x.replace("#sheet#sheet#sheet#sheet","#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet")+"::before"}).join(",")+"{position:absolute!important;top:0!important}";
+  c+=SB("tc")+">.t3r{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important;overflow:visible!important}"+SB("tc")+">.t3r>.t3hd{flex:none!important}";
+  var BD=SC3.split(",").map(function(x){return x+" .s31body"}).join(",");
+  c+=BD+"{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;padding:10px 0 18px!important;box-sizing:border-box}";
+  var MB="linear-gradient(to bottom,#000 calc(100% - 32px),rgba(0,0,0,0) 100%)",MT="linear-gradient(to bottom,rgba(0,0,0,0) 0,#000 24px)";
+  c+=BD.split(",").map(function(x){return x+".s31m"}).join(",")+"{-webkit-mask-image:"+MB+";mask-image:"+MB+"}";
+  c+=BD.split(",").map(function(x){return x+".s31t"}).join(",")+"{-webkit-mask-image:"+MT+";mask-image:"+MT+"}";
+  c+=BD.split(",").map(function(x){return x+".s31m.s31t"}).join(",")+"{-webkit-mask-image:"+MT+","+MB+";mask-image:"+MT+","+MB+";-webkit-mask-composite:source-in;mask-composite:intersect}";
+  /* n47: section headers = the kit divider header (as n43's .u3bp: cream caps between bronze rules, 15 px at both widths); equipped item tile as big as the kho tiles */
+  var dl=K.url("divider_jewel_M"),dr=K.url("divider_jewel_M_right"),DH=SB("pick")+" .dshl";
+  c+=DH+"{display:flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;margin:14px 2px 8px!important;font-family:"+FD+"!important;font-weight:700!important;letter-spacing:.04em!important;text-transform:uppercase!important;color:"+GD+"!important;text-shadow:"+OUT+"!important;line-height:1.15!important}";
+  if(dl&&dr)c+=DH+"::before,"+DH+"::after{content:\"\"!important;display:block!important;flex:1 1 0!important;min-width:24px!important;height:24px!important}"+
+   DH+"::before{background:url("+dl+") right 0 top -6px/auto 24px no-repeat,linear-gradient(90deg,rgba(176,122,62,0),#B07A3E) left center/calc(100% - 30px) 2px no-repeat!important}"+
+   DH+"::after{background:url("+dr+") left 0 top -6px/auto 24px no-repeat,linear-gradient(270deg,rgba(176,122,62,0),#B07A3E) right center/calc(100% - 30px) 2px no-repeat!important}";
+  c+=DH+" .dsnum{color:"+GD+"!important}"+SB("pick")+" .dsitem>.stack>.btn{min-height:44px!important;height:44px!important}";
+  c+=SB("pick")+" .dsitem>div:first-child{width:76px!important;flex:none!important}"+SB("pick")+" .dsitem .gi.dsgi{border:1.5px solid color-mix(in srgb,var(--q) 60%,transparent)!important;box-shadow:0 0 10px color-mix(in srgb,var(--q) 35%,transparent)!important}";
+  /* R3 n47: ngoại trang card header: chip "Đang phát huy" drops to its own row under the art+title (does not squeeze the title column); path chip on one line; tile 76 css with rarity frame */
+  var PK=SB("pick");
+  c+=PK+" .dsskh{flex-wrap:wrap!important;row-gap:8px!important}"+PK+" .dsskh>.dsskt{flex:0 0 calc(100% - 88px)!important;min-width:0!important}"+PK+" .dsskh>.dschip{order:3!important;flex:0 0 auto!important;margin-left:0!important}";
+  c+=PK+" .dssk .skpath{white-space:nowrap!important;letter-spacing:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important}"+PK+" .dsskn,"+PK+" .dsskn b{overflow-wrap:break-word!important}";
+  c+=PK+" .dssk .siart{width:76px!important;height:76px!important;box-sizing:border-box!important;border-radius:14px!important;overflow:hidden!important;background:radial-gradient(90% 90% at 50% 38%,color-mix(in srgb,var(--k1,#6cc283) 30%,#231a12),#1a130d 78%)!important;border:1.5px solid color-mix(in srgb,var(--k1,#6cc283) 70%,transparent)!important;box-shadow:0 0 10px color-mix(in srgb,var(--k1,#6cc283) 35%,transparent)!important}"+PK+" .dssk .siart svg{width:100%!important;height:100%!important;transform:scale(1.7)}";
+  /* n46 at tall phones (>= 800 css): the sheet sits fully below the HUD (frame top 108) and ends 8 css above the nav labels (nav 64 + 8); shorter phones (360x740) keep the full-height sheet */
+  c+="@media (min-height:800px){"+SB("tree")+"{align-self:flex-start!important;margin-top:108px!important;max-height:calc(100% - 180px)!important}}";
+  c+="@media (max-height:799px){"+SB("tree")+"{max-height:calc(100% - 8px)!important}}";
+  st.textContent="/* .s3031: section S1 */"+c;
+  /* title -> key; the watcher also sets s31m while the sheet has more content below */
+  var TK=[[/^Truyền công · /,"tc"],[/^Binh chủng chủ tướng/,"lord"],[/^Cửa hàng mảnh tuần/,"shop"],[/^Nguồn mảnh · /,"src"],[/^Nguồn (Binh|Thiên|Nguồn)/,"bdsrc"],[/^Binh Đạo · /,"tree"],[/^Thần Tướng · /,"urc"]];
+  function s31key(sh){var t=sh.querySelector(".t3ttl,h3.dsT,h3"),tx=t?(t.textContent||"").trim():"",k="";
+   for(var i=0;i<TK.length;i++)if(TK[i][0].test(tx)){k=TK[i][1];break}
+   if(!k&&sh.querySelector("[data-a=wheel]")&&sh.querySelector("[data-a=rs9]"))k="pick";
+   return k}
+  /* scroll sheets get an inner body under the header (everything after .snav / hidden key / .t3hd / .tub moves into .s31body); same node moves, so every data-a and listener stays */
+  function s31wrap(sh,k){if(k!=="tc"&&k!=="pick"&&k!=="tree")return null;
+   var host=sh.querySelector(":scope>.t3r")||sh,bd=host.querySelector(":scope>.s31body");
+   if(!bd){var kids=[].filter.call(host.childNodes,function(n){return!(n.nodeType===1&&n.matches(".snav,h3.u3bkey,.t3hd,.tub,.s31body"))});
+    if(!kids.length&&!(host.children.length>0))return null;
+    bd=D.createElement("div");bd.className="s31body";kids.forEach(function(n){bd.appendChild(n)});host.appendChild(bd)}
+   return bd}
+  function s31flags(bd){var more=bd.scrollHeight>bd.clientHeight+4&&bd.scrollTop+bd.clientHeight<bd.scrollHeight-6,top=bd.scrollTop>3;
+   if(more!==bd.classList.contains("s31m"))bd.classList.toggle("s31m",more);if(top!==bd.classList.contains("s31t"))bd.classList.toggle("s31t",top)}
+  function s31run(){try{if(!D.documentElement.classList.contains("kw1"))return;var sh=D.getElementById("sheet"),m=D.getElementById("modal");if(!sh||!m||m.hidden){if(sh&&sh.hasAttribute("data-s31b")){sh.removeAttribute("data-s31b");sh.classList.remove("s31m")}return}
+   if(sh.querySelector(".hbwin,.wcbox"))return;
+   var k=s31key(sh);
+   if(k){if(sh.getAttribute("data-s31b")!==k)sh.setAttribute("data-s31b",k);var bd=s31wrap(sh,k);if(bd)s31flags(bd);
+    if(k==="pick")[].forEach.call(sh.querySelectorAll(".dshl"),function(e){if(e.style.fontSize!=="15px")e.style.setProperty("font-size","15px","important")})}
+   else if(sh.hasAttribute("data-s31b")){sh.removeAttribute("data-s31b")}}catch(e){}}
+  if(!window.__s31w){window.__s31w=setInterval(s31run,300);
+   try{D.addEventListener("scroll",function(ev){try{var t=ev.target;if(t&&t.classList&&t.classList.contains("s31body"))s31flags(t)}catch(e){}},true)}catch(e){}
+   try{var sh0=D.getElementById("sheet");if(sh0&&window.MutationObserver)new MutationObserver(function(){s31run()}).observe(sh0,{childList:true})}catch(e){}}
+  /* ---- rules that use the sweep's derived art (blob urls), applied once kw1swcss2 has them ---- */
+  var tries=0,done=0;
+  function derive(){if(done)return;try{
+   var s2=D.getElementById("kw1swcss2"),t=s2&&s2.textContent||"";
+   var mf=t.match(/border-image-source:url\((blob:[^)]+)\)!important;border-image-slice:\d+ 300 \d+ 300/),mp=t.match(/border-image-source:url\((blob:[^)]+)\)!important;border-image-slice:30 (\d+) 30 (\d+) fill/);
+   if(!mf||!mp){if(++tries<80)setTimeout(derive,400);else console.warn("sec303_1: the sweep's frame / plank art (#kw1swcss2) never appeared: S1 pop-up frames and planks are not painted");return}
+   done=1;var fu=mf[1],pu=mp[1],R=+mp[2],L=+mp[3],c2="";
+   function fr(k,bw){return"border-style:solid!important;border-color:transparent!important;border-width:"+bw+"!important;border-image-source:url("+fu+")!important;border-image-slice:"+HT+" 300 "+BH+" 300!important;border-image-width:"+px(HT*k)+" "+px(300*k)+" "+px(BH*k)+" "+px(300*k)+"!important;border-image-repeat:stretch!important;border-image-outset:0!important;border-radius:0!important;"}
+   var wood=K.url("bg_wood_O"),bg="background:linear-gradient(rgba(16,9,5,.38),rgba(16,9,5,.38)),"+(wood?"url("+wood+") 0 0/256px 256px repeat,":"")+"#2E1C1A!important;background-clip:border-box!important;background-origin:border-box!important;";
+   var pl="border-style:solid!important;border-color:transparent!important;border-width:0!important;border-image-source:url("+pu+")!important;border-image-slice:30 "+R+" 30 "+L+" fill!important;border-image-width:"+px(9)+" "+px(R*.3)+" "+px(9)+" "+px(L*.3)+"!important;border-image-repeat:stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))!important;";
+   /* hub windows 26-34: the sweep's pop-up frame (dragon corners, rails, same widths as .kwp), plank rows */
+   c2+=X+" .hbwin{"+fr(KP,"14px 14px 16px")+bg+"padding:34px 8px 14px!important;box-shadow:0 8px 28px rgba(0,0,0,.65)!important;max-width:440px!important}";
+   c2+=X+" .hbwb.hb-boi .hbrw,"+X+" .hbwb .hbrw{"+pl+"padding:12px 14px 12px 12px!important;margin:0 0 6px!important;min-height:76px!important}";
+   c2+=X+" .hbwb .hbrw.off{opacity:1!important;filter:grayscale(.5) brightness(.85) drop-shadow(0 1px 2px rgba(0,0,0,.55))!important}";
+   c2+=X+" .hbwb .hbmore{border-top:0!important;margin-top:4px!important}";
+   c2+=RT+"{"+fr(KP,"14px 14px 16px")+bg+"padding:2px 8px 14px!important;box-shadow:0 8px 28px rgba(0,0,0,.65)!important}";
+   c2+="html.kw1 body #rt226#rt226 .rt226bg{background:rgba(0,0,0,.8)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}";
+   /* faction sheet 22: full-sheet frame (k .34), cards on planks keep their banner column (padding-left 90) */
+   /* r3: same carved-wood frame and plank as the pop-ups (k .27, 14/14/16); 8 ids beat login301's 6-id "background:none" on this sheet */
+   var FW8="html.kw1 body #modal#modal #sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet:has(>.wcbox)";
+   c2+=FW8+"{"+fr(KP,"14px 14px 16px")+bg+"box-shadow:none!important;padding:2px 6px 8px!important}";
+   c2+=FW+" .wcf{"+pl+"padding:12px 16px 12px 90px!important}";
+   /* S1b: cards on the plank like S1a's rows */
+   var Q1="html.kw1 body #modal#modal #sheet#sheet#sheet#sheet";
+   c2+=Q1+'[data-s31b="shop"] .pusec,'+Q1+'[data-s31b="bdsrc"] .pusec,'+Q1+'[data-s31b="tree"] .tr7h,'+Q1+'[data-s31b="tree"] .bd6c{'+pl+"padding:14px 16px!important;margin:8px 0!important}";
+   var s=D.createElement("style");s.id="sec303_1css2";s.textContent=c2;(D.head||D.documentElement).appendChild(s);
+  }catch(e){try{console.warn("sec303_1: derive failed "+e)}catch(x){}}}
+  derive();
+ /* ---- SEC-1b R2 n44: Nguồn Binh Thư / Binh Phù / Thiên Mệnh = n43's source rows (divider header + one kit plank row per source, no buttons); same strings, same order; kw1 off or any throw = the old list ---- */
+ try{if(typeof bdSrcSheet==="function"&&typeof U3B!=="undefined"&&U3B&&!window.__s31bd){window.__s31bd=1;var _bdS=bdSrcSheet;
+  bdSrcSheet=function(k){var h=_bdS.apply(this,arguments);try{
+   if(!D.documentElement.classList.contains("kw1")||!U3B.on())return h;
+   var U=U3B,d=U.dom(h),h3=d.querySelector("h3"),lis=[].map.call(d.querySelectorAll("li"),function(x){return(x.textContent||"").trim()});
+   if(!h3||!lis.length)return h;
+   var IC={"Chiến dịch mỗi ngày":"camp","Tinh binh":"gen","Thảo Phạt":"boss","Cảng Biển":"world","Cửa hàng mảnh tuần":"shop","Thông Thiên Tháp":"tower","Lôi Đài":"arena","Sự kiện":"quest","Sự kiện tuần":"quest","Quân Đoàn":"guild"},rows="";
+   lis.forEach(function(t){rows+=U.row({icon:U.ico(IC[t]||"prestige","#c8a45a"),title:U.esc(t)})});
+   return U.shell((h3.textContent||"").trim(),U.plate("Nguồn")+U.list(rows)).replace('class="t3r u3b"','class="t3r u3b u3bfam"')}catch(e){return h}}}}catch(e){}
+ }catch(e){}});
+}catch(e){}})();
+/* FU-POL (coder-junior408): S1 polish, CSS only under html.kw1 (?kw1=0 = old look), no DOM / action / state / text change.
+   n34 rotation pop-up labels (stat captions, Ô n, branch tag) 12 px; n47 Thanh Long ngoại trang icon brighter (that icon only, rarity frame kept);
+   n36/n37 branch-pair line on one line at 360 and 390 (nowrap, 12.5 px at <= 374, 16 css branch icons). */
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var RT='html.kw1 body #rt226#rt226#rt226 .rt226in',PR='html.kw1 body #modal#modal#modal.t3m #sheet#sheet#sheet.t3 .u3at',PK='html.kw1 body #modal#modal #sheet#sheet#sheet#sheet[data-s31b="pick"]',c='';
+   c+=RT+' .rts i{font-size:12px!important;white-space:nowrap!important}'+RT+' .rowlbl{font-size:12px!important}'+RT+' .rtb{font-size:12px!important}';
+   c+=PK+' .dssk .siart .dsgx{filter:brightness(1.75) contrast(1.12) saturate(1.25) drop-shadow(0 0 3px rgba(108,194,131,.55))!important}';
+   c+=PR+'{flex-wrap:nowrap!important;gap:0 3px!important;white-space:nowrap!important;min-width:0!important}'+
+    '@media (max-width:374px){'+PR+'{font-size:12.5px!important;gap:0 2px!important}'+PR+' .u3ap{gap:2px!important}'+PR+' .u3aic{width:16px!important;height:16px!important}}';
+   var st=document.createElement('style');st.id='sec303_1css_fp';st.textContent=c;(document.head||document.documentElement).appendChild(st);
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S2 (Bày trận). Owned by its lane only; CSS root class .s3032.
+(function(){try{var s=document.createElement("style");s.id="sec303_2css";s.textContent="/* .s3032: section S2 */";(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+/* V303 SEC-2 (coder-junior320): kit consistency for S2 Bày trận (atlas n 49-69). CSS only under html.kw1, inside KW1.on, outranking kit303sw with the
+   #modal x4 + #sheet x6 ladder + !important. No DOM change, no wrapper, no action, no state, no text; ?kw1=0 untouched.
+   The sweep (kit303sw) already gives every sheet the red ribbon C, the carved frame with corner dragons and the bevel buttons; this file closes the gaps left on S2:
+   1 confirm pop-ups (Xác nhận: n60 n66 n68, class .u6pop): message in an inset carved plaque, buttons 44 css / 16 px, one style (bronze Hủy + jade main), same parts as full sheets.
+   2 Bày trận (n51): faction + branch filter chips and the Phe button 36 css tall.
+   3 Binh Khoa (n65): the maxed / disabled "Tối đa" plates keep >= 3:1 text contrast while staying grey.
+   4 disabled kit buttons on S2 sheets (Thiếu bạc, Chưa gặp, Nghiên cứu): label colour floor so they read grey but legible. */
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var K=KW1,D=document,C=K.CREAM,GD=K.GOLD,OUT=K.OUT,c='';
+   var SH='html.kw1 body #modal#modal#modal#modal>#sheet#sheet#sheet#sheet#sheet#sheet.sheet:not(.t3hp)';
+   var POP=SH+'.u6pop';
+   /* 1 pop-ups: ribbon centred IN the frame's top band (band = 0.27 x header art = ~50 css; ribbon 42 css, 4 css from the top), narrowed to fit between the two corner dragons;
+      message in a slim carved inset (lighter than the frame, <= 25% of the pop-up), body starts under the band */
+   c+=POP+'>.snav{top:4px!important;justify-content:center!important}'+
+    POP+'>.snav>h3:not([hidden]){flex:none!important;width:min(168px,calc(100% - 164px))!important;margin:0 auto!important;padding:0 2px!important;font-size:18px!important;white-space:nowrap!important}'+
+    POP+'{padding-top:36px!important}'+
+    POP+' .u3q{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;min-height:44px!important;margin:12px 0 12px!important;padding:6px 14px!important;box-sizing:border-box!important;'+
+    'font:600 17px/1.3 var(--fb)!important;color:'+C+'!important;text-shadow:'+OUT+'!important;background:linear-gradient(180deg,rgba(74,48,28,.62),rgba(52,32,19,.62))!important;border:1px solid rgba(176,122,62,.6)!important;border-radius:8px!important;'+
+    'box-shadow:inset 0 2px 3px rgba(0,0,0,.42),inset 0 -1px 0 rgba(232,192,104,.22),0 1px 0 rgba(232,192,104,.12)!important}'+
+    POP+' .u3q:empty{min-height:44px!important}'+
+    POP+' .sbar{display:flex!important;gap:12px!important;align-items:stretch!important}'+
+    POP+' .sbar>button{flex:1 1 0!important;min-height:44px!important;font:700 16px/1.1 var(--fb)!important}'+
+    POP+' .sbar>button .u9l{font:700 16px/1.1 var(--fb)!important}';
+   c+='@media (max-width:374px){'+POP+' .sbar>button,'+POP+' .sbar>button .u9l{font-size:14px!important;padding-left:6px!important;padding-right:6px!important}}';
+   /* 2 Bày trận filters */
+   c+=SH+' .dsrh>button{min-height:44px!important;height:44px!important}'+
+    SH+' .fm2-flt .chip{min-height:44px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}';
+   /* 3 Binh Khoa */
+   c+=SH+' .khg .khb[disabled]{opacity:1!important}'+
+    SH+' .khg .khb .u5cs{color:#E6D9C0!important;text-shadow:0 1px 1px rgba(0,0,0,.85)!important;font-size:13px!important}';
+   /* 4 disabled kit buttons */
+   c+=SH+' button.btn.dim,'+SH+' button.btn[disabled],'+SH+' button.btn.off{color:#E6D9C0!important}';
+   /* 4b round 2 (qa SEC-6 fix 1): every enabled button on the S2 screens is >= 44 css tall (a min-height only: the plates stretch, labels stay centred) */
+   c+=SH+' button[data-a=fpre],'+SH+' button[data-a=fmauto],'+SH+' button[data-a=fmclr],'+SH+' button[data-a=refillTeam],'+SH+' button[data-a=fmo],'+SH+' .fm2-fold,'+SH+' [data-a=flsrc],'+SH+' button[data-a=trpf],'+SH+' button[data-a=keslot]{min-height:44px!important;box-sizing:border-box!important}'+
+    SH+' button[data-a=fmauto],'+SH+' button[data-a=fmclr],'+SH+' button[data-a=refillTeam],'+SH+' .uigseg button[data-a=trpf],'+SH+' button[data-a=keslot]{height:44px!important}'+
+    SH+' button[data-a=fpre]{padding-top:0!important;padding-bottom:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}';
+   /* 5 round 2, n51 Bày trận: slot / card captions never run past 2 lines (the game sets white-space inline, so clamp instead); filter chips scroll with an edge fade, never cut mid-word */
+   c+=SH+' .fm2-c .fm2-nm,'+SH+' .fm2-h .fm2-nm,'+SH+' .fm2-flag{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;max-width:100%!important;font-size:12px!important;line-height:1.15!important;word-break:break-word!important}'+
+    SH+' .fm2-flt .chips{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)!important;mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)!important;padding-right:2px!important;-webkit-mask-image:none!important;mask-image:none!important;flex-wrap:wrap!important;overflow:visible!important;row-gap:6px!important}'+SH+' .fm2-flt .chips .chip{flex:1 1 calc(25% - 6px)!important;min-width:0!important;padding-left:6px!important;padding-right:6px!important;gap:3px!important;font-size:14px!important;white-space:nowrap!important}';
+   /* 6 round 2, n67 Chọn tướng: tab row tighter (all six reachable, first four whole at 360), names <= 2 lines, maxed cards keep portrait brightness and wear a badge */
+   c+=SH+' .uigseg{gap:4px!important}'+SH+' .uigseg button{padding:0 9px!important;font-size:14px!important}'+SH+' .uigseg{flex-wrap:wrap!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;row-gap:6px!important}'+SH+' .uigseg button{flex:1 1 auto!important;white-space:nowrap!important}'+
+    SH+' .uigt .trtn{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;white-space:normal!important;line-height:1.15!important}'+
+    SH+' .uigt.cap .pw,'+SH+' .uigt.cap .trtn{opacity:1!important}'+
+    SH+' .uigt.cap .trtl{display:inline-block!important;margin:2px auto 0!important;padding:1px 9px!important;border-radius:10px!important;background:rgba(14,8,5,.78)!important;border:1px solid rgba(232,192,104,.7)!important;color:'+GD+'!important;font:700 12px/1.3 var(--fb)!important;text-shadow:'+OUT+'!important}';
+   /* 7 round 2, n69 Quân Sư Kế: cost plate 8 css off the card edge; condition chips share each row evenly with an 8 css gap */
+   c+=SH+' .u3bk{margin-right:10px!important}'+
+    SH+' .u3hch{gap:8px!important}'+SH+' .u3hch button{flex:1 1 calc(50% - 4px)!important;min-width:0!important;white-space:normal!important;line-height:1.2!important;padding:4px 8px!important}';
+   /* 8 round 4 (qa348): (a) pv220rm x = 44 css box, the 24 css disc is drawn by ::before so it looks as before (box centre = old disc centre);
+      (b) "Đổi đội hình" 44 css tall; (c) never narrower than dev: pop-up OK 155 (144 under 375) = dev measured 154 / 143.3, n69 first ketr chip 225 = dev 224.7 (own row) */
+   c+=SH+' .pv-my .fc .pv220x{width:44px!important;height:44px!important;top:-7px!important;right:-7px!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}'+
+    SH+' .pv-my .fc .pv220x::before{content:"";position:absolute;left:10px;top:10px;width:24px;height:24px;box-sizing:border-box;border-radius:50%;background:rgba(26,18,12,.82);border:1px solid rgba(226,178,90,.6);z-index:-1}'+
+    SH+' button[data-a=form]{min-height:44px!important;box-sizing:border-box!important}'+
+    POP+' .sbar>button[data-a=u3cfok],'+POP+' .sbar>button[data-a=flcfok]{min-width:0!important}'+POP+' .sbar{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,2fr)!important;gap:12px!important}'+
+    SH+' .u3bk.u3hfoot{margin-right:0!important}'+
+    SH+' .u3hch button[data-a=ketr]:first-child{flex:1 1 100%!important;min-width:225px!important}';
+   var st=D.getElementById('sec303_2css');if(!st){st=D.createElement('style');st.id='sec303_2css';D.head.appendChild(st)}st.textContent='/* .s3032: section S2 */'+c;
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S3 (Thành). Owned by its lane only; CSS root class .s3033.
+// CSS only, under html.kw1 (so ?kw1=0 and an atlas failure keep the old look). No DOM change, no action name, no save field, wraps nothing.
+(function(){try{var s=document.createElement("style");s.id="sec303_3css";s.textContent="/* .s3033: section S3 */";(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var K=KW1,D=document,CR=K.CREAM,GD=K.GOLD,OUT=K.OUT,c='';
+   function px(v){return(Math.round(v*100)/100)+'px'}
+   function bi(n,k,o){o=o||{};var p=K.part(n),u=K.url(n);if(!p||!u)return'';var s=p.slice||[0,0,0,0];
+    return'border-style:solid!important;border-color:transparent!important;border-width:0!important;border-image-source:url('+u+')!important;border-image-slice:'+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+(o.nofill?'':' fill')+'!important;'+
+     'border-image-width:'+px(s[1]*k)+' '+px(s[2]*k)+' '+px(s[3]*k)+' '+px(s[0]*k)+'!important;border-image-repeat:stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important;'}
+   /* every rule is scoped to one S3 screen by a descendant only it has; ids stacked to outrank kit303sw (#modal x3-4, #sheet x6) */
+   var H='html.kw1 body #modal#modal#modal#modal#modal',SH=H+'>#sheet#sheet#sheet#sheet#sheet#sheet#sheet';
+
+   /* ===== n4-6 hub windows (Hoạt động / Chiến trường / Cửa hàng): a floating panel that fits its rows, not a full-height sheet with dead wood ===== */
+   var HUB=SH+'.w4shell:has(.hub-list)';
+   c+=H+':has(>#sheet.w4shell .hub-list){align-items:center!important;padding:12px 0!important;box-sizing:border-box!important}'+
+    HUB+'{height:auto!important;max-height:100%!important;min-height:0!important;width:calc(100% - 20px)!important;margin:0 auto!important;padding-bottom:6px!important}'+
+    HUB+' .hub-list{padding:10px 8px 8px!important;gap:10px!important}'+
+    HUB+' .hub-t.u354hr{min-height:96px!important;height:96px!important}'+
+    HUB+' .hub-t.u354hr .u3hc{position:absolute!important;right:12px!important;left:auto!important;top:6px!important;width:auto!important;min-height:0!important;height:24px!important;white-space:nowrap!important;font-size:12px!important;z-index:3;padding:0 10px!important}'+
+    HUB+' .hub-t.u354hr .hub-tx{right:56px!important}'+HUB+' .hub-t.u354hr:has(.u3hc) .hub-tx{right:128px!important}'+
+    HUB+' .u3hc{display:inline-flex!important;align-items:center;justify-content:center;border:1.5px solid!important;border-radius:12px!important;font-weight:700!important;box-shadow:0 1px 4px rgba(0,0,0,.6)!important}'+
+    HUB+' .u3hc.ok{background:#2c5a37!important;border-color:#5fc77a!important;color:#e6fae4!important}'+HUB+' .u3hc.off{background:#2b2620!important;border-color:rgba(255,255,255,.35)!important;color:#d6ccb6!important}'+
+    HUB+' .u3hc.gold{background:#3a2c10!important;border-color:#d9a441!important;color:#f7d98c!important}'+HUB+' .u3hc.warn{background:#4a1a14!important;border-color:#c8453d!important;color:#ffc9be!important}'+
+    HUB+' .hub-t.u354hr .hub-tx b{font-size:17px!important}'+HUB+' .hub-t.u354hr .hub-tx em{font-size:13px!important;white-space:normal!important}'+
+    HUB+'>button.btn.alt.wide{min-height:44px!important;height:44px!important;margin:6px 8px 4px!important;width:calc(100% - 16px)!important}';
+
+   /* ===== tabs / chips: 44 css tap height (kit sweep left 40) ===== */
+   var TAB=SH+'.u354port .u3bg>button,'+SH+' .u3hps>button,'+SH+':has([data-a=trpf]) .u3bg>button';
+   c+=TAB+'{min-height:44px!important;height:44px!important}';
+   /* ===== disabled / locked: still reads as disabled (grey), text >= 3:1 on the dark plank (the old 55 % opacity fell under it) ===== */
+   var LK=SH+':has([data-a=trpick]) .u3br.lk';
+   c+=LK+'{opacity:1!important;filter:grayscale(.85) brightness(.84)!important}'+
+    LK+' .u3bx>b{color:#e3d6b6!important;text-shadow:'+OUT+'!important}'+LK+' .u3bs{color:#cdbf9f!important;font-size:13px!important}'+
+    LK+' .u3bq.off{background:#40362c!important;border:1.5px solid #8a7a5f!important;color:#ece0c4!important;opacity:1!important;font-size:13px!important;height:30px!important;line-height:27px!important;padding:0 14px!important;min-width:64px!important;border-radius:15px!important;text-align:center}'+
+    SH+' .u3hps>button.lk{opacity:1!important;filter:grayscale(.75) brightness(.86)!important}'+SH+' .u3hps>button.lk,'+SH+' .u3hps>button.lk>*{color:#e3d6b6!important;text-shadow:'+OUT+'!important}'+
+    SH+' .u3hps>button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;line-height:1.1!important}'+SH+' .u3hps>button>b{font-size:15px!important}'+SH+' .u3hps>button>span{font-size:12px!important;white-space:nowrap!important}';
+   /* ===== n16 pick-hero filter chips: wrap to two rows instead of clipping at the sheet edge (all six chips kept) ===== */
+   c+=SH+':has([data-a=trpf]) .u3bg{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;overflow:visible!important}'+
+    SH+':has([data-a=trpf]) .u3bg>button{width:auto!important;min-width:0!important;white-space:nowrap!important;font-size:14px!important}';
+   /* ===== n18 Tính năng mới pop-up: body text clear of the dragon corners and the frame ===== */
+   c+=SH+'.u6pop>.u3q{padding:18px 30px 6px!important;margin:0!important;font-size:15px!important;line-height:1.4!important;text-align:center!important;box-sizing:border-box!important}';
+   /* ===== REL-678-FIX n18: title ribbon at the n124 size (full width, 46 css tall, 18 / 16 px label, no clip), "Đã hiểu" a centred plate >= 60% of the panel ===== */
+   c+=SH+'.u6pop>.snav>h3.u3h3.dsT{width:100%!important;min-width:0!important;max-width:none!important;margin:0!important;box-sizing:border-box!important;height:46px!important;padding:0 0 4px!important;border-width:0 21px!important;font-size:18px!important;line-height:18px!important;white-space:nowrap!important;overflow:visible!important;justify-content:center!important;text-align:center!important}'+
+    '@media (max-width:374px){'+SH+'.u6pop>.snav>h3.u3h3.dsT{font-size:16px!important}}'+
+    SH+'.u6pop:has(>.u3q)>.sbar{display:flex!important;justify-content:center!important;align-items:center!important;width:100%!important;padding:6px 20px 10px!important;margin:0!important;box-sizing:border-box!important}'+
+    SH+'.u6pop:has(>.u3q)>.sbar>.btn.u3b{flex:1 1 auto!important;width:100%!important;max-width:none!important;min-height:48px!important;height:48px!important;margin:0!important}';
+   /* ===== REL-678-FIX n22 Thiên hạ Tam phân: the heading on the red title ribbon (label >= 14 px), faction cards start their text <= 12 css right of the badge and wrap inside the card ===== */
+   var FP=SH+':has(.wcfac)';
+   c+=K.cls9(FP+' .wcin>.wctag','title_ribbon_C',46)+FP+' .wcin>.wctag{display:flex!important;align-items:center;justify-content:center;width:min(100%,264px)!important;box-sizing:border-box!important;margin:22px auto 12px!important;padding:0 6px 4px!important;font:700 15px/1 var(--fb)!important;letter-spacing:.04em!important;text-transform:uppercase;color:'+CR+'!important;white-space:nowrap!important;opacity:1!important;text-shadow:'+OUT+'!important}'+
+    FP+' .wcf{padding:12px 14px 12px 20px!important;grid-template-columns:48px minmax(0,1fr)!important;column-gap:8px!important}'+
+    FP+' .wcf .wcn,'+FP+' .wcf .wcd,'+FP+' .wcf .wcrw,'+FP+' .wcf .u3pool{min-width:0!important;overflow-wrap:anywhere!important;white-space:normal!important}';
+   /* ===== n19 toast: kit plank (stat_tile_G), 44 css tall, cream text; the err / gain tints keep their text colour ===== */
+   var TO='html.kw1 body #toast#toast#toast#toast.toast';
+   c+=TO+'{'+bi('stat_tile_G',.32)+'top:auto!important;bottom:calc(80px + env(safe-area-inset-bottom,0px))!important;height:auto!important;min-height:44px!important;line-height:1.3!important;white-space:normal!important;text-align:center!important;overflow:visible!important;text-overflow:clip!important;padding:11px 26px!important;box-sizing:border-box!important;display:block;color:'+CR+'!important;font:600 14px/1.3 var(--fb)!important;text-shadow:'+OUT+'!important;max-width:calc(100% - 24px)!important}'+
+    TO+'[hidden]{display:none!important}'+TO+'[data-k="err"]{color:#ffd9d0!important}'+TO+'[data-k="gain"]{color:#e4f8e2!important}';
+   /* ===== n3/n7 home: weather chip as the kit cartouche (the corner labels and hub rail belong to S8; the valley paint and its SVG labels are map art) ===== */
+   c+=K.cls9('html.kw1 body button.wxchip.wxchip.wxchip','map_cartouche_N',44)+'html.kw1 body button.wxchip.wxchip.wxchip{display:flex!important;align-items:center;gap:6px;padding:0 16px 3px!important;min-width:196px;color:'+CR+'!important}'+
+    'html.kw1 body button.wxchip.wxchip.wxchip b{font:700 14px/1 var(--fb)!important;color:'+CR+'!important;text-shadow:'+OUT+'!important}'+
+    'html.kw1 body button.wxchip.wxchip.wxchip .u354wt{font:600 13px/1 var(--fb)!important;color:#e6d6b0!important;text-shadow:'+OUT+'!important}';
+   /* ===== n13 Hạn mức giá thưởng: the pop-up may grow to the screen so Tăng hạn mức is never cut at 360; title text at the ribbon's size ===== */
+   var GI=SH+'.w4shell:has(.u3irs)';
+   c+=GI+'{max-height:calc(100% - 20px)!important;height:auto!important}'+GI+' .u3ir{padding:8px 12px!important}'+GI+' .u3icr{padding:10px 12px!important}'+GI+' .u3icr .mute,'+GI+' .sm.mute{font-size:13px!important;line-height:1.35!important;color:#e6d9ba!important;opacity:1!important}'+
+    GI+'>.snav>h3.dsT{min-width:max-content!important;width:auto!important;max-width:none!important;border-width:0 20px!important;padding:0 2px!important}'+GI+' .btn.wide{min-height:48px!important;height:48px!important}';
+   /* the old text layer sets this one title to an inline 14px !important (nothing in a stylesheet can win): put it at 17px / 16px (the ribbon's inner width), idempotent */
+   try{var fixT=function(){try{var h=D.querySelector('#modal #sheet.w4shell:has(.u3irs)>.snav>h3.dsT');if(!h)return;var v=(window.innerWidth<=374?16:18)+'px';if(h.style.getPropertyValue('font-size')!==v||h.style.getPropertyPriority('font-size')!=='important')h.style.setProperty('font-size',v,'important')}catch(e){}};
+    var mo=D.getElementById('modal');if(mo&&window.MutationObserver)new MutationObserver(fixT).observe(mo,{childList:true,subtree:true,attributes:true,attributeFilter:['style']});fixT()}catch(e){}
+   /* ===== ROUND 2 (art352 fix list 1-8) ===== */
+   /* ROUND 5 (art376 fix 1, Decision 676 A): the scroll lives on an inner body (.s3r5b, made by the watcher below) that starts under the title band; the header (ribbon + close) stays outside the scroller,
+      so nothing scrolls beside the ribbon or between the dragons, and the band needs no fill of its own. Bottom: 30 css mask fade while more is below, 30 css of wood after the last row. Top: 24 css soft edge once scrolled. */
+   var SC=SH+':has(.u3hef),'+SH+':has(.u3hps),'+SH+':has(.u354qs),'+SH+':has([data-a=trpf])';
+   var SCs=SC.split(',');
+   c+=SC+'{display:flex!important;flex-direction:column!important;overflow:hidden!important;padding-bottom:4px!important}'+
+    SCs.map(function(x){return x+'::after'}).join(',')+'{display:none!important}'+
+    SCs.map(function(x){return x+'>.snav'}).join(',')+'{flex:none!important}'+
+    SCs.map(function(x){return x.replace('#sheet#sheet#sheet#sheet#sheet#sheet#sheet','#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet')+'::before'}).join(',')+'{position:absolute!important;top:0!important}'+
+    SCs.map(function(x){return x+'>.t3r'}).join(',')+'{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important;overflow:visible!important}'+
+    SCs.map(function(x){return x+'>.t3r>.t3hd'}).join(',')+'{flex:none!important;position:relative!important;top:0!important}';
+   var BD=SCs.map(function(x){return x+' .s3r5b'}),MB='linear-gradient(to bottom,#000 calc(100% - 30px),rgba(0,0,0,0) 100%)',MT='linear-gradient(to bottom,rgba(0,0,0,0) 0,#000 24px)';
+   c+=BD.join(',')+'{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;padding:0 0 30px!important;box-sizing:border-box}'+
+    BD.map(function(x){return x+'.s3r5m'}).join(',')+'{-webkit-mask-image:'+MB+';mask-image:'+MB+'}'+
+    BD.map(function(x){return x+'.s3r5t'}).join(',')+'{-webkit-mask-image:'+MT+';mask-image:'+MT+'}'+
+    BD.map(function(x){return x+'.s3r5m.s3r5t'}).join(',')+'{-webkit-mask-image:'+MT+','+MB+';mask-image:'+MT+','+MB+';-webkit-mask-composite:source-in;mask-composite:intersect}';
+   /* 2: n9 stat tiles: two tiles share the row */
+   c+=SH+' .u3htg:has(>.u3hti:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))!important}';
+   /* 3: n10 queue line wraps in balanced halves, the amount stays together */
+   c+=SH+':has(.u354qs) .u3bi{text-wrap:balance!important}'+SH+':has(.u354qs) .u3bi b.gold{white-space:nowrap!important;display:inline-block!important}';
+   /* 4: n4 notice badges sit on the top-right of the icon medallion, inside the row */
+   c+=HUB+' .hub-t.u354hr .hub-b{position:absolute!important;left:44px!important;right:auto!important;top:12px!important;transform:none!important;margin:0!important;z-index:4!important;min-width:20px!important;height:20px!important}'+
+    '@media (max-width:374px){'+HUB+' .hub-t.u354hr .hub-b{left:38px!important}}';
+   /* 6: n16 maxed cards: a state, not a dirty card (portrait >= 75 %, name >= 4.5:1); the Đội tag is a small chip on the portrait's bottom-right corner */
+   var PK_=SH+':has([data-a=trpf]) .uigt.cap';
+   c+=PK_+' .pw{opacity:.78!important;filter:saturate(.8)!important}'+PK_+' .trtn{opacity:1!important;color:#e9dfc6!important}'+PK_+' .trtl{opacity:1!important;color:#cdbf9f!important}'+
+    SH+':has([data-a=trpf]) .uigt .pw>em.tm{top:auto!important;left:auto!important;right:3px!important;bottom:3px!important;font-size:12px!important;line-height:1.1!important;padding:2px 5px!important;border-radius:7px!important;opacity:1!important}';
+   /* 7: n17 slot row with a hero: medallion 56 css, text runs full width, buttons side by side under it */
+   var HR=SH+':has([data-a=trset]) .u3br:has(>.u3bc.pt)';
+   c+=HR+'{display:grid!important;grid-template-columns:56px minmax(0,1fr)!important;column-gap:10px!important;row-gap:4px!important;align-items:center!important}'+
+    HR+'>.u3bc.pt{width:56px!important;height:56px!important;min-width:56px!important;margin:0!important;grid-column:1!important;grid-row:1!important;border:2.5px solid #e8c35a!important;box-shadow:0 0 0 1px rgba(0,0,0,.65),inset 0 0 6px rgba(0,0,0,.5)!important}'+
+    HR+'>.u3bx{display:contents!important}'+HR+'>.u3bx>b{grid-column:2!important;grid-row:1!important;font-size:17px!important}'+
+    HR+'>.u3bx>.u3bs{grid-column:1/-1!important;grid-row:2!important;font-size:14px!important;line-height:1.35!important}'+
+    HR+'>.u3bv{grid-column:1/-1!important;grid-row:3!important;display:flex!important;flex-direction:row!important;justify-content:flex-end!important;gap:8px!important}';
+   /* 8: n18 pop-up: the part C ribbon sits on the top border like n13 (inside the frame, not above it) */
+   var PU=SH+'.u6pop';
+   c+=PU+'{margin-top:0!important;padding-top:0!important}'+PU+'>.snav{position:relative!important;top:-4px!important;margin:-4px 0 0!important;width:auto!important;height:50px!important;padding-top:4px!important;box-sizing:border-box!important;display:flex!important;justify-content:center!important;align-items:flex-start!important}';
+   /* ===== ROUND 3 (art363 fix list: n10 queue line, n13 ribbon) ===== */
+   /* n13: the ribbon takes the room left of the close button (not centred on the sheet): >= 12 css between text and each ribbon cap, >= 6 css to the close button; title 18 px (16 px at 360) */
+   c+=GI+'>.snav{padding-left:8px!important}'+GI+'>.snav>h3.dsT{padding:0 12px!important}';
+   /* n10: "1 [icon] = 2 phút" and "bạn có 1.200 [icon]" are two nowrap groups (nowrap spans; the text is plain nodes, so a stylesheet cannot group it) */
+   try{var nbQ=function(){try{D.querySelectorAll('#modal #sheet:has(.u354qs) .u3bi').forEach(function(q){if(q.querySelector('.u364g'))return;var h=q.innerHTML,g=function(m){return'<span class="u364g" style="white-space:nowrap">'+m+'</span>'},u=h.replace(/(\d+ <svg[\s\S]*?<\/svg> = \S+ phút)/,g).replace(/(bạn có <b[\s\S]*?<\/b> <svg[\s\S]*?<\/svg>)/,g);if(u!==h)q.innerHTML=u})}catch(e){}};
+    var mq=D.getElementById('modal');if(mq&&window.MutationObserver)new MutationObserver(nbQ).observe(mq,{childList:true,subtree:true});nbQ()}catch(e){}
+   /* ROUND 5 watcher: scroll sheets get an inner body under the header (every node after .t3hd moves into .s3r5b; same nodes, so each data-a and listener stays; display only). Flags: s3r5m = more below, s3r5t = scrolled */
+   try{var S3K='.u3hef,.u3hps,.u354qs,[data-a=trpf]';
+    var s3fl=function(bd){var more=bd.scrollHeight>bd.clientHeight+4&&bd.scrollTop+bd.clientHeight<bd.scrollHeight-6,top=bd.scrollTop>3;
+     if(more!==bd.classList.contains('s3r5m'))bd.classList.toggle('s3r5m',more);if(top!==bd.classList.contains('s3r5t'))bd.classList.toggle('s3r5t',top)};
+    var s3run=function(){try{if(!D.documentElement.classList.contains('kw1'))return;var sh=D.querySelector('#modal:not([hidden]) #sheet');if(!sh)return;var host=sh.querySelector(':scope>.t3r');if(!host||!host.querySelector(':scope>.t3hd')||!host.querySelector(S3K))return;
+      var bd=host.querySelector(':scope>.s3r5b');
+      if(!bd){var kids=[].filter.call(host.childNodes,function(n){return!(n.nodeType===1&&n.matches('.t3hd,.s3r5b'))});if(!kids.length)return;bd=D.createElement('div');bd.className='s3r5b';kids.forEach(function(n){bd.appendChild(n)});host.appendChild(bd)}
+      s3fl(bd)}catch(e){}};
+    if(!window.__s3r5){window.__s3r5=1;var mo5=D.getElementById('modal');if(mo5&&window.MutationObserver)new MutationObserver(s3run).observe(mo5,{childList:true,subtree:true});
+     D.addEventListener('scroll',function(ev){try{var t=ev.target;if(t&&t.classList&&t.classList.contains('s3r5b'))s3fl(t)}catch(e){}},true);window.addEventListener('resize',s3run);setInterval(s3run,400)}
+    s3run()}catch(e){}
+   var st=D.getElementById('sec303_3css');if(!st){st=D.createElement('style');st.id='sec303_3css'}st.textContent=c;D.head.appendChild(st);
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S4 (Cửa hàng & Nạp). Owned by its lane only; CSS root class .s3034.
+// SEC-4 (coder-junior406): display only, all under html.kw1 (?kw1=0 = dev). No wrapper, no action name, no state/save field, no text, no price / pack / odds / reward change.
+// 1) tap targets >= 44 px on the S4 screens (n104-n120); 2) the S3 scroll-sheet rule (art376): scrolling sheets get an inner body under the title band (same nodes moved, listeners and data-a kept).
+(function(){try{var s=document.createElement("style");s.id="sec303_4css";
+var SH="html.kw1 body #modal#modal#modal#modal#modal #sheet#sheet#sheet#sheet#sheet#sheet#sheet";
+s.textContent="/* .s3034: section S4 */"+[
+ /* n104-108/112 Thương Điếm: the tab row (Tạp Hóa / Thí Luyện / Thảo Phạt / Nạp · VIP) 40 -> 44 */
+ SH+" .u4rl .u3bg>button{min-height:44px!important;height:44px!important}",
+ /* n104-107: the "Cửa hàng mảnh tuần" row 43 -> 44 */
+ SH+" button.u3sh{min-height:44px!important}",
+ /* n104-107 buy plates stay B4 (40 high; the kit's own ::after hit zone is 48 high); n108/n112 "Xem" and "300" keep the card look (36 high) and get a 44 high hit zone (round 2: the 44 px heights had flipped the kit's data-b role, B4 -> B1 and card -> tab) */
+ SH+" .card.row button.btn.sm{position:relative}",
+ SH+" .card.row button.btn.sm::after{content:'';position:absolute!important;left:-4px!important;right:-4px!important;top:50%!important;bottom:auto!important;height:46px!important;margin-top:-23px!important;transform:none!important}",
+ /* n114-117 Vòng Quay: the two target tabs 36 -> 44 */
+ SH+" .dsseg>button{min-height:44px!important}",
+ /* n104/n105 (round 2): the balance row fits the banner at 390 and 360, the gold chip's "+" included (chips never shrink under their content, tighter gaps and padding, no text change) */
+ SH+" .u4st{margin-left:8px!important;margin-right:12px!important}",
+ SH+" .u4st .u4cs{gap:3px!important;flex:none!important}",
+ SH+" .u4st .u4ch{flex:none!important;padding-left:6px!important;padding-right:4px!important;gap:2px!important;white-space:nowrap!important}",
+ SH+" .u4st .u4ch svg{width:16px!important;height:16px!important}",
+ SH+" .u4st .u4pl{margin-left:0!important;flex:none!important}",
+ /* n111 (round 2): the cut line wraps inside the card */
+ SH+" .ftu2cv{white-space:normal!important;height:auto!important;line-height:18px!important}"
+].join("\n");(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var D=document,c='';
+   var H='html.kw1 body #modal#modal#modal#modal#modal',SH=H+'>#sheet#sheet#sheet#sheet#sheet#sheet#sheet';
+   /* scrolling S4 sheets: Thương Điếm (.u4rl tab row), Doanh Trại (levy button), Vòng Quay (.dswpw), Chiến Lệnh (.c3ucl), Thiên Tướng pack confirm (.tt-cf) */
+   var SC=SH+':has(>.t3r>.t3hd):has(.u4rl),'+SH+':has(>.t3r>.t3hd):has([data-a=levy]),'+SH+':has(>.t3r>.t3hd):has(.dswpw),'+SH+':has(>.t3r>.t3hd):has(.c3ucl),'+SH+':has(>.t3r>.t3hd):has(.tt-cf)';
+   var SCs=SC.split(',');
+   c+=SC+'{display:flex!important;flex-direction:column!important;overflow:hidden!important;padding-bottom:4px!important}'+
+    SCs.map(function(x){return x+'::after'}).join(',')+'{display:none!important}'+
+    SCs.map(function(x){return x+'>.snav'}).join(',')+'{flex:none!important}'+
+    SCs.map(function(x){return x.replace('#sheet#sheet#sheet#sheet#sheet#sheet#sheet','#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet#sheet')+'::before'}).join(',')+'{position:absolute!important;top:0!important}'+
+    SCs.map(function(x){return x+'>.t3r'}).join(',')+'{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important;overflow:visible!important}'+
+    SCs.map(function(x){return x+'>.t3r>.t3hd'}).join(',')+'{flex:none!important;position:relative!important;top:0!important}'+
+    SCs.map(function(x){return x+'>.t3r>.u354h4,'+x+'>.t3r>.u4st,'+x+'>.t3r>.s4f'}).join(',')+'{flex:none!important}';
+   /* n111 Gói Nạp Đầu (ftu2 layout): ribbon + close stay in place, the hero body (.ftu2w, tagged .s4b by the watcher) scrolls below them */
+   var F=SH+':has(>.ftu2w)';
+   var BD=SCs.map(function(x){return x+' .s4b'}).concat([F+'>.ftu2w.s4b']),MB='linear-gradient(to bottom,#000 calc(100% - 30px),rgba(0,0,0,0) 100%)',MT='linear-gradient(to bottom,rgba(0,0,0,0) 0,#000 24px)';
+   c+=F+'{overflow:hidden!important}'+
+    F+'>.ftu2w.s4b .ftu2top{margin-top:-26px!important}'+F+'>.ftu2w.s4b{position:absolute!important;left:0!important;right:0!important;top:46px!important;bottom:26px!important;min-height:0!important;height:auto!important;padding:0 0 22px!important;margin:0!important}';
+   c+=BD.join(',')+'{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;box-sizing:border-box}'+
+    SCs.map(function(x){return x+' .s4b'}).join(',')+'{padding:0 0 30px!important}'+
+    SCs.map(function(x){return x+' .s4b.s4g'}).join(',')+'{padding-bottom:10px!important}'+
+    BD.map(function(x){return x+'.s4m'}).join(',')+'{-webkit-mask-image:'+MB+';mask-image:'+MB+'}'+
+    BD.map(function(x){return x+'.s4t'}).join(',')+'{-webkit-mask-image:'+MT+';mask-image:'+MT+'}'+
+    BD.map(function(x){return x+'.s4m.s4t'}).join(',')+'{-webkit-mask-image:'+MT+','+MB+';mask-image:'+MT+','+MB+';-webkit-mask-composite:source-in;mask-composite:intersect}';
+   /* fixed footer (Vòng Quay Quay buttons; pack confirm ack line + Hủy / Mua): outside the scroller, at the foot of the frame */
+   var FT=SCs.map(function(x){return x+'>.t3r>.s4f'}).join(',');
+   c+=FT+'{position:relative!important;display:flex!important;flex-direction:column!important;gap:4px!important;padding:6px 0 4px!important;margin:0!important}'+
+    SCs.map(function(x){return x+'>.t3r>.s4f>.whbtns'}).join(',')+'{margin:26px 0 0!important}'+
+    SCs.map(function(x){return x+'>.t3r>.s4f>.u3bk'}).join(',')+'{position:static!important;display:flex!important;gap:8px!important;margin:2px 0 0!important;padding:0!important;background:none!important}'+
+    SCs.map(function(x){return x+'>.t3r>.s4f>.u3bk>.t3P,'+x+'>.t3r>.s4f>.u3bk>.t3D'}).join(',')+'{flex:2 1 0!important;width:auto!important;min-width:0!important;height:44px!important}'+
+    SCs.map(function(x){return x+'>.t3r>.s4f>.u3bk>.t3S'}).join(',')+'{flex:1 1 0!important;width:auto!important;min-width:0!important;height:44px!important}'+
+    SCs.map(function(x){return x+'>.t3r>.s4f>.u3bk .t3D[disabled]'}).join(',')+'{opacity:1!important;filter:none!important;color:#0e0903!important;text-shadow:none!important}'+
+    SCs.map(function(x){return x+'>.t3r>.s4f>label'}).join(',')+'{margin:0!important}';
+   /* n117 result panel: a framed pop-up (the sheet's own composite frame, copied by the watcher into --s4*, at pop-up scale), "Nhận được" ribbon on its top border, Tiếp tục centred at <= 70 % */
+   var RC='html.kw1 body #modal#modal#modal #sheet#sheet#sheet#sheet#sheet#sheet#sheet .dswres .dswrc.dswrc.dswk';
+   c+=RC+'{width:min(100%,300px)!important;max-height:calc(100% - 8px)!important;box-sizing:border-box!important;border-style:solid!important;border-color:transparent!important;border-width:14px 14px 16px!important;border-radius:0!important;'+
+    'border-image-source:var(--s4fs,none)!important;border-image-slice:var(--s4fl,1)!important;border-image-width:var(--s4fw,14px)!important;border-image-repeat:stretch!important;'+
+    'background-image:var(--s4bg,none)!important;background-color:var(--s4bc,#2e1c1a)!important;background-size:var(--s4bs,auto)!important;background-repeat:var(--s4br,repeat)!important;background-clip:border-box!important;background-origin:border-box!important;'+
+    'box-shadow:0 8px 28px rgba(0,0,0,.65)!important;padding:calc(var(--s4ft,40px) - 14px) 6px 6px!important;gap:8px!important;align-items:stretch}'+
+    RC+' .t3hd{position:absolute!important;left:50%!important;top:-12px!important;transform:translateX(-50%)!important;margin:0!important;width:auto!important}'+
+    RC+' .dswrh{text-align:center}'+
+    RC+' .t3P,'+RC+' .u3bwd{width:70%!important;align-self:center!important;margin:4px auto 0!important}';
+   /* watcher: every node after the header (.t3hd, the Thương Điếm banner .u354h4 and its balance row .u4st stay outside) moves into .s4b (display only); flags s4m = more below, s4t = scrolled */
+   try{var S4K='.u4rl,[data-a=levy],.dswpw,.c3ucl,.tt-cf';
+    var keepTop=0;/* refresh() re-renders the sheet and restores #sheet.scrollTop, which would drop the inner body's position: remember it and put it back on the rebuilt body; a fresh openSheet (no keep) starts at 0 */
+    try{var _osS4=openSheet;openSheet=function(fn,keep){try{if(!keep)keepTop=0;else{var lv=D.querySelector('#modal:not([hidden]) #sheet .s4b');if(lv)keepTop=lv.scrollTop}}catch(e){}return _osS4.apply(this,arguments)}}catch(e){}
+    var fl=function(bd){var more=bd.scrollHeight>bd.clientHeight+4&&bd.scrollTop+bd.clientHeight<bd.scrollHeight-6,top=bd.scrollTop>3;
+     if(more!==bd.classList.contains('s4m'))bd.classList.toggle('s4m',more);if(top!==bd.classList.contains('s4t'))bd.classList.toggle('s4t',top)};
+    var fr=function(sh){var rs=sh.querySelector('.dswres');if(!rs)return;var cs=getComputedStyle(sh),src=cs.borderImageSource;if(!src||src==='none')return;
+     var sc=.27/.34,w=(cs.borderImageWidth||'').split(/\s+/).map(function(v){var n=parseFloat(v);return isNaN(n)?v:(Math.round(n*sc*10)/10)+'px'});
+     var st=rs.style;st.setProperty('--s4fs',src);st.setProperty('--s4fl',cs.borderImageSlice);st.setProperty('--s4fw',w.join(' '));st.setProperty('--s4ft',(w[0]||'40px'));
+     st.setProperty('--s4bg',cs.backgroundImage);st.setProperty('--s4bc',cs.backgroundColor);st.setProperty('--s4bs',cs.backgroundSize);st.setProperty('--s4br',cs.backgroundRepeat)};
+    var run=function(){try{if(!D.documentElement.classList.contains('kw1'))return;var sh=D.querySelector('#modal:not([hidden]) #sheet');if(!sh)return;
+      /* round 3: the big Thiên Tướng pack card (.tt-ptap) was tagged data-b=tab by the kit (its class-key role cache measured it at 0 size once); dev reads card. Display label only. */
+      try{[].forEach.call(sh.querySelectorAll('.tt-ptap[data-b=tab]'),function(n){n.setAttribute('data-b','card')})}catch(e){}
+      var f2=sh.querySelector(':scope>.ftu2w');if(f2){if(!f2.classList.contains('s4b')){f2.classList.add('s4b');if(keepTop)f2.scrollTop=keepTop}fl(f2);return}
+      var host=sh.querySelector(':scope>.t3r');if(!host||!host.querySelector(':scope>.t3hd')||!host.querySelector(S4K))return;fr(sh);
+      var bd=host.querySelector(':scope>.s4b');
+      if(!bd){var kids=[].filter.call(host.childNodes,function(n){return!(n.nodeType===1&&n.matches('.t3hd,.s4b,.s4f,.u354h4,.u4st,.tdtop,.dswres'))});if(!kids.length)return;bd=D.createElement('div');bd.className='s4b';kids.forEach(function(n){bd.appendChild(n)});host.appendChild(bd);
+       /* fixed footer: the Quay buttons (Vòng Quay) / the ack line + Hủy, Mua bar (pack confirm) leave the scroller */
+       var fo=[],q=bd.querySelector('.whbtns.dswbt');if(q)fo.push(q);
+       var cf=bd.querySelector('.tt-cf');if(cf){var lb=cf.querySelector(':scope>label.tt-line'),bk=cf.querySelector(':scope>.u3bk');if(lb)fo.push(lb);if(bk)fo.push(bk)}
+       if(fo.length){var ft=D.createElement('div');ft.className='s4f';fo.forEach(function(n){ft.appendChild(n)});host.appendChild(ft);bd.classList.add('s4g')}
+       if(keepTop)bd.scrollTop=keepTop}
+      fl(bd)}catch(e){}};
+    if(!window.__s4w){window.__s4w=1;var mo=D.getElementById('modal');if(mo&&window.MutationObserver)new MutationObserver(run).observe(mo,{childList:true,subtree:true});
+     D.addEventListener('scroll',function(ev){try{var t=ev.target;if(t&&t.classList&&t.classList.contains('s4b')){keepTop=t.scrollTop;fl(t)}}catch(e){}},true);window.addEventListener('resize',run);setInterval(run,400)}
+    run()}catch(e){}
+   var st=D.getElementById('sec303_4kw');if(!st){st=D.createElement('style');st.id='sec303_4kw'}st.textContent=c;D.head.appendChild(st);
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S5 (Kho đồ). Owned by its lane only; CSS root class .s3035.
+// SEC-5 (coder-junior313): CSS only (n74 rules under html.kw1 since round 3), no wrapper, no action, no save field. Tap targets >= 44 px on S5 screens (Quân Đoàn tab, Kho đồ Hòm thư chip, Bảo Khố tabs).
+(function(){try{var s=document.createElement("style");s.id="sec303_5css";s.textContent="/* .s3035: section S5 */"+[
+ /* 75 Kho đồ: Hòm thư chip keeps its 92x28 look, the tap area grows to 44 px high */
+ "html body #sheet#sheet#sheet .u10m::after{content:'';position:absolute;left:-4px;right:-4px;top:-8px;bottom:-8px}",
+ /* 76 Bảo Khố: Danh Khí / Thần Khí tabs 44 px */
+ "html.kw1 body #modal #sheet#sheet#sheet .u3bg:has(>[data-a='i9bkt']) button{min-height:44px!important;height:44px!important}",
+ /* 74 Quân Đoàn tab: every button on the page is at least 44 px high / wide */
+ "html.kw1 body #main#main:has([data-a='gck']) button[data-a],html.kw1 body #main#main:has([data-a='gck']) .btn{min-height:44px!important}",
+ "html.kw1 body #main#main:has([data-a='gck']) .btn.dssw{min-width:56px!important}"
+].join("\n");(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+/* SEC-5 round 2 (coder-junior324, art322 fix list 1-6): same kit parts as 658 (title_ribbon_C, sheet_header_C, bg_wood_O, btn_jade_J) through KW1; CSS only, under html.kw1 (?kw1=0 unchanged), no DOM / action / state change. */
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var K=KW1,C=K.CREAM,OUT=K.OUT,T=(typeof TX_SEC303_5!=='undefined'&&TX_SEC303_5)||{},c='';
+   var SH='html.kw1 body #modal#modal#modal#modal#modal>#sheet#sheet#sheet#sheet#sheet#sheet#sheet';
+   function px(v){return(Math.round(v*100)/100)+'px'}
+   /* 1 + 4 titles: the 658 red ribbon (part C) wide enough to show the red field and both caps, on n75 n76 n85 n88 */
+   var TT=SH+'.u354inv>.snav>h3:not([hidden]),'+SH+':has([data-a=i9bkt]) .t3hd>.t3ttl,'+SH+':has([data-a=flsrc]) .t3hd>.t3ttl,'+SH+':has(.c3w~.c3w) .t3hd>.t3ttl';
+   c+=TT+'{min-width:min(200px,58vw)!important}';
+   /* 2 + 3 n75: the sheet is the same framed window as n76 (dragon corners fully inside the screen), content-height when empty */
+   c+='html.kw1 body #modal#modal#modal:has(>#sheet.u354inv){padding:0 0 25px!important;align-items:center!important}'+
+    SH+'.u354inv{margin:0 8px!important;width:calc(100% - 16px)!important;max-width:none!important;max-height:calc(100% - 20px)!important;padding:0 6px 8px!important}'+
+    SH+'.u354inv:has(>.esx){height:auto!important;min-height:0!important}'+
+    SH+'.u354inv>.snav{background:none!important;box-shadow:none!important;border:0!important}';
+   /* 4 n76: the window ends above the nav, so no tile label can sit under it (also at 360) */
+   c+='html.kw1 body #modal#modal#modal.t3m:has(>#sheet [data-a=i9bkt]){padding-bottom:60px!important}';
+   /* ROUND 3 n76: clean ground behind the Bảo Khố / Kho đồ frame (no page text below the corners) + a fade where the scroll area ends, so no tile shows cut with its label missing */
+   var M8='html.kw1 body #modal#modal#modal#modal#modal#modal#modal#modal';c+=M8+':has(>#sheet [data-a=i9bkt]),'+M8+':has(>#sheet.u354inv){background:rgba(8,4,2,.99)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}'+
+    SH+':has([data-a=i9bkt])::after{content:"";display:block;position:sticky;bottom:-8px;height:30px;margin:-30px -6px -8px;background:linear-gradient(180deg,rgba(16,9,5,0),rgba(16,9,5,.96) 80%);pointer-events:none;z-index:4}'+
+    /* the empty-star line is visibility:hidden (invisible) but still takes 19 css per tile row: collapse it so the Đỏ row and its labels fit at 360 */
+    SH+':has([data-a=i9bkt]) .i9dk .i9st2.u3e0{display:none!important}';
+   /* ROUND 3 n74: disabled "Thiếu cống hiến" = the grey bevelled plate with a near-white label (>= 3:1, same idea as n85 Thiếu mảnh), not the 40% gold */
+   c+='html.kw1 body #main#main#main:has([data-a=gck]) button[disabled]{opacity:1!important;filter:none!important;color:#F4E8CC!important;text-shadow:0 1px 0 #1a0d05,1px 0 0 #1a0d05,-1px 0 0 #1a0d05,0 -1px 0 #1a0d05!important;'+
+    'background:linear-gradient(180deg,#7a7060 0%,#4c443a 52%,#352f28 100%)!important;border:1px solid #9a8b6c!important;border-radius:8px!important;'+
+    'box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -2px 0 rgba(0,0,0,.5),0 2px 3px rgba(0,0,0,.55)!important}';
+   /* UI-E FIX1: the stage (room picture + count) sits 10 css under the ribbon (was 14 / 12) */
+   c+=SH+'.u354inv>.u354hk{margin-top:-4px!important}'+SH+':has([data-a=i9bkt]) .c2bkw{margin-top:-2px!important}';
+   /* 5 n85: progress track + fill >= 3:1 on the row; one button bevel (jade plate), Nguồn mảnh = the same plate in jade (Thiếu mảnh is its grey copy) */
+   c+=SH+':has([data-a=flsrc]) .u3bb{height:10px!important;background:#100804!important;border:1.5px solid #D9B46A!important;border-radius:6px!important;overflow:hidden!important;padding:0!important}'+
+    SH+':has([data-a=flsrc]) .u3bb>i{background:linear-gradient(180deg,#6fe6b0,#2fa070)!important;border-radius:4px!important;height:100%!important;display:block}'+
+    SH+':has([data-a=flsrc]) .u3bs span{color:'+C+'!important}';
+   var jp=K.part('btn_jade_J'),ju=K.url('btn_jade_J');
+   if(jp&&ju){var s=jp.slice||[0,0,0,0],k=0.27;
+    c+=SH+':has([data-a=flsrc]) button.t3S{border-image-source:url('+ju+')!important;border-image-slice:'+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+' fill!important;border-image-width:'+px(s[1]*k)+' '+px(s[2]*k)+' '+px(s[3]*k)+' '+px(s[0]*k)+'!important}'}
+   /* 6 n88: both mail rows the same height and the same frame (no gold highlight on one only), no dead divider, page dimmed harder behind */
+   c+=SH+' .c3um .u3bl>.c3w{min-height:84px!important;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))!important}'+
+    SH+':has(.c3w~.c3w) .u3bp.u3bu{display:none!important}'+
+    'html.kw1 body #modal#modal#modal#modal#modal#modal#modal#modal:has(.c3w~.c3w){background:rgba(0,0,0,.78)!important}';
+   /* 2 n74: Quân Đoàn tab page = wood + the 658 banner (dragon corners) + the red ribbon title, same parts as the Tướng list */
+   var hp=K.part('sheet_header_C'),hu=K.url('sheet_header_C'),rb=K.part('title_ribbon_C'),wd=K.cssWood();
+   if(hp&&hu&&rb&&wd){var BH=80,kk=BH/hp.r[3],hs=hp.slice||[0,0,0,0],M='html.kw1 body #main#main#main#main#main:has([data-a=gck])';
+    c+=M+'{'+wd.replace(/;/g,'!important;')+'padding:0 12px 12px!important;display:flex!important;flex-direction:column!important;overflow-x:clip!important;box-shadow:inset 3px 0 0 #8a6a38,inset -3px 0 0 #8a6a38!important}'+
+     M+'>*{flex-shrink:0!important}'+
+     M+'::before{content:""!important;display:block!important;order:-2;flex:none;position:sticky;top:0;height:'+BH+'px;margin:0 -12px -'+BH+'px;z-index:5;pointer-events:none;'+wd.replace(/;/g,'!important;')+'border-style:solid;border-color:transparent;'+
+      'border-image-source:url('+hu+');border-image-slice:0 '+hs[2]+' 0 '+hs[0]+' fill;border-image-width:0 '+px(hs[2]*kk)+' 0 '+px(hs[0]*kk)+';border-width:0}'+
+     M+'::after{content:"'+String(T.t74||'').replace(/"/g,'')+'"!important;display:flex!important;order:-1;flex:none;position:sticky;top:12px;z-index:6;align-self:center;align-items:center;justify-content:center;margin:12px 0 36px;padding:0 24px;min-width:min(200px,58vw);box-sizing:border-box;pointer-events:none;'+
+      K.css9('title_ribbon_C',42)+'font:700 20px/1.1 var(--ds-fd,Philosopher,Georgia,serif);color:'+C+';text-shadow:'+OUT+'}'+
+     '@media (max-width:374px){'+M+'::after{font-size:18px}}'}
+   var st=document.getElementById('sec303_5css2');if(!st){st=document.createElement('style');st.id='sec303_5css2'}st.textContent=c;document.head.appendChild(st);
+  }catch(e){}});
+ }catch(e){}
+})();
+/* FU-POL (coder-junior408): n74 info + task cards on the same wood row plank as the pop-up rows (the sweep's plank, read from #kw1swcss2 like sec303_1); n76 on tall screens (>= 800 css high, i.e. 390x844) the window ends under a taller fade so the Tím row no longer peeks. CSS only under html.kw1. */
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var D=document,tries=0,M='html.kw1 body #main#main#main#main#main:has([data-a=gck])',SH='html.kw1 body #modal#modal#modal#modal#modal>#sheet#sheet#sheet#sheet#sheet#sheet#sheet';
+   function put(c){var st=D.getElementById('sec303_5css3');if(!st){st=D.createElement('style');st.id='sec303_5css3';D.head.appendChild(st)}st.textContent=c}
+   /* n76: stronger, taller fade: the tile tops of the next row (Tím) sit under >= 85 % cover, the Đỏ labels above it stay clear */
+   var f='@media (min-height:800px){'+SH+':has([data-a=i9bkt])::after{height:64px!important;margin:-64px -6px -8px!important;background:linear-gradient(180deg,rgba(16,9,5,0),rgba(16,9,5,.88) 45%,rgba(16,9,5,1) 72%)!important}}';
+   /* round 2 (art411 fix 2): the scrolling page ends under a soft fade above the nav so no header or row title is cut half-legible at the nav edge (n74, 390 and 360) */
+   f+=M+'{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 52px),rgba(0,0,0,0) 100%)!important;mask-image:linear-gradient(180deg,#000 calc(100% - 52px),rgba(0,0,0,0) 100%)!important}';
+   /* round 2 (art411 fix 1): at <= 374 the Điểm danh desc stays on one line (plank side padding 10, desc 12 px, no wrap) */
+   var nw='@media (max-width:374px){'+M+' .elc:has([data-a=gck]) .sm{font-size:12px!important;white-space:nowrap!important;letter-spacing:0!important}'+M+' .elc{padding-left:10px!important;padding-right:10px!important}}';
+   f+=nw;
+   put(f);
+   function derive(){try{
+    var s2=D.getElementById('kw1swcss2'),t=s2&&s2.textContent||'',mp=t.match(/border-image-source:url\((blob:[^)]+)\)!important;border-image-slice:30 (\d+) 30 (\d+) fill/);
+    if(!mp){if(++tries<80)setTimeout(derive,400);return}
+    var pu=mp[1],R=+mp[2],L=+mp[3],k=0.3;
+    var pl='border-style:solid!important;border-color:transparent!important;border-width:0!important;border-image-source:url('+pu+')!important;border-image-slice:30 '+R+' 30 '+L+' fill!important;border-image-width:9px '+(Math.round(R*k*100)/100)+'px 9px '+(Math.round(L*k*100)/100)+'px!important;border-image-repeat:stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))!important;';
+    put(f+M+' .gh,'+M+' .wpan,'+M+' .elc,'+M+' .card{'+pl+'padding:12px 14px!important}'+nw);
+   }catch(e){}}
+   derive();
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S6 (Nhiệm vụ & Sự kiện). Owned by its lane only; CSS root class .s3036.
+(function(){try{var s=document.createElement("style");s.id="sec303_6css";s.textContent="/* .s3036: section S6 */";(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+/* V303 SEC-6 (coder-junior312): kit consistency for Nhiệm vụ ngày (+ w1 first-week card) so it matches the redesign (atlas n 90-103). CSS only under html.kw1,
+   inside KW1.on, outranks u3_c / kit303sw with the #modal x4 + #sheet x6 ladder + !important. No DOM change, no wrapper, no action, no state, no text.
+   1 chest strip (.c3us) cream parchment -> dark carved inset (same family as the sweep's inset card I), cream labels, jade progress fill.
+   2 daily rows: icon medallion 36 -> 44 css (40 at <= 380), as the w1 rows already are.
+   3 w1 rows: the "0/1" counter sits at the right of the title line (flex), no longer glued to the last word of a wrapped title.
+   4 w1 "Mục tiêu ngày trước" fold (details.w1old > summary): section plate with the jewel dividers, 44 css tap row. */
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var K=KW1,D=document,C=K.CREAM,GD=K.GOLD,OUT=K.OUT;
+   var SH='html.kw1 body #modal#modal#modal#modal>#sheet#sheet#sheet#sheet#sheet#sheet.sheet:not(.t3hp)';
+   var c='';
+   c+=SH+' .c3us{background:linear-gradient(180deg,rgba(20,12,7,.78),rgba(14,8,5,.84))!important;border:1px solid rgba(176,122,62,.6)!important;border-radius:8px!important;box-shadow:inset 0 1px 0 rgba(232,192,104,.12),inset 0 0 12px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.5)!important;color:'+C+'!important}'+
+    SH+' .c3us .c3cx b{color:'+C+'!important;font-size:13px!important;text-shadow:'+OUT+'!important}'+
+    SH+' .c3us .c3cx.on b{color:'+GD+'!important}'+
+    SH+' .c3us .c3tl{color:'+C+'!important;font-size:13px!important;text-shadow:'+OUT+'!important}'+
+    SH+' .c3us .c3tk{height:10px!important;background:rgba(8,5,3,.85)!important;box-shadow:inset 0 0 0 1px rgba(176,122,62,.55)!important}'+
+    SH+' .c3us .c3tk .fl{background:linear-gradient(180deg,#6fe0b8,#23966f)!important}';
+   c+=SH+' .dslist .u3br>.u3bc{width:44px!important;height:44px!important;flex:0 0 44px!important}'+
+    SH+' .dslist .u3br>.u3bc .c3ui{width:38px!important;height:38px!important}'+
+    '@media (max-width:380px){'+SH+' .dslist .u3br>.u3bc{width:40px!important;height:40px!important;flex-basis:40px!important}'+SH+' .dslist .u3br>.u3bc .c3ui{width:34px!important;height:34px!important}}';
+   c+=SH+' .u3br b:has(>.w1kt){display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:8px!important}'+
+    SH+' .u3br b>.w1kt{flex:1 1 auto!important;min-width:0!important}'+
+    SH+' .u3br b:has(>.w1kt)>.w1kn{flex:0 0 auto!important;font:700 13px/1.3 var(--fb)!important;color:'+GD+'!important;text-shadow:'+OUT+'!important}';
+   var dl=K.url('divider_jewel_M'),dr=K.url('divider_jewel_M_right'),S=SH+' details.w1old>summary';
+   c+=S+'{list-style:none!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;min-height:44px!important;cursor:pointer;font:700 14px/1.2 var(--ds-fd,Philosopher,Georgia,serif)!important;color:'+GD+'!important;text-shadow:'+OUT+'!important;letter-spacing:.02em!important;text-align:center!important}'+
+    S+'::-webkit-details-marker{display:none!important}'+S+'::marker{content:""!important}';
+   if(dl&&dr)c+=S+'::before,'+S+'::after{content:""!important;display:block!important;flex:1 1 0!important;min-width:12px!important;height:24px!important}'+
+    S+'::before{background:url('+dl+') right 0 top -6px/auto 24px no-repeat,linear-gradient(90deg,rgba(176,122,62,0),#B07A3E) left center/calc(100% - 30px) 2px no-repeat!important}'+
+    S+'::after{background:url('+dr+') left 0 top -6px/auto 24px no-repeat,linear-gradient(270deg,rgba(176,122,62,0),#B07A3E) right center/calc(100% - 30px) 2px no-repeat!important}';
+   /* ===== round 2 (coder-junior316, art315 fix list 1-8): scope = the S6 sheets only (daily, w1, calendar, festival, Do Giam, w1 pop-ups) ===== */
+   var S6=SH+':has(.dslist,.c3us,.w1k,.w1ek,.c3uwk,.c3ue,[data-a=u185ball])',F6=S6+':not(.kwp)',px=function(v){return(Math.round(v*100)/100)+'px'},r2='';
+   function geo(sel,n,h){var p=K.part(n);if(!p)return'';var s=p.slice||[0,0,0,0],sh=p.r[3],k=h/sh;
+    return sel+'{height:'+h+'px!important;min-height:'+h+'px!important;box-sizing:border-box!important;border-image-width:'+px(s[1]*k)+' '+px(s[2]*k)+' '+px(s[3]*k)+' '+px(s[0]*k)+'!important}'}
+   /* 1 + 8: title = the kit red ribbon C, one size on every S6 sheet and pop-up (54 css tall, caps scaled with the height, 22 px serif) */
+   var rb=K.part('title_ribbon_C'),ru=K.url('title_ribbon_C');
+   if(rb&&ru){var rs=rb.slice,rk=54/rb.r[3],TT=S6+' .t3hd>.t3ttl';
+    r2+=S6+' .t3hd{min-height:56px!important;margin-bottom:8px!important}'+
+     TT+'{border-style:solid!important;border-color:transparent!important;border-image-source:url('+ru+')!important;border-image-slice:'+rs[1]+' '+rs[2]+' '+rs[3]+' '+rs[0]+' fill!important;border-image-width:'+px(rs[1]*rk)+' '+px(rs[2]*rk)+' '+px(rs[3]*rk)+' '+px(rs[0]*rk)+'!important;border-width:0 '+px(rs[0]*rk)+'!important;'+
+     'height:54px!important;min-height:54px!important;min-width:210px!important;padding:0 6px!important;font:700 22px/1.1 var(--ds-fd,Philosopher,Georgia,serif)!important;color:'+C+'!important;text-shadow:'+OUT+'!important;filter:drop-shadow(0 3px 4px rgba(0,0,0,.6))!important;white-space:nowrap!important}'+
+     '@media (max-width:374px){'+TT+'{min-width:190px!important;font-size:20px!important}}'}
+   /* 2: full sheets only: corner dragons / rails at the Tuong-list scale (0.40 of the header art), inner shadow like the 658 sheets; pop-ups keep the kit .kwp size */
+   var hp=K.part('sheet_header_C'),bp=K.part('sheet_bottom_P');
+   if(hp&&bp){var HT=hp.r[3],BH=bp.r[3]-19,fk=.40,fw=300*fk,fh=HT*fk,nx=fw-4;
+    r2+=F6+'{border-image-width:'+px(fh)+' '+px(fw)+' '+px(BH*fk)+' '+px(fw)+'!important;box-shadow:0 12px 32px rgba(0,0,0,.65),inset 0 0 20px 3px rgba(0,0,0,.6)!important}'+
+     F6+'::before{height:'+px(fh-14)+'!important;margin:0 -6px '+px(14-fh)+'!important;background-size:'+px(fw)+' '+px(fh)+','+px(fw)+' '+px(fh)+'!important;'+
+     ['-webkit-mask-size','mask-size'].map(function(m){return m+':100% '+px(fh*.3)+','+px(fw*.5)+' 100%,'+px(fw*.5)+' 100%!important;'}).join('')+'}'+
+     F6+' .t3hd::before,'+F6+' .t3hd::after{'+['-webkit-mask-image','mask-image'].map(function(m){return m+':linear-gradient(90deg,rgba(0,0,0,0) '+px(nx-6)+',#000 '+px(nx+16)+',#000 calc(100% - '+px(nx+16)+'),rgba(0,0,0,0) calc(100% - '+px(nx-6)+'))!important;'}).join('')+'}'}
+   /* 3: claimed rows (.dn): full-contrast text (was 0.6 opacity), still muted by desaturation; the Da nhan plate stays grey. Medallion depth on every S6 row */
+   r2+=S6+' .u3br.dn{opacity:1!important;filter:saturate(.55) brightness(.92) drop-shadow(0 1px 2px rgba(0,0,0,.55))!important}'+
+    S6+' .u3br.dn .u3bx>b{color:#F6E7C8!important}'+S6+' .u3br.dn .u3bs{color:#E2D3B0!important}'+
+    S6+' .u3br .u3bc{filter:drop-shadow(0 2px 3px rgba(0,0,0,.65))}';
+   /* 4: row + pop-up buttons share one bevel scale (caps = height / part height, like the 658 plates): 40 css rows, 44 claim-all */
+   r2+=geo(S6+' .u3br button.t3S','btn_bronze',40)+geo(S6+' .u3br button.t3P','btn_jade_J',40)+geo(S6+' .u3br button.btn:not(.alt)','btn_jade_J',40)+
+    geo(S6+' button[data-a=evall],'+S6+' button[data-a=u185dall],'+S6+' button[data-a=u185ball],'+S6+' button[data-a=feastall]','btn_gold_claim_K',44)+
+    S6+' .u3br button.t3S,'+S6+' .u3br button.t3P,'+S6+' .u3br button.btn{font:700 14px/1 var(--fb)!important;min-width:76px!important}';
+   /* 5: w1 screens: pill inside the card at 360, lighter fold plate, 8 css progress bars */
+   r2+=S6+' .w1k>.u3bp{padding-right:10px!important;box-sizing:border-box!important}'+S6+' .w1k>.u3bp>em{flex:none!important;margin:0 0 0 4px!important}'+
+    '@media (max-width:374px){'+S6+' .w1k>.u3bp::after{display:none!important}}'+
+    S6+' details.w1old>summary{font:600 13px/1.2 var(--fb)!important;color:#D9C9A6!important;opacity:.85}'+
+    S6+' .u3bb{height:8px!important;min-height:8px!important;border-radius:4px!important;background:rgba(8,5,3,.85)!important;box-shadow:inset 0 0 0 1px rgba(176,122,62,.55)!important;overflow:hidden!important}'+
+    S6+' .u3bb>i{height:100%!important;background:linear-gradient(180deg,#6fe0b8,#23966f)!important;border-radius:4px!important}';
+   /* 7: chests: warm metal (sepia + saturation lift on the grey art), the reachable chest glows gold; thicker jade bar */
+   r2+=S6+' .c3us .c3cx .c3ui{filter:sepia(.55) saturate(1.9) brightness(1.25) contrast(1.05) drop-shadow(0 2px 2px rgba(0,0,0,.6))!important}'+
+    S6+' .c3us .c3cx.on .c3ui{filter:sepia(.4) saturate(2.2) brightness(1.4) drop-shadow(0 0 6px rgba(232,192,104,.9))!important}'+
+    S6+' .c3us .c3tk{height:12px!important;border-radius:6px!important}'+S6+' .c3us .c3tk .fl{border-radius:6px!important}';
+   /* 6: calendar + festival: numerals 12+, bigger empty-state art */
+   r2+=S6+' .c3ut b,'+S6+' .c3ut em,'+S6+' .c3uw i,'+S6+' .c3uw b{font-size:12px!important}'+S6+' .c3ue{padding-top:6px!important;padding-bottom:10px!important}'+
+    S6+' .c3ue .c3uei{width:150px!important;height:150px!important}'+S6+' .c3ue .c3uei{background-size:450px 300px!important;background-position:-300px 0!important}';
+   c+=r2;
+   /* ===== round 3 (coder-junior327, art325 fix list 1-4: n96, n100, n101, n103 only) ===== */
+   var r3='';
+   /* 1 (n96): fold header on one line at 360 (12 px, nowrap, tighter jewel rules so the chevron stays inside); chest sub-line max 2 lines */
+   r3+='@media (max-width:374px){'+S6+' details.w1old>summary{font-size:12px!important;white-space:nowrap!important;gap:2px!important;letter-spacing:0!important}'+
+    S6+' details.w1old>summary::before,'+S6+' details.w1old>summary::after{min-width:4px!important}}'+
+    S6+' .w1kch+.u3bx .u3bs{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important}';
+   /* 2 (n100): banner title + sub tighter so they take <= 2 lines at 360 (title 1 line at 13 px nowrap-safe width 64%, sub 1 line); grid gaps >= 6 css; locked tiles brighter */
+   r3+=S6+' .tt-bnx{width:62%!important;gap:1px!important}'+
+    S6+' .tt-bnt{font-size:13px!important;line-height:1.15!important;letter-spacing:-.2px!important}'+
+    S6+' .tt-bns{font-size:12px!important;white-space:nowrap!important}'+
+    S6+' .c3ugd{gap:6px!important}'+S6+' .c3uwk{gap:6px!important}'+
+    S6+' .c3ut.lk{opacity:1!important}'+S6+' .c3ut.lk .o,'+S6+' .c3ut.lk .objx{opacity:.85!important;filter:brightness(1.35) saturate(.9)!important}'+
+    S6+' .c3ut.lk b,'+S6+' .c3ut.lk em{color:#E6D9B8!important;opacity:1!important}'+
+    S6+' .c3ut.lk{background:linear-gradient(180deg,#3a2a18,#22160b)!important;border-color:rgba(190,140,66,.62)!important}';
+   /* 3 (n101): empty festival pop-up: art 1.5x (225 css cell), name 16 px, body 14 px, no dead band */
+   r3+=S6+' .c3ue{padding-top:4px!important;padding-bottom:12px!important;gap:6px!important}'+
+    S6+' .c3ue .c3uei{width:225px!important;height:225px!important;background-size:675px 450px!important;background-position:-450px 0!important;margin:-14px 0 -22px!important}'+
+    S6+' .c3ue>b{font-size:16px!important;line-height:1.25!important}'+S6+' .c3ue .esxt{font-size:14px!important;line-height:1.45!important}';
+   /* 4 (n103/n102): disabled Nhan plates: text reaches >= 3:1 on the plate (dark plate via contrast, text white) and still reads as disabled next to the jade */
+   var DS=['button.t3P.dim','button.t3P[disabled]','button.t3S.dim','button.t3S[disabled]','button.btn[disabled]','button.btn.off','button.btn.dim'].map(function(x){return S6+' .u3br '+x}),DJ=DS.join(',');
+   r3+=DJ+'{filter:grayscale(.9) brightness(.78) contrast(1.35)!important;color:#FFFFFF!important}'+
+    DS.map(function(x){return x+' span,'+x+' b'}).join(',')+'{color:#FFFFFF!important;text-shadow:0 1px 1px rgba(0,0,0,.9)!important}';
+   c+=r3;
+   /* ===== round 4 (qa326 fix 1): every enabled button >= 44 css, same bevel (geo at 44) ===== */
+   var r4=geo(S6+' .u3br button.t3S','btn_bronze',44)+geo(S6+' .u3br button.t3P','btn_jade_J',44)+geo(S6+' .u3br button.btn:not(.alt)','btn_jade_J',44)+
+    S6+' button,'+S6+' [data-a]{min-height:44px!important;box-sizing:border-box!important}'+
+    S6+' button{min-width:44px!important}';
+   c+=r4;
+   var st=D.getElementById('sec303_6css');if(!st){st=D.createElement('style');st.id='sec303_6css';D.head.appendChild(st)}st.textContent='/* .s3036: section S6 */'+c;
+  }catch(e){}});
+ }catch(e){}
+})();
+/* FU-POL (coder-junior408): n96 / n102 / n103 row titles take <= 2 lines at 360 (and 1-2 at 390): 13.5 px at <= 374, row buttons 60 css wide there (height / bevel unchanged), tighter row gap. CSS only under html.kw1; no text change. */
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var D=document,SH='html.kw1 body #modal#modal#modal#modal>#sheet#sheet#sheet#sheet#sheet#sheet.sheet:not(.t3hp)',S6=SH+':has(.dslist,.c3us,.w1k,.w1ek,.c3uwk,.c3ue,[data-a=u185ball])',c='';
+   c+='@media (max-width:374px){'+S6+' .u3br>.u3bx>b{font-size:13.5px!important;line-height:1.2!important}'+
+    S6+' .u3br button.t3S,'+S6+' .u3br button.t3P,'+S6+' .u3br button.btn{min-width:60px!important;padding-left:2px!important;padding-right:2px!important}'+
+    S6+' .u3br{gap:6px!important;padding-left:8px!important;padding-right:8px!important}'+S6+' .dslist .u3br>.u3bc,'+S6+' .u3br>.u3bc{width:36px!important;height:36px!important;flex:0 0 36px!important}'+S6+' .u3br>.u3bc .c3ui{width:30px!important;height:30px!important}'+S6+' .u3br b>.w1kt{font-size:13px!important}}';
+   /* round 2 (qa412 fix 1): daily/W1 rows (n96): every title <= 2 lines at 390 and 360. Title 12.5 px, bevel caps of the row button 18 css (was 26: the button was ~100 wide), row padding 6; at <= 374 also icon 30, gaps 4. Button height stays 44. */
+   c+=S6+' .u3br b>.w1kt{font-size:12.5px!important}'+
+    S6+' .u3br:has(.w1kt) button{border-width:0 18px!important;border-image-width:0 17px!important;min-width:0!important}'+
+    S6+' .u3br:has(.w1kt){gap:6px!important;padding-left:6px!important;padding-right:6px!important}'+
+    '@media (max-width:374px){'+S6+' .u3br:has(.w1kt){gap:4px!important;padding-left:5px!important;padding-right:5px!important}'+
+    S6+' .u3br:has(.w1kt)>.u3bc{width:30px!important;height:30px!important;flex:0 0 30px!important}'+
+    S6+' .u3br:has(.w1kt) b:has(>.w1kt){gap:4px!important}}';
+   /* round 3 (art425 fix 1): balance W1 row titles and descs so a 2-line title never ends on a lone word or digit. */
+   c+=S6+' .u3br:has(.w1kt) .u3bx>b,'+S6+' .u3br:has(.w1kt) .u3bx>b>.w1kt,'+S6+' .u3br:has(.w1kt) .u3bs{text-wrap:balance!important}';
+   var st=D.createElement('style');st.id='sec303_6css_fp';st.textContent=c;D.head.appendChild(st);
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC-7 step 1: section S7 (Thử thách): Tháp (+ swept states, unlock pop-up), Lôi Đài, Cửa hàng Uy Danh, Thảo Phạt, Tuần Tra. CSS root class .s3037.
+// CSS only, under html.kw1 (so ?kw1=0 and an atlas failure keep the old look). No DOM change, no action, no state, no save field, no text.
+// Rides on the kit sweep (kit303sw.js: frame, red ribbon C, X, jade / bronze plates, planks, dividers) and brings the Lôi Đài page (old .card rows, plain
+// headings, grey rank box) and the Tháp / Uy Danh / Boss / Tuần Tra footers up to the same kit parts, plus floors (buttons >= 38 css, text >= 12 px).
+// Content lock honoured: every label, number, price, tab and disabled state stays as it is.
+(function(){try{var s=document.createElement("style");s.id="sec303_7css";s.textContent="/* .s3037: section S7 */";(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var K=KW1,D=document,C=K.CREAM,GD=K.GOLD,OUT=K.OUT,c='';
+   /* more ids than the sweep (#modal x4, #sheet x6) so these rules win without touching it */
+   var SH='html.kw1 body #modal#modal#modal#modal#modal>#sheet#sheet#sheet#sheet#sheet#sheet#sheet.sheet';
+   var AR=SH+':has([data-a=arclaim])',TW=SH+':has([data-a=twfight])',AS=SH+':has([data-a=ar2sb])',BO=SH+':has([data-a=bfight])',PT=SH+':has([data-a=ptclaim])';
+   var ALL=[AR,TW,AS,BO,PT];
+   function each(f){return ALL.map(f).join(',')}
+   var ring=K.url('nav_ring_normal'),tile=K.part('stat_tile_G'),dl=K.url('divider_jewel_M');
+   var FB='"Be Vietnam Pro","Segoe UI",system-ui,sans-serif',FD='var(--ds-fd,Philosopher,Georgia,serif)';
+   /* ---------- all five: tap floor, min 44x44 css (never a fixed height) ---------- */
+   c+=each(function(s){return s+' button.btn:not(.w4x):not(.snb):not([data-a=bfight]),'+s+' button.t3P,'+s+' button.t3S'})+'{min-height:44px!important}';
+   /* ---------- Lôi Đài: the old page (cards, grey rank box, plain headings) on the kit ---------- */
+   if(tile&&K.url('stat_tile_G')){
+    c+=K.cls9(AR+' .arh .arb','stat_tile_G',84)+
+     AR+' .arh .arb{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:0!important;min-width:92px!important;padding:0 '+Math.round(tile.slice[0]*84/tile.r[3])+'px!important}';
+   }
+   c+=AR+' .arh .arb>span{font:600 13px/1.2 '+FB+'!important;color:'+C+'!important;text-shadow:'+OUT+'!important;opacity:1!important}'+
+    AR+' .arh .arb>b{font:700 28px/1.05 '+FD+'!important;color:'+GD+'!important;text-shadow:'+OUT+'!important}'+
+    AR+' .arh .sp .sm{font:500 13px/1.35 '+FB+'!important;color:'+C+'!important;text-shadow:'+OUT+'!important;opacity:1!important}';
+   /* every Lôi Đài card: warmer plank face with a bronze rim */
+   var CARD=AR+' .card.row,'+AR+' .card.sm';
+   c+=CARD+'{background:linear-gradient(180deg,rgba(78,44,24,.92),rgba(44,24,14,.95))!important;border:1.5px solid #B07A3E!important;border-radius:8px!important;box-shadow:inset 0 1px 0 rgba(232,192,104,.35),inset 0 -2px 6px rgba(0,0,0,.45),0 2px 4px rgba(0,0,0,.5)!important;padding:8px 10px!important}'+
+    AR+' .stack.dslist{gap:6px!important}'+AR+' .card.row{align-items:center!important;gap:10px!important;min-height:64px!important}'+
+    AR+' .card.row b{font:700 15px/1.25 '+FB+'!important;color:'+C+'!important;text-shadow:'+OUT+'!important}'+
+    AR+' .card.row .sm{font:500 13px/1.3 '+FB+'!important;opacity:1!important}'+
+    AR+' .card.row .sm.mute{color:#DCCBA6!important}'+AR+' .card.row .sm.ok{color:#8FE0A6!important;font-weight:600!important}';
+   /* rank medallion = nav ring (same ring as the 658 nav and sheets) */
+   if(ring)c+=AR+' .arr{width:46px!important;height:46px!important;min-width:46px!important;flex:none!important;border:0!important;border-radius:0!important;background:url('+ring+') center/46px 46px no-repeat!important;box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:center!important;font:700 15px/1 '+FB+'!important;color:'+GD+'!important;text-shadow:'+OUT+'!important}';
+   /* section headings (Đối thủ, Mốc hạng): kit jewel + serif gold */
+   if(dl){
+    var HD=AR+' .row.sm>b.sp,'+AR+' .card.sm>b:first-child';
+    c+=HD+'{display:flex!important;align-items:center!important;gap:8px!important;font:700 15px/1.2 '+FD+'!important;color:'+GD+'!important;text-shadow:'+OUT+'!important;letter-spacing:.03em!important;white-space:nowrap!important;flex:1 1 auto!important}'+
+     HD+'::before{content:"";flex:none;width:24px;height:24px;background:url('+dl+') center/auto 24px no-repeat}'+
+     AR+' .row.sm>b.sp::after{content:"";flex:1 1 0;height:2px;margin-right:8px;background:linear-gradient(90deg,#B07A3E,rgba(176,122,62,0))}'+
+     AR+' .row.sm{margin:12px 0 6px!important;align-items:center!important}'+AR+' .row.sm>span{font:600 13px/1.2 '+FB+'!important;color:'+C+'!important;text-shadow:'+OUT+'!important}';
+   }
+   /* milestone table rows: even rhythm, dotted separators, 14 css */
+   c+=AR+' .card.sm .row{min-height:30px!important;align-items:center!important;border-top:1px dotted rgba(176,122,62,.55)!important;font:500 14px/1.3 '+FB+'!important;color:'+C+'!important;text-shadow:'+OUT+'!important}'+
+    AR+' .card.sm .row b.gold{color:'+GD+'!important}'+
+    AR+'>.sm.mute{font:500 13px/1.35 '+FB+'!important;color:#DCCBA6!important;opacity:1!important;padding:0 4px 12px!important}';
+   /* faction tags: the inline dark blue / purple / red read < 3:1 on the plank; lighter tints of the same hues (text unchanged) */
+   c+=AR+' .card.row span.sm[style*="2f5fb0"]{color:#8DB2FF!important}'+AR+' .card.row span.sm[style*="6e2f63"]{color:#E0A0D6!important}'+AR+' .card.row span.sm[style*="c0392b"]{color:#FF9486!important}';
+   /* "Khiêu chiến" on Lôi Đài: one width */
+   c+=AR+' .card.row>button.btn{min-width:104px!important;flex:none!important}';
+   c+='@media (max-width:374px){'+AR+' .card.row{gap:8px!important;padding:8px!important}'+AR+' .card.row>button.btn{min-width:92px!important}'+AR+' .arh .arb{min-width:84px!important}}';
+   /* ---------- R2 (art329): one disabled style across S7: plate darker, label near-white (>= 3:1 measured), still grey vs the jade ready plate ---------- */
+   var DS=each(function(s){return s+' button.btn[disabled],'+s+' button.btn.off,'+s+' button.btn.dim,'+s+' button.t3P[disabled],'+s+' button.t3P.dim,'+s+' button.t3S[disabled],'+s+' button.t3S.dim'});
+   var DSX=each(function(s){return s+' button.btn[disabled] *,'+s+' button.btn.off *,'+s+' button.btn.dim *,'+s+' button.t3P[disabled] *,'+s+' button.t3S[disabled] *'});
+   c+=DS+'{color:#FFF8E6!important;font-weight:700!important;text-shadow:0 1px 2px #000,0 0 3px #000!important}'+DSX+'{color:#FFF8E6!important;text-shadow:0 1px 2px #000,0 0 3px #000!important}';
+   /* tower: "Đã quét hôm nay" pill: lighter label on a dark base, stays a grey, flat pill */
+   c+=TW+' .u3bq.off{background:rgba(10,6,4,.55)!important;border-color:rgba(214,200,170,.5)!important;color:#EFE4CC!important;text-shadow:0 1px 1px rgba(0,0,0,.8)!important;height:30px!important;font-size:13px!important}';
+   /* Lôi Đài: rank box value reads at 32 px (a heavy dash when unranked); list ends with inner padding and an edge fade (no row cut mid-text) */
+   c+=AR+' .arh .arb>b{font:700 32px/1.05 '+FB+'!important}';
+   c+=AR+'{padding-bottom:18px!important}'+AR+'::after{content:"";display:block;position:sticky;bottom:-18px;height:48px;margin:-48px 0 0;pointer-events:none;background:linear-gradient(180deg,rgba(30,18,11,0),rgba(30,18,11,.97) 70%)}';
+   var st=D.getElementById('sec303_7css');if(!st){st=D.createElement('style');st.id='sec303_7css';D.head.appendChild(st)}st.textContent=c;
+  }catch(e){}});
+ }catch(e){}
+})();
+// V303 SEC step 0: section S8 (Chinh chiến + Lần đầu + Bang hội & Cài đặt). Owned by its lane only; CSS root class .s3038.
+// CSS only, under html.kw1 (so ?kw1=0 and an atlas failure keep the old look). No DOM change, no action name, no save field, wraps nothing.
+(function(){try{var s=document.createElement("style");s.id="sec303_8css";s.textContent="/* .s3038: section S8 */";(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+(function(){
+ try{
+  if(typeof KW1==='undefined'||!KW1||!KW1.on)return;
+  KW1.on(function(){try{
+   var K=KW1,D=document,CR=K.CREAM,GD=K.GOLD,OUT=K.OUT;
+   function px(v){return(Math.round(v*100)/100)+'px'}
+   /* frame a box from a kit part at scale k; the element keeps its own size (border-image-width = slice x k), padding is added by the caller */
+   function bi(n,k,o){o=o||{};var p=K.part(n),u=K.url(n);if(!p||!u)return'';var s=p.slice||[0,0,0,0];
+    return'border-style:solid!important;border-color:transparent!important;border-width:0!important;border-image-source:url('+u+')!important;border-image-slice:'+s[1]+' '+s[2]+' '+s[3]+' '+s[0]+(o.nofill?'':' fill')+'!important;'+
+     'border-image-width:'+px(s[1]*k)+' '+px(s[2]*k)+' '+px(s[3]*k)+' '+px(s[0]*k)+'!important;border-image-repeat:stretch!important;background:none!important;box-shadow:none!important;border-radius:0!important;'}
+   function img(n,sz){var u=K.url(n);return u?'background:url('+u+') center/'+sz+' no-repeat!important;':''}
+   var M='html.kw1 body #main#main#main',c='';
+   /* ===== 135: Quân Đoàn tab, Cài đặt cards (keep the layout; kit cards, kit buttons, full left-aligned text) ===== */
+   var SET=M+' .stack.u3set';
+   c+=SET+' .card{'+bi('stat_tile_G',.42)+'padding:16px 18px!important;margin-bottom:10px!important;color:'+CR+'}'+
+    SET+' .card b{color:'+CR+'!important;font-size:16px!important;text-shadow:'+OUT+'}'+
+    SET+' .card .sm,'+SET+' .card .mute{font-size:13px!important;line-height:1.35!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;color:#d9c7a0!important}'+
+    SET+' .card.row{align-items:center;padding:14px 12px 14px 16px!important;gap:8px}'+SET+' .card.row .dssw{flex:0 0 auto!important;min-width:52px!important}'+
+    SET+' .u3ip span{color:'+GD+'!important;font-size:15px!important;text-shadow:'+OUT+'}';
+   /* REL-678-FIX n94/n98/n135: the pill heading sits fully inside its card (>= 8 css under the card border), never on it */
+   c+=SET+' .card>b:first-child{margin-top:2px!important}';
+   c+=K.cls9(SET+' button.btn.alt.sm:not(.dssw)','btn_bronze',38)+K.cls9(SET+' button.btn.sm:not(.alt):not(.dssw)','btn_jade_J',38);
+   c+=SET+' button.btn.sm:not(.dssw){min-width:88px;padding:0 18px!important;min-height:44px!important;height:44px!important;--kw1-kh:44;font-size:14px!important;color:'+CR+'!important;text-shadow:'+OUT+'}';
+
+   /* ===== 70: Chinh chiến tab (stage chips = rings with the label below, Đánh tiếp = jade plate) ===== */
+   var TW=M+'#main#main .u11tw';
+   c+=TW+'{height:auto!important;min-height:78px!important;overflow:visible!important}'+
+    TW+'::before{display:none!important}'+TW+' .pills.mtabs{height:78px!important;align-items:flex-start!important;gap:4px!important}'+
+    TW+' .mtabs .pill{position:relative!important;flex:0 0 calc((100% - 16px)/5)!important;width:calc((100% - 16px)/5)!important;min-width:56px!important;height:78px!important;padding:51px 0 0!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;'+
+     'font:600 13px/1.2 var(--fb)!important;color:'+CR+'!important;text-shadow:'+OUT+';text-align:center!important;white-space:nowrap!important;display:block!important;box-sizing:border-box!important}'+
+    TW+' .mtabs .pill::before{content:"";position:absolute;left:50%;top:0;width:50px;height:51px;margin-left:-25px;border:0!important;border-image:none!important;border-radius:0!important;box-shadow:none!important;inset:auto!important;left:50%!important;top:0!important;right:auto!important;bottom:auto!important;'+img('nav_ring_normal','100% 100%')+'}'+
+    TW+' .mtabs .pill.on::before{'+img('nav_ring_selected','100% 100%')+'filter:drop-shadow(0 0 5px rgba(255,200,90,.8))}'+
+    TW+' .mtabs .pill.on{color:'+GD+'!important}'+
+    TW+' .mtabs .pill.u11lk{color:#cdbb97!important}'+
+    TW+' .mtabs .pill i.u11l{position:absolute!important;left:50%!important;top:13px!important;width:17px!important;height:22px!important;margin-left:-8px!important;background-size:contain!important;background-repeat:no-repeat!important}';
+   var NX=M+'#main#main button.c12P[data-a=flnext]';
+   c+=K.cls9(NX,'btn_jade_J',50)+NX+'{color:'+CR+'!important;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))!important}'+NX+'{padding:0 4px 4px 2px!important;gap:5px!important}'+NX+' .ic{width:20px!important;height:20px!important;filter:brightness(0) invert(.9) drop-shadow(0 1px 1px rgba(0,0,0,.6))!important}'+NX+' .x b,'+NX+' .x span{color:'+CR+'!important;text-shadow:'+OUT+'}';
+
+
+   /* ===== 71-73: battle HUD. Only a carved-wood frame laid over the bottom HUD zone (pointer-events none, transparent middle); the canvas (troops, skills, medallions, HP bar) and every button are untouched ===== */
+   var BW_='html.kw1 body #battle#battle#battle .bw#bw';
+   c+='html.kw1 body #battle#battle#battle .bw{position:relative}'+
+    'html.kw1 body #battle#battle#battle .bw::after{content:"";position:absolute;left:0;right:0;bottom:0;height:min(22%,190px);pointer-events:none;z-index:4;box-sizing:border-box;'+
+    bi('bottom_panel_L',.27,{nofill:1}).replace('background:none!important;','')+'border-width:0!important}';
+
+   /* ===== 1: first-launch title (re-dress: red ribbon title, bronze server chip, jade CTA, carved frame; text and actions unchanged) ===== */
+   var SP='html.kw1 body #splash#splash#splash';
+   c+=K.cls9(SP+' .splogo','title_ribbon_C',56)+SP+' .splogo{display:flex!important;align-items:center;justify-content:center;width:300px!important;margin:0 auto!important;padding:0 40px 4px!important;font:700 28px/1 var(--fd)!important;color:'+CR+'!important;-webkit-text-fill-color:'+CR+'!important;background-clip:border-box!important;text-shadow:'+OUT+'!important;letter-spacing:1px}'+
+    SP+' .sptag,'+SP+' .t2en{color:'+CR+'!important;text-shadow:'+OUT+'!important;background:rgba(36,22,14,.66)!important;padding:3px 0!important;box-sizing:content-box!important}'+
+    K.cls9(SP+' #lgpl','btn_bronze',38)+SP+' #lgpl{display:flex!important;align-items:center;justify-content:center;gap:8px;color:'+CR+'!important}'+SP+' #lgsrv{color:'+CR+'!important;text-shadow:'+OUT+';font-size:13px!important}'+
+    K.cls9(SP+' #lgbtn','btn_jade_J',60)+SP+' #lgbtn{width:276px!important;margin-left:-138px!important;color:'+CR+'!important}'+SP+' #lgbt{color:'+CR+'!important;-webkit-text-fill-color:'+CR+'!important;text-shadow:'+OUT+'!important;font:700 17px/1 var(--fb)!important;letter-spacing:1px}'+SP+' #lgbtn::after{opacity:.15!important}'+
+    SP+'::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;box-shadow:inset 0 0 0 5px rgba(46,28,22,.96),inset 0 0 0 7px #B07A3E,inset 0 0 0 9px #1a0d05}';
+
+   /* ===== 2: home HUD after the first-launch intro (hub rail panel + the three corner labels as kit cartouches; the valley, its padlocks, Cảng Biển and Sự kiện stay) ===== */
+   var HR=M+'#main#main .hubrail.qbtop';
+   c+=HR+'{'+bi('stat_tile_G',.34)+'border-width:0!important;box-shadow:0 2px 6px rgba(0,0,0,.5)!important}';
+   ['u354sb','ptbtn'].forEach(function(k){c+=K.cls9(M+'#main#main button.'+k+' > span:last-child:not(.u354md):not(.u354pm)','map_cartouche_N',20)});
+
+   /* ===== ROUND 2 (art319 fix list SEC-8) ===== */
+   var FD='var(--ds-fd,Philosopher,Georgia,serif)',BZ='#B07A3E';
+   /* fix 2/3/4 (n135): wood page, one bevel set (jade/bronze 658), kit cartouche section headers, framed switches, red Đặt lại = ribbon C plate */
+   var wd=K.cssWood();if(wd)c+=M+':has(.u3set){'+wd.replace(/;/g,'!important;')+'}';
+   c+=K.cls9(SET+' .u3ip span','map_cartouche_N',36)+SET+' .u3ip{display:flex!important;justify-content:center!important;align-items:center!important;margin:16px 0 10px!important;padding:0!important;background:none!important;border:0!important;gap:0!important}'+
+    SET+' .u3ip::before,'+SET+' .u3ip::after,'+SET+' .u3ip i{display:none!important}'+
+    SET+' .u3ip span{display:flex!important;align-items:center;justify-content:center;min-width:190px;padding:0 24px!important;font:700 15px/1 var(--fb)!important;color:'+GD+'!important;text-transform:none!important;letter-spacing:.3px}';
+   c+=SET+' .btn.dssw{width:64px!important;min-width:64px!important;height:36px!important;min-height:36px!important;border-radius:18px!important;border:2px solid '+BZ+'!important;box-shadow:inset 0 2px 5px rgba(0,0,0,.65),0 2px 3px rgba(0,0,0,.5)!important;font-size:0!important;color:transparent!important;text-shadow:none!important;--kw1-kh:36}'+
+    SET+' .btn.dssw::after{top:3px!important;width:26px!important;height:26px!important;border-radius:13px!important;box-shadow:0 1px 2px rgba(0,0,0,.6)}'+
+    SET+' .btn.dssw.off{background:#2a1a0f!important}'+SET+' .btn.dssw.off::after{left:3px!important;background:#b8a27a!important}'+
+    SET+' .btn.dssw.on{background:linear-gradient(180deg,#f2cf7c,#c98f34)!important}'+SET+' .btn.dssw.on::after{left:31px!important;background:#2a1a0c!important}'+
+    SET+' .card.row .sp{min-width:0}';
+   c+=K.cls9(SET+' #rst#rst','title_ribbon_C',44)+SET+' #rst#rst{padding:0 30px!important;min-width:110px!important;color:'+CR+'!important;font-size:14px!important}';
+   c+=SET+' .btn.sm:not(.dssw){font-size:14px!important;line-height:1.1!important;white-space:nowrap!important}'+SET+' .card .row{flex-wrap:wrap}';
+   /* fix 1/3 (n73): red ribbon C instead of the flag + drum banner; stars under it; 658 bevel on the cap row and the two links */
+   var RB='html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .rs9:not(.thres) .g45bn';
+   c+=RB+',html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .rs9:not(.thres) .g45bn.lose{height:104px!important;margin:-4px 0 0!important;border:0!important;border-image:none!important;background:none!important}'+
+    K.cls9(RB+' .tt','title_ribbon_C',46)+RB+' .tt{position:absolute!important;left:50%!important;right:auto!important;top:4px!important;transform:translateX(-50%);display:flex!important;align-items:center;justify-content:center;width:auto!important;min-width:176px;padding:0 30px!important;white-space:nowrap;font:700 22px/1.1 '+FD+'!important;color:'+CR+'!important;text-shadow:'+OUT+'!important}'+
+    RB+'.lose .tt{color:'+CR+'!important;text-shadow:'+OUT+'!important}'+
+    RB+' .g45ss{top:60px!important}'+RB+' .g45ss .ss i{width:34px!important;height:34px!important}'+
+    K.cls9('html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .bn3cap','btn_bronze',44)+
+    'html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .bn3cap{display:flex!important;align-items:center;justify-content:space-between;gap:8px;width:100%!important;padding:0 26px!important;color:'+CR+'!important}'+
+    'html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .bn3cap b,html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .bn3cap span{font:700 14px/1.1 var(--fb)!important;color:'+CR+'!important;text-shadow:'+OUT+'!important;white-space:nowrap}'+
+    K.cls9('html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .rs9mr .rs9m','btn_bronze',40)+
+    'html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .rs9mr{display:flex!important;gap:8px!important;align-items:stretch;border:0!important}'+
+    'html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .rs9mr .rs9m{flex:1 1 0!important;min-width:0;display:flex!important;align-items:center;justify-content:center;gap:4px;font:700 14px/1.1 var(--fb)!important;color:'+CR+'!important;text-shadow:'+OUT+'!important;padding:0 22px!important;white-space:nowrap;margin:0!important}';
+   /* fix 6 (n70): carved dragon frame over the boss panel (overlay, no pointer events); Đánh tiếp label never clipped */
+   var BP=M+' .c12.ccm';
+   c+=BP+'{position:relative}'+BP+'::after{content:"";position:absolute;inset:0;z-index:30;pointer-events:none;box-sizing:border-box;'+bi('bottom_panel_L',.26,{nofill:1}).replace('background:none!important;','')+'border-image-outset:12px!important}'+
+    NX+' .x{min-width:0!important;overflow:visible!important}'+NX+' .x span{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;font-size:12px!important}'+NX+' .x b{white-space:nowrap!important}'+
+    '@media (max-width:374px){'+NX+'{padding:0 2px 4px 2px!important;gap:3px!important}'+NX+' .x span{font-size:12px!important;letter-spacing:-.2px}}';
+   /* fix 7 (n71/72): battle control buttons keep inside the frame at 360 and carry the bronze bevel ring */
+   c+='html.kw1 body #battle#battle#battle #bvBtns{right:22px!important;left:auto!important;gap:4px!important}'+
+    'html.kw1 body #battle#battle#battle #bvBtns button{box-shadow:0 0 0 2px '+BZ+',0 3px 5px rgba(0,0,0,.6)!important}'+
+    '@media (max-width:374px){html.kw1 body #battle#battle#battle .bw::after{height:min(24%,176px)}}';
+   /* fix 5 (n2): hub rail carved bronze weight (top bar = uih303, frozen: not touched) */
+   c+=HR+'{outline:2px solid '+BZ+';outline-offset:-5px}';
+   /* ===== ROUND 3 (art331 fix list SEC-8, n73 + n135 only) ===== */
+   var RS='html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet';
+   /* fix 1 (n73): full-width red ribbon C (>= 70% of the sheet, ends visible), stars below it as lit medallions */
+   c+=RB+',html.kw1 body #modal#modal#modal.rs9fl>#sheet#sheet#sheet .rs9:not(.thres) .g45bn.lose{height:122px!important}'+
+    K.cls9(RB+' .tt','title_ribbon_C',62)+RB+' .tt{top:2px!important;width:78%!important;min-width:0!important;box-sizing:border-box!important;padding:0 34px!important;font:700 28px/1.1 '+FD+'!important}'+
+    '@media (max-width:374px){'+RB+' .tt{font-size:25px!important;padding:0 30px!important}}'+
+    RB+' .g45ss{top:72px!important}'+RB+' .g45ss .ss{gap:10px!important}'+
+    RB+' .g45ss .ss i{width:42px!important;height:42px!important;border-radius:50%!important;box-shadow:0 0 0 2px '+BZ+',0 3px 5px rgba(0,0,0,.6)!important;background-color:#2a1a0f!important;background-size:88% 88%!important;background-position:center!important}'+
+    RB+' .g45ss .ss i:not(.off){background-color:#4a2c12!important;filter:drop-shadow(0 0 5px rgba(255,200,90,.7))!important}'+
+    RB+' .g45ss .ss i.off{background-size:70% 70%!important;filter:brightness(2.2) contrast(1.1)!important}'+
+    /* fix 2 (n73 at 360): the cap row keeps an 8 css gap to the chevron and the edges */
+    RS+' .bn3cap{padding:0 32px 0 30px!important;gap:10px!important}'+
+    '@media (max-width:374px){'+RS+' .bn3cap b,'+RS+' .bn3cap span{font-size:13px!important}}';
+   /* fix 3/4/5 (n135): every card title = centred kit cartouche; wood plate with the 658 bevel (stat_tile_G at the 658 scale); even button rows */
+   c+=SET+' .card{'+bi('stat_tile_G',.62)+'padding:26px 22px 24px!important;margin-bottom:12px!important;text-align:center!important}'+
+    SET+' .card.row{padding:24px 22px 24px 24px!important;text-align:left!important}'+
+    K.cls9(SET+' .card>b,'+SET+' .card .sp>b','map_cartouche_N',34)+
+    SET+' .card>b,'+SET+' .card .sp>b{display:flex!important;align-items:center;justify-content:center;width:max-content;max-width:100%;min-width:176px;height:34px;margin:-6px auto 8px!important;padding:0 22px!important;font:700 15px/1 var(--fb)!important;color:'+GD+'!important;text-shadow:'+OUT+'!important;box-sizing:border-box}'+
+    SET+' .card.row .sp>b{margin:0 0 6px!important}'+
+    SET+' .card .sm,'+SET+' .card .mute{text-align:center!important}'+SET+' .card.row .sm,'+SET+' .card.row .mute{text-align:left!important}'+
+    SET+' .card div:has(>.btn.sm:not(.dssw)){display:flex!important;flex-wrap:nowrap!important;justify-content:center!important;align-items:stretch!important;gap:5px!important;margin:6px -4px 0!important}'+
+    SET+' .card div>.btn.sm:not(.dssw){flex:1 1 0!important;min-width:0!important;width:auto!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 13px!important;font-size:13px!important;white-space:nowrap!important}'+
+    SET+' #rst#rst{flex:0 1 160px!important}';
+   c+=SET+' .btn.dssw{width:68px!important;min-width:68px!important;height:44px!important;min-height:44px!important;border-radius:22px!important;--kw1-kh:44}'+SET+' .btn.dssw::after{top:3px!important;width:34px!important;height:34px!important;border-radius:17px!important}'+SET+' .btn.dssw.off::after{left:3px!important}'+SET+' .btn.dssw.on::after{left:27px!important}';
+   /* ===== ROUND 4 (qa346 tap sizes): every enabled control >= 44x44 css; bevel, glow and text size unchanged ===== */
+   c+='html.kw1 body #modal#modal#modal #sheet#sheet#sheet button[data-a=t3x]{min-width:44px!important;min-height:44px!important;box-sizing:border-box!important}'+
+    'html.kw1 body #main#main button[data-a=tttr],html.kw1 body #modal#modal button[data-a=tttr]{min-height:44px!important;min-width:44px!important;box-sizing:border-box!important}'+
+    'html.kw1 body #main#main button[data-a=gck],html.kw1 body #main#main button[data-a=gdon],html.kw1 body #sheet#sheet button[data-a=gck],html.kw1 body #sheet#sheet button[data-a=gdon]{min-height:44px!important;min-width:44px!important;box-sizing:border-box!important}'+
+    'html.kw1 body button.nmd[data-a=nm221r]{min-width:44px!important;min-height:44px!important;width:44px!important;height:44px!important;box-sizing:border-box!important}'+
+    'html.kw1 body input#clnm.nmi{min-height:44px!important;box-sizing:border-box!important}';
+   /* ===== ROUND 5 (qa380 tap sizes, Decision 676 A): n70 chips + chest cue, n134 sliders >= 44 css; the drawn frame/icon keeps its old size and place ===== */
+   var CV='html.kw1 body #main#main .c12v ';
+   var CZ='html.kw1 body #main#main .c12:has(.c12st .ct)>.c12v';
+   var CT='html.kw1.kwtt:not(.kwdn) body #main#main .c12:has(.c12st .ct)>.c12v';
+   var CTD='html.kw1.kwtt.kwdn body #main#main .c12:has(.c12st .ct)>.c12v';
+   var ROOM='html.kw1 body #main#main#main .c12:has(.c12st .ct)>.c12v .c12cx:not(.tp):not(.tr):not(.up){bottom:auto!important}'+
+    CZ+' .c12sc::after{content:"";display:block;height:240px}'+CZ+' .c12in{overflow:visible!important}'+'html.kw1.kwns body #main#main#main .c12:has(.c12st .ct)>.c12v{margin-top:0!important;overflow-clip-margin:0}';
+   c+=CV+'.c12cx{min-height:44px!important;min-width:44px!important;box-sizing:border-box!important;margin-top:-8px!important;margin-bottom:-8px!important}'+
+    CV+'.c12cx::before{inset:8px 0!important;top:8px!important;bottom:8px!important}'+
+    CV+'.c12pk{min-height:44px!important;min-width:44px!important;box-sizing:border-box!important;margin-top:0!important;margin-bottom:0!important}'+
+    CV+'.c12pk::before{inset:0 0 8px 0!important;top:0!important;bottom:8px!important}'+
+    '@media (max-width:400px){'+CV+'.c12pk::before{inset:0 0 20px 0!important;top:0!important;bottom:20px!important}}'+
+    CV+'>button.r2cue{width:44px!important;height:44px!important;margin:-2px -2px 0 0!important;box-sizing:border-box!important}'+
+    CV+'>button.r2cue i{left:9px!important;top:10px!important}'+CV+'>button.r2cue b{right:2px!important;top:2px!important}'+
+    CV+'.c12pk{left:calc(50% + 44px)!important}'+CV+'.c12cx.tp2{margin-top:11px!important}'+'@media (max-width:380px){'+CV+'.c12cx.tp2::before{inset:10px 0!important;top:10px!important;bottom:10px!important}'+CV+'.c12gl[data-s]{transform:translateY(14px)!important}}'+
+    /* ===== ROUND 7b (qa399 round 6 FIX 3): 44 css hit areas never cover a stage node circle (r 23). 390: peek chip box 2 css higher (clip top). 360: peek chip then daily/Nâng Thành chip stacked in the free left band under node 2; drawn chips keep their size ===== */
+    '@media (max-width:400px){'+CV+'.c12pk{top:0!important}}'+
+    /* ===== ROUND 8: at <=374 the Khao quan peek chip + daily/Nang Thanh chip sit side by side in a 52 css strip reserved ABOVE the map (c12v margin-top 52, set before the map is measured so its camera math sees the shorter box; chips are drawn into the strip through the clip margin), so no node, stage label or other chip can sit under them. Peek chip frame = its 44 hit box centred on the text (all widths). ===== */
+CV+'.c12pk::before{inset:10px 0!important;top:10px!important;bottom:10px!important}'+
+/* Tran thu chip (hro9): box above the node 0|8 circle (no overlap with the r23 circle); while that node is still in fog (no stage label under it) it goes below the circle instead */
+'html.kw1 body #main#main .tt-chip,html.kw1 body #main#main .tt-chipsub{margin-top:-73px!important}'+'html.kw1 body #main#main .c12nd[data-v="0|8|stage"].fg~.tt-chip,html.kw1 body #main#main .c12nd[data-v="0|8|stage"].fg~.tt-chipsub{margin-top:27px!important}'+
+CZ+'{margin-top:52px!important;overflow-clip-margin:52px}'+CZ+' .c12sc,'+CZ+' .c12ov,'+CZ+' .c12bv{border-radius:13px}'+
+  CZ+' .c12pk{left:auto!important;right:12px!important;transform:none!important;top:-50px!important;max-width:194px!important}'+CZ+' .c12pk::before{inset:4px 0!important;top:4px!important;bottom:4px!important}'+CZ+' .c12pk span{overflow:hidden;text-overflow:ellipsis}'+
+  CZ+' .c12cx{left:12px!important;right:auto!important;top:-50px!important;bottom:auto!important;margin:0!important;max-width:calc(100% - 232px)!important;text-align:center}'+CZ+' .c12cx::before{inset:4px 0!important;top:4px!important;bottom:4px!important}'+CZ+' .c12gl[data-s]{transform:none!important}'+
+    /* ===== ROUND 9: the strip is used at EVERY width. Hero-system builds (html.kwtt, set before the map mounts) add a second strip row (104 css in all) that holds the Tran thu chip (+ its locked line); peek + daily chips move up one row. Bottom scroll room so the last nodes clear the Danh tiep bar. ===== */
+    CT+'{margin-top:104px!important;overflow-clip-margin:104px}'+CT+' .c12pk,'+CT+' .c12cx{top:-102px!important}'+
+    CT+'>.tt-chip{left:12px!important;top:-50px!important;margin:0!important;width:96px!important;min-width:96px!important;height:44px!important;min-height:44px!important;box-sizing:border-box!important;z-index:6}'+
+    CT+'>.tt-chip .tt-sp{top:2.6px!important}'+CT+'>.tt-chip i.t{top:2.6px!important;bottom:2.6px!important}'+
+    /* chapter cleared (html.kwdn): no peek chip can show, the Tran thu chip is open, so ONE strip row: daily chip left, Tran thu chip right */
+    CTD+'>.tt-chip{left:auto!important;right:12px!important;top:-50px!important;margin:0!important;width:96px!important;min-width:96px!important;height:44px!important;min-height:44px!important;box-sizing:border-box!important;z-index:6}'+
+    CTD+'>.tt-chip .tt-sp{top:2.6px!important}'+CTD+'>.tt-chip i.t{top:2.6px!important;bottom:2.6px!important}'+CTD+'>.tt-chipsub{display:none!important}'+
+    CT+'>.tt-chipsub{left:114px!important;top:-35px!important;margin:0!important;max-width:calc(100% - 126px);overflow:hidden;text-overflow:ellipsis;font-size:12px!important}'+
+    /* round 9 (art446 fix 3): the Rương label panel (.c12pz) sits 5-6 css above the Tinh binh / Thao Phat buttons; lift it 9 css so the label plate ends >= 4 css above the button column */
+    CZ+' .c12pz{translate:0 -10px}'+
+    /* round 9b: at <=374 the label box ran under the chest cue (gap 0): slide it left 48 css so its right end sits >= 8 css before the cue */
+    '@media (max-width:374px){'+CZ+' .c12pz>span.c12pl{translate:-48px 0}}'+
+    /* round 9 (art446 fix 3): the layout engine keeps stage labels out of the button column assuming it sits 80 css above the bottom; u3_a lifted it to 88, so labels ended up under Tinh binh. Back to 80 (the bar below is 55 high). */
+    'html.kw1 body #main#main#main .c12:has(.c12st .ct)>.c12v .c12rb{bottom:calc(80px + var(--c12lift,0px))!important}'+
+    ROOM+
+    /* ===== ROUND 6 (art390): chips keep their drawn 24/28 css height (hit area 44 only) so no stage node is covered; n73 close moves clear of the dragon corner, beside the star row ===== */
+    'html.kw1 body #sheet#sheet#sheet .rs9:not(.thres) .g45bn .g45x{top:56px!important;right:-6px!important;width:44px!important;height:44px!important;z-index:12!important}'+
+    'html.kw1 body #sheet#sheet .c3set .card input[type=range]{min-height:44px!important;height:44px!important;margin:0!important;box-sizing:border-box!important}';
+   /* ===== ROUND 7 (art398): audio sliders = carved groove + bronze knob, value beside the track ===== */
+   var RG='html.kw1 body #audCard#audCard input[type=range]';
+   c+=RG+'{-webkit-appearance:none!important;appearance:none!important;background:transparent!important;--p:50%;accent-color:#E8C068;cursor:pointer;outline:none}'+
+    RG+'::-webkit-slider-runnable-track{height:12px;box-sizing:border-box;border-radius:6px;border:2px solid #8f7d58;background:linear-gradient(90deg,#f0cf7c 0,#c8933a var(--p),transparent var(--p)),linear-gradient(180deg,#0c0603,#2b1b0f);box-shadow:inset 0 2px 3px rgba(0,0,0,.85),0 1px 0 rgba(255,225,160,.18)}'+
+    RG+'::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:26px;height:26px;margin-top:-9px;border-radius:50%;border:2px solid #3a2410;background:radial-gradient(circle at 36% 30%,#fbe3a0 0,#d9a441 28%,#a8702a 62%,#5e3a14 100%);box-shadow:0 0 0 1.5px #E8C068,0 2px 4px rgba(0,0,0,.7),inset 0 1px 1px rgba(255,240,200,.8),inset 0 -2px 3px rgba(60,30,8,.6)}'+
+    RG+'::-moz-range-track{height:12px;box-sizing:border-box;border-radius:6px;border:2px solid #8f7d58;background:linear-gradient(180deg,#0c0603,#2b1b0f)}'+RG+'::-moz-range-progress{height:8px;border-radius:4px;background:#d9a441}'+
+    RG+'::-moz-range-thumb{box-sizing:border-box;width:26px;height:26px;border-radius:50%;border:2px solid #3a2410;background:#c8933a}'+
+    /* ===== ROUND 8 (art418 n135): label, track/knob, value and Bat share one vertical centre per row (their 44 boxes were already level, but the text sat at the top of the label and value boxes) ===== */
+    'html.kw1 body #audCard#audCard .row>span.sm,html.kw1 body #audCard#audCard #audVm,html.kw1 body #audCard#audCard #audVs{display:flex!important;align-items:center!important;height:44px!important;line-height:1!important}'+'html.kw1 body #audCard#audCard .row>span.sm{justify-content:center}'+
+    'html.kw1 body #audCard#audCard #audVm,html.kw1 body #audCard#audCard #audVs{flex:0 0 22px!important;margin-left:-2px!important;text-align:left!important;font-size:14px!important;color:#E8C068!important}';
+   /* ===== FU-C12 (SEC-8 art follow-up b): n70 star rack = the final's warm metal rail + jade fill. Display only: the old .r2arc wood scroll sprite is replaced by map_cartouche_N,
+      the groove path is made straight (same x range, so the chest hooks keep their star fractions), the stroke turns jade, the cords run up to the rail, the 0/30 tag is a dark pill in the same metal ===== */
+   try{var RK='html.kw1 body #main#main .c12v .r2tk ',rkB=bi('map_cartouche_N',26/109);
+    if(rkB){c+=RK+'.r2arc{background:none!important}'+
+     RK+'.r2arc::before{content:"";position:absolute;left:30px;top:4px;width:298px;height:26px;box-sizing:border-box;pointer-events:none;'+rkB+'filter:drop-shadow(0 2px 2px rgba(0,0,0,.55))}'+
+     RK+'.r2arc svg{z-index:1}'+
+     RK+'.r2arc,'+RK+'.r2arc svg{pointer-events:none!important}'+RK+'.r2arc svg path{d:path("M45 17 L312.57 17.02")!important;stroke:url(#r2gg)!important;stroke-width:8px!important}'+
+     RK+'.r2arc svg #r2gg stop:first-child{stop-color:#7fe3b4}'+RK+'.r2arc svg #r2gg stop:last-child{stop-color:#1f9a6e}'+
+     RK+'button.r2ch{margin:-14px 0 0 -28px!important}'+RK+'button.r2ch .lb{right:61px!important;top:20px!important}'+RK+'button.r2ch .r2cd{z-index:2}'+RK+'button.r2ch .r2cd::before,'+RK+'button.r2ch .r2cd::after{content:"";position:absolute;left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f6e2a6,#c9a15a 55%,#5a3a18);box-shadow:0 0 0 1px #2a1a0a,0 1px 2px rgba(0,0,0,.6)}'+RK+'button.r2ch .r2cd::before{top:-5px}'+RK+'button.r2ch .r2cd::after{bottom:-3px}'+
+     RK+'button.r2ch[data-r2c="0"] .r2cd,'+RK+'button.r2ch[data-r2c="2"] .r2cd{top:-11px!important;height:25px!important}'+RK+'button.r2ch .r2cd{top:-3px!important;height:17px!important;width:3px!important;margin-left:-1px;background:linear-gradient(90deg,#5a3a18,#c9a15a 50%,#5a3a18)!important;border-radius:1px}'+
+     RK+'.r2tg{width:88px!important;right:-8px!important;color:#f3e3c0!important;text-shadow:0 1px 2px #000;'+rkB+'}'}
+   }catch(e){}
+   var st=D.getElementById('sec303_8css');if(!st){st=D.createElement('style');st.id='sec303_8css'}st.textContent=c;D.head.appendChild(st);
+   /* round 7: gold fill = the --p custom property on each range input (CSS var only; value, save and handlers untouched) */
+   function rgS(){try{D.querySelectorAll('input[type=range]').forEach(function(r){var mx=+r.max||100,mn=+r.min||0,p=Math.round(((+r.value-mn)/(mx-mn))*100);if(r.style.getPropertyValue('--p')!==p+'%')r.style.setProperty('--p',p+'%')})}catch(e){}}
+   /* round 9: html.kwtt = the Tran thu chip will be on the map (hero-system build, chapter 1 shown, trial not gone/off). Set before every render so the 2-row strip is reserved BEFORE the map measures its height; the chip (+ its locked line), built inside the scroll content by tts1d.js, is moved into the strip (outside the scroll) as soon as it exists. */
+   function ttK(){try{var on=false;if(typeof ttLive==='function'&&ttLive()&&typeof ttTrialOpen==='function'&&typeof mapSel!=='undefined'&&mapSel===0){var o=ttTrialOpen();on=!!(o&&!o.gone&&o.why!=='off'&&o.why!=='err')}D.documentElement.classList.toggle('kwtt',on);var dn=false;if(on){var M=MAPS[mapSel];dn=!!(M&&S.camp.stage[mapSel+'-'+(M.st.length-1)])}D.documentElement.classList.toggle('kwdn',dn)}catch(e){}}
+   function ttMv(){try{var v=D.querySelector('#main .c12v');if(!v||!D.documentElement.classList.contains('kwtt'))return;[].forEach.call(D.querySelectorAll('#main .tt-chip,#main .tt-chipsub'),function(e){if(e.parentNode!==v){e.style.left='';e.style.top='';v.appendChild(e)}})}catch(e){}}
+   /* round 10 (qa458 fix 3): a cleared chapter with no daily / Nang Thanh chip (the claim state, the next map offered) has nothing to put in the strip, and the peek chip only shows while playing: html.kwns collapses the strip to 0 so the map starts where dev starts. Decided right after renderMain, before the map is built and measured (it is built two frames later). Hero-system builds keep the strip (Tran thu chip). */
+   function nsK(){try{var h=D.documentElement,on=false;if(!h.classList.contains('kwtt')&&typeof mapSel!=='undefined'&&typeof MAPS!=='undefined'){var M=MAPS[mapSel],m=D.getElementById('main');if(M&&m&&S.camp.stage[mapSel+'-'+(M.st.length-1)]){var fl=m.querySelector('.flnext'),oa=fl?fl.getAttribute('data-a'):'',claim=!!(m.querySelector('.mcard [data-a="chest"]')&&!(S.camp.chest&&S.camp.chest[mapSel]));on=!(oa&&oa!=='flnext'&&!claim)}}h.classList.toggle('kwns',on)}catch(e){}}
+   try{if(typeof renderMain==='function'){var _rmS8=renderMain;renderMain=function(){ttK();var r=_rmS8.apply(this,arguments);nsK();return r}}}catch(e){}
+   /* round 9 (art446 fix 3): the map's opening view can leave a stage label or node under the Tinh binh / Thao Phat buttons, the Danh tiep bar or the chest cue (fixed controls; the map scrolls). Once per mount, after the opening scroll has settled and only if the player has not touched the map, find the smallest scroll shift (up to 240 css up, 80 down) that leaves every visible label and node clear of them, and glide there. Nothing moves when the opening view is already clear. */
+   /* round 12 (qa464 fix 1): the glide is a script tween, not a native smooth scrollTo, so a wheel or touch that lands while it runs stops it (sc._s8u is set by the watch listener) and the user's scroll stands */
+   function rbGlide(sc,to){try{var a=sc.scrollTop,t0=performance.now(),d=170;(function f(n){if(sc._s8u||!sc.isConnected)return;var k=Math.min(1,Math.max(0,(n-t0)/d));sc.scrollTop=a+(to-a)*(1-(1-k)*(1-k));if(k<1)requestAnimationFrame(f)})(t0)}catch(e){sc.scrollTop=to}}
+   function rbNudge(sc){try{if(!sc||!sc.isConnected||sc._s8u)return;var v=sc.parentNode,vq=v.getBoundingClientRect(),fx=[],it=[];
+     [].forEach.call(v.querySelectorAll('.c12rb,.c12P,.r2cue.sh'),function(e){var q=e.getBoundingClientRect();if(q.width>0)fx.push([q.left-4,q.top-4,q.right+4,q.bottom+4])});if(!fx.length)return;
+     [].forEach.call(v.querySelectorAll('.c12pl'),function(l){var q=l.getBoundingClientRect();if(q.width&&q.bottom>vq.top-80&&q.top<vq.bottom+240)it.push([q.left,q.top,q.right,q.bottom])});
+     [].forEach.call(v.querySelectorAll('.c12nd[data-a=stage]'),function(n){var q=n.getBoundingClientRect(),mt=parseFloat(n.style.getPropertyValue('--mt'))||0,ms=parseFloat(n.style.getPropertyValue('--ms'))||46,cx=(q.left+q.right)/2,cy=q.top+mt+ms/2;if(cy>vq.top-80&&cy<vq.bottom+240)it.push([cx-23,cy-23,cx+23,cy+23])});
+     function bad(d){return it.some(function(q){var t=Math.max(q[1]-d,vq.top),b=Math.min(q[3]-d,vq.bottom);if(b<=t)return false;return fx.some(function(f){return q[0]<f[2]&&q[2]>f[0]&&t<f[3]&&b>f[1]})})}
+     /* round 11 (art460 fix 1): the chapter title block (.c12bt: ribbon + name) may not be cut by the map top or come within 8 css of the round star-chest button through a shift, when it is clear without one. */
+     var tb=v.querySelector('.c12bt'),tq=tb&&tb.getBoundingClientRect(),rc=v.querySelector('.r2cue'),rq=rc&&rc.getBoundingClientRect();if(rq&&!(rq.width>0))rq=null;
+     function tbad(d){if(!tq||!tq.width)return false;var t=tq.top-d,b=tq.bottom-d;if(t<vq.top)return true;return !!rq&&tq.left<rq.right+8&&tq.right>rq.left-8&&t<rq.bottom+8&&b>rq.top-8}
+     var tk=!tbad(0);
+     /* a finished chapter whose opening view was kept scrolled (so the title block is cut or sits under the star-chest button) glides back to the top, where the title is whole and the button is not shown */
+     if(tb&&tb.classList.contains('dn')&&tbad(0)&&sc.scrollTop>0){rbGlide(sc,0);return}
+     if(!bad(0))return;var mx=sc.scrollHeight-sc.clientHeight,up=Math.min(240,mx-sc.scrollTop),dn=Math.min(80,sc.scrollTop),best=null;
+     for(var k=6;k<=240&&best===null;k+=6){if(k<=up&&!bad(k)&&!(tk&&tbad(k)))best=k;else if(k<=dn&&!bad(-k)&&!(tk&&tbad(-k)))best=-k}
+     if(best!==null){var to=sc.scrollTop+best;rbGlide(sc,to)}}catch(e){}}
+   function rbWatch(){try{[].forEach.call(D.querySelectorAll('#main .c12sc'),function(sc){if(sc._s8w)return;sc._s8w=1;var u=function(){sc._s8u=1;};['touchstart','wheel','pointerdown'].forEach(function(t){sc.addEventListener(t,u,{passive:true,once:true})});var last=-1,same=0,n=0,iv=setInterval(function(){try{if(!sc.isConnected||sc._s8u||++n>60){clearInterval(iv);return}if(sc.scrollTop===last)same++;else{same=0;last=sc.scrollTop}if(same>=8&&n>=10){clearInterval(iv);rbNudge(sc)}}catch(e){clearInterval(iv)}},250)})}catch(e){}}
+   try{new MutationObserver(function(){ttMv();rbWatch()}).observe(D.body,{childList:true,subtree:true})}catch(e){}ttK();rbWatch();
+   D.addEventListener('input',rgS,true);D.addEventListener('change',rgS,true);try{new MutationObserver(rgS).observe(D.body,{childList:true,subtree:true})}catch(e){}rgS();
   }catch(e){}});
  }catch(e){}
 })();
